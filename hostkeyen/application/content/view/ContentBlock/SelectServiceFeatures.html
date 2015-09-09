@@ -1,0 +1,28 @@
+{if ( 0 < count($data) )}
+<div class="b-container">
+    <div class="b-dedicated-features">
+        <table class="b-dedicated-features__table">
+            <tr class="b-dedicated-features__row">
+            {set $i=0}
+            {foreach ($data as $k => $val)}
+            {if ( $i%2 == 0 && 0 < $k )}
+            </tr>
+            <tr class="b-dedicated-features__row">
+            {/if}
+                <td class="b-dedicated-features__cell">
+                    <div class="b-dedicated-features__item">
+                        <img class="b-dedicated-features__item-image" src="{HTTPD}/{$val['Img']}" alt="иконка"/>
+                        <div class="b-dedicated-features__item-description">
+                            <h3 class="b-dedicated-features__item-title">{$val['Head']}</h3>
+                            <p class="b-dedicated-features__item-text">{$val['Content']}</p>
+                            <a class="b-dedicated-features__item-link" href="#">more<span class="b-icon b-dedicated-features__item-link-icon"></span></a>
+                        </div>
+                    </div>
+                </td>
+            {set $i++}
+            {/foreach}
+            </tr>
+        </table>
+    </div>
+</div>
+{/if}

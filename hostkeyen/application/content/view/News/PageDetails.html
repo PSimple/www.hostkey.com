@@ -1,0 +1,28 @@
+<div class="b-page">
+
+    <div class="b-news-one">
+        <div class="b-news-one__back">
+            <a class="b-news-one__back-text" href="{URL}">
+                <span class="b-icon b-news-one__back-icon"></span>
+                back to news
+            </a>
+        </div>
+        <div class="b-news-one__item">
+            <div class="b-news-one__item-col b-news-one__item-col_left_yes">
+                <div class="b-news-one__item-date">{$news->DateCreate}</div>
+                <div class="b-news-one__item-title">
+                    {$news->Name}
+                </div>
+                <div class="b-news-one__item-subtitle">
+                    {$news->Description}
+                </div>
+            </div>
+            <div class="b-news-one__item-col b-news-one__item-col_right_yes">
+                {$news->Content}
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-push"></div>
+</div>
+

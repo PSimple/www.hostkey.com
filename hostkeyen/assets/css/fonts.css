@@ -1,0 +1,77 @@
+@font-face {
+  font-family: 'FranklinGothicBookCmpC';
+  src: url('/assets/css/fonts/FranklinGothicBookCmpC.ttf');
+  src: url('/assets/css/fonts/FranklinGothicBookCmpC.eot?#iefix') format('embedded-opentype'), url('fonts/FranklinGothicBookCmpC.woff') format('woff'), url('/assets/css/fonts/FranklinGothicBookCmpC.ttf') format('truetype'), url('/assets/css/fonts/FranklinGothicBookCmpC.svg#FranklinGothicBookCmpC') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.BookCmp {
+  font-family: 'FranklinGothicBookCmpC';
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'FranklinGothicBookCondC';
+  src: url('/assets/css/fonts/FranklinGothicBookCondC.ttf');
+  src: url('/assets/css/fonts/FranklinGothicBookCondC.eot?#iefix') format('embedded-opentype'), url('/assets/css/fonts/FranklinGothicBookCondC.woff') format('woff'), url('/assets/css/fonts/FranklinGothicBookCondC.ttf') format('truetype'), url('/assets/css/fonts/FranklinGothicBookCondC.svg#FranklinGothicBookCondC') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.BookCondC {
+  font-family: 'FranklinGothicBookCondC';
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'FranklinGothicBookCondCItalic';
+  src: url('/assets/css/fonts/FranklinGothicBookCondCItalic.ttf');
+  src: url('/assets/css/fonts/FranklinGothicBookCondCItalic.eot?#iefix') format('embedded-opentype'), url('/assets/css/fonts/FranklinGothicBookCondCItalic.woff') format('woff'), url('/assets/css/fonts/FranklinGothicBookCondCItalic.ttf') format('truetype'), url('/assets/css/fonts/FranklinGothicBookCondCItalic.svg#FranklinGothicBookCondCItalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.BookCondCItalic {
+  font-family: 'FranklinGothicBookCondCItalic';
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'FranklinGothicDemiCondCItalic';
+  src: url('/assets/css/fonts/FranklinGothicDemiCondCItalic.ttf');
+  src: url('/assets/css/fonts/FranklinGothicDemiCondCItalic.eot?#iefix') format('embedded-opentype'), url('/assets/css/fonts/FranklinGothicDemiCondCItalic.woff') format('woff'), url('/assets/css/fonts/FranklinGothicDemiCondCItalic.ttf') format('truetype'), url('/assets/css/fonts/FranklinGothicDemiCondCItalic.svg#FranklinGothicDemiCondCItalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.DemiCondCItalic {
+  font-family: 'FranklinGothicDemiCondCItalic';
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'FranklinGothicMediCondC';
+  src: url('/assets/css/fonts/FranklinGothicMediCondC.ttf');
+  src: url('/assets/css/fonts/FranklinGothicMediCondC.eot?#iefix') format('embedded-opentype'), url('/assets/css/fonts/FranklinGothicMediCondC.woff') format('woff'), url('/assets/css/fonts/FranklinGothicMediCondC.ttf') format('truetype'), url('/assets/css/fonts/FranklinGothicMediCondC.svg#FranklinGothicMediCondC') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.MediCondC {
+  font-family: 'FranklinGothicMediCondC';
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'FranklinGothicMediCondCItalic';
+  src: url('/assets/css/fonts/FranklinGothicMediCondCItalic.ttf');
+  src: url('/assets/css/fonts/FranklinGothicMediCondCItalic.eot?#iefix') format('embedded-opentype'), url('/assets/css/fonts/FranklinGothicMediCondCItalic.woff') format('woff'), url('/assets/css/fonts/FranklinGothicMediCondCItalic.ttf') format('truetype'), url('/assets/css/fonts/FranklinGothicMediCondCItalic.svg#FranklinGothicMediCondCItalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.MediCondCItalic {
+  font-family: 'FranklinGothicMediCondCItalic';
+  font-weight: normal;
+}
+@font-face {
+  font-family: 'FranklinGothicMediCondOSC';
+  src: url('/assets/css/fonts/FranklinGothicMediCondOSC.ttf');
+  src: url('/assets/css/fonts/FranklinGothicMediCondOSC.eot?#iefix') format('embedded-opentype'), url('/assets/css/fonts/FranklinGothicMediCondOSC.woff') format('woff'), url('/assets/css/fonts/FranklinGothicMediCondOSC.ttf') format('truetype'), url('/assets/css/fonts/FranklinGothicMediCondOSC.svg#FranklinGothicMediCondOSC') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.MediCondOSC {
+  font-family: 'FranklinGothicMediCondOSC';
+  font-weight: normal;
+}

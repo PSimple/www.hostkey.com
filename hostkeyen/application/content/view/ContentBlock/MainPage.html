@@ -1,0 +1,22 @@
+<div class="b-container">
+    <div class="b-col">
+    {set $i=0}
+    {foreach ($data as $k => $val)}
+        {if ( $i%4 == 0 && 0 < $k )}
+        </div>
+        <div class="b-col">
+        {/if}
+        <div class="b-col__item b-col__item_x4 b-main-page__offer-item">
+            <img class="b-main-page__offer-image" src="{HTTPD}/{$val['Img']}">
+            <h3 class="b-main-page__offer-item-title">
+                {$val['Head']}
+            </h3>
+            <p class="b-main-page__offer-item-text">
+                {$val['Content']}
+            </p>
+        </div>
+        {set $i++}
+    {/foreach}
+    </div>
+</div>
+

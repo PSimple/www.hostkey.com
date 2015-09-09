@@ -1,0 +1,21 @@
+{if ( 0 < count($data) )}
+<div class="b-dedicated__feature b-container">
+{set $i=0}
+{foreach ($data as $k => $val)}
+{if ( $i%4 == 0 && 0 < $k )}
+</div>
+<div class="b-dedicated__feature b-container">
+{/if}
+    <div class="b-dedicated__feature-item">
+        <img class="b-dedicated__feature-item-icon" src="{HTTPD}/{$val['Img']}" alt="иконка">
+        <h3 class="b-dedicated__feature-item-title">
+            {$val['Head']}
+        </h3>
+        <p class="b-dedicated__feature-item-text">
+            {$val['Content']}
+        </p>
+    </div>
+{set $i++}
+{/foreach}
+</div>
+{/if}

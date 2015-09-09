@@ -1,0 +1,109 @@
+        <div class="b-page">
+
+            <div class="b-page__promo b-page__promo_news_yes">
+                <h1 class="b-page__promo-title">News</h1>
+            </div>
+
+            <div class="b-news">
+                <div class="b-news__list">
+                    <div class="b-news__column">
+                        {foreach ($newsList1 as $row)}
+                        <div class="b-news__item">
+                            <div class="b-news__item-date b-news__item-date_first_yes">{$row['DateCreate']}</div>
+                            {if ( $row['Name'] )}
+                            <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
+                            <p class="b-news__item-text b-news__item-text_red_yes">
+                            {else}
+                            <div class="b-news__item-separate"></div>
+                            <p class="b-news__item-text">
+                            {/if}
+                                {$row['Name']}
+                            </p>
+                            <p class="b-news__item-text">
+                                {$row['Description']}
+                            </p>
+                            {if ( $row['IsDetails'] )}
+                            <a class="b-news__item-detail" href="{URL}-{$row['ID']}">Detail</a>
+                            {/if}
+                        </div>
+                        {/foreach}
+                    </div><!--
+                            --><div class="b-news__column">
+                    {foreach ($newsList2 as $row)}
+                    <div class="b-news__item">
+                        <div class="b-news__item-date b-news__item-date_first_yes">{$row['DateCreate']}</div>
+                        {if ( $row['Name'] )}
+                        <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
+                        <p class="b-news__item-text b-news__item-text_red_yes">
+                        {else}
+                        <div class="b-news__item-separate"></div>
+                        <p class="b-news__item-text">
+                        {/if}
+                            {$row['Name']}
+                        </p>
+                        <p class="b-news__item-text">
+                            {$row['Description']}
+                        </p>
+                        {if ( $row['IsDetails'] )}
+                        <a class="b-news__item-detail" href="{URL}-{$row['ID']}">Detail</a>
+                        {/if}
+                    </div>
+                    {/foreach}
+                </div><!--
+                            --><div class="b-news__column">
+                    {foreach ($newsList3 as $row)}
+                    <div class="b-news__item">
+                        <div class="b-news__item-date b-news__item-date_first_yes">{$row['DateCreate']}</div>
+                        {if ( $row['Name'] )}
+                        <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
+                        <p class="b-news__item-text b-news__item-text_red_yes">
+                            {else}
+                        <div class="b-news__item-separate"></div>
+                        <p class="b-news__item-text">
+                            {/if}
+                            {$row['Name']}
+                        </p>
+                        <p class="b-news__item-text">
+                            {$row['Description']}
+                        </p>
+                        {if ( $row['IsDetails'] )}
+                        <a class="b-news__item-detail" href="{URL}-{$row['ID']}">Detail</a>
+                        {/if}
+                    </div>
+                    {/foreach}
+                </div><!--
+                            --><div class="b-news__column b-news__column_last_yes">
+                    {foreach ($newsList3 as $row)}
+                    <div class="b-news__item">
+                        <div class="b-news__item-date b-news__item-date_first_yes">{$row['DateCreate']}</div>
+                        {if ( $row['Name'] )}
+                        <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
+                        <p class="b-news__item-text b-news__item-text_red_yes">
+                            {else}
+                        <div class="b-news__item-separate"></div>
+                        <p class="b-news__item-text">
+                            {/if}
+                            {$row['Name']}
+                        </p>
+                        <p class="b-news__item-text">
+                            {$row['Description']}
+                        </p>
+                        {if ( $row['IsDetails'] )}
+                        <a class="b-news__item-detail" href="{URL}-{$row['ID']}">Detail</a>
+                        {/if}
+                    </div>
+                    {/foreach}
+                </div>
+
+                </div>
+                <a class="b-news__more" href="#">
+                    <div class="b-news__more-plus">
+                        <span class="b-icon b-news__more-plus-icon"></span>
+                    </div>
+                    <div class="b-news__more-text">more<br>news</div>
+                </a>
+            </div>
+
+            <div class="footer-push"></div>
+        </div>
+

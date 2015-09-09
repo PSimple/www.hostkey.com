@@ -1,0 +1,15 @@
+<div class="b-container">
+    <div class="b-col">
+        {foreach ($data as $k => $val)}
+        <div class="b-col__item b-col__item_x4 b-about__offer-item">
+            <img class="b-about__offer-image" src="{HTTPD}/{$val['Img']}">
+            <h3 class="b-about__offer-item-title">
+                {$val['Head']}
+            </h3>
+            <p class="b-about__offer-item-text">
+                {$val['Content']}
+            </p>
+        </div>
+        {/foreach}
+    </div>
+</div>
