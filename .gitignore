@@ -9,12 +9,12 @@
 cache
 test
 config.php
-hostkeyen/zero
-hostkeyen/library
-hostkeyen/application/mail
-hostkeyen/application/document
-hostkeyen/assets/ckeditor
-hostkeyen/assets/ckfinder
+hostkey_com_new/zero
+hostkey_com_new/library
+hostkey_com_new/application/mail
+hostkey_com_new/application/document
+hostkey_com_new/assets/ckeditor
+hostkey_com_new/assets/ckfinder
 
 
 # External dependences
