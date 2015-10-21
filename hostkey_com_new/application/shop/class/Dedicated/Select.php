@@ -9,13 +9,27 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */
-class Shop_Dedicated_SelectService extends Zero_Controller
+class Shop_Dedicated_Select extends Zero_Controller
 {
+
+    /**
+     * Контроллер по умолчанию.
+     *
+     * @return Zero_View
+     */
+    public function Action_Default()
+    {
+        $this->Chunk_Init();
+        $this->Chunk_View();
+        return $this->View->Fetch(true);
+    }
+
+
     /**
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Dedicated_SelectService
+     * @return Shop_Dedicated_Select
      */
     public static function Make($properties = [])
     {

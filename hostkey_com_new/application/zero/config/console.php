@@ -16,7 +16,7 @@ return [
         'Day' => '*',
         'Month' => '*',
         'Week' => '*',
-        'IsActive' => false
+        'IsActive' => true
     ],
     /**
      * Удаление старых бинарных данных загруженных через веб (ajax)

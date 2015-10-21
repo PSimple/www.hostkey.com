@@ -1,6 +1,8 @@
 jQuery(document).ready(function($) {
-    var $currentPlaceX = 59.9458134,
-        $currentPlaceY = 30.3296705;
+    //var $currentPlaceX = 59.9458134,
+    //    $currentPlaceY = 30.3296705;
+    var $currentPlaceX = 52.3835427,
+        $currentPlaceY = 4.8882864;
 
     $(document).on('click', '.js-add-map', function(e){
 

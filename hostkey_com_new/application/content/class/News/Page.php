@@ -29,16 +29,16 @@ class Content_News_Page extends Zero_Controller
             $news = Content_News::Make();
             $news->AR->Sql_Order('DateCreate', 'DESC');
             $news->AR->Sql_Limit(1, 3);
-            $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') DateCreate, IsDetails");
+            $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
             $view->Assign('newsList1', $newsList);
             $news->AR->Sql_Limit(2, 3);
-            $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') DateCreate, IsDetails");
+            $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
             $view->Assign('newsList2', $newsList);
             $news->AR->Sql_Limit(3, 3);
-            $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') DateCreate, IsDetails");
+            $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
             $view->Assign('newsList3', $newsList);
             $news->AR->Sql_Limit(4, 3);
-            $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') DateCreate, IsDetails");
+            $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
             $view->Assign('newsList4', $newsList);
         }
         return $view;
