@@ -1,7 +1,32 @@
 <?php
-echo "WWWW";
-print_r(1%2);
-print_r(0%2);
-print_r(3%2);
-print_r(4%2);
-print_r(7%2);
+
+$a = 678;
+
+$b = &$a;
+
+$b = 876;
+
+echo $a;
+
+
+$obj = new Zero_Users();
+
+
+$obj->Summa = 45;
+
+$h = $obj->Summa;
+
+
+
+$mas=[];
+$mas=array();
+
+/////
+
+if ( 5 = $b ) {
+
+}
+
+if ( $b = 5 ) {
+
+}
