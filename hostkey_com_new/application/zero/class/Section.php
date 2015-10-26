@@ -326,17 +326,6 @@ class Zero_Section extends Zero_Model
     }
 
     /**
-     * Получение разделов с установленными группами для кастомизатора
-     *
-     * @return array
-     */
-    public static function Get_SectionComponentGroup()
-    {
-        $sql = "SELECT ID, `Currency`, `ComponentGroup` FROM Section WHERE `ComponentGroup` IS NOT NULL";
-        return Zero_DB::Select_Array($sql);
-    }
-
-    /**
      * Getting subsections, taking into account the rights and visibility.
      *
      * @param integer $id section ID

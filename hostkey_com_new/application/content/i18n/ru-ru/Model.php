@@ -74,10 +74,12 @@ return [
     'Error_NotNull' => 'Поле не заполненно',
     'Error_PasswordValid' => 'Пароль задан неверно (не совпадают)',
     'News IsDetails' => 'Показать подробно',
-
     'ContentBlock Content' => 'Контент',
     'ContentBlock Head' => 'Заголовок',
     'ContentBlock IsFeatures' => 'Особенности',
     'ContentBlock ID' => 'Идентификатор',
     'ContentBlock Img' => 'Картинка',
+    'ContentLittle Content' => 'Значение',
+    'ContentLittle ID' => 'Идентификатор',
+    'ContentLittle Name' => 'Название',
 ];

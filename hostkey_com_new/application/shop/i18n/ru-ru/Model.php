@@ -73,4 +73,10 @@ return [
     'Address' => 'Адрес доставки по умолчанию',
     'Error_NotNull' => 'Поле не заполненно',
     'Error_PasswordValid' => 'Пароль задан неверно (не совпадают)',
+    'ConfigCalculator ComponentGroup' => 'Группы',
+    'ConfigCalculator ComponentGroup options' => ['NL' => 'NL','RU' => 'RU','Mini' => 'Mini','Storage' => 'Storage','Hosting' => 'Hosting','Nodes' => 'Nodes','Micro' => 'Micro','VPS_SSD' => 'VPS_SSD','VPS_Win' => 'VPS_Win','Cloud' => 'Cloud','Enterprise' => 'Enterprise','1CPU' => '1CPU','2CPU' => '2CPU'],
+    'ConfigCalculator Currency' => 'Валюта',
+    'ConfigCalculator Currency options' => ['eur' => 'eur','rur' => 'rur'],
+    'ConfigCalculator ID' => 'Идентификатор',
+    'ConfigCalculator Name' => 'Название',
 ];
