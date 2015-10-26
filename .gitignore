@@ -9,13 +9,13 @@
 cache
 test
 config.php
+test.php
 hostkey_com_new/zero
 hostkey_com_new/library
 hostkey_com_new/application/mail
 hostkey_com_new/application/document
 hostkey_com_new/assets/ckeditor
 hostkey_com_new/assets/ckfinder
-
 
 # External dependences
 
