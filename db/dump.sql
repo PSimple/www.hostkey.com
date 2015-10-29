@@ -12,10 +12,6 @@ MySQL - 5.5.44-MariaDB : Database - hostkeyen
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`hostkeyen` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-USE `hostkeyen`;
-
 /*Table structure for table `Action` */
 
 DROP TABLE IF EXISTS `Action`;
@@ -201,7 +197,7 @@ CREATE TABLE `Users` (
 
 /*Data for the table `Users` */
 
-insert  into `Users`(`ID`,`Groups_ID`,`Users_ID`,`Name`,`Login`,`Password`,`IsAccess`,`Email`,`Phone`,`Skype`,`IsCondition`,`ImgAvatar`,`IsOnline`,`DateOnline`,`Date`,`Address`,`Token`) values (1,1,NULL,'Разработчик','dev','e77989ed21758e78331b20e477fc5582','open','test@test.ru',NULL,NULL,'no',NULL,'yes','2015-10-26 15:03:41',NULL,NULL,NULL),(2,1,1,'Alex','alex','534b44a19bf18d20b71ecc4eb77c572f','open','alex@hostkey.ru',NULL,NULL,'yes',NULL,'yes','2015-08-19 18:28:53','2015-08-19 18:25:53',NULL,NULL),(3,1,2,'Огарь','ogar','0bb5ce01b351772c16e54988845b4ad8','open','aogar@hostkey.com',NULL,NULL,'yes',NULL,'yes','2015-08-19 18:50:03','2015-08-19 18:28:53',NULL,NULL);
+insert  into `Users`(`ID`,`Groups_ID`,`Users_ID`,`Name`,`Login`,`Password`,`IsAccess`,`Email`,`Phone`,`Skype`,`IsCondition`,`ImgAvatar`,`IsOnline`,`DateOnline`,`Date`,`Address`,`Token`) values (1,1,NULL,'Разработчик','dev','e77989ed21758e78331b20e477fc5582','open','test@test.ru',NULL,NULL,'no',NULL,'yes','2015-10-29 14:21:12',NULL,NULL,NULL),(2,1,1,'Alex','alex','534b44a19bf18d20b71ecc4eb77c572f','open','alex@hostkey.ru',NULL,NULL,'yes',NULL,'yes','2015-08-19 18:28:53','2015-08-19 18:25:53',NULL,NULL),(3,1,2,'Огарь','ogar','0bb5ce01b351772c16e54988845b4ad8','open','aogar@hostkey.com',NULL,NULL,'yes',NULL,'yes','2015-08-19 18:50:03','2015-08-19 18:28:53',NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
