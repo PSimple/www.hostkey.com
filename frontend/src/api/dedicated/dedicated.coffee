@@ -2,13 +2,16 @@ angular.module "api.dedicated", [
 
 ]
 
-angular.module("api.dedicated").service "$dedicated", ($http, $q) ->
+angular.module("api.dedicated").constant("CONFIG", require('webpack-config-loader!../../env/env.js'));
+
+angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
     that = this
 
-    @getOptions = ->
+    @getConfigCalculator = ->
         deferred = $q.defer()
 
         $http
+            #url: "#{CONFIG.apiUrl}/configcalculator/getconfig?currency=eur&groups=NL,Mini"
             url: "/assets/dist/dedicated.json"
             method: "GET"
 

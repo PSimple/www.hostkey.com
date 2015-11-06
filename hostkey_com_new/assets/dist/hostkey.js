@@ -71,95 +71,7 @@
 
 	__webpack_require__(7);
 
-	__webpack_require__(10);
-
-	__webpack_require__(11);
-
-	__webpack_require__(16);
-
-	angular.module("app.dedicated", ["ui", "ui.router", "api"]);
-
-	angular.module("app.dedicated").config(["$httpProvider", "$stateProvider", "$urlRouterProvider", function($httpProvider, $stateProvider, $urlRouterProvider) {
-	  $urlRouterProvider.otherwise("");
-	  $stateProvider.state("dedicated", {
-	    url: "",
-	    views: {
-	      "": {
-	        template: __webpack_require__(18),
-	        controller: "AppDedicatedCtrl",
-	        resolve: {
-	          dedicated: ["$dedicated", function($dedicated) {
-	            return $dedicated.getOptions();
-	          }]
-	        }
-	      },
-	      "software@": {
-	        template: __webpack_require__(21)
-	      },
-	      "network@": {
-	        template: __webpack_require__(22)
-	      },
-	      "contract@": {
-	        template: __webpack_require__(23)
-	      }
-	    }
-	  });
-	}]);
-
-	angular.module("app.dedicated").controller("AppDedicatedCtrl", ["$scope", "$rootScope", "dedicated", function($scope, $rootScope, dedicated) {
-	  $rootScope.loaded = true;
-	  $scope.orderPrice = 0;
-	  $scope.$watch("order", function() {
-	    var price;
-	    price = 0;
-	    angular.forEach($scope.order, function(group) {
-	      return angular.forEach(group, function(opt) {
-	        return price += Number(opt.PriceEUR);
-	      });
-	    });
-	    return $scope.orderPrice = price;
-	  }, true);
-	  $scope.order = {
-	    software: {
-	      os: dedicated[4][100],
-	      controlPanel: dedicated[5][113],
-	      cpu: dedicated[1][230]
-	    }
-	  };
-	  return $scope.tabs = {
-	    software: {
-	      open: true,
-	      name: "Software",
-	      cpu: {
-	        name: "CPU",
-	        options: dedicated[1]
-	      },
-	      os: {
-	        name: "OS",
-	        options: dedicated[4]
-	      },
-	      controlPanel: {
-	        name: "Control Panel Software",
-	        options: dedicated[5]
-	      }
-	    }
-	  };
-	}]);
-
-	angular.module("app.dedicated").filter('orderVerbose', function() {
-	  return function(obj) {
-	    var names, str;
-	    str = "";
-	    if (angular.isObject(obj)) {
-	      names = [];
-	      angular.forEach(obj, function(o) {
-	        return names.push(o.Name);
-	      });
-	      str = names.join(" / ");
-	    }
-	    return str;
-	  };
-	});
+	__webpack_require__(25);
 
 
 /***/ },
@@ -167,11 +79,45 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(8);
-	module.exports = angular;
+
+	__webpack_require__(11);
+
+	__webpack_require__(12);
+
+	__webpack_require__(17);
+
+	__webpack_require__(20);
+
+	angular.module("dedicated.service", ["ui", "ui.router", "api", "dedicated.service.selected"]);
+
+	angular.module("dedicated.service").config(["$httpProvider", "$stateProvider", "$urlRouterProvider", function($httpProvider, $stateProvider, $urlRouterProvider) {
+	  $urlRouterProvider.otherwise("");
+	  $stateProvider.state("dedicatedService", {
+	    url: "",
+	    views: {
+	      "solutions": {
+	        controller: "DedicatedServiceSolutionsCtrl",
+	        template: __webpack_require__(24)
+	      }
+	    }
+	  });
+	}]);
+
+	angular.module("dedicated.service").controller("DedicatedServiceSolutionsCtrl", ["$scope", "$rootScope", function($scope, $rootScope) {
+	  return $rootScope.loaded = true;
+	}]);
 
 
 /***/ },
 /* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(9);
+	module.exports = angular;
+
+
+/***/ },
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {/**
@@ -22343,10 +22289,10 @@
 	})(window, document);
 
 	!window.angular.$$csp() && window.angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>');
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -31562,7 +31508,7 @@
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	/**
@@ -35937,23 +35883,40 @@
 	})(window, window.angular);
 
 /***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(12);
-
-	__webpack_require__(14);
-
-	__webpack_require__(15);
-
-	angular.module("ui", ["ui.buttons", "ui.scrollBlock", "ui.accordion"]);
-
-
-/***/ },
 /* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
+	__webpack_require__(30);
+
 	__webpack_require__(13);
+
+	__webpack_require__(15);
+
+	__webpack_require__(16);
+
+	angular.module("ui", ["ui.buttons", "ui.scrollBlock", "ui.accordion"]);
+
+	angular.module("ui").filter('orderVerbose', function() {
+	  return function(obj) {
+	    var names, str;
+	    str = "";
+	    if (angular.isObject(obj)) {
+	      names = [];
+	      angular.forEach(obj, function(o) {
+	        return names.push(o.Name);
+	      });
+	      str = names.join(" / ");
+	    }
+	    return str;
+	  };
+	});
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(14);
 
 	angular.module("ui.accordion", ["ui.bootstrap.accordion"]);
 
@@ -35971,7 +35934,7 @@
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	/*
@@ -39878,10 +39841,10 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(13);
+	__webpack_require__(14);
 
 	angular.module("ui.buttons", ["ui.bootstrap.buttons"]);
 
@@ -39891,7 +39854,7 @@
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {angular.module("ui.scrollBlock", []);
@@ -39932,32 +39895,29 @@
 	  };
 	});
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(17);
+	__webpack_require__(18);
 
 	angular.module("api", ["api.dedicated"]);
 
 
 /***/ },
-/* 17 */
-/***/ function(module, exports) {
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
 
 	angular.module("api.dedicated", []);
 
-	angular.module("api.dedicated").service("$dedicated", ["$http", "$q", function($http, $q) {
+	angular.module("api.dedicated").constant("CONFIG", __webpack_require__(19));
+
+	angular.module("api.dedicated").service("$dedicated", ["$http", "$q", "CONFIG", function($http, $q, CONFIG) {
 	  var that;
 	  that = this;
-
-	  /*
-	      Получим доступные решения для выделенных серверов: мини, микро
-	   */
-	  this.getSolutions = function() {};
-	  this.getOptions = function() {
+	  this.getConfigCalculator = function() {
 	    var deferred;
 	    deferred = $q.defer();
 	    $http({
@@ -39973,21 +39933,103 @@
 
 
 /***/ },
-/* 18 */
+/* 19 */
+/***/ function(module, exports) {
+
+	module.exports = {"apiUrl":"/api/v1"};
+
+/***/ },
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(19);
+	/* WEBPACK VAR INJECTION */(function($) {angular.module("dedicated.service.selected", []);
+
+	angular.module("dedicated.service.selected").config(["$httpProvider", "$stateProvider", "$urlRouterProvider", function($httpProvider, $stateProvider, $urlRouterProvider) {
+	  $stateProvider.state("dedicatedService.micro", {
+	    url: "/micro",
+	    controller: "MicroCtrl",
+	    template: __webpack_require__(21),
+	    resolve: {
+	      configCalculator: ["$dedicated", function($dedicated) {
+	        return $dedicated.getConfigCalculator();
+	      }]
+	    }
+	  });
+	}]);
+
+	angular.module("dedicated.service.selected").controller("MicroCtrl", ["$scope", "$state", "$stateParams", "$timeout", "configCalculator", function($scope, $state, $stateParams, $timeout, configCalculator) {
+	  $timeout(function() {
+	    return $.scrollTo('.b-dedicated__hide-block', 1000);
+	  }, 1000);
+	  $scope.close = function() {
+	    $.scrollTo('.js-switch-box', 1000);
+	    return $state.go("^", $stateParams, {
+	      reload: true
+	    });
+	  };
+	  $scope.orderPrice = 0;
+	  $scope.$watch("order", function() {
+	    var price;
+	    price = 0;
+	    angular.forEach($scope.order, function(group) {
+	      return angular.forEach(group, function(opt) {
+	        return price += Number(opt.PriceEUR);
+	      });
+	    });
+	    return $scope.orderPrice = price;
+	  }, true);
+	  $scope.order = {
+	    hardware: {
+	      cpu: configCalculator[1][230],
+	      hdd: configCalculator[2][62],
+	      ram: configCalculator[3][233]
+	    }
+	  };
+	  return $scope.tabs = {
+	    hardware: {
+	      open: true,
+	      name: "Hardware",
+	      cpu: {
+	        name: "CPU",
+	        options: configCalculator[1]
+	      },
+	      hdd: {
+	        name: "disks",
+	        options: configCalculator[2]
+	      },
+	      ram: {
+	        name: "RAM",
+	        options: configCalculator[3]
+	      }
+	    },
+	    software: {
+	      name: "Software",
+	      os: {
+	        name: "OS",
+	        options: configCalculator[1]
+	      }
+	    }
+	  };
+	}]);
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var jade = __webpack_require__(22);
 
 	module.exports = function template(locals) {
 	var buf = [];
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-dedicated__accordion\"><div id=\"scroll-box\" accordion=\"\"><div ui-view=\"software@\"></div></div><div class=\"b-accordion__continue\"><div class=\"b-accordion__continue-price\">Price:<span class=\"b-accordion__continue-price-qty\">€ {{orderPrice}}/Mo</span></div><a href=\"#\" class=\"b-submit b-accordion__continue-submit\">Continue</a></div></div><!-- Скролящийся блок с результатом подбора--><div scroll-block=\"\" class=\"b-dedicated__summary\"><div class=\"b-dedicated__summary-title\">Your dedicated</div><div class=\"b-dedicated__summary-subtitle\">Software</div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.software\" class=\"b-dedicated__summary-table-row\"><td class=\"b-dedicated__summary-table-cell\">{{opt.Name}}</td><td class=\"b-dedicated__summary-table-cell\">€ {{opt.PriceEUR}}</td></tr></table><div class=\"b-dedicated__summary-price\"><span class=\"b-dedicated__summary-price-value\">€ {{orderPrice}}/month</span></div><a href=\"#\" class=\"b-submit b-dedicated__summary-submit\">continue</a></div>");;return buf.join("");
+	buf.push("<div ng-click=\"close()\" class=\"b-dedicated__hide-block-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div class=\"b-dedicated__item-content dedicated-item-content\"><div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">configurator of Virtualisation nodes SOLUTIONS</h3><div class=\"b-dedicated__description\">HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia.\nWe are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+\ninternational resellers. Virtually any server configuration could be provided to our customers. We offer full\nrange of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own\nservers in Moscow.</div></div><div class=\"b-container\"><div class=\"b-dedicated__accordion\"><div id=\"scroll-box\" accordion=\"\"><accordion-group is-open=\"tabs.hardware.open\"><accordion-heading><span class=\"b-accordion__title-main\">{{tabs.hardware.name}}</span><span class=\"b-accordion__title-submain\">{{order.hardware|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">{{tabs.hardware.cpu.name}}</td><td class=\"b-dedicated__accordion-table-cell\"><label ng-repeat=\"cpu in tabs.hardware.cpu.options\" ng-model=\"order.hardware.cpu\" btn-radio=\"{{cpu}}\" class=\"b-checkbox-submit b-checkbox-submit_size_220\"><span class=\"b-checkbox-submit__text\">{{cpu.Name}}</span></label></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">{{tabs.hardware.ram.name}}</td><td class=\"b-dedicated__accordion-table-cell js-checked\"><label ng-repeat=\"ram in tabs.hardware.ram.options\" ng-model=\"order.hardware.ram\" btn-radio=\"{{ram}}\" class=\"b-checkbox-submit b-checkbox-submit_size_70\"><span class=\"b-checkbox-submit__text\">{{ram.Name}}</span></label></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">{{tabs.hardware.hdd.name}}</td><td class=\"b-dedicated__accordion-table-cell js-checked\"><label ng-repeat=\"hdd in tabs.hardware.hdd.options\" ng-model=\"order.hardware.hdd\" btn-radio=\"{{hdd}}\" class=\"b-checkbox-submit b-checkbox-submit_size_170\"><span class=\"b-checkbox-submit__text\">{{hdd.Name}}</span></label></td></tr></table></accordion-group><accordion-group><accordion-heading><span class=\"b-accordion__title-main\">{{tabs.software.name}}</span><span class=\"b-accordion__title-submain\">{{order.software|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">{{tabs.software.os.name}}</td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><select class=\"table-select__item\"><option value=\"1\"> Windows Server 12 Datacenter (70)</option><option value=\"2\">1 Gb</option><option value=\"3\">2 Gb</option><option value=\"4\">4 Gb</option></select></td><td class=\"table-select__cell\"><select class=\"table-select__item js-select\"><option value=\"1\">64 BIT</option><option value=\"2\">1 Gb</option><option value=\"3\">4 Gb</option></select></td><td class=\"table-select__cell\"><label class=\"table-select__item-label table-select__item-label_inline_yes\">RDP<br/>Licenses</label><input type=\"text\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X € 3</span></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">MS SQL</td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><select class=\"table-select__item js-select\"><option value=\"1\"> Windows Server 12 Datacenter (70)</option><option value=\"2\">1 Gb</option><option value=\"3\">2 Gb</option><option value=\"4\">4 Gb</option></select></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">MS Exchange\nCALs</td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><select class=\"table-select__item js-select\"><option value=\"1\"> Windows Server 12 Datacenter (70)</option><option value=\"2\">1 Gb</option><option value=\"3\">2 Gb</option><option value=\"4\">4 Gb</option></select></td><td class=\"table-select__cell\"><label class=\"table-select__item-label table-select__item-label_inline_yes\">Count</label><input type=\"text\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X € 2</span></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span class=\"b-accordion__title-main\">Network</span><span class=\"b-accordion__title-submain\">200Mbps unmetered (52Tb max) (140)/2 IPv4 (4)/VLAN port 100Mbps (5)/FTP Backup 1</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">traffic</td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><select class=\"table-select__item js-select\"><option value=\"1\"> 400 Mbps unmetered (104Tb max) (210)</option><option value=\"2\">1 Gb</option><option value=\"3\">2 Gb</option><option value=\"4\">4 Gb</option></select></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">ip</td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><select class=\"table-select__item js-select\"><option value=\"1\"> Windows Server 12 Datacenter (70)</option><option value=\"2\">1 Gb</option><option value=\"3\">2 Gb</option><option value=\"4\">4 Gb</option></select></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">vlan</td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><select class=\"table-select__item js-select\"><option value=\"1\"> Windows Server 12 Datacenter (70)</option><option value=\"2\">1 Gb</option><option value=\"3\">2 Gb</option><option value=\"4\">4 Gb</option></select></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">ftp backup</td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><select class=\"table-select__item js-select\"><option value=\"1\"> Windows Server 12 Datacenter (70)</option><option value=\"2\">1 Gb</option><option value=\"3\">2 Gb</option><option value=\"4\">4 Gb</option></select></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span class=\"b-accordion__title-main\">SLA</span><span class=\"b-accordion__title-submain\">Basic SLA /Self-service</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">Service level\nagreement</td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><select class=\"table-select__item js-select\"><option value=\"1\"> 400 Mbps unmetered (104Tb max) (210)</option><option value=\"2\">1 Gb</option><option value=\"3\">2 Gb</option><option value=\"4\">4 Gb</option></select></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">FTP Backup</td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><select class=\"table-select__item js-select\"><option value=\"1\"> Windows Server 12 Datacenter (70)</option><option value=\"2\">1 Gb</option><option value=\"3\">2 Gb</option><option value=\"4\">4 Gb</option></select></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group></div></div><!-- Скролящийся блок с результатом подбора--><div scroll-block=\"\" class=\"b-dedicated__summary\"><div class=\"b-dedicated__summary-title\">Your dedicated</div><div class=\"b-dedicated__summary-price\"><span class=\"b-dedicated__summary-price-value\">€{{orderPrice}}/year</span><span class=\"b-dedicated__summary-price-discount\">12% discount, save €97.92</span></div><a href=\"\" class=\"b-submit b-dedicated__summary-submit\">buy</a></div></div><div class=\"b-container\"><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\">Billing cycle\ndiscount:</td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td class=\"table-select__cell\"><select class=\"table-select__item js-select\"><option value=\"1\">Monthly</option><option value=\"2\">1 Gb</option><option value=\"3\">2 Gb</option><option value=\"4\">4 Gb</option></select></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></div></div>");;return buf.join("");
 	}
 
 /***/ },
-/* 19 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40207,7 +40249,7 @@
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(20).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(23).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -40239,16 +40281,141 @@
 
 
 /***/ },
-/* 20 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 21 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(19);
+	var jade = __webpack_require__(22);
+
+	module.exports = function template(locals) {
+	var buf = [];
+	var jade_mixins = {};
+	var jade_interp;
+
+	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div class=\"b-dedicated__switch-item js-switch-item active\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div class=\"b-dedicated__switch-item js-switch-item\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div ui-sref=\".micro()\" class=\"b-dedicated__item js-switch-item\"><img src=\"images/dedicate-select-icon-2-1.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Micro servers</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ui-sref=\".micro()\" class=\"b-dedicated__item js-switch-item\"><img src=\"images/dedicate-select-icon-2-2.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Mini servers</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ui-sref=\".micro()\" class=\"b-dedicated__item js-switch-item\"><img src=\"images/dedicate-select-icon-2-3.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Virtualisation nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ui-sref=\".micro()\" class=\"b-dedicated__item js-switch-item\"><img src=\"images/dedicate-select-icon-2-4.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Hosting nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ui-sref=\".micro()\" class=\"b-dedicated__item js-switch-item\"><img src=\"images/dedicate-select-icon-2-5.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Storage</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ui-sref=\".micro()\" class=\"b-dedicated__item js-switch-item\"><img src=\"images/dedicate-select-icon-2-6.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Big data</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div class=\"b-dedicated__item js-switch-item\"><img src=\"images/dedicate-select-icon-2-7.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Configurator</h3><h4 class=\"b-dedicated__item-subtitle\">Your own configuration</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div class=\"b-dedicated__item js-switch-item\"><img src=\"images/dedicate-select-icon-2-8.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Extra price</h3><h4 class=\"b-dedicated__item-subtitle\">2014 sale</h4><div class=\"b-dedicated__item-start b-dedicated__item-start_red_yes\">Starts from</div><div class=\"b-dedicated__item-price b-dedicated__item-price_red_yes\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div></div><div ui-view=\"\" class=\"b-dedicated__hide-block\"></div>");;return buf.join("");
+	}
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(8);
+
+	__webpack_require__(11);
+
+	__webpack_require__(12);
+
+	__webpack_require__(17);
+
+	angular.module("app.dedicated.step2", ["ui", "ui.router", "api"]);
+
+	angular.module("app.dedicated.step2").config(["$httpProvider", "$stateProvider", "$urlRouterProvider", function($httpProvider, $stateProvider, $urlRouterProvider) {
+	  $urlRouterProvider.otherwise("");
+	  $stateProvider.state("dedicated", {
+	    url: "",
+	    views: {
+	      "": {
+	        template: __webpack_require__(26),
+	        controller: "AppDedicatedCtrl",
+	        resolve: {
+	          dedicated: ["$dedicated", function($dedicated) {
+	            return $dedicated.getConfigCalculator();
+	          }]
+	        }
+	      },
+	      "software@": {
+	        template: __webpack_require__(27)
+	      },
+	      "network@": {
+	        template: __webpack_require__(28)
+	      },
+	      "contract@": {
+	        template: __webpack_require__(29)
+	      }
+	    }
+	  });
+	}]);
+
+	angular.module("app.dedicated.step2").controller("AppDedicatedCtrl", ["$scope", "$rootScope", "dedicated", function($scope, $rootScope, dedicated) {
+	  $rootScope.loaded = true;
+	  $scope.orderPrice = 0;
+	  $scope.$watch("order", function() {
+	    var price;
+	    price = 0;
+	    angular.forEach($scope.order, function(group) {
+	      return angular.forEach(group, function(opt) {
+	        return price += Number(opt.PriceEUR);
+	      });
+	    });
+	    return $scope.orderPrice = price;
+	  }, true);
+	  $scope.order = {
+	    software: {
+	      os: dedicated[4][100],
+	      controlPanel: dedicated[5][113],
+	      cpu: dedicated[1][230]
+	    }
+	  };
+	  return $scope.tabs = {
+	    software: {
+	      open: true,
+	      name: "Software",
+	      cpu: {
+	        name: "CPU",
+	        options: dedicated[1]
+	      },
+	      os: {
+	        name: "OS",
+	        options: dedicated[4]
+	      },
+	      controlPanel: {
+	        name: "Control Panel Software",
+	        options: dedicated[5]
+	      }
+	    }
+	  };
+	}]);
+
+	angular.module("app.dedicated.step2").filter('orderVerbose', function() {
+	  return function(obj) {
+	    var names, str;
+	    str = "";
+	    if (angular.isObject(obj)) {
+	      names = [];
+	      angular.forEach(obj, function(o) {
+	        return names.push(o.Name);
+	      });
+	      str = names.join(" / ");
+	    }
+	    return str;
+	  };
+	});
+
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var jade = __webpack_require__(22);
+
+	module.exports = function template(locals) {
+	var buf = [];
+	var jade_mixins = {};
+	var jade_interp;
+
+	buf.push("<div class=\"b-dedicated__accordion\"><div id=\"scroll-box\" accordion=\"\"><div ui-view=\"software@\"></div></div><div class=\"b-accordion__continue\"><div class=\"b-accordion__continue-price\">Price:<span class=\"b-accordion__continue-price-qty\">€ {{orderPrice}}/Mo</span></div><a href=\"#\" class=\"b-submit b-accordion__continue-submit\">Continue</a></div></div><!-- Скролящийся блок с результатом подбора--><div scroll-block=\"\" class=\"b-dedicated__summary\"><div class=\"b-dedicated__summary-title\">Your dedicated</div><div class=\"b-dedicated__summary-subtitle\">Software</div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.software\" class=\"b-dedicated__summary-table-row\"><td class=\"b-dedicated__summary-table-cell\">{{opt.Name}}</td><td class=\"b-dedicated__summary-table-cell\">€ {{opt.PriceEUR}}</td></tr></table><div class=\"b-dedicated__summary-price\"><span class=\"b-dedicated__summary-price-value\">€ {{orderPrice}}/month</span></div><a href=\"#\" class=\"b-submit b-dedicated__summary-submit\">continue</a></div>");;return buf.join("");
+	}
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var jade = __webpack_require__(22);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -40259,10 +40426,10 @@
 	}
 
 /***/ },
-/* 22 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(19);
+	var jade = __webpack_require__(22);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -40273,10 +40440,10 @@
 	}
 
 /***/ },
-/* 23 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(19);
+	var jade = __webpack_require__(22);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -40285,6 +40452,222 @@
 
 	buf.push("<h3 class=\"b-accordion__title\"><span class=\"b-accordion__title-main\">4. Contract</span><span class=\"b-accordion__title-submain\">R1Soft CDP Backup Agent - 20GB / Basic – 24x7x24 / Monitoring - Mail / Contract Term 1 Month / Payment period 3 Months</span></h3><div class=\"b-accordion__item\"><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes b-dedicated__accordion-table-cell_top_yes\">Backup</td><td class=\"b-dedicated__accordion-table-cell\"><div class=\"radio-box\"><label class=\"fake-radio-label\"><span class=\"fake-input js-check\"></span>Non<input name=\"radio-row-8\" type=\"radio\" class=\"hidden-input\"/></label><label class=\"fake-radio-label\"><span class=\"fake-input js-check\"></span>R1Soft CDP Backup Agent - 20GB<span class=\"red-text\">(€ 20.00)</span><input name=\"radio-row-8\" type=\"radio\" class=\"hidden-input\"/></label><label class=\"fake-radio-label\"><span class=\"fake-input js-check\"></span>R1Soft CDP Backup Agent - 50GB<span class=\"red-text\">(€ 27.50)</span><input name=\"radio-row-8\" type=\"radio\" class=\"hidden-input\"/></label><label class=\"fake-radio-label\"><span class=\"fake-input js-check\"></span>R1Soft CDP Backup Agent - 100GB<span class=\"red-text\">(€ 40.00)</span><input name=\"radio-row-8\" type=\"radio\" class=\"hidden-input\"/></label><label class=\"fake-radio-label\"><span class=\"fake-input js-check\"></span>R1Soft CDP Backup Agent - 200GB<span class=\"red-text\">(€ 65.00)</span><input name=\"radio-row-8\" type=\"radio\" class=\"hidden-input\"/></label><label class=\"fake-radio-label\"><span class=\"fake-input js-check\"></span>R1Soft CDP Backup Agent - 500GB<span class=\"red-text\">(€ 140.00)</span><input name=\"radio-row-8\" type=\"radio\" class=\"hidden-input\"/></label></div></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes b-dedicated__accordion-table-cell_top_yes\">Service Level Agreements</td><td class=\"b-dedicated__accordion-table-cell\"><div class=\"radio-box\"><label class=\"fake-radio-label\"><span class=\"fake-input js-check\"></span>Basic – 24x7x24<span class=\"red-text\">(incl.)</span><input name=\"radio-row-9\" type=\"radio\" class=\"hidden-input\"/></label><label class=\"fake-radio-label\"><span class=\"fake-input js-check\"></span>Bronze – 24x7x4<span class=\"red-text\">(€ 29.00)</span><input name=\"radio-row-9\" type=\"radio\" class=\"hidden-input\"/></label><label class=\"fake-radio-label\"><span class=\"fake-input js-check\"></span>Silver – 24x7x2<span class=\"red-text\">(€ 49.00)</span><input name=\"radio-row-9\" type=\"radio\" class=\"hidden-input\"/></label><label class=\"fake-radio-label\"><span class=\"fake-input js-check\"></span>Gold – 24x7x1<span class=\"red-text\">(€ 79.00)</span><input name=\"radio-row-9\" type=\"radio\" class=\"hidden-input\"/></label><label class=\"fake-radio-label\"><span class=\"fake-input js-check\"></span>Platinum - 24x7x½<span class=\"red-text\">(€ 119.00)</span><input name=\"radio-row-9\" type=\"radio\" class=\"hidden-input\"/></label></div></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes b-dedicated__accordion-table-cell_top_yes\">Advanced Monitoring</td><td class=\"b-dedicated__accordion-table-cell\"><label class=\"fake-checkbox-label\"><span class=\"fake-checkbox-label__box js-check\"></span>Monitoring - Mail<span class=\"red-text\">(€ 5.00)</span><input name=\"check-9\" type=\"checkbox\" class=\"hidden-input\"/></label><label class=\"fake-checkbox-label\"><span class=\"fake-checkbox-label__box js-check\"></span>Monitoring - SMS<span class=\"red-text\">(€ 10.00)</span><input name=\"check-56\" type=\"checkbox\" class=\"hidden-input\"/></label></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes b-dedicated__accordion-table-cell_top_yes\">Contract term</td><td class=\"b-dedicated__accordion-table-cell\">1 month<br/><br/></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes b-dedicated__accordion-table-cell_top_yes\">Payment period</td><td class=\"b-dedicated__accordion-table-cell\"><div data-slides=\"6\" class=\"b-slider js-slider\"></div><div class=\"b-slider__legend-6\"><div class=\"b-slider__legend-6-item b-slider__legend-6-item_place_1\">1 Months<br/></div><div class=\"b-slider__legend-6-item b-slider__legend-6-item_place_2\">3 Months<br/><span class=\"red-text\">(- 2,5%)</span></div><div class=\"b-slider__legend-6-item b-slider__legend-6-item_place_3\">6 Months<br/><span class=\"red-text\">(- 5%)</span></div><div class=\"b-slider__legend-6-item b-slider__legend-6-item_place_4\">12 Months<br/><span class=\"red-text\">(- 10%)</span></div><div class=\"b-slider__legend-6-item b-slider__legend-6-item_place_5\">24 Months<br/><span class=\"red-text\">(- 20%)</span></div><div class=\"b-slider__legend-6-item b-slider__legend-6-item_place_6\">36 Months<br/><span class=\"red-text\">(- 30%)</span></div></div></td></tr></table></div>");;return buf.join("");
 	}
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	 * jQuery.scrollTo
+	 * Copyright (c) 2007-2015 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
+	 * Licensed under MIT
+	 * http://flesler.blogspot.com/2007/10/jqueryscrollto.html
+	 * @projectDescription Lightweight, cross-browser and highly customizable animated scrolling with jQuery
+	 * @author Ariel Flesler
+	 * @version 2.1.2
+	 */
+	;(function(factory) {
+		'use strict';
+		if (true) {
+			// AMD
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(10)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (typeof module !== 'undefined' && module.exports) {
+			// CommonJS
+			module.exports = factory(require('jquery'));
+		} else {
+			// Global
+			factory(jQuery);
+		}
+	})(function($) {
+		'use strict';
+
+		var $scrollTo = $.scrollTo = function(target, duration, settings) {
+			return $(window).scrollTo(target, duration, settings);
+		};
+
+		$scrollTo.defaults = {
+			axis:'xy',
+			duration: 0,
+			limit:true
+		};
+
+		function isWin(elem) {
+			return !elem.nodeName ||
+				$.inArray(elem.nodeName.toLowerCase(), ['iframe','#document','html','body']) !== -1;
+		}		
+
+		$.fn.scrollTo = function(target, duration, settings) {
+			if (typeof duration === 'object') {
+				settings = duration;
+				duration = 0;
+			}
+			if (typeof settings === 'function') {
+				settings = { onAfter:settings };
+			}
+			if (target === 'max') {
+				target = 9e9;
+			}
+
+			settings = $.extend({}, $scrollTo.defaults, settings);
+			// Speed is still recognized for backwards compatibility
+			duration = duration || settings.duration;
+			// Make sure the settings are given right
+			var queue = settings.queue && settings.axis.length > 1;
+			if (queue) {
+				// Let's keep the overall duration
+				duration /= 2;
+			}
+			settings.offset = both(settings.offset);
+			settings.over = both(settings.over);
+
+			return this.each(function() {
+				// Null target yields nothing, just like jQuery does
+				if (target === null) return;
+
+				var win = isWin(this),
+					elem = win ? this.contentWindow || window : this,
+					$elem = $(elem),
+					targ = target, 
+					attr = {},
+					toff;
+
+				switch (typeof targ) {
+					// A number will pass the regex
+					case 'number':
+					case 'string':
+						if (/^([+-]=?)?\d+(\.\d+)?(px|%)?$/.test(targ)) {
+							targ = both(targ);
+							// We are done
+							break;
+						}
+						// Relative/Absolute selector
+						targ = win ? $(targ) : $(targ, elem);
+						/* falls through */
+					case 'object':
+						if (targ.length === 0) return;
+						// DOMElement / jQuery
+						if (targ.is || targ.style) {
+							// Get the real position of the target
+							toff = (targ = $(targ)).offset();
+						}
+				}
+
+				var offset = $.isFunction(settings.offset) && settings.offset(elem, targ) || settings.offset;
+
+				$.each(settings.axis.split(''), function(i, axis) {
+					var Pos	= axis === 'x' ? 'Left' : 'Top',
+						pos = Pos.toLowerCase(),
+						key = 'scroll' + Pos,
+						prev = $elem[key](),
+						max = $scrollTo.max(elem, axis);
+
+					if (toff) {// jQuery / DOMElement
+						attr[key] = toff[pos] + (win ? 0 : prev - $elem.offset()[pos]);
+
+						// If it's a dom element, reduce the margin
+						if (settings.margin) {
+							attr[key] -= parseInt(targ.css('margin'+Pos), 10) || 0;
+							attr[key] -= parseInt(targ.css('border'+Pos+'Width'), 10) || 0;
+						}
+
+						attr[key] += offset[pos] || 0;
+
+						if (settings.over[pos]) {
+							// Scroll to a fraction of its width/height
+							attr[key] += targ[axis === 'x'?'width':'height']() * settings.over[pos];
+						}
+					} else {
+						var val = targ[pos];
+						// Handle percentage values
+						attr[key] = val.slice && val.slice(-1) === '%' ?
+							parseFloat(val) / 100 * max
+							: val;
+					}
+
+					// Number or 'number'
+					if (settings.limit && /^\d+$/.test(attr[key])) {
+						// Check the limits
+						attr[key] = attr[key] <= 0 ? 0 : Math.min(attr[key], max);
+					}
+
+					// Don't waste time animating, if there's no need.
+					if (!i && settings.axis.length > 1) {
+						if (prev === attr[key]) {
+							// No animation needed
+							attr = {};
+						} else if (queue) {
+							// Intermediate animation
+							animate(settings.onAfterFirst);
+							// Don't animate this axis again in the next iteration.
+							attr = {};
+						}
+					}
+				});
+
+				animate(settings.onAfter);
+
+				function animate(callback) {
+					var opts = $.extend({}, settings, {
+						// The queue setting conflicts with animate()
+						// Force it to always be true
+						queue: true,
+						duration: duration,
+						complete: callback && function() {
+							callback.call(elem, targ, settings);
+						}
+					});
+					$elem.animate(attr, opts);
+				}
+			});
+		};
+
+		// Max scrolling position, works on quirks mode
+		// It only fails (not too badly) on IE, quirks mode.
+		$scrollTo.max = function(elem, axis) {
+			var Dim = axis === 'x' ? 'Width' : 'Height',
+				scroll = 'scroll'+Dim;
+
+			if (!isWin(elem))
+				return elem[scroll] - $(elem)[Dim.toLowerCase()]();
+
+			var size = 'client' + Dim,
+				doc = elem.ownerDocument || elem.document,
+				html = doc.documentElement,
+				body = doc.body;
+
+			return Math.max(html[scroll], body[scroll]) - Math.min(html[size], body[size]);
+		};
+
+		function both(val) {
+			return $.isFunction(val) || $.isPlainObject(val) ? val : { top:val, left:val };
+		}
+
+		// Add special hooks so that window scroll properties can be animated
+		$.Tween.propHooks.scrollLeft = 
+		$.Tween.propHooks.scrollTop = {
+			get: function(t) {
+				return $(t.elem)[t.prop]();
+			},
+			set: function(t) {
+				var curr = this.get(t);
+				// If interrupt is true and user scrolled, stop animating
+				if (t.options.interrupt && t._last && t._last !== curr) {
+					return $(t.elem).stop();
+				}
+				var next = Math.round(t.now);
+				// Don't waste CPU
+				// Browsers don't render floating point scroll
+				if (curr !== next) {
+					$(t.elem)[t.prop](next);
+					t._last = this.get(t);
+				}
+			}
+		};
+
+		// AMD requirement
+		return $scrollTo;
+	});
+
 
 /***/ }
 /******/ ]);
