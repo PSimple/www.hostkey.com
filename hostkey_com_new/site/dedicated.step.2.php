@@ -12,7 +12,7 @@
         <title>Hostkey. Dedicated. Select service. Step 2</title>
 
         <link href="stylesheets/style.css" rel="stylesheet" type="text/css" media="all">
-        <link href="assets/hostkey.css" rel="stylesheet" type="text/css">
+        <link href="assets/dist/hostkey.css" rel="stylesheet" type="text/css">
 
 
         <!--[if lt IE 9]>
@@ -542,7 +542,7 @@
 
         <script src="js/scroll-block.js"></script>
 
-        <script src="assets/hostkey.js"></script>
+        <script src="assets/dist/hostkey.js"></script>
 
         <?php include_once "partials/include.all.script.php" ?>
 

@@ -9,7 +9,7 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q) ->
         deferred = $q.defer()
 
         $http
-            url: "assets/dedicated.json"
+            url: "/assets/dist/dedicated.json"
             method: "GET"
 
         .success (data) ->
