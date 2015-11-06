@@ -1,0 +1,7 @@
+{
+  "name": "bower",
+  "version": "1.0",
+  "dependencies": {
+    "angular-bootstrap": "=0.12.0 "
+  }
+}

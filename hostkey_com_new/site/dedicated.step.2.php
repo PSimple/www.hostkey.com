@@ -12,6 +12,7 @@
         <title>Hostkey. Dedicated. Select service. Step 2</title>
 
         <link href="stylesheets/style.css" rel="stylesheet" type="text/css" media="all">
+        <link href="assets/hostkey.css" rel="stylesheet" type="text/css">
 
 
         <!--[if lt IE 9]>
@@ -20,7 +21,7 @@
         <![endif]-->
 
     </head>
-    <body>
+    <body ng-app="app.dedicated" class="fade" ng-class="{in: loaded}">
 
         <?php include_once "partials/include.header.php" ?>
 
@@ -51,7 +52,10 @@
                                 additional options</h3>
                         </div>
 
-                        <div class="b-container">
+                        <!-- временно вместо верстки запустим app.dedicated -->
+                        <div class="b-container" ui-view=""></div>
+
+                        <div class="b-container" style="display:none;">
                             <div class="b-dedicated__accordion">
 
                                 <div class="b-accordion" id="scroll-box">
@@ -536,8 +540,9 @@
         <script src="vendors/slick/slick.min.js"></script>
         <script src="js/slick-run.js"></script>
 
-
         <script src="js/scroll-block.js"></script>
+
+        <script src="assets/hostkey.js"></script>
 
         <?php include_once "partials/include.all.script.php" ?>
 
