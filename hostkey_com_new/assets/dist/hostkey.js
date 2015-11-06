@@ -39952,6 +39952,11 @@
 	angular.module("api.dedicated").service("$dedicated", ["$http", "$q", function($http, $q) {
 	  var that;
 	  that = this;
+
+	  /*
+	      Получим доступные решения для выделенных серверов: мини, микро
+	   */
+	  this.getSolutions = function() {};
 	  this.getOptions = function() {
 	    var deferred;
 	    deferred = $q.defer();
