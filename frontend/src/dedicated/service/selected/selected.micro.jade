@@ -304,14 +304,11 @@
                                 table.table-select
 
                                     tr.table-select__row
-
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
-                                            select.table-select__item(ui-select2="", ng-model="order.software.os")
-                                                option(ng-selected="{{item.ID === order.software.os}}", ng-repeat="item in tabs.software.os.options", value="{{item.ID}}") {{item.Name}}
+                                            .table-select__item(ui-select="order.software.os", options="tabs.software.os.options", width="340")
 
                                         td.table-select__cell
-                                            select.table-select__item(ui-select2="", ng-model="order.software.bit")
-                                                option(ng-selected="{{item.ID === order.software.bit}}", ng-repeat="item in tabs.software.bit.options", value="{{item.ID}}") {{item.Name}}
+                                            .table-select__item(ui-select="order.software.bit", options="tabs.software.bit.options", width="170")
 
                                         td.table-select__cell
                                             label.table-select__item-label.table-select__item-label_inline_yes
@@ -328,8 +325,7 @@
                                 table.table-select
                                     tr.table-select__row
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
-                                            select.table-select__item(ui-select2="", ng-model="order.software.control_panel")
-                                                option(ng-selected="{{item.ID === order.software.controlPanel}}", ng-repeat="item in tabs.software.controlPanel.options", value="{{item.ID}}") {{item.Name}}
+                                            .table-select__item(ui-select="order.software.controlPanel", options="tabs.software.controlPanel.options", width="340")
 
                                         td.table-select__cell
                                         td.table-select__cell
@@ -370,66 +366,54 @@
                 accordion-group
 
                     accordion-heading
-                        span.b-accordion__title-main Network
-                        span.b-accordion__title-submain 200Mbps unmetered (52Tb max) (140)/2 IPv4 (4)/VLAN port 100Mbps (5)/FTP Backup 1
+                        span.b-accordion__title-main {{tabs.network.name}}
+                        span.b-accordion__title-submain {{order.network|orderVerbose}}
 
                     table.b-dedicated__accordion-table
                         tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes traffic
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.traffic.name}}
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
-                                            select.table-select__item.js-select
-                                                option(value='1')  400 Mbps unmetered (104Tb max) (210)
-                                                option(value='2') 1 Gb
-                                                option(value='3') 2 Gb
-                                                option(value='4') 4 Gb
+                                            .table-select__item(ui-select="order.network.traffic", options="tabs.network.traffic.options", width="340")
+
                                         td.table-select__cell
                                         td.table-select__cell
 
 
                         tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes ip
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.ip.name}}
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
-                                            select.table-select__item.js-select
-                                                option(value='1')  Windows Server 12 Datacenter (70)
-                                                option(value='2') 1 Gb
-                                                option(value='3') 2 Gb
-                                                option(value='4') 4 Gb
+                                            .table-select__item(ui-select="order.network.ip", options="tabs.network.ip.options", width="340")
+
                                         td.table-select__cell
                                         td.table-select__cell
 
 
                         tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes vlan
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.vlan.name}}
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
-                                            select.table-select__item.js-select
-                                                option(value='1')  Windows Server 12 Datacenter (70)
-                                                option(value='2') 1 Gb
-                                                option(value='3') 2 Gb
-                                                option(value='4') 4 Gb
+                                            .table-select__item(ui-select="order.network.vlan", options="tabs.network.vlan.options", width="340")
+
                                         td.table-select__cell
                                         td.table-select__cell
 
 
                         tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes ftp backup
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.ftpBackup.name}}
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
-                                            select.table-select__item.js-select
-                                                option(value='1')  Windows Server 12 Datacenter (70)
-                                                option(value='2') 1 Gb
-                                                option(value='3') 2 Gb
-                                                option(value='4') 4 Gb
+                                            .table-select__item(ui-select="order.network.ftpBackup", options="tabs.network.ftpBackup.options", width="340")
+
                                         td.table-select__cell
                                         td.table-select__cell
 
@@ -437,8 +421,8 @@
                 accordion-group
 
                     accordion-heading
-                        span.b-accordion__title-main SLA
-                        span.b-accordion__title-submain Basic SLA /Self-service
+                        span.b-accordion__title-main {{tabs.sla.name}}
+                        span.b-accordion__title-submain {{order.sla|orderVerbose}}
 
 
                     table.b-dedicated__accordion-table
@@ -452,11 +436,8 @@
                                 table.table-select
                                     tr.table-select__row
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
-                                            select.table-select__item.js-select
-                                                option(value='1')  400 Mbps unmetered (104Tb max) (210)
-                                                option(value='2') 1 Gb
-                                                option(value='3') 2 Gb
-                                                option(value='4') 4 Gb
+                                            .table-select__item(ui-select="order.sla.serviceLevel", options="tabs.sla.serviceLevel.options", width="340")
+
                                         td.table-select__cell
                                         td.table-select__cell
 
@@ -466,11 +447,8 @@
                                 table.table-select
                                     tr.table-select__row
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
-                                            select.table-select__item.js-select
-                                                option(value='1')  Windows Server 12 Datacenter (70)
-                                                option(value='2') 1 Gb
-                                                option(value='3') 2 Gb
-                                                option(value='4') 4 Gb
+                                            .table-select__item(ui-select="order.sla.management", options="tabs.sla.management.options", width="340")
+
                                         td.table-select__cell
                                         td.table-select__cell
 
@@ -482,7 +460,8 @@
 
             .b-dedicated__summary-price
                 span.b-dedicated__summary-price-value €{{orderPrice}}/year
-                span.b-dedicated__summary-price-discount 12% discount, save €97.92
+                span.b-dedicated__summary-price-discount(ng-show="order.discount.billingCycle.Value")
+                    | {{order.discount.billingCycle.Value}}% discount, save €97.92
 
             a.b-submit.b-dedicated__summary-submit(href='') buy
 
@@ -496,11 +475,8 @@
                     table.table-select
                         tr.table-select__row
                             td.table-select__cell
-                                select.table-select__item.js-select
-                                    option(value='1') Monthly
-                                    option(value='2') 1 Gb
-                                    option(value='3') 2 Gb
-                                    option(value='4') 4 Gb
+                                .table-select__item(ui-select="order.discount.billingCycle", options="tabs.discount.billingCycle.options", width="340")
+
                             td.table-select__cell
                             td.table-select__cell
                             td.table-select__cell

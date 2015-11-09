@@ -1,3 +1,5 @@
+window._ = require 'underscore'
+
 angular.module "dedicated.service.selected", []
 
 angular.module("dedicated.service.selected").config ($httpProvider, $stateProvider, $urlRouterProvider) ->
@@ -10,10 +12,12 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
         resolve:
             configCalculator: ($dedicated) ->
                 $dedicated.getConfigCalculator()
+            billingCycleDiscount: ($dedicated) ->
+                $dedicated.billingCycleDiscount()
 
     return
 
-angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator) ->
+angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount) ->
 
     $timeout ->
         $('.b-dedicated__hide-block-close').scrollTo(1000)
@@ -29,7 +33,8 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
         price = 0
         angular.forEach $scope.order, (group) ->
             angular.forEach group, (opt) ->
-                price += Number(opt.PriceEUR)
+                if opt.PriceEUR
+                    price += Number(opt.PriceEUR)
 
         $scope.orderPrice = price
     , true
@@ -37,14 +42,26 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
     # формируем заказ на сервер
     $scope.order =
         hardware:
-            cpu: configCalculator[1][230]
-            hdd: configCalculator[2][62]
-            ram: configCalculator[3][233]
+            cpu: _.values(configCalculator[1])[0]
+            hdd: _.values(configCalculator[2])[0]
+            ram: _.values(configCalculator[3])[0]
 
         software:
-            os: configCalculator[4][97].ID
-            bit: configCalculator[10][120].ID
-            controlPanel: ""
+            os: _.values(configCalculator[4])[0]
+            bit: _.values(configCalculator[10])[0]
+            controlPanel: _.values(configCalculator[5])[0]
+
+        network:
+            traffic: _.values(configCalculator[14])[0]
+            ip: _.values(configCalculator[7])[0]
+            vlan: _.values(configCalculator[15])[0]
+            ftpBackup: _.values(configCalculator[19])[0]
+        sla:
+            serviceLevel: _.values(configCalculator[16])[0]
+            management: _.values(configCalculator[17])[0]
+
+        discount:
+            billingCycle: billingCycleDiscount[0]
 
     $scope.tabs =
         hardware:
@@ -71,4 +88,39 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             controlPanel:
                 name: "Control Panel"
                 options: configCalculator[5]
+
+        network:
+            name: "Network"
+            traffic:
+                name: "Traffic"
+                options: configCalculator[14]
+            ip:
+                name: "Ip"
+                options: configCalculator[7]
+            vlan:
+                name: "Vlan"
+                options: configCalculator[15]
+            ftpBackup:
+                name: "ftp backup"
+                options: configCalculator[19]
+
+        sla:
+            name: "SLA"
+            serviceLevel:
+                name: "service level"
+                options: configCalculator[16]
+            management:
+                name: "management"
+                options: configCalculator[17]
+
+        discount:
+            billingCycle:
+                options: billingCycleDiscount
+
+
+
+    $scope.$watch "order", (n, o) ->
+        unless angular.equals(n, o)
+            console.log "order", n, o
+    , true
 

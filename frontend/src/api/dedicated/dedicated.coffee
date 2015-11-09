@@ -20,4 +20,34 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
 
         deferred.promise
 
+    @billingCycleDiscount = ->
+        deferred = $q.defer()
+
+        discount = [
+            {
+                ID: 1
+                Value: 0
+                Name: "1 month"
+            }
+            {
+                ID: 2
+                Value: 3
+                Name: "3 months"
+            }
+            {
+                ID: 3
+                Value: 6
+                Name: "6 months"
+            }
+            {
+                ID: 4
+                Value: 12
+                Name: "1 year"
+            }
+        ]
+
+        deferred.resolve discount
+
+        deferred.promise
+
     that
