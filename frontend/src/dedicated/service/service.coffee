@@ -29,7 +29,10 @@ angular.module("dedicated.service").config ($httpProvider, $stateProvider, $urlR
     return
 
 angular.module("dedicated.service").controller "DedicatedServiceSolutionsCtrl", ($scope, $rootScope) ->
-    $rootScope.loaded = true
 
+    $rootScope.bodyClass = ->
+        {in: $rootScope.loaded}
+
+    $rootScope.loaded = true
 
 
