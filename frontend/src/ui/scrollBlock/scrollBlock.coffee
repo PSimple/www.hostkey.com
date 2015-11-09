@@ -25,6 +25,7 @@ angular.module("ui.scrollBlock").directive "scrollBlock", ->
             $(window).on 'scroll', ->
                 countAllPosition()
                 if $heightScrollBox < $heightScrollBlock
+                    console.log "remove is-fixed"
                     scrollBlock.removeClass('is-fixed').removeClass 'is-bottom'
                     return
                     

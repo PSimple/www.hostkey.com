@@ -48,8 +48,8 @@ module.exports = {
                 loader: 'file?prefix=fonts/'
             },
             {
-                test: /\.(png|jpg|ico)$/,
-                loader: 'file?name=[path][name].[ext]'
+                test: /\.(gif|png|jpg|ico)$/,
+                loader: 'file?name=[name].[ext]'
             },
             {
                 test: /\.jade/, loader: "jade"

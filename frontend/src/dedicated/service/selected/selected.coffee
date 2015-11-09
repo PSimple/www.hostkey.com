@@ -41,6 +41,11 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             hdd: configCalculator[2][62]
             ram: configCalculator[3][233]
 
+        software:
+            os: configCalculator[4][97].ID
+            bit: configCalculator[10][120].ID
+            controlPanel: ""
+
     $scope.tabs =
         hardware:
             open: true
@@ -59,5 +64,11 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             name: "Software"
             os:
                 name: "OS"
-                options: configCalculator[1]
+                options: configCalculator[4]
+            bit:
+                name: "Bit"
+                options: configCalculator[10]
+            controlPanel:
+                name: "Control Panel"
+                options: configCalculator[5]
 

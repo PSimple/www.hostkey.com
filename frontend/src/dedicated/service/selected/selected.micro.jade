@@ -306,17 +306,12 @@
                                     tr.table-select__row
 
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
-                                            select.table-select__item
-                                                option(value='1')  Windows Server 12 Datacenter (70)
-                                                option(value='2') 1 Gb
-                                                option(value='3') 2 Gb
-                                                option(value='4') 4 Gb
+                                            select.table-select__item(ui-select2="", ng-model="order.software.os")
+                                                option(ng-selected="{{item.ID === order.software.os}}", ng-repeat="item in tabs.software.os.options", value="{{item.ID}}") {{item.Name}}
 
                                         td.table-select__cell
-                                            select.table-select__item.js-select
-                                                option(value='1') 64 BIT
-                                                option(value='2') 1 Gb
-                                                option(value='3') 4 Gb
+                                            select.table-select__item(ui-select2="", ng-model="order.software.bit")
+                                                option(ng-selected="{{item.ID === order.software.bit}}", ng-repeat="item in tabs.software.bit.options", value="{{item.ID}}") {{item.Name}}
 
                                         td.table-select__cell
                                             label.table-select__item-label.table-select__item-label_inline_yes
@@ -326,7 +321,20 @@
                                             input.table-select__input(type='text')
                                             span.table-select__input-x X € 3
 
+
                         tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.software.controlPanel.Name}}
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            select.table-select__item(ui-select2="", ng-model="order.software.control_panel")
+                                                option(ng-selected="{{item.ID === order.software.controlPanel}}", ng-repeat="item in tabs.software.controlPanel.options", value="{{item.ID}}") {{item.Name}}
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
+                        //-tr.b-dedicated__accordion-table-row
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes MS SQL
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
@@ -340,7 +348,7 @@
                                         td.table-select__cell
                                         td.table-select__cell
 
-                        tr.b-dedicated__accordion-table-row
+                        //-tr.b-dedicated__accordion-table-row
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
                                 | MS Exchange
                                 | CALs
