@@ -491,6 +491,8 @@
                 span.b-dedicated__summary-price-discount(ng-show="order.discount.billingCycle.Value")
                     | {{order.discount.billingCycle.Value}}% discount, save €{{order.discount.billingCycle.Value/100 * orderPrice}}
 
+            a.b-submit.b-dedicated__summary-submit(href="", ng-click="buy()") Buy
+
     .b-container
         table.b-dedicated__accordion-table
             tr.b-dedicated__accordion-table-row

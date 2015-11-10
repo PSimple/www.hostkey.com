@@ -8,7 +8,7 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
     .state "dedicatedService.selected",
         url: "/selected/:type/:country"
         controller: "MicroCtrl"
-        template: require "./selected.micro.jade"
+        template: require "./selected.jade"
         resolve:
             configCalculator: ($dedicated, $stateParams) ->
                 $dedicated.getConfigCalculator($stateParams.type, $stateParams.country)
@@ -123,6 +123,7 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             billingCycle:
                 options: billingCycleDiscount
 
+    $scope.buy = -> alert 'buy'
 
 #    $scope.$watch "order", (n, o) ->
 #        unless angular.equals(n, o)
