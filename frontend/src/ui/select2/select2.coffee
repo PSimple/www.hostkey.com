@@ -15,8 +15,6 @@ angular.module("ui.select").directive "select2", ($timeout) ->
             element.select2()
 
             element.bind "change", ->
-                console.log "change", element.select2('data'), JSON.parse(element.select2('val'))
-
                 scope.$apply ->
                     scope.model = JSON.parse(element.select2('val'))
 

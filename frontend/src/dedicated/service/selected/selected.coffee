@@ -15,9 +15,12 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
             billingCycleDiscount: ($dedicated) ->
                 $dedicated.billingCycleDiscount()
 
+            raidLevel: ($dedicated) ->
+                $dedicated.getRaidLevel()
+
     return
 
-angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount) ->
+angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, raidLevel) ->
 
     unless configCalculator
         alert "Нет конфиграции для #{$stateParams.type} #{$stateParams.country}"
@@ -49,7 +52,10 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
     $scope.order =
         hardware:
             cpu: _.values(configCalculator[1])[0]
+            platform: _.values(configCalculator[6])[0]
             hdd: _.values(configCalculator[2])[0]
+            raid: _.values(configCalculator[8])[0]
+            raidLevel: raidLevel[0]
             ram: _.values(configCalculator[3])[0]
 
         software:
@@ -76,9 +82,21 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             cpu:
                 name: "CPU"
                 options: configCalculator[1]
-            hdd:
+
+            platform:
                 name: "disks"
+                options: configCalculator[6]
+
+            hdd:
+                size: 0
+                sizeAvailable: [1..8]
                 options: configCalculator[2]
+            raid:
+                options: configCalculator[8]
+
+            raidLevel:
+                options: raidLevel
+
             ram:
                 name: "RAM"
                 options: configCalculator[3]
@@ -123,7 +141,24 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             billingCycle:
                 options: billingCycleDiscount
 
+    updateHdd = ->
+
+        platform = $scope.order.hardware.platform
+
+        # количество дисков
+        $scope.tabs.hardware.hdd.size = platform.Options.size
+
+        return
+
+    updateHdd()
+
     $scope.buy = -> alert 'buy'
+
+    $scope.$watch "order.hardware.platform", (n, o) ->
+        unless angular.equals(n, o)
+            updateHdd()
+    , true
+
 
 #    $scope.$watch "order", (n, o) ->
 #        unless angular.equals(n, o)

@@ -60,4 +60,40 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
 
         deferred.promise
 
+    @getRaidLevel = ->
+        deferred = $q.defer()
+
+        discount = [
+            {
+                ID: 1
+                Name: "No Raid"
+            }
+            {
+                ID: 2
+                Name: "Stripe(0)"
+
+            }
+            {
+                ID: 3
+                Name: "Mirror(1)"
+            }
+            {
+                ID: 4
+                Name: "RAID5"
+            }
+            {
+                ID: 5
+                Name: "RAID6"
+            }
+            {
+                ID: 6
+                Name: "RAID10"
+            }
+
+        ]
+
+        deferred.resolve discount
+
+        deferred.promise
+
     that

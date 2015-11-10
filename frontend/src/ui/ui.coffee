@@ -4,6 +4,7 @@ require './accordion/accordion'
 require './buttons/buttons'
 require './scrollBlock/scrollBlock'
 require './select2/select2'
+require './columns/columns'
 
 angular.module "ui", [
 #    "ui.bootstrap"
@@ -11,6 +12,7 @@ angular.module "ui", [
     "ui.scrollBlock"
     "ui.accordion"
     "ui.select"
+    "ui.columns"
 ]
 
 angular.module("ui").filter 'orderVerbose',  ->
@@ -20,7 +22,10 @@ angular.module("ui").filter 'orderVerbose',  ->
         if angular.isObject(obj)
             names = []
             angular.forEach obj, (o) ->
-                names.push o.Options.short_name
+                if o.Options?.short_name
+                    names.push o.Options.short_name
+                else
+                    names.push o.Name
 
             str = names.join(" / ")
 

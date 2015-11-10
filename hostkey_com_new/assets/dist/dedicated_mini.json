@@ -360,6 +360,17 @@
             "short_name": "NL MC",
             "unit": "1"
           }
+        },
+        "232": {
+          "ID": "232",
+          "ComponentType_ID": "6",
+          "Name": "4 disks",
+          "Price": "60.00",
+          "Options": {
+            "size": "4",
+            "short_name": "NL MC",
+            "unit": "1"
+          }
         }
       },
       "7": {
