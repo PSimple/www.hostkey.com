@@ -35923,7 +35923,7 @@
 	    if (angular.isObject(obj)) {
 	      names = [];
 	      angular.forEach(obj, function(o) {
-	        return names.push(o.Name);
+	        return names.push(o.Options.short_name);
 	      });
 	      str = names.join(" / ");
 	    }
