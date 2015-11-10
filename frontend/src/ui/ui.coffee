@@ -25,3 +25,10 @@ angular.module("ui").filter 'orderVerbose',  ->
             str = names.join(" / ")
 
         str
+
+angular.module("ui").filter 'discount',  ->
+    (price, discountPercent) ->
+        discount = discountPercent/100 * price
+
+        price - discount
+
