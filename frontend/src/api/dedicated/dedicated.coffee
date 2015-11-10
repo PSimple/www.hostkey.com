@@ -7,16 +7,26 @@ angular.module("api.dedicated").constant("CONFIG", require('webpack-config-loade
 angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
     that = this
 
-    @getConfigCalculator = ->
+    @getConfigCalculator = (type, country)->
         deferred = $q.defer()
 
+        if location.host is 'hostkey'
+            url = "/assets/dist/dedicated_#{type}.json"
+        else
+            url = "#{CONFIG.apiUrl}/configcalculator/getconfig"
+
         $http
-            #url: "#{CONFIG.apiUrl}/configcalculator/getconfig?currency=eur&groups=NL,Mini"
-            url: "/assets/dist/dedicated.json"
+            url: url
             method: "GET"
+            params:
+                currency: 'eur'
+                groups: [country,type].join(',')
 
         .success (data) ->
-            deferred.resolve data.Content
+            if data.Content
+                deferred.resolve data.Content.Data
+            else
+                deferred.resolve false
 
         deferred.promise
 

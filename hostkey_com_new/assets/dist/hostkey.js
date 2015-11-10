@@ -103,13 +103,26 @@
 	  });
 	}]);
 
-	angular.module("dedicated.service").controller("DedicatedServiceSolutionsCtrl", ["$scope", "$rootScope", function($scope, $rootScope) {
+	angular.module("dedicated.service").run(["$stateParams", "$state", "$rootScope", function($stateParams, $state, $rootScope) {
+	  $rootScope.$stateParams = $stateParams;
+	}]);
+
+	angular.module("dedicated.service").controller("DedicatedServiceSolutionsCtrl", ["$scope", "$state", "$stateParams", "$rootScope", function($scope, $state, $stateParams, $rootScope) {
 	  $rootScope.bodyClass = function() {
 	    return {
 	      "in": $rootScope.loaded
 	    };
 	  };
-	  return $rootScope.loaded = true;
+	  $rootScope.loaded = true;
+	  $scope.$stateParams.country = 'NL';
+	  return $scope.changeCountry = function(country) {
+	    $scope.$stateParams.country = country;
+	    if ($state.includes('dedicatedService.selected')) {
+	      return $state.go($state.current, $stateParams, {
+	        reload: true
+	      });
+	    }
+	  };
 	}]);
 
 
@@ -46312,14 +46325,27 @@
 	angular.module("api.dedicated").service("$dedicated", ["$http", "$q", "CONFIG", function($http, $q, CONFIG) {
 	  var that;
 	  that = this;
-	  this.getConfigCalculator = function() {
-	    var deferred;
+	  this.getConfigCalculator = function(type, country) {
+	    var deferred, url;
 	    deferred = $q.defer();
+	    if (location.host === 'hostkey') {
+	      url = "/assets/dist/dedicated_" + type + ".json";
+	    } else {
+	      url = CONFIG.apiUrl + "/configcalculator/getconfig";
+	    }
 	    $http({
-	      url: "/assets/dist/dedicated.json",
-	      method: "GET"
+	      url: url,
+	      method: "GET",
+	      params: {
+	        currency: 'eur',
+	        groups: [country, type].join(',')
+	      }
 	    }).success(function(data) {
-	      return deferred.resolve(data.Content);
+	      if (data.Content) {
+	        return deferred.resolve(data.Content.Data);
+	      } else {
+	        return deferred.resolve(false);
+	      }
 	    });
 	    return deferred.promise;
 	  };
@@ -46367,13 +46393,13 @@
 	angular.module("dedicated.service.selected", []);
 
 	angular.module("dedicated.service.selected").config(["$httpProvider", "$stateProvider", "$urlRouterProvider", function($httpProvider, $stateProvider, $urlRouterProvider) {
-	  $stateProvider.state("dedicatedService.micro", {
-	    url: "/micro",
+	  $stateProvider.state("dedicatedService.selected", {
+	    url: "/selected/:type/:country",
 	    controller: "MicroCtrl",
 	    template: __webpack_require__(27),
 	    resolve: {
-	      configCalculator: ["$dedicated", function($dedicated) {
-	        return $dedicated.getConfigCalculator();
+	      configCalculator: ["$dedicated", "$stateParams", function($dedicated, $stateParams) {
+	        return $dedicated.getConfigCalculator($stateParams.type, $stateParams.country);
 	      }],
 	      billingCycleDiscount: ["$dedicated", function($dedicated) {
 	        return $dedicated.billingCycleDiscount();
@@ -46383,9 +46409,19 @@
 	}]);
 
 	angular.module("dedicated.service.selected").controller("MicroCtrl", ["$scope", "$state", "$stateParams", "$timeout", "configCalculator", "billingCycleDiscount", function($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount) {
+	  if (!configCalculator) {
+	    alert("Нет конфиграции для " + $stateParams.type + " " + $stateParams.country);
+	    $state.go("^", $stateParams, {
+	      reload: true
+	    });
+	    return;
+	  }
 	  $timeout(function() {
-	    return $('.b-dedicated__hide-block-close').scrollTo(1000);
-	  }, 1000);
+	    return $.scrollTo('#selectedSolution', {
+	      offset: -68,
+	      duration: 1000
+	    });
+	  });
 	  $scope.close = function() {
 	    $.scrollTo('.js-switch-box', 1000);
 	    return $state.go("^", $stateParams, {
@@ -46398,8 +46434,8 @@
 	    price = 0;
 	    angular.forEach($scope.order, function(group) {
 	      return angular.forEach(group, function(opt) {
-	        if (opt.PriceEUR) {
-	          return price += Number(opt.PriceEUR);
+	        if (opt.Price) {
+	          return price += Number(opt.Price);
 	        }
 	      });
 	    });
@@ -46430,7 +46466,7 @@
 	      billingCycle: billingCycleDiscount[0]
 	    }
 	  };
-	  $scope.tabs = {
+	  return $scope.tabs = {
 	    hardware: {
 	      open: true,
 	      name: "Hardware",
@@ -46498,11 +46534,6 @@
 	      }
 	    }
 	  };
-	  return $scope.$watch("order", function(n, o) {
-	    if (!angular.equals(n, o)) {
-	      return console.log("order", n, o);
-	    }
-	  }, true);
 	}]);
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
@@ -48344,7 +48375,7 @@
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div class=\"b-dedicated__switch-item js-switch-item active\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div class=\"b-dedicated__switch-item js-switch-item\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div ui-sref=\".micro()\" class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-1.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Micro servers</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ui-sref=\".micro()\" class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-2.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Mini servers</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ui-sref=\".micro()\" class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-3.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Virtualisation nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ui-sref=\".micro()\" class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-4.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Hosting nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ui-sref=\".micro()\" class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-5.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Storage</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ui-sref=\".micro()\" class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-6.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Big data</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-7.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Configurator</h3><h4 class=\"b-dedicated__item-subtitle\">Your own configuration</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-8.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Extra price</h3><h4 class=\"b-dedicated__item-subtitle\">2014 sale</h4><div class=\"b-dedicated__item-start b-dedicated__item-start_red_yes\">Starts from</div><div class=\"b-dedicated__item-price b-dedicated__item-price_red_yes\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div></div><div ui-view=\"\" class=\"b-dedicated__hide-block\"></div>");;return buf.join("");
+	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div ng-click=\"changeCountry('NL')\" ng-class=\"{active:$stateParams.country==='NL'}\" class=\"b-dedicated__switch-item\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div ng-click=\"changeCountry('RU')\" ng-class=\"{active:$stateParams.country==='RU'}\" class=\"b-dedicated__switch-item\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-class=\"{active:$stateParams.type==='Micro'}\" ui-sref=\".selected({type:'Micro', country:$stateParams.country})\" class=\"b-dedicated__item\"><img src=\"/assets/img/dedicate-select-icon-2-1.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Micro servers</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ng-class=\"{active:$stateParams.type==='Mini'}\" ui-sref=\".selected({type:'Mini', country:$stateParams.country})\" class=\"b-dedicated__item\"><img src=\"/assets/img/dedicate-select-icon-2-2.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Mini servers</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-3.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Virtualisation nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-4.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Hosting nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-5.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Storage</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-6.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Big data</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-7.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Configurator</h3><h4 class=\"b-dedicated__item-subtitle\">Your own configuration</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div class=\"b-dedicated__item js-switch-item\"><img src=\"/assets/img/dedicate-select-icon-2-8.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Extra price</h3><h4 class=\"b-dedicated__item-subtitle\">2014 sale</h4><div class=\"b-dedicated__item-start b-dedicated__item-start_red_yes\">Starts from</div><div class=\"b-dedicated__item-price b-dedicated__item-price_red_yes\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div></div><div id=\"selectedSolution\" ui-view=\"\" class=\"b-dedicated__hide-block\"></div>");;return buf.join("");
 	}
 
 /***/ },

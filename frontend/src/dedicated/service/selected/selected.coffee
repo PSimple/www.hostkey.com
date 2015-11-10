@@ -5,13 +5,13 @@ angular.module "dedicated.service.selected", []
 angular.module("dedicated.service.selected").config ($httpProvider, $stateProvider, $urlRouterProvider) ->
 
     $stateProvider
-    .state "dedicatedService.micro",
-        url: "/micro"
+    .state "dedicatedService.selected",
+        url: "/selected/:type/:country"
         controller: "MicroCtrl"
         template: require "./selected.micro.jade"
         resolve:
-            configCalculator: ($dedicated) ->
-                $dedicated.getConfigCalculator()
+            configCalculator: ($dedicated, $stateParams) ->
+                $dedicated.getConfigCalculator($stateParams.type, $stateParams.country)
             billingCycleDiscount: ($dedicated) ->
                 $dedicated.billingCycleDiscount()
 
@@ -19,9 +19,15 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
 angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount) ->
 
+    unless configCalculator
+        alert "Нет конфиграции для #{$stateParams.type} #{$stateParams.country}"
+        $state.go "^", $stateParams, {reload:true}
+        return
+
     $timeout ->
-        $('.b-dedicated__hide-block-close').scrollTo(1000)
-    , 1000
+        $.scrollTo '#selectedSolution',
+            offset: -68
+            duration: 1000
 
     $scope.close = ->
         $.scrollTo('.js-switch-box', 1000)
@@ -33,8 +39,8 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
         price = 0
         angular.forEach $scope.order, (group) ->
             angular.forEach group, (opt) ->
-                if opt.PriceEUR
-                    price += Number(opt.PriceEUR)
+                if opt.Price
+                    price += Number(opt.Price)
 
         $scope.orderPrice = price
     , true
@@ -118,9 +124,8 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
                 options: billingCycleDiscount
 
 
-
-    $scope.$watch "order", (n, o) ->
-        unless angular.equals(n, o)
-            console.log "order", n, o
-    , true
+#    $scope.$watch "order", (n, o) ->
+#        unless angular.equals(n, o)
+#            console.log "order", n, o
+#    , true
 

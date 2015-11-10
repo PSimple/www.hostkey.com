@@ -28,11 +28,23 @@ angular.module("dedicated.service").config ($httpProvider, $stateProvider, $urlR
 
     return
 
-angular.module("dedicated.service").controller "DedicatedServiceSolutionsCtrl", ($scope, $rootScope) ->
+angular.module("dedicated.service").run ($stateParams, $state, $rootScope) ->
+
+    $rootScope.$stateParams = $stateParams
+    return
+
+angular.module("dedicated.service").controller "DedicatedServiceSolutionsCtrl", ($scope, $state, $stateParams, $rootScope) ->
 
     $rootScope.bodyClass = ->
         {in: $rootScope.loaded}
 
     $rootScope.loaded = true
 
+    $scope.$stateParams.country = 'NL'
+
+    $scope.changeCountry = (country) ->
+        $scope.$stateParams.country = country
+
+        if $state.includes('dedicatedService.selected')
+            $state.go $state.current, $stateParams, {reload:true}
 
