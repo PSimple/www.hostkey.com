@@ -40115,15 +40115,23 @@
 	      if (scrollBox.length) {
 	        $(window).on('scroll', function() {
 	          countAllPosition();
+	          console.log($heightScrollBox, $heightScrollBlock, $topPositionBox);
 	          if ($heightScrollBox < $heightScrollBlock) {
 	            console.log("remove is-fixed");
 	            scrollBlock.removeClass('is-fixed').removeClass('is-bottom');
 	            return;
 	          }
 	          if ($topPositionDocument >= $topPositionBox - 100) {
+	            console.log(scrollBlock, "add");
 	            scrollBlock.addClass('is-fixed');
 	          } else {
+	            console.log(scrollBlock, "remove");
 	            scrollBlock.removeClass('is-fixed');
+	          }
+	          if ($topPositionDocument > $topPositionBox + $heightScrollBox - $heightScrollBlock - 220) {
+	            scrollBlock.addClass('is-bottom');
+	          } else {
+	            scrollBlock.removeClass('is-bottom');
 	          }
 	        });
 	        return countAllPosition();
