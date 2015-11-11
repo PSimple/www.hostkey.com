@@ -15,7 +15,7 @@
  */
 module.exports = {
     development: {
-        "apiUrl": ""
+        "apiUrl": "/api/v1"
     },
     production: {
         "apiUrl": ""

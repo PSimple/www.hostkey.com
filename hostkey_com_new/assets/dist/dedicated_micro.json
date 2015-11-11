@@ -1,0 +1,449 @@
+{
+  "Code": 0,
+  "Message": "",
+  "ErrorStatus": false,
+  "Content": {
+    "Data": {
+      "2": {
+        "73": {
+          "ID": "73",
+          "ComponentType_ID": "2",
+          "Name": "240Gb SSD",
+          "Price": "14.00",
+          "Options": {
+            "short_name": "240Gb SSD"
+          }
+        },
+        "74": {
+          "ID": "74",
+          "ComponentType_ID": "2",
+          "Name": "480Gb SSD",
+          "Price": "25.00",
+          "Options": {
+            "short_name": "480Gb SSD"
+          }
+        }
+      },
+      "4": {
+        "97": {
+          "ID": "97",
+          "ComponentType_ID": "4",
+          "Name": "Ubuntu Server",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "Ubuntu Server"
+          }
+        },
+        "98": {
+          "ID": "98",
+          "ComponentType_ID": "4",
+          "Name": "Ubuntu Desktop",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "Ubuntu Desktop"
+          }
+        },
+        "102": {
+          "ID": "102",
+          "ComponentType_ID": "4",
+          "Name": "FreeBSD",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "FreeBSD"
+          }
+        },
+        "103": {
+          "ID": "103",
+          "ComponentType_ID": "4",
+          "Name": "Windows Server 08 Web",
+          "Price": "15.00",
+          "Options": {
+            "short_name": "W08WE"
+          }
+        },
+        "104": {
+          "ID": "104",
+          "ComponentType_ID": "4",
+          "Name": "Windows Server 08 Standard",
+          "Price": "30.00",
+          "Options": {
+            "short_name": "W8SE"
+          }
+        },
+        "106": {
+          "ID": "106",
+          "ComponentType_ID": "4",
+          "Name": "Windows Server 12 Essentials",
+          "Price": "25.00",
+          "Options": {
+            "short_name": "W12ES"
+          }
+        },
+        "107": {
+          "ID": "107",
+          "ComponentType_ID": "4",
+          "Name": "Windows Server 12 Standard",
+          "Price": "30.00",
+          "Options": {
+            "short_name": "W12SE"
+          }
+        },
+        "109": {
+          "ID": "109",
+          "ComponentType_ID": "4",
+          "Name": "Windows Server 08 Standard (trial)",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "W8SE(trl)"
+          }
+        },
+        "110": {
+          "ID": "110",
+          "ComponentType_ID": "4",
+          "Name": "Windows Server 12 Standard (trial)",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "W12SE(trl)"
+          }
+        },
+        "111": {
+          "ID": "111",
+          "ComponentType_ID": "4",
+          "Name": "Windows 7 trial",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "W7(trl)"
+          }
+        },
+        "112": {
+          "ID": "112",
+          "ComponentType_ID": "4",
+          "Name": "Windows 8 trial",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "Win8(trl)"
+          }
+        },
+        "224": {
+          "ID": "224",
+          "ComponentType_ID": "4",
+          "Name": "Centos 5",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "Centos 5"
+          }
+        },
+        "225": {
+          "ID": "225",
+          "ComponentType_ID": "4",
+          "Name": "Centos 6",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "Centos 6"
+          }
+        },
+        "226": {
+          "ID": "226",
+          "ComponentType_ID": "4",
+          "Name": "Centos 7",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "Centos 7"
+          }
+        },
+        "227": {
+          "ID": "227",
+          "ComponentType_ID": "4",
+          "Name": "Debian 5",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "Debian 5"
+          }
+        },
+        "246": {
+          "ID": "246",
+          "ComponentType_ID": "4",
+          "Name": "Debian 6",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "Debian 6"
+          }
+        },
+        "247": {
+          "ID": "247",
+          "ComponentType_ID": "4",
+          "Name": "Debian 7",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "Debian 7"
+          }
+        }
+      },
+      "5": {
+        "113": {
+          "ID": "113",
+          "ComponentType_ID": "5",
+          "Name": "cPanel dedicated",
+          "Price": "33.00",
+          "Options": {
+            "short_name": "cPanel dedicated"
+          }
+        }
+      },
+      "7": {
+        "86": {
+          "ID": "86",
+          "ComponentType_ID": "7",
+          "Name": "2 IPv4",
+          "Price": "1.00",
+          "Options": {
+            "short_name": "2 IPv4"
+          }
+        },
+        "87": {
+          "ID": "87",
+          "ComponentType_ID": "7",
+          "Name": "4 IPv4",
+          "Price": "3.00",
+          "Options": {
+            "short_name": "4 IPv4"
+          }
+        },
+        "88": {
+          "ID": "88",
+          "ComponentType_ID": "7",
+          "Name": "8 IPv4",
+          "Price": "7.00",
+          "Options": {
+            "short_name": "8 IPv4"
+          }
+        },
+        "89": {
+          "ID": "89",
+          "ComponentType_ID": "7",
+          "Name": "16 IPv4",
+          "Price": "15.00",
+          "Options": {
+            "short_name": "16 IPv4"
+          }
+        },
+        "171": {
+          "ID": "171",
+          "ComponentType_ID": "7",
+          "Name": "1 IPv4",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "1 IPv4"
+          }
+        }
+      },
+      "8": {
+        "132": {
+          "ID": "132",
+          "ComponentType_ID": "8",
+          "Name": "Integrated RST RAID 0-10",
+          "Price": "0.00",
+          "Options": {
+            "disc": "0",
+            "short_name": "Integrated",
+            "raid": "0-1-10"
+          }
+        }
+      },
+      "10": {
+        "120": {
+          "ID": "120",
+          "ComponentType_ID": "10",
+          "Name": "32-bit",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "32-bit"
+          }
+        },
+        "121": {
+          "ID": "121",
+          "ComponentType_ID": "10",
+          "Name": "64-bit",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "64-bit"
+          }
+        }
+      },
+      "11": {
+        "138": {
+          "ID": "138",
+          "ComponentType_ID": "11",
+          "Name": "Extra Windows Terminal licenses",
+          "Price": "6.00",
+          "Options": {
+            "short_name": "Extra Windows Terminal licenses"
+          }
+        }
+      },
+      "12": {
+        "161": {
+          "ID": "161",
+          "ComponentType_ID": "12",
+          "Name": "MS SQL 2012 Standard Edition",
+          "Price": "120.00",
+          "Options": {
+            "short_name": "SQL12SE"
+          }
+        },
+        "176": {
+          "ID": "176",
+          "ComponentType_ID": "12",
+          "Name": "MS SQL 2008 Standard Edition",
+          "Price": "120.00",
+          "Options": {
+            "short_name": "SQL08SE"
+          }
+        }
+      },
+      "14": [],
+      "16": {
+        "133": {
+          "ID": "133",
+          "ComponentType_ID": "16",
+          "Name": "TOP Priority SLA (30 mins/phone/email/skype)",
+          "Price": "50.00",
+          "Options": {
+            "short_name": "Top_SLA"
+          }
+        },
+        "134": {
+          "ID": "134",
+          "ComponentType_ID": "16",
+          "Name": "Best effort (email/phone)",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "BasicSLA"
+          }
+        },
+        "282": {
+          "ID": "282",
+          "ComponentType_ID": "16",
+          "Name": "Priority (email/phone/skype)",
+          "Price": "30.00",
+          "Options": {
+            "short_name": "PrioritySLA"
+          }
+        }
+      },
+      "17": {
+        "135": {
+          "ID": "135",
+          "ComponentType_ID": "17",
+          "Name": "Self-service",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "Self-service"
+          }
+        },
+        "137": {
+          "ID": "137",
+          "ComponentType_ID": "17",
+          "Name": "Core OS management",
+          "Price": "20.00",
+          "Options": {
+            "short_name": "Core OS management"
+          }
+        },
+        "255": {
+          "ID": "255",
+          "ComponentType_ID": "17",
+          "Name": "Managed server cPanel",
+          "Price": "40.00",
+          "Options": {
+            "short_name": "Managed server cPanel"
+          }
+        }
+      },
+      "18": {
+        "249": {
+          "ID": "249",
+          "ComponentType_ID": "18",
+          "Name": "100Mbps",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "100Mbps"
+          }
+        }
+      },
+      "19": {
+        "168": {
+          "ID": "168",
+          "ComponentType_ID": "19",
+          "Name": "Backup 100Gb",
+          "Price": "1.00",
+          "Options": {
+            "short_name": "Backup 100Gb"
+          }
+        },
+        "169": {
+          "ID": "169",
+          "ComponentType_ID": "19",
+          "Name": "Backup 500Gb",
+          "Price": "5.00",
+          "Options": {
+            "short_name": "Backup 500Gb"
+          }
+        },
+        "170": {
+          "ID": "170",
+          "ComponentType_ID": "19",
+          "Name": "Backup 1Tb",
+          "Price": "10.00",
+          "Options": {
+            "short_name": "Backup 1Tb"
+          }
+        }
+      },
+      "20": {
+        "179": {
+          "ID": "179",
+          "ComponentType_ID": "20",
+          "Name": "MS Exchange Basic",
+          "Price": "0.50",
+          "Options": {
+            "short_name": "MS Exchange Basic"
+          }
+        },
+        "180": {
+          "ID": "180",
+          "ComponentType_ID": "20",
+          "Name": "MS Exchange Standard",
+          "Price": "3.00",
+          "Options": {
+            "short_name": "MS Exchange Standard"
+          }
+        },
+        "181": {
+          "ID": "181",
+          "ComponentType_ID": "20",
+          "Name": "MS Exchange Enterprise",
+          "Price": "7.00",
+          "Options": {
+            "short_name": "MS Exchange Enterprise"
+          }
+        }
+      },
+      "21": {
+        "284": {
+          "ID": "284",
+          "ComponentType_ID": "21",
+          "Name": "DC Tier2",
+          "Price": "0.00",
+          "Options": {
+            "short_name": "DC Tier2"
+          }
+        }
+      }
+    },
+    "CostLicenseWin": "6.00",
+    "EURRUR": 69.6136,
+    "Currency": "eur",
+    "ComponentGroup": "NL,Micro"
+  }
+}

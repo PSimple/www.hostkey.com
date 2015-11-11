@@ -6,6 +6,7 @@
   "scripts": {
     "install": "bower install --silent",
     "start": "webpack --bail -w",
+    "server": "node ./server.js localhost 3000",
     "build": "webpack --bail -p --env=production"
   },
   "author": "Aleksey Subbotenko <subbotenko@gmail.com>",
@@ -51,6 +52,7 @@
     "angular": "~1.2.23",
     "angular-ui-router": "~0.2.15",
     "angular-sanitize": "~1.4.7",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "underscore": "~1.8.3"
   }
 }

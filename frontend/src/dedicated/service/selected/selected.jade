@@ -1,0 +1,461 @@
+.b-dedicated__hide-block-close(ng-click="close()")
+    span.b-icon.b-dedicated__hide-block-close-image
+    span.b-dedicated__hide-block-close-text hide
+
+//-.b-dedicated__item-content.b-dedicated__item-content_padding-top_yes.dedicated-item-content
+    .b-dedicated__box
+        h3.b-dedicated__title.b-dedicated__title_upline_yes Visualisation nodes
+        .b-dedicated__description
+            | HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia.
+            | We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+
+            | international resellers. Virtually any server configuration could be provided to our customers. We offer
+            | full range of modern and stock servers for every task. You could lease Cisco network equipment or collocate
+            | your own servers in Moscow.
+
+    table.dedicated-item-content__table
+
+        tr.dedicated-item-content__row.dedicated-item-content__row_title_yes
+            td.dedicated-item-content__cell
+            td.dedicated-item-content__cell processor
+            td.dedicated-item-content__cell memory
+            td.dedicated-item-content__cell hard drive
+            td.dedicated-item-content__cell hardwear raid
+            td.dedicated-item-content__cell vlan
+            td.dedicated-item-content__cell impi
+            td.dedicated-item-content__cell free bonus
+            td.dedicated-item-content__cell monthly (€)
+
+        tr.dedicated-item-content__row
+
+            td.dedicated-item-content__cell
+                span.dedicated-item-content__title Video streaming
+                span.dedicated-item-content__subtitle For small projects
+
+            td.dedicated-item-content__cell
+                .dedicate-select-red.dedicate-select-red__proc_yes.js-drop-block
+                    .dedicate-select-red__value.is-value CoreDuo2 E6320 1.86 GHz (2 core)
+                    .dedicate-select-red__drop.is-drop
+                        .dedicate-select-red__drop-item.js-drop-item.is-active CoreDuo2 E6320 1.86 GHz (2 core)
+                        .dedicate-select-red__drop-item.js-drop-item CoreDuo2 E6320 2.86 GHz (4 core)
+                        .dedicate-select-red__drop-item.js-drop-item CoreDuo2 E6320 3.86 GHz (8 core)
+
+            td.dedicated-item-content__cell
+                select#mem-1.dedicate-select-red.js-select(name='mem-1')
+                    option(value='1') 24 Gb
+                    option(value='2') 128 Gb
+                    option(value='3') 512 Gb
+
+            td.dedicated-item-content__cell
+                select#hard-1.dedicate-select-red.dedicate-select-red__hard_yes.js-select(name='hard-1')
+                    option(value='1') 2x500Gb SATA
+                    option(value='2') 4x500Gb SATA
+                    option(value='3') 2x2Tb SATA
+
+            td.dedicated-item-content__cell
+                label.fake-checkbox-label
+                    span.fake-checkbox-label__box.js-check
+                    input.hidden-input(name='222', type='checkbox')
+
+            td.dedicated-item-content__cell
+                select#vlan-1.dedicate-select-red.js-select(name='vlan-1')
+                    option(value='1') 100 Mbps
+                    option(value='2') 200 Mbps
+                    option(value='3') 50 Mbps
+
+            td.dedicated-item-content__cell
+                label.fake-checkbox-label
+                    span.fake-checkbox-label__box.js-check
+                    input.hidden-input(name='1111', type='checkbox')
+
+            td.dedicated-item-content__cell
+                span.dedicate-item-content__text 20 IP, traffic, cPanel, Windows
+
+            td.dedicated-item-content__cell
+                a.b-submit.dedicated-item-content__submit(href='#') 1650.65
+
+        tr.dedicated-item-content__row
+
+            td.dedicated-item-content__cell
+                span.dedicated-item-content__title First server
+                span.dedicated-item-content__subtitle For small projects
+
+            td.dedicated-item-content__cell
+                .dedicate-select-red.dedicate-select-red__proc_yes.js-drop-block
+                    .dedicate-select-red__value.is-value CoreDuo2 E6320 1.86 GHz (2 core)
+                    .dedicate-select-red__drop.is-drop
+                        .dedicate-select-red__drop-item.js-drop-item.is-active CoreDuo2 E6320 1.86 GHz (2 core)
+                        .dedicate-select-red__drop-item.js-drop-item CoreDuo2 E6320 2.86 GHz (4 core)
+                        .dedicate-select-red__drop-item.js-drop-item CoreDuo2 E6320 3.86 GHz (8 core)
+
+            td.dedicated-item-content__cell
+                select#mem-1.dedicate-select-red.js-select(name='mem-1')
+                    option(value='1') 24 Gb
+                    option(value='2') 128 Gb
+                    option(value='3') 512 Gb
+
+            td.dedicated-item-content__cell
+                select#hard-1.dedicate-select-red.dedicate-select-red__hard_yes.js-select(name='hard-1')
+                    option(value='1') 2x500Gb SATA
+                    option(value='2') 4x500Gb SATA
+                    option(value='3') 2x2Tb SATA
+
+            td.dedicated-item-content__cell
+                label.fake-checkbox-label
+                    span.fake-checkbox-label__box.js-check
+                    input.hidden-input(name='222', type='checkbox')
+
+            td.dedicated-item-content__cell
+                select#vlan-1.dedicate-select-red.js-select(name='vlan-1')
+                    option(value='1') 100 Mbps
+                    option(value='2') 200 Mbps
+                    option(value='3') 50 Mbps
+
+            td.dedicated-item-content__cell
+                label.fake-checkbox-label
+                    span.fake-checkbox-label__box.js-check
+                    input.hidden-input(name='1111', type='checkbox')
+
+            td.dedicated-item-content__cell
+                span.dedicate-item-content__text 20 IP, traffic, cPanel, Windows, VPS, premium SLA, super backup
+
+            td.dedicated-item-content__cell
+                a.b-submit.dedicated-item-content__submit(href='#') 1650.65
+
+        tr.dedicated-item-content__row
+
+            td.dedicated-item-content__cell
+                span.dedicated-item-content__title Extra power
+                span.dedicated-item-content__subtitle For small projects
+
+            td.dedicated-item-content__cell
+                .dedicate-select-red.dedicate-select-red__proc_yes.js-drop-block
+                    .dedicate-select-red__value.is-value CoreDuo2 E6320 1.86 GHz (2 core)
+                    .dedicate-select-red__drop.is-drop
+                        .dedicate-select-red__drop-item.js-drop-item.is-active CoreDuo2 E6320 1.86 GHz (2 core)
+                        .dedicate-select-red__drop-item.js-drop-item CoreDuo2 E6320 2.86 GHz (4 core)
+                        .dedicate-select-red__drop-item.js-drop-item CoreDuo2 E6320 3.86 GHz (8 core)
+
+            td.dedicated-item-content__cell
+                select#mem-1.dedicate-select-red.js-select(name='mem-1')
+                    option(value='1') 24 Gb
+                    option(value='2') 128 Gb
+                    option(value='3') 512 Gb
+
+            td.dedicated-item-content__cell
+                select#hard-1.dedicate-select-red.dedicate-select-red__hard_yes.js-select(name='hard-1')
+                    option(value='1') 2x500Gb SATA
+                    option(value='2') 4x500Gb SATA
+                    option(value='3') 2x2Tb SATA
+
+            td.dedicated-item-content__cell
+                label.fake-checkbox-label
+                    span.fake-checkbox-label__box.js-check
+                    input.hidden-input(name='222', type='checkbox')
+
+            td.dedicated-item-content__cell
+                select#vlan-1.dedicate-select-red.js-select(name='vlan-1')
+                    option(value='1') 100 Mbps
+                    option(value='2') 200 Mbps
+                    option(value='3') 50 Mbps
+
+            td.dedicated-item-content__cell
+                label.fake-checkbox-label
+                    span.fake-checkbox-label__box.js-check
+                    input.hidden-input(name='1111', type='checkbox')
+
+            td.dedicated-item-content__cell
+                span.dedicate-item-content__text 20 IP, traffic, cPanel, Windows
+
+            td.dedicated-item-content__cell
+                a.b-submit.dedicated-item-content__submit(href='#') 1650.65
+
+.b-dedicated__item-content.dedicated-item-content
+
+    .b-dedicated__box
+        h3.b-dedicated__title.b-dedicated__title_upline_yes configurator of Virtualisation nodes SOLUTIONS
+        .b-dedicated__description
+            | HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia.
+            | We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+
+            | international resellers. Virtually any server configuration could be provided to our customers. We offer full
+            | range of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own
+            | servers in Moscow.
+
+    .b-container
+
+        .b-dedicated__accordion
+
+            #scroll-box(accordion="")
+
+                accordion-group(is-open='tabs.hardware.open')
+
+                    accordion-heading
+                        span.b-accordion__title-main {{tabs.hardware.name}}
+                        span.b-accordion__title-submain {{order.hardware|orderVerbose}}
+
+                    table.b-dedicated__accordion-table
+
+                        tr.b-dedicated__accordion-table-row
+
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.hardware.cpu.name}}
+
+                            td.b-dedicated__accordion-table-cell
+
+                                label.b-checkbox-submit.b-checkbox-submit_size_220(ng-repeat="cpu in tabs.hardware.cpu.options", ng-model="order.hardware.cpu", btn-radio="{{cpu}}")
+                                    span.b-checkbox-submit__text {{cpu.Name}}
+
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.hardware.ram.name}}
+
+                            td.b-dedicated__accordion-table-cell.js-checked
+                                label.b-checkbox-submit.b-checkbox-submit_size_70(ng-repeat="ram in tabs.hardware.ram.options", ng-model="order.hardware.ram", btn-radio="{{ram}}")
+                                    span.b-checkbox-submit__text {{ram.Name}}
+
+
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.hardware.platform.name}}
+                            td.b-dedicated__accordion-table-cell.js-checked
+                                label.b-checkbox-submit.b-checkbox-submit_size_170(ng-repeat="platform in tabs.hardware.platform.options", ng-model="order.hardware.platform", btn-radio="{{platform}}")
+                                    span.b-checkbox-submit__text {{platform.Name}}
+
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row(ng-columns="hddRow in tabs.hardware.hdd.sizeAvailable by 4")
+                                        td.table-select__cell(ng-repeat="hddColumn in hddRow")
+                                            div(ng-show="hddColumn<=tabs.hardware.hdd.size")
+                                                label.table-select__item-label {{hddColumn}} disk
+                                                .table-select__item(ui-select="order.hardware.hdd[$index]", options="tabs.hardware.hdd.options", width="170")
+
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell(colspan='3')
+                                            label.table-select__item-label RAID:
+                                            .table-select__item(ui-select="order.hardware.raid", options="tabs.hardware.raid.options", width="520")
+
+                                        td.table-select__cell
+                                            label.table-select__item-label LEVEL:
+                                            .table-select__item(ui-select="order.hardware.raidLevel", options="tabs.hardware.raidLevel.options", width="170")
+
+
+                accordion-group
+
+                    accordion-heading
+                        span.b-accordion__title-main {{tabs.software.name}}
+                        span.b-accordion__title-submain {{order.software|orderVerbose}}
+
+                    table.b-dedicated__accordion-table
+
+                        tr.b-dedicated__accordion-table-row
+
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.software.os.name}}
+
+                            td.b-dedicated__accordion-table-cell
+
+                                table.table-select
+
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.software.os", options="tabs.software.os.options", width="340")
+
+                                        td.table-select__cell
+                                            .table-select__item(ui-select="order.software.bit", options="tabs.software.bit.options", width="170")
+
+                                        td.table-select__cell
+                                            label.table-select__item-label.table-select__item-label_inline_yes
+                                                | RDP
+                                                br
+                                                | Licenses
+                                            input.table-select__input(type='text')
+                                            span.table-select__input-x X € 3
+
+
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.software.controlPanel.Name}}
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.software.controlPanel", options="tabs.software.controlPanel.options", width="340")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
+                        //-tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes MS SQL
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            select.table-select__item.js-select
+                                                option(value='1')  Windows Server 12 Datacenter (70)
+                                                option(value='2') 1 Gb
+                                                option(value='3') 2 Gb
+                                                option(value='4') 4 Gb
+                                        td.table-select__cell
+                                        td.table-select__cell
+
+                        //-tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
+                                | MS Exchange
+                                | CALs
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            select.table-select__item.js-select
+                                                option(value='1')  Windows Server 12 Datacenter (70)
+                                                option(value='2') 1 Gb
+                                                option(value='3') 2 Gb
+                                                option(value='4') 4 Gb
+                                        td.table-select__cell
+                                            label.table-select__item-label.table-select__item-label_inline_yes Count
+                                            input.table-select__input(type='text')
+                                            span.table-select__input-x X € 2
+                                        td.table-select__cell
+
+                accordion-group
+
+                    accordion-heading
+                        span.b-accordion__title-main {{tabs.network.name}}
+                        span.b-accordion__title-submain {{order.network|orderVerbose}}
+
+                    table.b-dedicated__accordion-table
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.traffic.name}}
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.network.traffic", options="tabs.network.traffic.options", width="340")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
+
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.ip.name}}
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.network.ip", options="tabs.network.ip.options", width="340")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
+
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.vlan.name}}
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.network.vlan", options="tabs.network.vlan.options", width="340")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
+
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.ftpBackup.name}}
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.network.ftpBackup", options="tabs.network.ftpBackup.options", width="340")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
+
+                accordion-group
+
+                    accordion-heading
+                        span.b-accordion__title-main {{tabs.sla.name}}
+                        span.b-accordion__title-submain {{order.sla|orderVerbose}}
+
+
+                    table.b-dedicated__accordion-table
+                        tr.b-dedicated__accordion-table-row
+
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
+                                | Service level
+                                | agreement
+
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.sla.serviceLevel", options="tabs.sla.serviceLevel.options", width="340")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes FTP Backup
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.sla.management", options="tabs.sla.management.options", width="340")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
+
+        // Скролящийся блок с результатом выбора
+        .b-dedicated__summary(scroll-block="")
+            .b-dedicated__summary-title Your dedicated
+
+            //-table.b-dedicated__summary-table
+                tr.b-dedicated__summary-table-row
+                    td.b-dedicated__summary-table-cell Monthly Base Price
+                    td.b-dedicated__summary-table-cell € 759
+
+            .b-dedicated__summary-subtitle {{tabs.hardware.name}}
+            table.b-dedicated__summary-table
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware")
+                    td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
+                    td.b-dedicated__summary-table-cell € {{opt.Price}}
+
+            .b-dedicated__summary-subtitle {{tabs.software.name}}
+            table.b-dedicated__summary-table
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.software")
+                    td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
+                    td.b-dedicated__summary-table-cell € {{opt.Price}}
+
+            .b-dedicated__summary-subtitle {{tabs.network.name}}
+            table.b-dedicated__summary-table
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.network")
+                    td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
+                    td.b-dedicated__summary-table-cell € {{opt.Price}}
+
+            .b-dedicated__summary-subtitle {{tabs.sla.name}}
+            table.b-dedicated__summary-table
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.sla")
+                    td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
+                    td.b-dedicated__summary-table-cell € {{opt.Price}}
+
+            .b-dedicated__summary-price
+                span.b-dedicated__summary-price-value €{{orderPrice - order.discount.billingCycle.Value/100 * orderPrice}}/year
+                span.b-dedicated__summary-price-discount(ng-show="order.discount.billingCycle.Value")
+                    | {{order.discount.billingCycle.Value}}% discount, save €{{order.discount.billingCycle.Value/100 * orderPrice}}
+
+            a.b-submit.b-dedicated__summary-submit(href="", ng-click="buy()") Buy
+
+    .b-container
+        table.b-dedicated__accordion-table
+            tr.b-dedicated__accordion-table-row
+                td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
+                    | Billing cycle
+                    | discount:
+                td.b-dedicated__accordion-table-cell
+                    table.table-select
+                        tr.table-select__row
+                            td.table-select__cell
+                                .table-select__item(ui-select="order.discount.billingCycle", options="tabs.discount.billingCycle.options", width="340")
+
+                            td.table-select__cell
+                            td.table-select__cell
+                            td.table-select__cell

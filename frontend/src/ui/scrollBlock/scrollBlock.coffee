@@ -24,6 +24,7 @@ angular.module("ui.scrollBlock").directive "scrollBlock", ->
             
             $(window).on 'scroll', ->
                 countAllPosition()
+
                 if $heightScrollBox < $heightScrollBlock
                     scrollBlock.removeClass('is-fixed').removeClass 'is-bottom'
                     return
@@ -33,10 +34,10 @@ angular.module("ui.scrollBlock").directive "scrollBlock", ->
                 else
                     scrollBlock.removeClass 'is-fixed'
                     
-#                if $topPositionDocument > $topPositionBox + $heightScrollBox - $heightScrollBlock - 120
-#                    scrollBlock.addClass 'is-bottom'
-#                else
-#                    scrollBlock.removeClass 'is-bottom'
+                if $topPositionDocument > $topPositionBox + $heightScrollBox - $heightScrollBlock - 220
+                    scrollBlock.addClass 'is-bottom'
+                else
+                    scrollBlock.removeClass 'is-bottom'
                     
                 return
 
