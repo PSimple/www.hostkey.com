@@ -170,13 +170,13 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     $scope.$watch "order.hardware.cpu", ->
         updateRAM($scope.tabs, $scope.order)
+        updateOS($scope.tabs, $scope.order)
 
     $scope.$watch "tabs.hardware.hdd.selected", ->
         updateHddSelected($scope.tabs, $scope.order)
     , true
 
     $scope.$watch "order.software.os", -> updateOS($scope.tabs, $scope.order)
-    $scope.$watch "order.hardware.cpu", -> updateOS($scope.tabs, $scope.order)
 
 
 # обновим доступные блоки памяти
@@ -189,6 +189,10 @@ updateRAM = (tabs, order)->
             tabs.hardware.ram.options[optId].Options.enable = true
         else
             tabs.hardware.ram.options[optId].Options.enable = false
+
+    #при выборе CPU выбранная память сбрасывается до минимальной
+    order.hardware.ram = _.values(tabs.hardware.ram.options)[0]
+    return
 
 updateHdd = (tabs, order) ->
     return unless order.hardware?.platform

@@ -46679,15 +46679,13 @@
 	    return updateHdd($scope.tabs, $scope.order);
 	  });
 	  $scope.$watch("order.hardware.cpu", function() {
-	    return updateRAM($scope.tabs, $scope.order);
+	    updateRAM($scope.tabs, $scope.order);
+	    return updateOS($scope.tabs, $scope.order);
 	  });
 	  $scope.$watch("tabs.hardware.hdd.selected", function() {
 	    return updateHddSelected($scope.tabs, $scope.order);
 	  }, true);
-	  $scope.$watch("order.software.os", function() {
-	    return updateOS($scope.tabs, $scope.order);
-	  });
-	  return $scope.$watch("order.hardware.cpu", function() {
+	  return $scope.$watch("order.software.os", function() {
 	    return updateOS($scope.tabs, $scope.order);
 	  });
 	}]);
@@ -46696,13 +46694,14 @@
 	  var max_mem;
 	  max_mem = order.hardware.cpu.Options.max_mem;
 	  console.log("updateRAM", order.hardware.cpu.Name, max_mem);
-	  return angular.forEach(tabs.hardware.ram.options, function(opt, optId) {
+	  angular.forEach(tabs.hardware.ram.options, function(opt, optId) {
 	    if (Number(opt.Options.size, 10) <= Number(max_mem, 10)) {
 	      return tabs.hardware.ram.options[optId].Options.enable = true;
 	    } else {
 	      return tabs.hardware.ram.options[optId].Options.enable = false;
 	    }
 	  });
+	  order.hardware.ram = _.values(tabs.hardware.ram.options)[0];
 	};
 
 	updateHdd = function(tabs, order) {
