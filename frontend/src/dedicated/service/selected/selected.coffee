@@ -24,7 +24,6 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     components = {
         1: ['hardware', 'cpu'] # id: ['category', 'name']
-        2: ['hardware', 'hdd']
         3: ['hardware', 'ram']
         6: ['hardware', 'platform']
         8: ['hardware', 'raid']
@@ -107,7 +106,9 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             hdd:
                 size: 0
                 sizeAvailable: [1..8]
+                selected: []
                 options: configCalculator[2]
+
             raid:
                 options: configCalculator[8]
 
@@ -166,6 +167,10 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
     $scope.$watch "order.hardware.cpu", ->
         updateRAM($scope.tabs, $scope.order)
 
+    $scope.$watch "tabs.hardware.hdd.selected", ->
+        updateHddSelected($scope.tabs, $scope.order)
+    , true
+
 
 # обновим доступные блоки памяти
 updateRAM = (tabs, order)->
@@ -181,7 +186,54 @@ updateRAM = (tabs, order)->
 
 updateHdd = (tabs, order) ->
     return unless order.hardware?.platform
-    console.log "updateHdd", order.hardware.platform.Name
+    console.log "updateHdd", order.hardware.platform.Name, order.hardware.hdd
 
+    size = order.hardware.platform.Options.size
     # количество дисков
-    tabs.hardware.hdd.size = order.hardware.platform.Options.size
+    tabs.hardware.hdd.size = size
+    tabs.hardware.hdd.selected = []
+
+    for i in [1..size]
+        tabs.hardware.hdd.selected[i-1] = _.values(tabs.hardware.hdd.options)[0]
+
+    console.log tabs.hardware.hdd.selected
+
+updateHddSelected = (tabs, order) ->
+
+    price = 0
+    hddCount = 0
+    names = {}
+    ids = []
+
+    console.log tabs.hardware.hdd.selected
+    angular.forEach tabs.hardware.hdd.selected, (hdd) ->
+        price += Number(hdd.Price, 10)
+        hddCount++
+
+        name = hdd.Options.short_name
+        if names[name]
+            names[name]++
+        else
+            names[name] = 1
+
+        ids.push hdd.ID
+
+    reduceNames = (names)->
+        short_name = []
+
+        angular.forEach names, (count, name) ->
+            if count > 1
+                short_name.push "#{count}x#{name}"
+            else
+                short_name.push name
+
+        short_name.join("*")
+
+    order.hardware.hdd =
+        ID: ids
+        Price: price
+        Options:
+            short_name: reduceNames(names)
+
+    console.log "updateHddSelected", order.hardware.hdd
+
