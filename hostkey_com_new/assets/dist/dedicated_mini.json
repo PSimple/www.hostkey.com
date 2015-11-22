@@ -11,7 +11,7 @@
           "Name": "Xeon E3-1230v3 4x3.3GHz",
           "Price": "14.00",
           "Options": {
-            "cpu_count": "1",
+            "cpu_count": "2",
             "max_mem": "32",
             "short_name": "E3-1230v3"
           }

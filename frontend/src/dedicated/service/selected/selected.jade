@@ -417,25 +417,25 @@
             table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware", ng-show="opt.Options.short_name")
                     td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
-                    td.b-dedicated__summary-table-cell € {{opt.Price}}
+                    td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
 
             .b-dedicated__summary-subtitle {{tabs.software.name}}
             table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.software")
                     td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
-                    td.b-dedicated__summary-table-cell € {{opt.Price}}
+                    td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
 
             .b-dedicated__summary-subtitle {{tabs.network.name}}
             table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.network")
                     td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
-                    td.b-dedicated__summary-table-cell € {{opt.Price}}
+                    td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
 
             .b-dedicated__summary-subtitle {{tabs.sla.name}}
             table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.sla")
                     td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
-                    td.b-dedicated__summary-table-cell € {{opt.Price}}
+                    td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
 
             .b-dedicated__summary-price
                 span.b-dedicated__summary-price-value €{{orderPrice - order.discount.billingCycle.Value/100 * orderPrice}}/year

@@ -83,10 +83,14 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     $scope.$watch "order", () ->
         price = 0
+        #console.log "order", $scope.order
         angular.forEach $scope.order, (group) ->
             angular.forEach group, (opt) ->
-                if opt?.Price
-                    price += Number(opt.Price)
+                if opt?.PriceTotal
+                    price += Number(opt.PriceTotal)
+                else
+                    if opt?.Price
+                        price += Number(opt.Price)
 
         $scope.orderPrice = price
     , true
@@ -171,6 +175,9 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
         updateHddSelected($scope.tabs, $scope.order)
     , true
 
+    $scope.$watch "order.software.os", -> updateOS($scope.tabs, $scope.order)
+    $scope.$watch "order.hardware.cpu", -> updateOS($scope.tabs, $scope.order)
+
 
 # обновим доступные блоки памяти
 updateRAM = (tabs, order)->
@@ -231,4 +238,16 @@ updateHddSelected = (tabs, order) ->
             short_name: reduceNames(names)
 
     console.log "updateHddSelected", order.hardware.hdd
+
+updateOS = (tabs, order) ->
+    multiplicator = 1
+
+    if /Windows/.test(order.software.os.Name)
+        # Если выбрана ОС семейства Windows (п. 2.1) то цена ОС умножается на количество процессоров. параметр ”cpu_count”
+        multiplicator = Number(order.hardware.cpu.Options.cpu_count, 10)
+
+    price = Number(order.software.os.Price, 10)
+    order.software.os.PriceTotal = price * multiplicator
+
+    return
 
