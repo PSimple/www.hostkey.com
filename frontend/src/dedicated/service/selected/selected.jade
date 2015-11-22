@@ -207,7 +207,7 @@
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.hardware.ram.name}}
 
                             td.b-dedicated__accordion-table-cell.js-checked
-                                label.b-checkbox-submit.b-checkbox-submit_size_70(ng-repeat="ram in tabs.hardware.ram.options", ng-model="order.hardware.ram", btn-radio="{{ram}}")
+                                label.b-checkbox-submit.b-checkbox-submit_size_70(ng-repeat="ram in tabs.hardware.ram.options", ng-model="order.hardware.ram", btn-radio="{{ram}}", ng-class="{disable: !ram.Options.enable}")
                                     span.b-checkbox-submit__text {{ram.Name}}
 
 

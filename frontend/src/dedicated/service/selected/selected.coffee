@@ -158,28 +158,30 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             billingCycle:
                 options: billingCycleDiscount
 
-    updateHdd = ->
-        return unless $scope.order.hardware?.platform
-
-        platform = $scope.order.hardware.platform
-
-        # количество дисков
-        $scope.tabs.hardware.hdd.size = platform.Options.size
-
-        return
-
-    updateHdd()
-
     $scope.buy = -> alert 'buy'
 
-    $scope.$watch "order.hardware.platform", (n, o) ->
-        unless angular.equals(n, o)
-            updateHdd()
-    , true
+    $scope.$watch "order.hardware.platform.ID", ->
+        updateHdd($scope.tabs, $scope.order)
+
+    $scope.$watch "order.hardware.cpu", ->
+        updateRAM($scope.tabs, $scope.order)
 
 
-#    $scope.$watch "order", (n, o) ->
-#        unless angular.equals(n, o)
-#            console.log "order", n, o
-#    , true
+# обновим доступные блоки памяти
+updateRAM = (tabs, order)->
+    max_mem = order.hardware.cpu.Options.max_mem
+    console.log "updateRAM", order.hardware.cpu.Name, max_mem
 
+    angular.forEach tabs.hardware.ram.options, (opt, optId) ->
+        if Number(opt.Options.size, 10) <= Number(max_mem, 10)
+            tabs.hardware.ram.options[optId].Options.enable = true
+        else
+            tabs.hardware.ram.options[optId].Options.enable = false
+
+
+updateHdd = (tabs, order) ->
+    return unless order.hardware?.platform
+    console.log "updateHdd", order.hardware.platform.Name
+
+    # количество дисков
+    tabs.hardware.hdd.size = order.hardware.platform.Options.size

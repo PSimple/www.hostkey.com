@@ -28,6 +28,9 @@ tbody.collapse.in {
 .b-dedicated__summary {
   margin-left: 45px;
 }
+.b-checkbox-submit.disable {
+  pointer-events: none;
+}
 .select2-container {
   box-sizing: border-box;
   display: inline-block;
