@@ -26,8 +26,10 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
             if data.Content
 
                 # control panel default value
-                data.Content.Data[5][0] =
-                    Name: "None"
+                data.Content.Data[5][0] = Name: "None"
+
+                data.Content.Data[12][0] = Name: "None"
+                data.Content.Data[20][0] = Name: "None"
 
                 deferred.resolve data.Content.Data
             else

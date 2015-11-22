@@ -192,6 +192,14 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     $scope.$watch "order.software.os", -> updateOS($scope.tabs, $scope.order)
 
+    $scope.$watch "order.software.MSExchange.ID", ->
+        $scope.order.software.MSExchangeCount = 1
+
+    $scope.$watch "order.software.MSExchangeCount", ->
+        if $scope.order.software.MSExchange?.Price
+            price = Number($scope.order.software.MSExchange.Price, 10)
+            count = Number($scope.order.software.MSExchangeCount, 10)
+            $scope.order.software.MSExchange.PriceTotal = price * count
 
 # обновим доступные блоки памяти
 updateRAM = (tabs, order)->
@@ -293,5 +301,8 @@ updateOS = (tabs, order) ->
     price = Number(order.software.os.Price, 10)
     order.software.os.PriceTotal = price * multiplicator
 
+
     return
+
+
 

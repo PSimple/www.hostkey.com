@@ -301,10 +301,10 @@
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
                                             .table-select__item(ui-select="order.software.MSExchange", options="tabs.software.MSExchange.options", width="340")
 
-                                        td.table-select__cell
+                                        td.table-select__cell(ng-show="order.software.MSExchange.ID")
                                             label.table-select__item-label.table-select__item-label_inline_yes Count
-                                            input.table-select__input(type='text')
-                                            span.table-select__input-x X € 2
+                                            input.table-select__input(type='text', ng-model="order.software.MSExchangeCount")
+                                            span.table-select__input-x X € {{order.software.MSExchange.Price}}
                                         td.table-select__cell
 
                 accordion-group
