@@ -261,17 +261,17 @@
                                         td.table-select__cell
                                             .table-select__item(ui-select="order.software.bit", options="tabs.software.bit.options", width="170")
 
-                                        td.table-select__cell
+                                        td.table-select__cell(ng-style="{visibility: tabs.software.RDPLicenses.enable ? 'initial': 'hidden'}")
                                             label.table-select__item-label.table-select__item-label_inline_yes
                                                 | RDP
                                                 br
                                                 | Licenses
-                                            input.table-select__input(type='text')
+                                            input.table-select__input(type='text', name="RDPLicenses", ng-model="order.software.RDPLicenses.value")
                                             span.table-select__input-x X € 3
 
 
-                        tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.software.controlPanel.Name}}
+                        tr.b-dedicated__accordion-table-row(ng-show="tabs.software.controlPanel.enable")
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
@@ -281,21 +281,17 @@
                                         td.table-select__cell
                                         td.table-select__cell
 
-                        //-tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes MS SQL
+                        tr.b-dedicated__accordion-table-row(ng-show="tabs.software.MSSql.enable")
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.software.MSSql.name}}
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
-                                            select.table-select__item.js-select
-                                                option(value='1')  Windows Server 12 Datacenter (70)
-                                                option(value='2') 1 Gb
-                                                option(value='3') 2 Gb
-                                                option(value='4') 4 Gb
+                                            .table-select__item(ui-select="order.software.MSSql", options="tabs.software.MSSql.options", width="340")
                                         td.table-select__cell
                                         td.table-select__cell
 
-                        //-tr.b-dedicated__accordion-table-row
+                        tr.b-dedicated__accordion-table-row(ng-show="tabs.software.MSExchange.enable")
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
                                 | MS Exchange
                                 | CALs
@@ -303,11 +299,8 @@
                                 table.table-select
                                     tr.table-select__row
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
-                                            select.table-select__item.js-select
-                                                option(value='1')  Windows Server 12 Datacenter (70)
-                                                option(value='2') 1 Gb
-                                                option(value='3') 2 Gb
-                                                option(value='4') 4 Gb
+                                            .table-select__item(ui-select="order.software.MSExchange", options="tabs.software.MSExchange.options", width="340")
+
                                         td.table-select__cell
                                             label.table-select__item-label.table-select__item-label_inline_yes Count
                                             input.table-select__input(type='text')
@@ -415,25 +408,25 @@
 
             .b-dedicated__summary-subtitle {{tabs.hardware.name}}
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware", ng-show="opt.Options.short_name")
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware", ng-show="opt.Options.short_name && opt.ID")
                     td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
                     td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
 
             .b-dedicated__summary-subtitle {{tabs.software.name}}
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.software")
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.software", ng-show="opt.Options.short_name && opt.ID")
                     td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
                     td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
 
             .b-dedicated__summary-subtitle {{tabs.network.name}}
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.network")
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.network", ng-show="opt.Options.short_name && opt.ID")
                     td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
                     td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
 
             .b-dedicated__summary-subtitle {{tabs.sla.name}}
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.sla")
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.sla", ng-show="opt.Options.short_name && opt.ID")
                     td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
                     td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
 

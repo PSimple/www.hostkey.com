@@ -25,7 +25,7 @@ angular.module("ui").filter 'orderVerbose',  ->
                 if o?.Options?.short_name
                     names.push o.Options.short_name
                 else
-                    if o?.Name
+                    if o?.Name and o.ID
                         names.push o.Name
 
             str = names.join(" / ")

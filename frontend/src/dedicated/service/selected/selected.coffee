@@ -29,16 +29,18 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
         8: ['hardware', 'raid']
 
         4: ['software', 'os']
-        10: ['software', 'bit']
+        10:['software', 'bit']
         5: ['software', 'controlPanel']
+        12:['software', 'MSSql']
+        20:['software', 'MSExchange']
 
-        14: ['network', 'traffic']
+        14:['network', 'traffic']
         7: ['network', 'ip']
-        15: ['network', 'vlan']
-        19: ['network', 'ftpBackup']
+        15:['network', 'vlan']
+        19:['network', 'ftpBackup']
 
-        16: ['sla', 'serviceLevel']
-        17: ['sla', 'management']
+        16:['sla', 'serviceLevel']
+        17:['sla', 'management']
     }
 
     initOrderComponents = (components, config)->
@@ -83,7 +85,7 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     $scope.$watch "order", () ->
         price = 0
-        #console.log "order", $scope.order
+        console.log "order", $scope.order
         angular.forEach $scope.order, (group) ->
             angular.forEach group, (opt) ->
                 if opt?.PriceTotal
@@ -132,8 +134,20 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
                 name: "Bit"
                 options: configCalculator[10]
             controlPanel:
+                enable: true
                 name: "Control Panel"
                 options: configCalculator[5]
+            MSSql:
+                enable: false
+                name: "MS SQL"
+                options: configCalculator[12]
+            MSExchange:
+                enable: false
+                name: "MS Exchange Cals"
+                options: configCalculator[20]
+            RDPLicenses:
+                enable: false
+                value: 0
 
         network:
             name: "Network"
@@ -246,9 +260,35 @@ updateHddSelected = (tabs, order) ->
 updateOS = (tabs, order) ->
     multiplicator = 1
 
+    # тригерим опции для винды
+    enableWindowsOptions = ->
+        tabs.software.controlPanel.enable = false
+
+        tabs.software.MSSql.enable = true
+        tabs.software.RDPLicenses.enable = true
+        tabs.software.MSExchange.enable = true
+
+        delete order.software.controlPanel
+
+    enableUnixOptions = ->
+        tabs.software.controlPanel.enable = true
+
+        tabs.software.MSSql.enable = false
+        tabs.software.RDPLicenses.enable = false
+        tabs.software.MSExchange.enable = false
+
+        delete order.software.MSSql
+        delete order.software.RDPLicenses
+        delete order.software.MSExchange
+
+
     if /Windows/.test(order.software.os.Name)
         # Если выбрана ОС семейства Windows (п. 2.1) то цена ОС умножается на количество процессоров. параметр ”cpu_count”
         multiplicator = Number(order.hardware.cpu.Options.cpu_count, 10)
+
+        enableWindowsOptions()
+    else
+        enableUnixOptions()
 
     price = Number(order.software.os.Price, 10)
     order.software.os.PriceTotal = price * multiplicator
