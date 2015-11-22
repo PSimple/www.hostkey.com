@@ -415,7 +415,7 @@
 
             .b-dedicated__summary-subtitle {{tabs.hardware.name}}
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware")
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware", ng-show="opt.Options.short_name")
                     td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
                     td.b-dedicated__summary-table-cell € {{opt.Price}}
 

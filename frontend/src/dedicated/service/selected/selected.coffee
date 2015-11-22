@@ -183,10 +183,8 @@ updateRAM = (tabs, order)->
         else
             tabs.hardware.ram.options[optId].Options.enable = false
 
-
 updateHdd = (tabs, order) ->
     return unless order.hardware?.platform
-    console.log "updateHdd", order.hardware.platform.Name, order.hardware.hdd
 
     size = order.hardware.platform.Options.size
     # количество дисков
@@ -196,8 +194,6 @@ updateHdd = (tabs, order) ->
     for i in [1..size]
         tabs.hardware.hdd.selected[i-1] = _.values(tabs.hardware.hdd.options)[0]
 
-    console.log tabs.hardware.hdd.selected
-
 updateHddSelected = (tabs, order) ->
 
     price = 0
@@ -205,7 +201,6 @@ updateHddSelected = (tabs, order) ->
     names = {}
     ids = []
 
-    console.log tabs.hardware.hdd.selected
     angular.forEach tabs.hardware.hdd.selected, (hdd) ->
         price += Number(hdd.Price, 10)
         hddCount++
@@ -218,7 +213,7 @@ updateHddSelected = (tabs, order) ->
 
         ids.push hdd.ID
 
-    reduceNames = (names)->
+    reduceNames = (names) ->
         short_name = []
 
         angular.forEach names, (count, name) ->
