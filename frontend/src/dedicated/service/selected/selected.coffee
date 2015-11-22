@@ -22,6 +22,50 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
 angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, raidLevel) ->
 
+    components = {
+        1: ['hardware', 'cpu'] # id: ['category', 'name']
+        2: ['hardware', 'hdd']
+        3: ['hardware', 'ram']
+        6: ['hardware', 'platform']
+        8: ['hardware', 'raid']
+
+        4: ['software', 'os']
+        10: ['software', 'bit']
+        5: ['software', 'controlPanel']
+
+        14: ['network', 'traffic']
+        7: ['network', 'ip']
+        15: ['network', 'vlan']
+        19: ['network', 'ftpBackup']
+
+        16: ['sla', 'serviceLevel']
+        17: ['sla', 'management']
+    }
+
+    initOrderComponents = (components, config)->
+        defaultOrder = {}
+
+        angular.forEach components, (component, componentId) ->
+            id = componentId
+            category = component[0] # категория компонента (hardware, software)
+            name = component[1]     # имя компонента (hdd, os)
+
+            if angular.isObject(config[id])
+                defaultOrder[category] = {} unless defaultOrder[category]
+                defaultOrder[category][name] = _.values(config[id])[0]
+
+            return
+
+        defaultOrder.discount =
+            billingCycle: billingCycleDiscount[0]
+
+        defaultOrder.hardware.raidLevel = raidLevel[0]
+
+        defaultOrder
+
+    # формируем заказ на сервер
+    $scope.order = initOrderComponents(components, configCalculator)
+
     unless configCalculator
         alert "Нет конфиграции для #{$stateParams.type} #{$stateParams.country}"
         $state.go "^", $stateParams, {reload:true}
@@ -42,38 +86,11 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
         price = 0
         angular.forEach $scope.order, (group) ->
             angular.forEach group, (opt) ->
-                if opt.Price
+                if opt?.Price
                     price += Number(opt.Price)
 
         $scope.orderPrice = price
     , true
-
-    # формируем заказ на сервер
-    $scope.order =
-        hardware:
-            cpu: _.values(configCalculator[1])[0]
-            platform: _.values(configCalculator[6])[0]
-            hdd: _.values(configCalculator[2])[0]
-            raid: _.values(configCalculator[8])[0]
-            raidLevel: raidLevel[0]
-            ram: _.values(configCalculator[3])[0]
-
-        software:
-            os: _.values(configCalculator[4])[0]
-            bit: _.values(configCalculator[10])[0]
-            controlPanel: _.values(configCalculator[5])[0]
-
-        network:
-            traffic: _.values(configCalculator[14])[0]
-            ip: _.values(configCalculator[7])[0]
-            vlan: _.values(configCalculator[15])[0]
-            ftpBackup: _.values(configCalculator[19])[0]
-        sla:
-            serviceLevel: _.values(configCalculator[16])[0]
-            management: _.values(configCalculator[17])[0]
-
-        discount:
-            billingCycle: billingCycleDiscount[0]
 
     $scope.tabs =
         hardware:
@@ -142,6 +159,7 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
                 options: billingCycleDiscount
 
     updateHdd = ->
+        return unless $scope.order.hardware?.platform
 
         platform = $scope.order.hardware.platform
 

@@ -22,10 +22,11 @@ angular.module("ui").filter 'orderVerbose',  ->
         if angular.isObject(obj)
             names = []
             angular.forEach obj, (o) ->
-                if o.Options?.short_name
+                if o?.Options?.short_name
                     names.push o.Options.short_name
                 else
-                    names.push o.Name
+                    if o?.Name
+                        names.push o.Name
 
             str = names.join(" / ")
 

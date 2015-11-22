@@ -35926,10 +35926,12 @@
 	      names = [];
 	      angular.forEach(obj, function(o) {
 	        var ref;
-	        if ((ref = o.Options) != null ? ref.short_name : void 0) {
+	        if (o != null ? (ref = o.Options) != null ? ref.short_name : void 0 : void 0) {
 	          return names.push(o.Options.short_name);
 	        } else {
-	          return names.push(o.Name);
+	          if (o != null ? o.Name : void 0) {
+	            return names.push(o.Name);
+	          }
 	        }
 	      });
 	      str = names.join(" / ");
@@ -46514,7 +46516,45 @@
 	}]);
 
 	angular.module("dedicated.service.selected").controller("MicroCtrl", ["$scope", "$state", "$stateParams", "$timeout", "configCalculator", "billingCycleDiscount", "raidLevel", function($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, raidLevel) {
-	  var updateHdd;
+	  var components, initOrderComponents, updateHdd;
+	  components = {
+	    1: ['hardware', 'cpu'],
+	    2: ['hardware', 'hdd'],
+	    3: ['hardware', 'ram'],
+	    6: ['hardware', 'platform'],
+	    8: ['hardware', 'raid'],
+	    4: ['software', 'os'],
+	    10: ['software', 'bit'],
+	    5: ['software', 'controlPanel'],
+	    14: ['network', 'traffic'],
+	    7: ['network', 'ip'],
+	    15: ['network', 'vlan'],
+	    19: ['network', 'ftpBackup'],
+	    16: ['sla', 'serviceLevel'],
+	    17: ['sla', 'management']
+	  };
+	  initOrderComponents = function(components, config) {
+	    var defaultOrder;
+	    defaultOrder = {};
+	    angular.forEach(components, function(component, componentId) {
+	      var category, id, name;
+	      id = componentId;
+	      category = component[0];
+	      name = component[1];
+	      if (angular.isObject(config[id])) {
+	        if (!defaultOrder[category]) {
+	          defaultOrder[category] = {};
+	        }
+	        defaultOrder[category][name] = _.values(config[id])[0];
+	      }
+	    });
+	    defaultOrder.discount = {
+	      billingCycle: billingCycleDiscount[0]
+	    };
+	    defaultOrder.hardware.raidLevel = raidLevel[0];
+	    return defaultOrder;
+	  };
+	  $scope.order = initOrderComponents(components, configCalculator);
 	  if (!configCalculator) {
 	    alert("Нет конфиграции для " + $stateParams.type + " " + $stateParams.country);
 	    $state.go("^", $stateParams, {
@@ -46540,41 +46580,13 @@
 	    price = 0;
 	    angular.forEach($scope.order, function(group) {
 	      return angular.forEach(group, function(opt) {
-	        if (opt.Price) {
+	        if (opt != null ? opt.Price : void 0) {
 	          return price += Number(opt.Price);
 	        }
 	      });
 	    });
 	    return $scope.orderPrice = price;
 	  }, true);
-	  $scope.order = {
-	    hardware: {
-	      cpu: _.values(configCalculator[1])[0],
-	      platform: _.values(configCalculator[6])[0],
-	      hdd: _.values(configCalculator[2])[0],
-	      raid: _.values(configCalculator[8])[0],
-	      raidLevel: raidLevel[0],
-	      ram: _.values(configCalculator[3])[0]
-	    },
-	    software: {
-	      os: _.values(configCalculator[4])[0],
-	      bit: _.values(configCalculator[10])[0],
-	      controlPanel: _.values(configCalculator[5])[0]
-	    },
-	    network: {
-	      traffic: _.values(configCalculator[14])[0],
-	      ip: _.values(configCalculator[7])[0],
-	      vlan: _.values(configCalculator[15])[0],
-	      ftpBackup: _.values(configCalculator[19])[0]
-	    },
-	    sla: {
-	      serviceLevel: _.values(configCalculator[16])[0],
-	      management: _.values(configCalculator[17])[0]
-	    },
-	    discount: {
-	      billingCycle: billingCycleDiscount[0]
-	    }
-	  };
 	  $scope.tabs = {
 	    hardware: {
 	      open: true,
@@ -46655,7 +46667,10 @@
 	    }
 	  };
 	  updateHdd = function() {
-	    var platform;
+	    var platform, ref;
+	    if (!((ref = $scope.order.hardware) != null ? ref.platform : void 0)) {
+	      return;
+	    }
 	    platform = $scope.order.hardware.platform;
 	    $scope.tabs.hardware.hdd.size = platform.Options.size;
 	  };
