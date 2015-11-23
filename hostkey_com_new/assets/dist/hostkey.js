@@ -46509,7 +46509,7 @@
 
 	angular.module("dedicated.service.selected").config(["$httpProvider", "$stateProvider", "$urlRouterProvider", function($httpProvider, $stateProvider, $urlRouterProvider) {
 	  $stateProvider.state("dedicatedService.selected", {
-	    url: "/selected/:type/:country",
+	    url: "/:country/:type/",
 	    controller: "MicroCtrl",
 	    template: __webpack_require__(28),
 	    resolve: {
