@@ -22,6 +22,51 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
 angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, raidLevel) ->
 
+    components = {
+        1: ['hardware', 'cpu'] # id: ['category', 'name']
+        3: ['hardware', 'ram']
+        6: ['hardware', 'platform']
+        8: ['hardware', 'raid']
+
+        4: ['software', 'os']
+        10:['software', 'bit']
+        5: ['software', 'controlPanel']
+        12:['software', 'MSSql']
+        20:['software', 'MSExchange']
+
+        14:['network', 'traffic']
+        7: ['network', 'ip']
+        15:['network', 'vlan']
+        19:['network', 'ftpBackup']
+
+        16:['sla', 'serviceLevel']
+        17:['sla', 'management']
+    }
+
+    initOrderComponents = (components, config)->
+        defaultOrder = {}
+
+        angular.forEach components, (component, componentId) ->
+            id = componentId
+            category = component[0] # категория компонента (hardware, software)
+            name = component[1]     # имя компонента (hdd, os)
+
+            if angular.isObject(config[id])
+                defaultOrder[category] = {} unless defaultOrder[category]
+                defaultOrder[category][name] = _.values(config[id])[0]
+
+            return
+
+        defaultOrder.discount =
+            billingCycle: billingCycleDiscount[0]
+
+        defaultOrder.hardware.raidLevel = raidLevel[0]
+
+        defaultOrder
+
+    # формируем заказ на сервер
+    $scope.order = initOrderComponents(components, configCalculator)
+
     unless configCalculator
         alert "Нет конфиграции для #{$stateParams.type} #{$stateParams.country}"
         $state.go "^", $stateParams, {reload:true}
@@ -40,40 +85,17 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     $scope.$watch "order", () ->
         price = 0
+        console.log "order", $scope.order
         angular.forEach $scope.order, (group) ->
             angular.forEach group, (opt) ->
-                if opt.Price
-                    price += Number(opt.Price)
+                if opt?.PriceTotal
+                    price += Number(opt.PriceTotal)
+                else
+                    if opt?.Price
+                        price += Number(opt.Price)
 
         $scope.orderPrice = price
     , true
-
-    # формируем заказ на сервер
-    $scope.order =
-        hardware:
-            cpu: _.values(configCalculator[1])[0]
-            platform: _.values(configCalculator[6])[0]
-            hdd: _.values(configCalculator[2])[0]
-            raid: _.values(configCalculator[8])[0]
-            raidLevel: raidLevel[0]
-            ram: _.values(configCalculator[3])[0]
-
-        software:
-            os: _.values(configCalculator[4])[0]
-            bit: _.values(configCalculator[10])[0]
-            controlPanel: _.values(configCalculator[5])[0]
-
-        network:
-            traffic: _.values(configCalculator[14])[0]
-            ip: _.values(configCalculator[7])[0]
-            vlan: _.values(configCalculator[15])[0]
-            ftpBackup: _.values(configCalculator[19])[0]
-        sla:
-            serviceLevel: _.values(configCalculator[16])[0]
-            management: _.values(configCalculator[17])[0]
-
-        discount:
-            billingCycle: billingCycleDiscount[0]
 
     $scope.tabs =
         hardware:
@@ -90,7 +112,9 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             hdd:
                 size: 0
                 sizeAvailable: [1..8]
+                selected: []
                 options: configCalculator[2]
+
             raid:
                 options: configCalculator[8]
 
@@ -110,8 +134,20 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
                 name: "Bit"
                 options: configCalculator[10]
             controlPanel:
+                enable: true
                 name: "Control Panel"
                 options: configCalculator[5]
+            MSSql:
+                enable: false
+                name: "MS SQL"
+                options: configCalculator[12]
+            MSExchange:
+                enable: false
+                name: "MS Exchange Cals"
+                options: configCalculator[20]
+            RDPLicenses:
+                enable: false
+                value: 0
 
         network:
             name: "Network"
@@ -141,27 +177,132 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             billingCycle:
                 options: billingCycleDiscount
 
-    updateHdd = ->
-
-        platform = $scope.order.hardware.platform
-
-        # количество дисков
-        $scope.tabs.hardware.hdd.size = platform.Options.size
-
-        return
-
-    updateHdd()
-
     $scope.buy = -> alert 'buy'
 
-    $scope.$watch "order.hardware.platform", (n, o) ->
-        unless angular.equals(n, o)
-            updateHdd()
+    $scope.$watch "order.hardware.platform.ID", ->
+        updateHdd($scope.tabs, $scope.order)
+
+    $scope.$watch "order.hardware.cpu", ->
+        updateRAM($scope.tabs, $scope.order)
+        updateOS($scope.tabs, $scope.order)
+
+    $scope.$watch "tabs.hardware.hdd.selected", ->
+        updateHddSelected($scope.tabs, $scope.order)
     , true
 
+    $scope.$watch "order.software.os", -> updateOS($scope.tabs, $scope.order)
 
-#    $scope.$watch "order", (n, o) ->
-#        unless angular.equals(n, o)
-#            console.log "order", n, o
-#    , true
+    $scope.$watch "order.software.MSExchange.ID", ->
+        $scope.order.software.MSExchangeCount = 1
+
+    $scope.$watch "order.software.MSExchangeCount", ->
+        if $scope.order.software.MSExchange?.Price
+            price = Number($scope.order.software.MSExchange.Price, 10)
+            count = Number($scope.order.software.MSExchangeCount, 10)
+            $scope.order.software.MSExchange.PriceTotal = price * count
+
+# обновим доступные блоки памяти
+updateRAM = (tabs, order)->
+    max_mem = order.hardware.cpu.Options.max_mem
+    console.log "updateRAM", order.hardware.cpu.Name, max_mem
+
+    angular.forEach tabs.hardware.ram.options, (opt, optId) ->
+        if Number(opt.Options.size, 10) <= Number(max_mem, 10)
+            tabs.hardware.ram.options[optId].Options.enable = true
+        else
+            tabs.hardware.ram.options[optId].Options.enable = false
+
+    #при выборе CPU выбранная память сбрасывается до минимальной
+    order.hardware.ram = _.values(tabs.hardware.ram.options)[0]
+    return
+
+updateHdd = (tabs, order) ->
+    return unless order.hardware?.platform
+
+    size = order.hardware.platform.Options.size
+    # количество дисков
+    tabs.hardware.hdd.size = size
+    tabs.hardware.hdd.selected = []
+
+    for i in [1..size]
+        tabs.hardware.hdd.selected[i-1] = _.values(tabs.hardware.hdd.options)[0]
+
+updateHddSelected = (tabs, order) ->
+
+    price = 0
+    hddCount = 0
+    names = {}
+    ids = []
+
+    angular.forEach tabs.hardware.hdd.selected, (hdd) ->
+        price += Number(hdd.Price, 10)
+        hddCount++
+
+        name = hdd.Options.short_name
+        if names[name]
+            names[name]++
+        else
+            names[name] = 1
+
+        ids.push hdd.ID
+
+    reduceNames = (names) ->
+        short_name = []
+
+        angular.forEach names, (count, name) ->
+            if count > 1
+                short_name.push "#{count}x#{name}"
+            else
+                short_name.push name
+
+        short_name.join("*")
+
+    order.hardware.hdd =
+        ID: ids
+        Price: price
+        Options:
+            short_name: reduceNames(names)
+
+    console.log "updateHddSelected", order.hardware.hdd
+
+updateOS = (tabs, order) ->
+    multiplicator = 1
+
+    # тригерим опции для винды
+    enableWindowsOptions = ->
+        tabs.software.controlPanel.enable = false
+
+        tabs.software.MSSql.enable = true
+        tabs.software.RDPLicenses.enable = true
+        tabs.software.MSExchange.enable = true
+
+        delete order.software.controlPanel
+
+    enableUnixOptions = ->
+        tabs.software.controlPanel.enable = true
+
+        tabs.software.MSSql.enable = false
+        tabs.software.RDPLicenses.enable = false
+        tabs.software.MSExchange.enable = false
+
+        delete order.software.MSSql
+        delete order.software.RDPLicenses
+        delete order.software.MSExchange
+
+
+    if /Windows/.test(order.software.os.Name)
+        # Если выбрана ОС семейства Windows (п. 2.1) то цена ОС умножается на количество процессоров. параметр ”cpu_count”
+        multiplicator = Number(order.hardware.cpu.Options.cpu_count, 10)
+
+        enableWindowsOptions()
+    else
+        enableUnixOptions()
+
+    price = Number(order.software.os.Price, 10)
+    order.software.os.PriceTotal = price * multiplicator
+
+
+    return
+
+
 
