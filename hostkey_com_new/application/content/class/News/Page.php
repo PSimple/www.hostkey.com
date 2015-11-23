@@ -21,6 +21,8 @@ class Content_News_Page extends Zero_Controller
             $view = new Zero_View(get_class($this) . 'Details');
             $news = Content_News::Make(Zero_App::$RequestParams[0]);
             $news->Load_Page();
+            if ( !$news->ID )
+                throw new Exception('Page Not Found', 404);
             $view->Assign('news', $news);
         }
         else
