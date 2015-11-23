@@ -1,0 +1,59 @@
+<div class="b-page">
+
+    <div class="b-page__promo b-page__promo_faq_yes">
+        <h1 class="b-page__promo-title">FAQ</h1>
+    </div>
+
+    <div class="b-faq">
+        <div class="b-faq__list">
+            <div class="b-faq__list-head">
+                <div class="b-container">
+                    <a class="b-faq__list-select" href="#">All questions<span class="b-icon b-faq__list-select-icon"></span></a>
+                    <a class="b-faq__list-tech" href="https://my.hostkey.com/index.php?/Knowledgebase/List">For technical questions use our knowledge base<span class="b-icon b-faq__list-tech-icon"></span></a>
+                </div>
+            </div>
+            <div class="b-faq__list-content">
+                <div class="b-faq__questions">
+                    <a class="b-faq__questions-item" href="https://my.hostkey.com/index.php?/Knowledgebase/List">
+                        <span class="b-icon b-faq__questions-item-tech-icon"></span>
+                                <span class="b-faq__questions-item-text">
+                                    For technical questions use our
+                                    knowledge base
+                                </span>
+                        <script>
+                            function faqControl(newId) {
+                                $(".b-faq__answer-content").hide('slow');
+                                $(".b-faq__answer-content[data-id='" + newId + "']").toggle('slow');
+                                $(".b-faq__questions-item").removeClass('active');
+                                $("#faq" + newId).addClass('active');
+                                return false;
+                            }
+                        </script>
+                        <span class="b-icon b-faq__questions-item-icon b-faq__questions-item-icon_purpur"></span></a>
+                    {foreach ($rows as $key => $row)}
+                    {if ( 0 == $key )}
+                    <a class="b-faq__questions-item active" id="faq{$row['ID']}" href="#" onclick="return faqControl('{$row['ID']}');">{$row['Question']}<span class="b-icon b-faq__questions-item-icon"></span></a>
+                    {else}
+                    <a class="b-faq__questions-item" id="faq{$row['ID']}" href="#" onclick="return faqControl('{$row['ID']}');">{$row['Question']}<span class="b-icon b-faq__questions-item-icon"></span></a>
+                    {/if}
+                    {/foreach}
+                </div>
+                <!--
+                                        -->
+                <div class="b-faq__answer">
+
+                    {foreach ($rows as $row)}
+                    <div class="b-faq__answer-content active" data-id="{$row['ID']}">
+                        <h2 class="b-faq__answer-content-title">{$row['Question']}</h2>
+                        {$row['Answer']}
+                    </div>
+                    {/foreach}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-push"></div>
+</div>

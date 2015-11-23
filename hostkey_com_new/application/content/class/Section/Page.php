@@ -10,14 +10,26 @@
 class Content_Section_Page extends Zero_Controller
 {
     /**
-     * Create views.
+     * The compile tpl in string and out
      *
-     * @return boolean flag stop execute of the next chunk
+     * @var bool
+     */
+    protected $ViewTplOutString = false;
+
+    /**
+     * Контроллер по умолчанию.
+     *
+     * @return string
      */
     public function Action_Default()
     {
+        $this->Chunk_Init();
 
-        return Zero_App::$Section->Content;
+        $head = str_replace(' ', '<br>', Zero_App::$Section->Name);
+        $this->View->Assign('head', $head);
+        $this->View->Assign('content', Zero_App::$Section->Content);
+
+        return $this->View->Fetch($this->ViewTplOutString);
     }
 
     /**
@@ -29,7 +41,8 @@ class Content_Section_Page extends Zero_Controller
     public static function Make($properties = [])
     {
         $Controller = new self();
-        foreach ($properties as $property => $value) {
+        foreach ($properties as $property => $value)
+        {
             $Controller->Params[$property] = $value;
         }
         return $Controller;

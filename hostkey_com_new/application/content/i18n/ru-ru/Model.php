@@ -82,4 +82,7 @@ return [
     'ContentLittle Content' => 'Значение',
     'ContentLittle ID' => 'Идентификатор',
     'ContentLittle Name' => 'Название',
+    'Faq Answer' => 'Ответ',
+    'Faq ID' => 'Идентификатор',
+    'Faq Question' => 'Вопрос',
 ];

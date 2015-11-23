@@ -22,11 +22,11 @@
     </head>
     <body class="is-black">
 
-        {include "Content_Include_include.header"}
+    {plugin "Content_ContentLittle_Plugin" view="Header"}
 
-        {$Content}
+    {$Content}
 
-        {include "Content_Include_include.footer.main"}
+    {plugin "Content_ContentLittle_Plugin" view="FooterMain"}
 
         <script src="/assets/js/jquery-1.11.1.min.js"></script>
 

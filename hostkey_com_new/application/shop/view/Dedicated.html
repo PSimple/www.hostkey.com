@@ -12,24 +12,22 @@
     <title>Hostkey. Dedicated. Select service</title>
 
     <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/assets/dist/hostkey.css" rel="stylesheet" type="text/css" media="all">
-
 
     <!--[if lt IE 9]>
     <script src="/assets/js/html5.js"></script>
     <script src="/assets/js/css3-mediaqueries.js"></script>
     <![endif]-->
 
+    <script src="/assets/js/jquery-1.11.1.min.js"></script>
+
 </head>
 <body>
 
-{include "Content_Include_include.header"}
+{plugin "Content_ContentLittle_Plugin" view="Header"}
 
 {$Content}
 
-{include "Content_Include_include.footer"}
-
-<script src="/assets/js/jquery-1.11.1.min.js"></script>
+{plugin "Content_ContentLittle_Plugin" view="Footer"}
 
 <script src="/assets/vendors/jquery-ui-1.11.4/jquery-ui.min.js"></script>
 
@@ -44,8 +42,6 @@
 <link href="/assets/vendors/slick/slick.css" rel="stylesheet">
 <script src="/assets/vendors/slick/slick.min.js"></script>
 <script src="/assets/js/slick-run.js"></script>
-
-<script src="/assets/dist/hostkey.js"></script>
 
 {include "Content_Include_include.all.script"}
 

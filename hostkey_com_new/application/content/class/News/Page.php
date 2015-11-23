@@ -16,10 +16,10 @@ class Content_News_Page extends Zero_Controller
      */
     public function Action_Default()
     {
-        if ( 1 < count(Zero_App::$RequestParams) )
+        if ( 0 < count(Zero_App::$RequestParams) )
         {
             $view = new Zero_View(get_class($this) . 'Details');
-            $news = Content_News::Make(Zero_App::$RequestParams[1]);
+            $news = Content_News::Make(Zero_App::$RequestParams[0]);
             $news->Load_Page();
             $view->Assign('news', $news);
         }

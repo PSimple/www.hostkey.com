@@ -13,6 +13,7 @@
 
         <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
 
+        <script src="/assets/js/jquery-1.11.1.min.js"></script>
 
         <!--[if lt IE 9]>
             <script src="/assets/js/html5.js"></script>
@@ -22,13 +23,13 @@
     </head>
     <body>
 
-        {include "Content_Include_include.header"}
 
-        {$Content}
+    {plugin "Content_ContentLittle_Plugin" view="Header"}
 
-        {include "Content_Include_include.footer"}
+    {$Content}
 
-        <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    {plugin "Content_ContentLittle_Plugin" view="Footer"}
+
 
         <script src="/assets/js/interface.js"></script>
 

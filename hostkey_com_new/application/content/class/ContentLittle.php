@@ -3,14 +3,14 @@
 /**
  * ContentLittle.
  *
- * @package <Package>.ContentLittle
+ * @package Content.ContentLittle.Model
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.10.26
  *
  * @property string $Name
  * @property string $Conten
  */
-class ContentLittle extends Zero_Model
+class Content_ContentLittle extends Zero_Model
 {
     /**
      * The table stores the objects this model
@@ -71,12 +71,12 @@ class ContentLittle extends Zero_Model
 				'Default' => '',
 				'Form' => 'Text',
 			],
-			'Content' => [
-				'AliasDB' => 'z.Content',
+			'Value' => [
+				'AliasDB' => 'z.Value',
 				'DB' => 'T',
 				'IsNull' => 'YES',
 				'Default' => '',
-				'Form' => 'Content',
+				'Form' => 'Text',
 			],
         ];
     }
@@ -102,7 +102,7 @@ class ContentLittle extends Zero_Model
         return [
             'ID' => ['Visible' => true, 'AR' => true],
 			'Name' => ['Visible' => true, 'AR' => true],
-			'Content' => ['Visible' => true, 'AR' => true],
+			'Value' => ['Visible' => true, 'AR' => true],
         ];
     }
 
@@ -122,6 +122,7 @@ class ContentLittle extends Zero_Model
         return [
             'ID' => [],
 			'Name' => [],
+            'Value' => [],
         ];
     }
 
@@ -142,45 +143,8 @@ class ContentLittle extends Zero_Model
         return [
             'ID' => [],
 			'Name' => [],
-			'Content' => [],
+			'Value' => [],
         ];
-    }
-
-    /**
-     * Sample. The total initial validation properties
-     *
-     * @param array $data verifiable data array
-     * @param string $scenario scenario validation
-     * @return array
-     */
-    public function Validate_Before($data, $scenario)
-    {
-        return $data;
-    }
-
-    /**
-     * Sample. The validation property
-     * May be removed
-     *
-     * @param mixed $value value to check and set
-     * @param string $scenario scenario validation
-     * @return string
-     */
-    public function VL_PropertyName($value, $scenario)
-    {
-        $this->PropertyName = $value;
-        return '';
-    }
-
-    /**
-     * Sample. Filter for property.
-     * May be removed
-     *
-     * @return array
-     */
-    public function FL_PropertyName()
-    {
-        return [23 => 'Value'];
     }
 
     /**
@@ -231,7 +195,7 @@ class ContentLittle extends Zero_Model
      *
      * @param integer $id идентификатор объекта
      * @param bool $flagLoad флаг полной загрузки объекта
-     * @return ContentLittle
+     * @return Content_ContentLittle
      */
     public static function Factor($id = 0, $flagLoad = false)
     {
