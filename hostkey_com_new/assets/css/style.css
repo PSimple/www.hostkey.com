@@ -5090,7 +5090,7 @@ p {
 }
 
 /* add CSS for page Service in Russia */
-.b-page__promo_dedicated_yes {
+.b-page__promo_infro_russia {
   background: url(/assets/img/home.png) no-repeat;
   position: relative;
 }
@@ -5335,3 +5335,7 @@ p {
 .html_tab1 tr td:nth-child(2){ width: 245px; padding-left: 10px; }
 .html_tab1 tr td:nth-child(3){ width: 245px; padding-left: 10px; }
 .html_tab1 tr td:nth-child(4){ width: 209px; padding-left: 15px; }
+
+.noactive {
+    display: none;
+}

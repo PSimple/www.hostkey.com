@@ -14,7 +14,7 @@
             </div>
             <div class="b-faq__list-content">
                 <div class="b-faq__questions">
-                    <a class="b-faq__questions-item" href="https://my.hostkey.com/index.php?/Knowledgebase/List">
+                    <a class="b-faq__questions-item" id="go_to_technical_description" href="https://my.hostkey.com/index.php?/Knowledgebase/List">
                         <span class="b-icon b-faq__questions-item-tech-icon"></span>
                                 <span class="b-faq__questions-item-text">
                                     For technical questions use our
@@ -22,10 +22,20 @@
                                 </span>
                         <script>
                             function faqControl(newId) {
-                                $(".b-faq__answer-content").hide('slow');
-                                $(".b-faq__answer-content[data-id='" + newId + "']").toggle('slow');
+                                $(".b-faq__answer-content").css("display", "none");
+                                $(".b-faq__answer-content[data-id='" + newId + "']").css("display", "block");
                                 $(".b-faq__questions-item").removeClass('active');
                                 $("#faq" + newId).addClass('active');
+                             //   first = $( '.b-faq__questions .b-faq__answer-content' );
+                             //   $(".b-faq__answer-content[data-id='" + newId + "']").before( first[0] );
+                               // $(LI[0]).remove();
+
+                                $( '#go_to_technical_description' ).after( $( "#faq" + newId ) );
+
+
+                                    var destination = $(".b-faq__list-head").offset().top;
+                                      $("html,body").animate( { scrollTop: destination }, 1000);
+
                                 return false;
                             }
                         </script>
@@ -34,7 +44,7 @@
                     {if ( 0 == $key )}
                     <a class="b-faq__questions-item active" id="faq{$row['ID']}" href="#" onclick="return faqControl('{$row['ID']}');">{$row['Question']}<span class="b-icon b-faq__questions-item-icon"></span></a>
                     {else}
-                    <a class="b-faq__questions-item" id="faq{$row['ID']}" href="#" onclick="return faqControl('{$row['ID']}');">{$row['Question']}<span class="b-icon b-faq__questions-item-icon"></span></a>
+                    <a class="b-faq__questions-item" id="faq{$row['ID']}" href="#" onclick=" return faqControl('{$row['ID']}');">{$row['Question']}<span class="b-icon b-faq__questions-item-icon"></span></a>
                     {/if}
                     {/foreach}
                 </div>
@@ -42,8 +52,8 @@
                                         -->
                 <div class="b-faq__answer">
 
-                    {foreach ($rows as $row)}
-                    <div class="b-faq__answer-content active" data-id="{$row['ID']}">
+                    {foreach ($rows as $key => $row)}
+                    <div class="b-faq__answer-content" data-id="{$row['ID']}" style="{if (0==$key)}display: block{else}display: none{/if}">
                         <h2 class="b-faq__answer-content-title">{$row['Question']}</h2>
                         {$row['Answer']}
                     </div>
