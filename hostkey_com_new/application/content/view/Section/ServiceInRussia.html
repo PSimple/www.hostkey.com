@@ -522,6 +522,83 @@
 </div>
 
 
+<script>
+    $(document).ready(function() {
+
+
+        $('.callback').click(function(){
+            $('#bgJS').show();
+            $('.popup_callback').show();
+            //alert ( "0-000");
+            return false;
+        });
+
+        $('.datacenters').click(function(){
+            $('#bgJS').show();
+            $('.popup_datacenters').show();
+            return false;
+        });
+
+        $('.bothers_more').click(function(){
+            $('#bgJS').show();
+            $('.popup_bothers').show();
+            return false;
+        });
+
+        $('.popup .close, #bgJS').click(function(){
+            $('#bgJS').hide();
+            $('.popup').hide();
+            return false;
+        });
+
+        $('.tabs a').click(function(){
+            $('.tabs a').removeClass('tab_sel');
+            $('.html_tab').hide();
+            var tabid = $(this).attr('class');
+            $(this).addClass('tab_sel');
+            $('.html_'+tabid).show();
+            return false;
+        });
+
+        $('.popup_callback .combox').click(function(){
+            if($('.popup_combox').css('display') == 'none'){ $('.popup_combox').show(); }
+            else { $('.popup_combox').hide(); }
+            return false;
+        });
+
+        $('.combox_block a').click(function(){
+            var code = $(this).data('code');
+            $('.div2 input:first-of-type').val(code);
+            $('.popup_combox').hide();
+            return false;
+        });
+
+        $('#callback_btn').click(function(){
+            var error = false;
+            var name = $('#callback_name').val();
+            var code = $('#callback_code').val();
+            var phone = $('#callback_nr').val();
+            var skype = $('#callback_skype').val();
+            $(".popup_callback .callback_div input").removeClass('error');
+
+            $(".popup_callback .callback_div input").each(function(){
+                if($(this).attr('required') == 'required' && ($(this).val() == '' || $(this).text())){
+                    $(this).addClass('error');
+                    error = true;
+                }
+            });
+
+            if(error == false){
+                $('#bgJS').hide(); $('.popup').hide(); $(".popup_callback .callback_div input").val('');
+            }
+            return false;
+        });
+
+        $(document).keyup(function(e) { if (e.keyCode == 27) { $('#bgJS').hide(); $('.popup').hide(); } });
+    });
+</script>
+
+
 <!-- Иконка онлайн-консультанта-->
 
 <!--div class="online-chat">
@@ -744,3 +821,38 @@
     </div>
     <div class="footer-push"></div>
 </div>
+
+<!-- SlickJS -->
+<link  href="/assets/vendors/slick/slick.css" rel="stylesheet">
+<script src="/assets/vendors/slick/slick.min.js"></script>
+<script src="/assets/js/slick-run.js"></script>
+
+<script src="/assets/js/interface.js"></script>
+
+<!-- Background video -->
+<script type="text/javascript" src="/assets/vendors/background-video/jquery.backgroundvideo.min.js"></script>
+
+<script src="/assets/vendors/jquery.scrollTo-1.4.13/jquery.scrollTo.min.js"></script>
+
+<script src="/assets/vendors/checkbox/fake-checkbox.js"></script>
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+<link rel="stylesheet" href="/assets/vendors/colorbox/colorbox.css" />
+<script src="/assets/vendors/colorbox/jquery.colorbox-min.js"></script>
+
+<style>
+    .b-page__promo_main_yes {
+        background-size: cover;
+        position: relative;
+        z-index: 1;
+    }
+    #video_background {
+        position: absolute !important;
+        width: 100% !important;
+        left: 0 !important;
+        top: -43px !important;
+        height: 710px !important;
+    }
+</style>
