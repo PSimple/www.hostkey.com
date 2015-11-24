@@ -13,6 +13,7 @@ class Content_News_Page extends Zero_Controller
      * Контроллер по умолчанию.
      *
      * @return Zero_View
+     * @throws Exception
      */
     public function Action_Default()
     {
@@ -43,7 +44,7 @@ class Content_News_Page extends Zero_Controller
             $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
             $view->Assign('newsList4', $newsList);
         }
-        return $view;
+        return $view->Fetch($this->ViewTplOutString);
     }
 
     /**
