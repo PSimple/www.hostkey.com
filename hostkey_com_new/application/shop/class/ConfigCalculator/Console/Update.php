@@ -24,9 +24,11 @@ class Shop_ConfigCalculator_Console_Update extends Zero_Controller
             $data = Zero_App::RequestJson("GET", "https://ug.hostkey.ru/api/v1.0/inv/component/salenew?currency={$row['Currency']}&groups={$row['ComponentGroup']}");
             if ( false == $data['ErrorStatus'] )
             {
+
                 $obj = Shop_ConfigCalculator::Make();
                 $data['Content']['Currency'] = $row['Currency'];
                 $data['Content']['ComponentGroup'] = $row['ComponentGroup'];
+                Zero_Logs::File("qqqq", $row['ComponentGroup']);
                 $obj->Cache->Set_Data('ConfigCalculator/' . md5($row['Currency'] . $row['ComponentGroup']), $data['Content']);
             }
         }
