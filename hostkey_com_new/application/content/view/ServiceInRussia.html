@@ -6,6 +6,7 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <link rel="stylesheet" href="/assets/css/styles_russia.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
     <script src="/assets/js/jquery-1.10.1.min.js" type="text/javascript"></script>
     <script src="/assets/js/scrollTo.min.js" type="text/javascript"></script>
     <script src="/assets/js/enscroll-0.6.1.min.js" type="text/javascript"></script>
@@ -13,13 +14,27 @@
     <LINK REL="SHORTCUT ICON" href="/assets/img/favicon.gif">
 </head>
 
-<!-- COPY-->
+<script>
+    ( function(i,s,o,g,r,a,m){ i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-65081862-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+
+</head>
+
+
+<!-- Test -->
 <body>
 <div id="bgJS"></div>
 <div class="popup popup_callback">
-    <a href="#" class="close"><img src="/assets/img/close.png" /></a>
+    <a href="#" class="close"><img src="img/close.png" /></a>
     <h2>Request Call back</h2>
-    <a href="#" class="combox"><img src="/assets/img/arr_d_mini.png" /></a>
+    <a href="#" class="combox"><img src="img/arr_d_mini.png" /></a>
     <div class="callback_div"><input type="text" name="name" placeholder="Name*" id="callback_name" required="required" /></div>
     <div class="callback_div div2">
         <input type="text" name="phone_code" placeholder="Country code*" id="callback_code" required="required" /><input type="text" name="phone_nr" placeholder="Phone*" id="callback_nr" required="required" />
@@ -231,11 +246,11 @@
         <div class="clear"></div></div>
     <div class="callback_div div3"><input type="text" name="skype" placeholder="Skype" id="callback_skype" /></div>
     <label>* - required fields</label><div class="clear"></div>
-    <a href="#" class="btn"  id="callback_btn">Request Call back</a>
+    <a href="#" class="btn"  id="callback_btn" onClick="ga('send', 'event', 'Russia', 'Отправить заявку');">Request Call back</a>
 </div>
 
 <div class="popup popup_datacenters">
-    <a href="#" class="close"><img src="/assets/img/close.png" /></a>
+    <a href="#" class="close"><img src="img/close.png" /></a>
     <h2>Our data centers span over</h2>
     <div class="tab_block">
         <div class="tabs">
@@ -250,27 +265,41 @@
             <div class="html_tab html_tab1">
                 <table>
                     <tr><th class="th1">&nbsp;</th><th class="th2">City Systems</th><th class="th3">DataLine</th><th class="th4">DataPro</th></tr>
-                    <tr><td><strong>location</strong></td><td>Moscow<div><img src="/assets/img/data1.png" /></div></td><td>Moscow<div><img src="/assets/img/data2.png" /></div></td><td>Moscow<div><img src="/assets/img/data3.png" /></div></td></tr>
-                    <tr><td><strong>TIER level</strong></td><td>TIER II uncertified</td><td>TIER III uncertified</td><td><img src="/assets/img/tier3.png" class="cert" />TIER III certified</td></tr>
+                    <tr><td><strong>location</strong></td><td>Moscow<div><img src="img/CitySystems-small.jpg" /></div></td><td>Moscow<div><img src="img/DataLine-small.jpg" /></div></td><td>Moscow<div><img src="img/DataPro-small.jpg" /></div></td></tr>
+                    <tr><td><strong>TIER level</strong></td><td>TIER II uncertified</td><td>TIER III uncertified</td><td><img src="img/tier3.png" class="cert" />TIER III certified</td></tr>
                     <tr><td><strong>Units per “19 rack</strong></td><td>47</td><td>42</td><td>42</td></tr>
+                    <tr><td><strong>Power per rack,<br>up to</strong></td><td>20 KWh</td><td>10 KWh</td><td>28 KWh</td></tr>
                     <tr><td><strong>Cages and customized racks available</strong></td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-                    <tr><td><strong>Authorized and support</strong></td><td>24/7</td><td>24/7</td><td>24/7</td></tr>
+                    <tr><td><strong>Security certification level</strong></td><td>—</td><td>ISO/IEC 27001:2013<br>PCI Data Security 3.0</td><td>PCI Data Security 3.1</td></tr>
+                    <tr><td><strong>Authorized access and support</strong></td><td>24/7</td><td>24/7</td><td>24/7</td></tr>
                 </table>
             </div>
 
             <div class="html_tab html_tab2">
                 <h2>City Systems</h2>
-                <img src="/assets/img/datapro.png" />
+                <img src="img/CitySystems-big.jpg" />
                 <table>
                     <tr><td><strong>location</strong></td><td>Moscow</td></tr>
-                    <tr><td><strong>TIER level</strong></td><td><img src="/assets/img/tier3.png" class="cert" />TIER III certified</td></tr>
+                    <tr><td><strong>TIER level</strong></td><td>TIER II uncertified</td></tr>
                     <tr><td><strong>Units per “19 rack</strong></td><td>42</td></tr>
+                    <tr><td><strong>Power per rack,<br>up to</strong></td><td>20</td></tr>
                     <tr><td><strong>Cages and customized racks available</strong></td><td>Yes</td></tr>
-                    <tr><td><strong>Authorized and support</strong></td><td>24/7</td></tr>
+                    <tr><td><strong>Security certification level</strong></td><td>—</td></tr>
+                    <tr><td><strong>Authorized access and support</strong></td><td>24/7</td></tr>
                     <tr><td>&nbsp;</td>
                         <td>
-                            <p>The dedicated power capacity for connection of the load is 1000 kVA. The power supply meets the requirements of I reliability category and it is provided by 4 transformers, 2 of them are in hot standby. Reservation of the municipal power entrances is supported by power from the third independent power source (diesel power plant) with capacity of 1250 kVA, designed to operate at full load of the data center at least 8 hours without recharging. The data center is equipped with 4th UPS series NXA with capacity of 200 kVA each connected according to scheme N+1.</p>
-                            <p>The data center refrigeration supply system is based on commercial precise conditioners type HiRef, with standby according to scheme N+1, and refrigeration capacity of 95 kW each. The ambient temperature and air humidity in the premises meet all sanitary norms and national standards. Separation of the airflow is based on the concept of a “cold-hot” corridor.</p>
+                            <p>City Systems data center was built in accordance with TIER II standards.
+                                It is located in a close proximity to Moscow city center. The data center is equipped with:</p>
+                            <p>
+                            <li>two independent power supply systems</<li>
+                            <li>each system has the capacity of 1 MW</li>
+                            <li>1250 kVA diesel generator set (DGS) operating in automatic mode</li>
+                            <li>three uninterruptible power supply units (UPS) operating under N+1 scheme</li>
+                            <li>300 kVA each, excess air conditioning and air humidifying systems</li>
+                            <li>automatic fire extinguishing systems</li>
+                            <li>security systems for perimeter protection and unauthorized access prevention</li>
+                            <li>including video surveillance system.</li>
+                            </p>
                         </td>
                     </tr>
                 </table>
@@ -278,17 +307,24 @@
 
             <div class="html_tab html_tab3">
                 <h2>DataLine</h2>
-                <img src="/assets/img/datapro.png" />
+                <img src="img/DataLine-big.jpg" />
                 <table>
                     <tr><td><strong>location</strong></td><td>Moscow</td></tr>
-                    <tr><td><strong>TIER level</strong></td><td><img src="/assets/img/tier3.png" class="cert" />TIER III certified</td></tr>
+                    <tr><td><strong>TIER level</strong></td><td>TIER III uncertified</td></tr>
                     <tr><td><strong>Units per “19 rack</strong></td><td>42</td></tr>
+                    <tr><td><strong>Power per rack,<br>up to</strong></td><td>10</td></tr>
                     <tr><td><strong>Cages and customized racks available</strong></td><td>Yes</td></tr>
-                    <tr><td><strong>Authorized and support</strong></td><td>24/7</td></tr>
+                    <tr><td><strong>Security certification level</strong></td><td>ISO/IEC 27001:2013<br>PCI Data Security 3.0</td></tr>
+                    <tr><td><strong>Authorized access and support</strong></td><td>24/7</td></tr>
                     <tr><td>&nbsp;</td>
                         <td>
-                            <p>The dedicated power capacity for connection of the load is 1000 kVA. The power supply meets the requirements of I reliability category and it is provided by 4 transformers, 2 of them are in hot standby. Reservation of the municipal power entrances is supported by power from the third independent power source (diesel power plant) with capacity of 1250 kVA, designed to operate at full load of the data center at least 8 hours without recharging. The data center is equipped with 4th UPS series NXA with capacity of 200 kVA each connected according to scheme N+1.</p>
-                            <p>The data center refrigeration supply system is based on commercial precise conditioners type HiRef, with standby according to scheme N+1, and refrigeration capacity of 95 kW each. The ambient temperature and air humidity in the premises meet all sanitary norms and national standards. Separation of the airflow is based on the concept of a “cold-hot” corridor.</p>
+                            <p>Data center Dataline Nord was built in 2007 and is now offering its customers a possibility of placing equipment in a data center that has the following characteristics:</p>
+                            <p><li>total area of 10,684 square meters</li>
+                            <li>total power capacity of 18200 KW</li>
+                            <li>power per rack: 6 kW or higher</li>
+                            <li>10 server rooms</li>
+                            <li>1712 commercial racks.</li></p>
+                            <p>Multi-level infrastructure of this data center includes gas extinguishing systems, CCTV and alarm monitoring system as well as access control. Power supply including backup is structured in accordance with 2N scheme. Power to each rack is supplied via 2 rays. Uninterruptible Power Supply (UPS) is located inside the data center modules. Backup diesel generator sets are setup according to N + 1 scheme: two generators are sufficient to provide power supply to a data center plus one backup one in case of emergency.</p>
                         </td>
                     </tr>
                 </table>
@@ -296,17 +332,23 @@
 
             <div class="html_tab html_tab4">
                 <h2>DataPro</h2>
-                <img src="/assets/img/datapro.png" />
+                <img src="img/DataPro-big.jpg" />
                 <table>
                     <tr><td><strong>location</strong></td><td>Moscow</td></tr>
-                    <tr><td><strong>TIER level</strong></td><td><img src="/assets/img/tier3.png" class="cert" />TIER III certified</td></tr>
+                    <tr><td><strong>TIER level</strong></td><td><img src="img/tier3.png" class="cert" />TIER III certified</td></tr>
                     <tr><td><strong>Units per “19 rack</strong></td><td>42</td></tr>
+                    <tr><td><strong>Power per rack,<br>up to</strong></td><td>28</td></tr>
                     <tr><td><strong>Cages and customized racks available</strong></td><td>Yes</td></tr>
-                    <tr><td><strong>Authorized and support</strong></td><td>24/7</td></tr>
+                    <tr><td><strong>Security certification level</strong></td><td>PCI Data Security 3.1</td></tr>
+                    <tr><td><strong>Authorized access and support</strong></td><td>24/7</td></tr>
                     <tr><td>&nbsp;</td>
                         <td>
-                            <p>The dedicated power capacity for connection of the load is 1000 kVA. The power supply meets the requirements of I reliability category and it is provided by 4 transformers, 2 of them are in hot standby. Reservation of the municipal power entrances is supported by power from the third independent power source (diesel power plant) with capacity of 1250 kVA, designed to operate at full load of the data center at least 8 hours without recharging. The data center is equipped with 4th UPS series NXA with capacity of 200 kVA each connected according to scheme N+1.</p>
-                            <p>The data center refrigeration supply system is based on commercial precise conditioners type HiRef, with standby according to scheme N+1, and refrigeration capacity of 95 kW each. The ambient temperature and air humidity in the premises meet all sanitary norms and national standards. Separation of the airflow is based on the concept of a “cold-hot” corridor.</p>
+                            <p>DataPro data center in Moscow was commissioned in December 2014 and is by far the largest of the stated objects of its kind in Russia and Eastern Europe with: </p>
+                            <p><li>total area of 16,000 sq.m.</li>
+                            <li>total power supply of  25 MW</li>
+                            <li>capability of accommodating up to 3,000 racks of IT equipment.</li></p>
+                            <p>Design and construction of this data center was carried out in accordance with international best practices and to the highest international standards.</p>
+                            <p>DataPro has received TIER III Uptime Institute Certification. It is one of the most technologically advanced and energy efficient commercial data centers in Russia.</p>
                         </td>
                     </tr>
                 </table>
@@ -317,14 +359,22 @@
 </div>
 
 <div class="popup popup_bothers">
-    <a href="#" class="close"><img src="/assets/img/close.png" /></a>
+    <a href="#" class="close"><img src="img/close.png" /></a>
     <h2>Russian law</h2>
     <div class="tab_block">
         <div class="tab_html">
-            <p>The new Russian information legislation includes an obligation for all operators to ensure that personal data* of Russian citizens is collected, recorded, systemized, stored, clarified (updated and modified) and retrieved only through the use of databases physically located on the territory of the Russian Federation. </p>
-            <p>The new Russian information legislation includes an obligation for all operators to ensure that personal data* of Russian citizens is collected, recorded, systemized, stored, clarified (updated and modified) and retrieved only through the use of databases physically located on the territory of the Russian Federation. </p>
-            <p>The new Russian information legislation includes an obligation for all operators to ensure that personal data* of Russian citizens is collected, recorded, systemized, stored, clarified (updated and modified) and retrieved only through the use of databases physically located on the territory of the Russian Federation. </p>
-            <p>The new Russian information legislation includes an obligation for all operators to ensure that personal data* of Russian citizens is collected, recorded, systemized, stored, clarified (updated and modified) and retrieved only through the use of databases physically located on the territory of the Russian Federation. </p>
+            <p>On 1 September 2015, a new law comes into force in the Russian Federation - <i>“On Amendments to Certain Laws of the Russian Federation in Order to Clarify the Procedure for Personal Data Processing in Information and Telecommunications Networks”</i>. </p>
+            <p>Under this new law companies collecting data of Russian citizens are obliged to perform any action related to the personal data of the Russian clients in databases located within the territory of the Russian Federation. </p>
+            <p>Even if you conduct your business online (i.e. web shops, hotel/airline reservations, social networking, etc.) you are still obligated to store the personal data of the Russian clients on a server situated in Russia. </p>
+            <p>Personal data refers to any information that identifies a specific person. </p>
+            <p>In order to comply with the law there are the following options:
+            <p>— Collocate your server on the territory on the Russian Federation</p>
+            <p>— Rent a physical or virtual server on the territory of the Russian Federation</p>
+            <p>— Install a server in your own premises in Russia if applicable. </p>
+            <p>Failing to comply with the law may lead to the administrative liability for violation as well as the company information being entered into a blacklist. On top of that, the webassets might be blocked from operating in Russia. </p>
+            <p>HOSTKEY stays on top of the current/new laws & requirements.
+                You can always contact us for consultation. We will be your right hand in case you require to rent or collocate a server/infrastructure in the Russian Federation.</p>
+            <p>Let’s work together.</p>
         </div>
 
     </div>
@@ -343,20 +393,20 @@
             <a href="#contacts">contacts</a>
             <div class="clear"></div>
         </div>
-        <a href="http://hostkey.com" class="header_visit">Visit our website</a>
+        <a href="http://hostkey.com" class="header_visit" onClick="ga('send', 'event', 'Russia', 'Переход на сайт из шапки');">Visit our webassets</a>
         <div class="clear"></div>
     </div>
 
     <div id="home" class="page">
-        <a href="#" class="headphones"><img src="/assets/img/headphones.png" /></a>
+        <a href="#contacts" class="headphones" onClick="ga('send', 'event', 'Russia', 'Клик по наушникам');"><img src="/assets/img/headphones.png" /></a>
         <div class="words">
             <div><span>your</span></div>
-            <div><span>infrustructure </span></div>
+            <div><span>infrastructure </span></div>
             <span>provider</span><span>in</span><span>russia</span>
             <div class="clear"></div>
-            <a href="http://hostkey.com">Visit our website</a>
+            <a href="http://hostkey.com" onClick="ga('send', 'event', 'Russia', 'Переход на сайт с баннера');">Visit our webassets</a>
         </div>
-        <a href="#why" class="arr_d"><img src="/assets/img/arr_d.png" /></a>
+        <a href="#why" class="arr_d"><img src="img/arr_d.png" /></a>
     </div>
 
     <div id="why">
@@ -383,8 +433,7 @@
                         <span></span>
                         <h2>Specific expertise accommodating foreign clients in Russia</h2>
                         We have got vast experience serving remote clients in Moscow and the regions. We can procure, install and fully support any amounts
-                        of equipment in our Tier 2 to certified Tier 3 data centers.
-                        and Russia.
+                        of equipment in our Tier 2 to certified Tier 3 data centers in Russia.
                     </div>
                 </div>
                 <div class="why_block_r"><img src="/assets/img/why2.png" /></div>
@@ -397,7 +446,7 @@
                     <div>
                         <span></span>
                         <h2>Solid performance on your terms</h2>
-                        Any SLA, a choice of data centers, specific conditions of placement and security options, tailored to your corporate standards. Every corporate brief is discussed separately
+                        Any SLA, a choice of data centers, specific conditions of placement and security options, tailored to your corporate standards. Every corporate brief is discussed separately.
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -412,7 +461,7 @@
                         in business and technical English* and can be contacted through all necessary means: phone, tickets instant messaging.
                         <div class="note">
                             <div class="note_border"></div>
-                            * in case of special demand we are ready to communicate in Dutch, German, Chinese, you name it…
+                            * in case of special demand we are ready to communicate in French, Dutch, German, Chinese, Russian you name it…
                         </div>
                     </div>
                 </div>
@@ -451,28 +500,16 @@
 
     <div id="service">
         <div>
-            <h2>Service level</h2>
-            <p>The company operates on the basis of the licenses for provision of telematics services,
-                issued by Russian Federal Surveillance Service for Mass Communications, Communications
-                and Cultural Heritage Protection.</p>
-
-            <p>The company acts in the capacity of an Silver Hosting partner of Microsoft Corporation, which
-                guarantees legality and license transparency of the hosting services offered on the basis
-                of Microsoft products. Our other partners include such companies as Synterra, Evoswitch,
-                NewTelco, Ancotel, Optimal Telecom and many others.</p>
+            <h2>Flexible service plans</h2>
+            <p>Depending on the budget and needs, we can tailor a special SLA for you and provide any preset level of support, availability of specific staff and reacting to specific serviceable events.</p>
         </div>
     </div>
 
     <div id="opportunities">
         <div>
-            <h2>technological opportunities</h2>
-            <p>Telecommunication company "Mir Telematiki" (World of telematics), trade mark "HOSTKEY"
-                is a joint venture with foreign participation. Since 2007 it has been providing colocation services and
-                leasing of equipment, as well as additional high quality services at competitive prices, using modern
-                Russian and European data centers to corporate entities and private clients.</p>
-
-            <p>The company operates on the basis of the licenses for provision of telematics services, issued by Russian
-                Federal Surveillance Service for Mass Communications, Communications and Cultural Heritage Protection.</p>
+            <h2>Beyond standards — easy done</h2>
+            <p>We are able to procure, install, rent and service nearly any type of server and networking upon your request. We can do it locally and maintain full service including warranties.</p>
+            <p>Our local hardware partners are Cisco, Brocade, SuperMicro, HP, Dell and many others.</p>
         </div>
     </div>
 
@@ -480,13 +517,19 @@
         <h1>Our data centers span over</h1>
         <div class="datacenters_block">
             <div class="datacenters_block3">
-                <div><span>1.</span><span>DATAPRO</span><span>MOSCOW,</span><span>TIER</span><span>3</span></div>
+                <div>
+                    <span>1.</span>
+                    <span>DATAPRO</span>
+                    <span>MOSCOW,</span>
+                    <span>TIER</span>
+                    <span>3</span>
+                </div>
                 <div><span>2.</span><span>DATALINE</span><span>MOSCOW,</span><span>TIER</span><span>3</span></div>
-                <div><span>3.</span><span>CITY</span><span>SYSTEMS,</span><span>TIER</span><span>2</span></div>
+                <div><span>3.</span><span>CITY</span><span>SYSTEMS,</span><span>MOSCOW,</span><span>TIER</span><span>2</span></div>
             </div>
             <div class="datacenters_descr">
                 We are also ready and fully able to setup a separate data facility for your needs
-                <a href="#" class="datacenters">more about our datacenters</a>
+                <a href="#" class="datacenters"><b>more about our datacenters</b></a>
             </div>
         </div>
     </div>
@@ -515,19 +558,40 @@
     </div>
 
     <div id="contacts">
-        <div class="contacts_descr">We’re sure that your case deserves A personal approach, so please feel free to contact our Commercial Director <span>Paul Verhoeven</span></div>
+        <div class="contacts_descr">We’re sure that your case deserves A personal approach, so please feel free to contact our sales team lead <span>Maxim Danilov</span></div>
         <div class="contacts_data">
-            <div class="contacts_phone"><span>+</span><span>7</span><span>926</span><span>672</span><span>88</span><span>91</span></div>
-            <div class="contacts_email">info@hostkey.com</div>
-            <div><a href="#callback" class="callback">Request Call back</a></div>
+            <div class="contacts_phone"><span>+</span><span>31</span><span>20</span><span>820</span><span>37</span><span>77</span></div>
+
+
+            <div class="contacts_email">sales@hostkey.com</div>
+
+
+
+
+
+            <script>$('.contacts_email').on('click', function(){ document.location = 'mailto:russia@hostkey.com';});</script>
+
+            <div><a href="#callback" class="callback" onClick="ga('send', 'event', 'Russia', 'Вызвать окно отправки заявки');">Request Call back</a></div>
         </div>
     </div>
 
     <div id="footer">
-        <a href="#top" class="up"><img src="/assets/img/up.png" /></a>
-        <div>&copy; 2015, HOSTKEY Ltd., All Rights Reserved</div>
-        <div>Made in - <a href="http://sunera.ru" target="_blank">Sunera</a></div>
+        <a href="#top" class="up"><img src="img/up.png" /></a>
+        <div>&copy; 2015, HOSTKEY B.V., All Rights Reserved</div>
+        <div>Made at - <a href="http://sunera.ru" target="_blank">Sunera</a></div>
     </div>
 </div>
+
+<script type="text/javascript">
+    var __lc = {};
+    __lc.license = 6343171;
+
+    (function() {
+        var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+        lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+    })();
+</script>
+
 </body>
 </html>
