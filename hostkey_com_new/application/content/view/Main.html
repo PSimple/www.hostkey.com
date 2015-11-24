@@ -1,93 +1,94 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
+<head>
+    <meta charset="utf-8">
 
-        <meta name="viewport" content="width=1280" />
+    <meta name="viewport" content="width=1280"/>
 
-        <LINK REL="SHORTCUT ICON" href="/assets/img/favicon.gif">
+    <LINK REL="SHORTCUT ICON" href="/assets/img/favicon.gif">
 
-        <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="telephone=no">
 
-        <title>Hostkey. Main page</title>
+    <title>Hostkey. Main page</title>
 
-        <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
 
 
-        <!--[if lt IE 9]>
-            <script src="/assets/js/html5.js"></script>
-            <script src="/assets/js/css3-mediaqueries.js"></script>
-        <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5.js"></script>
+    <script src="/assets/js/css3-mediaqueries.js"></script>
+    <![endif]-->
 
-    </head>
-    <body class="is-black">
+</head>
+<body class="is-black">
 
-    {plugin "Content_ContentLittle_Plugin" view="Header"}
+{plugin "Content_ContentLittle_Plugin" view="Header"}
 
-    {$Content}
+{$Content}
 
-    {plugin "Content_ContentLittle_Plugin" view="FooterMain"}
+{plugin "Content_ContentLittle_Plugin" view="FooterMain"}
 
-        <script src="/assets/js/jquery-1.11.1.min.js"></script>
+<script src="/assets/js/jquery-1.11.1.min.js"></script>
 
-        <!-- SlickJS -->
-        <link  href="/assets/vendors/slick/slick.css" rel="stylesheet">
-        <script src="/assets/vendors/slick/slick.min.js"></script>
-        <script src="/assets/js/slick-run.js"></script>
+<!-- SlickJS -->
+<link href="/assets/vendors/slick/slick.css" rel="stylesheet">
+<script src="/assets/vendors/slick/slick.min.js"></script>
+<script src="/assets/js/slick-run.js"></script>
 
-        <script src="/assets/js/interface.js"></script>
+<script src="/assets/js/interface.js"></script>
 
-        <!-- Background video -->
-        <script type="text/javascript" src="/assets/vendors/background-video/jquery.backgroundvideo.min.js"></script>
+<!-- Background video -->
+<script type="text/javascript" src="/assets/vendors/background-video/jquery.backgroundvideo.min.js"></script>
 
-        {include "Content_Include_include.all.script"}
+{include "Content_Include_include.all.script"}
 
-        <style>
-            .b-page__promo_main_yes {
-                background-size: cover;
-                position: relative;
-                z-index: 1;
-            }
-            #video_background {
-                position: absolute !important;
-                width: 100% !important;
-                left: 0 !important;
-                top: -43px !important;
-                height: 710px !important;
-            }
-        </style>
+<style>
+    .b-page__promo_main_yes {
+        background-size: cover;
+        position: relative;
+        z-index: 1;
+    }
 
-        {if ( URL == '/main' )}
-        <script>
-            var videobackground_1 = new $.backgroundVideo($('.b-page__promo_main_yes'), {
-                "align": "centerXY",
-                "width": 1280,
-                "height": 720,
-                "path": "/assets/video/",
-                "filename": "door",
-                "types": ["mp4","ogg","webm"],
-                "poster": "media/promo_main_video_2.png",
-                "preload": true,
-                "autoplay": true,
-                "loop": true
-            });
-        </script>
-        {else}
-        <script>
-            var videobackground_1 = new $.backgroundVideo($('.b-page__promo_main_yes'), {
-                "align": "centerXY",
-                "width": 1280,
-                "height": 720,
-                "path": "/assets/video/",
-                "filename": "wave",
-                "types": ["mp4","ogg","webm"],
-                "poster": "media/promo_main.png",
-                "preload": true,
-                "autoplay": true,
-                "loop": true
-            });
-        </script>
-        {/if}
+    #video_background {
+        position: absolute !important;
+        width: 100% !important;
+        left: 0 !important;
+        top: -43px !important;
+        height: 710px !important;
+    }
+</style>
 
-    </body>
+{if ( URL == '/main' )}
+<script>
+    var videobackground_1 = new $.backgroundVideo($('.b-page__promo_main_yes'), {
+        "align": "centerXY",
+        "width": 1280,
+        "height": 720,
+        "path": "/assets/video/",
+        "filename": "door",
+        "types": ["mp4", "ogg", "webm"],
+        "poster": "media/promo_main_video_2.png",
+        "preload": true,
+        "autoplay": true,
+        "loop": true
+    });
+</script>
+{else}
+<script>
+    var videobackground_1 = new $.backgroundVideo($('.b-page__promo_main_yes'), {
+        "align": "centerXY",
+        "width": 1280,
+        "height": 720,
+        "path": "/assets/video/",
+        "filename": "wave",
+        "types": ["mp4", "ogg", "webm"],
+        "poster": "media/promo_main.png",
+        "preload": true,
+        "autoplay": true,
+        "loop": true
+    });
+</script>
+{/if}
+
+</body>
 </html>

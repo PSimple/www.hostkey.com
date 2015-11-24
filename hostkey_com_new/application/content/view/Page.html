@@ -1,60 +1,57 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
+<head>
+    <meta charset="utf-8">
 
-        <meta name="viewport" content="width=1280" />
+    <meta name="viewport" content="width=1280"/>
 
-        <LINK REL="SHORTCUT ICON" href="/assets/img/favicon.gif">
+    <LINK REL="SHORTCUT ICON" href="/assets/img/favicon.gif">
 
-        <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="telephone=no">
 
-        <title>Hostkey. Text. Page 1</title>
+    <title>Hostkey. Text. Page 1</title>
 
-        <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/dist/hostkey.css" rel="stylesheet" type="text/css" media="all">
 
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5.js"></script>
+    <script src="/assets/js/css3-mediaqueries.js"></script>
+    <![endif]-->
 
+    <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/assets/vendors/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+    <script src="/assets/js/interface.js"></script>
+    <script src="/assets/vendors/checkbox/fake-checkbox.js"></script>
+    <script src="/assets/js/scroll-block.js"></script>
 
-        <!--[if lt IE 9]>
-            <script src="/assets/js/html5.js"></script>
-            <script src="/assets/js/css3-mediaqueries.js"></script>
-        <![endif]-->
+    <!-- TimerJS -->
+    <link href="/assets/vendors/timer/timeTo.css" rel="stylesheet">
+    <script src="/assets/vendors/timer/jquery.timeTo.min.js"></script>
+    <script src="/assets/js/timeTo-run.js"></script>
 
+    <style>
+        .b-page__promo_text-page_yes {
+            background: url({HTTPD}/{Zero_App::$Section->Img}) no-repeat;
+            height: 600px;
+        }
+    </style>
 
-        <style>
-            .b-page__promo_text-page_yes {
-                background: url({HTTPD}/{Zero_App::$Section->Img}) no-repeat;
-                height: 600px;
-            }
-        </style>
+</head>
+<body>
 
-        <script src="/assets/js/jquery-1.11.1.min.js"></script>
+{plugin "Content_ContentLittle_Plugin" view="Header"}
 
-        <!-- TimerJS -->
-        <link href="/assets/vendors/timer/timeTo.css" rel="stylesheet">
-        <script src="/assets/vendors/timer/jquery.timeTo.min.js"></script>
-        <script src="/assets/js/timeTo-run.js"></script>
+{$Content}
 
+{plugin "Content_ContentLittle_Plugin" view="Footer"}
 
-    </head>
-    <body>
+<!-- SlickJS -->
+<link href="/assets/vendors/slick/slick.css" rel="stylesheet">
+<script src="/assets/vendors/slick/slick.min.js"></script>
+<script src="/assets/js/slick-run.js"></script>
+<script src="/assets/dist/hostkey.js"></script>
 
-
-
-    {plugin "Content_ContentLittle_Plugin" view="Header"}
-
-    {$Content}
-
-    {plugin "Content_ContentLittle_Plugin" view="Footer"}
-
-        <script src="/assets/vendors/jquery-ui-1.11.4/jquery-ui.min.js"></script>
-
-        <script src="/assets/js/interface.js"></script>
-        <script src="/assets/js/scroll-block.js"></script>
-
-
-
-        {include "Content_Include_include.all.script"}
-
-    </body>
+{include "Content_Include_include.all.script"}
+</body>
 </html>
