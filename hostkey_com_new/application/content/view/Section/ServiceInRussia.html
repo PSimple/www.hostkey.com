@@ -24,6 +24,84 @@
 
     </script>
 
+
+    <script>
+        $(document).ready(function() {
+
+
+            $('.callback').click(function(){
+                $('#bgJS').show();
+                $('.popup_callback').show();
+                //alert ( "0-000");
+                return false;
+            });
+
+            $('.datacenters').click(function(){
+                $('#bgJS').show();
+                $('.popup_datacenters').show();
+                return false;
+            });
+
+            $('.bothers_more').click(function(){
+                $('#bgJS').show();
+                $('.popup_bothers').show();
+                return false;
+            });
+
+            $('.popup .close, #bgJS').click(function(){
+                $('#bgJS').hide();
+                $('.popup').hide();
+                return false;
+            });
+
+            $('.tabs a').click(function(){
+                $('.tabs a').removeClass('tab_sel');
+                $('.html_tab').hide();
+                var tabid = $(this).attr('class');
+                $(this).addClass('tab_sel');
+                $('.html_'+tabid).show();
+                return false;
+            });
+
+            $('.popup_callback .combox').click(function(){
+                if($('.popup_combox').css('display') == 'none'){ $('.popup_combox').show(); }
+                else { $('.popup_combox').hide(); }
+                return false;
+            });
+
+            $('.combox_block a').click(function(){
+                var code = $(this).data('code');
+                $('.div2 input:first-of-type').val(code);
+                $('.popup_combox').hide();
+                return false;
+            });
+
+            $('#callback_btn').click(function(){
+                var error = false;
+                var name = $('#callback_name').val();
+                var code = $('#callback_code').val();
+                var phone = $('#callback_nr').val();
+                var skype = $('#callback_skype').val();
+                $(".popup_callback .callback_div input").removeClass('error');
+
+                $(".popup_callback .callback_div input").each(function(){
+                    if($(this).attr('required') == 'required' && ($(this).val() == '' || $(this).text())){
+                        $(this).addClass('error');
+                        error = true;
+                    }
+                });
+
+                if(error == false){
+                    $('#bgJS').hide(); $('.popup').hide(); $(".popup_callback .callback_div input").val('');
+                }
+                return false;
+            });
+
+            $(document).keyup(function(e) { if (e.keyCode == 27) { $('#bgJS').hide(); $('.popup').hide(); } });
+        });
+    </script>
+
+
 </head>
 
 
