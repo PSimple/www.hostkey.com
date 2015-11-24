@@ -58,37 +58,46 @@
     }
 </style>
 
-{if ( URL == '/main' )}
 <script>
-    var videobackground_1 = new $.backgroundVideo($('.b-page__promo_main_yes'), {
-        "align": "centerXY",
-        "width": 1280,
-        "height": 720,
-        "path": "/assets/video/",
-        "filename": "door",
-        "types": ["mp4", "ogg", "webm"],
-        "poster": "media/promo_main_video_2.png",
-        "preload": true,
-        "autoplay": true,
-        "loop": true
-    });
+
+    flag = Math.random(0,1);
+    flag = Math.round(flag);
+    if ( flag )
+    {
+
+        var videobackground_1 = new $.backgroundVideo($('.b-page__promo_main_yes'), {
+            "align": "centerXY",
+            "width": 1280,
+            "height": 720,
+            "path": "/assets/video/",
+            "filename": "door",
+            "types": ["mp4", "ogg", "webm"],
+            "poster": "media/promo_main_video_2.png",
+            "preload": true,
+            "autoplay": true,
+            "loop": true
+        });
+
+
+    }
+    else
+    {
+
+        var videobackground_1 = new $.backgroundVideo($('.b-page__promo_main_yes'), {
+            "align": "centerXY",
+            "width": 1280,
+            "height": 720,
+            "path": "/assets/video/",
+            "filename": "wave",
+            "types": ["mp4", "ogg", "webm"],
+            "poster": "media/promo_main.png",
+            "preload": true,
+            "autoplay": true,
+            "loop": true
+        });
+
+    }
 </script>
-{else}
-<script>
-    var videobackground_1 = new $.backgroundVideo($('.b-page__promo_main_yes'), {
-        "align": "centerXY",
-        "width": 1280,
-        "height": 720,
-        "path": "/assets/video/",
-        "filename": "wave",
-        "types": ["mp4", "ogg", "webm"],
-        "poster": "media/promo_main.png",
-        "preload": true,
-        "autoplay": true,
-        "loop": true
-    });
-</script>
-{/if}
 
 </body>
 </html>

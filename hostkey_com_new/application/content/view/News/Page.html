@@ -1,11 +1,12 @@
         <div class="b-page">
 
             <div class="b-page__promo b-page__promo_news_yes">
+                <div class="b-icon b-page__scroll-icon"  onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
                 <h1 class="b-page__promo-title">News</h1>
             </div>
 
             <div class="b-news">
-                <div class="b-news__list">
+                <div class="b-news__list" id="scroll-anchor-01">
                     <div class="b-news__column">
                         {foreach ($newsList1 as $row)}
                         <div class="b-news__item">

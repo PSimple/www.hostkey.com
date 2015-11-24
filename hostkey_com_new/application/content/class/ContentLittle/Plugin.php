@@ -63,8 +63,9 @@ class Content_ContentLittle_Plugin extends Zero_Controller
         }
         else
         {
-            Zero_Logs::Set_Message_Error('Шаблон для Content_ContentLittle_Plugin указан неверный');
-            return '';
+            $this->View = new Zero_View(__CLASS__ . '_' . $this->Params['view']);
+
+            return $this->View->Fetch($this->ViewTplOutString);
         }
     }
 
