@@ -5339,3 +5339,26 @@ p {
 .noactive {
     display: none;
 }
+
+#datacenters .datacenters_block3 span span{
+  color: #ffffff;
+  font-family: "Tahoma";
+  font-size: 52px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  line-height: 100px;
+  margin-bottom: 30px;
+  position: relative;
+  padding: 0px;
+  text-decoration: none;
+  text-transform: uppercase;
+  z-index: 3;
+}
+
+
+.tier_datacenters_in_russia {
+  text-decoration: none;
+  display: inline-block;
+  color: #ffffff;
+
+}
