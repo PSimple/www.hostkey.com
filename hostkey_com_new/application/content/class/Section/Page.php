@@ -10,13 +10,6 @@
 class Content_Section_Page extends Zero_Controller
 {
     /**
-     * The compile tpl in string and out
-     *
-     * @var bool
-     */
-    protected $ViewTplOutString = false;
-
-    /**
      * Контроллер по умолчанию.
      *
      * @return string
@@ -29,7 +22,7 @@ class Content_Section_Page extends Zero_Controller
         $this->View->Assign('head', $head);
         $this->View->Assign('content', Zero_App::$Section->Content);
 
-        return $this->View->Fetch($this->ViewTplOutString);
+        return $this->View;
     }
 
     /**
