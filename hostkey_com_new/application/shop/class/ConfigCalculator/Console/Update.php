@@ -28,10 +28,16 @@ class Shop_ConfigCalculator_Console_Update extends Zero_Controller
                 $obj = Shop_ConfigCalculator::Make();
                 $data['Content']['Currency'] = $row['Currency'];
                 $data['Content']['ComponentGroup'] = $row['ComponentGroup'];
-                Zero_Logs::File("qqqq", $row['ComponentGroup']);
-                $obj->Cache->Set_Data('ConfigCalculator/' . md5($row['Currency'] . $row['ComponentGroup']), $data['Content']);
+                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculator/' . md5($row['Currency'] . $row['ComponentGroup']) . '.data';
+                Zero_Helper_File::File_Save($path, serialize($data['Content']));
+//                $obj->Cache->Set_Data('ConfigCalculator/' . md5($row['Currency'] . $row['ComponentGroup']), $data['Content']);
             }
         }
+
+
+
+
+
         return true;
     }
 

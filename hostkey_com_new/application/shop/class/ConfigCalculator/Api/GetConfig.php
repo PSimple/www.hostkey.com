@@ -26,7 +26,11 @@ class Shop_ConfigCalculator_Api_GetConfig extends Zero_Controller
         $obj = Shop_ConfigCalculator::Make();
         $data['Content']['Currency'] = $_REQUEST['currency'];
         $data['Content']['ComponentGroup'] = $_REQUEST['groups'];
-        $response = $obj->Cache->Get_Data('ConfigCalculator/' . md5($_REQUEST['currency'] . $_REQUEST['groups']));
+
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculator/' . md5($_REQUEST['currency'] . $_REQUEST['groups']) . '.data';
+        $response = unserialize(file_get_contents($path));
+
+        //        $response = $obj->Cache->Get_Data('ConfigCalculator/' . md5($_REQUEST['currency'] . $_REQUEST['groups']));
         Zero_App::ResponseJson200($response);
         return true;
     }
