@@ -12,13 +12,6 @@
 class Content_ContentLittle_Plugin extends Zero_Controller
 {
     /**
-     * The compile tpl in string and out
-     *
-     * @var bool
-     */
-    protected $ViewTplOutString = true;
-
-    /**
      * Контроллер по умолчанию.
      *
      * @return Zero_View
@@ -39,7 +32,7 @@ class Content_ContentLittle_Plugin extends Zero_Controller
             $data = Zero_DB::Select_List_Index($sql);
             $this->View->Assign('data', $data);
 
-            return $this->View->Fetch($this->ViewTplOutString);
+            return $this->View;
         }
         else if ( 'Footer' == $this->Params['view'] )
         {
@@ -49,7 +42,7 @@ class Content_ContentLittle_Plugin extends Zero_Controller
             $data = Zero_DB::Select_List_Index($sql);
             $this->View->Assign('data', $data);
 
-            return $this->View->Fetch($this->ViewTplOutString);
+            return $this->View;
         }
         else if ( 'FooterMain' == $this->Params['view'] )
         {
@@ -59,13 +52,13 @@ class Content_ContentLittle_Plugin extends Zero_Controller
             $data = Zero_DB::Select_List_Index($sql);
             $this->View->Assign('data', $data);
 
-            return $this->View->Fetch($this->ViewTplOutString);
+            return $this->View;
         }
         else
         {
             $this->View = new Zero_View(__CLASS__ . '_' . $this->Params['view']);
 
-            return $this->View->Fetch($this->ViewTplOutString);
+            return $this->View;
         }
     }
 

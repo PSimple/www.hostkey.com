@@ -54,6 +54,6 @@ class Content_News_Grid extends Zero_Crud_Grid
         $Filter->Set_Sort('DateCreate', 'DESC');
 
         $this->Chunk_View();
-        return $this->View->Fetch($this->ViewTplOutString);
+        return $this->View;
     }
 }

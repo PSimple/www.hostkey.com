@@ -24,7 +24,7 @@ class Content_Faq_Page extends Zero_Controller
         $rows = Zero_DB::Select_Array($sql);
         $this->View->Assign('rows', $rows);
 
-        return $this->View->Fetch($this->ViewTplOutString);
+        return $this->View;
     }
 
     /**

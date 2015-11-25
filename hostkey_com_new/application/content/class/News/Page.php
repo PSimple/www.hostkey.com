@@ -44,7 +44,7 @@ class Content_News_Page extends Zero_Controller
             $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
             $view->Assign('newsList4', $newsList);
         }
-        return $view->Fetch($this->ViewTplOutString);
+        return $view;
     }
 
     /**

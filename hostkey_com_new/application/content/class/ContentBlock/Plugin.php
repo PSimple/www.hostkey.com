@@ -12,13 +12,6 @@
 class Content_ContentBlock_Plugin extends Zero_Controller
 {
     /**
-     * The compile tpl in string and out
-     *
-     * @var bool
-     */
-    protected $ViewTplOutString = true;
-
-    /**
      * Контроллер по умолчанию.
      *
      * @return Zero_View
@@ -43,7 +36,7 @@ class Content_ContentBlock_Plugin extends Zero_Controller
         $data = Zero_DB::Select_Array($sql);
         $this->View->Assign('data', $data);
 
-        return $this->View->Fetch($this->ViewTplOutString);
+        return $this->View;
     }
 
     /**
