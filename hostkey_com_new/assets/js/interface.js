@@ -50,23 +50,37 @@ jQuery(function($){
             });
         });
     }
+
+
+  /*
+
     // Slider
-    if ($( ".js-slider").length) {
-
-        $(".js-slider").each(function( index, val ){
-            var $slidesCount = $(val).data('slides');
-
-            $(function() {
-                $( val ).slider({
-                    range: "min",
-                    min: 1,
-                    max: $slidesCount
+    if ( $( ".js-slider").length ) {
+                console.log(JSON.stringify(listOfProducts));
+                $(".js-slider").each(function (index, val, listOfProducts) {
+                    var $slidesCount = $(val).data('slides');
+                    var Begin_position = $(val).data('position');
+                    var Preset = $(val).data('preset');
+                    //listOfProducts =listOfProducts;
+                    // alert ( Preset);
+                    $(function () {
+                        $(val).slider({
+                            range: "min",
+                            min: 1,
+                            value: Begin_position,
+                            max: $slidesCount,
+                            slide: function (event, ui) {
+                                // console.log( JSON.stringify( listOfProducts ));
+                                //alert ( event );
+                            }
+                        });
+                        //alert( $(val).slider( "value" ) );
+                    });
                 });
-            });
-        });
 
     }
 
+   */
 
     $(document).on('change', '.js-checked-submit', function(){
         $(this).parents('.js-checked').find('label').removeClass('checked');

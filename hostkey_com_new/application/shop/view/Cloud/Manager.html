@@ -1,3 +1,4 @@
+
 <div class="b-page">
 
     <div class="b-page__promo b-page__promo_managed-cloud_yes">
@@ -15,13 +16,15 @@
             </h3>
         </div>
 
+
+
         <div class="b-container">
             <table class="b-managed-cloud__table">
                 <tr class="b-managed-cloud__table-row">
                     <td class="b-managed-cloud__table-cell b-managed-cloud__table-cell_title_yes b-managed-cloud__table-cell_top_yes">Select the
                         cloud server</td>
                     <td class="b-managed-cloud__table-cell">
-                        <div class="b-slider js-slider" data-slides="8"></div>
+                        <div class="b-slider js-slider" data-slides="8" data-position="3" data-preset="CloudVDS"></div>
                         <div class="b-slider__legend-8">
                             <div class="b-slider__legend-8-item b-slider__legend-8-item_place_1">Cloud 3</div>
                             <div class="b-slider__legend-8-item b-slider__legend-8-item_place_2">Cloud 4</div>
@@ -31,6 +34,13 @@
                             <div class="b-slider__legend-8-item b-slider__legend-8-item_place_6">Cloud 8</div>
                             <div class="b-slider__legend-8-item b-slider__legend-8-item_place_7">Cloud 9</div>
                             <div class="b-slider__legend-8-item b-slider__legend-8-item_place_8">Cloud 10</div>
+                        </div>
+                        <div class="b-slider js-slider" data-slides="4" data-position="1" data-preset="CloudVDS_1"></div>
+                        <div class="b-slider__legend-8">
+                            <div class="b-slider__legend-4-item b-slider__legend-4-item_place_1">Cloud 3</div>
+                            <div class="b-slider__legend-4-item b-slider__legend-4-item_place_2">Cloud 4</div>
+                            <div class="b-slider__legend-4-item b-slider__legend-4-item_place_3">Cloud 5</div>
+                            <div class="b-slider__legend-4-item b-slider__legend-4-item_place_4">Cloud 6</div>
                         </div>
                     </td>
                 </tr>
@@ -43,28 +53,28 @@
                         <table class="b-managed-cloud__result-table">
                             <tr class="b-managed-cloud__result-table-row">
                                 <td class="b-managed-cloud__result-table-cell">
-                                    <div class="b-managed-cloud__result-table-cell-title">CPU cores</div>
-                                    <div class="b-managed-cloud__result-table-cell-text">2 cores</div>
+                                    <div class="b-managed-cloud__result-table-cell-title" data_pole_name="CPU cores">CPU cores</div>
+                                    <div class="b-managed-cloud__result-table-cell-text" data_pole="CPU cores">2 cores</div>
                                 </td>
                                 <td class="b-managed-cloud__result-table-cell">
-                                    <div class="b-managed-cloud__result-table-cell-title">Ram</div>
-                                    <div class="b-managed-cloud__result-table-cell-text">3 008 Mb</div>
+                                    <div class="b-managed-cloud__result-table-cell-title" data_pole_name="Ram">Ram</div>
+                                    <div class="b-managed-cloud__result-table-cell-text" data_pole="Ram">3 008 Mb</div>
                                 </td>
                                 <td class="b-managed-cloud__result-table-cell">
-                                    <div class="b-managed-cloud__result-table-cell-title">disk</div>
-                                    <div class="b-managed-cloud__result-table-cell-text">80 Gb</div>
+                                    <div class="b-managed-cloud__result-table-cell-title" data_pole_name="Hdd">Hdd</div>
+                                    <div class="b-managed-cloud__result-table-cell-text" data_pole="Hdd">80 Gb</div>
                                 </td>
                                 <td class="b-managed-cloud__result-table-cell">
-                                    <div class="b-managed-cloud__result-table-cell-title">Traffic: </div>
-                                    <div class="b-managed-cloud__result-table-cell-text">2000 Gb</div>
+                                    <div class="b-managed-cloud__result-table-cell-title" data_pole_name="Traffic">Traffic</div>
+                                    <div class="b-managed-cloud__result-table-cell-text" data_pole="Traffic">2000 Gb</div>
                                 </td>
                                 <td class="b-managed-cloud__result-table-cell">
-                                    <div class="b-managed-cloud__result-table-cell-title">Windows License: </div>
-                                    <div class="b-managed-cloud__result-table-cell-text">Include</div>
+                                    <div class="b-managed-cloud__result-table-cell-title" data_pole_name="OS">Windows License: </div>
+                                    <div class="b-managed-cloud__result-table-cell-text" data_pole="LICENSIA">Include</div>
                                 </td>
                                 <td class="b-managed-cloud__result-table-cell b-managed-cloud__result-table-cell_border_no">
-                                    <div class="b-managed-cloud__result-table-cell-price">€475.99 / month </div>
-                                    <a class="b-submit b-managed-cloud__result-table-cell-submit" href="#">buy</a>
+                                    <div class="b-managed-cloud__result-table-cell-price" data_pole="Cost">€475.99 / month </div>
+                                    <a class="b-submit b-managed-cloud__result-table-cell-submit" href="#" id="byu_cloud">buy</a>
                                 </td>
                             </tr>
                         </table>
@@ -85,4 +95,190 @@
     </div>
 
     <div class="footer-push"></div>
+</div>
+
+<script>
+    $( document ).ready(function() {
+        listOfProducts = new Array();
+        zakaz = new Object();
+        listOfProducts["CloudVDS_1"] =
+        {
+            "Code": 0,
+            "Message": "",
+            "ErrorStatus": false,
+            "1": {
+                "Content": {
+                    "Hardware": {
+                        "CPU cores": "100000000000 core",
+                        "Ram": 100,
+                        "Hdd": 80,
+                    },
+                    "Software": {
+                        "OS": "Debian",
+                        "LICENSIA": "GPL",
+                        "Bit": 64
+                    },
+                    "Network": {
+                        "Traffic": "2tb",
+                    },
+                    "Price": {
+                        "Cost" : "€475.99 / month",
+                    },
+                    "UID": {
+                        "id": "172727"
+                    }
+                }
+            },
+            "2": {
+                "Content": {
+                    "Hardware": {
+                        "CPU cores": "2 core",
+                        "Ram": 200,
+                        "Hdd": "20tb",
+                    },
+                    "Software": {
+                        "OS": "Win",
+                        "LICENSIA": "include",
+                        "Bit": 64
+                    },
+                    "Network": {
+                        "Traffic": "10tb unlimited",
+                    },
+                    "Price": {
+                        "Cost" : "usd 475.99 / month",
+                    },
+                    "UID": {
+                        "id": "172727"
+                    }
+                }
+            }
+        };
+
+        listOfProducts["CloudVDS"] =
+        {
+            "1": {
+                "Content": {
+                    "Hardware": {
+                        "CPU cores": "10 cores",
+                        "Ram": 100000,
+                        "Hdd": "100 Mb",
+                    },
+                    "Software": {
+                        "OS": "Debian",
+                        "LICENSIA": "FREE",
+                        "Bit": 32
+                    },
+                    "Network": {
+                        "Traffic": "2tb",
+                    },
+                    "Price": {
+                        "Cost" : "evro 1999 / yaer",
+                    },
+                    "UID": {
+                        "id": "172727"
+                    }
+                }
+            },
+            "2": {
+                "Content": {
+                    "Hardware": {
+                        "CPU cores": "200 core",
+                        "Ram": 200,
+                        "Hdd": "1 Gb",
+                    },
+                    "Software": {
+                        "OS": "Windows",
+                        "LICENSIA": "Include",
+                        "Bit": 32
+                    },
+                    "Network": {
+                        "Traffic": "10tb unlimited",
+                    },
+                    "Price": {
+                        "Cost": "evro 200000/ yaer",
+                    },
+                    "UID": {
+                        "id": "172727"
+                    }
+                }
+            }
+        };
+
+
+        // Slider
+        if ( $( ".js-slider").length ) {
+
+            $(".js-slider").each(function (index, val) {
+                var $slidesCount = $(val).data('slides');
+                var Begin_position = $(val).data('position');
+                var Preset = $(val).data('preset');
+                zakaz = listOfProducts[Preset][Begin_position];//ставим дефолтный заказ
+                $(function ( ) {
+                    $(val).slider({
+                        range: "min",
+                        min: 1,
+                        value: Begin_position,
+                        max: $slidesCount,
+                        slide: function (event, ui ) {
+                            if ( typeof window.listOfProducts[Preset][ui.value] != "undefined" ) {
+
+                                zakaz = listOfProducts[Preset][ui.value];
+
+                                for (var prop in listOfProducts[Preset][ui.value].Content.Hardware ) {
+                                    $( '[data_pole_name = "' + prop + '"]' ).html( prop );
+                                    $( '[data_pole = "' + prop + '"]' ).html( listOfProducts[Preset][ui.value].Content.Hardware[prop] );
+                                }
+
+                                for (var prop in listOfProducts[Preset][ui.value].Content.Software ) {
+                                      console.log( "---" + prop + "---" + listOfProducts[Preset][ui.value].Content.Software[prop] );
+                                    $( '[data_pole_name = "' + prop + '"]' ).html( listOfProducts[Preset][ui.value].Content.Software[prop]
+                                            + " " +listOfProducts[Preset][ui.value].Content.Software.Bit
+                                    );
+                                    $( '[data_pole = "' + prop + '"]' ).html( listOfProducts[Preset][ui.value].Content.Software[prop]);
+                                }
+
+                                for (var prop in listOfProducts[Preset][ui.value].Content.Network) {
+                                    $('[data_pole_name = "' + prop + '"]').html(prop);
+                                    $('[data_pole = "' + prop + '"]').html(listOfProducts[Preset][ui.value].Content.Network[prop]);
+                                }
+                                    for (var prop in listOfProducts[Preset][ui.value].Content.Price) {
+                                        $( '[data_pole = "' + prop + '"]' ).html( listOfProducts[Preset][ui.value].Content.Price[prop] );
+                                    }
+                        } else {
+                                console.log( "not_prod---" + ui.value + "--" + Preset );
+                            }
+
+                        }
+                    });
+
+                });
+            });
+
+        }
+
+  $( '#byu_cloud').bind( 'click', function () {
+      $ ( '.popup_callback').show();
+      console.log ( zakaz );
+      return false;
+  })
+
+        $('.close_window_information_manager_cloud').click(function(){
+            $('.popup').hide();
+            return false;
+        });
+    });
+
+  </script>
+
+<div class="popup popup_callback" style="display: none;">
+    <a class="close close_window_information_manager_cloud" href="#"><img src="/assets/img/close.png"></a>
+
+    <h2>INFORMATION for REQUEST</h2>
+
+    <div class="callback_div"><input type="text" required="required" id="callback_name" placeholder="Name*" name="name_host"></div>
+    <div class="callback_div div3"><input type="password" required="required" id="callback_name" placeholder="Name*" name="name_pass"></div>
+    <label>* - required fields</label>
+
+    <div class="clear"></div>
+    <a onclick="ga('send', 'event', 'Russia', 'Отправить заявку');" id="callback_btn" class="btn" href="#">Send ITEM</a>
 </div>
