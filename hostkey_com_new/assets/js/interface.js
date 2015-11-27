@@ -165,4 +165,7 @@ jQuery(function($){
     function closeDrop(action) {
         action.parent('.is-drop').removeClass('is-active');
     }
-});
+
+
+});   // Run code
+

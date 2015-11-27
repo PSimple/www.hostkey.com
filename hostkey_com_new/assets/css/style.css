@@ -5362,3 +5362,15 @@ p {
   color: #ffffff;
 
 }
+
+.disabled_href_button {
+  pointer-events: none; /* делаем ссылку некликабельной */
+  cursor: default;  /* устанавливаем курсор в виде стрелки */
+  color: #fff; /* цвет текста для нективной ссылки */
+  background: url("/assets/img/220-3.GIF") 50% 5px no-repeat;
+}
+
+
+.empty_field {
+  border: 2px solid red;
+}

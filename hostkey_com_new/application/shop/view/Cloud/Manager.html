@@ -220,34 +220,11 @@
                         value: Begin_position,
                         max: $slidesCount,
                         slide: function (event, ui ) {
-                            if ( typeof window.listOfProducts[Preset][ui.value] != "undefined" ) {
+                            calculatePreset ( index, ui, Preset);
 
-                                zakaz = listOfProducts[Preset][ui.value];
-
-                                for (var prop in listOfProducts[Preset][ui.value].Content.Hardware ) {
-                                    $( '[data_pole_name = "' + prop + '"]' ).html( prop );
-                                    $( '[data_pole = "' + prop + '"]' ).html( listOfProducts[Preset][ui.value].Content.Hardware[prop] );
-                                }
-
-                                for (var prop in listOfProducts[Preset][ui.value].Content.Software ) {
-                                      console.log( "---" + prop + "---" + listOfProducts[Preset][ui.value].Content.Software[prop] );
-                                    $( '[data_pole_name = "' + prop + '"]' ).html( listOfProducts[Preset][ui.value].Content.Software[prop]
-                                            + " " +listOfProducts[Preset][ui.value].Content.Software.Bit
-                                    );
-                                    $( '[data_pole = "' + prop + '"]' ).html( listOfProducts[Preset][ui.value].Content.Software[prop]);
-                                }
-
-                                for (var prop in listOfProducts[Preset][ui.value].Content.Network) {
-                                    $('[data_pole_name = "' + prop + '"]').html(prop);
-                                    $('[data_pole = "' + prop + '"]').html(listOfProducts[Preset][ui.value].Content.Network[prop]);
-                                }
-                                    for (var prop in listOfProducts[Preset][ui.value].Content.Price) {
-                                        $( '[data_pole = "' + prop + '"]' ).html( listOfProducts[Preset][ui.value].Content.Price[prop] );
-                                    }
-                        } else {
-                                console.log( "not_prod---" + ui.value + "--" + Preset );
-                            }
-
+                        },
+                        change: function(event, ui ) {
+                            calculatePreset ( index, ui, Preset);
                         }
                     });
 
@@ -258,27 +235,111 @@
 
   $( '#byu_cloud').bind( 'click', function () {
       $ ( '.popup_callback').show();
-      console.log ( zakaz );
       return false;
   })
 
-        $('.close_window_information_manager_cloud').click(function(){
+  $('.close_window_information_manager_cloud').click(function(){
             $('.popup').hide();
+            $( '#callback_btn_manage_cloud').removeClass( 'disabled_href_button').css( 'color', '#ff6a39');
             return false;
         });
     });
 
+    function border_clear_on_required ( e ){
+       /////console.log( e );
+        e.style.border = "2px solid #d9dcdd";
+       // $( this).css( 'border', '2px solid d9dcdd');
+       // v = event.explicitOriginalTarget.attributes.id;
+      //  console.log  (v.valueOf );
+    };
+
+    function checkout_empty_input ( e ) {
+        var c = 0;
+        e.each(function () {
+            stroka = $(this).val().replace(/\s{2,}/g, '');
+            if (stroka == '') {
+                $(this).css('border', '2px solid red');
+                c++;
+            }
+        });
+        return c;
+    }
+
+    function Ajax_send() {
+        if ( checkout_empty_input ( $('.popup_callback input[required = "required"]') ) === 0) {
+            $.ajax({
+                type: 'POST',
+                url: "/api/v1/configcalculator/order",
+                cache: false,
+                data: JSON.stringify( zakaz ),
+                beforeSend : function (){
+                    $('#callback_btn_manage_cloud').addClass('disabled_href_button').css('color', '#fff');
+                },
+                success: function( msg ){
+                    console.log(  msg );
+                    
+                    sleep( 1000);
+
+                    $('.close_window_information_manager_cloud').click();
+                },
+                error: function (jqXHR, exception) {
+                    console.log(jqXHR);
+                    // getErrorMessage(jqXHR, exception);
+                },
+            });
+       } else {
+
+        }
+        return false;
+    }
+
+
+
+
+    function calculatePreset ( index, ui, Preset){
+        if ( typeof window.listOfProducts[Preset][ui.value] != "undefined" ) {
+
+            zakaz = listOfProducts[Preset][ui.value];
+
+            for (var prop in listOfProducts[Preset][ui.value].Content.Hardware ) {
+                $( '[data_pole_name = "' + prop + '"]' ).html( prop );
+                $( '[data_pole = "' + prop + '"]' ).html( listOfProducts[Preset][ui.value].Content.Hardware[prop] );
+            }
+
+            for (var prop in listOfProducts[Preset][ui.value].Content.Software ) {
+                console.log( "---" + prop + "---" + listOfProducts[Preset][ui.value].Content.Software[prop] );
+                $( '[data_pole_name = "' + prop + '"]' ).html( listOfProducts[Preset][ui.value].Content.Software[prop]
+                        + " " +listOfProducts[Preset][ui.value].Content.Software.Bit
+                );
+                $( '[data_pole = "' + prop + '"]' ).html( listOfProducts[Preset][ui.value].Content.Software[prop]);
+            }
+
+            for (var prop in listOfProducts[Preset][ui.value].Content.Network) {
+                $('[data_pole_name = "' + prop + '"]').html(prop);
+                $('[data_pole = "' + prop + '"]').html(listOfProducts[Preset][ui.value].Content.Network[prop]);
+            }
+            for (var prop in listOfProducts[Preset][ui.value].Content.Price) {
+                $( '[data_pole = "' + prop + '"]' ).html( listOfProducts[Preset][ui.value].Content.Price[prop] );
+            }
+        } else {
+            console.log( "not_prod---" + ui.value + "--" + Preset );
+        }
+    }
+
   </script>
 
-<div class="popup popup_callback" style="display: none;">
+<div class="popup popup_callback" style="display: none;" id="information_manage_cloud">
     <a class="close close_window_information_manager_cloud" href="#"><img src="/assets/img/close.png"></a>
 
     <h2>INFORMATION for REQUEST</h2>
 
-    <div class="callback_div"><input type="text" required="required" id="callback_name" placeholder="Name*" name="name_host"></div>
-    <div class="callback_div div3"><input type="password" required="required" id="callback_name" placeholder="Name*" name="name_pass"></div>
+    <div class="callback_div">
+        <input type="text" required="required" id="name_host" placeholder="Host name*" name="name_host" onkeyup="return border_clear_on_required ( this );">
+    </div>
+    <div class="callback_div div3">
+        <input type="password" required="required" id="name_pass" placeholder="Admin pass*" name="name_pass" onkeyup="return border_clear_on_required( this );"></div>
     <label>* - required fields</label>
 
     <div class="clear"></div>
-    <a onclick="ga('send', 'event', 'Russia', 'Отправить заявку');" id="callback_btn" class="btn" href="#">Send ITEM</a>
+    <a id="callback_btn_manage_cloud" class="btn" href="#" onclick="return Ajax_send()">Send ITEM</a>
 </div>
