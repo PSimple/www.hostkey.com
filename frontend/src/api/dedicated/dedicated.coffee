@@ -15,13 +15,17 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
         else
             url = "#{CONFIG.apiUrl}/configcalculator/getconfig"
 
+        if type is "Test"
+            groups = type
+        else
+            groups = [country,type].join(',')
+
         $http
             url: url
             method: "GET"
             params:
                 currency: 'eur'
-                #groups: [country,type].join(',')
-                groups: "Test"
+                groups: groups
 
         .success (data) ->
             if data.Content
@@ -30,9 +34,10 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
                     data.Content.Data[id] = objectToArray(component)
 
                 # у данных компонентов есть значение None
-                data.Content.Data[5].unshift(Name: "None")
-                data.Content.Data[12].unshift(Name: "None")
-                data.Content.Data[20].unshift(Name: "None")
+                data.Content.Data[2].unshift(Name: "None")  # hdd
+                data.Content.Data[5].unshift(Name: "None")  # controlPanel
+                data.Content.Data[12].unshift(Name: "None") # MSSql
+                data.Content.Data[20].unshift(Name: "None") # MSExchange
 
                 deferred.resolve data.Content.Data
             else

@@ -46361,7 +46361,7 @@
 	          parent.html('');
 	          itemKey = matches[1];
 	          collection = extract($scope, matches[2]);
-	          itemsPerCol = matches[3];
+	          itemsPerCol = Number(matches[3], 10);
 	          colsCount = Math.ceil(collection.length / itemsPerCol);
 	          results = [];
 	          for (i = j = 0, ref = colsCount - 1; 0 <= ref ? j <= ref : j >= ref; i = 0 <= ref ? ++j : --j) {
@@ -46405,24 +46405,32 @@
 	  var that;
 	  that = this;
 	  this.getConfigCalculator = function(type, country) {
-	    var deferred, url;
+	    var deferred, groups, url;
 	    deferred = $q.defer();
 	    if (location.host === 'hostkey') {
 	      url = "/assets/dist/dedicated_" + type + ".json";
 	    } else {
 	      url = CONFIG.apiUrl + "/configcalculator/getconfig";
 	    }
+	    if (type === "Test") {
+	      groups = type;
+	    } else {
+	      groups = [country, type].join(',');
+	    }
 	    $http({
 	      url: url,
 	      method: "GET",
 	      params: {
 	        currency: 'eur',
-	        groups: "Test"
+	        groups: groups
 	      }
 	    }).success(function(data) {
 	      if (data.Content) {
 	        angular.forEach(data.Content.Data, function(component, id) {
 	          return data.Content.Data[id] = objectToArray(component);
+	        });
+	        data.Content.Data[2].unshift({
+	          Name: "None"
 	        });
 	        data.Content.Data[5].unshift({
 	          Name: "None"
@@ -46541,7 +46549,7 @@
 	}]);
 
 	angular.module("dedicated.service.selected").controller("MicroCtrl", ["$scope", "$state", "$stateParams", "$timeout", "configCalculator", "billingCycleDiscount", "raidLevel", function($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, raidLevel) {
-	  var components, initOrderComponents;
+	  var components, initOrderComponents, j, results;
 	  components = {
 	    1: ['hardware', 'cpu'],
 	    3: ['hardware', 'ram'],
@@ -46632,7 +46640,11 @@
 	      },
 	      hdd: {
 	        size: 0,
-	        sizeAvailable: [1, 2, 3, 4, 5, 6, 7, 8],
+	        sizeAvailable: (function() {
+	          results = [];
+	          for (j = 1; j <= 24; j++){ results.push(j); }
+	          return results;
+	        }).apply(this),
 	        selected: [],
 	        options: configCalculator[2]
 	      },
@@ -46764,6 +46776,7 @@
 	  size = order.hardware.platform.Options.size;
 	  tabs.hardware.hdd.size = size;
 	  tabs.hardware.hdd.selected = [];
+	  console.log(size);
 	  results = [];
 	  for (i = j = 1, ref1 = size; 1 <= ref1 ? j <= ref1 : j >= ref1; i = 1 <= ref1 ? ++j : --j) {
 	    results.push(tabs.hardware.hdd.selected[i - 1] = _.values(tabs.hardware.hdd.options)[0]);
@@ -46779,6 +46792,9 @@
 	  ids = [];
 	  angular.forEach(tabs.hardware.hdd.selected, function(hdd) {
 	    var name;
+	    if (!(hdd.Options || hdd.Price)) {
+	      return;
+	    }
 	    price += Number(hdd.Price, 10);
 	    hddCount++;
 	    name = hdd.Options.short_name;

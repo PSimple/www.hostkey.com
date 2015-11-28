@@ -31,6 +31,9 @@ tbody.collapse.in {
 .b-checkbox-submit.disable {
   pointer-events: none;
 }
+.b-dedicated__summary-table-cell:nth-child(1) {
+  max-width: 150px;
+}
 .select2-container {
   box-sizing: border-box;
   display: inline-block;
