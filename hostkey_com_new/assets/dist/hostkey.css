@@ -40,10 +40,10 @@ tbody.collapse.in {
 }
 .table-select__cell-item {
   float: left;
-  margin: 2px 2px 15px 2px;
+  margin: 2px 3px 15px 2px;
 }
 .table-select__cell-item:nth-child(4n+1) {
-  margin-left: -5px;
+  margin-left: 0;
 }
 .table-select__cell-item:nth-child(4n) {
   margin-right: -5px;

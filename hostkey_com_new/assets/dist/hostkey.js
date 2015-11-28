@@ -46645,7 +46645,7 @@
 /* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {var columnize, updateHdd, updateHddSelected, updateOS, updateRAM;
+	/* WEBPACK VAR INJECTION */(function($) {var updateHdd, updateHddSelected, updateOS, updateRAM;
 
 	window._ = __webpack_require__(28);
 
@@ -46752,11 +46752,11 @@
 	      },
 	      hdd: {
 	        size: 0,
-	        columns: columnize((function() {
+	        sizeAvailable: (function() {
 	          results = [];
 	          for (j = 1; j <= 24; j++){ results.push(j); }
 	          return results;
-	        }).apply(this), 4),
+	        }).apply(this),
 	        selected: [],
 	        options: configCalculator[2]
 	      },
@@ -46969,25 +46969,6 @@
 	  }
 	  price = Number(order.software.os.Price, 10);
 	  order.software.os.PriceTotal = price * multiplicator;
-	};
-
-	columnize = function(list, n) {
-	  var col, grid, i, row, x;
-	  grid = [];
-	  i = 0;
-	  x = list.length;
-	  col = void 0;
-	  row = -1;
-	  i = 0;
-	  while (i < x) {
-	    col = i % n;
-	    if (col === 0) {
-	      grid[++row] = [];
-	    }
-	    grid[row][col] = list[i];
-	    i++;
-	  }
-	  return grid;
 	};
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
