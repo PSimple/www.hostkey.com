@@ -104,8 +104,7 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
             hdd:
                 size: 0
-                #sizeAvailable: [1..24]
-                columns: columnize([1..24], 4)
+                sizeAvailable: [1..24]
                 selected: []
                 options: configCalculator[2]
 
@@ -307,21 +306,5 @@ updateOS = (tabs, order) ->
 
 
     return
-
-columnize = (list, n) ->
-    grid = []
-    i = 0
-    x = list.length
-    col = undefined
-    row = -1
-    i = 0
-    while i < x
-        col = i % n
-        if col == 0
-            grid[++row] = []
-        grid[row][col] = list[i]
-        i++
-    grid
-
 
 
