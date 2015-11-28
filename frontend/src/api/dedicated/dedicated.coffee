@@ -1,8 +1,4 @@
-angular.module "api.dedicated", [
-
-]
-
-angular.module("api.dedicated").constant("CONFIG", require('webpack-config-loader!../../env/env.js'));
+angular.module "api.dedicated", ['config']
 
 angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
     that = this
@@ -10,7 +6,7 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
     @getConfigCalculator = (type, country)->
         deferred = $q.defer()
 
-        if location.host is 'hostkey'
+        if window.isDev
             url = "/assets/dist/dedicated_#{type}.json"
         else
             url = "#{CONFIG.apiUrl}/configcalculator/getconfig"

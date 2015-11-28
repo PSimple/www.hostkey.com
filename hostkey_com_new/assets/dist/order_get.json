@@ -1,0 +1,37 @@
+{
+  "Hardware": {
+    "Cpu": 345,
+    "Ram": 345,
+    "Platform": 345,
+    "Hdd": [
+      345,
+      345,
+      345,
+      345
+    ],
+    "Raid": 345,
+    "RaidLevel": 5
+  },
+  "Software": {
+    "OS": 345,
+    "Bit": 345,
+    "RdpLicCount": 2,
+    "Sql": 345,
+    "Exchange": 345,
+    "ExchangeCount": 3,
+    "CP": 345
+  },
+  "Network": {
+    "Traffic": 345,
+    "Bandwidth": 345,
+    "IP": 345,
+    "Vlan": 345,
+    "FtpBackup": 345
+  },
+  "SLA": {
+    "ServiceLevel": 345,
+    "Management": 345,
+    "Comment": "bla bla bla",
+    "CycleDiscount": "monthly"
+  }
+}
