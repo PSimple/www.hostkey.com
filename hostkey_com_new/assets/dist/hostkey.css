@@ -34,6 +34,10 @@ tbody.collapse.in {
 .b-dedicated__summary-table-cell:nth-child(1) {
   max-width: 150px;
 }
+.b-dedicated__summary-table-cell:nth-child(2) {
+  text-align: right;
+  width: 72px;
+}
 .select2-container {
   box-sizing: border-box;
   display: inline-block;
