@@ -200,7 +200,7 @@
 
                             td.b-dedicated__accordion-table-cell
 
-                                label.b-checkbox-submit.b-checkbox-submit_size_220(ng-repeat="cpu in tabs.hardware.cpu.options", ng-model="order.hardware.cpu", btn-radio="{{cpu}}")
+                                label.b-checkbox-submit(ng-repeat="(id, cpu) in tabs.hardware.cpu.options", ng-model="order.hardware.cpu", btn-radio="{{cpu}}")
                                     span.b-checkbox-submit__text {{cpu.Name}}
 
                         tr.b-dedicated__accordion-table-row

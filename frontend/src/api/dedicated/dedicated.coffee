@@ -20,16 +20,19 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
             method: "GET"
             params:
                 currency: 'eur'
-                groups: [country,type].join(',')
+                #groups: [country,type].join(',')
+                groups: "Test"
 
         .success (data) ->
             if data.Content
 
-                # control panel default value
-                data.Content.Data[5][0] = Name: "None"
+                angular.forEach data.Content.Data, (component, id) ->
+                    data.Content.Data[id] = objectToArray(component)
 
-                data.Content.Data[12][0] = Name: "None"
-                data.Content.Data[20][0] = Name: "None"
+                # у данных компонентов есть значение None
+                data.Content.Data[5].unshift(Name: "None")
+                data.Content.Data[12].unshift(Name: "None")
+                data.Content.Data[20].unshift(Name: "None")
 
                 deferred.resolve data.Content.Data
             else
@@ -104,3 +107,12 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
         deferred.promise
 
     that
+
+
+# преобразовать объект в массив
+objectToArray = (object) ->
+    arr = []
+    angular.forEach object, (c) ->
+        arr.push c
+
+    arr
