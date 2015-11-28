@@ -104,7 +104,8 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
             hdd:
                 size: 0
-                sizeAvailable: [1..24]
+                #sizeAvailable: [1..24]
+                columns: columnize([1..24], 4)
                 selected: []
                 options: configCalculator[2]
 
@@ -224,7 +225,6 @@ updateHdd = (tabs, order) ->
     tabs.hardware.hdd.size = size
     tabs.hardware.hdd.selected = []
 
-    console.log size
     for i in [1..size]
         tabs.hardware.hdd.selected[i-1] = _.values(tabs.hardware.hdd.options)[0]
 
@@ -237,7 +237,7 @@ updateHddSelected = (tabs, order) ->
 
     angular.forEach tabs.hardware.hdd.selected, (hdd) ->
         # пропустим None и невалидные опции
-        return unless hdd.Options or hdd.Price
+        return unless hdd?.Options or hdd?.Price
 
         price += Number(hdd.Price, 10)
         hddCount++
@@ -307,6 +307,21 @@ updateOS = (tabs, order) ->
 
 
     return
+
+columnize = (list, n) ->
+    grid = []
+    i = 0
+    x = list.length
+    col = undefined
+    row = -1
+    i = 0
+    while i < x
+        col = i % n
+        if col == 0
+            grid[++row] = []
+        grid[row][col] = list[i]
+        i++
+    grid
 
 
 

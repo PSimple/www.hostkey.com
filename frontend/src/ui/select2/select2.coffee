@@ -11,11 +11,17 @@ angular.module("ui.select").directive "select2", ($timeout) ->
 
     link: (scope, element, attrs, ngModel) ->
 
+        scope.$watch "model", (n, o) ->
+            unless angular.equals(n, o)
+                newModel = angular.copy n
+                element.select2().val(JSON.stringify(newModel)).trigger("change") unless scope.$$phase
+        , true
+
         $timeout ->
             element.select2()
 
             element.bind "change", ->
-                scope.$apply ->
+                $timeout ->
                     scope.model = JSON.parse(element.select2('val'))
 
 

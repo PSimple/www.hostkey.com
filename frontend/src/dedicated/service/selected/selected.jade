@@ -221,6 +221,13 @@
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell
+                                            .table-select__cell-item(ng-show="hddItem<=tabs.hardware.hdd.size", ng-repeat="hddItem in tabs.hardware.hdd.sizeAvailable")
+                                                label.table-select__item-label {{hddItem}} disk
+                                                .table-select__item(ui-select="tabs.hardware.hdd.selected[$index]", options="tabs.hardware.hdd.options", width="170")
+
+                                //-table.table-select
                                     tr.table-select__row(ng-columns="hddRow in tabs.hardware.hdd.sizeAvailable by 4")
                                         td.table-select__cell(ng-repeat="hddColumn in hddRow")
                                             div(ng-show="hddColumn<=tabs.hardware.hdd.size")
