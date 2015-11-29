@@ -91,6 +91,16 @@ angular.module("ui").filter 'optPrice', ($dedicated) ->
         if ComponentType_ID is "91"
             price = price * Number(option.Value, 10)
 
+        # расчет стоимости DCGrade
+        if ComponentType_ID is "21"
+            if order.hardware.platform.Options?.unit
+                multiplicator = Number(order.hardware.platform.Options.unit, 10)
+            else
+                multiplicator = 1
+
+            price = price * multiplicator
+
+
         price
 
 
