@@ -210,6 +210,44 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
     $scope.$watch "order.software.MSExchange.ID", ->
         $scope.order.software.ExchangeCount.Value = 1
 
+    $scope.$watch "order.network.Bandwidth.ID", -> watchTraffic($scope.tabs, $scope.order, configCalculator)
+
+    ###
+        Вспомогательные функции контроллера
+    ###
+
+    # зависимость Traffic от Bandwidth
+    watchTraffic = (tabs, order, config) ->
+        trafficOptions = config.Data[14]
+
+        # поиск текущей опции в отфильтрованном списке опций
+        findOption = (opt, options) ->
+            f = options.filter (o) -> o.ID is opt.ID
+            f.length
+
+        # При выборе ”100 Mbps” оставить в поле Traffic (п. 3.1) только “100 mbps Unmetered (26Tb max)”, остальные опции удалить.
+        if order.network.Bandwidth.Name is "100Mbps"
+            options = trafficOptions.filter (o) -> o.Name is "100Mbps unmetered (26Tb max)"
+            order.network.traffic = options[0] unless findOption(order.network.traffic, options)
+            tabs.network.traffic.options = options
+            return
+
+        # При выборе "1Gbps (10)" убираем опцию "100 mbps Unmetered (26Tb max)" в поле Traffic, остальные оставляем.
+        if order.network.Bandwidth.Name is "1Gbps"
+            options = trafficOptions.filter (o) -> o.Name isnt "100Mbps unmetered (26Tb max)"
+            order.network.traffic = options[0] unless findOption(order.network.traffic, options)
+            tabs.network.traffic.options = options
+            return
+
+        # вернем оригинальные варианты опции Traffic
+        if trafficOptions.length isnt tabs.network.traffic.options.length
+            tabs.network.traffic.options = trafficOptions
+
+        return
+
+
+    return
+
 # обновим доступные блоки памяти
 updateRAM = (tabs, order)->
     max_mem = order.hardware.cpu.Options.max_mem
@@ -310,4 +348,6 @@ updateOS = (tabs, order) ->
         enableUnixOptions()
 
     return
+
+
 
