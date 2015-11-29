@@ -1,0 +1,9 @@
+{
+  "Code": 0,
+  "Message": "",
+  "ErrorStatus": false,
+  "Content": {
+    "Summa": 56,
+    "Discount": 28
+  }
+}

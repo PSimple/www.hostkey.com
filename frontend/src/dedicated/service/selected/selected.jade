@@ -211,7 +211,7 @@
                                     span.b-checkbox-submit__text {{ram.Name}}
 
 
-                        tr.b-dedicated__accordion-table-row
+                        tr.b-dedicated__accordion-table-row#platform
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.hardware.platform.name}}
                             td.b-dedicated__accordion-table-cell.js-checked
                                 label.b-checkbox-submit.b-checkbox-submit_size_170(ng-repeat="platform in tabs.hardware.platform.options", ng-model="order.hardware.platform", btn-radio="{{platform}}")
@@ -416,33 +416,33 @@
             .b-dedicated__summary-subtitle {{tabs.hardware.name}}
             table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware", ng-show="opt.Options.short_name && opt.ID")
-                    td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
-                    td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
+                    td.b-dedicated__summary-table-cell {{opt|optName}}
+                    td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
             .b-dedicated__summary-subtitle {{tabs.software.name}}
             table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.software", ng-show="opt.Options.short_name && opt.ID")
-                    td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
-                    td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
+                    td.b-dedicated__summary-table-cell {{opt|optName}}
+                    td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
             .b-dedicated__summary-subtitle {{tabs.network.name}}
             table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.network", ng-show="opt.Options.short_name && opt.ID")
-                    td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
-                    td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
+                    td.b-dedicated__summary-table-cell {{opt|optName}}
+                    td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
             .b-dedicated__summary-subtitle {{tabs.sla.name}}
             table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.sla", ng-show="opt.Options.short_name && opt.ID")
-                    td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
-                    td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
+                    td.b-dedicated__summary-table-cell {{opt|optName}}
+                    td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
-            .b-dedicated__summary-price
-                span.b-dedicated__summary-price-value €{{orderPrice - order.discount.billingCycle.Value/100 * orderPrice}}/year
-                span.b-dedicated__summary-price-discount(ng-show="order.discount.billingCycle.Value")
-                    | {{order.discount.billingCycle.Value}}% discount, save €{{order.discount.billingCycle.Value/100 * orderPrice}}
+            .b-dedicated__summary-price(ng-show="totalPrice.Summa")
+                span.b-dedicated__summary-price-value €{{totalPrice.Summa}}/month
+                span.b-dedicated__summary-price-discount(ng-show="order.discount.billingCycle.Percent")
+                    | {{order.discount.billingCycle.Percent}}% discount, save €{{totalPrice.Discount}}
 
-            a.b-submit.b-dedicated__summary-submit(href="", ng-click="buy()") Buy
+            a.b-submit.b-dedicated__summary-submit(href="", ng-click="buy(order)") Buy
 
     .b-container
         table.b-dedicated__accordion-table

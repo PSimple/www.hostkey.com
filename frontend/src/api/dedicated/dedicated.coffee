@@ -9,7 +9,7 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
         if window.isDev
             url = "/assets/dist/dedicated_#{type}.json"
         else
-            url = "#{CONFIG.apiUrl}/configcalculator/getconfig"
+            url = "#{CONFIG.apiUrl}/dedicated/config"
 
         if type is "Test"
             groups = type
@@ -47,22 +47,26 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
         discount = [
             {
                 ID: 1
-                Value: 0
+                Percent: 0
+                Period: "monthly"
                 Name: "1 month"
             }
             {
                 ID: 2
-                Value: 3
+                Percent: 3
+                Period: "quarterly"
                 Name: "3 months"
             }
             {
                 ID: 3
-                Value: 6
+                Percent: 6
+                Period: "semiannually"
                 Name: "6 months"
             }
             {
                 ID: 4
-                Value: 12
+                Percent: 12
+                Period: "annually"
                 Name: "1 year"
             }
         ]
@@ -106,6 +110,29 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
         deferred.resolve discount
 
         deferred.promise
+
+    @components = ->
+        components = {
+            1: ['hardware', 'cpu'] # id: ['category', 'name']
+            3: ['hardware', 'ram']
+            6: ['hardware', 'platform']
+            8: ['hardware', 'raid']
+
+            4: ['software', 'os']
+            10:['software', 'bit']
+            5: ['software', 'controlPanel']
+            12:['software', 'MSSql']
+            20:['software', 'MSExchange']
+
+            14:['network', 'traffic']
+            7: ['network', 'ip']
+            15:['network', 'vlan']
+            19:['network', 'ftpBackup']
+
+            16:['sla', 'serviceLevel']
+            17:['sla', 'management']
+        }
+        components
 
     that
 

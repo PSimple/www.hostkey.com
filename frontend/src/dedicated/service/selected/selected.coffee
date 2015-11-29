@@ -10,6 +10,8 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
         controller: "MicroCtrl"
         template: require "./selected.jade"
         resolve:
+            components: ($dedicated) -> $dedicated.components()
+
             configCalculator: ($dedicated, $stateParams) ->
                 $dedicated.getConfigCalculator($stateParams.type, $stateParams.country)
             billingCycleDiscount: ($dedicated) ->
@@ -20,28 +22,7 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
     return
 
-angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, raidLevel, $order) ->
-
-    components = {
-        1: ['hardware', 'cpu'] # id: ['category', 'name']
-        3: ['hardware', 'ram']
-        6: ['hardware', 'platform']
-        8: ['hardware', 'raid']
-
-        4: ['software', 'os']
-        10:['software', 'bit']
-        5: ['software', 'controlPanel']
-        12:['software', 'MSSql']
-        20:['software', 'MSExchange']
-
-        14:['network', 'traffic']
-        7: ['network', 'ip']
-        15:['network', 'vlan']
-        19:['network', 'ftpBackup']
-
-        16:['sla', 'serviceLevel']
-        17:['sla', 'management']
-    }
+angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, raidLevel, $order, components) ->
 
     initOrderComponents = (components, config)->
         defaultOrder = {}
@@ -81,14 +62,16 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
         $.scrollTo('.js-switch-box', 1000)
         $state.go "^", $stateParams, {reload:true}
 
-    $scope.orderPrice = 0
+    # объект с суммой заказа и скидкой
+    $scope.totalPrice = {}
 
     $scope.$watch "order", (n, o) ->
         unless angular.equals(n, o)
+            console.log "get price", n
             $order.getPrice(n)
-            .then (priceData) ->
-                $scope.orderPrice = priceData.totalPrice
-    , true
+            .then (totalPrice) ->
+                $scope.totalPrice = totalPrice
+    , 3000
 
     $scope.tabs =
         hardware:
@@ -170,14 +153,16 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             billingCycle:
                 options: billingCycleDiscount
 
-    $scope.buy = ->
-        $order.post($scope.order)
+    $scope.buy = (order) ->
+        $order.post(order)
         .then (orderLink) ->
+            alert orderLink
             console.log orderLink
-#            window.location = orderLink
+            #window.location = orderLink
 
         .catch (error) ->
-            alert "Ошибка формирования заказа"
+            if error.Message
+                alert error.Message
 
     $scope.$watch "order.hardware.platform.ID", ->
         updateHdd($scope.tabs, $scope.order)
@@ -195,11 +180,11 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
     $scope.$watch "order.software.MSExchange.ID", ->
         $scope.order.software.MSExchangeCount = 1
 
-    $scope.$watch "order.software.MSExchangeCount", ->
-        if $scope.order.software.MSExchange?.Price
-            price = Number($scope.order.software.MSExchange.Price, 10)
-            count = Number($scope.order.software.MSExchangeCount, 10)
-            $scope.order.software.MSExchange.PriceTotal = price * count
+#    $scope.$watch "order.software.MSExchangeCount", ->
+#        if $scope.order.software.MSExchange?.Price
+#            price = Number($scope.order.software.MSExchange.Price, 10)
+#            count = Number($scope.order.software.MSExchangeCount, 10)
+#            $scope.order.software.MSExchange.PriceTotal = price * count
 
 # обновим доступные блоки памяти
 updateRAM = (tabs, order)->
@@ -266,11 +251,13 @@ updateHddSelected = (tabs, order) ->
         Options:
             short_name: reduceNames(names)
 
-    console.log "updateHddSelected", order.hardware.hdd
+#    selectedPlatformSize = Number(order.hardware.platform.Options.size, 10)
+#    if selectedPlatformSize > 8
+#        $.scrollTo '#platform',
+#            offset: -80
+#            duration: 1000
 
 updateOS = (tabs, order) ->
-    multiplicator = 1
-
     # тригерим опции для винды
     enableWindowsOptions = ->
         tabs.software.controlPanel.enable = false
@@ -292,18 +279,10 @@ updateOS = (tabs, order) ->
         delete order.software.RDPLicenses
         delete order.software.MSExchange
 
-
     if /Windows/.test(order.software.os.Name)
-        # Если выбрана ОС семейства Windows (п. 2.1) то цена ОС умножается на количество процессоров. параметр ”cpu_count”
-        multiplicator = Number(order.hardware.cpu.Options.cpu_count, 10)
-
         enableWindowsOptions()
     else
         enableUnixOptions()
-
-    price = Number(order.software.os.Price, 10)
-    order.software.os.PriceTotal = price * multiplicator
-
 
     return
 
