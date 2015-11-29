@@ -54606,7 +54606,9 @@
 	        return o.Name === "100Mbps unmetered (26Tb max)";
 	      });
 	      if (!findOption(order.network.traffic, options)) {
-	        order.network.traffic = options[0];
+	        $timeout(function() {
+	          return order.network.traffic = options[0];
+	        });
 	      }
 	      tabs.network.traffic.options = options;
 	      return;
@@ -54615,10 +54617,12 @@
 	      options = trafficOptions.filter(function(o) {
 	        return o.Name !== "100Mbps unmetered (26Tb max)";
 	      });
-	      if (!findOption(order.network.traffic, options)) {
-	        order.network.traffic = options[0];
-	      }
 	      tabs.network.traffic.options = options;
+	      if (!findOption(order.network.traffic, options)) {
+	        $timeout(function() {
+	          return order.network.traffic = options[0];
+	        });
+	      }
 	      return;
 	    }
 	    if (trafficOptions.length !== tabs.network.traffic.options.length) {
