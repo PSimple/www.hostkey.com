@@ -46523,31 +46523,21 @@
 	        groups: groups
 	      }
 	    }).success(function(data) {
+	      var i, id, ids, len;
 	      if (data.Content) {
 	        angular.forEach(data.Content.Data, function(component, id) {
 	          return data.Content.Data[id] = objectToArray(component);
 	        });
-	        data.Content.Data[2].unshift({
-	          Name: "None"
-	        });
-	        data.Content.Data[5].unshift({
-	          Name: "None"
-	        });
-	        data.Content.Data[12].unshift({
-	          Name: "None"
-	        });
-	        data.Content.Data[20].unshift({
-	          Name: "None"
-	        });
-	        data.Content.Data[22].unshift({
-	          Name: "None"
-	        });
-	        data.Content.Data[15].unshift({
-	          Name: "None"
-	        });
-	        data.Content.Data[19].unshift({
-	          Name: "None"
-	        });
+	        ids = [2, 5, 12, 20, 22, 15, 19];
+	        for (i = 0, len = ids.length; i < len; i++) {
+	          id = ids[i];
+	          if (!angular.isArray(data.Content.Data[id])) {
+	            data.Content.Data[id] = [];
+	          }
+	          data.Content.Data[id].unshift({
+	            Name: "None"
+	          });
+	        }
 	        data.Content.Data[91] = {
 	          ComponentType_ID: "91",
 	          Name: "RDP Licence",
