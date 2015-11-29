@@ -34,6 +34,9 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
                 data.Content.Data[5].unshift(Name: "None")  # controlPanel
                 data.Content.Data[12].unshift(Name: "None") # MSSql
                 data.Content.Data[20].unshift(Name: "None") # MSExchange
+                data.Content.Data[22].unshift(Name: "None") # DDOSProtection
+                data.Content.Data[15].unshift(Name: "None") # Vlan
+                data.Content.Data[19].unshift(Name: "None") # FtpBackup
 
                 data.Content.Data[91] =
                     ComponentType_ID: "91"
@@ -141,7 +144,9 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
             14:['network', 'traffic']
             7: ['network', 'ip']
             15:['network', 'vlan']
+            18:['network', 'Bandwidth']
             19:['network', 'ftpBackup']
+            22:['network', 'DDOSProtection']
 
             16:['sla', 'serviceLevel']
             17:['sla', 'management']

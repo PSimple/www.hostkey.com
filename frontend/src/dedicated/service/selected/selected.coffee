@@ -127,6 +127,9 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             traffic:
                 name: "Traffic"
                 options: configCalculator.Data[14]
+            Bandwidth:
+                name: "Bandwidth"
+                options: configCalculator.Data[18]
             ip:
                 name: "Ip"
                 options: configCalculator.Data[7]
@@ -136,6 +139,10 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             ftpBackup:
                 name: "ftp backup"
                 options: configCalculator.Data[19]
+
+            DDOSProtection:
+                name: "DDOS Protection"
+                options: configCalculator.Data[22]
 
         sla:
             name: "SLA"
@@ -164,9 +171,9 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
         $.scrollTo '#selectedSolution',
             offset: -68
             duration: 1000
-#        $timeout ->
-#            $scope.tabs.hardware.open = true
-#        , 1000
+        $timeout ->
+            $scope.tabs.hardware.open = true
+        , 1000
 
     $scope.buy = (order) ->
         $order.post(order)

@@ -55,16 +55,16 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
                 OS: rawOrder.software.os.ID
                 Bit: rawOrder.software.bit.ID
                 CP: rawOrder.software.controlPanel?.ID
-                RdpLicCount: rawOrder.software.RdpLicCount.Value
+                RdpLicCount: Number(rawOrder.software.RdpLicCount.Value, 10)
                 Sql: rawOrder.software.MSSql?.ID
                 Exchange: rawOrder.software.MSExchange?.ID
-                ExchangeCount: rawOrder.software.ExchangeCount.Value
+                ExchangeCount: Number(rawOrder.software.ExchangeCount.Value, 10)
                 Label: $filter('orderVerbose')(rawOrder.software)
 
             Network:
                 Traffic: rawOrder.network.traffic.ID
-                Bandwidth: 345
-                DDOSProtection: 345
+                Bandwidth: rawOrder.network.Bandwidth.ID
+                DDOSProtection: rawOrder.network.DDOSProtection.ID
                 IP: rawOrder.network.ip.ID
                 Vlan: rawOrder.network.vlan.ID
                 FtpBackup: rawOrder.network.ftpBackup.ID

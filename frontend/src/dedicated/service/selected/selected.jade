@@ -332,6 +332,17 @@
                                         td.table-select__cell
                                         td.table-select__cell
 
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.Bandwidth.name}}
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.network.Bandwidth", options="tabs.network.Bandwidth.options", width="340")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
 
                         tr.b-dedicated__accordion-table-row
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.ip.name}}
@@ -364,6 +375,17 @@
                                     tr.table-select__row
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
                                             .table-select__item(ui-select="order.network.ftpBackup", options="tabs.network.ftpBackup.options", width="340")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.DDOSProtection.name}}
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.network.DDOSProtection", options="tabs.network.DDOSProtection.options", width="340")
 
                                         td.table-select__cell
                                         td.table-select__cell
