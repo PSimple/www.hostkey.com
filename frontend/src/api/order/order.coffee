@@ -48,7 +48,7 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
                 Platform: rawOrder.hardware.platform.ID
                 Hdd: rawOrder.hardware.hdd.ID
                 Raid: rawOrder.hardware.raid.ID
-                RaidLevel: rawOrder.hardware.raidLevel.ID
+                RaidLevel: rawOrder.hardware.RaidLevel.ID
                 Label: $filter('orderVerbose')(rawOrder.hardware)
 
             Software:

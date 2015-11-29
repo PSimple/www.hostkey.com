@@ -17,12 +17,9 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
             billingCycleDiscount: ($dedicated) ->
                 $dedicated.billingCycleDiscount()
 
-            raidLevel: ($dedicated) ->
-                $dedicated.getRaidLevel()
-
     return
 
-angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, raidLevel, $order, components) ->
+angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components) ->
 
     initOrderComponents = (components, config)->
         defaultOrder = {}
@@ -44,8 +41,6 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
         defaultOrder.discount =
             billingCycle: billingCycleDiscount[0]
-
-        defaultOrder.hardware.raidLevel = raidLevel[0]
 
         defaultOrder
 
@@ -91,8 +86,8 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             raid:
                 options: configCalculator.Data[8]
 
-            raidLevel:
-                options: raidLevel
+            RaidLevel:
+                options: configCalculator.Data[94]
 
             ram:
                 name: "RAM"
@@ -195,17 +190,20 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
                 alert error.Message
 
     $scope.$watch "order.hardware.platform.ID", ->
-        updateHdd($scope.tabs, $scope.order)
+        watchHdd($scope.tabs, $scope.order)
+        watchRaidLevel($scope.tabs, $scope.order)
+
+    $scope.$watch "order.hardware.raid.ID", -> watchRaidLevel($scope.tabs, $scope.order)
 
     $scope.$watch "order.hardware.cpu", ->
-        updateRAM($scope.tabs, $scope.order)
-        updateOS($scope.tabs, $scope.order)
+        watchRAM($scope.tabs, $scope.order)
+        watchOS($scope.tabs, $scope.order)
 
     $scope.$watch "tabs.hardware.hdd.selected", ->
-        updateHddSelected($scope.tabs, $scope.order)
+        watchHddSelected($scope.tabs, $scope.order)
     , true
 
-    $scope.$watch "order.software.os", -> updateOS($scope.tabs, $scope.order)
+    $scope.$watch "order.software.os", -> watchOS($scope.tabs, $scope.order)
 
     $scope.$watch "order.software.MSExchange.ID", ->
         $scope.order.software.ExchangeCount.Value = 1
@@ -248,109 +246,136 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
         return
 
+    watchRaidLevel = (tabs, order) ->
+        # Проверяется поддерживает ли выбранный контроллер очередной уровень “raid” (0,1,5,6,10).
+        raidLevels = order.hardware.raid.Options.raid.split("-")
+        raidLevels.unshift("-1") # No Raid
 
-    return
+        listRaidLevel = configCalculator.Data[94]
 
-# обновим доступные блоки памяти
-updateRAM = (tabs, order)->
-    max_mem = order.hardware.cpu.Options.max_mem
-    console.log "updateRAM", order.hardware.cpu.Name, max_mem
+        filteredLevels = listRaidLevel.filter (l) -> raidLevels.indexOf(l.ID) > -1
 
-    angular.forEach tabs.hardware.ram.options, (opt, optId) ->
-        if Number(opt.Options.size, 10) <= Number(max_mem, 10)
-            tabs.hardware.ram.options[optId].Options.enable = true
-        else
-            tabs.hardware.ram.options[optId].Options.enable = false
+        #console.log "watchRaidLevel", filteredLevels
 
-    #при выборе CPU выбранная память сбрасывается до минимальной
-    order.hardware.ram = _.values(tabs.hardware.ram.options)[0]
-    return
+        # Если успешно то происходит проверка на количество дисков. Смотри список ниже:
+        diskSize = Number(order.hardware.platform.Options.size, 10)
+        filteredLevels = listRaidLevel.filter (l) ->
+            return l if l.ID is "-1"
+            return l if l.ID is "0" and diskSize >= 2
+            return l if l.ID is "1" and diskSize >= 2
+            return l if l.ID is "5" and diskSize >= 3
+            return l if l.ID is "6" and diskSize >= 3
+            return l if l.ID is "10" and diskSize >= 4
 
-updateHdd = (tabs, order) ->
-    return unless order.hardware?.platform
+        #console.log "watchRaidLevel", diskSize, filteredLevels
 
-    size = order.hardware.platform.Options.size
-    # количество дисков
-    tabs.hardware.hdd.size = size
-    tabs.hardware.hdd.selected = []
+        # поменяем список RaidLevel на доступные согласно зависимостям
+        tabs.hardware.RaidLevel.options = filteredLevels
+        $timeout -> order.hardware.RaidLevel = filteredLevels[0]
 
-    for i in [1..size]
-        tabs.hardware.hdd.selected[i-1] = _.values(tabs.hardware.hdd.options)[0]
+        return
 
-updateHddSelected = (tabs, order) ->
+    # обновим доступные блоки памяти
+    watchRAM = (tabs, order)->
+        max_mem = order.hardware.cpu.Options.max_mem
+        #console.log "watchRAM", order.hardware.cpu.Name, max_mem
 
-    price = 0
-    hddCount = 0
-    names = {}
-    ids = []
-
-    angular.forEach tabs.hardware.hdd.selected, (hdd) ->
-        # пропустим None и невалидные опции
-        return unless hdd?.Options or hdd?.Price
-
-        price += Number(hdd.Price, 10)
-        hddCount++
-
-        name = hdd.Options.short_name
-        if names[name]
-            names[name]++
-        else
-            names[name] = 1
-
-        ids.push hdd.ID
-
-    reduceNames = (names) ->
-        short_name = []
-
-        angular.forEach names, (count, name) ->
-            if count > 1
-                short_name.push "#{count}x#{name}"
+        angular.forEach tabs.hardware.ram.options, (opt, optId) ->
+            if Number(opt.Options.size, 10) <= Number(max_mem, 10)
+                tabs.hardware.ram.options[optId].Options.enable = true
             else
-                short_name.push name
+                tabs.hardware.ram.options[optId].Options.enable = false
 
-        short_name.join("*")
+        #при выборе CPU выбранная память сбрасывается до минимальной
+        order.hardware.ram = _.values(tabs.hardware.ram.options)[0]
+        return
 
-    order.hardware.hdd =
-        ID: ids
-        Price: price
-        Options:
-            short_name: reduceNames(names)
+    watchHdd = (tabs, order) ->
+        return unless order.hardware?.platform
 
-#    selectedPlatformSize = Number(order.hardware.platform.Options.size, 10)
-#    if selectedPlatformSize > 8
-#        $.scrollTo '#platform',
-#            offset: -80
-#            duration: 1000
+        size = order.hardware.platform.Options.size
+        # количество дисков
+        tabs.hardware.hdd.size = size
+        tabs.hardware.hdd.selected = []
 
-updateOS = (tabs, order) ->
-    # тригерим опции для винды
-    enableWindowsOptions = ->
-        tabs.software.controlPanel.enable = false
+        for i in [1..size]
+            tabs.hardware.hdd.selected[i-1] = _.values(tabs.hardware.hdd.options)[0]
 
-        tabs.software.MSSql.enable = true
-        tabs.software.RdpLicCount.enable = true
-        tabs.software.MSExchange.enable = true
+    watchHddSelected = (tabs, order) ->
 
-        order.software.controlPanel = Name: "None"
+        price = 0
+        hddCount = 0
+        names = {}
+        ids = []
 
-    enableUnixOptions = ->
-        tabs.software.controlPanel.enable = true
+        angular.forEach tabs.hardware.hdd.selected, (hdd) ->
+            # пропустим None и невалидные опции
+            return unless hdd?.Options or hdd?.Price
 
-        tabs.software.MSSql.enable = false
-        tabs.software.RdpLicCount.enable = false
-        tabs.software.MSExchange.enable = false
+            price += Number(hdd.Price, 10)
+            hddCount++
 
-        order.software.MSSql = Name: "None"
-        order.software.MSExchange = Name: "None"
-        order.software.RdpLicCount.Value = 0
-        order.software.ExchangeCount.Value = 0
+            name = hdd.Options.short_name
+            if names[name]
+                names[name]++
+            else
+                names[name] = 1
 
-    if /Windows/.test(order.software.os.Name)
-        enableWindowsOptions()
-    else
-        enableUnixOptions()
+            ids.push hdd.ID
+
+        reduceNames = (names) ->
+            short_name = []
+
+            angular.forEach names, (count, name) ->
+                if count > 1
+                    short_name.push "#{count}x#{name}"
+                else
+                    short_name.push name
+
+            short_name.join("*")
+
+        order.hardware.hdd =
+            ID: ids
+            Price: price
+            Options:
+                short_name: reduceNames(names)
+
+    #    selectedPlatformSize = Number(order.hardware.platform.Options.size, 10)
+    #    if selectedPlatformSize > 8
+    #        $.scrollTo '#platform',
+    #            offset: -80
+    #            duration: 1000
+
+    watchOS = (tabs, order) ->
+        # тригерим опции для винды
+        enableWindowsOptions = ->
+            tabs.software.controlPanel.enable = false
+
+            tabs.software.MSSql.enable = true
+            tabs.software.RdpLicCount.enable = true
+            tabs.software.MSExchange.enable = true
+
+            order.software.controlPanel = Name: "None"
+
+        enableUnixOptions = ->
+            tabs.software.controlPanel.enable = true
+
+            tabs.software.MSSql.enable = false
+            tabs.software.RdpLicCount.enable = false
+            tabs.software.MSExchange.enable = false
+
+            order.software.MSSql = Name: "None"
+            order.software.MSExchange = Name: "None"
+            order.software.RdpLicCount.Value = 0
+            order.software.ExchangeCount.Value = 0
+
+        if /Windows/.test(order.software.os.Name)
+            enableWindowsOptions()
+        else
+            enableUnixOptions()
+
+        return
 
     return
-
 
 

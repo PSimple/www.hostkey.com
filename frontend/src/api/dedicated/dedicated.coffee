@@ -55,6 +55,9 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
                         short_name: "IPv6 block"
                     Value: false
 
+                # RaidLevel
+                data.Content.Data[94] = that.getRaidLevel()
+
                 deferred.resolve data.Content
             else
                 deferred.resolve false
@@ -96,40 +99,34 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
         deferred.promise
 
     @getRaidLevel = ->
-        deferred = $q.defer()
-
-        discount = [
+        [
             {
-                ID: 1
+                ID: "-1"
                 Name: "No Raid"
             }
             {
-                ID: 2
+                ID: "0"
                 Name: "Stripe(0)"
 
             }
             {
-                ID: 3
+                ID: "1"
                 Name: "Mirror(1)"
             }
             {
-                ID: 4
+                ID: "5"
                 Name: "RAID5"
             }
             {
-                ID: 5
+                ID: "6"
                 Name: "RAID6"
             }
             {
-                ID: 6
+                ID: "10"
                 Name: "RAID10"
             }
 
         ]
-
-        deferred.resolve discount
-
-        deferred.promise
 
     @components = ->
         components = {
@@ -137,6 +134,7 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
             3: ['hardware', 'ram']
             6: ['hardware', 'platform']
             8: ['hardware', 'raid']
+            94: ['hardware', 'RaidLevel']
 
             4: ['software', 'os']
             10:['software', 'bit']
