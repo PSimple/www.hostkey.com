@@ -55,10 +55,10 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
                 OS: rawOrder.software.os.ID
                 Bit: rawOrder.software.bit.ID
                 CP: rawOrder.software.controlPanel?.ID
-                RdpLicCount: 5
+                RdpLicCount: rawOrder.software.RdpLicCount.Value
                 Sql: rawOrder.software.MSSql?.ID
                 Exchange: rawOrder.software.MSExchange?.ID
-                ExchangeCount: 5
+                ExchangeCount: rawOrder.software.ExchangeCount.Value
                 Label: $filter('orderVerbose')(rawOrder.software)
 
             Network:

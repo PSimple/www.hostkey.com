@@ -23,7 +23,12 @@ angular.module("ui").filter 'orderVerbose',  ->
             names = []
             angular.forEach obj, (o) ->
                 if o?.Options?.short_name
-                    names.push o.Options.short_name
+                    if o.hasOwnProperty('Value')
+                        if o.Value > 0
+                            count = Number(o.Value, 10)
+                            names.push "#{o.Options.short_name}"
+                    else
+                        names.push o.Options.short_name
                 else
                     if o?.Name and o.ID
                         names.push o.Name
@@ -62,6 +67,7 @@ angular.module("ui").filter 'optPrice', ($dedicated) ->
             Обработка всех зависимостей расчет цены от выбранной опции компонента
         ###
 
+        # расчет стоимости OS
         if ComponentType_ID is "4"
             # Если выбрана ОС семейства Windows (п. 2.1) то цена ОС умножается на количество процессоров. параметр ”cpu_count”
             if /Windows/.test(option.Name)
@@ -71,6 +77,19 @@ angular.module("ui").filter 'optPrice', ($dedicated) ->
                     multiplicator = 1
 
                 price = price * multiplicator
+
+        # расчет стоимости MSExchange
+        if ComponentType_ID is "20"
+            if order.software.ExchangeCount?.Value
+                multiplicator = Number(order.software.ExchangeCount.Value, 10)
+            else
+                multiplicator = 1
+
+            price = price * multiplicator
+
+        # расчет стоимости RdpLicCount
+        if ComponentType_ID is "91"
+            price = price * Number(option.Value, 10)
 
         price
 

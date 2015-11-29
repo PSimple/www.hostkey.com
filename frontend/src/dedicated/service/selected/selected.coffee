@@ -32,9 +32,13 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             category = component[0] # категория компонента (hardware, software)
             name = component[1]     # имя компонента (hdd, os)
 
-            if angular.isObject(config[id])
-                defaultOrder[category] = {} unless defaultOrder[category]
-                defaultOrder[category][name] = _.values(config[id])[0]
+            defaultOrder[category] = {} unless defaultOrder[category]
+            # массив значений в опции компонента
+            if angular.isArray(config[id])
+                defaultOrder[category][name] = config[id][0]
+            else
+                # числовое значение в опции компонента
+                defaultOrder[category][name] = config[id]
 
             return
 
@@ -46,17 +50,12 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
         defaultOrder
 
     # формируем заказ на сервер
-    $scope.order = initOrderComponents(components, configCalculator)
+    $scope.order = initOrderComponents(components, configCalculator.Data)
 
-    unless configCalculator
+    unless configCalculator.Data
         alert "Нет конфиграции для #{$stateParams.type} #{$stateParams.country}"
         $state.go "^", $stateParams, {reload:true}
         return
-
-    $timeout ->
-        $.scrollTo '#selectedSolution',
-            offset: -68
-            duration: 1000
 
     $scope.close = ->
         $.scrollTo('.js-switch-box', 1000)
@@ -75,83 +74,99 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     $scope.tabs =
         hardware:
-            open: true
             name: "Hardware"
             cpu:
                 name: "CPU"
-                options: configCalculator[1]
+                options: configCalculator.Data[1]
 
             platform:
                 name: "disks"
-                options: configCalculator[6]
+                options: configCalculator.Data[6]
 
             hdd:
                 size: 0
                 sizeAvailable: [1..24]
                 selected: []
-                options: configCalculator[2]
+                options: configCalculator.Data[2]
 
             raid:
-                options: configCalculator[8]
+                options: configCalculator.Data[8]
 
             raidLevel:
                 options: raidLevel
 
             ram:
                 name: "RAM"
-                options: configCalculator[3]
+                options: configCalculator.Data[3]
 
         software:
             name: "Software"
             os:
                 name: "OS"
-                options: configCalculator[4]
+                options: configCalculator.Data[4]
             bit:
                 name: "Bit"
-                options: configCalculator[10]
+                options: configCalculator.Data[10]
             controlPanel:
                 enable: true
                 name: "Control Panel"
-                options: configCalculator[5]
+                options: configCalculator.Data[5]
             MSSql:
                 enable: false
                 name: "MS SQL"
-                options: configCalculator[12]
+                options: configCalculator.Data[12]
             MSExchange:
                 enable: false
                 name: "MS Exchange Cals"
-                options: configCalculator[20]
-            RDPLicenses:
+                options: configCalculator.Data[20]
+            RdpLicCount:
                 enable: false
-                value: 0
 
         network:
             name: "Network"
             traffic:
                 name: "Traffic"
-                options: configCalculator[14]
+                options: configCalculator.Data[14]
             ip:
                 name: "Ip"
-                options: configCalculator[7]
+                options: configCalculator.Data[7]
             vlan:
                 name: "Vlan"
-                options: configCalculator[15]
+                options: configCalculator.Data[15]
             ftpBackup:
                 name: "ftp backup"
-                options: configCalculator[19]
+                options: configCalculator.Data[19]
 
         sla:
             name: "SLA"
             serviceLevel:
                 name: "service level"
-                options: configCalculator[16]
+                options: configCalculator.Data[16]
             management:
                 name: "management"
-                options: configCalculator[17]
+                options: configCalculator.Data[17]
 
         discount:
             billingCycle:
                 options: billingCycleDiscount
+
+    $scope.isValidOption = (opt) ->
+        return false unless opt.Options?.short_name
+
+        if opt.hasOwnProperty('Value')
+            if opt.Value > 0
+                return true
+        else
+            if opt.hasOwnProperty('ID')
+                return true
+
+    $timeout ->
+        $.scrollTo '#selectedSolution',
+            offset: -68
+            duration: 1000
+#        $timeout ->
+#            $scope.tabs.hardware.open = true
+#        , 1000
 
     $scope.buy = (order) ->
         $order.post(order)
@@ -178,13 +193,7 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
     $scope.$watch "order.software.os", -> updateOS($scope.tabs, $scope.order)
 
     $scope.$watch "order.software.MSExchange.ID", ->
-        $scope.order.software.MSExchangeCount = 1
-
-#    $scope.$watch "order.software.MSExchangeCount", ->
-#        if $scope.order.software.MSExchange?.Price
-#            price = Number($scope.order.software.MSExchange.Price, 10)
-#            count = Number($scope.order.software.MSExchangeCount, 10)
-#            $scope.order.software.MSExchange.PriceTotal = price * count
+        $scope.order.software.ExchangeCount.Value = 1
 
 # обновим доступные блоки памяти
 updateRAM = (tabs, order)->
@@ -263,21 +272,22 @@ updateOS = (tabs, order) ->
         tabs.software.controlPanel.enable = false
 
         tabs.software.MSSql.enable = true
-        tabs.software.RDPLicenses.enable = true
+        tabs.software.RdpLicCount.enable = true
         tabs.software.MSExchange.enable = true
 
-        delete order.software.controlPanel
+        order.software.controlPanel = Name: "None"
 
     enableUnixOptions = ->
         tabs.software.controlPanel.enable = true
 
         tabs.software.MSSql.enable = false
-        tabs.software.RDPLicenses.enable = false
+        tabs.software.RdpLicCount.enable = false
         tabs.software.MSExchange.enable = false
 
-        delete order.software.MSSql
-        delete order.software.RDPLicenses
-        delete order.software.MSExchange
+        order.software.MSSql = Name: "None"
+        order.software.MSExchange = Name: "None"
+        order.software.RdpLicCount.Value = 0
+        order.software.ExchangeCount.Value = 0
 
     if /Windows/.test(order.software.os.Name)
         enableWindowsOptions()

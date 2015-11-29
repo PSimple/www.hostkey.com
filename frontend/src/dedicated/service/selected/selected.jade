@@ -268,13 +268,13 @@
                                         td.table-select__cell
                                             .table-select__item(ui-select="order.software.bit", options="tabs.software.bit.options", width="170")
 
-                                        td.table-select__cell(ng-style="{visibility: tabs.software.RDPLicenses.enable ? 'initial': 'hidden'}")
+                                        td.table-select__cell(ng-style="{visibility: tabs.software.RdpLicCount.enable ? 'initial': 'hidden'}")
                                             label.table-select__item-label.table-select__item-label_inline_yes
                                                 | RDP
                                                 br
                                                 | Licenses
-                                            input.table-select__input(type='text', name="RDPLicenses", ng-model="order.software.RDPLicenses.value")
-                                            span.table-select__input-x X € 3
+                                            input.table-select__input(type='text', ng-model="order.software.RdpLicCount.Value")
+                                            span.table-select__input-x X € {{order.software.RdpLicCount.Price}}
 
 
                         tr.b-dedicated__accordion-table-row(ng-show="tabs.software.controlPanel.enable")
@@ -310,7 +310,7 @@
 
                                         td.table-select__cell(ng-show="order.software.MSExchange.ID")
                                             label.table-select__item-label.table-select__item-label_inline_yes Count
-                                            input.table-select__input(type='text', ng-model="order.software.MSExchangeCount")
+                                            input.table-select__input(type='text', ng-model="order.software.ExchangeCount.Value")
                                             span.table-select__input-x X € {{order.software.MSExchange.Price}}
                                         td.table-select__cell
 
@@ -415,25 +415,25 @@
 
             .b-dedicated__summary-subtitle {{tabs.hardware.name}}
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware", ng-show="opt.Options.short_name && opt.ID")
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware", ng-show="isValidOption(opt)")
                     td.b-dedicated__summary-table-cell {{opt|optName}}
                     td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
             .b-dedicated__summary-subtitle {{tabs.software.name}}
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.software", ng-show="opt.Options.short_name && opt.ID")
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.software", ng-show="isValidOption(opt)")
                     td.b-dedicated__summary-table-cell {{opt|optName}}
                     td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
             .b-dedicated__summary-subtitle {{tabs.network.name}}
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.network", ng-show="opt.Options.short_name && opt.ID")
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.network", ng-show="isValidOption(opt)")
                     td.b-dedicated__summary-table-cell {{opt|optName}}
                     td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
             .b-dedicated__summary-subtitle {{tabs.sla.name}}
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.sla", ng-show="opt.Options.short_name && opt.ID")
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.sla", ng-show="isValidOption(opt)")
                     td.b-dedicated__summary-table-cell {{opt|optName}}
                     td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 

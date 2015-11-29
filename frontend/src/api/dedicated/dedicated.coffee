@@ -35,7 +35,19 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
                 data.Content.Data[12].unshift(Name: "None") # MSSql
                 data.Content.Data[20].unshift(Name: "None") # MSExchange
 
-                deferred.resolve data.Content.Data
+                data.Content.Data[91] =
+                    ComponentType_ID: "91"
+                    Name: "RDP Licence"
+                    Options:
+                        short_name: "RDP Licence"
+                    Price: Number(data.Content.CostLicenseWin, 10)
+                    Value: 0
+
+                data.Content.Data[92] =
+                    Name: "ExchangeCount"
+                    Value: 0
+
+                deferred.resolve data.Content
             else
                 deferred.resolve false
 
@@ -123,6 +135,8 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
             5: ['software', 'controlPanel']
             12:['software', 'MSSql']
             20:['software', 'MSExchange']
+            91:['software', 'RdpLicCount']
+            92:['software', 'ExchangeCount']
 
             14:['network', 'traffic']
             7: ['network', 'ip']
