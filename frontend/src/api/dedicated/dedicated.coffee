@@ -29,14 +29,13 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
                 angular.forEach data.Content.Data, (component, id) ->
                     data.Content.Data[id] = objectToArray(component)
 
-                # у данных компонентов есть значение None
-                data.Content.Data[2].unshift(Name: "None")  # hdd
-                data.Content.Data[5].unshift(Name: "None")  # controlPanel
-                data.Content.Data[12].unshift(Name: "None") # MSSql
-                data.Content.Data[20].unshift(Name: "None") # MSExchange
-                data.Content.Data[22].unshift(Name: "None") # DDOSProtection
-                data.Content.Data[15].unshift(Name: "None") # Vlan
-                data.Content.Data[19].unshift(Name: "None") # FtpBackup
+                ids = [2,5,12,20,22,15,19] # controlPanel, MSSql, MSExchange, DDOSProtection, Vlan, FtpBackup
+
+                for id in ids
+                    unless angular.isArray(data.Content.Data[id])
+                        data.Content.Data[id] = []
+
+                    data.Content.Data[id].unshift(Name: "None")
 
                 data.Content.Data[91] =
                     ComponentType_ID: "91"
