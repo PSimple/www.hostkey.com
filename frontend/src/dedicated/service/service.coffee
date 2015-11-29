@@ -1,5 +1,6 @@
 require 'angular'
 require 'angular-ui-router'
+require 'angular-sanitize'
 
 angular.module("config", []).constant("CONFIG", require('webpack-config-loader!../../env/env.js'))
 
@@ -9,6 +10,7 @@ require '../../api/api'
 require './selected/selected'
 
 angular.module "dedicated.service", [
+    "ngSanitize"
     "ui"
     "ui.router"
     "api"

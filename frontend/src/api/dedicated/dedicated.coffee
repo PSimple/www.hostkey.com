@@ -149,6 +149,7 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
 
             16:['sla', 'serviceLevel']
             17:['sla', 'management']
+            21:['sla', 'DCGrade']
         }
         components
 

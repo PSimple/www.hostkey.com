@@ -74,8 +74,8 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
             SLA:
                 ServiceLevel: rawOrder.sla.serviceLevel.ID
                 Management: rawOrder.sla.management.ID
-                DCGrade: 345
-                Comment: 'bla bla bla'
+                DCGrade: rawOrder.sla.DCGrade.ID
+                Comment: ""
                 CycleDiscount: rawOrder.discount.billingCycle.Period
                 Label: $filter('orderVerbose')(rawOrder.sla)
 

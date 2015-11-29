@@ -66,7 +66,6 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     $scope.$watch "order", (n, o) ->
         unless angular.equals(n, o)
-            console.log "get price", n
             $order.getPrice(n)
             .then (totalPrice) ->
                 $scope.totalPrice = totalPrice
@@ -120,6 +119,7 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
                 name: "MS Exchange Cals"
                 options: configCalculator.Data[20]
             RdpLicCount:
+                name: "RDP<br>Licenses"
                 enable: false
 
         network:
@@ -147,14 +147,18 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
         sla:
             name: "SLA"
             serviceLevel:
-                name: "service level"
+                name: "Service level agreement"
                 options: configCalculator.Data[16]
             management:
-                name: "management"
+                name: "Management"
                 options: configCalculator.Data[17]
+            DCGrade:
+                name: "DC grade"
+                options: configCalculator.Data[21]
 
         discount:
             billingCycle:
+                name: "Billing cycle discount:"
                 options: billingCycleDiscount
 
     $scope.isValidOption = (opt) ->
