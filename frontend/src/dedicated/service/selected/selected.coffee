@@ -144,6 +144,10 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
                 name: "DDOS Protection"
                 options: configCalculator.Data[22]
 
+            IPv6:
+                name: "IPv6 block"
+
+
         sla:
             name: "SLA"
             serviceLevel:

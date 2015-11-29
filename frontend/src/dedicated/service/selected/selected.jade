@@ -385,6 +385,18 @@
                                         td.table-select__cell
                                         td.table-select__cell
 
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.IPv6.name")
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            label.fake-checkbox-label
+                                                span.fake-checkbox-label__box(ng-model="order.network.IPv6.Value", btn-checkbox="", ng-class="{'js-check':order.network.IPv6.Value}")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
 
                 accordion-group
 

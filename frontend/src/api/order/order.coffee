@@ -68,7 +68,7 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
                 IP: rawOrder.network.ip.ID
                 Vlan: rawOrder.network.vlan.ID
                 FtpBackup: rawOrder.network.ftpBackup.ID
-                IPv6: true
+                IPv6: rawOrder.network.IPv6.Value
                 Label: $filter('orderVerbose')(rawOrder.network)
 
             SLA:

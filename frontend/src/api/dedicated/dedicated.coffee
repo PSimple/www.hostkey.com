@@ -49,6 +49,12 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
                     Name: "ExchangeCount"
                     Value: 0
 
+                # IPv6
+                data.Content.Data[93] =
+                    Options:
+                        short_name: "IPv6 block"
+                    Value: false
+
                 deferred.resolve data.Content
             else
                 deferred.resolve false
@@ -146,6 +152,7 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
             18:['network', 'Bandwidth']
             19:['network', 'ftpBackup']
             22:['network', 'DDOSProtection']
+            93:['network', 'IPv6']
 
             16:['sla', 'serviceLevel']
             17:['sla', 'management']
