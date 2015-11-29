@@ -20,7 +20,7 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
     return
 
-angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, raidLevel) ->
+angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, raidLevel, $order) ->
 
     components = {
         1: ['hardware', 'cpu'] # id: ['category', 'name']
@@ -83,18 +83,11 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     $scope.orderPrice = 0
 
-    $scope.$watch "order", () ->
-        price = 0
-        console.log "order", $scope.order
-        angular.forEach $scope.order, (group) ->
-            angular.forEach group, (opt) ->
-                if opt?.PriceTotal
-                    price += Number(opt.PriceTotal)
-                else
-                    if opt?.Price
-                        price += Number(opt.Price)
-
-        $scope.orderPrice = price
+    $scope.$watch "order", (n, o) ->
+        unless angular.equals(n, o)
+            $order.getPrice(n)
+            .then (priceData) ->
+                $scope.orderPrice = priceData.totalPrice
     , true
 
     $scope.tabs =
@@ -111,7 +104,7 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
             hdd:
                 size: 0
-                sizeAvailable: [1..8]
+                sizeAvailable: [1..24]
                 selected: []
                 options: configCalculator[2]
 
@@ -177,7 +170,14 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             billingCycle:
                 options: billingCycleDiscount
 
-    $scope.buy = -> alert 'buy'
+    $scope.buy = ->
+        $order.post($scope.order)
+        .then (orderLink) ->
+            console.log orderLink
+#            window.location = orderLink
+
+        .catch (error) ->
+            alert "Ошибка формирования заказа"
 
     $scope.$watch "order.hardware.platform.ID", ->
         updateHdd($scope.tabs, $scope.order)
@@ -235,6 +235,9 @@ updateHddSelected = (tabs, order) ->
     ids = []
 
     angular.forEach tabs.hardware.hdd.selected, (hdd) ->
+        # пропустим None и невалидные опции
+        return unless hdd?.Options or hdd?.Price
+
         price += Number(hdd.Price, 10)
         hddCount++
 
@@ -303,6 +306,5 @@ updateOS = (tabs, order) ->
 
 
     return
-
 
 

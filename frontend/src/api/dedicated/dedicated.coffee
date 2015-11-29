@@ -1,8 +1,4 @@
-angular.module "api.dedicated", [
-
-]
-
-angular.module("api.dedicated").constant("CONFIG", require('webpack-config-loader!../../env/env.js'));
+angular.module "api.dedicated", ['config']
 
 angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
     that = this
@@ -10,26 +6,34 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
     @getConfigCalculator = (type, country)->
         deferred = $q.defer()
 
-        if location.host is 'hostkey'
+        if window.isDev
             url = "/assets/dist/dedicated_#{type}.json"
         else
             url = "#{CONFIG.apiUrl}/configcalculator/getconfig"
+
+        if type is "Test"
+            groups = type
+        else
+            groups = [country,type].join(',')
 
         $http
             url: url
             method: "GET"
             params:
                 currency: 'eur'
-                groups: [country,type].join(',')
+                groups: groups
 
         .success (data) ->
             if data.Content
 
-                # control panel default value
-                data.Content.Data[5][0] = Name: "None"
+                angular.forEach data.Content.Data, (component, id) ->
+                    data.Content.Data[id] = objectToArray(component)
 
-                data.Content.Data[12][0] = Name: "None"
-                data.Content.Data[20][0] = Name: "None"
+                # у данных компонентов есть значение None
+                data.Content.Data[2].unshift(Name: "None")  # hdd
+                data.Content.Data[5].unshift(Name: "None")  # controlPanel
+                data.Content.Data[12].unshift(Name: "None") # MSSql
+                data.Content.Data[20].unshift(Name: "None") # MSExchange
 
                 deferred.resolve data.Content.Data
             else
@@ -104,3 +108,12 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
         deferred.promise
 
     that
+
+
+# преобразовать объект в массив
+objectToArray = (object) ->
+    arr = []
+    angular.forEach object, (c) ->
+        arr.push c
+
+    arr

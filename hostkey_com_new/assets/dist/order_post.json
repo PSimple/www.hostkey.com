@@ -1,0 +1,9 @@
+{
+  "Code": 0,
+  "Message": "",
+  "ErrorStatus": false,
+  "Content": {
+    "Inventory": 7858,
+    "Configuration": "i3-2100 /8Gb /NL MC /2x240Gb SSD /No raid/Centos 7/64-bit/100Mbps unmetered (26Tb max)100Mbps/2 IPv4 /VLAN port 100Mbps /Backup 100Gb /Top_SLA /Self-service/DC Tier2"
+  }
+}

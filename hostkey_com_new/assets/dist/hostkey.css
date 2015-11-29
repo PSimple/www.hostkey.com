@@ -31,6 +31,23 @@ tbody.collapse.in {
 .b-checkbox-submit.disable {
   pointer-events: none;
 }
+.b-dedicated__summary-table-cell:nth-child(1) {
+  max-width: 150px;
+}
+.b-dedicated__summary-table-cell:nth-child(2) {
+  text-align: right;
+  width: 72px;
+}
+.table-select__cell-item {
+  float: left;
+  margin: 2px 3px 15px 2px;
+}
+.table-select__cell-item:nth-child(4n+1) {
+  margin-left: 0;
+}
+.table-select__cell-item:nth-child(4n) {
+  margin-right: -5px;
+}
 .select2-container {
   box-sizing: border-box;
   display: inline-block;

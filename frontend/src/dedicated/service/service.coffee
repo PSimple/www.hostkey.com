@@ -1,6 +1,8 @@
 require 'angular'
 require 'angular-ui-router'
 
+angular.module("config", []).constant("CONFIG", require('webpack-config-loader!../../env/env.js'))
+
 require '../../ui/ui'
 require '../../api/api'
 

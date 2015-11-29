@@ -28,12 +28,12 @@ angular.module("ui.columns").directive "ngColumns", () ->
                 parent.html ''
                 itemKey = matches[1]
                 collection = extract($scope, matches[2])
-                itemsPerCol = matches[3]
+                itemsPerCol = Number(matches[3], 10)
                 colsCount = Math.ceil(collection.length / itemsPerCol)
-                for i in [0..colsCount-1]
 
+                for i in [0..colsCount-1]
                     childScope = $scope.$new()
-                    childScope[itemKey] = slice collection, i * itemsPerCol, itemsPerCol
+                    childScope[itemKey] = slice(collection, i * itemsPerCol, itemsPerCol)
                     childScope['$index'] = i
                     childScope['$offset'] = i * itemsPerCol
 
