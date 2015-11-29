@@ -191,7 +191,6 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     $scope.$watch "order.hardware.platform.ID", ->
         watchHdd($scope.tabs, $scope.order)
-        watchRaidLevel($scope.tabs, $scope.order)
 
     $scope.$watch "order.hardware.raid.ID", -> watchRaidLevel($scope.tabs, $scope.order)
 
@@ -201,6 +200,7 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     $scope.$watch "tabs.hardware.hdd.selected", ->
         watchHddSelected($scope.tabs, $scope.order)
+        watchRaidLevel($scope.tabs, $scope.order)
     , true
 
     $scope.$watch "order.software.os", -> watchOS($scope.tabs, $scope.order)
@@ -255,19 +255,18 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
         filteredLevels = listRaidLevel.filter (l) -> raidLevels.indexOf(l.ID) > -1
 
-        #console.log "watchRaidLevel", filteredLevels
+        # Если успешно то происходит проверка на количество выбранных дисков. Смотри список ниже:
+        if order.hardware.hdd?.ID
+            diskCount = order.hardware.hdd.ID.length
+            console.log "diskCount", diskCount
 
-        # Если успешно то происходит проверка на количество дисков. Смотри список ниже:
-        diskSize = Number(order.hardware.platform.Options.size, 10)
-        filteredLevels = listRaidLevel.filter (l) ->
-            return l if l.ID is "-1"
-            return l if l.ID is "0" and diskSize >= 2
-            return l if l.ID is "1" and diskSize >= 2
-            return l if l.ID is "5" and diskSize >= 3
-            return l if l.ID is "6" and diskSize >= 3
-            return l if l.ID is "10" and diskSize >= 4
-
-        #console.log "watchRaidLevel", diskSize, filteredLevels
+            filteredLevels = listRaidLevel.filter (l) ->
+                return l if l.ID is "-1"
+                return l if l.ID is "0" and diskCount >= 2
+                return l if l.ID is "1" and diskCount >= 2
+                return l if l.ID is "5" and diskCount >= 3
+                return l if l.ID is "6" and diskCount >= 3
+                return l if l.ID is "10" and diskCount >= 4
 
         # поменяем список RaidLevel на доступные согласно зависимостям
         tabs.hardware.RaidLevel.options = filteredLevels

@@ -54561,8 +54561,7 @@
 	    });
 	  };
 	  $scope.$watch("order.hardware.platform.ID", function() {
-	    watchHdd($scope.tabs, $scope.order);
-	    return watchRaidLevel($scope.tabs, $scope.order);
+	    return watchHdd($scope.tabs, $scope.order);
 	  });
 	  $scope.$watch("order.hardware.raid.ID", function() {
 	    return watchRaidLevel($scope.tabs, $scope.order);
@@ -54572,7 +54571,8 @@
 	    return watchOS($scope.tabs, $scope.order);
 	  });
 	  $scope.$watch("tabs.hardware.hdd.selected", function() {
-	    return watchHddSelected($scope.tabs, $scope.order);
+	    watchHddSelected($scope.tabs, $scope.order);
+	    return watchRaidLevel($scope.tabs, $scope.order);
 	  }, true);
 	  $scope.$watch("order.software.os", function() {
 	    return watchOS($scope.tabs, $scope.order);
@@ -54626,34 +54626,37 @@
 	    }
 	  };
 	  watchRaidLevel = function(tabs, order) {
-	    var diskSize, filteredLevels, listRaidLevel, raidLevels;
+	    var diskCount, filteredLevels, listRaidLevel, raidLevels, ref;
 	    raidLevels = order.hardware.raid.Options.raid.split("-");
 	    raidLevels.unshift("-1");
 	    listRaidLevel = configCalculator.Data[94];
 	    filteredLevels = listRaidLevel.filter(function(l) {
 	      return raidLevels.indexOf(l.ID) > -1;
 	    });
-	    diskSize = Number(order.hardware.platform.Options.size, 10);
-	    filteredLevels = listRaidLevel.filter(function(l) {
-	      if (l.ID === "-1") {
-	        return l;
-	      }
-	      if (l.ID === "0" && diskSize >= 2) {
-	        return l;
-	      }
-	      if (l.ID === "1" && diskSize >= 2) {
-	        return l;
-	      }
-	      if (l.ID === "5" && diskSize >= 3) {
-	        return l;
-	      }
-	      if (l.ID === "6" && diskSize >= 3) {
-	        return l;
-	      }
-	      if (l.ID === "10" && diskSize >= 4) {
-	        return l;
-	      }
-	    });
+	    if ((ref = order.hardware.hdd) != null ? ref.ID : void 0) {
+	      diskCount = order.hardware.hdd.ID.length;
+	      console.log("diskCount", diskCount);
+	      filteredLevels = listRaidLevel.filter(function(l) {
+	        if (l.ID === "-1") {
+	          return l;
+	        }
+	        if (l.ID === "0" && diskCount >= 2) {
+	          return l;
+	        }
+	        if (l.ID === "1" && diskCount >= 2) {
+	          return l;
+	        }
+	        if (l.ID === "5" && diskCount >= 3) {
+	          return l;
+	        }
+	        if (l.ID === "6" && diskCount >= 3) {
+	          return l;
+	        }
+	        if (l.ID === "10" && diskCount >= 4) {
+	          return l;
+	        }
+	      });
+	    }
 	    tabs.hardware.RaidLevel.options = filteredLevels;
 	    $timeout(function() {
 	      return order.hardware.RaidLevel = filteredLevels[0];
