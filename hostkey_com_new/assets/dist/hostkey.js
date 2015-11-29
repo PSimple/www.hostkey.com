@@ -54374,7 +54374,7 @@
 	}]);
 
 	angular.module("dedicated.service.selected").controller("MicroCtrl", ["$scope", "$state", "$stateParams", "$timeout", "configCalculator", "billingCycleDiscount", "raidLevel", "$order", "components", function($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, raidLevel, $order, components) {
-	  var initOrderComponents, j, results;
+	  var initOrderComponents, j, results, watchTraffic;
 	  initOrderComponents = function(components, config) {
 	    var defaultOrder;
 	    defaultOrder = {};
@@ -54581,9 +54581,50 @@
 	  $scope.$watch("order.software.os", function() {
 	    return updateOS($scope.tabs, $scope.order);
 	  });
-	  return $scope.$watch("order.software.MSExchange.ID", function() {
+	  $scope.$watch("order.software.MSExchange.ID", function() {
 	    return $scope.order.software.ExchangeCount.Value = 1;
 	  });
+	  $scope.$watch("order.network.Bandwidth.ID", function() {
+	    return watchTraffic($scope.tabs, $scope.order, configCalculator);
+	  });
+
+	  /*
+	      Вспомогательные функции контроллера
+	   */
+	  watchTraffic = function(tabs, order, config) {
+	    var findOption, options, trafficOptions;
+	    trafficOptions = config.Data[14];
+	    findOption = function(opt, options) {
+	      var f;
+	      f = options.filter(function(o) {
+	        return o.ID === opt.ID;
+	      });
+	      return f.length;
+	    };
+	    if (order.network.Bandwidth.Name === "100Mbps") {
+	      options = trafficOptions.filter(function(o) {
+	        return o.Name === "100Mbps unmetered (26Tb max)";
+	      });
+	      if (!findOption(order.network.traffic, options)) {
+	        order.network.traffic = options[0];
+	      }
+	      tabs.network.traffic.options = options;
+	      return;
+	    }
+	    if (order.network.Bandwidth.Name === "1Gbps") {
+	      options = trafficOptions.filter(function(o) {
+	        return o.Name !== "100Mbps unmetered (26Tb max)";
+	      });
+	      if (!findOption(order.network.traffic, options)) {
+	        order.network.traffic = options[0];
+	      }
+	      tabs.network.traffic.options = options;
+	      return;
+	    }
+	    if (trafficOptions.length !== tabs.network.traffic.options.length) {
+	      tabs.network.traffic.options = trafficOptions;
+	    }
+	  };
 	}]);
 
 	updateRAM = function(tabs, order) {
