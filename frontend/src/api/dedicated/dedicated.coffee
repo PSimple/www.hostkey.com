@@ -37,6 +37,15 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
 
                     data.Content.Data[id].unshift(Name: "None")
 
+                # @todo костыль, нужно в апи менять порядок, чтобы первым был "Integrated RST RAID 0-10"
+                # для raid поставить интегрированный рэйд на первое место
+                angular.forEach data.Content.Data[8], (raid, i) ->
+                    if raid.ID is "132"
+                        integrated = raid
+                        delete data.Content.Data[8][i]
+                        data.Content.Data[8].unshift(integrated)
+
+
                 data.Content.Data[91] =
                     ComponentType_ID: "91"
                     Name: "RDP Licence"

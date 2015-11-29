@@ -54075,14 +54075,14 @@
 	        groups: groups
 	      }
 	    }).success(function(data) {
-	      var i, id, ids, len;
+	      var id, ids, j, len;
 	      if (data.Content) {
 	        angular.forEach(data.Content.Data, function(component, id) {
 	          return data.Content.Data[id] = objectToArray(component);
 	        });
 	        ids = [2, 5, 12, 20, 22, 15, 19];
-	        for (i = 0, len = ids.length; i < len; i++) {
-	          id = ids[i];
+	        for (j = 0, len = ids.length; j < len; j++) {
+	          id = ids[j];
 	          if (!angular.isArray(data.Content.Data[id])) {
 	            data.Content.Data[id] = [];
 	          }
@@ -54090,6 +54090,14 @@
 	            Name: "None"
 	          });
 	        }
+	        angular.forEach(data.Content.Data[8], function(raid, i) {
+	          var integrated;
+	          if (raid.ID === "132") {
+	            integrated = raid;
+	            delete data.Content.Data[8][i];
+	            return data.Content.Data[8].unshift(integrated);
+	          }
+	        });
 	        data.Content.Data[91] = {
 	          ComponentType_ID: "91",
 	          Name: "RDP Licence",
@@ -54367,7 +54375,7 @@
 	}]);
 
 	angular.module("dedicated.service.selected").controller("MicroCtrl", ["$scope", "$state", "$stateParams", "$timeout", "configCalculator", "billingCycleDiscount", "$order", "components", function($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components) {
-	  var initOrderComponents, j, results, watchHdd, watchHddSelected, watchOS, watchRAM, watchRaidLevel, watchTraffic;
+	  var initOrderComponents, j, results, watchHdd, watchHddSelected, watchOS, watchRAM, watchRaid, watchRaidLevel, watchTraffic;
 	  initOrderComponents = function(components, config) {
 	    var defaultOrder;
 	    defaultOrder = {};
@@ -54572,6 +54580,7 @@
 	  });
 	  $scope.$watch("tabs.hardware.hdd.selected", function() {
 	    watchHddSelected($scope.tabs, $scope.order);
+	    watchRaid($scope.tabs, $scope.order);
 	    return watchRaidLevel($scope.tabs, $scope.order);
 	  }, true);
 	  $scope.$watch("order.software.os", function() {
@@ -54625,6 +54634,37 @@
 	      tabs.network.traffic.options = trafficOptions;
 	    }
 	  };
+	  watchRaid = function(tabs, order) {
+	    var RaidOptions, diskCount, filterRaidOptions, findSASDisks, isIncludeSASDisks, ref;
+	    findSASDisks = function(diskIds) {
+	      var disks, filterDisks, filterDisksSAS;
+	      disks = configCalculator.Data[2];
+	      filterDisks = disks.filter(function(d) {
+	        return diskIds.indexOf(d.ID) > -1;
+	      });
+	      filterDisksSAS = filterDisks.filter(function(d) {
+	        return /SAS/.test(d.Name);
+	      });
+	      return filterDisksSAS.length;
+	    };
+	    if ((ref = order.hardware.hdd) != null ? ref.ID : void 0) {
+	      diskCount = order.hardware.hdd.ID.length;
+	      RaidOptions = configCalculator.Data[8];
+	      isIncludeSASDisks = findSASDisks(order.hardware.hdd.ID);
+	      filterRaidOptions = RaidOptions.filter(function(r) {
+	        if (isIncludeSASDisks && r.ID === "132") {
+	          return false;
+	        }
+	        if (diskCount >= Number(r.Options.disc, 10) || isIncludeSASDisks) {
+	          return true;
+	        }
+	      });
+	      tabs.hardware.raid.options = filterRaidOptions;
+	      $timeout(function() {
+	        return order.hardware.raid = filterRaidOptions[0];
+	      });
+	    }
+	  };
 	  watchRaidLevel = function(tabs, order) {
 	    var diskCount, filteredLevels, listRaidLevel, raidLevels, ref;
 	    raidLevels = order.hardware.raid.Options.raid.split("-");
@@ -54635,7 +54675,6 @@
 	    });
 	    if ((ref = order.hardware.hdd) != null ? ref.ID : void 0) {
 	      diskCount = order.hardware.hdd.ID.length;
-	      console.log("diskCount", diskCount);
 	      filteredLevels = listRaidLevel.filter(function(l) {
 	        if (l.ID === "-1") {
 	          return l;
@@ -54724,6 +54763,7 @@
 	    return order.hardware.hdd = {
 	      ID: ids,
 	      Price: price,
+	      ComponentType_ID: "2",
 	      Options: {
 	        short_name: reduceNames(names)
 	      }

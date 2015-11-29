@@ -200,6 +200,8 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     $scope.$watch "tabs.hardware.hdd.selected", ->
         watchHddSelected($scope.tabs, $scope.order)
+        watchRaid($scope.tabs, $scope.order)
+
         watchRaidLevel($scope.tabs, $scope.order)
     , true
 
@@ -246,6 +248,41 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
         return
 
+    watchRaid = (tabs, order) ->
+        # Список зависит от количества выбранных дисков и выбранных “SAS” дисков.
+        # Если количество дисков равно или больше “disc” (RAID) либо выбран хотя бы один “SAS” диск.
+        # То данный RAID контроллер отображается в списке активным.
+        # Иначе он отображается не активным и выбрать его нельзя.
+        # В списке присутствует интегрированный RAID контроллер ( Integrated RST RAID 0-10 ) его id = 132.
+        # Он стоит первым и становится не доступен, если выбран хотя бы один “SAS” диск.
+        findSASDisks = (diskIds) ->
+            disks = configCalculator.Data[2]
+
+            filterDisks = disks.filter (d) -> diskIds.indexOf(d.ID) > -1
+            filterDisksSAS = filterDisks.filter (d) -> /SAS/.test(d.Name)
+
+            filterDisksSAS.length
+
+
+        if order.hardware.hdd?.ID
+            diskCount = order.hardware.hdd.ID.length
+
+            RaidOptions = configCalculator.Data[8]
+            isIncludeSASDisks = findSASDisks(order.hardware.hdd.ID)
+
+            filterRaidOptions = RaidOptions.filter (r) ->
+                # исключим интегрированный raid если есть хотя бы один SAS диск
+                if isIncludeSASDisks and r.ID is "132"
+                    return false
+
+                if diskCount >= Number(r.Options.disc, 10) or isIncludeSASDisks
+                    return true
+
+            tabs.hardware.raid.options = filterRaidOptions
+            $timeout -> order.hardware.raid = filterRaidOptions[0]
+
+        return
+
     watchRaidLevel = (tabs, order) ->
         # Проверяется поддерживает ли выбранный контроллер очередной уровень “raid” (0,1,5,6,10).
         raidLevels = order.hardware.raid.Options.raid.split("-")
@@ -258,7 +295,6 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
         # Если успешно то происходит проверка на количество выбранных дисков. Смотри список ниже:
         if order.hardware.hdd?.ID
             diskCount = order.hardware.hdd.ID.length
-            console.log "diskCount", diskCount
 
             filteredLevels = listRaidLevel.filter (l) ->
                 return l if l.ID is "-1"
@@ -336,6 +372,7 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
         order.hardware.hdd =
             ID: ids
             Price: price
+            ComponentType_ID: "2"
             Options:
                 short_name: reduceNames(names)
 
