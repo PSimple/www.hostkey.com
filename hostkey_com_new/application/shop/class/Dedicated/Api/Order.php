@@ -62,6 +62,7 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
             "Summa" => $sum,
             "Discount" => $sum / 2,
             "OptionID" => 543,
+            "Configuration" => "bla bla bla",
         ]);
         return true;
     }
