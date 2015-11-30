@@ -10,13 +10,6 @@
 class Content_Section_ServiceInRussia extends Zero_Controller
 {
     /**
-     * The compile tpl in string and out
-     *
-     * @var bool
-     */
-    protected $ViewTplOutString = false;
-
-    /**
      * Контроллер по умолчанию.
      *
      * @return string
@@ -30,7 +23,7 @@ class Content_Section_ServiceInRussia extends Zero_Controller
         $this->View->Assign('content', Zero_App::$Section->Content);
 
         $this->Chunk_View();
-        return $this->View->Fetch($this->ViewTplOutString);
+        return $this->View;
     }
 
     /**

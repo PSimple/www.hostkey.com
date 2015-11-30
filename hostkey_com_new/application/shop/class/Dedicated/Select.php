@@ -11,7 +11,6 @@
  */
 class Shop_Dedicated_Select extends Zero_Controller
 {
-
     /**
      * Контроллер по умолчанию.
      *
@@ -24,6 +23,19 @@ class Shop_Dedicated_Select extends Zero_Controller
         return $this->View->Fetch(true);
     }
 
+    /**
+     * Вывод данных операции контроллера в шаблон
+     *
+     * Может быть переопределен конкретным контроллером
+     *
+     * @return bool
+     */
+    protected function Chunk_View()
+    {
+        $this->View->Assign("currency", "eur");
+        $this->View->Assign("currencyId", 2);
+        return true;
+    }
 
     /**
      * Фабричный метод по созданию контроллера.

@@ -189,30 +189,30 @@
                 accordion-group(is-open='tabs.hardware.open')
 
                     accordion-heading
-                        span.b-accordion__title-main {{tabs.hardware.name}}
+                        span.b-accordion__title-main(ng-bind="::tabs.hardware.name")
                         span.b-accordion__title-submain {{order.hardware|orderVerbose}}
 
                     table.b-dedicated__accordion-table
 
                         tr.b-dedicated__accordion-table-row
 
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.hardware.cpu.name}}
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes(ng-bind="::tabs.hardware.cpu.name")
 
                             td.b-dedicated__accordion-table-cell
 
-                                label.b-checkbox-submit.b-checkbox-submit_size_220(ng-repeat="cpu in tabs.hardware.cpu.options", ng-model="order.hardware.cpu", btn-radio="{{cpu}}")
+                                label.b-checkbox-submit(ng-repeat="(id, cpu) in tabs.hardware.cpu.options", ng-model="order.hardware.cpu", btn-radio="{{cpu}}")
                                     span.b-checkbox-submit__text {{cpu.Name}}
 
                         tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.hardware.ram.name}}
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes(ng-bind="::tabs.hardware.ram.name")
 
                             td.b-dedicated__accordion-table-cell.js-checked
                                 label.b-checkbox-submit.b-checkbox-submit_size_70(ng-repeat="ram in tabs.hardware.ram.options", ng-model="order.hardware.ram", btn-radio="{{ram}}", ng-class="{disable: !ram.Options.enable}")
                                     span.b-checkbox-submit__text {{ram.Name}}
 
 
-                        tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.hardware.platform.name}}
+                        tr.b-dedicated__accordion-table-row#platform
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes(ng-bind="::tabs.hardware.platform.name")
                             td.b-dedicated__accordion-table-cell.js-checked
                                 label.b-checkbox-submit.b-checkbox-submit_size_170(ng-repeat="platform in tabs.hardware.platform.options", ng-model="order.hardware.platform", btn-radio="{{platform}}")
                                     span.b-checkbox-submit__text {{platform.Name}}
@@ -221,6 +221,13 @@
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell
+                                            .table-select__cell-item(ng-show="hddItem<=tabs.hardware.hdd.size", ng-repeat="hddItem in tabs.hardware.hdd.sizeAvailable")
+                                                label.table-select__item-label {{hddItem}} disk
+                                                .table-select__item(ui-select="tabs.hardware.hdd.selected[$index]", options="tabs.hardware.hdd.options", width="170")
+
+                                //-table.table-select
                                     tr.table-select__row(ng-columns="hddRow in tabs.hardware.hdd.sizeAvailable by 4")
                                         td.table-select__cell(ng-repeat="hddColumn in hddRow")
                                             div(ng-show="hddColumn<=tabs.hardware.hdd.size")
@@ -235,20 +242,20 @@
 
                                         td.table-select__cell
                                             label.table-select__item-label LEVEL:
-                                            .table-select__item(ui-select="order.hardware.raidLevel", options="tabs.hardware.raidLevel.options", width="170")
+                                            .table-select__item(ui-select="order.hardware.RaidLevel", options="tabs.hardware.RaidLevel.options", width="170")
 
 
                 accordion-group
 
                     accordion-heading
-                        span.b-accordion__title-main {{tabs.software.name}}
+                        span.b-accordion__title-main(ng-bind="::tabs.software.name")
                         span.b-accordion__title-submain {{order.software|orderVerbose}}
 
                     table.b-dedicated__accordion-table
 
                         tr.b-dedicated__accordion-table-row
 
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.software.os.name}}
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.software.os.name")
 
                             td.b-dedicated__accordion-table-cell
 
@@ -261,17 +268,14 @@
                                         td.table-select__cell
                                             .table-select__item(ui-select="order.software.bit", options="tabs.software.bit.options", width="170")
 
-                                        td.table-select__cell(ng-style="{visibility: tabs.software.RDPLicenses.enable ? 'initial': 'hidden'}")
-                                            label.table-select__item-label.table-select__item-label_inline_yes
-                                                | RDP
-                                                br
-                                                | Licenses
-                                            input.table-select__input(type='text', name="RDPLicenses", ng-model="order.software.RDPLicenses.value")
-                                            span.table-select__input-x X € 3
+                                        td.table-select__cell(ng-style="{visibility: tabs.software.RdpLicCount.enable ? 'initial': 'hidden'}")
+                                            label.table-select__item-label.table-select__item-label_inline_yes(ng-bind-html="::tabs.software.RdpLicCount.name")
+                                            input.table-select__input(type='text', ng-model="order.software.RdpLicCount.Value")
+                                            span.table-select__input-x X € {{order.software.RdpLicCount.Price}}
 
 
                         tr.b-dedicated__accordion-table-row(ng-show="tabs.software.controlPanel.enable")
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.software.controlPanel.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
@@ -282,7 +286,7 @@
                                         td.table-select__cell
 
                         tr.b-dedicated__accordion-table-row(ng-show="tabs.software.MSSql.enable")
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.software.MSSql.name}}
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.software.MSSql.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
@@ -292,9 +296,7 @@
                                         td.table-select__cell
 
                         tr.b-dedicated__accordion-table-row(ng-show="tabs.software.MSExchange.enable")
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
-                                | MS Exchange
-                                | CALs
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.software.MSExchange.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
@@ -303,7 +305,7 @@
 
                                         td.table-select__cell(ng-show="order.software.MSExchange.ID")
                                             label.table-select__item-label.table-select__item-label_inline_yes Count
-                                            input.table-select__input(type='text', ng-model="order.software.MSExchangeCount")
+                                            input.table-select__input(type='text', ng-model="order.software.ExchangeCount.Value")
                                             span.table-select__input-x X € {{order.software.MSExchange.Price}}
                                         td.table-select__cell
 
@@ -315,7 +317,7 @@
 
                     table.b-dedicated__accordion-table
                         tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.traffic.name}}
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.traffic.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
@@ -325,9 +327,20 @@
                                         td.table-select__cell
                                         td.table-select__cell
 
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.Bandwidth.name")
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.network.Bandwidth", options="tabs.network.Bandwidth.options", width="340")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
 
                         tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.ip.name}}
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.ip.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
@@ -339,7 +352,7 @@
 
 
                         tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.vlan.name}}
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.vlan.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
@@ -351,7 +364,7 @@
 
 
                         tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes {{tabs.network.ftpBackup.name}}
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.ftpBackup.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
@@ -361,20 +374,41 @@
                                         td.table-select__cell
                                         td.table-select__cell
 
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.DDOSProtection.name")
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.network.DDOSProtection", options="tabs.network.DDOSProtection.options", width="340")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.IPv6.name")
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            label.fake-checkbox-label
+                                                span.fake-checkbox-label__box(ng-model="order.network.IPv6.Value", btn-checkbox="", ng-class="{'js-check':order.network.IPv6.Value}")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
 
                 accordion-group
 
                     accordion-heading
-                        span.b-accordion__title-main {{tabs.sla.name}}
+                        span.b-accordion__title-main(ng-bind="::tabs.sla.name")
                         span.b-accordion__title-submain {{order.sla|orderVerbose}}
 
 
                     table.b-dedicated__accordion-table
                         tr.b-dedicated__accordion-table-row
 
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
-                                | Service level
-                                | agreement
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.sla.serviceLevel.name")
 
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
@@ -386,12 +420,23 @@
                                         td.table-select__cell
 
                         tr.b-dedicated__accordion-table-row
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes FTP Backup
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.sla.management.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
                                         td.table-select__cell.table-select__cell_double_yes(colspan='2')
                                             .table-select__item(ui-select="order.sla.management", options="tabs.sla.management.options", width="340")
+
+                                        td.table-select__cell
+                                        td.table-select__cell
+
+                        tr.b-dedicated__accordion-table-row
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.sla.DCGrade.name")
+                            td.b-dedicated__accordion-table-cell
+                                table.table-select
+                                    tr.table-select__row
+                                        td.table-select__cell.table-select__cell_double_yes(colspan='2')
+                                            .table-select__item(ui-select="order.sla.DCGrade", options="tabs.sla.DCGrade.options", width="340")
 
                                         td.table-select__cell
                                         td.table-select__cell
@@ -406,43 +451,41 @@
                     td.b-dedicated__summary-table-cell Monthly Base Price
                     td.b-dedicated__summary-table-cell € 759
 
-            .b-dedicated__summary-subtitle {{tabs.hardware.name}}
+            .b-dedicated__summary-subtitle(ng-bind="::tabs.hardware.name")
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware", ng-show="opt.Options.short_name && opt.ID")
-                    td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
-                    td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware", ng-show="isValidOption(opt)")
+                    td.b-dedicated__summary-table-cell {{opt|optName}}
+                    td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
-            .b-dedicated__summary-subtitle {{tabs.software.name}}
+            .b-dedicated__summary-subtitle(ng-bind="::tabs.software.name")
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.software", ng-show="opt.Options.short_name && opt.ID")
-                    td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
-                    td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.software", ng-show="isValidOption(opt)")
+                    td.b-dedicated__summary-table-cell {{opt|optName}}
+                    td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
-            .b-dedicated__summary-subtitle {{tabs.network.name}}
+            .b-dedicated__summary-subtitle(ng-bind="::tabs.network.name")
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.network", ng-show="opt.Options.short_name && opt.ID")
-                    td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
-                    td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.network", ng-show="isValidOption(opt)")
+                    td.b-dedicated__summary-table-cell {{opt|optName}}
+                    td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
-            .b-dedicated__summary-subtitle {{tabs.sla.name}}
+            .b-dedicated__summary-subtitle(ng-bind="::tabs.sla.name")
             table.b-dedicated__summary-table
-                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.sla", ng-show="opt.Options.short_name && opt.ID")
-                    td.b-dedicated__summary-table-cell {{opt.Options.short_name}}
-                    td.b-dedicated__summary-table-cell € {{opt.PriceTotal || opt.Price}}
+                tr.b-dedicated__summary-table-row(ng-repeat="opt in order.sla", ng-show="isValidOption(opt)")
+                    td.b-dedicated__summary-table-cell {{opt|optName}}
+                    td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
-            .b-dedicated__summary-price
-                span.b-dedicated__summary-price-value €{{orderPrice - order.discount.billingCycle.Value/100 * orderPrice}}/year
-                span.b-dedicated__summary-price-discount(ng-show="order.discount.billingCycle.Value")
-                    | {{order.discount.billingCycle.Value}}% discount, save €{{order.discount.billingCycle.Value/100 * orderPrice}}
+            .b-dedicated__summary-price(ng-show="totalPrice.Summa")
+                span.b-dedicated__summary-price-value €{{totalPrice.Summa}}/month
+                span.b-dedicated__summary-price-discount(ng-show="order.discount.billingCycle.Percent")
+                    | {{order.discount.billingCycle.Percent}}% discount, save €{{totalPrice.Discount}}
 
-            a.b-submit.b-dedicated__summary-submit(href="", ng-click="buy()") Buy
+            a.b-submit.b-dedicated__summary-submit(href="", ng-click="buy(order)") Buy
 
     .b-container
         table.b-dedicated__accordion-table
             tr.b-dedicated__accordion-table-row
-                td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes
-                    | Billing cycle
-                    | discount:
+                td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.discount.billingCycle.name")
                 td.b-dedicated__accordion-table-cell
                     table.table-select
                         tr.table-select__row

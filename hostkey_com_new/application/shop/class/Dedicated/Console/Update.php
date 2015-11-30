@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Кеширование конфигураций кастомизатора
+ * Кеширование конфигураций dedicated
  *
- * Запршивает конфигурацию у инвентори для каждого раздела у которого установлены группы.
+ * Запршивает конфигурацию у инвентори.
  *
- * @package Shop.ConfigCalculator.Console
+ * @package Shop.Dedicated.Console
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015-09-24
  */
-class Shop_ConfigCalculator_Console_Update extends Zero_Controller
+class Shop_Dedicated_Console_Update extends Zero_Controller
 {
     /**
      * Контроллер по умолчанию
@@ -25,19 +25,12 @@ class Shop_ConfigCalculator_Console_Update extends Zero_Controller
             if ( false == $data['ErrorStatus'] )
             {
 
-                $obj = Shop_ConfigCalculator::Make();
                 $data['Content']['Currency'] = $row['Currency'];
                 $data['Content']['ComponentGroup'] = $row['ComponentGroup'];
-                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculator/' . md5($row['Currency'] . $row['ComponentGroup']) . '.data';
+                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($row['Currency'] . $row['ComponentGroup']) . '.data';
                 Zero_Helper_File::File_Save($path, serialize($data['Content']));
-//                $obj->Cache->Set_Data('ConfigCalculator/' . md5($row['Currency'] . $row['ComponentGroup']), $data['Content']);
             }
         }
-
-
-
-
-
         return true;
     }
 
@@ -45,7 +38,7 @@ class Shop_ConfigCalculator_Console_Update extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_ConfigCalculator_Console_Update
+     * @return Shop_Dedicated_Console_Update
      */
     public static function Make($properties = [])
     {

@@ -9,8 +9,22 @@ return [
      * Кеширование конфигураций калькулятора
      *
      * @see Shop_ConfigCalculator_Console_Update
+     * @deprecated
      */
     'Shop_ConfigCalculator_Console_Update' => [
+        'Minute' => '*/2',
+        'Hour' => '*',
+        'Day' => '*',
+        'Month' => '*',
+        'Week' => '*',
+        'IsActive' => true
+    ],
+    /**
+     * Кеширование конфигураций калькулятора
+     *
+     * @see Shop_Dedicated_Console_Update
+     */
+    'Shop_Dedicated_Console_Update' => [
         'Minute' => '*/2',
         'Hour' => '*',
         'Day' => '*',

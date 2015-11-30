@@ -13,6 +13,8 @@
         </h3>
 
         {plugin "Content_ContentBlock_Plugin" view="SelectService"}
+        <input type="hidden" name="currency" value="{$currency}">
+        <input type="hidden" name="currencyId" value="{$currencyId}">
 
         <div ui-view="solutions"></div>
 

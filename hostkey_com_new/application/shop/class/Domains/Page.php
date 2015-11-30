@@ -12,13 +12,6 @@
 class Shop_Domains_Page extends Zero_Controller
 {
     /**
-     * The compile tpl in string and out
-     *
-     * @var bool
-     */
-    protected $ViewTplOutString = true;
-
-    /**
      * Контроллер по умолчанию.
      *
      * @return Zero_View
@@ -27,7 +20,7 @@ class Shop_Domains_Page extends Zero_Controller
     {
         $this->Chunk_Init();
         $this->Chunk_View();
-        return $this->View->Fetch($this->ViewTplOutString);
+        return $this->View;
     }
 
     /**
