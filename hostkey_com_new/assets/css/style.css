@@ -5370,7 +5370,46 @@ p {
   background: url("/assets/img/220-3.GIF") 50% 5px no-repeat;
 }
 
+#callback_btn_manage_cloud .hide_href_button {
+  display: none;
+}
+
 
 .empty_field {
   border: 2px solid red;
+}
+
+.message_pole {
+  dispaly: none;
+}
+.write_message_success {
+  padding: 20px 10px;
+  border: 2px solid #945ae0;
+  background: #d4d6d9;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  margin: 10px auto;
+  width: 80%;
+  dispalay: block;
+}
+
+.write_message_success a {
+  color: #000;
+}
+
+.write_message_error {
+  padding: 20px 10px;
+  border: 2px solid red;
+  background: #ff692d;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  margin: 10px auto;
+  width: 80%;
+  dispalay: block;
 }
