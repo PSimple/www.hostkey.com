@@ -10,38 +10,16 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
         controller: "MicroCtrl"
         template: require "./selected.jade"
         resolve:
+            components: ($dedicated) -> $dedicated.components()
+
             configCalculator: ($dedicated, $stateParams) ->
                 $dedicated.getConfigCalculator($stateParams.type, $stateParams.country)
             billingCycleDiscount: ($dedicated) ->
                 $dedicated.billingCycleDiscount()
 
-            raidLevel: ($dedicated) ->
-                $dedicated.getRaidLevel()
-
     return
 
-angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, raidLevel, $order) ->
-
-    components = {
-        1: ['hardware', 'cpu'] # id: ['category', 'name']
-        3: ['hardware', 'ram']
-        6: ['hardware', 'platform']
-        8: ['hardware', 'raid']
-
-        4: ['software', 'os']
-        10:['software', 'bit']
-        5: ['software', 'controlPanel']
-        12:['software', 'MSSql']
-        20:['software', 'MSExchange']
-
-        14:['network', 'traffic']
-        7: ['network', 'ip']
-        15:['network', 'vlan']
-        19:['network', 'ftpBackup']
-
-        16:['sla', 'serviceLevel']
-        17:['sla', 'management']
-    }
+angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components) ->
 
     initOrderComponents = (components, config)->
         defaultOrder = {}
@@ -51,259 +29,388 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
             category = component[0] # категория компонента (hardware, software)
             name = component[1]     # имя компонента (hdd, os)
 
-            if angular.isObject(config[id])
-                defaultOrder[category] = {} unless defaultOrder[category]
-                defaultOrder[category][name] = _.values(config[id])[0]
+            defaultOrder[category] = {} unless defaultOrder[category]
+            # массив значений в опции компонента
+            if angular.isArray(config[id])
+                defaultOrder[category][name] = config[id][0]
+            else
+                # числовое значение в опции компонента
+                defaultOrder[category][name] = config[id]
 
             return
 
         defaultOrder.discount =
             billingCycle: billingCycleDiscount[0]
 
-        defaultOrder.hardware.raidLevel = raidLevel[0]
-
         defaultOrder
 
     # формируем заказ на сервер
-    $scope.order = initOrderComponents(components, configCalculator)
+    $scope.order = initOrderComponents(components, configCalculator.Data)
 
-    unless configCalculator
+    unless configCalculator.Data
         alert "Нет конфиграции для #{$stateParams.type} #{$stateParams.country}"
         $state.go "^", $stateParams, {reload:true}
         return
-
-    $timeout ->
-        $.scrollTo '#selectedSolution',
-            offset: -68
-            duration: 1000
 
     $scope.close = ->
         $.scrollTo('.js-switch-box', 1000)
         $state.go "^", $stateParams, {reload:true}
 
-    $scope.orderPrice = 0
+    # объект с суммой заказа и скидкой
+    $scope.totalPrice = {}
 
     $scope.$watch "order", (n, o) ->
         unless angular.equals(n, o)
             $order.getPrice(n)
-            .then (priceData) ->
-                $scope.orderPrice = priceData.totalPrice
-    , true
+            .then (totalPrice) ->
+                $scope.totalPrice = totalPrice
+    , 3000
 
     $scope.tabs =
         hardware:
-            open: true
             name: "Hardware"
             cpu:
                 name: "CPU"
-                options: configCalculator[1]
+                options: configCalculator.Data[1]
 
             platform:
                 name: "disks"
-                options: configCalculator[6]
+                options: configCalculator.Data[6]
 
             hdd:
                 size: 0
                 sizeAvailable: [1..24]
                 selected: []
-                options: configCalculator[2]
+                options: configCalculator.Data[2]
 
             raid:
-                options: configCalculator[8]
+                options: configCalculator.Data[8]
 
-            raidLevel:
-                options: raidLevel
+            RaidLevel:
+                options: configCalculator.Data[94]
 
             ram:
                 name: "RAM"
-                options: configCalculator[3]
+                options: configCalculator.Data[3]
 
         software:
             name: "Software"
             os:
                 name: "OS"
-                options: configCalculator[4]
+                options: configCalculator.Data[4]
             bit:
                 name: "Bit"
-                options: configCalculator[10]
+                options: configCalculator.Data[10]
             controlPanel:
                 enable: true
                 name: "Control Panel"
-                options: configCalculator[5]
+                options: configCalculator.Data[5]
             MSSql:
                 enable: false
                 name: "MS SQL"
-                options: configCalculator[12]
+                options: configCalculator.Data[12]
             MSExchange:
                 enable: false
                 name: "MS Exchange Cals"
-                options: configCalculator[20]
-            RDPLicenses:
+                options: configCalculator.Data[20]
+            RdpLicCount:
+                name: "RDP<br>Licenses"
                 enable: false
-                value: 0
 
         network:
             name: "Network"
             traffic:
                 name: "Traffic"
-                options: configCalculator[14]
+                options: configCalculator.Data[14]
+            Bandwidth:
+                name: "Bandwidth"
+                options: configCalculator.Data[18]
             ip:
                 name: "Ip"
-                options: configCalculator[7]
+                options: configCalculator.Data[7]
             vlan:
                 name: "Vlan"
-                options: configCalculator[15]
+                options: configCalculator.Data[15]
             ftpBackup:
                 name: "ftp backup"
-                options: configCalculator[19]
+                options: configCalculator.Data[19]
+
+            DDOSProtection:
+                name: "DDOS Protection"
+                options: configCalculator.Data[22]
+
+            IPv6:
+                name: "IPv6 block"
+
 
         sla:
             name: "SLA"
             serviceLevel:
-                name: "service level"
-                options: configCalculator[16]
+                name: "Service level agreement"
+                options: configCalculator.Data[16]
             management:
-                name: "management"
-                options: configCalculator[17]
+                name: "Management"
+                options: configCalculator.Data[17]
+            DCGrade:
+                name: "DC grade"
+                options: configCalculator.Data[21]
 
         discount:
             billingCycle:
+                name: "Billing cycle discount:"
                 options: billingCycleDiscount
 
-    $scope.buy = ->
-        $order.post($scope.order)
+    $scope.isValidOption = (opt) ->
+        return false unless opt.Options?.short_name
+
+        if opt.hasOwnProperty('Value')
+            if opt.Value > 0
+                return true
+        else
+            if opt.hasOwnProperty('ID')
+                return true
+
+    $timeout ->
+        $.scrollTo '#selectedSolution',
+            offset: -68
+            duration: 1000
+        $timeout ->
+            $scope.tabs.hardware.open = true
+        , 1000
+
+    $scope.buy = (order) ->
+        $order.post(order)
         .then (orderLink) ->
+            alert orderLink
             console.log orderLink
-#            window.location = orderLink
+            #window.location = orderLink
 
         .catch (error) ->
-            alert "Ошибка формирования заказа"
+            if error.Message
+                alert error.Message
 
     $scope.$watch "order.hardware.platform.ID", ->
-        updateHdd($scope.tabs, $scope.order)
+        watchHdd($scope.tabs, $scope.order)
+
+    $scope.$watch "order.hardware.raid.ID", -> watchRaidLevel($scope.tabs, $scope.order)
 
     $scope.$watch "order.hardware.cpu", ->
-        updateRAM($scope.tabs, $scope.order)
-        updateOS($scope.tabs, $scope.order)
+        watchRAM($scope.tabs, $scope.order)
+        watchOS($scope.tabs, $scope.order)
 
     $scope.$watch "tabs.hardware.hdd.selected", ->
-        updateHddSelected($scope.tabs, $scope.order)
+        watchHddSelected($scope.tabs, $scope.order)
+        watchRaid($scope.tabs, $scope.order)
+
+        watchRaidLevel($scope.tabs, $scope.order)
     , true
 
-    $scope.$watch "order.software.os", -> updateOS($scope.tabs, $scope.order)
+    $scope.$watch "order.software.os", -> watchOS($scope.tabs, $scope.order)
 
     $scope.$watch "order.software.MSExchange.ID", ->
-        $scope.order.software.MSExchangeCount = 1
+        $scope.order.software.ExchangeCount.Value = 1
 
-    $scope.$watch "order.software.MSExchangeCount", ->
-        if $scope.order.software.MSExchange?.Price
-            price = Number($scope.order.software.MSExchange.Price, 10)
-            count = Number($scope.order.software.MSExchangeCount, 10)
-            $scope.order.software.MSExchange.PriceTotal = price * count
+    $scope.$watch "order.network.Bandwidth.ID", -> watchTraffic($scope.tabs, $scope.order, configCalculator)
 
-# обновим доступные блоки памяти
-updateRAM = (tabs, order)->
-    max_mem = order.hardware.cpu.Options.max_mem
-    console.log "updateRAM", order.hardware.cpu.Name, max_mem
+    ###
+        Вспомогательные функции контроллера
+    ###
 
-    angular.forEach tabs.hardware.ram.options, (opt, optId) ->
-        if Number(opt.Options.size, 10) <= Number(max_mem, 10)
-            tabs.hardware.ram.options[optId].Options.enable = true
-        else
-            tabs.hardware.ram.options[optId].Options.enable = false
+    # зависимость Traffic от Bandwidth
+    watchTraffic = (tabs, order, config) ->
+        trafficOptions = config.Data[14]
 
-    #при выборе CPU выбранная память сбрасывается до минимальной
-    order.hardware.ram = _.values(tabs.hardware.ram.options)[0]
-    return
+        # поиск текущей опции в отфильтрованном списке опций
+        findOption = (opt, options) ->
+            f = options.filter (o) -> o.ID is opt.ID
+            f.length
 
-updateHdd = (tabs, order) ->
-    return unless order.hardware?.platform
+        # При выборе ”100 Mbps” оставить в поле Traffic (п. 3.1) только “100 mbps Unmetered (26Tb max)”, остальные опции удалить.
+        if order.network.Bandwidth.Name is "100Mbps"
+            options = trafficOptions.filter (o) -> o.Name is "100Mbps unmetered (26Tb max)"
+            unless findOption(order.network.traffic, options)
+                $timeout -> order.network.traffic = options[0]
+            tabs.network.traffic.options = options
+            return
 
-    size = order.hardware.platform.Options.size
-    # количество дисков
-    tabs.hardware.hdd.size = size
-    tabs.hardware.hdd.selected = []
+        # При выборе "1Gbps (10)" убираем опцию "100 mbps Unmetered (26Tb max)" в поле Traffic, остальные оставляем.
+        if order.network.Bandwidth.Name is "1Gbps"
+            options = trafficOptions.filter (o) -> o.Name isnt "100Mbps unmetered (26Tb max)"
+            tabs.network.traffic.options = options
+            unless findOption(order.network.traffic, options)
+                $timeout -> order.network.traffic = options[0]
 
-    for i in [1..size]
-        tabs.hardware.hdd.selected[i-1] = _.values(tabs.hardware.hdd.options)[0]
+            return
 
-updateHddSelected = (tabs, order) ->
+        # вернем оригинальные варианты опции Traffic
+        if trafficOptions.length isnt tabs.network.traffic.options.length
+            tabs.network.traffic.options = trafficOptions
 
-    price = 0
-    hddCount = 0
-    names = {}
-    ids = []
+        return
 
-    angular.forEach tabs.hardware.hdd.selected, (hdd) ->
-        # пропустим None и невалидные опции
-        return unless hdd?.Options or hdd?.Price
+    watchRaid = (tabs, order) ->
+        # Список зависит от количества выбранных дисков и выбранных “SAS” дисков.
+        # Если количество дисков равно или больше “disc” (RAID) либо выбран хотя бы один “SAS” диск.
+        # То данный RAID контроллер отображается в списке активным.
+        # Иначе он отображается не активным и выбрать его нельзя.
+        # В списке присутствует интегрированный RAID контроллер ( Integrated RST RAID 0-10 ) его id = 132.
+        # Он стоит первым и становится не доступен, если выбран хотя бы один “SAS” диск.
+        findSASDisks = (diskIds) ->
+            disks = configCalculator.Data[2]
 
-        price += Number(hdd.Price, 10)
-        hddCount++
+            filterDisks = disks.filter (d) -> diskIds.indexOf(d.ID) > -1
+            filterDisksSAS = filterDisks.filter (d) -> /SAS/.test(d.Name)
 
-        name = hdd.Options.short_name
-        if names[name]
-            names[name]++
-        else
-            names[name] = 1
+            filterDisksSAS.length
 
-        ids.push hdd.ID
 
-    reduceNames = (names) ->
-        short_name = []
+        if order.hardware.hdd?.ID
+            diskCount = order.hardware.hdd.ID.length
 
-        angular.forEach names, (count, name) ->
-            if count > 1
-                short_name.push "#{count}x#{name}"
+            RaidOptions = configCalculator.Data[8]
+            isIncludeSASDisks = findSASDisks(order.hardware.hdd.ID)
+
+            filterRaidOptions = RaidOptions.filter (r) ->
+                # исключим интегрированный raid если есть хотя бы один SAS диск
+                if isIncludeSASDisks and r.ID is "132"
+                    return false
+
+                if diskCount >= Number(r.Options.disc, 10) or isIncludeSASDisks
+                    return true
+
+            tabs.hardware.raid.options = filterRaidOptions
+            $timeout -> order.hardware.raid = filterRaidOptions[0]
+
+        return
+
+    watchRaidLevel = (tabs, order) ->
+        # Проверяется поддерживает ли выбранный контроллер очередной уровень “raid” (0,1,5,6,10).
+        raidLevels = order.hardware.raid.Options.raid.split("-")
+        raidLevels.unshift("-1") # No Raid
+
+        listRaidLevel = configCalculator.Data[94]
+
+        filteredLevels = listRaidLevel.filter (l) -> raidLevels.indexOf(l.ID) > -1
+
+        # Если успешно то происходит проверка на количество выбранных дисков. Смотри список ниже:
+        if order.hardware.hdd?.ID
+            diskCount = order.hardware.hdd.ID.length
+
+            filteredLevels = listRaidLevel.filter (l) ->
+                return l if l.ID is "-1"
+                return l if l.ID is "0" and diskCount >= 2
+                return l if l.ID is "1" and diskCount >= 2
+                return l if l.ID is "5" and diskCount >= 3
+                return l if l.ID is "6" and diskCount >= 3
+                return l if l.ID is "10" and diskCount >= 4
+
+        # поменяем список RaidLevel на доступные согласно зависимостям
+        tabs.hardware.RaidLevel.options = filteredLevels
+        $timeout -> order.hardware.RaidLevel = filteredLevels[0]
+
+        return
+
+    # обновим доступные блоки памяти
+    watchRAM = (tabs, order)->
+        max_mem = order.hardware.cpu.Options.max_mem
+        #console.log "watchRAM", order.hardware.cpu.Name, max_mem
+
+        angular.forEach tabs.hardware.ram.options, (opt, optId) ->
+            if Number(opt.Options.size, 10) <= Number(max_mem, 10)
+                tabs.hardware.ram.options[optId].Options.enable = true
             else
-                short_name.push name
+                tabs.hardware.ram.options[optId].Options.enable = false
 
-        short_name.join("*")
+        #при выборе CPU выбранная память сбрасывается до минимальной
+        order.hardware.ram = _.values(tabs.hardware.ram.options)[0]
+        return
 
-    order.hardware.hdd =
-        ID: ids
-        Price: price
-        Options:
-            short_name: reduceNames(names)
+    watchHdd = (tabs, order) ->
+        return unless order.hardware?.platform
 
-    console.log "updateHddSelected", order.hardware.hdd
+        size = order.hardware.platform.Options.size
+        # количество дисков
+        tabs.hardware.hdd.size = size
+        tabs.hardware.hdd.selected = []
 
-updateOS = (tabs, order) ->
-    multiplicator = 1
+        for i in [1..size]
+            tabs.hardware.hdd.selected[i-1] = _.values(tabs.hardware.hdd.options)[0]
 
-    # тригерим опции для винды
-    enableWindowsOptions = ->
-        tabs.software.controlPanel.enable = false
+    watchHddSelected = (tabs, order) ->
 
-        tabs.software.MSSql.enable = true
-        tabs.software.RDPLicenses.enable = true
-        tabs.software.MSExchange.enable = true
+        price = 0
+        hddCount = 0
+        names = {}
+        ids = []
 
-        delete order.software.controlPanel
+        angular.forEach tabs.hardware.hdd.selected, (hdd) ->
+            # пропустим None и невалидные опции
+            return unless hdd?.Options or hdd?.Price
 
-    enableUnixOptions = ->
-        tabs.software.controlPanel.enable = true
+            price += Number(hdd.Price, 10)
+            hddCount++
 
-        tabs.software.MSSql.enable = false
-        tabs.software.RDPLicenses.enable = false
-        tabs.software.MSExchange.enable = false
+            name = hdd.Options.short_name
+            if names[name]
+                names[name]++
+            else
+                names[name] = 1
 
-        delete order.software.MSSql
-        delete order.software.RDPLicenses
-        delete order.software.MSExchange
+            ids.push hdd.ID
 
+        reduceNames = (names) ->
+            short_name = []
 
-    if /Windows/.test(order.software.os.Name)
-        # Если выбрана ОС семейства Windows (п. 2.1) то цена ОС умножается на количество процессоров. параметр ”cpu_count”
-        multiplicator = Number(order.hardware.cpu.Options.cpu_count, 10)
+            angular.forEach names, (count, name) ->
+                if count > 1
+                    short_name.push "#{count}x#{name}"
+                else
+                    short_name.push name
 
-        enableWindowsOptions()
-    else
-        enableUnixOptions()
+            short_name.join("*")
 
-    price = Number(order.software.os.Price, 10)
-    order.software.os.PriceTotal = price * multiplicator
+        order.hardware.hdd =
+            ID: ids
+            Price: price
+            ComponentType_ID: "2"
+            Options:
+                short_name: reduceNames(names)
 
+    #    selectedPlatformSize = Number(order.hardware.platform.Options.size, 10)
+    #    if selectedPlatformSize > 8
+    #        $.scrollTo '#platform',
+    #            offset: -80
+    #            duration: 1000
+
+    watchOS = (tabs, order) ->
+        # тригерим опции для винды
+        enableWindowsOptions = ->
+            tabs.software.controlPanel.enable = false
+
+            tabs.software.MSSql.enable = true
+            tabs.software.RdpLicCount.enable = true
+            tabs.software.MSExchange.enable = true
+
+            order.software.controlPanel = Name: "None"
+
+        enableUnixOptions = ->
+            tabs.software.controlPanel.enable = true
+
+            tabs.software.MSSql.enable = false
+            tabs.software.RdpLicCount.enable = false
+            tabs.software.MSExchange.enable = false
+
+            order.software.MSSql = Name: "None"
+            order.software.MSExchange = Name: "None"
+            order.software.RdpLicCount.Value = 0
+            order.software.ExchangeCount.Value = 0
+
+        if /Windows/.test(order.software.os.Name)
+            enableWindowsOptions()
+        else
+            enableUnixOptions()
+
+        return
 
     return
 

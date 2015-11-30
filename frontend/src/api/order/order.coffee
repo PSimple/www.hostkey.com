@@ -1,98 +1,128 @@
 angular.module "api.order", ["config"]
 
-angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG) ->
+angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $filter) ->
     that = this
 
-    @getPrice = (order) ->
+    ###
+        Посчитать сумму заказа и скидку, без формирования заказа
+    ###
+    @getPrice = (rawOrder) ->
         deferred = $q.defer()
 
-        # расчет конечной стоимости на стороне клиента
-        # @todo переделать на расчет на стороне сервера
-        totalPrice = 0
-        angular.forEach order, (group) ->
-            angular.forEach group, (opt) ->
-                if opt?.PriceTotal
-                    totalPrice += Number(opt.PriceTotal)
+        if window.isDev
+            url = "/assets/dist/order_calculation.json"
+        else
+            url = "#{CONFIG.apiUrl}/dedicated/order"
+
+        that.orderFormat(rawOrder)
+        .then (order) ->
+            order.Calculation = true
+
+            $http
+                url: url
+                method: if window.isDev then "GET" else "POST"
+                data: order
+
+            .success (data) ->
+                if data.Code is 0
+                    deferred.resolve data.Content
                 else
-                    if opt?.Price
-                        totalPrice += Number(opt.Price)
+                    deferred.reject data
 
-        price =
-            totalPrice: totalPrice
-            discount: 10
-
-        $timeout ->
-            console.log "order, price", order, price
-            deferred.resolve price
-        , 500
+            .error (data) ->
+                deferred.reject data
 
         deferred.promise
 
-    @post = (order) ->
+    # преобразуем объект заказа в нужный формат, который понимает метод $order.post()
+    @orderFormat = (rawOrder) ->
+
         deferred = $q.defer()
 
-        fakeOrder =
+        rawOrder = angular.copy(rawOrder)
+
+        order =
             Hardware:
-                Cpu: 345
-                Ram: 345
-                Platform: 345
-                Hdd: [
-                    345
-                    345
-                    345
-                    345
-                ]
-                Raid: 345
-                RaidLevel: 5
+                Cpu: rawOrder.hardware.cpu.ID
+                Ram: rawOrder.hardware.ram.ID
+                Platform: rawOrder.hardware.platform.ID
+                Hdd: rawOrder.hardware.hdd.ID
+                Raid: rawOrder.hardware.raid.ID
+                RaidLevel: rawOrder.hardware.RaidLevel.ID
+                Label: $filter('orderVerbose')(rawOrder.hardware)
+
             Software:
-                OS: 345
-                Bit: 345
-                RdpLicCount: 2
-                Sql: 345
-                Exchange: 345
-                ExchangeCount: 3
-                CP: 345
+                OS: rawOrder.software.os.ID
+                Bit: rawOrder.software.bit.ID
+                CP: rawOrder.software.controlPanel?.ID
+                RdpLicCount: Number(rawOrder.software.RdpLicCount.Value, 10)
+                Sql: rawOrder.software.MSSql?.ID
+                Exchange: rawOrder.software.MSExchange?.ID
+                ExchangeCount: Number(rawOrder.software.ExchangeCount.Value, 10)
+                Label: $filter('orderVerbose')(rawOrder.software)
+
             Network:
-                Traffic: 345
-                Bandwidth: 345
-                IP: 345
-                Vlan: 345
-                FtpBackup: 345
+                Traffic: rawOrder.network.traffic.ID
+                Bandwidth: rawOrder.network.Bandwidth.ID
+                DDOSProtection: rawOrder.network.DDOSProtection.ID
+                IP: rawOrder.network.ip.ID
+                Vlan: rawOrder.network.vlan.ID
+                FtpBackup: rawOrder.network.ftpBackup.ID
+                IPv6: rawOrder.network.IPv6.Value
+                Label: $filter('orderVerbose')(rawOrder.network)
+
             SLA:
-                ServiceLevel: 345
-                Management: 345
-                Comment: "bla bla bla"
-                CycleDiscount: "monthly"
+                ServiceLevel: rawOrder.sla.serviceLevel.ID
+                Management: rawOrder.sla.management.ID
+                DCGrade: rawOrder.sla.DCGrade.ID
+                Comment: ""
+                CycleDiscount: rawOrder.discount.billingCycle.Period
+                Label: $filter('orderVerbose')(rawOrder.sla)
+
+            Currency: 'eur'
+            Groups: 'NL,Mini'
+
+        deferred.resolve order
+
+        deferred.promise
+
+    @post = (rawOrder) ->
+        deferred = $q.defer()
 
         if window.isDev
             url = "/assets/dist/order_post.json"
         else
-            url = "#{CONFIG.apiUrl}/configcalculator/order"
+            url = "#{CONFIG.apiUrl}/dedicated/order"
 
-        $http
-            url: url
-            method: if window.isDev then "GET" else "POST"
-            data: fakeOrder
+        that.orderFormat(rawOrder)
+        .then (order) ->
+            # формируем заказ
+            order.Calculation = false
 
-        .success (data) ->
-            if data.Code is 0 and data.Content
+            $http
+                url: url
+                method: if window.isDev then "GET" else "POST"
+                data: order
 
-                params =
-                    a: "add"
-                    currency: window.currencyId
-                    pid: window.pid
-                    configoption:
-                        "600": data.Content.Inventory
-                    billingcycle: "quarterly"
-                    customfield:
-                        "220": data.Content.Configuration
+            .success (data) ->
+                if data.Code is 0 and data.Content
 
-                serializeParams = angular.element.param(params)
+                    params =
+                        a: "add"
+                        currency: window.currencyId
+                        pid: window.pid
+                        configoption:
+                            "600": data.Content.OptionID
+                        billingcycle: "quarterly"
+                        customfield:
+                            "220": data.Content.Configuration
 
-                deferred.resolve "https://bill.hostkey.com/cart.php?#{serializeParams}"
+                    serializeParams = angular.element.param(params)
 
-            else
-                deferred.reject(data)
+                    deferred.resolve "https://bill.hostkey.com/cart.php?#{serializeParams}"
+
+                else
+                    deferred.reject(data)
 
         deferred.promise
 
