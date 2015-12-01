@@ -24,7 +24,7 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
                 groups: groups
 
         .success (data) ->
-            if data.Content
+            if data.Content and Number(data.Code, 10) >=0
 
                 angular.forEach data.Content.Data, (component, id) ->
                     data.Content.Data[id] = objectToArray(component)
@@ -69,7 +69,7 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
 
                 deferred.resolve data.Content
             else
-                deferred.resolve false
+                deferred.resolve data
 
         deferred.promise
 
