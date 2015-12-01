@@ -92,9 +92,9 @@
 
 	__webpack_require__(15);
 
-	__webpack_require__(26);
+	__webpack_require__(28);
 
-	__webpack_require__(29);
+	__webpack_require__(31);
 
 	angular.module("dedicated.service", ["ngSanitize", "ui", "ui.router", "api", "dedicated.service.selected"]);
 
@@ -105,7 +105,7 @@
 	    views: {
 	      "solutions": {
 	        controller: "DedicatedServiceSolutionsCtrl",
-	        template: __webpack_require__(34)
+	        template: __webpack_require__(36)
 	      }
 	    }
 	  });
@@ -43472,7 +43472,9 @@
 
 	__webpack_require__(25);
 
-	angular.module("ui", ["ui.buttons", "ui.scrollBlock", "ui.accordion", "ui.select", "ui.columns"]);
+	__webpack_require__(26);
+
+	angular.module("ui", ["ui.buttons", "ui.scrollBlock", "ui.accordion", "ui.select", "ui.columns", "ui.notifications"]);
 
 	angular.module("ui").filter('orderVerbose', function() {
 	  return function(obj) {
@@ -54034,9 +54036,286 @@
 /* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(27);
+	var humane = __webpack_require__(27);
 
-	__webpack_require__(28);
+	angular.module("ui.notifications", []);
+
+	angular.module("ui.notifications").factory("notifications", function () {
+	    var notifications, wrap;
+	    notifications = humane.create({
+	        baseCls: "humane-flatty",
+	        timeout: 2000
+	    });
+	    wrap = function (message, config) {
+	        return notifications.spawn(config)(message);
+	    };
+	    notifications.error = function (message) {
+	        return wrap(message, {
+	            addnCls: "humane-flatty-error",
+	            timeout: 4000
+	        });
+	    };
+	    notifications.success = function (message) {
+	        return wrap(message, {
+	            addnCls: "humane-flatty-success",
+	            timeout: 2000
+	        });
+	    };
+	    return notifications;
+	});
+
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * humane.js
+	 * Humanized Messages for Notifications
+	 * @author Marc Harter (@wavded)
+	 * @example
+	 *   humane.log('hello world');
+	 * @license MIT
+	 * See more usage examples at: http://wavded.github.com/humane-js/
+	 */
+
+	;!function (name, context, definition) {
+	   if (true) module.exports = definition(name, context)
+	   else if (typeof define === 'function' && typeof define.amd  === 'object') define(definition)
+	   else context[name] = definition(name, context)
+	}('humane', this, function (name, context) {
+	   var win = window
+	   var doc = document
+
+	   var ENV = {
+	      on: function (el, type, cb) {
+	         'addEventListener' in win ? el.addEventListener(type,cb,false) : el.attachEvent('on'+type,cb)
+	      },
+	      off: function (el, type, cb) {
+	         'removeEventListener' in win ? el.removeEventListener(type,cb,false) : el.detachEvent('on'+type,cb)
+	      },
+	      bind: function (fn, ctx) {
+	         return function () { fn.apply(ctx,arguments) }
+	      },
+	      isArray: Array.isArray || function (obj) { return Object.prototype.toString.call(obj) === '[object Array]' },
+	      config: function (preferred, fallback) {
+	         return preferred != null ? preferred : fallback
+	      },
+	      transSupport: false,
+	      useFilter: /msie [678]/i.test(navigator.userAgent), // sniff, sniff
+	      _checkTransition: function () {
+	         var el = doc.createElement('div')
+	         var vendors = { webkit: 'webkit', Moz: '', O: 'o', ms: 'MS' }
+
+	         for (var vendor in vendors)
+	            if (vendor + 'Transition' in el.style) {
+	               this.vendorPrefix = vendors[vendor]
+	               this.transSupport = true
+	            }
+	      }
+	   }
+	   ENV._checkTransition()
+
+	   var Humane = function (o) {
+	      o || (o = {})
+	      this.queue = []
+	      this.baseCls = o.baseCls || 'humane'
+	      this.addnCls = o.addnCls || ''
+	      this.timeout = 'timeout' in o ? o.timeout : 2500
+	      this.waitForMove = o.waitForMove || false
+	      this.clickToClose = o.clickToClose || false
+	      this.timeoutAfterMove = o.timeoutAfterMove || false
+	      this.container = o.container
+
+	      try { this._setupEl() } // attempt to setup elements
+	      catch (e) {
+	        ENV.on(win,'load',ENV.bind(this._setupEl, this)) // dom wasn't ready, wait till ready
+	      }
+	   }
+
+	   Humane.prototype = {
+	      constructor: Humane,
+	      _setupEl: function () {
+	         var el = doc.createElement('div')
+	         el.style.display = 'none'
+	         if (!this.container){
+	           if(doc.body) this.container = doc.body;
+	           else throw 'document.body is null'
+	         }
+	         this.container.appendChild(el)
+	         this.el = el
+	         this.removeEvent = ENV.bind(function(){
+	            var timeoutAfterMove = ENV.config(this.currentMsg.timeoutAfterMove,this.timeoutAfterMove)
+	            if (!timeoutAfterMove){
+	               this.remove()
+	            } else {
+	               setTimeout(ENV.bind(this.remove,this),timeoutAfterMove)
+	            }
+	         },this)
+
+	         this.transEvent = ENV.bind(this._afterAnimation,this)
+	         this._run()
+	      },
+	      _afterTimeout: function () {
+	         if (!ENV.config(this.currentMsg.waitForMove,this.waitForMove)) this.remove()
+
+	         else if (!this.removeEventsSet) {
+	            ENV.on(doc.body,'mousemove',this.removeEvent)
+	            ENV.on(doc.body,'click',this.removeEvent)
+	            ENV.on(doc.body,'keypress',this.removeEvent)
+	            ENV.on(doc.body,'touchstart',this.removeEvent)
+	            this.removeEventsSet = true
+	         }
+	      },
+	      _run: function () {
+	         if (this._animating || !this.queue.length || !this.el) return
+
+	         this._animating = true
+	         if (this.currentTimer) {
+	            clearTimeout(this.currentTimer)
+	            this.currentTimer = null
+	         }
+
+	         var msg = this.queue.shift()
+	         var clickToClose = ENV.config(msg.clickToClose,this.clickToClose)
+
+	         if (clickToClose) {
+	            ENV.on(this.el,'click',this.removeEvent)
+	            ENV.on(this.el,'touchstart',this.removeEvent)
+	         }
+
+	         var timeout = ENV.config(msg.timeout,this.timeout)
+
+	         if (timeout > 0)
+	            this.currentTimer = setTimeout(ENV.bind(this._afterTimeout,this), timeout)
+
+	         if (ENV.isArray(msg.html)) msg.html = '<ul><li>'+msg.html.join('<li>')+'</ul>'
+
+	         this.el.innerHTML = msg.html
+	         this.currentMsg = msg
+	         this.el.className = this.baseCls
+	         if (ENV.transSupport) {
+	            this.el.style.display = 'block'
+	            setTimeout(ENV.bind(this._showMsg,this),50)
+	         } else {
+	            this._showMsg()
+	         }
+
+	      },
+	      _setOpacity: function (opacity) {
+	         if (ENV.useFilter){
+	            try{
+	               this.el.filters.item('DXImageTransform.Microsoft.Alpha').Opacity = opacity*100
+	            } catch(err){}
+	         } else {
+	            this.el.style.opacity = String(opacity)
+	         }
+	      },
+	      _showMsg: function () {
+	         var addnCls = ENV.config(this.currentMsg.addnCls,this.addnCls)
+	         if (ENV.transSupport) {
+	            this.el.className = this.baseCls+' '+addnCls+' '+this.baseCls+'-animate'
+	         }
+	         else {
+	            var opacity = 0
+	            this.el.className = this.baseCls+' '+addnCls+' '+this.baseCls+'-js-animate'
+	            this._setOpacity(0) // reset value so hover states work
+	            this.el.style.display = 'block'
+
+	            var self = this
+	            var interval = setInterval(function(){
+	               if (opacity < 1) {
+	                  opacity += 0.1
+	                  if (opacity > 1) opacity = 1
+	                  self._setOpacity(opacity)
+	               }
+	               else clearInterval(interval)
+	            }, 30)
+	         }
+	      },
+	      _hideMsg: function () {
+	         var addnCls = ENV.config(this.currentMsg.addnCls,this.addnCls)
+	         if (ENV.transSupport) {
+	            this.el.className = this.baseCls+' '+addnCls
+	            ENV.on(this.el,ENV.vendorPrefix ? ENV.vendorPrefix+'TransitionEnd' : 'transitionend',this.transEvent)
+	         }
+	         else {
+	            var opacity = 1
+	            var self = this
+	            var interval = setInterval(function(){
+	               if(opacity > 0) {
+	                  opacity -= 0.1
+	                  if (opacity < 0) opacity = 0
+	                  self._setOpacity(opacity);
+	               }
+	               else {
+	                  self.el.className = self.baseCls+' '+addnCls
+	                  clearInterval(interval)
+	                  self._afterAnimation()
+	               }
+	            }, 30)
+	         }
+	      },
+	      _afterAnimation: function () {
+	         if (ENV.transSupport) ENV.off(this.el,ENV.vendorPrefix ? ENV.vendorPrefix+'TransitionEnd' : 'transitionend',this.transEvent)
+
+	         if (this.currentMsg.cb) this.currentMsg.cb()
+	         this.el.style.display = 'none'
+
+	         this._animating = false
+	         this._run()
+	      },
+	      remove: function (e) {
+	         var cb = typeof e == 'function' ? e : null
+
+	         ENV.off(doc.body,'mousemove',this.removeEvent)
+	         ENV.off(doc.body,'click',this.removeEvent)
+	         ENV.off(doc.body,'keypress',this.removeEvent)
+	         ENV.off(doc.body,'touchstart',this.removeEvent)
+	         ENV.off(this.el,'click',this.removeEvent)
+	         ENV.off(this.el,'touchstart',this.removeEvent)
+	         this.removeEventsSet = false
+
+	         if (cb && this.currentMsg) this.currentMsg.cb = cb
+	         if (this._animating) this._hideMsg()
+	         else if (cb) cb()
+	      },
+	      log: function (html, o, cb, defaults) {
+	         var msg = {}
+	         if (defaults)
+	           for (var opt in defaults)
+	               msg[opt] = defaults[opt]
+
+	         if (typeof o == 'function') cb = o
+	         else if (o)
+	            for (var opt in o) msg[opt] = o[opt]
+
+	         msg.html = html
+	         if (cb) msg.cb = cb
+	         this.queue.push(msg)
+	         this._run()
+	         return this
+	      },
+	      spawn: function (defaults) {
+	         var self = this
+	         return function (html, o, cb) {
+	            self.log.call(self,html,o,cb,defaults)
+	            return self
+	         }
+	      },
+	      create: function (o) { return new Humane(o) }
+	   }
+	   return new Humane()
+	});
+
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(29);
+
+	__webpack_require__(30);
 
 	angular.module("api", ["api.dedicated", "api.order"]);
 
@@ -54044,7 +54323,7 @@
 
 
 /***/ },
-/* 27 */
+/* 29 */
 /***/ function(module, exports) {
 
 	var objectToArray;
@@ -54076,7 +54355,7 @@
 	      }
 	    }).success(function(data) {
 	      var id, ids, j, len;
-	      if (data.Content) {
+	      if (data.Content && Number(data.Code, 10) >= 0) {
 	        angular.forEach(data.Content.Data, function(component, id) {
 	          return data.Content.Data[id] = objectToArray(component);
 	        });
@@ -54120,7 +54399,7 @@
 	        data.Content.Data[94] = that.getRaidLevel();
 	        return deferred.resolve(data.Content);
 	      } else {
-	        return deferred.resolve(false);
+	        return deferred.resolve(data);
 	      }
 	    });
 	    return deferred.promise;
@@ -54219,7 +54498,7 @@
 
 
 /***/ },
-/* 28 */
+/* 30 */
 /***/ function(module, exports) {
 
 	angular.module("api.order", ["config"]);
@@ -54348,10 +54627,10 @@
 
 
 /***/ },
-/* 29 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(30);
+	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(32);
 
 	angular.module("dedicated.service.selected", []);
 
@@ -54359,7 +54638,7 @@
 	  $stateProvider.state("dedicatedService.selected", {
 	    url: "/:country/:type/",
 	    controller: "MicroCtrl",
-	    template: __webpack_require__(31),
+	    template: __webpack_require__(33),
 	    resolve: {
 	      components: ["$dedicated", function($dedicated) {
 	        return $dedicated.components();
@@ -54374,8 +54653,17 @@
 	  });
 	}]);
 
-	angular.module("dedicated.service.selected").controller("MicroCtrl", ["$scope", "$state", "$stateParams", "$timeout", "configCalculator", "billingCycleDiscount", "$order", "components", function($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components) {
+	angular.module("dedicated.service.selected").controller("MicroCtrl", ["notifications", "$scope", "$state", "$stateParams", "$timeout", "configCalculator", "billingCycleDiscount", "$order", "components", function(notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components) {
 	  var initOrderComponents, j, results, watchHdd, watchHddSelected, watchOS, watchRAM, watchRaid, watchRaidLevel, watchTraffic;
+	  if (!configCalculator.Data) {
+	    if (configCalculator.Message) {
+	      notifications.error(configCalculator.Message);
+	    }
+	    $state.go("^", $stateParams, {
+	      reload: true
+	    });
+	    return;
+	  }
 	  initOrderComponents = function(components, config) {
 	    var defaultOrder;
 	    defaultOrder = {};
@@ -54399,13 +54687,6 @@
 	    return defaultOrder;
 	  };
 	  $scope.order = initOrderComponents(components, configCalculator.Data);
-	  if (!configCalculator.Data) {
-	    alert("Нет конфиграции для " + $stateParams.type + " " + $stateParams.country);
-	    $state.go("^", $stateParams, {
-	      reload: true
-	    });
-	    return;
-	  }
 	  $scope.close = function() {
 	    $.scrollTo('.js-switch-box', 1000);
 	    return $state.go("^", $stateParams, {
@@ -54559,6 +54840,10 @@
 	    }, 1000);
 	  });
 	  $scope.buy = function(order) {
+	    if (!order.hardware.hdd.ID.length) {
+	      notifications.error("Please choose hard disk!");
+	      return;
+	    }
 	    return $order.post(order).then(function(orderLink) {
 	      alert(orderLink);
 	      return console.log(orderLink);
@@ -54805,7 +55090,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 30 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -56359,10 +56644,10 @@
 
 
 /***/ },
-/* 31 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(32);
+	var jade = __webpack_require__(34);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -56373,7 +56658,7 @@
 	}
 
 /***/ },
-/* 32 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56593,7 +56878,7 @@
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(33).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(35).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -56625,16 +56910,16 @@
 
 
 /***/ },
-/* 33 */
+/* 35 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 34 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(32);
+	var jade = __webpack_require__(34);
 
 	module.exports = function template(locals) {
 	var buf = [];

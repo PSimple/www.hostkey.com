@@ -19,7 +19,12 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
     return
 
-angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components) ->
+angular.module("dedicated.service.selected").controller "MicroCtrl", (notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components) ->
+
+    unless configCalculator.Data
+        notifications.error configCalculator.Message if configCalculator.Message
+        $state.go "^", $stateParams, {reload:true}
+        return
 
     initOrderComponents = (components, config)->
         defaultOrder = {}
@@ -46,11 +51,6 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
 
     # формируем заказ на сервер
     $scope.order = initOrderComponents(components, configCalculator.Data)
-
-    unless configCalculator.Data
-        alert "Нет конфиграции для #{$stateParams.type} #{$stateParams.country}"
-        $state.go "^", $stateParams, {reload:true}
-        return
 
     $scope.close = ->
         $.scrollTo('.js-switch-box', 1000)
@@ -179,6 +179,10 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", ($scope, $s
         , 1000
 
     $scope.buy = (order) ->
+        unless order.hardware.hdd.ID.length
+            notifications.error "Please choose hard disk!"
+            return
+
         $order.post(order)
         .then (orderLink) ->
             alert orderLink

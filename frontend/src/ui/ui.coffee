@@ -5,6 +5,7 @@ require './buttons/buttons'
 require './scrollBlock/scrollBlock'
 require './select2/select2'
 require './columns/columns'
+require './notifications'
 
 angular.module "ui", [
 #    "ui.bootstrap"
@@ -13,6 +14,7 @@ angular.module "ui", [
     "ui.accordion"
     "ui.select"
     "ui.columns"
+    "ui.notifications"
 ]
 
 angular.module("ui").filter 'orderVerbose',  ->
