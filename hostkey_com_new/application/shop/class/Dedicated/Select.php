@@ -20,7 +20,7 @@ class Shop_Dedicated_Select extends Zero_Controller
     {
         $this->Chunk_Init();
         $this->Chunk_View();
-        return $this->View->Fetch(true);
+        return $this->View;
     }
 
     /**
@@ -32,8 +32,9 @@ class Shop_Dedicated_Select extends Zero_Controller
      */
     protected function Chunk_View()
     {
-        $this->View->Assign("currency", "eur");
-        $this->View->Assign("currencyId", 2);
+        $config = Zero_Config::Get_Config('shop', 'config');
+        $this->View->Assign("currency", $config['currency']);
+        $this->View->Assign("currencyId", $config['currencyId']);
         return true;
     }
 
