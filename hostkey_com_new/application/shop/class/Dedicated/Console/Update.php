@@ -21,6 +21,7 @@ class Shop_Dedicated_Console_Update extends Zero_Controller
         $sectionRows = Shop_ConfigCalculator::Get_ConfigCalculatorAll();
         foreach($sectionRows as $row)
         {
+            $row['Currency'] = 'eur';
             $data = Zero_App::RequestJson("GET", "https://ug.hostkey.ru/api/v1.0/inv/component/salenew?currency={$row['Currency']}&groups={$row['ComponentGroup']}");
             if ( false == $data['ErrorStatus'] )
             {

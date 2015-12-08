@@ -35,6 +35,8 @@ angular.module("dedicated.service").config ($httpProvider, $stateProvider, $urlR
 angular.module("dedicated.service").run ($stateParams, $state, $rootScope) ->
 
     $rootScope.$stateParams = $stateParams
+    $rootScope.$state = $state
+
     return
 
 angular.module("dedicated.service").controller "DedicatedServiceSolutionsCtrl", ($scope, $state, $stateParams, $rootScope) ->

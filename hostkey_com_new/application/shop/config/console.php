@@ -6,12 +6,12 @@ return [
     //  'ClassName-MethodName' => array('Minute' => 'exp.', 'Hour' => 'exp.', 'Day' => 'exp.', 'Month' => 'exp.', 'Week' => 'exp.', 'IsActive' => 'exp.',
     //  expression "*", "20", "*/10", "3-8", "6/2", "5,6,7"
     /**
-     * Кеширование конфигураций калькулятора
+     * Кеширование конфигураций калькулятора (Cloud)
      *
      * @see Shop_ConfigCalculator_Console_Update
      * @deprecated
      */
-    'Shop_ConfigCalculator_Console_Update' => [
+    'Shop_Cloud_Console_Update' => [
         'Minute' => '*/2',
         'Hour' => '*',
         'Day' => '*',
@@ -20,7 +20,7 @@ return [
         'IsActive' => true
     ],
     /**
-     * Кеширование конфигураций калькулятора
+     * Кеширование конфигураций калькулятора (Dedicated)
      *
      * @see Shop_Dedicated_Console_Update
      */

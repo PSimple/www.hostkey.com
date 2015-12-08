@@ -76,4 +76,4 @@
 
 
 //- выбранное решение
-.b-dedicated__hide-block.js-setting(id="selectedSolution", ui-view="")
+.b-dedicated__hide-block.js-setting(id="selectedSolution", ui-view="", ng-class="{'_angular': $state.includes('dedicatedService.selected')}")
