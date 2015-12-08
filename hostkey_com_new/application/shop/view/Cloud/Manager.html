@@ -210,7 +210,7 @@
         if ( $( ".js-slider").length ) {
 
             $(".js-slider").each(function (index, val) {
-                var $slidesCount = $(val).data('slides');
+                var slidesCount = $(val).data('slides');
                 var Begin_position = $(val).data('position');
                 var Preset = $(val).data('preset');
                 zakaz = listOfProducts[Preset][Begin_position];//ставим дефолтный заказ
@@ -219,7 +219,7 @@
                         range: "min",
                         min: 1,
                         value: Begin_position,
-                        max: $slidesCount,
+                        max: slidesCount,
                         slide: function (event, ui ) {
                             calculatePreset ( index, ui, Preset);
 
@@ -243,122 +243,50 @@
   })
 
 
+
+        /*
+        *  убираем рамки если исправили ошибки в обязательных полях
+        */
+        $('.popup_callback input[required = "required"]' ).bind( 'keyup', function() {
+            stroka = $(this).val().replace(/\s{2,}/g, '');
+           if (  stroka.length  <5 ) {
+                console.log(  stroka.length );
+           } else {
+               $(this).css('border', '2px solid #d9dcdd');
+           }
+        })
+
+
+
+
         /*
         *   Закрываем окно
         */
   $('.close_window_information_manager_cloud').click(function(){
             $('.popup').hide();
             $( '#callback_btn_manage_cloud').removeClass( 'disabled_href_button').css( 'color', '#ff6a39');// при закрытии окна очищаем кнопку отправки
-
+            messager_windows_operator ( "", $( "#message_load_ajax" ), 'clear+hide' );
             return false;
         });
 
 
-    /*
-    *рисуем бордеры у инпутов
-    */
-    function border_clear_on_required ( e ){
-       /////console.log( e );
-        e.style.border = "2px solid #d9dcdd";
-       // $( this).css( 'border', '2px solid d9dcdd');
-       // v = event.explicitOriginalTarget.attributes.id;
-      //  console.log  (v.valueOf );
-    };
 
-    (function($) {
-        $.fn.removeClassWild = function(mask) {
-            return this.removeClass(function(index, cls) {
-                var re = mask.replace(/\*/g, '\\S+');
-                return (cls.match(new RegExp('\\b' + re + '', 'g')) || []).join(' ');
-            });
-        };
-    })(jQuery);
 
-    /*
-    * status  success | info | error | fatal | hide | show | clear+hide | clear
-     */
-    function messager_windows_operator ( message, object, status ) {
-        s = object.css('display', 'block').html();
-        if ( s != '') s = s + "<br/>";
-        object.css('display', 'block').html( s + message );
-        switch (status ){
-            case 'success': object.removeClass( 'message_pole').addClass( 'write_message_success' );break;
-            case 'info': object.removeClass( 'message_pole').addClass( 'write_message_info' ); break;
-            case 'error': object.removeClass( 'message_pole').addClass( 'write_message_error' ); break;
-            case 'fatal': object.removeClass( 'message_pole').addClass( 'write_message_fatal' ); break;
-            case 'hide': object.addClass( 'message_pole' ); break;
-            case 'show': object.removeClass( 'message_pole' ); break;
-            case 'clear': object.html( '' ); object.removeClassWild("write_message_*"); break;
-            case 'clear+hide' : object.html( '' ); object.addClass( 'message_pole' ); object.removeClassWild("write_message_*");break;
-            default : alert ("sorry");
-        }
-    }
 
-    /*
-    * возвращает количество пустых полей или полей с количеством символов не менее 5 которые не заполнены и рисует вокруг них рамку
-     */
-    function checkout_empty_input ( e , object_message ) {
-        var c = 0;
-        messager_windows_operator ( "", object_message, 'clear' );///Чистим все мессанджи
-        e.each(function () {
-            stroka = $(this).val().replace(/\s{2,}/g, '');
-            if (stroka == '' ) {
-                $(this).css('border', '2px solid red');
-                messager_windows_operator ( "empty " + $(this).attr( 'placeholder' ), $( "#message_load_ajax" ), 'error' );
-                c++;
-            } else {
-                if (stroka.length < 5) {
-                    $(this).css('border', '2px solid red');
-                    messager_windows_operator(stroka.length + " low count in " + $(this).attr( 'placeholder' ), $("#message_load_ajax"), 'error');
-                    c++;
-                }
-            }
-        });
-        return c;
-    }
+
+
+
 
     /*
     * Отправляем заказ
      */
      $( '#callback_btn_manage_cloud').bind( 'click', function(){
         // messager_windows_operator ( "", $( "#message_load_ajax" ), 'clear+hide');
-            Ajax_send();
+         AJAX_SEND( $('.popup_callback input[required = "required"]' ),  $( "#message_load_ajax" ) );
          return false;
      });
 
 
-    function Ajax_send() {
-        if ( checkout_empty_input ( $('.popup_callback input[required = "required"]'), $( "#message_load_ajax" ) ) === 0) {
-            $.ajax({
-                type: 'POST',
-                url: "/api/v1/configcalculator/order",
-                cache: false,
-                data: JSON.stringify( zakaz ),
-                beforeSend : function (){
-                    $('#callback_btn_manage_cloud').addClass('disabled_href_button').css('color', '#fff');//блокируем кнопку отправки
-                },
-                success: function( msg ){
-                    messager_windows_operator ( "", $( "#message_load_ajax" ), 'clear+hide');
-                    messager_windows_operator ( '<a href="#" title="Success">You order Cloud VDS succefull!<br/>Go to manage you cloud.</a>', $( "#message_load_ajax" ), 'success');
-                    $('#callback_btn_manage_cloud').addClass( 'hide_href_button');//убираем кнопку опраки заказа
-
-                   // sleep( 5000);
-                   /// $('.close_window_information_manager_cloud').click();
-                },
-                error: function (jqXHR, exception) {
-                    console.log(jqXHR);
-                    // getErrorMessage(jqXHR, exception);
-                },
-            });
-       } else {
-
-        }
-        return false;
-    }
-
-    $( '#name_host, #name_pass').bind( "click", function(){
-
-    })
 
 
     function calculatePreset ( index, ui, Preset){

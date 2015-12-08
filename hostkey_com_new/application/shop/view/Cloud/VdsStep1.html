@@ -1,5 +1,5 @@
 <div class="b-page">
-
+    <!--CLOUD VDS-->
     <div class="b-page__promo b-page__promo_vds-cloud_yes">
         <h1 class="b-page__promo-title">
             cloud vds
@@ -11,50 +11,62 @@
         <div class="b-vps__feature b-container">
             <div class="b-vps__feature-item">
                 <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-01.png" alt="иконка">
+
                 <h3 class="b-vps__feature-item-title">
                     Always get
                     enough power
                 </h3>
+
                 <p class="b-vps__feature-item-text">
                     Rent the optimum server
                     configuration, capable to
                     sustain your infrastructure.
                 </p>
-            </div><!--
-                            --><div class="b-vps__feature-item">
-            <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-02.png" alt="иконка">
-            <h3 class="b-vps__feature-item-title">
-                Fluid power
-            </h3>
-            <p class="b-vps__feature-item-text">
-                Computation is flexibly
-                distributed over your pool
-                of servers.
-            </p>
-        </div><!--
-                            --><div class="b-vps__feature-item">
-            <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-03.png" alt="иконка">
-            <h3 class="b-vps__feature-item-title">
-                Rule your pool
-            </h3>
-            <p class="b-vps__feature-item-text">
-                Full administrative access
-                to your pull of servers including
-                OS installation.
-                Unlimited reinstallation.
-            </p>
-        </div><!--
-                            --><div class="b-vps__feature-item">
-            <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-04.png" alt="иконка">
-            <h3 class="b-vps__feature-item-title">
-                Sure thing!
-            </h3>
-            <p class="b-vps__feature-item-text">
-                All your actions while
-                managing your pool of servers
-                are fully backed up and can be restored without contacting the support team
-            </p>
-        </div>
+            </div>
+            <div class="b-vps__feature-item">
+                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-02.png" alt="иконка">
+
+                <h3 class="b-vps__feature-item-title">
+                    Fluid power
+                </h3>
+
+                <p class="b-vps__feature-item-text">
+                    Computation is flexibly
+                    distributed over your pool
+                    of servers.
+                </p>
+            </div>
+            <!--
+                                        -->
+            <div class="b-vps__feature-item">
+                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-03.png" alt="иконка">
+
+                <h3 class="b-vps__feature-item-title">
+                    Rule your pool
+                </h3>
+
+                <p class="b-vps__feature-item-text">
+                    Full administrative access
+                    to your pull of servers including
+                    OS installation.
+                    Unlimited reinstallation.
+                </p>
+            </div>
+            <!--
+                                        -->
+            <div class="b-vps__feature-item">
+                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-04.png" alt="иконка">
+
+                <h3 class="b-vps__feature-item-title">
+                    Sure thing!
+                </h3>
+
+                <p class="b-vps__feature-item-text">
+                    All your actions while
+                    managing your pool of servers
+                    are fully backed up and can be restored without contacting the support team
+                </p>
+            </div>
         </div>
 
         <div class="b-vds-cloud__configurator">
@@ -76,115 +88,44 @@
                     <div class="b-vds-cloud__content" id="scroll-box">
 
                         <table class="b-vds-cloud__table">
+                                {foreach ($configuration as $key => $val)}
+                                {if ( !$val['hidden'] )}
                             <tr class="b-vds-cloud__table-row">
-                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">CPU Cores:</td>
+                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">{$val['name']}</td>
                                 <td class="b-vds-cloud__table-cell">
-                                    <div class="b-slider js-slider" data-slides="4"></div>
-                                    <div class="b-slider__legend-4">
-                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_1"> 1</div>
-                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_2">2</div>
-                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_3">3</div>
-                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_4">4</div>
+                                    {if ( 696 == $key OR 700 == $key )}
+                                    <div class="b-slider__legend-5">
+                                        <select class="table-select__item js-select" name="tbl-select-1" id="vm_template" data_preset="{$key}">
+                                            {foreach ( $val['data'] as $k => $v )}
+                                            <option value="{$v['id']}"
+                                                    {if ( 0== $k )} selected="selected"{/if}>{$v['name']}</option>
+                                            {/foreach}
+                                        </select>
                                     </div>
+                                    {else}
+
+                                    <div class="b-slider js-slider" data-slides="{count($val['data'])}" data-position="1" data_preset="{$key}"></div>
+                                    <div class="b-slider__legend-{count($val['data'])}">
+                                        {foreach ( $val['data'] as $k => $v )}
+                                        <div class="b-slider__legend-{count($val['data'])}-item b-slider__legend-{count($val['data'])}-item_place_{$k+1}">{$v['name']}</div>
+                                        {/foreach}
+                                    </div>
+
+                                    {/if}
                                 </td>
                             </tr>
-                            <tr class="b-vds-cloud__table-row">
-                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">RAM:</td>
-                                <td class="b-vds-cloud__table-cell">
-                                    <div class="b-slider js-slider" data-slides="8"></div>
-                                    <div class="b-slider__legend-8">
-                                        <div class="b-slider__legend-8-item b-slider__legend-8-item_place_1">0.5 Gb</div>
-                                        <div class="b-slider__legend-8-item b-slider__legend-8-item_place_2">1 Gb</div>
-                                        <div class="b-slider__legend-8-item b-slider__legend-8-item_place_3">2 Gb</div>
-                                        <div class="b-slider__legend-8-item b-slider__legend-8-item_place_4">3 Gb</div>
-                                        <div class="b-slider__legend-8-item b-slider__legend-8-item_place_5">4 Gb</div>
-                                        <div class="b-slider__legend-8-item b-slider__legend-8-item_place_6">6 Gb</div>
-                                        <div class="b-slider__legend-8-item b-slider__legend-8-item_place_7">8 Gb</div>
-                                        <div class="b-slider__legend-8-item b-slider__legend-8-item_place_8">16 Gb</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="b-vds-cloud__table-row">
-                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">Disk space:</td>
-                                <td class="b-vds-cloud__table-cell">
-                                    <div class="b-slider js-slider" data-slides="15"></div>
-                                    <div class="b-slider__legend-15">
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_1">5 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_2">10 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_3">20 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_4">30 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_5">40 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_6">50 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_7">60 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_8">70 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_9">80 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_10">90 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_11">100 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_12">120 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_13">140 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_14">160 Gb</div>
-                                        <div class="b-slider__legend-15-item b-slider__legend-15-item_place_15">200 Gb</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="b-vds-cloud__table-row">
-                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">Extra IPs:</td>
-                                <td class="b-vds-cloud__table-cell">
-                                    <div class="b-slider js-slider" data-slides="17"></div>
-                                    <div class="b-slider__legend-17">
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_1">none</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_2">1 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_3">2 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_4">3 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_5">4 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_6">5 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_7">6 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_8">7 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_9">8 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_10">9 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_11">10 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_12">11 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_13">12 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_14">13 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_15">14 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_16">15 IP</div>
-                                        <div class="b-slider__legend-17-item b-slider__legend-17-item_place_17">16 IP</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="b-vds-cloud__table-row">
-                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">Traffic TB (100Mbps):</td>
-                                <td class="b-vds-cloud__table-cell">
-                                    <div class="b-slider js-slider" data-slides="16"></div>
-                                    <div class="b-slider__legend-16">
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_1">10 Mbps Unmetered</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_2">1 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_3">2 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_4">3 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_5">4 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_6">5 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_7">6 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_8">7 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_9">8 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_10">9 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_11">10 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_12">11 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_13">12 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_14">13 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_15">14 Tb</div>
-                                        <div class="b-slider__legend-16-item b-slider__legend-16-item_place_16">15 Tb</div>
-                                    </div>
-                                </td>
-                            </tr>
+                            {/if}
+                            {/foreach}
+
                             <tr class="b-vds-cloud__table-row">
                                 <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">payment period:</td>
                                 <td class="b-vds-cloud__table-cell">
-                                    <div class="b-slider js-slider" data-slides="4"></div>
+                                    <div class="b-slider js-slider" data-slides="4" data-position="1" data_preset="payment"></div>
                                     <div class="b-slider__legend-4">
-                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_1">monthly</div>
-                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_2">quarterly</div>
-                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_3">semiannually</div>
-                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_4">annually</div>
+                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_1 payments">monthly</div>
+                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_2 payments">quarterly</div>
+                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_3 payments">semiannually</div>
+                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_4 payments">annually</div>
                                     </div>
                                 </td>
                             </tr>
@@ -194,47 +135,27 @@
                     <!-- Скролящийся блок с результатом подбора -->
                     <div class="b-vds-cloud__summary b-vds-cloud__summary_is-purpur" id="scroll-block">
                         <div class="b-vds-cloud__summary-title">Your VDS</div>
+                        {foreach ($configuration as $key => $val)}
+                        {if ( !$val['hidden'] )}
                         <table class="b-vds-cloud__summary-table">
                             <tr class="b-vds-cloud__summary-table-row">
-                                <td class="b-vds-cloud__summary-table-cell">CPU cores:</td>
-                                <td class="b-vds-cloud__summary-table-cell">3</td>
+                                <td class="b-vds-cloud__summary-table-cell" data_preset_name="{$key}">{$val['name']}:</td>
+                                <td class="b-vds-cloud__summary-table-cell" data_preset_name_id="{$key}" data_pole_id="{$val['data'][0]['id']}">{$val['data'][0]['name']}</td>
                             </tr>
                         </table>
+                        {/if}
+                        {/foreach}
                         <table class="b-vds-cloud__summary-table">
                             <tr class="b-vds-cloud__summary-table-row">
-                                <td class="b-vds-cloud__summary-table-cell">RAM:</td>
-                                <td class="b-vds-cloud__summary-table-cell">8 Gb</td>
-                            </tr>
-                        </table>
-                        <table class="b-vds-cloud__summary-table">
-                            <tr class="b-vds-cloud__summary-table-row">
-                                <td class="b-vds-cloud__summary-table-cell">Disk space:</td>
-                                <td class="b-vds-cloud__summary-table-cell">140 Gb</td>
-                            </tr>
-                        </table>
-                        <table class="b-vds-cloud__summary-table">
-                            <tr class="b-vds-cloud__summary-table-row">
-                                <td class="b-vds-cloud__summary-table-cell">Extra IPs:</td>
-                                <td class="b-vds-cloud__summary-table-cell">14 IP</td>
-                            </tr>
-                        </table>
-                        <table class="b-vds-cloud__summary-table">
-                            <tr class="b-vds-cloud__summary-table-row">
-                                <td class="b-vds-cloud__summary-table-cell">Traffic TB (100Mbps):</td>
-                                <td class="b-vds-cloud__summary-table-cell">10 Mbps Unmetered</td>
-                            </tr>
-                        </table>
-                        <table class="b-vds-cloud__summary-table">
-                            <tr class="b-vds-cloud__summary-table-row">
-                                <td class="b-vds-cloud__summary-table-cell">Payment period:</td>
-                                <td class="b-vds-cloud__summary-table-cell">Semiannually</td>
+                                <td class="b-vds-cloud__summary-table-cell" data_preset_name="payment">Payment period:</td>
+                                <td class="b-vds-cloud__summary-table-cell" data_preset_name_id="payment">monthly</td>
                             </tr>
                         </table>
                         <div class="b-vds-cloud__summary-price">
-                            <span class="b-vds-cloud__summary-price-value">€ 1 143.00/month</span>
-                            <span class="b-vds-cloud__summary-price-discount">12% discount, save €97.92</span>
+                            <span class="b-vds-cloud__summary-price-value" id="Summa"></span>
+                            <span class="b-vds-cloud__summary-price-discount" id="Discount"></span>
                         </div>
-                        <a class="b-submit b-vds-cloud__summary-submit" href="#">continue</a>
+                        <a class="b-submit b-vds-cloud__summary-submit" href="#" id="byu_cloud">continue</a>
                     </div>
                 </div>
             </div>
@@ -245,6 +166,7 @@
                 <span class="b-dedicated-try__line-text">need more resourses?</span>
             </div>
             <h3 class="b-dedicated-try__title">Try our<br>vds plan</h3>
+
             <p class="b-dedicated-try__text"><span class="b-dedicated-try__text_red_yes">starts from 300 eur / month</span><br>or configurate your own</p>
             <a class="b-submit b-dedicated-try__submit" href="#">see plans</a>
         </div>
@@ -252,3 +174,361 @@
 
     <div class="footer-push"></div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        // Slider
+        if ($(".js-slider").length) {
+            $(".js-slider").each(function (index, val) {
+                var slidesCount = $(val).data('slides');
+                var Begin_position = $(val).data('position');
+                var Preset = $(val).data('preset');
+                $(function () {
+                    $(val).slider({
+                        range: "min",
+                        min: 1,
+                        value: Begin_position,
+                        max: slidesCount,
+                        slide: function (event, ui) {
+                            calculatePRoxMoxVDS_sliders(index, ui);
+                        },
+                        change: function (event, ui) {
+                            //  calculatePRoxMoxVDS_sliders ( index, ui );
+                        }
+                    });
+
+                });
+            });
+        }
+
+
+        var currency = {
+            "2": "€",
+            "1": "RUR",
+            "3": "$"
+        };
+        var currencyID = {$currencyId};
+
+        /*
+         *   Открываем окно завершения заказа
+         */
+        $('#byu_cloud').bind('click', function () {
+            //   $('.popup_callback').show();
+            //   return false
+            ;
+        })
+        /*
+         *  убираем рамки если исправили ошибки в обязательных полях
+         */
+        $('.popup_callback input[required = "required"]').bind('keyup', function () {
+            stroka = $(this).val().replace(/\s{2,}/g, '');
+            if (stroka.length < 5) {
+                console.log(stroka.length);
+            } else {
+                $(this).css('border', '2px solid #d9dcdd');
+            }
+        })
+        /*
+         *   Закрываем окно
+         */
+        $('.close_window_information_manager_cloud').click(function () {
+            $('.popup').hide();
+            $('#callback_btn_manage_cloud').removeClass('disabled_href_button').css('color', '#ff6a39');// при закрытии окна очищаем кнопку отправки
+            messager_windows_operator("", $("#message_load_ajax"), 'clear+hide');
+            return false;
+        });
+
+        var listOfProducts = new Object();
+        var listOfProducts = {json_encode($configuration)};
+        listOfProducts.payment = new Object();
+        listOfProducts.payment = {
+            "name": "payment",
+            "hidden": "0",
+            "data": {
+                "0": {
+                    "name": "monthly",
+                    "discount": "0",
+                    'period': "month"
+                },
+                "1": {
+                    "name": "quarterly",
+                    "discount": "3",
+                    "period": "quarter"
+                },
+                "2": {
+                    "name": "semiannually",
+                    "discount": "6",
+                    "period": "half-year"
+                },
+                "3": {
+                    "name": "annually",
+                    "discount": "12",
+                    "period": "year"
+                }
+            }
+        };
+
+        Zakaz = window.startZakaz( 0, listOfProducts ); //устанавливаем дефолтный заказ на нулевые позиции
+        window.write_summa( Zakaz, currency[currencyID], $('#Summa') );///Запишем дефолтную сумму заказа без скидок
+        window.write_dis( Zakaz,currency[currencyID], $('.b-vds-cloud__summary-price-discount'));///пишем дефолтный дискаунт
+
+        // AJAX_GET('http://site-f.hostke.ru/api/v1/cloud/config?pid=530&currencyId={$currencyId}&custom=1', 'JSON');
+
+        function calculatePRoxMoxVDS_sliders(index, ui) {
+            var UIP = ui.handle.parentElement.getAttribute('data_preset');
+            delete Zakaz[UIP]['data'][0];
+            Zakaz[UIP]['data'][0] = new Object();
+            Zakaz[UIP]['data'][0] = listOfProducts[UIP]['data'][ui.value - 1];
+            $('[ data_preset_name_id = "' + UIP + '"]').html(Zakaz[UIP]['data'][0].name);
+            window.write_summa( Zakaz, currency[currencyID], $('#Summa') );
+            window.write_dis( Zakaz, currency[currencyID], $('.b-vds-cloud__summary-price-discount')  );
+        }
+
+
+        function calculatePRoxMoxVDS_selects( UIP, UID ) {
+            for( var prop in listOfProducts[UIP]['data'] ) {
+                if ( listOfProducts[UIP]['data'][prop].id == UID ) {
+                    delete Zakaz[UIP]['data'][0];
+                    Zakaz[UIP]['data'][0] = new Object();
+                    Zakaz[UIP]['data'][0] = listOfProducts[UIP]['data'][prop];
+                }
+            }
+            $('[ data_preset_name_id = "' + UIP + '"]').html(Zakaz[UIP]['data'][0].name);
+            window.write_summa( Zakaz, currency[currencyID], $('#Summa') );
+            window.write_dis( Zakaz, currency[currencyID], $('.b-vds-cloud__summary-price-discount') );
+        }
+
+        var $eventSelect = $(".js-select");
+
+        $eventSelect.on("change", function (e) {
+            var UID = $( this ).select2("val");
+            var UIP =e.target.getAttribute('data_preset');
+            calculatePRoxMoxVDS_selects( UIP, UID );
+        });
+
+
+
+
+        document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
+
+
+
+        $( '.b-vds-cloud__summary-submit').bind( 'click', function( ) {
+            $('.popup_callback').show();
+           // $( '#configure_cloud_VDS' ).contents().find("body").html('Test');
+           // document.getElementById('configure_cloud_VDS').src = '';
+            return crFrame( );
+            //generate_post ( Zakaz );
+            //console.log( 'https://billing.hostkey.ru/cart.php?a=add&pid=512&carttpl=cart&currency=2&' + generate_post ( Zakaz ) + "addons[60]=on" );
+           // document.location.href = 'https://billing.hostkey.ru/cart.php?systpl=siteF&a=add&pid=512&carttpl=cartF&currency=2&' + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
+        });
+
+
+
+        function crFrame( )
+        {
+         //   var iframe = document.createElement("iframe");
+        //    iframe.id = "configure_cloud_VDS";
+           // iframe.frameborder = 0;
+            //iframe.height = '100%';
+          //  iframe.width = '80%';
+          //  iframe.style.display = "block";
+          //  iframe.src = 'https://billing.hostkey.ru/cart.php?systpl=siteF&a=add&pid=512&carttpl=cartF&currency=2&'
+                     //  + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
+          //  document.getElementById('add_iframe_from_billing').appendChild(iframe);
+           // $( '<img src="/assets/img/220-3.GIF" alt="">').appendTo( '#configure_cloud_VDS');
+           document.getElementById('configure_cloud_VDS').src = 'https://billing.hostkey.ru/cart.php?systpl=siteF&a=add&pid=512&carttpl=cartF&currency=2&'
+            + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
+            return false;
+        }
+
+        ////////////////////////////////////////
+    });
+
+
+</script>
+
+<div class="popup popup_callback" style="display: none;" id="information_manage_cloud">
+    <a class="close close_window_information_manager_cloud" href="#"><img src="/assets/img/close.png"></a>
+
+    <h2>INFORMATION for REQUEST</h2>
+
+    <div class="message_pole" id="message_load_ajax"></div>
+        <div id="add_iframe_from_billing">
+                <iframe id="configure_cloud_VDS" src=""></iframe>
+        </div>
+</div>
+
+<style>
+
+    .b-slider__legend-5 {
+        position: relative;
+        height: 60px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .b-slider__legend-5-item {
+        position: absolute;
+        top: 20px;
+        width: 80px;
+        color: #945ae0;
+        text-align: center;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .b-slider__legend-5-item:after {
+        content: '|';
+        position: absolute;
+        top: -13px;
+        left: 50%;
+        font-size: 8px;
+        line-height: 12px;
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-5-item_place_1 {
+        left: 0;
+        margin-left: -20px;
+    }
+
+    .b-slider__legend-5-item_place_2 {
+        left: 25%;
+        margin-left: -34px;
+    }
+
+    .b-slider__legend-5-item_place_2:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-5-item_place_3 {
+        left: 50%;
+        margin-left: -34px;
+    }
+
+    .b-slider__legend-5-item_place_3:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-5-item_place_4 {
+        left: 75%;
+        margin-left: -35px;
+    }
+
+    .b-slider__legend-5-item_place_4:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-5-item_place_5 {
+        left: 100%;
+        margin-left: -55px;
+    }
+
+    .b-slider__legend-5-item_place_5:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-7 {
+        position: relative;
+        height: 60px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .b-slider__legend-7-item {
+        position: absolute;
+        top: 20px;
+        width: 80px;
+        color: #945ae0;
+        text-align: center;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .b-slider__legend-7-item:after {
+        content: '|';
+        position: absolute;
+        top: -13px;
+        left: 50%;
+        font-size: 8px;
+        line-height: 12px;
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-7-item_place_1 {
+        left: 0;
+        margin-left: -20px;
+    }
+
+    .b-slider__legend-7-item_place_2 {
+        left: 17%;
+        margin-left: -36px;
+    }
+
+    .b-slider__legend-7-item_place_2:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-7-item_place_3 {
+        left: 34%;
+        margin-left: -40px;
+    }
+
+    .b-slider__legend-7-item_place_3:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-7-item_place_4 {
+        left: 51%;
+        margin-left: -42px;
+    }
+
+    .b-slider__legend-7-item_place_4:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-7-item_place_5 {
+        left: 68%;
+        margin-left: -45px;
+    }
+
+    .b-slider__legend-7-item_place_5:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-7-item_place_6 {
+        left: 85%;
+        margin-left: -48px;
+    }
+
+    .b-slider__legend-7-item_place_6:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-7-item_place_7 {
+        left: 100%;
+        margin-left: -55px;
+    }
+
+    .b-slider__legend-7-item_place_7:after {
+        margin-left: -2px;
+    }
+
+    .b-vds-cloud__summary-table-cell {
+        vertical-align: middle;
+    }
+
+    #add_iframe_from_billing {
+        display: block;
+    }
+
+    #configure_cloud_VDS {
+        border: none;
+        display: block;
+        width: 570px;
+        height: 300px;
+        margin: 0 auto;
+    }
+
+</style>

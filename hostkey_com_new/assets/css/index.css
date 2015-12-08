@@ -1,3 +1,6 @@
+@import "fonts.css" screen; /* Стиль для вывода результата на монитор */
+@import "fonts.css" handheld, print; /* Стиль для печати */
+
 body, td
 {
   font-family: Verdana;

@@ -21,5 +21,6 @@ class Content_Faq_Edit extends Zero_Crud_Edit
      *
      * @var string
      */
-    protected $ViewName = 'Zero_Crud_Edit';
+   // protected $ViewName = 'Zero_Crud_Edit';
+    protected $ViewName = 'Zero_Crud_EditNewCKeditor';
 }

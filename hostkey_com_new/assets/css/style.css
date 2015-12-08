@@ -5413,3 +5413,14 @@ p {
   width: 80%;
   dispalay: block;
 }
+
+
+.b-container table {
+  border-collapse:separate;
+  border-spacing: 0;
+}
+
+
+.b-container table td, .b-container table th {
+  padding: 10px
+}
