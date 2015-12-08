@@ -100,33 +100,39 @@ tbody.collapse.in {
     margin: 0;
   }
 }
-.b-dedicated__summary {
+._angular .b-dedicated__summary {
   margin-left: 45px;
 }
-.b-checkbox-submit.disable {
+._angular .b-checkbox-submit.disable {
   pointer-events: none;
 }
-.b-dedicated__summary-table-cell:nth-child(1) {
+._angular .b-dedicated__summary-table-cell:nth-child(1) {
   max-width: 150px;
 }
-.b-dedicated__summary-table-cell:nth-child(2) {
+._angular .b-dedicated__summary-table-cell:nth-child(2) {
   text-align: right;
   width: 72px;
 }
-.table-select__cell-item {
+._angular .table-select__cell-item {
   float: left;
   margin: 2px 3px 15px 2px;
 }
-.table-select__cell-item:nth-child(4n+1) {
+._angular .table-select__cell-item:nth-child(4n+1) {
   margin-left: 0;
 }
-.table-select__cell-item:nth-child(4n) {
+._angular .table-select__cell-item:nth-child(4n) {
   margin-right: -5px;
 }
-.b-dedicated__accordion-table-cell_title_select {
+._angular .b-dedicated__accordion-table-cell_title_select {
   vertical-align: middle;
   width: 140px;
   text-transform: uppercase;
+}
+._angular .table-select {
+  border-spacing: 0px 15px;
+}
+._angular .table-select__cell {
+  padding-right: 5px;
 }
 .select2-container {
   box-sizing: border-box;
