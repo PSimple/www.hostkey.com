@@ -1,0 +1,126 @@
+[
+  {
+    "687": {
+      "name": "Amount of SWAP",
+      "hidden": "1",
+      "data": [
+        {
+          "id": "5225",
+          "name": "2048 MB",
+          "value": "2048",
+          "monthly": "0.00",
+          "quarterly": "0.00",
+          "semiannually": "0.00",
+          "annually": "0.00"
+        }
+      ]
+    },
+    "689": {
+      "name": "Amount of RAM",
+      "hidden": "0",
+      "data": [
+        {
+          "id": "5230",
+          "name": "1 GB",
+          "value": "1024",
+          "monthly": "1.00",
+          "quarterly": "3.00",
+          "semiannually": "6.00",
+          "annually": "11.00"
+        }
+      ]
+    },
+    "695": {
+      "name": "Bandwidth Limit",
+      "hidden": "0",
+      "data": [
+        {
+          "id": "5249",
+          "name": "250 GB",
+          "value": "250",
+          "monthly": "0.00",
+          "quarterly": "0.00",
+          "semiannually": "0.00",
+          "annually": "0.00"
+        }
+      ]
+    }
+  },
+  {
+    "687": {
+      "name": "Amount of SWAP",
+      "hidden": "1",
+      "data": [
+        {
+          "id": "5225",
+          "name": "2048 MB",
+          "value": "2048",
+          "monthly": "0.00",
+          "quarterly": "0.00",
+          "semiannually": "0.00",
+          "annually": "0.00"
+        }
+      ]
+    },
+    "689": {
+      "name": "Amount of RAM",
+      "hidden": "0",
+      "data": [
+        {
+          "id": "5230",
+          "name": "1 GB",
+          "value": "1024",
+          "monthly": "1.00",
+          "quarterly": "3.00",
+          "semiannually": "6.00",
+          "annually": "11.00"
+        }
+      ]
+    },
+    "690": {
+      "name": "Disk Space",
+      "hidden": "0",
+      "data": [
+        {
+          "id": "5265",
+          "name": "200 GB",
+          "value": "200",
+          "monthly": "3.20",
+          "quarterly": "10.00",
+          "semiannually": "19.00",
+          "annually": "34.00"
+        }
+      ]
+    },
+    "695": {
+      "name": "Bandwidth Limit",
+      "hidden": "0",
+      "data": [
+        {
+          "id": "5249",
+          "name": "250 GB",
+          "value": "250",
+          "monthly": "0.00",
+          "quarterly": "0.00",
+          "semiannually": "0.00",
+          "annually": "0.00"
+        }
+      ]
+    },
+    "696": {
+      "name": "VM Template",
+      "hidden": "0",
+      "data": [
+        {
+          "id": "6094",
+          "name": "Debian 7 Mongodb 13.0 1 Amd64",
+          "value": "iSCSI2TB:vztmpl/debian-7-turnkey-mongodb_13.0-1_amd64.tar.gz",
+          "monthly": "0.00",
+          "quarterly": "0.00",
+          "semiannually": "0.00",
+          "annually": "0.00"
+        }
+      ]
+    }
+  }
+]
