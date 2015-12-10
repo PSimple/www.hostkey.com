@@ -82,13 +82,6 @@ class Shop_ConfigCalculator extends Zero_Model
                 'Default' => '',
                 'Form' => 'Text',
             ],
-            'Currency' => [
-                'AliasDB' => 'z.Currency',
-                'DB' => 'E',
-                'IsNull' => 'NO',
-                'Default' => 'eur',
-                'Form' => 'Radio',
-            ],
             'ComponentGroup' => [
                 'AliasDB' => 'z.ComponentGroup',
                 'DB' => 'S',
@@ -120,7 +113,6 @@ class Shop_ConfigCalculator extends Zero_Model
         return [
             'ID' => ['Visible' => true, 'AR' => true],
             'Name' => ['Visible' => true, 'AR' => true],
-            'Currency' => ['Visible' => true, 'AR' => true],
             'ComponentGroup' => ['Visible' => true, 'AR' => true],
         ];
     }
@@ -161,7 +153,6 @@ class Shop_ConfigCalculator extends Zero_Model
         return [
             'ID' => [],
             'Name' => [],
-            'Currency' => [],
             'ComponentGroup' => [],
         ];
     }
