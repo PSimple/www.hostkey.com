@@ -9,7 +9,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */
-class Shop_Cloud_VdsStep1 extends Zero_Controller
+class Shop_Cloud_VdsNL extends Zero_Controller
 {
     /**
      * Контроллер по умолчанию.
@@ -36,7 +36,7 @@ class Shop_Cloud_VdsStep1 extends Zero_Controller
         $this->View->Assign("currency", $config['currency']);
         $this->View->Assign("currencyId", $config['currencyId']);
 
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudCustom/' . md5($config['currencyId'] . 530) . '.data';
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudCustom/' . md5($config['currencyId'] . 531) . '.data';
         $configuration = [];
         if ( file_exists($path) )
         {
@@ -50,7 +50,7 @@ class Shop_Cloud_VdsStep1 extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Cloud_VdsStep1
+     * @return Shop_Cloud_VdsNL
      */
     public static function Make($properties = [])
     {

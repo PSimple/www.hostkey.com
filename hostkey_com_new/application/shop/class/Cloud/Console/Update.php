@@ -12,6 +12,8 @@
  */
 class Shop_Cloud_Console_Update extends Zero_Controller
 {
+    protected $pidList = [530, 531, 538, 539];
+
     /**
      * Контроллер по умолчанию
      *
@@ -19,24 +21,25 @@ class Shop_Cloud_Console_Update extends Zero_Controller
      */
     public function Action_Default()
     {
-        $pidList = [530,531,538,539];
-        foreach ($pidList as $pid)
+        $config = Zero_Config::Get_Config('shop', 'config');
+
+        foreach ($this->pidList as $pid)
         {
-            $http = "https://bill.hostkey.com/api/v1.0/shop/proxmox/configcustom?pid={$pid}&currencyId=2";
+            $http = "https://bill.hostkey.com/api/v1.0/shop/proxmox/configcustom?pid={$pid}&currencyId={$config['currencyId']}";
             $data = Zero_App::RequestJson("GET", $http);
             if ( false == $data['ErrorStatus'] )
             {
-                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudCustom/' . md5('2' . $pid) . '.data';
+                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudCustom/' . md5($config['currencyId'] . $pid) . '.data';
                 Zero_Helper_File::File_Save($path, serialize($data['Content']));
             }
         }
-        foreach ($pidList as $pid)
+        foreach ($this->pidList as $pid)
         {
-            $http = "https://bill.hostkey.com/api/v1.0/shop/proxmox/configset?pid={$pid}&currencyId=2";
+            $http = "https://bill.hostkey.com/api/v1.0/shop/proxmox/configset?pid={$pid}&currencyId={$config['currencyId']}";
             $data = Zero_App::RequestJson("GET", $http);
             if ( false == $data['ErrorStatus'] )
             {
-                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudSet/' . md5('2' . $pid) . '.data';
+                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudSet/' . md5($config['currencyId'] . $pid) . '.data';
                 Zero_Helper_File::File_Save($path, serialize($data['Content']));
             }
         }
