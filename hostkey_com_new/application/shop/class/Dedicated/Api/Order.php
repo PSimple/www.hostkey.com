@@ -33,7 +33,6 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         $response = unserialize(file_get_contents($path));
 
         // Расчет
-        $sum = 0;
         $Calculate = $response['Data'];
         // Hardvare
         $costHardvare = 0;
@@ -46,11 +45,18 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
                 $costHardvare += $Calculate[2][$id]['Price'];
         }
         $costHardvare += $Calculate[8][$_REQUEST['Hardware']['Raid']]['Price'];
-        $sum += $costHardvare;
+//        Zero_Logs::File(__FUNCTION__, $costHardvare, $_REQUEST, $Calculate);
 
         // SoftWare
         $costSoftWare = 0;
-        $costSoftWare += $Calculate[4][$_REQUEST['Software']['OS']]['Price'];
+        if ( false !== strpos($Calculate[4][$_REQUEST['Software']['OS']]['Name'], 'Windows') )
+        {
+            $costSoftWare += $Calculate[4][$_REQUEST['Software']['OS']]['Price'] * $Calculate[1][$_REQUEST['Hardware']['Cpu']]['Options']['cpu_count'];
+        }
+        else
+        {
+            $costSoftWare += $Calculate[4][$_REQUEST['Software']['OS']]['Price'];
+        }
         $costSoftWare += $Calculate[10][$_REQUEST['Software']['Bit']]['Price'];
         // Windows
         if ( isset($_REQUEST['Software']['RdpLicCount']) && $_REQUEST['Software']['RdpLicCount'] > 0 )
@@ -72,7 +78,6 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         {
             $costSoftWare += $Calculate[5][$_REQUEST['Software']['CP']]['Price'];
         }
-        $sum += $costSoftWare;
 
         // Network
         $costNetwork = 0;
@@ -100,17 +105,23 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         {
             $costNetwork += $Calculate[19][$_REQUEST['Network']['FtpBackup']]['Price'];
         }
-        $sum += $costNetwork;
 
         // SLA
         $costSLA = 0;
         $costSLA += $Calculate[16][$_REQUEST['SLA']['ServiceLevel']]['Price'];
         $costSLA += $Calculate[17][$_REQUEST['SLA']['Management']]['Price'];
         $costSLA += $Calculate[21][$_REQUEST['SLA']['DCGrade']]['Price'] * $Calculate[6][$_REQUEST['Hardware']['Platform']]['Options']['unit'];
-        $sum += $costSLA;
+
+        // РАСЧЕТ
+        $sum = 0;
+
+        
 
 
-//        $requestData = [];
+
+
+
+        //        $requestData = [];
 //        $requestData['SumEUR'] = $_REQUEST['Hardvare']['Summa'] + $_REQUEST['SoftWare']['Summa'] + $_REQUEST['Network']['Summa'] + $_REQUEST['SLA']['Summa'];
 //        $requestData['SumRUR'] = $_REQUEST['Hardvare']['Summa'] + $_REQUEST['SoftWare']['Summa'] + $_REQUEST['Network']['Summa'] + $_REQUEST['SLA']['Summa'];
 //        $requestData['billingcycle'] = $_REQUEST['Cicle'];
