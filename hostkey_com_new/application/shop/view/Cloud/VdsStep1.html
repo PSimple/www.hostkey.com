@@ -315,9 +315,29 @@
 
         $( '.b-vds-cloud__summary-submit').bind( 'click', function( ) {
             $('.popup_callback').show();
+           var iframe = document.getElementById('configure_cloud_VDS');
            // $( '#configure_cloud_VDS' ).contents().find("body").html('Test');
            // document.getElementById('configure_cloud_VDS').src = '';
-            return crFrame( );
+            crFrame( );
+
+
+
+
+            iframe.onload = function() {
+                //var iframeDoc2 = iframe.contentWindow.document;
+               // iframeDoc2.body.style.backgroundColor = 'orange';
+                win = window.frames.configure_cloud_VDS;
+                win.postMessage(
+
+               JSON.stringify( Zakaz ),
+
+                "https://bill.hostkey.com" // target domain
+
+                );
+
+            }
+
+            return false;
             //generate_post ( Zakaz );
             //console.log( 'https://billing.hostkey.ru/cart.php?a=add&pid=512&carttpl=cart&currency=2&' + generate_post ( Zakaz ) + "addons[60]=on" );
            // document.location.href = 'https://billing.hostkey.ru/cart.php?systpl=siteF&a=add&pid=512&carttpl=cartF&currency=2&' + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
@@ -337,9 +357,11 @@
                      //  + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
           //  document.getElementById('add_iframe_from_billing').appendChild(iframe);
            // $( '<img src="/assets/img/220-3.GIF" alt="">').appendTo( '#configure_cloud_VDS');
-           document.getElementById('configure_cloud_VDS').src = 'https://billing.hostkey.ru/cart.php?systpl=siteF&a=add&pid=512&carttpl=cartF&currency=2&'
-            + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
-            return false;
+          // document.getElementById('configure_cloud_VDS').src = "https://bill.hostkey.com/cart.php?systpl=siteF&a=confproduct&pid=530&carttpl=cartF&currency=2" ;
+
+           document.getElementById('configure_cloud_VDS').src = 'https://bill.hostkey.com/cart.php?systpl=siteF&a=add&pid=530&carttpl=cartF&currency=2&'
+                 + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
+           //return false;
         }
 
         ////////////////////////////////////////
@@ -355,7 +377,7 @@
 
     <div class="message_pole" id="message_load_ajax"></div>
         <div id="add_iframe_from_billing">
-                <iframe id="configure_cloud_VDS" src=""></iframe>
+                <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
         </div>
 </div>
 
@@ -515,6 +537,34 @@
         margin-left: -2px;
     }
 
+
+    .b-slider__legend-9 {
+        position: relative;
+        height: 60px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .b-slider__legend-7-item {
+        position: absolute;
+        top: 20px;
+        width: 80px;
+        color: #945ae0;
+        text-align: center;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .b-slider__legend-7-item:after {
+        content: '|';
+        position: absolute;
+        top: -13px;
+        left: 50%;
+        font-size: 8px;
+        line-height: 12px;
+        margin-left: -2px;
+    }
+
     .b-vds-cloud__summary-table-cell {
         vertical-align: middle;
     }
@@ -523,12 +573,20 @@
         display: block;
     }
 
+
     #configure_cloud_VDS {
         border: none;
         display: block;
         width: 570px;
-        height: 300px;
+        height: 500px;
         margin: 0 auto;
     }
+
+    .popup_callback { width: 700px; height: 700px; margin: -225px 0 0 -350px; }
+
+    .popup { display: none; position: relative; background: #fff; position: fixed; z-index: 100000; top: 40%; left: 50%; }
+
+    .popup h2{ width: 100%; display: block; font: bold 24px KievitOT,Arial; color: #171819; text-transform: uppercase; text-align: center; margin: 45px auto 60px auto; }
+
 
 </style>
