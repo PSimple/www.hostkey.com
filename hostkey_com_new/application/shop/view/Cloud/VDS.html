@@ -52,8 +52,7 @@
                     Unlimited reinstallation.
                 </p>
             </div>
-            <!--
-                                        -->
+
             <div class="b-vps__feature-item">
                 <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-04.png" alt="иконка">
 
@@ -69,6 +68,33 @@
             </div>
         </div>
 
+        <div class="switch_country_for_container_VPS">
+                        {if ( $PID==531 )}
+                            <div  class="b-dedicated__switch-item active">
+                                    netherland
+                                </div>
+                        {else}
+                             <div  class="b-dedicated__switch-item">
+                                 <a href="/cloud/vds" target="_self" title="ckoud VDS Russia>">
+                                            netherland
+                                        </a>
+                                </div>
+                                {/if}
+                    <div class="b-dedicated__switch-item">/</div>
+                        {if ( $PID==539 )}
+                            <div class="b-dedicated__switch-item active">
+                                    russia
+                            </div>
+                        {else}
+                            <div class="b-dedicated__switch-item">
+                                <a href="/cloud/vds/russia" target="_self" title="ckoud VDS Russia>">
+                                    russia
+                                </a>
+                             </div>
+                        {/if}
+                    </div>
+
+        </div>
         <div class="b-vds-cloud__configurator">
             <div class="b-dedicated__box">
                 <h3 class="b-dedicated__title b-dedicated__title_upline_yes">
@@ -132,7 +158,7 @@
                         </table>
                     </div>
 
-                    <!-- Скролящийся блок с результатом подбора -->
+                    <!-- блок с результатом подбора -->
                     <div class="b-vds-cloud__summary b-vds-cloud__summary_is-purpur" id="scroll-block">
                         <div class="b-vds-cloud__summary-title">Your VDS</div>
                         {foreach ($configuration as $key => $val)}
@@ -210,14 +236,6 @@
         var currencyID = {$currencyId};
 
         /*
-         *   Открываем окно завершения заказа
-         */
-        $('#byu_cloud').bind('click', function () {
-            //   $('.popup_callback').show();
-            //   return false
-            ;
-        })
-        /*
          *  убираем рамки если исправили ошибки в обязательных полях
          */
         $('.popup_callback input[required = "required"]').bind('keyup', function () {
@@ -233,7 +251,7 @@
          */
         $('.close_window_information_manager_cloud').click(function () {
             $('.popup').hide();
-            $('#callback_btn_manage_cloud').removeClass('disabled_href_button').css('color', '#ff6a39');// при закрытии окна очищаем кнопку отправки
+            //$('#callback_btn_manage_cloud').removeClass('disabled_href_button').css('color', '#ff6a39');// при закрытии окна очищаем кнопку отправки
             messager_windows_operator("", $("#message_load_ajax"), 'clear+hide');
             return false;
         });
@@ -272,6 +290,9 @@
         window.write_summa( Zakaz, currency[currencyID], $('#Summa') );///Запишем дефолтную сумму заказа без скидок
         window.write_dis( Zakaz,currency[currencyID], $('.b-vds-cloud__summary-price-discount'));///пишем дефолтный дискаунт
 
+        document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
+
+
         // AJAX_GET('http://site-f.hostke.ru/api/v1/cloud/config?pid=530&currencyId={$currencyId}&custom=1', 'JSON');
 
         function calculatePRoxMoxVDS_sliders(index, ui) {
@@ -307,25 +328,17 @@
         });
 
 
-
-
-        document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
-
-
-
         $( '.b-vds-cloud__summary-submit').bind( 'click', function( ) {
             $('.popup_callback').show();
-           var iframe = document.getElementById('configure_cloud_VDS');
+          // var iframe = document.getElementById('configure_cloud_VDS');
            // $( '#configure_cloud_VDS' ).contents().find("body").html('Test');
            // document.getElementById('configure_cloud_VDS').src = '';
             crFrame( );
-
-
-
-
+            /*
             iframe.onload = function() {
                 //var iframeDoc2 = iframe.contentWindow.document;
                // iframeDoc2.body.style.backgroundColor = 'orange';
+
                 win = window.frames.configure_cloud_VDS;
                 win.postMessage(
 
@@ -336,6 +349,7 @@
                 );
 
             }
+           */
 
             return false;
             //generate_post ( Zakaz );
@@ -359,8 +373,8 @@
            // $( '<img src="/assets/img/220-3.GIF" alt="">').appendTo( '#configure_cloud_VDS');
           // document.getElementById('configure_cloud_VDS').src = "https://bill.hostkey.com/cart.php?systpl=siteF&a=confproduct&pid=530&carttpl=cartF&currency=2" ;
 
-           document.getElementById('configure_cloud_VDS').src = 'https://bill.hostkey.com/cart.php?systpl=siteF&a=add&pid=530&carttpl=cartF&currency=2&'
-                 + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
+           document.getElementById('configure_cloud_VDS').src = 'https://bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
+                 + generate_post ( Zakaz ) ;
            //return false;
         }
 
@@ -382,6 +396,13 @@
 </div>
 
 <style>
+
+    .b-slider__legend-1 {
+        position: relative;
+        height: 60px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
 
     .b-slider__legend-5 {
         position: relative;
@@ -538,6 +559,7 @@
     }
 
 
+
     .b-slider__legend-9 {
         position: relative;
         height: 60px;
@@ -545,7 +567,7 @@
         margin-bottom: 30px;
     }
 
-    .b-slider__legend-7-item {
+    .b-slider__legend-9-item {
         position: absolute;
         top: 20px;
         width: 80px;
@@ -555,7 +577,7 @@
         line-height: 18px;
     }
 
-    .b-slider__legend-7-item:after {
+    .b-slider__legend-9-item:after {
         content: '|';
         position: absolute;
         top: -13px;
@@ -564,6 +586,86 @@
         line-height: 12px;
         margin-left: -2px;
     }
+
+    .b-slider__legend-9-item_place_1 {
+        left: 0;
+        margin-left: -20px;
+    }
+
+    .b-slider__legend-9-item_place_2 {
+        left: 12.5%;
+        margin-left: -34px;
+    }
+
+    .b-slider__legend-9-item_place_2:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-9-item_place_3 {
+        left: 25%;
+        margin-left: -35px;
+    }
+
+    .b-slider__legend-9-item_place_3:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-9-item_place_4 {
+        left: 37.5%;
+        margin-left: -35px;
+    }
+
+    .b-slider__legend-9-item_place_4:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-9-item_place_5 {
+        left: 50%;
+        margin-left: -35px;
+    }
+
+    .b-slider__legend-9-item_place_5:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-9-item_place_6 {
+        left: 62.5%;
+        margin-left: -35px;
+    }
+
+    .b-slider__legend-9-item_place_6:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-9-item_place_7 {
+        left: 75%;
+        margin-left: -36px;
+    }
+
+    .b-slider__legend-9-item_place_7:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-9-item_place_8 {
+        left: 87.5%;
+        margin-left: -36px;
+    }
+
+    .b-slider__legend-9-item_place_8:after {
+        margin-left: -2px;
+    }
+
+    .b-slider__legend-9-item_place_9 {
+        left: 100%;
+        margin-left: -55px;
+    }
+
+    .b-slider__legend-9-item_place_9:after {
+        margin-left: -2px;
+    }
+
+
+
 
     .b-vds-cloud__summary-table-cell {
         vertical-align: middle;
@@ -588,5 +690,14 @@
 
     .popup h2{ width: 100%; display: block; font: bold 24px KievitOT,Arial; color: #171819; text-transform: uppercase; text-align: center; margin: 45px auto 60px auto; }
 
+    .switch_country_for_container_VPS {
+        display: block;
+        padding: 50px 0 0 450px;
+        background: #fff;
+    }
+    .switch_country_for_container_VPS a{
+        color: #000;
+        text-decoration: none;
+    }
 
 </style>

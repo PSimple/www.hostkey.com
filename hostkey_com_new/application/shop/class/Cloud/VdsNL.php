@@ -18,7 +18,8 @@ class Shop_Cloud_VdsNL extends Zero_Controller
      */
     public function Action_Default()
     {
-        $this->Chunk_Init();
+        //$this->Chunk_Init();
+        $this->View = new Zero_View('Shop_Cloud_VDS');
         $this->Chunk_View();
         return $this->View;
     }
@@ -35,7 +36,7 @@ class Shop_Cloud_VdsNL extends Zero_Controller
         $config = Zero_Config::Get_Config('shop', 'config');
         $this->View->Assign("currency", $config['currency']);
         $this->View->Assign("currencyId", $config['currencyId']);
-
+        $this->View->Assign("PID", 531);
         $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudCustom/' . md5($config['currencyId'] . 531) . '.data';
         $configuration = [];
         if ( file_exists($path) )

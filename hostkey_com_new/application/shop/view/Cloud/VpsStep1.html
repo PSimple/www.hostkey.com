@@ -54,257 +54,74 @@
         <table class="b-vps__table">
             <tr class="b-vps__table-row">
                 <td class="b-vps__table-cell b-vps__table-cell_head_yes"></td>
-                <td class="b-vps__table-cell b-vps__table-cell_head_yes">
-                    <h2 class="b-vps-table__title">Starter</h2>
-                    <div class="b-vps-table__subtitle">Get started on the web</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_head_yes">
-                    <h2 class="b-vps-table__title b-vps-table__title_red_yes">Basic</h2>
-                    <div class="b-vps-table__subtitle">Most popular plan</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_head_yes">
-                    <h2 class="b-vps-table__title">Pro</h2>
-                    <div class="b-vps-table__subtitle">Most popular plan</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_head_yes">
-                    <h2 class="b-vps-table__title">Advanced</h2>
-                    <div class="b-vps-table__subtitle">Scalable hosting with
-                        guaranted resources</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_head_yes">
-                    <h2 class="b-vps-table__title">Pro</h2>
-                    <div class="b-vps-table__subtitle">Most popular plan</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_head_yes">
-                    <h2 class="b-vps-table__title">Advanced</h2>
-                    <div class="b-vps-table__subtitle">Scalable hosting with
-                        guaranted resources</div>
-                </td>
+                {foreach ( $configuration as $key => $value)}
+                    <td class="b-vps__table-cell b-vps__table-cell_head_yes">
+                        <h2 class="b-vps-table__title">{$value['name']}</h2>
+                        <div class="b-vps-table__subtitle">{$value['value']}</div>
+                    </td>
+                {/foreach}
             </tr>
             <tr class="b-vps__table-row">
                 <td class="b-vps__table-cell"></td>
+                {foreach ( $configuration as $key => $value)}
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">1.99 EUR / month</div>
+                    <div class="b-vps-table__price">{$value['summ']} EUR / month</div>
                 </td>
-                <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">2.99 EUR / month</div>
-                </td>
-                <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">3.99 EUR / month</div>
-                </td>
-                <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">4.99 EUR / month</div>
-                </td>
-                <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">3.99 EUR / month</div>
-                </td>
-                <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">4.99 EUR / month</div>
-                </td>
+                {/foreach}
             </tr>
 
             <tr class="b-vps__table-row">
                 <td class="b-vps__table-cell"></td>
-                <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#">BUY</a>
-                </td>
-                <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#">BUY</a>
-                </td>
-                <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#">BUY</a>
-                </td>
-                <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#">BUY</a>
-                </td>
-                <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#">BUY</a>
-                </td>
-                <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#">BUY</a>
-                </td>
+                {foreach ( $configuration as $key => $value)}
+                        <td class="b-vps__table-cell">
+                            <a class="b-vps-table__buy" href="#">BUY</a>
+                        </td>
+                {/foreach}
+
             </tr>
+            {foreach ( $table_row_data as $key => $value)}
+                <tr class="b-vps__table-row">
+                    <td class="b-vps__table-cell b-vps__table-cell_border_yes">
+                        <h3 class="b-vps__table-cell_main_yes">{$key}</h3>
+                    </td>
+                    {foreach ( $value as $k => $v)}
+                    <td class="b-vps__table-cell b-vps__table-cell_border_yes">
+                        <div class="b-vps-table__text">{$v}</div>
+                    </td>
+                    {/foreach}
+                    </tr>
+            {/foreach}
+
             <tr class="b-vps__table-row">
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <h3 class="b-vps__table-cell_main_yes">CPU Cores</h3>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">2</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text b-vps-table__text_red_yes">2</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">4</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">3</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">1</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">2</div>
-                </td>
-            </tr>
-            <tr class="b-vps__table-row">
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <h3 class="b-vps__table-cell_main_yes">RAM</h3>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">2 Gb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text b-vps-table__text_red_yes">4 Gb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">8 Gb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">3 Gb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">3 Gb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">8 Gb</div>
-                </td>
-            </tr>
-            <tr class="b-vps__table-row">
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <h3 class="b-vps__table-cell_main_yes">Disk space</h3>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">50 Gb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text b-vps-table__text_red_yes">60 Gb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">70 Gb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">140 Gb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">140 Gb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">70 Gb</div>
-                </td>
-            </tr>
-            <tr class="b-vps__table-row">
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <h3 class="b-vps__table-cell_main_yes">OS</h3>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">Linux</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text b-vps-table__text_red_yes">Linux</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">Linux</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">Linux</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">Linux</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">Linux</div>
-                </td>
-            </tr>
-            <tr class="b-vps__table-row">
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <h3 class="b-vps__table-cell_main_yes">Traffic TB (100MBPS)</h3>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">4 Tb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text b-vps-table__text_red_yes">5 Tb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">6 Tb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">6 Tb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">7 Tb</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">10 Mbps
-                        Unmetered</div>
-                </td>
-            </tr>
-            <tr class="b-vps__table-row">
+
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
                     <h3 class="b-vps__table-cell_main_yes">payment period</h3>
                 </td>
+                {foreach ( $configuration as $key => $value)}
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">Semiannually</div>
+                    <div class="b-vps-table__text">{$payment_period}</div>
                 </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text b-vps-table__text_red_yes">Semiannually</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">Semiannually</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">Semiannually</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">Semiannually</div>
-                </td>
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">Semiannually</div>
-                </td>
+                {/foreach}
+
             </tr>
 
             <tr class="b-vps__table-row">
                 <td class="b-vps__table-cell"></td>
+                {foreach ( $configuration as $key => $value)}
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">1.99 EUR / month</div>
+                    <div class="b-vps-table__price">{$value['summ']} EUR / month</div>
                 </td>
-                <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">2.99 EUR / month</div>
-                </td>
-                <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">3.99 EUR / month</div>
-                </td>
-                <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">4.99 EUR / month</div>
-                </td>
-                <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">3.99 EUR / month</div>
-                </td>
-                <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">4.99 EUR / month</div>
-                </td>
+                {/foreach}
             </tr>
             <tr class="b-vps__table-row">
                 <td class="b-vps__table-cell"></td>
+
+
+                {foreach ( $configuration as $key => $value)}
                 <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#">BUY</a>
+                    <a class="b-vps-table__buy" href="#" data_preset="{$key}">BUY</a>
                 </td>
-                <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#">BUY</a>
-                </td>
-                <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#">BUY</a>
-                </td>
-                <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#">BUY</a>
-                </td>
-                <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#">BUY</a>
-                </td>
-                <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#">BUY</a>
-                </td>
+                {/foreach}
             </tr>
         </table>
 
@@ -320,3 +137,125 @@
 
     <div class="footer-push"></div>
 </div>
+
+
+<div class="popup popup_callback" style="display: none;" id="information_manage_cloud">
+    <a class="close close_window_information_manager_cloud" href="#"><img src="/assets/img/close.png"></a>
+
+    <h2>INFORMATION for REQUEST</h2>
+
+    <div class="message_pole" id="message_load_ajax"></div>
+    <div id="add_iframe_from_billing">
+        <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function (){
+
+        var Zakaz = new Object();
+        var currency = {
+            "2": "€",
+            "1": "RUR",
+            "3": "$"
+        };
+        var currencyID = {$currencyId};
+
+    var listOfProducts = new Object();
+    var listOfProducts = {json_encode($configuration)};
+    listOfProducts.payment = {
+        "name": "payment",
+        "hidden": "0",
+        "data": {
+            "0": {
+                "name": "monthly",
+                "discount": "0",
+                'period': "month"
+            },
+            "1": {
+                "name": "quarterly",
+                "discount": "3",
+                "period": "quarter"
+            },
+            "2": {
+                "name": "semiannually",
+                "discount": "6",
+                "period": "half-year"
+            },
+            "3": {
+                "name": "annually",
+                "discount": "12",
+                "period": "year"
+            }
+        }
+    };
+
+        document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
+
+        /*
+         *   Закрываем окно
+         */
+        $('.close_window_information_manager_cloud').click(function () {
+            $('.popup').hide();
+            return false;
+        });
+
+        $('.b-vps-table__buy').bind('click', function () {
+              $('.popup_callback').show();
+              var PRESET_ID = $( this).attr( 'data_preset' );
+            //alert ( PRESET_ID );
+              for( var prop in listOfProducts ) {
+                    if( prop == PRESET_ID ) {
+                       // alert ( JSON.stringify ( listOfProducts[prop]  ) );
+                        Zakaz = listOfProducts[prop][0];
+                        Zakaz.payment = new Object();
+                        Zakaz.payment.name = 'payment';
+                        Zakaz.payment.hidden = '0';
+                        Zakaz.payment.data = new Object();
+                        Zakaz.payment.data[0] = listOfProducts['payment']['data'][0];
+                     // alert ( JSON.stringify ( Zakaz ) );
+                    }
+              }
+              crFrame( );
+           // console.log( JSON.stringify(Zakaz)  );
+              return false;
+            ;
+        })
+
+        function crFrame( )
+        {
+            document.getElementById('configure_cloud_VDS').src = 'https://bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
+                    + generate_post ( Zakaz ) ;
+        }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+    });
+
+
+</script>
+<style>
+    .b-vds-cloud__summary-table-cell {
+        vertical-align: middle;
+    }
+
+    #add_iframe_from_billing {
+        display: block;
+    }
+
+
+    #configure_cloud_VDS {
+        border: none;
+        display: block;
+        width: 570px;
+        height: 500px;
+        margin: 0 auto;
+    }
+
+    .popup_callback { width: 700px; height: 700px; margin: -225px 0 0 -350px; }
+
+    .popup { display: none; position: relative; background: #fff; position: fixed; z-index: 100000; top: 40%; left: 50%; }
+
+    .popup h2{ width: 100%; display: block; font: bold 24px KievitOT,Arial; color: #171819; text-transform: uppercase; text-align: center; margin: 45px auto 60px auto; }
+
+</style>
