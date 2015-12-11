@@ -119,46 +119,58 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
             'semiannually' => 6,
             'annually' => 12,
         ];
-        $sum = $costHardware + $costNetwork + $costSLA;
-        // Полная раскладка по месяцам
-        $sumMonthly = $sum + $costSoftWare;
-        $sumQuarterly = ($sum - ($sum * 0.03) + $costSoftWare) * 3;
-        $sumSemiannually = ($sum - ($sum * 0.06) + $costSoftWare) * 6;
-        $sumAnnually = ($sum - ($sum * 0.12) + $costSoftWare) * 12;
+        $cycleNumber = [
+            'monthly' => 1,
+            'quarterly' => 3,
+            'semiannually' => 6,
+            'annually' => 12,
+        ];
         // Инофрмация по месяцу для клиента с учетом выбранного периода
+        $sum = $costHardware + $costNetwork + $costSLA;
         $discountMonthly = ($sum / 100) * $percentCycle[$_REQUEST['SLA']['CycleDiscount']];
-        $sum = $sum - $discountMonthly + $costSoftWare;
         if ( 0 < $discountMonthly )
             $discount = $discountMonthly * $percentCycle[$_REQUEST['SLA']['CycleDiscount']];
         else
             $discount = $discountMonthly;
-        //        if ( 0 < $discountMonthly )
-        //            $sum = $sum * $percentCycle[$_REQUEST['SLA']['CycleDiscount']];
-
-        //        $requestData = [];
-        //        $requestData['SumEUR'] = $_REQUEST['Hardvare']['Summa'] + $_REQUEST['SoftWare']['Summa'] + $_REQUEST['Network']['Summa'] + $_REQUEST['SLA']['Summa'];
-        //        $requestData['SumRUR'] = $_REQUEST['Hardvare']['Summa'] + $_REQUEST['SoftWare']['Summa'] + $_REQUEST['Network']['Summa'] + $_REQUEST['SLA']['Summa'];
-        //        $requestData['billingcycle'] = $_REQUEST['Cicle'];
-        //        $requestData['InventoryID'] = $_REQUEST['compId'];
-        //        $requestData['Groups'] = $_REQUEST['Groups'];
-        //        $requestData['Configuration'] = $_REQUEST['Hardvare']['Label'] . '/' . $_REQUEST['SoftWare']['Label'] . '/' . $_REQUEST['Network']['Label'] .'/' . $_REQUEST['SLA']['Label'];
-        //        $requestData['Configuration'] = preg_replace("~\([0-9]+\)~si", "", $requestData['Configuration']);
         if ( $_REQUEST['Calculation'] )
         {
             Zero_App::ResponseJson200([
-                "Summa" => $sum,
+                "Summa" => $sum - $discountMonthly + $costSoftWare,
                 "Discount" => $discount,
             ]);
             return true;
         }
-
-        // Формирование заказа
-        Zero_App::ResponseJson200([
-            "Summa" => $sum,
-            "Discount" => $discount,
-            "OptionID" => 543,
-            "Configuration" => "bla bla bla",
-        ]);
+        // Полная раскладка по месяцам и формирование заказа
+        $sumMonthly = $sum + $costSoftWare;
+        $sumQuarterly = ($sum - ($sum * 0.03) + $costSoftWare) * 3;
+        $sumSemiannually = ($sum - ($sum * 0.06) + $costSoftWare) * 6;
+        $sumAnnually = ($sum - ($sum * 0.12) + $costSoftWare) * 12;
+        $requestData = [
+            'Monthly' => $sumMonthly,
+            'Quarterly' => $sumQuarterly,
+            'Semiannually' => $sumSemiannually,
+            'Annually' => $sumAnnually,
+            'billingcycle' => $cycleNumber[$_REQUEST['SLA']['CycleDiscount']],
+            'InventoryID' => 0,
+            'Groups' => $_REQUEST['Groups'],
+            'CurrencyId' => $_REQUEST['Currency'] == 'eur' ? 2 : 2,
+        ];
+        $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/orders/dedicated', $requestData);
+        $label = $_REQUEST['Hardware']['Label'] . '/' . $_REQUEST['Network']['Label'] . '/' . $_REQUEST['Software']['Label'] . '/' . $_REQUEST['SLA']['Label'];
+        Zero_Logs::File("ordernew.log", $requestData, $result);
+        if ( $result['ErrorStatus'] == false )
+        {
+            Zero_App::ResponseJson200([
+                "Summa" => $sum,
+                "Discount" => $discount,
+                "OptionID" => $result['Content']['OptionID'],
+                "Configuration" => $label,
+            ]);
+        }
+        else
+        {
+            Zero_App::ResponseJson200(null, $result['Code'], [$result['Message']]);
+        }
         return true;
     }
 
