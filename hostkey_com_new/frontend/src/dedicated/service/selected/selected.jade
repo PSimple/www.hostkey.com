@@ -180,7 +180,7 @@
             | range of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own
             | servers in Moscow.
 
-    .b-container
+    .b-container(style="padding-bottom: 30px;")
 
         .b-dedicated__accordion
 
@@ -441,6 +441,18 @@
                                         td.table-select__cell
                                         td.table-select__cell
 
+                table.b-dedicated__accordion-table
+                    tr.b-dedicated__accordion-table-row
+                        td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.discount.billingCycle.name")
+                        td.b-dedicated__accordion-table-cell
+                            table.table-select
+                                tr.table-select__row
+                                    td.table-select__cell
+                                        .table-select__item(ui-select="order.discount.billingCycle", options="tabs.discount.billingCycle.options", width="340")
+                                                td.table-select__cell
+                                    td.table-select__cell
+                                    td.table-select__cell
+
 
         // Скролящийся блок с результатом выбора
         .b-dedicated__summary(scroll-block="")
@@ -482,7 +494,7 @@
 
             a.b-submit.b-dedicated__summary-submit(href="", ng-click="buy(order)") Buy
 
-    .b-container
+    //-.b-container
         table.b-dedicated__accordion-table
             tr.b-dedicated__accordion-table-row
                 td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.discount.billingCycle.name")
