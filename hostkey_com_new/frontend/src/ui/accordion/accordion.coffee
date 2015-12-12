@@ -3,7 +3,10 @@ require 'bower/angular-bootstrap/ui-bootstrap.js'
 angular.module "ui.accordion", [
     "ui.bootstrap.accordion"
 ]
-            
+
+angular.module("ui.accordion").config (accordionConfig) ->
+    accordionConfig.closeOthers = true
+
 angular.module("ui.accordion").run ($templateCache) ->
     tpl =
         """
@@ -29,3 +32,14 @@ angular.module("ui.accordion").run ($templateCache) ->
 
     $templateCache.put "template/accordion/accordion.html", tpl
     return
+
+angular.module("ui.accordion").run ($timeout) ->
+    # хак для аккродеона
+    # когда расскрывается вкладка, отскроллить на ее заголовок
+    $("body").on "click", ".b-accordion__title", (e) ->
+        $openedTab = $(this)
+        $timeout ->
+            $('html, body').animate
+                scrollTop: $openedTab.offset().top - 75
+            , 150
+        , 150

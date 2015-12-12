@@ -88,9 +88,9 @@
 
 	__webpack_require__(15);
 
-	__webpack_require__(28);
+	__webpack_require__(29);
 
-	__webpack_require__(31);
+	__webpack_require__(32);
 
 	angular.module("dedicated.service", ["ngSanitize", "ui", "ui.router", "api", "dedicated.service.selected"]);
 
@@ -110,7 +110,7 @@
 	    views: {
 	      "solutions": {
 	        controller: "DedicatedServiceSolutionsCtrl",
-	        template: __webpack_require__(36)
+	        template: __webpack_require__(37)
 	      }
 	    }
 	  });
@@ -124,7 +124,6 @@
 	angular.module("dedicated.service").controller("DedicatedServiceSolutionsCtrl", ["$scope", "$state", "$stateParams", "$rootScope", function($scope, $state, $stateParams, $rootScope) {
 	  if ($stateParams.currency) {
 	    window.currency = $stateParams.currency;
-	    console.log(window.currency);
 	  }
 	  $rootScope.bodyClass = function() {
 	    return {
@@ -43478,11 +43477,11 @@
 
 	__webpack_require__(20);
 
-	__webpack_require__(21);
-
-	__webpack_require__(25);
+	__webpack_require__(22);
 
 	__webpack_require__(26);
+
+	__webpack_require__(27);
 
 	angular.module("ui", ["ui.buttons", "ui.scrollBlock", "ui.accordion", "ui.select", "ui.columns", "ui.notifications"]);
 
@@ -43844,9 +43843,13 @@
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(18);
+	/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(18);
 
 	angular.module("ui.accordion", ["ui.bootstrap.accordion"]);
+
+	angular.module("ui.accordion").config(["accordionConfig", function(accordionConfig) {
+	  return accordionConfig.closeOthers = true;
+	}]);
 
 	angular.module("ui.accordion").run(["$templateCache", function($templateCache) {
 	  var tpl;
@@ -43860,6 +43863,19 @@
 	  $templateCache.put("template/accordion/accordion.html", tpl);
 	}]);
 
+	angular.module("ui.accordion").run(["$timeout", function($timeout) {
+	  return $("body").on("click", ".b-accordion__title", function(e) {
+	    var $openedTab;
+	    $openedTab = $(this);
+	    return $timeout(function() {
+	      return $('html, body').animate({
+	        scrollTop: $openedTab.offset().top - 75
+	      }, 150);
+	    }, 150);
+	  });
+	}]);
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
 /* 18 */
@@ -47831,12 +47847,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 21 */
+/* 21 */,
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(22);
+	__webpack_require__(23);
 
-	__webpack_require__(24);
+	__webpack_require__(25);
 
 	angular.module("ui.select", []);
 
@@ -47894,14 +47911,14 @@
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 23 */,
-/* 24 */
+/* 24 */,
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;var require;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function($) {/*!
@@ -54022,7 +54039,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	
@@ -54079,10 +54096,10 @@
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var humane = __webpack_require__(27);
+	var humane = __webpack_require__(28);
 
 	angular.module("ui.notifications", []);
 
@@ -54112,7 +54129,7 @@
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -54356,12 +54373,12 @@
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(29);
-
 	__webpack_require__(30);
+
+	__webpack_require__(31);
 
 	angular.module("api", ["api.dedicated", "api.order"]);
 
@@ -54369,7 +54386,7 @@
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports) {
 
 	var objectToArray;
@@ -54544,7 +54561,7 @@
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports) {
 
 	angular.module("api.order", ["config"]);
@@ -54673,10 +54690,10 @@
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(32);
+	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(33);
 
 	angular.module("dedicated.service.selected", []);
 
@@ -54684,7 +54701,7 @@
 	  $stateProvider.state("dedicatedService.selected", {
 	    url: "/:country/:type",
 	    controller: "MicroCtrl",
-	    template: __webpack_require__(33),
+	    template: __webpack_require__(34),
 	    resolve: {
 	      components: ["$dedicated", function($dedicated) {
 	        return $dedicated.components();
@@ -55142,7 +55159,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -56696,10 +56713,10 @@
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(34);
+	var jade = __webpack_require__(35);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -56710,7 +56727,7 @@
 	}
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56930,7 +56947,7 @@
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(35).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(36).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -56962,16 +56979,16 @@
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(34);
+	var jade = __webpack_require__(35);
 
 	module.exports = function template(locals) {
 	var buf = [];

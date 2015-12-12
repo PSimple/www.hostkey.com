@@ -52,7 +52,6 @@ angular.module("dedicated.service").controller "DedicatedServiceSolutionsCtrl", 
 
     if $stateParams.currency
         window.currency = $stateParams.currency
-        console.log window.currency
 
     $rootScope.bodyClass = ->
         {in: $rootScope.loaded}
