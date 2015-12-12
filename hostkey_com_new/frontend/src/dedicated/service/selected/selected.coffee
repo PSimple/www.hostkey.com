@@ -6,7 +6,7 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
     $stateProvider
     .state "dedicatedService.selected",
-        url: "/:country/:type/"
+        url: "/:country/:type"
         controller: "MicroCtrl"
         template: require "./selected.jade"
         resolve:

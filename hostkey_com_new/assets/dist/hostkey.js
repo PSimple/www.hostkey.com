@@ -99,6 +99,15 @@
 	angular.module("dedicated.service", ["ngSanitize", "ui", "ui.router", "api", "dedicated.service.selected"]);
 
 	angular.module("dedicated.service").config(["$httpProvider", "$stateProvider", "$urlRouterProvider", function($httpProvider, $stateProvider, $urlRouterProvider) {
+	  $urlRouterProvider.rule(function($injector, $location) {
+	    var hasTrailingSlash, newPath, path;
+	    path = $location.path();
+	    hasTrailingSlash = path[path.length - 1] === '/';
+	    if (hasTrailingSlash) {
+	      newPath = path.substr(0, path.length - 1);
+	      return newPath;
+	    }
+	  });
 	  $urlRouterProvider.otherwise("");
 	  $stateProvider.state("dedicatedService", {
 	    url: "",
@@ -54657,7 +54666,7 @@
 
 	angular.module("dedicated.service.selected").config(["$httpProvider", "$stateProvider", "$urlRouterProvider", function($httpProvider, $stateProvider, $urlRouterProvider) {
 	  $stateProvider.state("dedicatedService.selected", {
-	    url: "/:country/:type/",
+	    url: "/:country/:type",
 	    controller: "MicroCtrl",
 	    template: __webpack_require__(33),
 	    resolve: {
