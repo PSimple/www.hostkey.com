@@ -5,7 +5,7 @@ require './buttons/buttons'
 require './scrollBlock/scrollBlock'
 require './select2/select2'
 require './columns/columns'
-require './notifications'
+require './notifications/index'
 
 angular.module "ui", [
 #    "ui.bootstrap"

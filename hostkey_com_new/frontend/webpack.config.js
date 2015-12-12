@@ -17,7 +17,7 @@ module.exports = {
     },
 
     output: {
-        path: path.join(__dirname, '/../hostkey_com_new/assets/dist'),
+        path: path.join(__dirname, '/../assets/dist'),
         filename: '[name].js'
     },
 
