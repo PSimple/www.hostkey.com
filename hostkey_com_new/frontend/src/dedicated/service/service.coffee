@@ -20,6 +20,15 @@ angular.module "dedicated.service", [
 
 angular.module("dedicated.service").config ($httpProvider, $stateProvider, $urlRouterProvider) ->
 
+    $urlRouterProvider.rule ($injector, $location) ->
+        path = $location.path()
+        hasTrailingSlash = path[path.length - 1] == '/'
+        if hasTrailingSlash
+            #if last charcter is a slash, return the same url without the slash
+            newPath = path.substr(0, path.length - 1)
+            return newPath
+        return
+
     $urlRouterProvider.otherwise ""
     
     $stateProvider

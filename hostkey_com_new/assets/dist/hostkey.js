@@ -99,6 +99,15 @@
 	angular.module("dedicated.service", ["ngSanitize", "ui", "ui.router", "api", "dedicated.service.selected"]);
 
 	angular.module("dedicated.service").config(["$httpProvider", "$stateProvider", "$urlRouterProvider", function($httpProvider, $stateProvider, $urlRouterProvider) {
+	  $urlRouterProvider.rule(function($injector, $location) {
+	    var hasTrailingSlash, newPath, path;
+	    path = $location.path();
+	    hasTrailingSlash = path[path.length - 1] === '/';
+	    if (hasTrailingSlash) {
+	      newPath = path.substr(0, path.length - 1);
+	      return newPath;
+	    }
+	  });
 	  $urlRouterProvider.otherwise("");
 	  $stateProvider.state("dedicatedService", {
 	    url: "",
@@ -43488,20 +43497,28 @@
 	    if (angular.isObject(obj)) {
 	      names = [];
 	      angular.forEach(obj, function(o) {
-	        var count, ref;
+	        var count, price, ref, verboseName;
+	        verboseName = "";
 	        if (o != null ? (ref = o.Options) != null ? ref.short_name : void 0 : void 0) {
 	          if (o.hasOwnProperty('Value')) {
 	            if (o.Value > 0) {
 	              count = Number(o.Value, 10);
-	              return names.push("" + o.Options.short_name);
+	              verboseName = "" + o.Options.short_name;
 	            }
 	          } else {
-	            return names.push(o.Options.short_name);
+	            verboseName = o.Options.short_name;
 	          }
 	        } else {
 	          if ((o != null ? o.Name : void 0) && o.ID) {
-	            return names.push(o.Name);
+	            verboseName = o.Name;
 	          }
+	        }
+	        if (verboseName) {
+	          price = Number(o.Price, 10);
+	          if (price) {
+	            verboseName += " (" + price + ")";
+	          }
+	          return names.push(verboseName);
 	        }
 	      });
 	      str = names.join(" / ");
@@ -47847,7 +47864,19 @@
 	      options: "=",
 	      width: "@"
 	    },
-	    template: "<select select2=\"uiSelect\" ng-style=\"{width: width+'px'}\">\n    <option ng-selected=\"{{item.ID === uiSelect.ID}}\" ng-repeat=\"item in options\" value=\"{{item}}\">{{item.Name}}</option>\n</select>"
+	    template: "<select select2=\"uiSelect\" ng-style=\"{width: width+'px'}\">\n    <option ng-selected=\"{{item.ID === uiSelect.ID}}\" ng-repeat=\"item in options\" value=\"{{item}}\">{{item|itemPrice}}</option>\n</select>"
+	  };
+	});
+
+	angular.module("ui.select").filter("itemPrice", function() {
+	  return function(item) {
+	    var price, str;
+	    str = item.Name;
+	    price = Number(item.Price, 10);
+	    if (price) {
+	      str += " (" + price + ")";
+	    }
+	    return str;
 	  };
 	});
 
@@ -54613,7 +54642,7 @@
 	            configoption: {
 	              "600": data.Content.OptionID
 	            },
-	            billingcycle: "quarterly",
+	            billingcycle: order.SLA.CycleDiscount,
 	            customfield: {
 	              "220": data.Content.Configuration
 	            }
@@ -54641,7 +54670,7 @@
 
 	angular.module("dedicated.service.selected").config(["$httpProvider", "$stateProvider", "$urlRouterProvider", function($httpProvider, $stateProvider, $urlRouterProvider) {
 	  $stateProvider.state("dedicatedService.selected", {
-	    url: "/:country/:type/",
+	    url: "/:country/:type",
 	    controller: "MicroCtrl",
 	    template: __webpack_require__(33),
 	    resolve: {
@@ -54850,8 +54879,8 @@
 	      return;
 	    }
 	    return $order.post(order).then(function(orderLink) {
-	      alert(orderLink);
-	      return console.log(orderLink);
+	      console.log(orderLink);
+	      return window.location = orderLink;
 	    })["catch"](function(error) {
 	      if (error.Message) {
 	        return alert(error.Message);
@@ -56931,7 +56960,7 @@
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div ng-click=\"changeCountry('NL')\" ng-class=\"{active:$stateParams.country==='NL'}\" class=\"b-dedicated__switch-item\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div ng-click=\"changeCountry('RU')\" ng-class=\"{active:$stateParams.country==='RU'}\" class=\"b-dedicated__switch-item\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-1.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Micro servers</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ng-class=\"{active:$stateParams.type==='Mini'}\" ui-sref=\".selected({type:'Mini', country:$stateParams.country})\" class=\"b-dedicated__item\"><img src=\"/assets/img/dedicate-select-icon-2-2.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Mini servers</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-3.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Virtualisation nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-4.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Hosting nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-5.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Storage</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-6.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Big data</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.2.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-7.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Configurator</h3><h4 class=\"b-dedicated__item-subtitle\">Your own configuration</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.3.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-8.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Extra price</h3><h4 class=\"b-dedicated__item-subtitle\">2014 sale</h4><div class=\"b-dedicated__item-start b-dedicated__item-start_red_yes\">Starts from</div><div class=\"b-dedicated__item-price b-dedicated__item-price_red_yes\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
+	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div ng-click=\"changeCountry('NL')\" ng-class=\"{active:$stateParams.country==='NL'}\" class=\"b-dedicated__switch-item\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div ng-click=\"changeCountry('RU')\" ng-class=\"{active:$stateParams.country==='RU'}\" class=\"b-dedicated__switch-item\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-class=\"{active:$stateParams.type==='Micro'}\" ui-sref=\".selected({type:'Micro', country:$stateParams.country})\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-1.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Micro servers</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ng-class=\"{active:$stateParams.type==='Mini'}\" ui-sref=\".selected({type:'Mini', country:$stateParams.country})\" class=\"b-dedicated__item\"><img src=\"/assets/img/dedicate-select-icon-2-2.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Mini servers</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-3.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Virtualisation nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-4.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Hosting nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-5.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Storage</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-6.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Big data</h3><h4 class=\"b-dedicated__item-subtitle\">For smalll projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.2.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-7.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Configurator</h3><h4 class=\"b-dedicated__item-subtitle\">Your own configuration</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">€15.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.3.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-8.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Extra price</h3><h4 class=\"b-dedicated__item-subtitle\">2014 sale</h4><div class=\"b-dedicated__item-start b-dedicated__item-start_red_yes\">Starts from</div><div class=\"b-dedicated__item-price b-dedicated__item-price_red_yes\">€25.99/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
 	}
 
 /***/ }

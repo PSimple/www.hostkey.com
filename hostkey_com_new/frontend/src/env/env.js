@@ -18,6 +18,6 @@ module.exports = {
         "apiUrl": "/api/v1"
     },
     production: {
-        "apiUrl": ""
+        "apiUrl": "/api/v1"
     }
 };

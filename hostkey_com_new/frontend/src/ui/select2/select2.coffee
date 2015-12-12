@@ -35,7 +35,14 @@ angular.module("ui.select").directive "uiSelect",  ->
     template:
         """
             <select select2="uiSelect" ng-style="{width: width+'px'}">
-                <option ng-selected="{{item.ID === uiSelect.ID}}" ng-repeat="item in options" value="{{item}}">{{item.Name}}</option>
+                <option ng-selected="{{item.ID === uiSelect.ID}}" ng-repeat="item in options" value="{{item}}">{{item|itemPrice}}</option>
             </select>
         """
 
+angular.module("ui.select").filter "itemPrice",  ->
+    (item) ->
+        str = item.Name
+        price = Number(item.Price, 10)
+        str += " (#{price})" if price
+
+        str

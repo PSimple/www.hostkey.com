@@ -113,7 +113,7 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
                         pid: window.pid
                         configoption:
                             "600": data.Content.OptionID
-                        billingcycle: "quarterly"
+                        billingcycle: order.SLA.CycleDiscount
                         customfield:
                             "220": data.Content.Configuration
 

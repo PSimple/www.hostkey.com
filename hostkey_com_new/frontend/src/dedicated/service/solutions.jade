@@ -10,7 +10,7 @@
 
 .b-dedicated__list.js-switch-box
 
-    .b-dedicated__item.js-switch-item.js-more-setting(data-url="/application/shop/view/Dedicated/include.ajax.content.1.html")
+    .b-dedicated__item.js-switch-item.js-more-setting(ng-class="{active:$stateParams.type==='Micro'}", ui-sref=".selected({type:'Micro', country:$stateParams.country})")
         img.b-dedicated__item-image(src='/assets/img/dedicate-select-icon-2-1.png')
         h3.b-dedicated__item-title Micro servers
         h4.b-dedicated__item-subtitle For smalll projects

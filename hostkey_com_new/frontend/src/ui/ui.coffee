@@ -5,7 +5,7 @@ require './buttons/buttons'
 require './scrollBlock/scrollBlock'
 require './select2/select2'
 require './columns/columns'
-require './notifications'
+require './notifications/index'
 
 angular.module "ui", [
 #    "ui.bootstrap"
@@ -24,16 +24,25 @@ angular.module("ui").filter 'orderVerbose',  ->
         if angular.isObject(obj)
             names = []
             angular.forEach obj, (o) ->
+                verboseName = ""
+
                 if o?.Options?.short_name
                     if o.hasOwnProperty('Value')
                         if o.Value > 0
                             count = Number(o.Value, 10)
-                            names.push "#{o.Options.short_name}"
+                            verboseName = "#{o.Options.short_name}"
                     else
-                        names.push o.Options.short_name
+                        verboseName = o.Options.short_name
                 else
                     if o?.Name and o.ID
-                        names.push o.Name
+                        verboseName = o.Name
+
+                if verboseName
+                    # добавить цену в скобках если она больше 0
+                    price = Number(o.Price, 10)
+                    verboseName += " (#{price})" if price
+
+                    names.push verboseName
 
             str = names.join(" / ")
 
