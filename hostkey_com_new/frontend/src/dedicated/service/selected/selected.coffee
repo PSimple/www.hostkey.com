@@ -113,7 +113,7 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", (notificati
                 options: configCalculator.Data[12]
             MSExchange:
                 enable: false
-                name: "MS Exchange Cals"
+                name: "MS Exchange<br>Cals"
                 options: configCalculator.Data[20]
             RdpLicCount:
                 name: "RDP<br>Licenses"

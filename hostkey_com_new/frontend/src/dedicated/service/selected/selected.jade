@@ -296,7 +296,7 @@
                                         td.table-select__cell
 
                         tr.b-dedicated__accordion-table-row(ng-show="tabs.software.MSExchange.enable")
-                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.software.MSExchange.name")
+                            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind-html="::tabs.software.MSExchange.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
                                     tr.table-select__row
