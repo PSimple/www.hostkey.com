@@ -43484,20 +43484,28 @@
 	    if (angular.isObject(obj)) {
 	      names = [];
 	      angular.forEach(obj, function(o) {
-	        var count, ref;
+	        var count, price, ref, verboseName;
+	        verboseName = "";
 	        if (o != null ? (ref = o.Options) != null ? ref.short_name : void 0 : void 0) {
 	          if (o.hasOwnProperty('Value')) {
 	            if (o.Value > 0) {
 	              count = Number(o.Value, 10);
-	              return names.push("" + o.Options.short_name);
+	              verboseName = "" + o.Options.short_name;
 	            }
 	          } else {
-	            return names.push(o.Options.short_name);
+	            verboseName = o.Options.short_name;
 	          }
 	        } else {
 	          if ((o != null ? o.Name : void 0) && o.ID) {
-	            return names.push(o.Name);
+	            verboseName = o.Name;
 	          }
+	        }
+	        if (verboseName) {
+	          price = Number(o.Price, 10);
+	          if (price) {
+	            verboseName += " (" + price + ")";
+	          }
+	          return names.push(verboseName);
 	        }
 	      });
 	      str = names.join(" / ");
@@ -47843,7 +47851,19 @@
 	      options: "=",
 	      width: "@"
 	    },
-	    template: "<select select2=\"uiSelect\" ng-style=\"{width: width+'px'}\">\n    <option ng-selected=\"{{item.ID === uiSelect.ID}}\" ng-repeat=\"item in options\" value=\"{{item}}\">{{item.Name}}</option>\n</select>"
+	    template: "<select select2=\"uiSelect\" ng-style=\"{width: width+'px'}\">\n    <option ng-selected=\"{{item.ID === uiSelect.ID}}\" ng-repeat=\"item in options\" value=\"{{item}}\">{{item|itemPrice}}</option>\n</select>"
+	  };
+	});
+
+	angular.module("ui.select").filter("itemPrice", function() {
+	  return function(item) {
+	    var price, str;
+	    str = item.Name;
+	    price = Number(item.Price, 10);
+	    if (price) {
+	      str += " (" + price + ")";
+	    }
+	    return str;
 	  };
 	});
 
