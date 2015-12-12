@@ -79,8 +79,8 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
                 CycleDiscount: rawOrder.discount.billingCycle.Period
                 Label: $filter('orderVerbose')(rawOrder.sla)
 
-            Currency: 'eur'
-            Groups: 'NL,Mini'
+            Currency: rawOrder.Currency
+            Groups: rawOrder.Groups
 
         deferred.resolve order
 

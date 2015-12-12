@@ -116,7 +116,6 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
             {
                 ID: "0"
                 Name: "Stripe(0)"
-
             }
             {
                 ID: "1"
@@ -134,7 +133,6 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
                 ID: "10"
                 Name: "RAID10"
             }
-
         ]
 
     @components = ->

@@ -27,7 +27,9 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", (notificati
         return
 
     initOrderComponents = (components, config)->
-        defaultOrder = {}
+        defaultOrder =
+            Currency: window.currency or 'eur'
+            Groups: [$stateParams.country, $stateParams.type].join(',')
 
         angular.forEach components, (component, componentId) ->
             id = componentId
