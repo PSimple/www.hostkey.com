@@ -20,7 +20,7 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
             url: url
             method: "GET"
             params:
-                currency: 'eur'
+                currency: window.currency
                 groups: groups
 
         .success (data) ->

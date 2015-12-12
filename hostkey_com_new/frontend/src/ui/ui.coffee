@@ -127,12 +127,16 @@ angular.module("ui").filter 'optName',  ->
 
         shortName.replace(/\*/g, "<br>")
 
-angular.module("ui").directive "optName", ($filter) ->
-    restrict: "A"
-    scope:
-        opt: "=optName"
 
-    link: (scope, element, attrs, ngModel) ->
+angular.module("ui").filter "verboseCurrency", ->
+    (price, space) ->
+        if space or space is `undefined`
+            space = " "
+        else
+            space = ""
 
-        verboseName = $filter('optName')(scope.opt)
-        element.html(verboseName)
+        if window.currency is 'eur'
+            return "€#{space}#{price}"
+
+        if window.currency is 'rub'
+            return "#{price}#{space}₽"

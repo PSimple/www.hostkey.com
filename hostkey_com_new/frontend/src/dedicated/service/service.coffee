@@ -33,7 +33,7 @@ angular.module("dedicated.service").config ($httpProvider, $stateProvider, $urlR
     
     $stateProvider
     .state "dedicatedService",
-        url: ""
+        url: "?currency"
         views:
             "solutions":
                 controller: "DedicatedServiceSolutionsCtrl"
@@ -49,6 +49,10 @@ angular.module("dedicated.service").run ($stateParams, $state, $rootScope) ->
     return
 
 angular.module("dedicated.service").controller "DedicatedServiceSolutionsCtrl", ($scope, $state, $stateParams, $rootScope) ->
+
+    if $stateParams.currency
+        window.currency = $stateParams.currency
+        console.log window.currency
 
     $rootScope.bodyClass = ->
         {in: $rootScope.loaded}
