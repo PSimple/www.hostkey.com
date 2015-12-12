@@ -53,7 +53,7 @@
 
 	__webpack_require__(2);
 
-	__webpack_require__(6);
+	__webpack_require__(11);
 
 
 /***/ },
@@ -66,31 +66,36 @@
 /* 3 */,
 /* 4 */,
 /* 5 */,
-/* 6 */
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	window.isDev = location.host === 'hostkey' ? true : false;
 
-	__webpack_require__(7);
+	__webpack_require__(12);
 
 
 /***/ },
-/* 7 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(8);
+	__webpack_require__(13);
 
-	__webpack_require__(11);
+	__webpack_require__(16);
 
-	__webpack_require__(12);
+	__webpack_require__(17);
 
-	angular.module("config", []).constant("CONFIG", __webpack_require__(14));
+	angular.module("config", []).constant("CONFIG", __webpack_require__(19));
 
-	__webpack_require__(15);
+	__webpack_require__(20);
 
-	__webpack_require__(29);
+	__webpack_require__(33);
 
-	__webpack_require__(32);
+	__webpack_require__(36);
 
 	angular.module("dedicated.service", ["ngSanitize", "ui", "ui.router", "api", "dedicated.service.selected"]);
 
@@ -110,7 +115,7 @@
 	    views: {
 	      "solutions": {
 	        controller: "DedicatedServiceSolutionsCtrl",
-	        template: __webpack_require__(37)
+	        template: __webpack_require__(41)
 	      }
 	    }
 	  });
@@ -144,15 +149,15 @@
 
 
 /***/ },
-/* 8 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(9);
+	__webpack_require__(14);
 	module.exports = angular;
 
 
 /***/ },
-/* 9 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__webpack_provided_window_dot_jQuery) {/**
@@ -29173,10 +29178,10 @@
 	})(window, document);
 
 	!window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ },
-/* 10 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -38392,7 +38397,7 @@
 
 
 /***/ },
-/* 11 */
+/* 16 */
 /***/ function(module, exports) {
 
 	/**
@@ -42767,15 +42772,15 @@
 	})(window, window.angular);
 
 /***/ },
-/* 12 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(13);
+	__webpack_require__(18);
 	module.exports = 'ngSanitize';
 
 
 /***/ },
-/* 13 */
+/* 18 */
 /***/ function(module, exports) {
 
 	/**
@@ -43460,28 +43465,28 @@
 
 
 /***/ },
-/* 14 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = {"apiUrl":"/api/v1"};
 
 /***/ },
-/* 15 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(16);
-
-	__webpack_require__(17);
-
-	__webpack_require__(19);
-
-	__webpack_require__(20);
+	__webpack_require__(21);
 
 	__webpack_require__(22);
 
+	__webpack_require__(24);
+
+	__webpack_require__(25);
+
 	__webpack_require__(26);
 
-	__webpack_require__(27);
+	__webpack_require__(30);
+
+	__webpack_require__(31);
 
 	angular.module("ui", ["ui.buttons", "ui.scrollBlock", "ui.accordion", "ui.select", "ui.columns", "ui.notifications"]);
 
@@ -43617,14 +43622,14 @@
 	      return "€" + space + price;
 	    }
 	    if (window.currency === 'rub') {
-	      return "" + price + space + "₽";
+	      return "" + price + space + "руб.";
 	    }
 	  };
 	});
 
 
 /***/ },
-/* 16 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -43640,7 +43645,7 @@
 		'use strict';
 		if (true) {
 			// AMD
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(10)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(15)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 		} else if (typeof module !== 'undefined' && module.exports) {
 			// CommonJS
 			module.exports = factory(require('jquery'));
@@ -43840,10 +43845,10 @@
 
 
 /***/ },
-/* 17 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(18);
+	/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(23);
 
 	angular.module("ui.accordion", ["ui.bootstrap.accordion"]);
 
@@ -43875,10 +43880,10 @@
 	  });
 	}]);
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ },
-/* 18 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/*
@@ -47785,10 +47790,10 @@
 
 
 /***/ },
-/* 19 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(18);
+	__webpack_require__(23);
 
 	angular.module("ui.buttons", ["ui.bootstrap.buttons"]);
 
@@ -47798,7 +47803,7 @@
 
 
 /***/ },
-/* 20 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function($) {angular.module("ui.scrollBlock", []);
@@ -47844,16 +47849,15 @@
 	  };
 	});
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ },
-/* 21 */,
-/* 22 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(23);
+	__webpack_require__(27);
 
-	__webpack_require__(25);
+	__webpack_require__(29);
 
 	angular.module("ui.select", []);
 
@@ -47911,14 +47915,14 @@
 
 
 /***/ },
-/* 23 */
+/* 27 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 24 */,
-/* 25 */
+/* 28 */,
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var require;var require;var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function($) {/*!
@@ -47931,7 +47935,7 @@
 	(function (factory) {
 	  if (true) {
 	    // AMD. Register as an anonymous module.
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(10)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(15)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if (typeof exports === 'object') {
 	    // Node/CommonJS
 	    factory(require('jquery'));
@@ -54036,10 +54040,10 @@
 	  return select2;
 	}));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ },
-/* 26 */
+/* 30 */
 /***/ function(module, exports) {
 
 	
@@ -54096,10 +54100,10 @@
 
 
 /***/ },
-/* 27 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var humane = __webpack_require__(28);
+	var humane = __webpack_require__(32);
 
 	angular.module("ui.notifications", []);
 
@@ -54129,7 +54133,7 @@
 
 
 /***/ },
-/* 28 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -54373,12 +54377,12 @@
 
 
 /***/ },
-/* 29 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(30);
+	__webpack_require__(34);
 
-	__webpack_require__(31);
+	__webpack_require__(35);
 
 	angular.module("api", ["api.dedicated", "api.order"]);
 
@@ -54386,7 +54390,7 @@
 
 
 /***/ },
-/* 30 */
+/* 34 */
 /***/ function(module, exports) {
 
 	var objectToArray;
@@ -54561,7 +54565,7 @@
 
 
 /***/ },
-/* 31 */
+/* 35 */
 /***/ function(module, exports) {
 
 	angular.module("api.order", ["config"]);
@@ -54690,10 +54694,10 @@
 
 
 /***/ },
-/* 32 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(33);
+	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(37);
 
 	angular.module("dedicated.service.selected", []);
 
@@ -54701,7 +54705,7 @@
 	  $stateProvider.state("dedicatedService.selected", {
 	    url: "/:country/:type",
 	    controller: "MicroCtrl",
-	    template: __webpack_require__(34),
+	    template: __webpack_require__(38),
 	    resolve: {
 	      components: ["$dedicated", function($dedicated) {
 	        return $dedicated.components();
@@ -55156,10 +55160,10 @@
 	  };
 	}]);
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)))
 
 /***/ },
-/* 33 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -56713,10 +56717,10 @@
 
 
 /***/ },
-/* 34 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(35);
+	var jade = __webpack_require__(39);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -56727,7 +56731,7 @@
 	}
 
 /***/ },
-/* 35 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56947,7 +56951,7 @@
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(36).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(40).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -56979,23 +56983,23 @@
 
 
 /***/ },
-/* 36 */
+/* 40 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 37 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(35);
+	var jade = __webpack_require__(39);
 
 	module.exports = function template(locals) {
 	var buf = [];
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div ng-click=\"changeCountry('NL')\" ng-class=\"{active:$stateParams.country==='NL'}\" class=\"b-dedicated__switch-item\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div ng-click=\"changeCountry('RU')\" ng-class=\"{active:$stateParams.country==='RU'}\" class=\"b-dedicated__switch-item\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-class=\"{active:$stateParams.type==='Micro'}\" ui-sref=\".selected({type:'Micro', country:$stateParams.country})\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-1.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Micro servers</h3><h4 class=\"b-dedicated__item-subtitle\">For small projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">{{'15.99'|verboseCurrency:false}}/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ng-class=\"{active:$stateParams.type==='Mini'}\" ui-sref=\".selected({type:'Mini', country:$stateParams.country})\" class=\"b-dedicated__item\"><img src=\"/assets/img/dedicate-select-icon-2-2.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Mini servers</h3><h4 class=\"b-dedicated__item-subtitle\">For small projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">{{'25.99'|verboseCurrency:false}}/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-3.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Virtualisation nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">{{'25.99'|verboseCurrency:false}}/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-4.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Hosting nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">{{'25.99'|verboseCurrency:false}}/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-5.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Storage</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">{{'25.99'|verboseCurrency:false}}/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-6.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Big data</h3><h4 class=\"b-dedicated__item-subtitle\">For small projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">{{'15.99'|verboseCurrency:false}}/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.2.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-7.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Configurator</h3><h4 class=\"b-dedicated__item-subtitle\">Your own configuration</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\">{{'15.99'|verboseCurrency:false}}/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.3.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-8.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Extra price</h3><h4 class=\"b-dedicated__item-subtitle\">2014 sale</h4><div class=\"b-dedicated__item-start b-dedicated__item-start_red_yes\">Starts from</div><div class=\"b-dedicated__item-price b-dedicated__item-price_red_yes\">{{'25.99'|verboseCurrency:false}}/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
+	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div ng-click=\"changeCountry('NL')\" ng-class=\"{active:$stateParams.country==='NL'}\" class=\"b-dedicated__switch-item\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div ng-click=\"changeCountry('RU')\" ng-class=\"{active:$stateParams.country==='RU'}\" class=\"b-dedicated__switch-item\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-class=\"{active:$stateParams.type==='Micro'}\" ui-sref=\".selected({type:'Micro', country:$stateParams.country})\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-1.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Micro servers</h3><h4 class=\"b-dedicated__item-subtitle\">For small projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"'15.99'|verboseCurrency:false\"></span>/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div ng-class=\"{active:$stateParams.type==='Mini'}\" ui-sref=\".selected({type:'Mini', country:$stateParams.country})\" class=\"b-dedicated__item\"><img src=\"/assets/img/dedicate-select-icon-2-2.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Mini servers</h3><h4 class=\"b-dedicated__item-subtitle\">For small projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"'25.99'|verboseCurrency:false\"></span>/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-3.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Virtualisation nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"'25.99'|verboseCurrency:false\"></span>/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-4.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Hosting nodes</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"'25.99'|verboseCurrency:false\"></span>/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-5.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Storage</h3><h4 class=\"b-dedicated__item-subtitle\">Power of one server</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"'25.99'|verboseCurrency:false\"></span>/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.1.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-6.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Big data</h3><h4 class=\"b-dedicated__item-subtitle\">For small projects</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"'15.99'|verboseCurrency:false\"></span>/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.2.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-7.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Configurator</h3><h4 class=\"b-dedicated__item-subtitle\">Your own configuration</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"'15.99'|verboseCurrency:false\"></span>/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div><div data-url=\"/application/shop/view/Dedicated/include.ajax.content.3.html\" class=\"b-dedicated__item js-switch-item js-more-setting\"><img src=\"/assets/img/dedicate-select-icon-2-8.png\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">Extra price</h3><h4 class=\"b-dedicated__item-subtitle\">2014 sale</h4><div class=\"b-dedicated__item-start b-dedicated__item-start_red_yes\">Starts from</div><div class=\"b-dedicated__item-price b-dedicated__item-price_red_yes\"><span ng-bind-html=\"'25.99'|verboseCurrency:false\"></span>/month</div><a href=\"#\" class=\"b-dedicated__item-detail\">Detail</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
 	}
 
 /***/ }

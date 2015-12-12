@@ -44,7 +44,7 @@ module.exports = {
                 loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
             },
             {
-                test: /\.(eot|woff|ttf|svg)$/,
+                test: /\.(eot|woff|woff2|ttf|svg)$/,
                 loader: 'file?prefix=fonts/'
             },
             {
