@@ -57,7 +57,7 @@ angular.module("ui").filter 'discount',  ->
 ###
     Расчет полной стоимости компонента с учетом всех зависимостей
     option - опция компонента: OS, Hdd, Ram и тд
-    tabs - содержим все вкладки и зависимости опций, если они есть
+    tabs - содержит все вкладки и зависимости опций, если они есть
 ###
 angular.module("ui").filter 'optPrice', ($dedicated) ->
     (option, order, tabs) ->
@@ -125,4 +125,14 @@ angular.module("ui").filter 'optName',  ->
 
         shortName = component.Options.short_name if component?.Options?.short_name
 
-        shortName
+        shortName.replace(/\*/g, "<br>")
+
+angular.module("ui").directive "optName", ($filter) ->
+    restrict: "A"
+    scope:
+        opt: "=optName"
+
+    link: (scope, element, attrs, ngModel) ->
+
+        verboseName = $filter('optName')(scope.opt)
+        element.html(verboseName)

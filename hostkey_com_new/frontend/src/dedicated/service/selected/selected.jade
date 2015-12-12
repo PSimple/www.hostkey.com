@@ -454,25 +454,25 @@
             .b-dedicated__summary-subtitle(ng-bind="::tabs.hardware.name")
             table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware", ng-show="isValidOption(opt)")
-                    td.b-dedicated__summary-table-cell {{opt|optName}}
+                    td.b-dedicated__summary-table-cell(ng-bind-html="opt|optName")
                     td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
             .b-dedicated__summary-subtitle(ng-bind="::tabs.software.name")
             table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.software", ng-show="isValidOption(opt)")
-                    td.b-dedicated__summary-table-cell {{opt|optName}}
+                    td.b-dedicated__summary-table-cell(ng-bind-html="opt|optName")
                     td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
             .b-dedicated__summary-subtitle(ng-bind="::tabs.network.name")
             table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.network", ng-show="isValidOption(opt)")
-                    td.b-dedicated__summary-table-cell {{opt|optName}}
+                    td.b-dedicated__summary-table-cell(ng-bind-html="opt|optName")
                     td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
             .b-dedicated__summary-subtitle(ng-bind="::tabs.sla.name")
             table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.sla", ng-show="isValidOption(opt)")
-                    td.b-dedicated__summary-table-cell {{opt|optName}}
+                    td.b-dedicated__summary-table-cell(ng-bind-html="opt|optName")
                     td.b-dedicated__summary-table-cell € {{opt|optPrice:order}}
 
             .b-dedicated__summary-price(ng-show="totalPrice.Summa")
