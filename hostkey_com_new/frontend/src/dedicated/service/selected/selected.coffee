@@ -280,6 +280,10 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", (notificati
                 if isIncludeSASDisks and r.ID is "132"
                     return false
 
+                # исключим интегрированный sas raid если не выбран хотя бы один SAS диск
+                if not isIncludeSASDisks and r.ID is "308"
+                    return false
+
                 if diskCount >= Number(r.Options.disc, 10) or isIncludeSASDisks
                     return true
 
