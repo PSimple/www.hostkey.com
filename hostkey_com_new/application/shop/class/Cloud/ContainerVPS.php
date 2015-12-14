@@ -9,7 +9,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */
-class Shop_Cloud_VpsStep1 extends Zero_Controller
+class Shop_Cloud_ContainerVPS extends Zero_Controller
 {
 
 
