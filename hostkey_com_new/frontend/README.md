@@ -52,3 +52,18 @@ npm start # запуск среды для разработки
 cd frontend
 npm run build
 ```
+
+## Dedicated / service
+
+Шаблон
+\hostkey_com_new\application\shop\view\Dedicated\Select.html
+
+Иесто
+<div ui-view="solutions"></div>
+
+Меняется на
+\hostkey_com_new\frontend\src\dedicated\service\solutions.jade
+
+
+
+
