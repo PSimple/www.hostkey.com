@@ -22,7 +22,7 @@ tbody.collapse.in {
   height: 0;
   overflow: hidden;
   transition-timing-function: ease;
-  transition-duration: 0.35s;
+  transition-duration: 0.05s;
   transition-property: height, visibility;
 }
 .humane,
@@ -99,6 +99,17 @@ tbody.collapse.in {
     width: 100%;
     margin: 0;
   }
+}
+@font-face {
+  font-family: 'Rouble';
+  src: url(024e40371fd76b58e469ff28200d56fd.eot);
+  src: url(024e40371fd76b58e469ff28200d56fd.eot?#iefix) format('embedded-opentype'), url(5085bb918b9365b3b146513801c034e7.woff2) format('woff2'), url(2884a2341cfc86fbd62aa70b256ded01.woff) format('woff'), url(702dc002b65db4bb2aa2fbc9a013a009.ttf) format('truetype'), url(b822ee62cf657088829d14e2eab25137.svg#als_rublregular) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.rouble {
+  font-family: "Rouble";
+  text-transform: lowercase;
 }
 ._angular .b-dedicated__summary {
   margin-left: 45px;

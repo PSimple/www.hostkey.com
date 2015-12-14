@@ -1,0 +1,149 @@
+accordion-group
+
+    accordion-heading
+
+        span.b-accordion__title-main 3. Network
+        span.b-accordion__title-submain
+            | 1 x 1000Mbps Full-Duplex / 200 TB / 1 IP / 24-Port 1 Gbps Private Switch / Hardware Firewall - Juniper SRX240H / Hardware Loadbalancer - Kemp LM-2400
+
+    table.b-dedicated__accordion-table
+        
+        tr.b-dedicated__accordion-table-row
+            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes.b-dedicated__accordion-table-cell_top_yes
+                | Uplink Port
+                | Speed
+            td.b-dedicated__accordion-table-cell
+                .radio-box
+                    label.fake-radio-label
+                        span.fake-input.js-check.checked
+                        | 1 x 100Mbps Full-Duplex
+                        span.red-text (incl.)
+                        input.hidden-input(name='radio-row-3', checked='', type='radio')
+                    label.fake-radio-label
+                        span.fake-input.js-check
+                        | x 1000Mbps Full-Duplex
+                        span.red-text (€ 10.00)
+                        input.hidden-input(name='radio-row-3', type='radio')
+        
+        tr.b-dedicated__accordion-table-row
+            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes.b-dedicated__accordion-table-cell_top_yes Bandwidth
+            td.b-dedicated__accordion-table-cell
+                .radio-box
+                    label.fake-radio-label.is-disabled
+                        span.fake-input.js-check
+                        | 100 TB
+                        span.red-text (incl.)
+                        input.hidden-input(name='radio-row-4', disabled='', type='radio')
+                    label.fake-radio-label
+                        span.fake-input.js-check.checked
+                        | 200 TB
+                        span.line-through € 150.00
+                        span.red-text (€ 100.00)
+                        input.hidden-input(name='radio-row-4', checked='', type='radio')
+                    label.fake-radio-label
+                        span.fake-input.js-check
+                        | 1.000Mbps Unmetered
+                        span.line-through € 350.00
+                        span.red-text (€ 250.00)
+                        input.hidden-input(name='radio-row-4', type='radio')
+        
+        tr.b-dedicated__accordion-table-row
+            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes.b-dedicated__accordion-table-cell_top_yes IP
+            td.b-dedicated__accordion-table-cell
+                .b-slider.js-slider(data-slides='3')
+                .b-slider__legend-3
+                    .b-slider__legend-3-item.b-slider__legend-3-item_place_1
+                        | 1 IP
+                        br
+                        span.red-text incl.
+                    .b-slider__legend-3-item.b-slider__legend-3-item_place_2
+                        | 2 IP
+                        br
+                        span.red-text (€ 2.50)
+                    .b-slider__legend-3-item.b-slider__legend-3-item_place_3
+                        | 3 IP
+                        br
+                        span.red-text (€ 5.00)
+        
+        tr.b-dedicated__accordion-table-row
+        
+            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes.b-dedicated__accordion-table-cell_top_yes
+                | Private
+                | Networking
+        
+            td.b-dedicated__accordion-table-cell
+                .radio-box
+                    label.fake-radio-label
+                        span.fake-input.js-check
+                        | Non
+                        input.hidden-input(name='radio-row-5', type='radio')
+                    label.fake-radio-label
+                        span.fake-input.js-check.checked
+                        | 24-Port 1 Gbps Private Switch
+                        span.red-text (€ 50.00)
+                        input.hidden-input(name='radio-row-5', checked='', type='radio')
+                    label.fake-radio-label
+                        span.fake-input.js-check
+                        | Connect to existing Private Switch
+                        input.hidden-input(name='radio-row-5', type='radio')
+        
+        tr.b-dedicated__accordion-table-row
+        
+            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes.b-dedicated__accordion-table-cell_top_yes Firewall
+        
+            td.b-dedicated__accordion-table-cell
+        
+                .radio-box
+                    label.fake-radio-label
+                        span.fake-input.js-check
+                        | Non
+                        input.hidden-input(name='radio-row-6', type='radio')
+        
+                    label.fake-radio-label.is-disabled
+                        span.fake-input.js-check
+                        | Shared Firewall
+                        span.red-text (€ 25.00)
+                        input.hidden-input(name='radio-row-6', disabled='', type='radio')
+                    label.fake-radio-label
+                        span.fake-input.js-check.checked
+                        | Hardware Firewall - Juniper SRX240H
+                        span.red-text (€ 125.00)
+                        input.hidden-input(name='radio-row-6', checked='', type='radio')
+                    label.fake-radio-label
+                        span.fake-input.js-check
+                        | Hardware Firewall - Cisco ASA 5515
+                        span.red-text (€ 175.00)
+                        input.hidden-input(name='radio-row-6', type='radio')
+                    label.fake-radio-label
+                        span.fake-input.js-check
+                        | Hardware Firewall - Cisco ASA 5525
+                        span.red-text (€ 350.00)
+                        input.hidden-input(name='radio-row-6', type='radio')
+                    label.fake-radio-label
+                        span.fake-input.js-check
+                        | Hardware Firewall - Cisco ASA 5545
+                        span.red-text (€ 650.00)
+                        input.hidden-input(name='radio-row-6', type='radio')
+        
+        tr.b-dedicated__accordion-table-row
+            td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_yes.b-dedicated__accordion-table-cell_top_yes Loadbalancer
+            td.b-dedicated__accordion-table-cell
+                .radio-box
+                    label.fake-radio-label
+                        span.fake-input.js-check
+                        | Non
+                        input.hidden-input(name='radio-row-7', type='radio')
+                    label.fake-radio-label
+                        span.fake-input.js-check
+                        | Hardware Loadbalancer - Kemp LM-2400
+                        span.red-text (€ 175.00)
+                        input.hidden-input(name='radio-row-7', type='radio')
+                    label.fake-radio-label
+                        span.fake-input.js-check.checked
+                        | Hardware Loadbalancer - A10 AX Series 1030
+                        span.red-text (€ 725.00)
+                        input.hidden-input(name='radio-row-7', checked='', type='radio')
+    
+    .b-submit.b-accordion__next-submit(onclick="$('.b-accordion').accordion({active: 2});") NExt
+        
+        
