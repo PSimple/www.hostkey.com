@@ -14,14 +14,13 @@ class Shop_Cloud_VpsStep1 extends Zero_Controller
 
 
     /**
-     * Контроллер по умолчанию.
      *
      * @return Zero_View
      */
     public function Action_Default()
     {
         //$this->Chunk_Init();
-        $this->View = new Zero_View('Shop_Cloud_VpsStep1');
+        $this->View = new Zero_View('Shop_Cloud_VPS');
         $this->Chunk_View();
         return $this->View;
     }
@@ -29,7 +28,6 @@ class Shop_Cloud_VpsStep1 extends Zero_Controller
     /**
      * Вывод данных операции контроллера в шаблон
      *
-     * Может быть переопределен конкретным контроллером
      *
      * @return bool
      */

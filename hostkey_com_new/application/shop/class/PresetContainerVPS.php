@@ -13,7 +13,13 @@
  */
 class Shop_PresetContainerVPS extends Zero_Model
 {
-    protected $preset = [
+    /**
+     *
+     * Template presets array
+     *
+     * @var array $preset
+     */
+    private $preset = [
         [
             'name' => 'Starter',
             'id' => 0,
@@ -210,17 +216,128 @@ class Shop_PresetContainerVPS extends Zero_Model
                 '695' =>[ 'data' => [  '0' => [ 'id' => 5249] ] ],
                 '696' =>[ 'data' => [  '0' => [ 'id' => 5253] ] ],
             ]
+        ],
+        [
+            'name' => 'RU-1',
+            'id' => 0,
+            'hidden' => 0,
+            'value' => '1/1/25',
+            'PID' => 531,
+            'summ' => 0,
+            '0' => [
+                '698' =>[ 'data' => [  '0' => [ 'id' => 5285] ] ],
+                '701' =>[ 'data' => [  '0' => [ 'id' => 5291] ] ],
+                '702' =>[ 'data' => [  '0' => [ 'id' => 7974] ] ],
+                '703' =>[ 'data' => [  '0' => [ 'id' => 5295] ] ],
+                '704' =>[ 'data' => [  '0' => [ 'id' => 5297] ] ],
+                '706' =>[ 'data' => [  '0' => [ 'id' => 5303] ] ],
+                '753' =>[ 'data' => [  '0' => [ 'id' => 7849] ] ]
+            ]
+        ],
+        [
+            'name' => 'RU-2',
+            'id' => 0,
+            'hidden' => 0,
+            'value' => '2/2/50',
+            'PID' => 531,
+            'summ' => 0,
+            '0' => [
+                '698' =>[ 'data' => [  '0' => [ 'id' => 5286] ] ],
+                '701' =>[ 'data' => [  '0' => [ 'id' => 5292] ] ],
+                '702' =>[ 'data' => [  '0' => [ 'id' => 5293] ] ],
+                '703' =>[ 'data' => [  '0' => [ 'id' => 5295] ] ],
+                '704' =>[ 'data' => [  '0' => [ 'id' => 5297] ] ],
+                '706' =>[ 'data' => [  '0' => [ 'id' => 5303] ] ],
+                '753' =>[ 'data' => [  '0' => [ 'id' => 7849] ] ]
+            ]
+        ],
+        [
+            'name' => 'RU-3',
+            'id' => 0,
+            'hidden' => 0,
+            'value' => '2/8/100',
+            'PID' => 531,
+            'summ' => 0,
+            '0' => [
+                '698' =>[ 'data' => [  '0' => [ 'id' => 5286] ] ],
+                '701' =>[ 'data' => [  '0' => [ 'id' => 5312] ] ],
+                '702' =>[ 'data' => [  '0' => [ 'id' => 5294] ] ],
+                '703' =>[ 'data' => [  '0' => [ 'id' => 5295] ] ],
+                '704' =>[ 'data' => [  '0' => [ 'id' => 5297] ] ],
+                '706' =>[ 'data' => [  '0' => [ 'id' => 5303] ] ],
+                '753' =>[ 'data' => [  '0' => [ 'id' => 7849] ] ]
+            ]
+        ],
+        [
+            'name' => 'RU-4',
+            'id' => 0,
+            'hidden' => 0,
+            'value' => '4/8/100',
+            'PID' => 531,
+            'summ' => 0,
+            '0' => [
+                '698' =>[ 'data' => [  '0' => [ 'id' => 5308] ] ],
+                '701' =>[ 'data' => [  '0' => [ 'id' => 5312] ] ],
+                '702' =>[ 'data' => [  '0' => [ 'id' => 5294] ] ],
+                '703' =>[ 'data' => [  '0' => [ 'id' => 5295] ] ],
+                '704' =>[ 'data' => [  '0' => [ 'id' => 5297] ] ],
+                '706' =>[ 'data' => [  '0' => [ 'id' => 5303] ] ],
+                '753' =>[ 'data' => [  '0' => [ 'id' => 7849] ] ]
+            ]
+        ],
+        [
+            'name' => 'RU-5',
+            'id' => 0,
+            'hidden' => 0,
+            'value' => '4/16/100',
+            'PID' => 531,
+            'summ' => 0,
+            '0' => [
+                '698' =>[ 'data' => [  '0' => [ 'id' => 5308] ] ],
+                '701' =>[ 'data' => [  '0' => [ 'id' => 5313] ] ],
+                '702' =>[ 'data' => [  '0' => [ 'id' => 5294] ] ],
+                '703' =>[ 'data' => [  '0' => [ 'id' => 5295] ] ],
+                '704' =>[ 'data' => [  '0' => [ 'id' => 5297] ] ],
+                '706' =>[ 'data' => [  '0' => [ 'id' => 5304] ] ],
+                '753' =>[ 'data' => [  '0' => [ 'id' => 7849] ] ]
+            ]
+        ],
+        [
+            'name' => 'RU-6',
+            'id' => 0,
+            'hidden' => 0,
+            'value' => '8/32/200',
+            'PID' => 531,
+            'summ' => 0,
+            '0' => [
+                '698' =>[ 'data' => [  '0' => [ 'id' => 5310] ] ],
+                '701' =>[ 'data' => [  '0' => [ 'id' => 5314] ] ],
+                '702' =>[ 'data' => [  '0' => [ 'id' => 5316] ] ],
+                '703' =>[ 'data' => [  '0' => [ 'id' => 5295] ] ],
+                '704' =>[ 'data' => [  '0' => [ 'id' => 5297] ] ],
+                '706' =>[ 'data' => [  '0' => [ 'id' => 5326] ] ],
+                '753' =>[ 'data' => [  '0' => [ 'id' => 7849] ] ]
+            ]
         ]
     ];
 
 
+
+    /**
+     *
+     * Returns the array received by superimposing of an array of template on custom array
+     *
+     * @param null $container_VPS_custom
+     * @param string $billingcycle
+     * @return array
+     */
     public function getPreset( $container_VPS_custom = null, $billingcycle = 'monthly' ){
         if ( is_null( $container_VPS_custom ) ) {
             return $this->preset;
         } else {
             $a = array();
             foreach ( $this->preset as $k => $v ) {//level Preset{ name, id, value...}
-                foreach ($v[0] as $key => $val )  {//level Options key = configoption
+                foreach ($v[0] as $key => $val )  {//level Options key = configoption[...]
                     $ID = $val['data'][0]['id'];// id producta in Options
                     foreach ( $container_VPS_custom as $key_custom => $val_custom ) {//Level Options in custom
                         if( $key_custom == $key ) {// option = option
@@ -229,6 +346,7 @@ class Shop_PresetContainerVPS extends Zero_Model
                                  if ( $val_product ['id'] == $ID )// ID product template = ID product custom merge array to template
                                      $a[$k][0][$key]['data'][0] = $val_product;
                                      $a[$k][0][$key]['name'] = $val_custom ['name'];
+                                     $a[$k][0][$key]['hidden'] = $val_custom ['hidden'];
                             }
                         }
                     }

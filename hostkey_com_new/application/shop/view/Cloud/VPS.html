@@ -6,6 +6,7 @@
         </h1>
     </div>
 
+
     <div class="b-vps">
 
         <div class="b-vps__feature b-container">
@@ -17,8 +18,8 @@
                 <p class="b-vps__feature-item-text">
                     We start preparing your server while you order. Pay and play.
                 </p>
-            </div><!--
-                        --><div class="b-vps__feature-item">
+            </div>
+            <div class="b-vps__feature-item">
             <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-02.png" alt="иконка">
             <h3 class="b-vps__feature-item-title">
                 Nothing gets lost
@@ -27,8 +28,8 @@
                 All your actions while
                 managing your server are fully backed up and can be instantly restored without contacting the support team
             </p>
-        </div><!--
-                        --><div class="b-vps__feature-item">
+        </div>
+            <div class="b-vps__feature-item">
             <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-03.png" alt="иконка">
             <h3 class="b-vps__feature-item-title">
                 Perfection achievable
@@ -48,6 +49,33 @@
                 to your server. No catch.
             </p>
         </div>
+        </div>
+
+
+        <div class="switch_country_for_container_VPS">
+            {if ( $PID==530 )}
+            <div  class="b-dedicated__switch-item active">
+                netherland
+            </div>
+            {else}
+            <div  class="b-dedicated__switch-item">
+                <a href="/cloud/vds" target="_self" title="ckoud VDS Russia>">
+                    netherland
+                </a>
+            </div>
+            {/if}
+            <div class="b-dedicated__switch-item">/</div>
+            {if ( $PID==538 )}
+            <div class="b-dedicated__switch-item active">
+                russia
+            </div>
+            {else}
+            <div class="b-dedicated__switch-item">
+                <a href="/cloud/vps/russia" target="_self" title="ckoud VDS Russia>">
+                    russia
+                </a>
+            </div>
+            {/if}
         </div>
 
 
@@ -74,7 +102,7 @@
                 <td class="b-vps__table-cell"></td>
                 {foreach ( $configuration as $key => $value)}
                         <td class="b-vps__table-cell">
-                            <a class="b-vps-table__buy" href="#">BUY</a>
+                            <a class="b-vps-table__buy" href="#" data_preset="{$key}">BUY</a>
                         </td>
                 {/foreach}
 
@@ -203,21 +231,13 @@
         $('.b-vps-table__buy').bind('click', function () {
               $('.popup_callback').show();
               var PRESET_ID = $( this).attr( 'data_preset' );
-            //alert ( PRESET_ID );
               for( var prop in listOfProducts ) {
                     if( prop == PRESET_ID ) {
-                       // alert ( JSON.stringify ( listOfProducts[prop]  ) );
                         Zakaz = listOfProducts[prop][0];
-                        Zakaz.payment = new Object();
-                        Zakaz.payment.name = 'payment';
-                        Zakaz.payment.hidden = '0';
-                        Zakaz.payment.data = new Object();
-                        Zakaz.payment.data[0] = listOfProducts['payment']['data'][0];
-                     // alert ( JSON.stringify ( Zakaz ) );
+                        window.set_payment_for_preset( Zakaz, listOfProducts, 0);
                     }
               }
               crFrame( );
-           // console.log( JSON.stringify(Zakaz)  );
               return false;
             ;
         })
@@ -258,4 +278,14 @@
 
     .popup h2{ width: 100%; display: block; font: bold 24px KievitOT,Arial; color: #171819; text-transform: uppercase; text-align: center; margin: 45px auto 60px auto; }
 
+
+    .switch_country_for_container_VPS {
+        display: block;
+        padding: 50px 0 20px 450px;
+        background: #fff;
+    }
+    .switch_country_for_container_VPS a{
+        color: #000;
+        text-decoration: none;
+    }
 </style>

@@ -166,7 +166,11 @@ jQuery(function($){
         action.parent('.is-drop').removeClass('is-active');
     }
 
-    window.write_summa = function write_summa( z , curr, place ) { place.html( curr + " " + SumUpResultZakaz( z ) + "/" + z['payment']['data'][0].period ); };
+
+
+    window.write_summa = function write_summa( z , curr, place ) {
+        place.html( curr + " " + SumUpResultZakaz( z ) + "/" + z['payment']['data'][0].period );
+    };
 
     window.write_dis = function write_dis( z, curr, place ) {
         var d = SumUpDiscount( z );
@@ -239,11 +243,19 @@ jQuery(function($){
                 str =   str + "billingcycle=" + z[prop]['data'][0]['name'] + "&" ; ///вставляем период оплаты
             }
         }
-        console.log( str );
         return str;
     }
 
-});   // Run code
+    window.set_payment_for_preset = function set_payment( z , l , n) {
+        z.payment = new Object();
+        z.payment.name = 'payment';
+        z.payment.hidden = '0';
+        z.payment.data = new Object();
+        z.payment.data[0] = l['payment']['data'][n];
+    }
+
+    });
+
 
 
 var AJAX_SEND = function ( object_input, object_message ) {
