@@ -9,7 +9,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */
-class Shop_Dedicated_Select extends Zero_Controller
+class Shop_Dedicated_SelectRU extends Zero_Controller
 {
     /**
      * Контроллер по умолчанию.
