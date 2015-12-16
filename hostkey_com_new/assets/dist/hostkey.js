@@ -57042,7 +57042,7 @@
 
 	angular.module("api.solutions", ["config"]);
 
-	angular.module("api.solutions").service("$solutions", ["$http", "$q", function($http, $q) {
+	angular.module("api.solutions").service("$solutions", ["$http", "$q", "CONFIG", function($http, $q, CONFIG) {
 	  var that;
 	  that = this;
 
@@ -57050,26 +57050,24 @@
 	      Список типовых серверных решений
 	   */
 	  this.getList = function() {
-	    var country, currency, deferred, type;
+	    var country, currency, deferred, type, url;
 	    deferred = $q.defer();
 	    type = window.type || 'dedicated';
 	    country = window.country || 'NL';
 	    currency = window.currency || 'eur';
-
-	    /*
-	    if window.isDev
-	        url = "/assets/dist/solutions_#{type}_#{country}.json"
-	    else
-	        url = "#{CONFIG.apiUrl}/solutions"
-	     */
+	    if (window.isDev) {
+	      url = "/assets/dist/api/solutions/" + type + "/" + country + ".json";
+	    } else {
+	      url = CONFIG.apiUrl + "/solutions";
+	    }
 	    $http({
-	      url: "/assets/dist/api/solutions/" + type + "/" + country + ".json",
+	      url: url,
 	      method: "GET",
 	      cache: true,
 	      params: {
-	        type: type,
 	        country: country,
-	        currency: currency
+	        currency: currency,
+	        type: type
 	      }
 	    }).success(function(data) {
 	      return deferred.resolve(data);
