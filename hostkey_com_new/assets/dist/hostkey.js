@@ -54731,7 +54731,7 @@
 	    var defaultOrder;
 	    defaultOrder = {
 	      Currency: window.currency || 'eur',
-	      Groups: [$stateParams.country, $stateParams.type].join(',')
+	      Groups: [window.country, $stateParams.type].join(',')
 	    };
 	    angular.forEach(components, function(component, componentId) {
 	      var category, id, name;

@@ -27,7 +27,7 @@ angular.module("dedicated.service.selected").controller "SelectedCtrl", (notific
     initOrderComponents = (components, config)->
         defaultOrder =
             Currency: window.currency or 'eur'
-            Groups: [$stateParams.country, $stateParams.type].join(',')
+            Groups: [window.country, $stateParams.type].join(',')
 
         angular.forEach components, (component, componentId) ->
             id = componentId
