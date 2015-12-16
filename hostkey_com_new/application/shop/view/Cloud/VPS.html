@@ -1,9 +1,11 @@
+
 <div class="b-page">
 
     <div class="b-page__promo b-page__promo_vps_yes">
         <h1 class="b-page__promo-title">Container<br>
             VPS
         </h1>
+        <div onclick="$.scrollTo('#calc', 1000, { offset:-90 })" class="b-icon b-page__scroll-icon"></div>
     </div>
 
 
@@ -38,8 +40,8 @@
                 You get an unlimited number
                 or reinstalls and a huge number of OS presets
             </p>
-        </div><!--
-                        --><div class="b-vps__feature-item">
+        </div>
+            <div class="b-vps__feature-item">
             <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-04.png" alt="иконка">
             <h3 class="b-vps__feature-item-title">
                 You’re the boss!
@@ -52,14 +54,14 @@
         </div>
 
 
-        <div class="switch_country_for_container_VPS">
+        <div class="switch_country_for_container_VPS" id="calc">
             {if ( $PID==530 )}
             <div  class="b-dedicated__switch-item active">
                 netherland
             </div>
             {else}
             <div  class="b-dedicated__switch-item">
-                <a href="/cloud/vds" target="_self" title="ckoud VDS Russia>">
+                <a href="/cloud/vps" target="_self" title="ckoud VDS Russia>">
                     netherland
                 </a>
             </div>
@@ -281,7 +283,7 @@
 
     .switch_country_for_container_VPS {
         display: block;
-        padding: 50px 0 20px 450px;
+        padding: 50px 0 20px 485px;
         background: #fff;
     }
     .switch_country_for_container_VPS a{

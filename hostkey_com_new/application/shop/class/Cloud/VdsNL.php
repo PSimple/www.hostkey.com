@@ -33,16 +33,20 @@ class Shop_Cloud_VdsNL extends Zero_Controller
      */
     protected function Chunk_View()
     {
+        $PID = 531;
         $config = Zero_Config::Get_Config('shop', 'config');
         $this->View->Assign("currency", $config['currency']);
         $this->View->Assign("currencyId", $config['currencyId']);
-        $this->View->Assign("PID", 531);
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudCustom/' . md5($config['currencyId'] . 531) . '.data';
+        $this->View->Assign("PID", $PID);
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudCustom/' . md5($config['currencyId'] . $PID) . '.data';
         $configuration = [];
         if ( file_exists($path) )
         {
             $configuration = unserialize(file_get_contents($path));
         }
+        $preset = Shop_PresetContainerVPS::Make();
+        $configuration = $preset -> getSortCloudVDS ( $configuration,$PID );
+      // pre( $configuration ); die;
         $this->View->Assign('configuration', $configuration);
         return true;
     }

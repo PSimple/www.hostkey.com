@@ -173,7 +173,7 @@ jQuery(function($){
     };
 
     window.write_dis = function write_dis( z, curr, place ) {
-        var d = SumUpDiscount( z );
+        var d = window.SumUpDiscountByMonthly( z );
         if ( d > 0 ){
             place.html( z['payment']['data'][0].discount + "% discount, save " + curr + " " + d );
         } else {
@@ -201,7 +201,8 @@ jQuery(function($){
     /*
      *  формируем дискаунт по периоду заказа
      */
-    window.SumUpDiscount = function SumUpDiscount( z ) {
+    window.SumUpDiscount = function ( z ) {
+        console.log( z );
         var discount = z['payment']['data'][0].discount;
         var period = z['payment']['data'][0].name;
         var summ = 0;
@@ -219,6 +220,33 @@ jQuery(function($){
         }
 
     }
+
+
+    /*
+     *  формируем дискаунт по цене одного месяца
+     */
+    window.SumUpDiscountByMonthly = function ( z ) {
+
+        var discount = z['payment']['data'][0].discount;
+        var period = z['payment']['data'][0].name;
+        var summ = 0;
+        var dis=0;
+        for (var prop in z) {
+            if (prop != 'payment') {
+                summ = parseInt( summ  + parseFloat( z[prop]['data'][0]['monthly'] ) * 100 );
+            }
+        }
+        if ( parseInt( discount ) == 0){
+            return 0;
+        } else {
+            dis = (12*summ/100)* parseInt( discount );
+            return Math.floor(dis)/100;
+        }
+
+    }
+
+
+
     /*
      * Формируем дефолтный заказ
      */
@@ -234,6 +262,10 @@ jQuery(function($){
         return z;
     }
 
+
+    /*
+    * На основании Zakaz создаем строку запроса
+     */
     window.generate_post = function generate_post ( z ) {
         var str ='';
         for (var prop in z) {
@@ -246,6 +278,9 @@ jQuery(function($){
         return str;
     }
 
+    /*
+    * устанавливаем данные платежа для пресетов
+     */
     window.set_payment_for_preset = function set_payment( z , l , n) {
         z.payment = new Object();
         z.payment.name = 'payment';

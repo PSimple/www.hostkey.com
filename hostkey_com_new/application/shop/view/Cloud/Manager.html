@@ -1,15 +1,16 @@
-
+<link href="/assets/css/slider_item.css" rel="stylesheet" type="text/css" media="all">
 <div class="b-page">
 
     <div class="b-page__promo b-page__promo_managed-cloud_yes">
         <h1 class="b-page__promo-title">Managed<br>
             cloud
         </h1>
+        <div onclick="$.scrollTo('#calc', 1000, { offset:-90 })" class="b-icon b-page__scroll-icon"></div>
     </div>
 
 
 
-    <div class="switch_country_for_container_VPS">
+    <div class="switch_country_for_container_VPS" id="calc">
         {if ( $PID==531 )}
         <div  class="b-dedicated__switch-item active">
             netherland
@@ -36,8 +37,6 @@
     </div>
 
 
-
-
     <div class="b-managed-cloud">
 
         <div class="b-dedicated__box">
@@ -59,7 +58,7 @@
                         <div class="b-slider__legend-8">
                             {foreach ($configuration as $key => $val)}
                             {if ( $val['hidden'] == 0 )}
-                                <div class="b-slider__legend-{count($configuration)}-item b-slider__legend-{count($configuration)}-item_place_{$key+1}">{$val['name']}</div>
+                                <div class="b-slider__legend-{count($configuration)}-item b-slider__legend-{count($configuration)}-item_place_{$key+1}">{$val['name']}<br/>{$val['value']}</div>
                             {/if}
                             {/foreach}
                         </div>
@@ -273,7 +272,7 @@
 
     .switch_country_for_container_VPS {
         display: block;
-        padding: 50px 0 20px 450px;
+        padding: 50px 0 20px 485px;
         background: #fff;
     }
     .switch_country_for_container_VPS a{
