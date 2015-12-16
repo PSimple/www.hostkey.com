@@ -1,0 +1,25 @@
+.b-dedicated__box
+    h3.b-dedicated__title.b-dedicated__title_upline_yes
+        | OUR
+        br
+        | SOLUTIONS
+    .b-dedicated__switch.js-switch-box
+        .b-dedicated__switch-item(ng-click="url('/dedicated/service/netherlands')") netherland
+        .b-dedicated__switch-item /
+        a.b-dedicated__switch-item.active russia
+
+.b-dedicated__list.js-switch-box
+
+    .b-dedicated__item(ng-repeat="s in solutions", ng-class="{active:$stateParams.type===s.type}", ui-sref=".selected({type:s.type})")
+        img.b-dedicated__item-image(ng-src="{{s.image}}")
+        h3.b-dedicated__item-title {{s.title}}
+        h4.b-dedicated__item-subtitle {{s.subtitle}}
+        .b-dedicated__item-start Starts from
+        .b-dedicated__item-price
+            span(ng-bind-html="s.price|verboseCurrency:false")
+            | /month
+        a.b-dedicated__item-detail(href="") Detail
+
+
+//- выбранное решение
+.b-dedicated__hide-block.js-setting(id="selectedSolution", ui-view="", ng-class="{'_angular': $state.includes('dedicatedService.selected')}")

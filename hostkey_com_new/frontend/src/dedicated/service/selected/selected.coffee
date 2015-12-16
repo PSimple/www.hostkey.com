@@ -6,20 +6,18 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
     $stateProvider
     .state "dedicatedService.selected",
-        url: "/:country/:type"
-        controller: "MicroCtrl"
+        url: "/:type"
+        controller: "SelectedCtrl"
         template: require "./selected.jade"
         resolve:
             components: ($dedicated) -> $dedicated.components()
-
-            configCalculator: ($dedicated, $stateParams) ->
-                $dedicated.getConfigCalculator($stateParams.type, $stateParams.country)
-            billingCycleDiscount: ($dedicated) ->
-                $dedicated.billingCycleDiscount()
+            configCalculator: ($dedicated, $stateParams) -> $dedicated.getConfigCalculator($stateParams.type)
+            billingCycleDiscount: ($dedicated) -> $dedicated.billingCycleDiscount()
+            solution: ($solutions, $stateParams) -> $solutions.getOne($stateParams.type)
 
     return
 
-angular.module("dedicated.service.selected").controller "MicroCtrl", (notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components) ->
+angular.module("dedicated.service.selected").controller "SelectedCtrl", (notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components, solution) ->
 
     unless configCalculator.Data
         notifications.error configCalculator.Message if configCalculator.Message
@@ -53,6 +51,9 @@ angular.module("dedicated.service.selected").controller "MicroCtrl", (notificati
 
     # формируем заказ на сервер
     $scope.order = initOrderComponents(components, configCalculator.Data)
+
+    # выбранное решение
+    $scope.solution = solution
 
     $scope.close = ->
         $.scrollTo('.js-switch-box', 1000)
