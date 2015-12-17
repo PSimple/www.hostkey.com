@@ -5,10 +5,10 @@
  *
  * @package <Package>.ContentLittle
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015.10.26
+ * @date 2015.12.16
  *
  * @property string $Name
- * @property string $Conten
+ * @property string $Valu
  */
 class ContentLittle extends Zero_Model
 {
@@ -71,12 +71,12 @@ class ContentLittle extends Zero_Model
 				'Default' => '',
 				'Form' => 'Text',
 			],
-			'Content' => [
-				'AliasDB' => 'z.Content',
+			'Value' => [
+				'AliasDB' => 'z.Value',
 				'DB' => 'T',
 				'IsNull' => 'YES',
 				'Default' => '',
-				'Form' => 'Content',
+				'Form' => 'Text',
 			],
         ];
     }
@@ -102,7 +102,7 @@ class ContentLittle extends Zero_Model
         return [
             'ID' => ['Visible' => true, 'AR' => true],
 			'Name' => ['Visible' => true, 'AR' => true],
-			'Content' => ['Visible' => true, 'AR' => true],
+			'Value' => ['Visible' => true, 'AR' => true],
         ];
     }
 
@@ -122,6 +122,7 @@ class ContentLittle extends Zero_Model
         return [
             'ID' => [],
 			'Name' => [],
+			'Value' => [],
         ];
     }
 
@@ -142,7 +143,7 @@ class ContentLittle extends Zero_Model
         return [
             'ID' => [],
 			'Name' => [],
-			'Content' => [],
+			'Value' => [],
         ];
     }
 

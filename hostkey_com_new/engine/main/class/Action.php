@@ -5,7 +5,7 @@
  *
  * @package <Package>.Action
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015.10.26
+ * @date 2015.12.16
  *
  * @property string $Section_ID
  * @property string $Groups_ID

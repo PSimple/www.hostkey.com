@@ -5,7 +5,7 @@
  *
  * @package <Package>.ContentLittle
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015.10.26
+ * @date 2015.12.16
  */
 class ContentLittle_Edit extends Zero_Crud_Edit
 {

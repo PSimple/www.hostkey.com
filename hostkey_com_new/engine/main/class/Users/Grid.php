@@ -7,7 +7,7 @@
  *
  * @package <Package>.Users
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015.10.26
+ * @date 2015.12.16
  */
 class Users_Grid extends Zero_Crud_Grid
 {
