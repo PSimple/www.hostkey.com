@@ -203,12 +203,11 @@
 
 <script>
     $(document).ready(function () {
-        // Slider
+        
         if ($(".js-slider").length) {
             $(".js-slider").each(function (index, val) {
                 var slidesCount = $(val).data('slides');
                 var Begin_position = $(val).data('position');
-              //  var Preset = $(val).data('preset');
                 $(function () {
                     $(val).slider({
                         range: "min",
@@ -219,13 +218,13 @@
                             calculatePRoxMoxVDS_sliders(index, ui);
                         },
                         change: function (event, ui) {
-                            //  calculatePRoxMoxVDS_sliders ( index, ui );
+                            /*  calculatePRoxMoxVDS_sliders ( index, ui ); */
                         }
                     });
 
                 });
             });
-        }
+        };
 
 
         var currency = {
@@ -245,14 +244,17 @@
             } else {
                 $(this).css('border', '2px solid #d9dcdd');
             }
-        })
+        });
+        
+        
         /*
          *   Закрываем окно
          */
         $('.close_window_information_manager_cloud').click(function () {
             $('.popup').hide();
-            //$('#callback_btn_manage_cloud').removeClass('disabled_href_button').css('color', '#ff6a39');// при закрытии окна очищаем кнопку отправки
-            messager_windows_operator("", $("#message_load_ajax"), 'clear+hide');
+            /*$('#callback_btn_manage_cloud').removeClass('disabled_href_button').css('color', '#ff6a39'); при закрытии окна очищаем кнопку отправки
+            messager_windows_operator("", $("#message_load_ajax"), 'clear+hide');*/
+            document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
             return false;
         });
 
@@ -286,14 +288,14 @@
             }
         };
 
-        Zakaz = window.startZakaz( 0, listOfProducts ); //устанавливаем дефолтный заказ на нулевые позиции
-        window.write_summa( Zakaz, currency[currencyID], $('#Summa') );///Запишем дефолтную сумму заказа без скидок
-        window.write_dis( Zakaz,currency[currencyID], $('.b-vds-cloud__summary-price-discount'));///пишем дефолтный дискаунт
+        Zakaz = window.startZakaz( 0, listOfProducts ); /*устанавливаем дефолтный заказ на нулевые позиции */
+        window.write_summa( Zakaz, currency[currencyID], $('#Summa') );/*Запишем дефолтную сумму заказа без скидок */
+        window.write_dis( Zakaz,currency[currencyID], $('.b-vds-cloud__summary-price-discount'));/*пишем дефолтный дискаунт */
 
         document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
 
 
-        // AJAX_GET('http://site-f.hostke.ru/api/v1/cloud/config?pid=530&currencyId={$currencyId}&custom=1', 'JSON');
+        /*  AJAX_GET('http:site-f.hostke.ru/api/v1/cloud/config?pid=530&currencyId={$currencyId}&custom=1', 'JSON');  */
 
         function calculatePRoxMoxVDS_sliders(index, ui) {
             var UIP = ui.handle.parentElement.getAttribute('data_preset');
@@ -303,7 +305,7 @@
             $('[ data_preset_name_id = "' + UIP + '"]').html(Zakaz[UIP]['data'][0].name);
             window.write_summa( Zakaz, currency[currencyID], $('#Summa') );
             window.write_dis( Zakaz, currency[currencyID], $('.b-vds-cloud__summary-price-discount')  );
-        }
+        };
 
 
         function calculatePRoxMoxVDS_selects( UIP, UID ) {
@@ -317,7 +319,7 @@
             $('[ data_preset_name_id = "' + UIP + '"]').html(Zakaz[UIP]['data'][0].name);
             window.write_summa( Zakaz, currency[currencyID], $('#Summa') );
             window.write_dis( Zakaz, currency[currencyID], $('.b-vds-cloud__summary-price-discount') );
-        }
+        };
 
         var $eventSelect = $(".js-select");
 
@@ -330,21 +332,21 @@
 
         $( '.b-vds-cloud__summary-submit').bind( 'click', function( ) {
             $('.popup_callback').show();
-          // var iframe = document.getElementById('configure_cloud_VDS');
-           // $( '#configure_cloud_VDS' ).contents().find("body").html('Test');
-           // document.getElementById('configure_cloud_VDS').src = '';
+          /*var iframe = document.getElementById('configure_cloud_VDS');
+            $( '#configure_cloud_VDS' ).contents().find("body").html('Test');
+            document.getElementById('configure_cloud_VDS').src = '';*/
             crFrame( );
             /*
             iframe.onload = function() {
-                //var iframeDoc2 = iframe.contentWindow.document;
-               // iframeDoc2.body.style.backgroundColor = 'orange';
+                var iframeDoc2 = iframe.contentWindow.document;
+                iframeDoc2.body.style.backgroundColor = 'orange';
 
                 win = window.frames.configure_cloud_VDS;
                 win.postMessage(
 
                JSON.stringify( Zakaz ),
 
-                "https://bill.hostkey.com" // target domain
+                "https:bill.hostkey.com"  target domain
 
                 );
 
@@ -352,33 +354,28 @@
            */
 
             return false;
-            //generate_post ( Zakaz );
-            //console.log( 'https://billing.hostkey.ru/cart.php?a=add&pid=512&carttpl=cart&currency=2&' + generate_post ( Zakaz ) + "addons[60]=on" );
-           // document.location.href = 'https://billing.hostkey.ru/cart.php?systpl=siteF&a=add&pid=512&carttpl=cartF&currency=2&' + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
         });
 
 
 
         function crFrame( )
         {
-         //   var iframe = document.createElement("iframe");
-        //    iframe.id = "configure_cloud_VDS";
-           // iframe.frameborder = 0;
-            //iframe.height = '100%';
-          //  iframe.width = '80%';
-          //  iframe.style.display = "block";
-          //  iframe.src = 'https://billing.hostkey.ru/cart.php?systpl=siteF&a=add&pid=512&carttpl=cartF&currency=2&'
-                     //  + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
-          //  document.getElementById('add_iframe_from_billing').appendChild(iframe);
-           // $( '<img src="/assets/img/220-3.GIF" alt="">').appendTo( '#configure_cloud_VDS');
-          // document.getElementById('configure_cloud_VDS').src = "https://bill.hostkey.com/cart.php?systpl=siteF&a=confproduct&pid=530&carttpl=cartF&currency=2" ;
-
-           document.getElementById('configure_cloud_VDS').src = 'https://bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
+         /*   var iframe = document.createElement("iframe");
+            iframe.id = "configure_cloud_VDS";
+            iframe.frameborder = 0;
+            iframe.height = '100%';
+            iframe.width = '80%';
+            iframe.style.display = "block";
+            iframe.src = 'https:billing.hostkey.ru/cart.php?systpl=siteF&a=add&pid=512&carttpl=cartF&currency=2&'
+                       + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
+            document.getElementById('add_iframe_from_billing').appendChild(iframe);
+            $( '<img src="/assets/img/220-3.GIF" alt="">').appendTo( '#configure_cloud_VDS');
+           document.getElementById('configure_cloud_VDS').src = "https:bill.hostkey.com/cart.php?systpl=siteF&a=confproduct&pid=530&carttpl=cartF&currency=2" ;
+         */
+           document.getElementById('configure_cloud_VDS').src = 'https:bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
                  + generate_post ( Zakaz ) ;
-           //return false;
         }
-
-        ////////////////////////////////////////
+        
     });
 
 
@@ -404,7 +401,6 @@
     #add_iframe_from_billing {
         display: block;
     }
-
 
     #configure_cloud_VDS {
         border: none;

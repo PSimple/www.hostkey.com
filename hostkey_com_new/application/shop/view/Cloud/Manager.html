@@ -148,13 +148,11 @@
         };
 
 
-        Zakaz = window.startZakaz(0, listOfProducts[0][0]); //устанавливаем дефолтный заказ на нулевые позиции
+        Zakaz = window.startZakaz(0, listOfProducts[0][0]); /*устанавливаем дефолтный заказ на нулевые позиции*/
         window.set_payment_for_preset( Zakaz , listOfProducts, 0 );
-        window.write_summa( Zakaz, currency[currencyID], $('#Summa') );///Запишем дефолтную сумму заказа без скидок
+        window.write_summa( Zakaz, currency[currencyID], $('#Summa') );/*Запишем дефолтную сумму заказа без скидок*/
         document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
 
-
-        // Slider
         if ( $( ".js-slider").length ) {
 
             $(".js-slider").each(function (index, val) {
@@ -171,8 +169,6 @@
                             for (var prop in Zakaz) {
                                if ( prop != 'payment'){
                                    if ( Zakaz[prop].hidden == 0 ){
-
-
                                        $( '[data_pole_id=' + prop + ']' ).html( Zakaz[prop]['data'][0]['name'] );
                                        console.log( '[data_pole="' + Zakaz[prop]['data'][0]['id'] + '"]' +  '----' +  Zakaz[prop]['data'][0]['name'] );
                                    }
@@ -182,56 +178,41 @@
 
                         },
                         change: function(event, ui ) {
-                           // calculatePreset ( index, ui, Preset);
+                           /*calculatePreset ( index, ui, Preset);*/
                         }
                     });
 
                 });
             });
 
-        }
+        };
 
         function calculatePreset ( index, ui){
             Zakaz = window.startZakaz ( 0, listOfProducts[ui.value-1][0] );
             window.set_payment_for_preset( Zakaz , listOfProducts, 0 );
             window.write_summa( Zakaz, currency[currencyID], $('#Summa') );
-        }
+        };
 
-        /*
-        *   Открываем окно завершения заказа
-        */
+
   $( '#byu_cloud').bind( 'click', function () {
       $ ( '.popup_callback').show();
       crFrame( );
       return false;
-  })
+  });
 
-        /*
-        *   Закрываем окно
-        */
+
   $('.close_window_information_manager_cloud').click(function(){
             $('.popup').hide();
+            document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
             return false;
         });
-
-
-        /*
-        * Отправляем заказ
-        */
-        /*
-     $( '#callback_btn_manage_cloud').bind( 'click', function(){
-        // messager_windows_operator ( "", $( "#message_load_ajax" ), 'clear+hide');
-         AJAX_SEND( $('.popup_callback input[required = "required"]' ),  $( "#message_load_ajax" ) );
-         return false;
-     });
-     */
 
 
         function crFrame( )
         {
             document.getElementById('configure_cloud_VDS').src = 'https://bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
                     + generate_post ( Zakaz ) ;
-        }
+        };
 
     });
 
@@ -254,7 +235,6 @@
         display: block;
     }
 
-
     #configure_cloud_VDS {
         border: none;
         display: block;
@@ -269,12 +249,12 @@
 
     .popup h2{ width: 100%; display: block; font: bold 24px KievitOT,Arial; color: #171819; text-transform: uppercase; text-align: center; margin: 45px auto 60px auto; }
 
-
     .switch_country_for_container_VPS {
         display: block;
         padding: 50px 0 20px 485px;
         background: #fff;
     }
+
     .switch_country_for_container_VPS a{
         color: #000;
         text-decoration: none;

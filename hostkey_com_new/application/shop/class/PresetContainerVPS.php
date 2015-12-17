@@ -5,7 +5,7 @@
  *
  * @package shop
  * @subpakage class
- * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
+ * @author Den <avtorpc@gmail.com>
  * @date <Date>
  *
  * <BEG_CONFIG_PROPERTY>
@@ -19,7 +19,7 @@ class Shop_PresetContainerVPS extends Zero_Model
      *
      * @var array $preset
      */
-    private $preset = [
+    private $preset_template = [
         [
             'name' => 'RU VDS',
             'id' => 0,
@@ -88,40 +88,7 @@ class Shop_PresetContainerVPS extends Zero_Model
                 '750' => [ 'data' => [ '0' => [ 'id' => 6297] ] ]
             ]
         ],
-        [
-            'name' => 'RU VDS',
-            'id' => 0,
-            'hidden' => 0,
-            'value' => '8/8/200',
-            'PID' => 538,
-            'summ' => 0,
-            'sort' => 5,
-            '0' => [
-                '742' => [ 'data' => [ '0' => [ 'id' => 6265] ] ],
-                '745' => [ 'data' => [ '0' => [ 'id' => 6273] ] ],
-                '746' => [ 'data' => [ '0' => [ 'id' => 6279] ] ],
-                '747' => [ 'data' => [ '0' => [ 'id' => 6283] ] ],
-                '748' => [ 'data' => [ '0' => [ 'id' => 6289] ] ],
-                '750' => [ 'data' => [ '0' => [ 'id' => 6297] ] ]
-            ]
-        ],
-        [
-            'name' => 'RU VDS',
-            'id' => 0,
-            'hidden' => 0,
-            'value' => '8/8/200',
-            'PID' => 530,
-            'summ' => 0,
-            'sort' => 6,
-            '0' => [
-                '742' => [ 'data' => [ '0' => [ 'id' => 6265] ] ],
-                '745' => [ 'data' => [ '0' => [ 'id' => 6273] ] ],
-                '746' => [ 'data' => [ '0' => [ 'id' => 6279] ] ],
-                '747' => [ 'data' => [ '0' => [ 'id' => 6283] ] ],
-                '748' => [ 'data' => [ '0' => [ 'id' => 6289] ] ],
-                '750' => [ 'data' => [ '0' => [ 'id' => 6297] ] ]
-            ]
-        ],
+
         [
             'name' => 'NL Container VPS -1',
             'id' => 0,
@@ -408,9 +375,13 @@ class Shop_PresetContainerVPS extends Zero_Model
         ]
     ];
 
-
-
-    private $sortCloudVDS = [
+    /**
+     *
+     * Template array for sort to Cloud VDS page
+     *
+     * @var array
+     */
+    private $sortCloudVDS_template = [
         '531' =>[
             'name' => 'cloud vds Configurator',
             'data' =>[
@@ -432,7 +403,7 @@ class Shop_PresetContainerVPS extends Zero_Model
                        'name' => 'Disk Space'
                    ]
                ],
-                '3' => [
+                '5' => [
                     'data' =>[
                         'configoption' => '704',
                         'name' => 'IPv4 Addresses'
@@ -444,7 +415,7 @@ class Shop_PresetContainerVPS extends Zero_Model
                         'name' => 'Backups Limit'
                     ]
                 ],
-                '5' => [
+                '3' => [
                     'data' =>[
                         'configoption' => '703',
                         'name' => 'Bandwidth Limit [GB]'
@@ -473,7 +444,7 @@ class Shop_PresetContainerVPS extends Zero_Model
                         'name' => 'Disk Space'
                     ]
                 ],
-                '3' => [
+                '5' => [
                     'data' =>[
                         'configoption' => '748',
                         'name' => 'IPv4 Addresses'
@@ -485,7 +456,7 @@ class Shop_PresetContainerVPS extends Zero_Model
                         'name' => 'Backups Limit'
                     ]
                 ],
-                '5' => [
+                '3' => [
                     'data' =>[
                         'configoption' => '747',
                         'name' => 'Bandwidth Limit [GB]'
@@ -500,21 +471,21 @@ class Shop_PresetContainerVPS extends Zero_Model
      *
      * Returns the array received by superimposing of an array of template on custom array
      *
-     * @param null $container_VPS_custom
+     * @param null|array $container_VPS_custom
      * @param string $billingcycle
      * @return array
      */
     public function getPreset( $container_VPS_custom = null, $billingcycle = 'monthly' ){
         if ( is_null( $container_VPS_custom ) ) {
-            return $this->preset;
+            return $this->preset_template;
         } else {
             $a = array();
-            foreach ( $this->preset as $k => $v ) {//level Preset{ name, id, value...}
+            foreach ( $this->preset_template as $k => $v ) {//level Preset{ name, id, value...}
                 foreach ($v[0] as $key => $val )  {//level Options key = configoption[...]
                     $ID = $val['data'][0]['id'];// id producta in Options
                     foreach ( $container_VPS_custom as $key_custom => $val_custom ) {//Level Options in custom
                         if( $key_custom == $key ) {// option = option
-                            if (!isset( $a[$k] ) ) { $a[$k] = $this->preset[$k];}
+                            if (!isset( $a[$k] ) ) { $a[$k] = $this->preset_template[$k];}
                             foreach( $val_custom['data'] as $key_product => $val_product ) {
                                  if ( $val_product ['id'] == $ID )// ID product template = ID product custom merge array to template
                                      $a[$k][0][$key]['data'][0] = $val_product;
@@ -537,19 +508,31 @@ class Shop_PresetContainerVPS extends Zero_Model
         return $a;
     }
 
+    /**
+     *
+     * Returns the array of values sorted by increase received from superimposing of an array of template on custom array
+     *
+     * @param null|array $container_VPS_custom
+     * @param null|int $PID
+     * @return array
+     */
     public function getSortCloudVDS ( $container_VPS_custom = null, $PID = null ){
         if ( is_null( $container_VPS_custom ) ) {
-            return $this->sortCloudVDS;
+            return $this->sortCloudVDS_template;
         } else {
             $a = array();
-            foreach( $this->sortCloudVDS[$PID]['data'] as $key => $value ){
+            foreach( $this->sortCloudVDS_template[$PID]['data'] as $key => $value ){
                 if ( isset( $container_VPS_custom[ $value['data']['configoption'] ] ) ) {
-                    $a[$value['data']['configoption']] = $container_VPS_custom[ $value['data']['configoption'] ] ;
+                    $a[$key][$value['data']['configoption']] = $container_VPS_custom[ $value['data']['configoption'] ] ;
                 }
             }
         }
-
-        return $a;
+        ksort ( $a );
+        $b = array();
+        foreach( $a as $key => $value ){
+           $b[key( $value )]  = $value[key( $value )];
+        }
+        return $b;
     }
 
         /**

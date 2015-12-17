@@ -227,6 +227,7 @@
          */
         $('.close_window_information_manager_cloud').click(function () {
             $('.popup').hide();
+            document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
             return false;
         });
 
@@ -242,16 +243,14 @@
               crFrame( );
               return false;
             ;
-        })
+        });
 
         function crFrame( )
         {
             document.getElementById('configure_cloud_VDS').src = 'https://bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
                     + generate_post ( Zakaz ) ;
-        }
+        };
 
-
-//////////////////////////////////////////////////////////////////////////////////////////
     });
 
 
