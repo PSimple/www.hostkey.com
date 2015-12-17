@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "type": "Micro",
+    "image": "/assets/img/dedicate-select-icon-2-1.png",
+    "title": "Micro servers",
+    "subtitle": "Private & low end servers in offshore location",
+    "price": 30
+  },
+  {
+    "id": 2,
+    "type": "Mini",
+    "image": "/assets/img/dedicate-select-icon-2-2.png",
+    "title": "Mini servers",
+    "subtitle": "Single CPU servers with IPMI remote control",
+    "price": 65
+  },
+  {
+    "id": 3,
+    "type": "Cloud",
+    "image": "/assets/img/dedicate-select-icon-2-6.png",
+    "title": "APPLICATION SERVERS",
+    "subtitle": "Extra performance 1-2 E5 CPU servers with SSD",
+    "price": 142
+  },
+  {
+    "id": 4,
+    "type": "1CPU",
+    "image": "/assets/img/dedicate-select-icon-2-7.png",
+    "title": "SINGLE CPU CUSTOMS",
+    "subtitle": "Customize any single CPU dedicated server",
+    "price": 30
+  },
+  {
+    "id": 5,
+    "type": "2CPU",
+    "image": "/assets/img/dedicate-select-icon-2-7.png",
+    "title": "DUAL CPU CUSTOMS",
+    "subtitle": "Customize any dual CPU dedicated server",
+    "price": 130
+  },
+  {
+    "id": 6,
+    "type": "Hosting",
+    "image": "/assets/img/dedicate-select-icon-2-4.png",
+    "title": "HOSTING SERVERS",
+    "subtitle": "Servers for hosting, cPanel/OpenVZ services",
+    "price": 109
+  },
+  {
+    "id": 7,
+    "type": "Nodes",
+    "image": "/assets/img/dedicate-select-icon-2-3.png",
+    "title": "VIRTUALIZATION NODES",
+    "subtitle": "Dual Xeons for ESXi, KVM, Xen or Hyper-V",
+    "price": 109
+  },
+  {
+    "id": 8,
+    "type": "Storage",
+    "image": "/assets/img/dedicate-select-icon-2-5.png",
+    "title": "STORAGE SERVERS",
+    "subtitle": "Backup servers and NAS/SAN systems",
+    "price": 78
+  }
+]

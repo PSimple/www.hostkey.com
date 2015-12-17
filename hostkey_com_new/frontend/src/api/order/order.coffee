@@ -10,7 +10,7 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
         deferred = $q.defer()
 
         if window.isDev
-            url = "/assets/dist/order_calculation.json"
+            url = "/assets/dist/api/order/calculation.json"
         else
             url = "#{CONFIG.apiUrl}/dedicated/order"
 
@@ -90,7 +90,7 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
         deferred = $q.defer()
 
         if window.isDev
-            url = "/assets/dist/order_post.json"
+            url = "/assets/dist/api/order/post.json"
         else
             url = "#{CONFIG.apiUrl}/dedicated/order"
 

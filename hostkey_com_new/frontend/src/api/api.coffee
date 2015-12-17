@@ -1,9 +1,11 @@
 require './dedicated/dedicated'
 require './order/order'
+require './solutions/solutions'
 
 angular.module "api", [
     "api.dedicated"
     "api.order"
+    "api.solutions"
 ]
 
 
