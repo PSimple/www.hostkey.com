@@ -138,7 +138,7 @@ angular.module("ui").filter "verboseCurrency", ->
         if window.currency is 'eur'
             return "€#{space}#{price}"
 
-        if window.currency is 'rub'
+        if window.currency is 'rur'
             # знак ₽ отдельным шрифтом
             # return "#{price}#{space}<span class='rouble'>q</span>"
 

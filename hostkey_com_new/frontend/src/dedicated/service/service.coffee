@@ -37,7 +37,10 @@ angular.module("dedicated.service").config ($httpProvider, $stateProvider, $urlR
         views:
             "solutions":
                 controller: "DedicatedServiceSolutionsCtrl"
-                template: require "./solutions.jade"
+                template: require "./solutions.#{country}.jade"
+                resolve:
+                    solutions: ($solutions) ->
+                        $solutions.getList()
 
     return
 
@@ -46,23 +49,18 @@ angular.module("dedicated.service").run ($stateParams, $state, $rootScope) ->
     $rootScope.$stateParams = $stateParams
     $rootScope.$state = $state
 
-    return
-
-angular.module("dedicated.service").controller "DedicatedServiceSolutionsCtrl", ($scope, $state, $stateParams, $rootScope) ->
-
-    if $stateParams.currency
-        window.currency = $stateParams.currency
+    $rootScope.url = (url) ->
+        window.location = url
 
     $rootScope.bodyClass = ->
         {in: $rootScope.loaded}
 
+
+angular.module("dedicated.service").controller "DedicatedServiceSolutionsCtrl", ($scope, $state, $stateParams, $rootScope, solutions) ->
+
+    if $stateParams.currency
+        window.currency = $stateParams.currency
+
     $rootScope.loaded = true
 
-    $scope.$stateParams.country = 'NL'
-
-    $scope.changeCountry = (country) ->
-        $scope.$stateParams.country = country
-
-        if $state.includes('dedicatedService.selected')
-            $state.go $state.current, $stateParams, {reload:true}
-
+    $scope.solutions = solutions

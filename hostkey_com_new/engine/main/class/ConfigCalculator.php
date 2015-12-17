@@ -5,10 +5,9 @@
  *
  * @package <Package>.ConfigCalculator
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015.10.26
+ * @date 2015.12.16
  *
  * @property string $Name
- * @property string $Currency
  * @property array $ComponentGrou
  */
 class ConfigCalculator extends Zero_Model
@@ -72,13 +71,6 @@ class ConfigCalculator extends Zero_Model
 				'Default' => '',
 				'Form' => 'Text',
 			],
-			'Currency' => [
-				'AliasDB' => 'z.Currency',
-				'DB' => 'E',
-				'IsNull' => 'NO',
-				'Default' => 'eur',
-				'Form' => 'Radio',
-			],
 			'ComponentGroup' => [
 				'AliasDB' => 'z.ComponentGroup',
 				'DB' => 'S',
@@ -110,7 +102,6 @@ class ConfigCalculator extends Zero_Model
         return [
             'ID' => ['Visible' => true, 'AR' => true],
 			'Name' => ['Visible' => true, 'AR' => true],
-			'Currency' => ['Visible' => true, 'AR' => true],
 			'ComponentGroup' => ['Visible' => true, 'AR' => true],
         ];
     }
@@ -151,7 +142,6 @@ class ConfigCalculator extends Zero_Model
         return [
             'ID' => [],
 			'Name' => [],
-			'Currency' => [],
 			'ComponentGroup' => [],
         ];
     }
