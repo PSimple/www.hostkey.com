@@ -3,18 +3,15 @@ angular.module "api.dedicated", ['config']
 angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
     that = this
 
-    @getConfigCalculator = (type, country)->
+    @getConfigCalculator = (type)->
         deferred = $q.defer()
 
         if window.isDev
-            url = "/assets/dist/dedicated_#{type}.json"
+            url = "/assets/dist/api/config/dedicated/#{type}.json"
         else
             url = "#{CONFIG.apiUrl}/dedicated/config"
 
-        if type is "Test"
-            groups = type
-        else
-            groups = [country,type].join(',')
+        groups = [window.country,type].join(',')
 
         $http
             url: url

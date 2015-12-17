@@ -1,0 +1,56 @@
+<script>
+window.currency = '{$currency}';
+window.currencyId = {$currencyId};
+window.pid = 448;
+window.country = 'RU';
+window.type = 'dedicated';
+</script>
+<div class="b-page" ng-app="dedicated.service" class="fade" ng-class="bodyClass()">
+
+    <div class="b-page__promo b-page__promo_dedicated-select-service_yes">
+        <div class="b-icon b-page__scroll-icon"  onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
+        <h1 class="b-page__promo-title">dedicated</h1>
+    </div>
+
+    <div class="b-dedicated">
+
+        <h3 class="b-dedicated__title" id="scroll-anchor-01">
+            DEDICATED<br>
+            FEATURE
+        </h3>
+
+        {plugin "Content_ContentBlock_Plugin" view="SelectService"}
+        <input type="hidden" name="currency" value="{$currency}">
+        <input type="hidden" name="currencyId" value="{$currencyId}">
+
+        <div ui-view="solutions"></div>
+
+        <div class="b-dedicated__box">
+            <h3 class="b-dedicated__title b-dedicated__title_upline_yes">
+                features
+            </h3>
+
+        </div>
+
+        {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" IsFeatures="1"}
+
+        <div class="b-dedicated__free">
+            <a class="b-dedicated__free-title" href="#">free<br>
+                test<br>
+                drive
+            </a>
+            <div class="b-dedicated__free-period">30 day free trial </div>
+            <a class="b-submit b-dedicated__free-submit" href="#">see plans</a>
+        </div>
+
+        <div class="black-sale">
+
+            <h2 class="black-sale__title">2014 SALE</h2>
+
+            {include "Shop_Dedicated_include.black.sale.slider"}
+        </div>
+
+    </div>
+
+    <div class="footer-push"></div>
+</div>

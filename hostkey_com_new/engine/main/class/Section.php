@@ -5,7 +5,7 @@
  *
  * @package <Package>.Section
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015.10.26
+ * @date 2015.12.16
  *
  * @property string $Section_ID
  * @property string $Url
@@ -19,12 +19,12 @@
  * @property string $IsIndex
  * @property integer $Sort
  * @property string $Name
+ * @property string $NameSub
  * @property string $Title
  * @property string $Keywords
  * @property string $Description
  * @property string $Content
- * @property string $Currency
- * @property array $ComponentGrou
+ * @property string $Im
  */
 class Section extends Zero_Model
 {
@@ -164,6 +164,13 @@ class Section extends Zero_Model
 				'Default' => '',
 				'Form' => 'Text',
 			],
+			'NameSub' => [
+				'AliasDB' => 'z.NameSub',
+				'DB' => 'T',
+				'IsNull' => 'YES',
+				'Default' => '',
+				'Form' => 'Text',
+			],
 			'Title' => [
 				'AliasDB' => 'z.Title',
 				'DB' => 'T',
@@ -192,19 +199,12 @@ class Section extends Zero_Model
 				'Default' => '',
 				'Form' => 'Content',
 			],
-			'Currency' => [
-				'AliasDB' => 'z.Currency',
-				'DB' => 'E',
-				'IsNull' => 'NO',
-				'Default' => 'eur',
-				'Form' => 'Radio',
-			],
-			'ComponentGroup' => [
-				'AliasDB' => 'z.ComponentGroup',
-				'DB' => 'S',
+			'Img' => [
+				'AliasDB' => 'z.Img',
+				'DB' => 'T',
 				'IsNull' => 'YES',
 				'Default' => '',
-				'Form' => 'Checkbox',
+				'Form' => 'Img',
 			],
         ];
     }
@@ -241,12 +241,12 @@ class Section extends Zero_Model
 			'IsIndex' => ['Visible' => true, 'AR' => true],
 			'Sort' => ['Visible' => true, 'AR' => true],
 			'Name' => ['Visible' => true, 'AR' => true],
+			'NameSub' => ['Visible' => true, 'AR' => true],
 			'Title' => ['Visible' => true, 'AR' => true],
 			'Keywords' => ['Visible' => true, 'AR' => true],
 			'Description' => ['Visible' => true, 'AR' => true],
 			'Content' => ['Visible' => true, 'AR' => true],
-			'Currency' => ['Visible' => true, 'AR' => true],
-			'ComponentGroup' => ['Visible' => true, 'AR' => true],
+			'Img' => ['Visible' => true, 'AR' => true],
         ];
     }
 
@@ -271,6 +271,7 @@ class Section extends Zero_Model
 			'Layout' => [],
 			'Controller' => [],
 			'Name' => [],
+			'NameSub' => [],
 			'Title' => [],
 			'Keywords' => [],
         ];
@@ -304,12 +305,12 @@ class Section extends Zero_Model
 			'IsIndex' => [],
 			'Sort' => [],
 			'Name' => [],
+			'NameSub' => [],
 			'Title' => [],
 			'Keywords' => [],
 			'Description' => [],
 			'Content' => [],
-			'Currency' => [],
-			'ComponentGroup' => [],
+			'Img' => [],
         ];
     }
 
