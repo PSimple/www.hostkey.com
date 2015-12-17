@@ -2411,7 +2411,7 @@ p {
 .b-dedicated__feature-item {
   display: inline-block;
   vertical-align: top;
-  width: 25%;
+  width: 24%;
   padding-right: 40px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -2535,6 +2535,7 @@ p {
   font-size: 43px;
   line-height: 47px;
   margin-bottom: 20px;
+  min-height: 100px;
 }
 .b-dedicated__item-start {
   font-size: 26px;
@@ -4046,7 +4047,7 @@ p {
 .b-vps__feature-item {
   display: inline-block;
   vertical-align: top;
-  width: 25%;
+  width: 24%;
   padding-right: 40px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -5361,4 +5362,66 @@ p {
   display: inline-block;
   color: #ffffff;
 
+}
+
+.disabled_href_button {
+  pointer-events: none; /* делаем ссылку некликабельной */
+  cursor: default;  /* устанавливаем курсор в виде стрелки */
+  color: #fff; /* цвет текста для нективной ссылки */
+  background: url("/assets/img/220-3.GIF") 50% 5px no-repeat;
+}
+
+#callback_btn_manage_cloud .hide_href_button {
+  display: none;
+}
+
+
+.empty_field {
+  border: 2px solid red;
+}
+
+.message_pole {
+  dispaly: none;
+}
+.write_message_success {
+  padding: 20px 10px;
+  border: 2px solid #945ae0;
+  background: #d4d6d9;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  margin: 10px auto;
+  width: 80%;
+  dispalay: block;
+}
+
+.write_message_success a {
+  color: #000;
+}
+
+.write_message_error {
+  padding: 20px 10px;
+  border: 2px solid red;
+  background: #ff692d;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  margin: 10px auto;
+  width: 80%;
+  dispalay: block;
+}
+
+
+.b-container table {
+  border-collapse:separate;
+  border-spacing: 0;
+}
+
+
+.editable-area table td, .editable-area table th {
+  padding: 10px;
 }
