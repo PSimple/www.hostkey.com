@@ -17,10 +17,10 @@ class Content_Section_Page extends Zero_Controller
     public function Action_Default()
     {
         $this->Chunk_Init();
-
+       pre( Zero_App::$Section->ID );
         $head = str_replace(' ', '<br>', Zero_App::$Section->Name);
         $this->View->Assign('head', $head);
-        $this->View->Assign('content', Zero_App::$Section->Content);
+        $this->View->Assign('content', Zero_App::$Section->Content );
 
         return $this->View;
     }

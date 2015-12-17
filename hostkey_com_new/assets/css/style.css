@@ -2411,7 +2411,7 @@ p {
 .b-dedicated__feature-item {
   display: inline-block;
   vertical-align: top;
-  width: 25%;
+  width: 24%;
   padding-right: 40px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -5421,6 +5421,6 @@ p {
 }
 
 
-.b-container table td, .b-container table th {
-  padding: 10px
+.editable-area table td, .editable-area table th {
+  padding: 10px;
 }
