@@ -47866,18 +47866,22 @@
 	      model: "=select2"
 	    },
 	    link: function(scope, element, attrs, ngModel) {
+	      var _minimumResultsForSearch;
+	      _minimumResultsForSearch = 10;
 	      scope.$watch("model", function(n, o) {
 	        var newModel;
 	        if (!angular.equals(n, o)) {
 	          newModel = angular.copy(n);
 	          if (!scope.$$phase) {
-	            return element.select2().val(JSON.stringify(newModel)).trigger("change");
+	            return element.select2({
+	              minimumResultsForSearch: _minimumResultsForSearch
+	            }).val(JSON.stringify(newModel)).trigger("change");
 	          }
 	        }
 	      }, true);
 	      return $timeout(function() {
 	        element.select2({
-	          minimumResultsForSearch: 10
+	          minimumResultsForSearch: _minimumResultsForSearch
 	        });
 	        return element.bind("change", function() {
 	          return $timeout(function() {
