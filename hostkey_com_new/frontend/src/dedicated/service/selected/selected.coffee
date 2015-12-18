@@ -6,7 +6,7 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
     $stateProvider
     .state "dedicatedService.selected",
-        url: "/:type"
+        url: "/type/:type"
         controller: "SelectedCtrl"
         template: require "./selected.jade"
         resolve:
@@ -19,10 +19,10 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
 angular.module("dedicated.service.selected").controller "SelectedCtrl", (notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components, solution) ->
 
-    unless configCalculator.Data
-        notifications.error configCalculator.Message if configCalculator.Message
-        $state.go "^", $stateParams, {reload:true}
-        return
+#    unless configCalculator.Data
+#        notifications.error configCalculator.Message if configCalculator.Message
+#        $state.go "^", $stateParams, {reload:true}
+#        return
 
     initOrderComponents = (components, config)->
         defaultOrder =
@@ -57,7 +57,7 @@ angular.module("dedicated.service.selected").controller "SelectedCtrl", (notific
 
     $scope.close = ->
         $.scrollTo('.js-switch-box', 1000)
-        $state.go "^", $stateParams, {reload:true}
+        $state.go "^.index"
 
     # объект с суммой заказа и скидкой
     $scope.totalPrice = {}

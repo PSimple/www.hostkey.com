@@ -1,26 +1,34 @@
-[
-  {
-    "id": 1,
-    "type": "Mini",
-    "image": "/assets/img/dedicate-select-icon-2-1.png",
-    "title": "Mini servers",
-    "subtitle": "For small projects",
-    "price": 45
-  },
-  {
-    "id": 2,
-    "type": "1CPU",
-    "image": "/assets/img/dedicate-select-icon-2-2.png",
-    "title": "SINGLE CPU SERVERS",
-    "subtitle": "Customize any single CPU dedicated server",
-    "price": 30
-  },
-  {
-    "id": 1,
-    "type": "2CPU",
-    "image": "/assets/img/dedicate-select-icon-2-6.png",
-    "title": "DUAL CPU SERVERS",
-    "subtitle": "Customize any dual CPU dedicated server",
-    "price": 45
-  }
-]
+{
+  "Code": 0,
+  "Message": "",
+  "ErrorStatus": false,
+  "Content": [
+    {
+      "id": "1",
+      "type": "Mini",
+      "image": "/assets/img/dedicate-select-icon-2-1.png",
+      "title": "Mini servers",
+      "description": "Mini servers",
+      "subtitle": "For small projects",
+      "price": "50.00"
+    },
+    {
+      "id": "2",
+      "type": "1CPU",
+      "image": "/assets/img/dedicate-select-icon-2-2.png",
+      "title": "SINGLE CPU SERVERS",
+      "description": "Customize any single CPU dedicated server",
+      "subtitle": "Customize any single CPU dedicated server",
+      "price": "30.00"
+    },
+    {
+      "id": "3",
+      "type": "2CPU",
+      "image": "/assets/img/dedicate-select-icon-2-6.png",
+      "title": "DUAL CPU SERVERS",
+      "description": "Customize any dual CPU dedicated server",
+      "subtitle": "Customize any dual CPU dedicated server",
+      "price": "54.00"
+    }
+  ]
+}

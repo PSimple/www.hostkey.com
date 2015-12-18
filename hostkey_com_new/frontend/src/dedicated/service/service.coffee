@@ -37,10 +37,13 @@ angular.module("dedicated.service").config ($httpProvider, $stateProvider, $urlR
         views:
             "solutions":
                 controller: "DedicatedServiceSolutionsCtrl"
-                template: require "./solutions.#{country}.jade"
+                template: require "./solutions.#{window.country}.jade"
                 resolve:
                     solutions: ($solutions) ->
                         $solutions.getList()
+    $stateProvider
+    .state "dedicatedService.index",
+        url: "/all"
 
     return
 
