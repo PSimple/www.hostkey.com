@@ -18,7 +18,8 @@ angular.module("ui.select").directive "select2", ($timeout) ->
         , true
 
         $timeout ->
-            element.select2()
+            element.select2
+                minimumResultsForSearch: 10
 
             element.bind "change", ->
                 $timeout ->
