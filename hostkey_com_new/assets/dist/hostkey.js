@@ -90,7 +90,7 @@
 
 	__webpack_require__(28);
 
-	__webpack_require__(31);
+	__webpack_require__(32);
 
 	angular.module("dedicated.service", ["ngSanitize", "ui", "ui.router", "api", "dedicated.service.selected"]);
 
@@ -110,7 +110,7 @@
 	    views: {
 	      "solutions": {
 	        controller: "DedicatedServiceSolutionsCtrl",
-	        template: __webpack_require__(37)("./solutions." + country + ".jade"),
+	        template: __webpack_require__(37)("./solutions." + window.country + ".jade"),
 	        resolve: {
 	          solutions: ["$solutions", function($solutions) {
 	            return $solutions.getList();
@@ -118,6 +118,9 @@
 	        }
 	      }
 	    }
+	  });
+	  $stateProvider.state("dedicatedService.index", {
+	    url: "/all"
 	  });
 	}]);
 
@@ -47863,17 +47866,23 @@
 	      model: "=select2"
 	    },
 	    link: function(scope, element, attrs, ngModel) {
+	      var _minimumResultsForSearch;
+	      _minimumResultsForSearch = 10;
 	      scope.$watch("model", function(n, o) {
 	        var newModel;
 	        if (!angular.equals(n, o)) {
 	          newModel = angular.copy(n);
 	          if (!scope.$$phase) {
-	            return element.select2().val(JSON.stringify(newModel)).trigger("change");
+	            return element.select2({
+	              minimumResultsForSearch: _minimumResultsForSearch
+	            }).val(JSON.stringify(newModel)).trigger("change");
 	          }
 	        }
 	      }, true);
 	      return $timeout(function() {
-	        element.select2();
+	        element.select2({
+	          minimumResultsForSearch: _minimumResultsForSearch
+	        });
 	        return element.bind("change", function() {
 	          return $timeout(function() {
 	            return scope.model = JSON.parse(element.select2('val'));
@@ -54379,7 +54388,7 @@
 
 	__webpack_require__(30);
 
-	__webpack_require__(40);
+	__webpack_require__(31);
 
 	angular.module("api", ["api.dedicated", "api.order", "api.solutions"]);
 
@@ -54688,17 +54697,79 @@
 
 /***/ },
 /* 31 */
+/***/ function(module, exports) {
+
+	angular.module("api.solutions", ["config"]);
+
+	angular.module("api.solutions").service("$solutions", ["$http", "$q", "CONFIG", function($http, $q, CONFIG) {
+	  var that;
+	  that = this;
+
+	  /*
+	      Список типовых серверных решений
+	   */
+	  this.getList = function() {
+	    var country, currency, deferred, type, url;
+	    deferred = $q.defer();
+	    type = window.type || 'dedicated';
+	    country = window.country || 'NL';
+	    currency = window.currency || 'eur';
+	    if (window.isDev) {
+	      url = "/assets/dist/api/solutions/" + type + "/" + country + ".json";
+	    } else {
+	      url = CONFIG.apiUrl + "/solutions";
+	    }
+	    $http({
+	      url: url,
+	      method: "GET",
+	      cache: true,
+	      params: {
+	        country: country,
+	        currency: currency,
+	        type: type
+	      }
+	    }).success(function(data) {
+	      return deferred.resolve(data.Content);
+	    }).error(function(error) {
+	      return deferred.reject(error);
+	    });
+	    return deferred.promise;
+	  };
+	  this.getOne = function(type) {
+	    var deferred;
+	    deferred = $q.defer();
+	    that.getList().then(function(solutions) {
+	      var solution;
+	      solution = solutions.filter(function(s) {
+	        return s.type === type;
+	      });
+	      if (solution.length) {
+	        return deferred.resolve(angular.copy(solution[0]));
+	      } else {
+	        return deferred.resolve({});
+	      }
+	    })["catch"](function(error) {
+	      return deferred.reject(error);
+	    });
+	    return deferred.promise;
+	  };
+	  return that;
+	}]);
+
+
+/***/ },
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(32);
+	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(33);
 
 	angular.module("dedicated.service.selected", []);
 
 	angular.module("dedicated.service.selected").config(["$httpProvider", "$stateProvider", "$urlRouterProvider", function($httpProvider, $stateProvider, $urlRouterProvider) {
 	  $stateProvider.state("dedicatedService.selected", {
-	    url: "/:type",
+	    url: "/type/:type",
 	    controller: "SelectedCtrl",
-	    template: __webpack_require__(33),
+	    template: __webpack_require__(34),
 	    resolve: {
 	      components: ["$dedicated", function($dedicated) {
 	        return $dedicated.components();
@@ -54718,15 +54789,6 @@
 
 	angular.module("dedicated.service.selected").controller("SelectedCtrl", ["notifications", "$scope", "$state", "$stateParams", "$timeout", "configCalculator", "billingCycleDiscount", "$order", "components", "solution", function(notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components, solution) {
 	  var initOrderComponents, j, results, watchHdd, watchHddSelected, watchOS, watchRAM, watchRaid, watchRaidLevel, watchTraffic;
-	  if (!configCalculator.Data) {
-	    if (configCalculator.Message) {
-	      notifications.error(configCalculator.Message);
-	    }
-	    $state.go("^", $stateParams, {
-	      reload: true
-	    });
-	    return;
-	  }
 	  initOrderComponents = function(components, config) {
 	    var defaultOrder;
 	    defaultOrder = {
@@ -54756,9 +54818,7 @@
 	  $scope.solution = solution;
 	  $scope.close = function() {
 	    $.scrollTo('.js-switch-box', 1000);
-	    return $state.go("^", $stateParams, {
-	      reload: true
-	    });
+	    return $state.go("^.index");
 	  };
 	  $scope.totalPrice = {};
 	  $scope.$watch("order", function(n, o) {
@@ -54962,23 +55022,27 @@
 	      options = trafficOptions.filter(function(o) {
 	        return o.Name === "100Mbps unmetered (26Tb max)";
 	      });
-	      if (!findOption(order.network.traffic, options)) {
-	        $timeout(function() {
-	          return order.network.traffic = options[0];
-	        });
+	      if (options.length) {
+	        if (!findOption(order.network.traffic, options)) {
+	          $timeout(function() {
+	            return order.network.traffic = options[0];
+	          });
+	        }
+	        tabs.network.traffic.options = options;
 	      }
-	      tabs.network.traffic.options = options;
 	      return;
 	    }
 	    if (order.network.Bandwidth.Name === "1Gbps") {
 	      options = trafficOptions.filter(function(o) {
 	        return o.Name !== "100Mbps unmetered (26Tb max)";
 	      });
-	      tabs.network.traffic.options = options;
-	      if (!findOption(order.network.traffic, options)) {
-	        $timeout(function() {
-	          return order.network.traffic = options[0];
-	        });
+	      if (options.length) {
+	        tabs.network.traffic.options = options;
+	        if (!findOption(order.network.traffic, options)) {
+	          $timeout(function() {
+	            return order.network.traffic = options[0];
+	          });
+	        }
 	      }
 	      return;
 	    }
@@ -55160,7 +55224,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -56714,21 +56778,21 @@
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(34);
+	var jade = __webpack_require__(35);
 
 	module.exports = function template(locals) {
 	var buf = [];
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div ng-click=\"close()\" class=\"b-dedicated__hide-block-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div class=\"b-dedicated__item-content dedicated-item-content\"><div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">configurator of {{solution.title}} SOLUTIONS</h3><div ng-bind-html=\"solution.description\" class=\"b-dedicated__description\"></div></div><div style=\"padding-bottom: 30px;\" class=\"b-container\"><div class=\"b-dedicated__accordion\"><div id=\"scroll-box\" accordion=\"\"><accordion-group is-open=\"tabs.hardware.open\"><accordion-heading><span ng-bind=\"::tabs.hardware.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.hardware|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.hardware.cpu.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell\"><label ng-repeat=\"(id, cpu) in tabs.hardware.cpu.options\" ng-model=\"order.hardware.cpu\" btn-radio=\"{{cpu}}\" class=\"b-checkbox-submit\"><span class=\"b-checkbox-submit__text\">{{cpu.Name}}</span></label></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.hardware.ram.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell js-checked\"><label ng-repeat=\"ram in tabs.hardware.ram.options\" ng-model=\"order.hardware.ram\" btn-radio=\"{{ram}}\" ng-class=\"{disable: !ram.Options.enable}\" class=\"b-checkbox-submit b-checkbox-submit_size_70\"><span class=\"b-checkbox-submit__text\">{{ram.Name}}</span></label></td></tr><tr id=\"platform\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.hardware.platform.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell js-checked\"><label ng-repeat=\"platform in tabs.hardware.platform.options\" ng-model=\"order.hardware.platform\" btn-radio=\"{{platform}}\" class=\"b-checkbox-submit b-checkbox-submit_size_170\"><span class=\"b-checkbox-submit__text\">{{platform.Name}}</span></label></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td class=\"table-select__cell\"><div ng-show=\"hddItem&lt;=tabs.hardware.hdd.size\" ng-repeat=\"hddItem in tabs.hardware.hdd.sizeAvailable\" class=\"table-select__cell-item\"><label class=\"table-select__item-label\">{{hddItem}} disk</label><div ui-select=\"tabs.hardware.hdd.selected[$index]\" options=\"tabs.hardware.hdd.options\" width=\"170\" class=\"table-select__item\"></div></div></td></tr></table><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"3\" class=\"table-select__cell\"><label class=\"table-select__item-label\">RAID:</label><div ui-select=\"order.hardware.raid\" options=\"tabs.hardware.raid.options\" width=\"520\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"><label class=\"table-select__item-label\">LEVEL:</label><div ui-select=\"order.hardware.RaidLevel\" options=\"tabs.hardware.RaidLevel.options\" width=\"170\" class=\"table-select__item\"></div></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span ng-bind=\"::tabs.software.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.software|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.os.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.os\" options=\"tabs.software.os.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"><div ui-select=\"order.software.bit\" options=\"tabs.software.bit.options\" width=\"170\" class=\"table-select__item\"></div></td><td ng-style=\"{visibility: tabs.software.RdpLicCount.enable ? 'initial': 'hidden'}\" class=\"table-select__cell\"><label ng-bind-html=\"::tabs.software.RdpLicCount.name\" class=\"table-select__item-label table-select__item-label_inline_yes\"></label><input type=\"text\" ng-model=\"order.software.RdpLicCount.Value\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X {{order.software.RdpLicCount.Price|verboseCurrency}}</span></td></tr></table></td></tr><tr ng-show=\"tabs.software.controlPanel.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.controlPanel.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.controlPanel\" options=\"tabs.software.controlPanel.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-show=\"tabs.software.MSSql.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.MSSql.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.MSSql\" options=\"tabs.software.MSSql.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-show=\"tabs.software.MSExchange.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind-html=\"::tabs.software.MSExchange.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.MSExchange\" options=\"tabs.software.MSExchange.options\" width=\"340\" class=\"table-select__item\"></div></td><td ng-show=\"order.software.MSExchange.ID\" class=\"table-select__cell\"><label class=\"table-select__item-label table-select__item-label_inline_yes\">Count</label><input type=\"text\" ng-model=\"order.software.ExchangeCount.Value\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X {{order.software.MSExchange.Price|verboseCurrency}}</span></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span class=\"b-accordion__title-main\">{{tabs.network.name}}</span><span class=\"b-accordion__title-submain\">{{order.network|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.traffic.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.traffic\" options=\"tabs.network.traffic.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.Bandwidth.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.Bandwidth\" options=\"tabs.network.Bandwidth.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.ip.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.ip\" options=\"tabs.network.ip.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.vlan.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.vlan\" options=\"tabs.network.vlan.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.ftpBackup.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.ftpBackup\" options=\"tabs.network.ftpBackup.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.DDOSProtection.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.DDOSProtection\" options=\"tabs.network.DDOSProtection.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.IPv6.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><label class=\"fake-checkbox-label\"><span ng-model=\"order.network.IPv6.Value\" btn-checkbox=\"\" ng-class=\"{'js-check':order.network.IPv6.Value}\" class=\"fake-checkbox-label__box\"></span></label></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span ng-bind=\"::tabs.sla.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.sla|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.serviceLevel.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.serviceLevel\" options=\"tabs.sla.serviceLevel.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.management.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.management\" options=\"tabs.sla.management.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.DCGrade.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.DCGrade\" options=\"tabs.sla.DCGrade.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.discount.billingCycle.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td class=\"table-select__cell\"><div ui-select=\"order.discount.billingCycle\" options=\"tabs.discount.billingCycle.options\" width=\"340\" class=\"table-select__item\"><td class=\"table-select__cell\"></td></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></div></div><!-- Скролящийся блок с результатом выбора--><div scroll-block=\"\" class=\"b-dedicated__summary\"><div class=\"b-dedicated__summary-title\">Your dedicated</div><div ng-bind=\"::tabs.hardware.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.hardware\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-bind=\"::tabs.software.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.software\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-bind=\"::tabs.network.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.network\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-bind=\"::tabs.sla.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.sla\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-show=\"totalPrice.Summa\" class=\"b-dedicated__summary-price\"><span class=\"b-dedicated__summary-price-value\">{{totalPrice.Summa|verboseCurrency}}/month</span><span ng-show=\"order.discount.billingCycle.Percent\" class=\"b-dedicated__summary-price-discount\">{{order.discount.billingCycle.Percent}}% discount, save {{totalPrice.Discount|verboseCurrency}}</span></div><a href=\"\" ng-click=\"buy(order)\" class=\"b-submit b-dedicated__summary-submit\">Buy</a></div></div></div>");;return buf.join("");
+	buf.push("<div ng-click=\"close()\" class=\"b-dedicated__hide-block-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div class=\"b-dedicated__item-content dedicated-item-content\"><div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">configurator of {{solution.title}} SOLUTIONS</h3><div ng-bind-html=\"solution.description\" class=\"b-dedicated__description\"></div></div><div style=\"padding-bottom: 30px;\" class=\"b-container\"><div class=\"b-dedicated__accordion\"><div id=\"scroll-box\" accordion=\"\"><accordion-group is-open=\"tabs.hardware.open\"><accordion-heading><span ng-bind=\"::tabs.hardware.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.hardware|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.hardware.cpu.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell\"><label ng-repeat=\"(id, cpu) in tabs.hardware.cpu.options\" ng-model=\"order.hardware.cpu\" btn-radio=\"{{cpu}}\" class=\"b-checkbox-submit\"><span class=\"b-checkbox-submit__text\">{{cpu.Name}}</span></label></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.hardware.ram.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell js-checked\"><label ng-repeat=\"ram in tabs.hardware.ram.options\" ng-model=\"order.hardware.ram\" btn-radio=\"{{ram}}\" ng-class=\"{disable: !ram.Options.enable}\" class=\"b-checkbox-submit b-checkbox-submit_size_70\"><span class=\"b-checkbox-submit__text\">{{ram.Name}}</span></label></td></tr><tr id=\"platform\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.hardware.platform.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell js-checked\"><label ng-repeat=\"platform in tabs.hardware.platform.options\" ng-model=\"order.hardware.platform\" btn-radio=\"{{platform}}\" class=\"b-checkbox-submit b-checkbox-submit_size_170\"><span class=\"b-checkbox-submit__text\">{{platform.Name}}</span></label></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td class=\"table-select__cell\"><div ng-show=\"hddItem&lt;=tabs.hardware.hdd.size\" ng-repeat=\"hddItem in tabs.hardware.hdd.sizeAvailable\" class=\"table-select__cell-item\"><label class=\"table-select__item-label\">{{hddItem}} disk</label><div ui-select=\"tabs.hardware.hdd.selected[$index]\" options=\"tabs.hardware.hdd.options\" width=\"170\" class=\"table-select__item\"></div></div></td></tr></table><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"3\" class=\"table-select__cell\"><label class=\"table-select__item-label\">RAID:</label><div ui-select=\"order.hardware.raid\" options=\"tabs.hardware.raid.options\" width=\"520\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"><label class=\"table-select__item-label\">LEVEL:</label><div ui-select=\"order.hardware.RaidLevel\" options=\"tabs.hardware.RaidLevel.options\" width=\"170\" class=\"table-select__item\"></div></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span ng-bind=\"::tabs.software.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.software|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.os.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.os\" options=\"tabs.software.os.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"><div ui-select=\"order.software.bit\" options=\"tabs.software.bit.options\" width=\"170\" class=\"table-select__item\"></div></td><td ng-style=\"{visibility: tabs.software.RdpLicCount.enable ? 'initial': 'hidden'}\" class=\"table-select__cell\"><label ng-bind-html=\"::tabs.software.RdpLicCount.name\" class=\"table-select__item-label table-select__item-label_inline_yes\"></label><input type=\"text\" ng-model=\"order.software.RdpLicCount.Value\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X {{order.software.RdpLicCount.Price|verboseCurrency}}</span></td></tr></table></td></tr><tr ng-show=\"tabs.software.controlPanel.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.controlPanel.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.controlPanel\" options=\"tabs.software.controlPanel.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-show=\"tabs.software.MSSql.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.MSSql.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.MSSql\" options=\"tabs.software.MSSql.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-show=\"tabs.software.MSExchange.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind-html=\"::tabs.software.MSExchange.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.MSExchange\" options=\"tabs.software.MSExchange.options\" width=\"340\" class=\"table-select__item\"></div></td><td ng-show=\"order.software.MSExchange.ID\" class=\"table-select__cell\"><label class=\"table-select__item-label table-select__item-label_inline_yes\">Count</label><input type=\"text\" ng-model=\"order.software.ExchangeCount.Value\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X {{order.software.MSExchange.Price|verboseCurrency}}</span></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span class=\"b-accordion__title-main\">{{tabs.network.name}}</span><span class=\"b-accordion__title-submain\">{{order.network|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.traffic.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.traffic\" options=\"tabs.network.traffic.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.Bandwidth.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.Bandwidth\" options=\"tabs.network.Bandwidth.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.ip.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.ip\" options=\"tabs.network.ip.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.vlan.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.vlan\" options=\"tabs.network.vlan.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.ftpBackup.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.ftpBackup\" options=\"tabs.network.ftpBackup.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.DDOSProtection.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.DDOSProtection\" options=\"tabs.network.DDOSProtection.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.IPv6.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><label class=\"fake-checkbox-label\"><span ng-model=\"order.network.IPv6.Value\" btn-checkbox=\"\" ng-class=\"{'js-check':order.network.IPv6.Value}\" class=\"fake-checkbox-label__box\"></span></label></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span ng-bind=\"::tabs.sla.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.sla|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.serviceLevel.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.serviceLevel\" options=\"tabs.sla.serviceLevel.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.management.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.management\" options=\"tabs.sla.management.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.DCGrade.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.DCGrade\" options=\"tabs.sla.DCGrade.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.discount.billingCycle.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td class=\"table-select__cell\"><div ui-select=\"order.discount.billingCycle\" options=\"tabs.discount.billingCycle.options\" width=\"340\" class=\"table-select__item\"><td class=\"table-select__cell\"></td></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></div></div><!-- Скролящийся блок с результатом выбора--><div scroll-block=\"\" class=\"b-dedicated__summary\"><div class=\"b-dedicated__summary-title\">Your dedicated</div><div ng-bind=\"::tabs.hardware.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.hardware\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-bind=\"::tabs.software.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.software\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-bind=\"::tabs.network.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.network\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-bind=\"::tabs.sla.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.sla\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-show=\"totalPrice.Summa\" class=\"b-dedicated__summary-price\"><span class=\"b-dedicated__summary-price-value\">{{totalPrice.Summa|verboseCurrency}}/month</span><span ng-show=\"order.discount.billingCycle.Percent\" class=\"b-dedicated__summary-price-discount\">{{order.discount.billingCycle.Percent}}% discount,<br/>save {{totalPrice.Discount|verboseCurrency}}</span></div><a href=\"\" ng-click=\"buy(order)\" class=\"b-submit b-dedicated__summary-submit\">Buy</a></div></div></div>");;return buf.join("");
 	}
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56948,7 +57012,7 @@
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(35).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(36).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -56980,13 +57044,12 @@
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 36 */,
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -57012,7 +57075,7 @@
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(34);
+	var jade = __webpack_require__(35);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -57026,7 +57089,7 @@
 /* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(34);
+	var jade = __webpack_require__(35);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -57035,68 +57098,6 @@
 
 	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div ng-click=\"url('/dedicated/service/netherlands')\" class=\"b-dedicated__switch-item\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><a class=\"b-dedicated__switch-item active\">russia</a></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Detail</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
 	}
-
-/***/ },
-/* 40 */
-/***/ function(module, exports) {
-
-	angular.module("api.solutions", ["config"]);
-
-	angular.module("api.solutions").service("$solutions", ["$http", "$q", "CONFIG", function($http, $q, CONFIG) {
-	  var that;
-	  that = this;
-
-	  /*
-	      Список типовых серверных решений
-	   */
-	  this.getList = function() {
-	    var country, currency, deferred, type, url;
-	    deferred = $q.defer();
-	    type = window.type || 'dedicated';
-	    country = window.country || 'NL';
-	    currency = window.currency || 'eur';
-	    if (window.isDev) {
-	      url = "/assets/dist/api/solutions/" + type + "/" + country + ".json";
-	    } else {
-	      url = CONFIG.apiUrl + "/solutions";
-	    }
-	    $http({
-	      url: url,
-	      method: "GET",
-	      cache: true,
-	      params: {
-	        country: country,
-	        currency: currency,
-	        type: type
-	      }
-	    }).success(function(data) {
-	      return deferred.resolve(data);
-	    }).error(function(error) {
-	      return deferred.reject(error);
-	    });
-	    return deferred.promise;
-	  };
-	  this.getOne = function(type) {
-	    var deferred;
-	    deferred = $q.defer();
-	    that.getList().then(function(solutions) {
-	      var solution;
-	      solution = solutions.filter(function(s) {
-	        return s.type === type;
-	      });
-	      if (solution.length) {
-	        return deferred.resolve(angular.copy(solution[0]));
-	      } else {
-	        return deferred.resolve({});
-	      }
-	    })["catch"](function(error) {
-	      return deferred.reject(error);
-	    });
-	    return deferred.promise;
-	  };
-	  return that;
-	}]);
-
 
 /***/ }
 /******/ ]);
