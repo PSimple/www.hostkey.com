@@ -6,7 +6,7 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
     $stateProvider
     .state "dedicatedService.selected",
-        url: "/:type"
+        url: "/type/:type"
         controller: "SelectedCtrl"
         template: require "./selected.jade"
         resolve:
@@ -19,10 +19,10 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
 angular.module("dedicated.service.selected").controller "SelectedCtrl", (notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components, solution) ->
 
-    unless configCalculator.Data
-        notifications.error configCalculator.Message if configCalculator.Message
-        $state.go "^", $stateParams, {reload:true}
-        return
+#    unless configCalculator.Data
+#        notifications.error configCalculator.Message if configCalculator.Message
+#        $state.go "^", $stateParams, {reload:true}
+#        return
 
     initOrderComponents = (components, config)->
         defaultOrder =
@@ -57,7 +57,7 @@ angular.module("dedicated.service.selected").controller "SelectedCtrl", (notific
 
     $scope.close = ->
         $.scrollTo('.js-switch-box', 1000)
-        $state.go "^", $stateParams, {reload:true}
+        $state.go "^.index"
 
     # объект с суммой заказа и скидкой
     $scope.totalPrice = {}
@@ -234,18 +234,21 @@ angular.module("dedicated.service.selected").controller "SelectedCtrl", (notific
         # При выборе ”100 Mbps” оставить в поле Traffic (п. 3.1) только “100 mbps Unmetered (26Tb max)”, остальные опции удалить.
         if order.network.Bandwidth.Name is "100Mbps"
             options = trafficOptions.filter (o) -> o.Name is "100Mbps unmetered (26Tb max)"
-            unless findOption(order.network.traffic, options)
-                $timeout -> order.network.traffic = options[0]
-            tabs.network.traffic.options = options
+            if options.length
+                unless findOption(order.network.traffic, options)
+                    $timeout -> order.network.traffic = options[0]
+
+                tabs.network.traffic.options = options
+
             return
 
         # При выборе "1Gbps (10)" убираем опцию "100 mbps Unmetered (26Tb max)" в поле Traffic, остальные оставляем.
         if order.network.Bandwidth.Name is "1Gbps"
             options = trafficOptions.filter (o) -> o.Name isnt "100Mbps unmetered (26Tb max)"
-            tabs.network.traffic.options = options
-            unless findOption(order.network.traffic, options)
-                $timeout -> order.network.traffic = options[0]
-
+            if options.length
+                tabs.network.traffic.options = options
+                unless findOption(order.network.traffic, options)
+                    $timeout -> order.network.traffic = options[0]
             return
 
         # вернем оригинальные варианты опции Traffic

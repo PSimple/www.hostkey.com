@@ -2534,7 +2534,11 @@ p {
 .b-dedicated__item-title {
   font-size: 43px;
   line-height: 47px;
+<<<<<<< HEAD
   margin-bottom: 10px;
+=======
+  margin-bottom: 20px;
+>>>>>>> master
   min-height: 100px;
 }
 .b-dedicated__item-start {
@@ -5427,9 +5431,12 @@ p {
 
 .editable-area table td, .editable-area table th {
   padding: 10px;
+<<<<<<< HEAD
 }
 
 .b-dedicated__item-subtitle {
   margin: 0 0 10px 0;
   min-height: 40px;
+=======
+>>>>>>> master
 }

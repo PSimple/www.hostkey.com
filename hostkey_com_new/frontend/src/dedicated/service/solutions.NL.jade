@@ -18,7 +18,7 @@
         .b-dedicated__item-price
             span(ng-bind-html="s.price|verboseCurrency:false")
             | /month
-        a.b-dedicated__item-detail(href="") Details
+        a.b-dedicated__item-detail(href="") Detail
 
 //- выбранное решение
 .b-dedicated__hide-block.js-setting(id="selectedSolution", ui-view="", ng-class="{'_angular': $state.includes('dedicatedService.selected')}")

@@ -485,7 +485,9 @@
             .b-dedicated__summary-price(ng-show="totalPrice.Summa")
                 span.b-dedicated__summary-price-value {{totalPrice.Summa|verboseCurrency}}/month
                 span.b-dedicated__summary-price-discount(ng-show="order.discount.billingCycle.Percent")
-                    | {{order.discount.billingCycle.Percent}}% discount, save {{totalPrice.Discount|verboseCurrency}}
+                    | {{order.discount.billingCycle.Percent}}% discount,
+                    br
+                    |save {{totalPrice.Discount|verboseCurrency}}
 
             a.b-submit.b-dedicated__summary-submit(href="", ng-click="buy(order)") Buy
 

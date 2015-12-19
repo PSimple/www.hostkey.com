@@ -29,7 +29,7 @@ angular.module("api.solutions").service "$solutions", ($http, $q, CONFIG) ->
                 type: type
 
         .success (data) ->
-            deferred.resolve data
+            deferred.resolve data.Content
 
         .error (error) ->
             deferred.reject error

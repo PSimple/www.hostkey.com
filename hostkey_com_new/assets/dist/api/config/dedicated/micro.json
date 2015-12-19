@@ -4,42 +4,13 @@
   "ErrorStatus": false,
   "Content": {
     "Data": {
-      "15": {
-        "140": {
-          "ID": "140",
-          "ComponentType_ID": "15",
-          "Name": "VLAN port 1Gbps",
-          "Price": "10.00",
-          "Options": {"short_name": "VLAN port 1Gbps"}
-        },
-        "139": {
-          "ID": "139",
-          "ComponentType_ID": "15",
-          "Name": "VLAN port 100Mbps",
-          "Price": "2.00",
-          "Options": {"short_name": "VLAN port 100Mbps"}
-        }
-      },
-      "11": {
-        "138": {
-          "ID": "138",
-          "ComponentType_ID": "11",
-          "Name": "Extra Windows Terminal licenses",
-          "Price": "6.00",
-          "Options": {"short_name": "Extra Windows Terminal licenses"}
-        }
-      },
-      "6": {
-        "231": {
-          "ID": "231",
-          "ComponentType_ID": "6",
-          "Name": "2 disks",
-          "Price": "30.00",
-          "Options": {
-            "size": "2",
-            "short_name": "NL MC",
-            "unit": "1"
-          }
+      "5": {
+        "113": {
+          "ID": "113",
+          "ComponentType_ID": "5",
+          "Name": "cPanel dedicated",
+          "Price": "33.00",
+          "Options": {"short_name": "cPanel dedicated"}
         }
       },
       "4": {
@@ -161,141 +132,59 @@
           "Name": "FreeBSD",
           "Price": "0.00",
           "Options": {"short_name": "FreeBSD"}
-        },
-        "101": {
-          "ID": "101",
-          "ComponentType_ID": "4",
-          "Name": "ESXi 5.5",
-          "Price": "0.00",
-          "Options": {"short_name": "ESXi 5.5"}
-        },
-        "100": {
-          "ID": "100",
-          "ComponentType_ID": "4",
-          "Name": "Citrix Xen",
-          "Price": "0.00",
-          "Options": {"short_name": "Citrix Xen"}
-        },
-        "99": {
-          "ID": "99",
-          "ComponentType_ID": "4",
-          "Name": "Centos KVM",
-          "Price": "0.00",
-          "Options": {"short_name": "Centos KVM"}
-        },
-        "248": {
-          "ID": "248",
-          "ComponentType_ID": "4",
-          "Name": "Own OS via IPMI",
-          "Price": "0.00",
-          "Options": {"short_name": "Own OS via IPMI"}
         }
       },
-      "5": {
-        "113": {
-          "ID": "113",
-          "ComponentType_ID": "5",
-          "Name": "cPanel dedicated",
-          "Price": "33.00",
-          "Options": {"short_name": "cPanel dedicated"}
+      "11": {
+        "138": {
+          "ID": "138",
+          "ComponentType_ID": "11",
+          "Name": "Extra Windows Terminal licenses",
+          "Price": "6.00",
+          "Options": {"short_name": "Extra Windows Terminal licenses"}
         }
       },
-      "1": {
-        "242": {
-          "ID": "242",
-          "ComponentType_ID": "1",
-          "Name": "Core i3-2100 2x3.1GHz",
-          "Price": "5.00",
-          "Options": {
-            "max_mem": "32",
-            "short_name": "i3-2100",
-            "cpu_count": "1"
-          }
+      "22": {
+        "318": {
+          "ID": "318",
+          "ComponentType_ID": "22",
+          "Name": "1Tb of cleaned incoming traffic",
+          "Price": "50.00",
+          "Options": {"short_name": "DDOS-1TbIN"}
         },
-        "230": {
-          "ID": "230",
-          "ComponentType_ID": "1",
-          "Name": "Xeon E3-1230v3 4x3.3GHz",
-          "Price": "14.00",
-          "Options": {
-            "cpu_count": "1",
-            "max_mem": "32",
-            "short_name": "E3-1230v3"
-          }
+        "311": {
+          "ID": "311",
+          "ComponentType_ID": "22",
+          "Name": "2Tb of cleaned incoming traffic",
+          "Price": "90.00",
+          "Options": {"short_name": "DDOS-2TbIN"}
         },
-        "278": {
-          "ID": "278",
-          "ComponentType_ID": "1",
-          "Name": "Xeon E3-1271v3 4x3.6GHz",
-          "Price": "24.00",
-          "Options": {
-            "cpu_count": "1",
-            "short_name": "E3-1271v3",
-            "max_mem": "32"
-          }
+        "312": {
+          "ID": "312",
+          "ComponentType_ID": "22",
+          "Name": "3Tb of cleaned incoming traffic",
+          "Price": "135.00",
+          "Options": {"short_name": "DDOS-3TbIN"}
         },
-        "263": {
-          "ID": "263",
-          "ComponentType_ID": "1",
-          "Name": "Xeon E5-1650 6x3.2GHz",
-          "Price": "30.00",
-          "Options": {
-            "cpu_count": "1",
-            "max_mem": "128",
-            "short_name": "E5-1650"
-          }
-        }
-      },
-      "3": {
-        "233": {
-          "ID": "233",
-          "ComponentType_ID": "3",
-          "Name": "8Gb",
-          "Price": "5.00",
-          "Options": {
-            "size": "8",
-            "short_name": "8Gb"
-          }
+        "313": {
+          "ID": "313",
+          "ComponentType_ID": "22",
+          "Name": "4Tb of cleaned incoming traffic",
+          "Price": "165.00",
+          "Options": {"short_name": "DDOS-4TbIN"}
         },
-        "234": {
-          "ID": "234",
-          "ComponentType_ID": "3",
-          "Name": "16Gb",
-          "Price": "10.00",
-          "Options": {
-            "size": "16",
-            "short_name": "16Gb"
-          }
+        "314": {
+          "ID": "314",
+          "ComponentType_ID": "22",
+          "Name": "5Tb of cleaned incoming traffic",
+          "Price": "195.00",
+          "Options": {"short_name": "DDOS-5TbIN"}
         },
-        "235": {
-          "ID": "235",
-          "ComponentType_ID": "3",
-          "Name": "32Gb",
-          "Price": "20.00",
-          "Options": {
-            "size": "32",
-            "short_name": "32Gb"
-          }
-        },
-        "237": {
-          "ID": "237",
-          "ComponentType_ID": "3",
-          "Name": "64Gb",
-          "Price": "40.00",
-          "Options": {
-            "size": "64",
-            "short_name": "64Gb"
-          }
-        },
-        "238": {
-          "ID": "238",
-          "ComponentType_ID": "3",
-          "Name": "128Gb",
-          "Price": "80.00",
-          "Options": {
-            "size": "128",
-            "short_name": "128Gb"
-          }
+        "315": {
+          "ID": "315",
+          "ComponentType_ID": "22",
+          "Name": "100Mbps cleaned incoming traffic",
+          "Price": "250.00",
+          "Options": {"short_name": "DDOS-100IN"}
         }
       },
       "8": {
@@ -311,233 +200,50 @@
           }
         }
       },
-      "13": {
-        "267": {
-          "ID": "267",
-          "ComponentType_ID": "13",
-          "Name": "100Mbps",
-          "Price": "0.00",
-          "Options": {"short_name": "100Mbps"}
-        },
-        "251": {
-          "ID": "251",
-          "ComponentType_ID": "13",
-          "Name": "1Gbps",
-          "Price": "10.00",
-          "Options": {"short_name": "1Gbps"}
-        }
-      },
-      "7": {
-        "171": {
-          "ID": "171",
-          "ComponentType_ID": "7",
-          "Name": "1 IPv4",
-          "Price": "0.00",
-          "Options": {"short_name": "1 IPv4"}
-        },
-        "86": {
-          "ID": "86",
-          "ComponentType_ID": "7",
-          "Name": "2 IPv4",
-          "Price": "1.00",
-          "Options": {"short_name": "2 IPv4"}
-        },
-        "87": {
-          "ID": "87",
-          "ComponentType_ID": "7",
-          "Name": "4 IPv4",
-          "Price": "3.00",
-          "Options": {"short_name": "4 IPv4"}
-        },
-        "88": {
-          "ID": "88",
-          "ComponentType_ID": "7",
-          "Name": "8 IPv4",
-          "Price": "7.00",
-          "Options": {"short_name": "8 IPv4"}
-        },
-        "89": {
-          "ID": "89",
-          "ComponentType_ID": "7",
-          "Name": "16 IPv4",
-          "Price": "15.00",
-          "Options": {"short_name": "16 IPv4"}
-        },
-        "90": {
-          "ID": "90",
-          "ComponentType_ID": "7",
-          "Name": "32 IPv4",
-          "Price": "31.00",
-          "Options": {"short_name": "32 IPv4"}
-        }
-      },
-      "19": {
-        "168": {
-          "ID": "168",
-          "ComponentType_ID": "19",
-          "Name": "Backup 100Gb",
-          "Price": "1.00",
-          "Options": {"short_name": "Backup 100Gb"}
-        },
-        "169": {
-          "ID": "169",
-          "ComponentType_ID": "19",
-          "Name": "Backup 500Gb",
+      "1": {
+        "58": {
+          "ID": "58",
+          "ComponentType_ID": "1",
+          "Name": "Celeron J1800 2x2.4GHz",
           "Price": "5.00",
-          "Options": {"short_name": "Backup 500Gb"}
+          "Options": {
+            "cpu_count": "1",
+            "max_mem": "8",
+            "short_name": "J1800"
+          }
         },
-        "170": {
-          "ID": "170",
-          "ComponentType_ID": "19",
-          "Name": "Backup 1Tb",
-          "Price": "10.00",
-          "Options": {"short_name": "Backup 1Tb"}
-        }
-      },
-      "12": {
-        "159": {
-          "ID": "159",
-          "ComponentType_ID": "12",
-          "Name": "MS SQL 2012 Web Edition",
-          "Price": "8.00",
-          "Options": {"short_name": "SQL12WE"}
+        "59": {
+          "ID": "59",
+          "ComponentType_ID": "1",
+          "Name": "Celeron J1900 4x2GHz",
+          "Price": "6.00",
+          "Options": {
+            "cpu_count": "2",
+            "max_mem": "8",
+            "short_name": "J1900"
+          }
         },
-        "160": {
-          "ID": "160",
-          "ComponentType_ID": "12",
-          "Name": "MS SQL 2008 Web Edition",
-          "Price": "8.00",
-          "Options": {"short_name": "SQL08WE"}
+        "116": {
+          "ID": "116",
+          "ComponentType_ID": "1",
+          "Name": "Core i3-4360 2x3.7GHz",
+          "Price": "16.00",
+          "Options": {
+            "cpu_count": "2",
+            "max_mem": "16",
+            "short_name": "i3-4360"
+          }
         },
-        "161": {
-          "ID": "161",
-          "ComponentType_ID": "12",
-          "Name": "MS SQL 2012 Standard Edition",
-          "Price": "120.00",
-          "Options": {"short_name": "SQL12SE"}
-        },
-        "176": {
-          "ID": "176",
-          "ComponentType_ID": "12",
-          "Name": "MS SQL 2008 Standard Edition",
-          "Price": "120.00",
-          "Options": {"short_name": "SQL08SE"}
-        },
-        "177": {
-          "ID": "177",
-          "ComponentType_ID": "12",
-          "Name": "MS SQL 2008 Enterprise Edition",
-          "Price": "470.00",
-          "Options": {"short_name": "SQL08EE"}
-        },
-        "178": {
-          "ID": "178",
-          "ComponentType_ID": "12",
-          "Name": "MS SQL 2012 Enterprise Edition",
-          "Price": "470.00",
-          "Options": {"short_name": "SQL12EE"}
-        }
-      },
-      "18": {
-        "249": {
-          "ID": "249",
-          "ComponentType_ID": "18",
-          "Name": "100Mbps",
-          "Price": "0.00",
-          "Options": {"short_name": "100Mbps"}
-        },
-        "250": {
-          "ID": "250",
-          "ComponentType_ID": "18",
-          "Name": "1Gbps",
-          "Price": "10.00",
-          "Options": {"short_name": "1Gbps"}
-        }
-      },
-      "14": {
-        "148": {
-          "ID": "148",
-          "ComponentType_ID": "14",
-          "Name": "100Mbps unmetered (26Tb max)",
-          "Price": "0.00",
-          "Options": {"short_name": "100Mbps unmetered (26Tb max)"}
-        },
-        "256": {
-          "ID": "256",
-          "ComponentType_ID": "14",
-          "Name": "10Tb (1Gbps port)",
-          "Price": "0.00",
-          "Options": {"short_name": "10Tb (1Gbps port)"}
-        },
-        "257": {
-          "ID": "257",
-          "ComponentType_ID": "14",
-          "Name": "20Tb (1Gbps port)",
-          "Price": "40.00",
-          "Options": {"short_name": "20Tb (1Gbps port)"}
-        },
-        "258": {
-          "ID": "258",
-          "ComponentType_ID": "14",
-          "Name": "30Tb (1Gbps port)",
-          "Price": "80.00",
-          "Options": {"short_name": "30Tb (1Gbps port)"}
-        },
-        "259": {
-          "ID": "259",
-          "ComponentType_ID": "14",
-          "Name": "50Tb (1Gbps port)",
-          "Price": "160.00",
-          "Options": {"short_name": "50Tb (1Gbps port)"}
-        },
-        "158": {
-          "ID": "158",
-          "ComponentType_ID": "14",
-          "Name": "200Mbps unmetered (52Tb max)",
-          "Price": "80.00",
-          "Options": {"short_name": "200Mbps unmetered (52Tb max)"}
-        },
-        "150": {
-          "ID": "150",
-          "ComponentType_ID": "14",
-          "Name": "300Mbps unmetered (78Tb max)",
-          "Price": "120.00",
-          "Options": {"short_name": "300Mbps unmetered (78Tb max)"}
-        },
-        "151": {
-          "ID": "151",
-          "ComponentType_ID": "14",
-          "Name": "400Mbps unmetered (104Tb max)",
-          "Price": "160.00",
-          "Options": {"short_name": "400Mbps unmetered (104Tb max)"}
-        },
-        "153": {
-          "ID": "153",
-          "ComponentType_ID": "14",
-          "Name": "600Mbps unmetered (156Tb max)",
-          "Price": "240.00",
-          "Options": {"short_name": "600Mbps unmetered (156Tb max)"}
-        },
-        "155": {
-          "ID": "155",
-          "ComponentType_ID": "14",
-          "Name": "800Mbps unmetered (208Tb max)",
-          "Price": "320.00",
-          "Options": {"short_name": "800Mbps unmetered (208Tb max)"}
-        },
-        "156": {
-          "ID": "156",
-          "ComponentType_ID": "14",
-          "Name": "900Mbps unmetered (234Tb max)",
-          "Price": "360.00",
-          "Options": {"short_name": "900Mbps unmetered (234Tb max)"}
-        },
-        "157": {
-          "ID": "157",
-          "ComponentType_ID": "14",
-          "Name": "1Gbps unmetered (260Tb max)",
-          "Price": "400.00",
-          "Options": {"short_name": "1Gbps unmetered (260Tb max)"}
+        "118": {
+          "ID": "118",
+          "ComponentType_ID": "1",
+          "Name": "Core i7-4790 4x3.6GHz",
+          "Price": "33.00",
+          "Options": {
+            "cpu_count": "2",
+            "max_mem": "16",
+            "short_name": "i7-4790"
+          }
         }
       },
       "17": {
@@ -586,6 +292,37 @@
           "Options": {"short_name": "Top_SLA"}
         }
       },
+      "6": {
+        "122": {
+          "ID": "122",
+          "ComponentType_ID": "6",
+          "Name": "2 disks",
+          "Price": "22.00",
+          "Options": {
+            "size": "2",
+            "short_name": "2DD micro",
+            "unit": "1"
+          }
+        }
+      },
+      "21": {
+        "284": {
+          "ID": "284",
+          "ComponentType_ID": "21",
+          "Name": "DC Tier2",
+          "Price": "0.00",
+          "Options": {"short_name": "DC Tier2"}
+        }
+      },
+      "18": {
+        "249": {
+          "ID": "249",
+          "ComponentType_ID": "18",
+          "Name": "100Mbps",
+          "Price": "0.00",
+          "Options": {"short_name": "100Mbps"}
+        }
+      },
       "20": {
         "179": {
           "ID": "179",
@@ -609,16 +346,74 @@
           "Options": {"short_name": "MS Exchange Enterprise"}
         }
       },
-      "21": {
-        "284": {
-          "ID": "284",
-          "ComponentType_ID": "21",
-          "Name": "DC Tier2",
+      "7": {
+        "171": {
+          "ID": "171",
+          "ComponentType_ID": "7",
+          "Name": "1 IPv4",
           "Price": "0.00",
-          "Options": {"short_name": "DC Tier2"}
+          "Options": {"short_name": "1 IPv4"}
+        },
+        "86": {
+          "ID": "86",
+          "ComponentType_ID": "7",
+          "Name": "2 IPv4",
+          "Price": "1.00",
+          "Options": {"short_name": "2 IPv4"}
+        },
+        "87": {
+          "ID": "87",
+          "ComponentType_ID": "7",
+          "Name": "4 IPv4",
+          "Price": "3.00",
+          "Options": {"short_name": "4 IPv4"}
+        },
+        "88": {
+          "ID": "88",
+          "ComponentType_ID": "7",
+          "Name": "8 IPv4",
+          "Price": "7.00",
+          "Options": {"short_name": "8 IPv4"}
+        },
+        "89": {
+          "ID": "89",
+          "ComponentType_ID": "7",
+          "Name": "16 IPv4",
+          "Price": "15.00",
+          "Options": {"short_name": "16 IPv4"}
+        }
+      },
+      "19": {
+        "168": {
+          "ID": "168",
+          "ComponentType_ID": "19",
+          "Name": "Backup 100Gb",
+          "Price": "1.00",
+          "Options": {"short_name": "Backup 100Gb"}
+        },
+        "169": {
+          "ID": "169",
+          "ComponentType_ID": "19",
+          "Name": "Backup 500Gb",
+          "Price": "5.00",
+          "Options": {"short_name": "Backup 500Gb"}
+        },
+        "170": {
+          "ID": "170",
+          "ComponentType_ID": "19",
+          "Name": "Backup 1Tb",
+          "Price": "10.00",
+          "Options": {"short_name": "Backup 1Tb"}
         }
       },
       "2": {
+        "72": {
+          "ID": "72",
+          "ComponentType_ID": "2",
+          "Name": "120Gb SSD",
+          "Price": "9.00",
+          "Options": {"short_name": "120Gb SSD"}
+        },
         "73": {
           "ID": "73",
           "ComponentType_ID": "2",
@@ -633,40 +428,72 @@
           "Price": "25.00",
           "Options": {"short_name": "480Gb SSD"}
         },
-        "63": {
-          "ID": "63",
+        "309": {
+          "ID": "309",
           "ComponentType_ID": "2",
-          "Name": "500Gb SATA",
-          "Price": "4.00",
-          "Options": {"short_name": "500Gb SATA"}
+          "Name": "2000Gb SSD",
+          "Price": "100.00",
+          "Options": {"short_name": "2000Gb SSD"}
         },
-        "62": {
-          "ID": "62",
+        "297": {
+          "ID": "297",
+          "ComponentType_ID": "2",
+          "Name": "500Gb SATA 7,2K",
+          "Price": "5.00",
+          "Options": {"short_name": "500Gb SATA 7,2K"}
+        },
+        "299": {
+          "ID": "299",
           "ComponentType_ID": "2",
           "Name": "1Tb SATA 7,2K",
-          "Price": "6.00",
+          "Price": "20.00",
           "Options": {"short_name": "1Tb SATA 7,2K"}
         },
-        "64": {
-          "ID": "64",
+        "223": {
+          "ID": "223",
           "ComponentType_ID": "2",
-          "Name": "2Tb SATA 7,2K",
+          "Name": "1Tb SATA 5,3K",
           "Price": "8.00",
-          "Options": {"short_name": "2Tb SATA 7,2K"}
+          "Options": {"short_name": "1Tb SATA 5,3K"}
         },
-        "65": {
-          "ID": "65",
+        "300": {
+          "ID": "300",
           "ComponentType_ID": "2",
-          "Name": "3Tb SATA 7,2K",
+          "Name": "2Tb SATA 5,3K",
           "Price": "11.00",
-          "Options": {"short_name": "3Tb SATA 7,2K"}
+          "Options": {"short_name": "2Tb SATA 5,3K"}
+        }
+      },
+      "3": {
+        "76": {
+          "ID": "76",
+          "ComponentType_ID": "3",
+          "Name": "4 Gb",
+          "Price": "3.00",
+          "Options": {
+            "size": "4",
+            "short_name": "4 Gb"
+          }
         },
-        "66": {
-          "ID": "66",
-          "ComponentType_ID": "2",
-          "Name": "4Tb SATA 7,2K",
-          "Price": "15.00",
-          "Options": {"short_name": "4Tb SATA 7,2K"}
+        "78": {
+          "ID": "78",
+          "ComponentType_ID": "3",
+          "Name": "8 Gb",
+          "Price": "6.00",
+          "Options": {
+            "size": "8",
+            "short_name": "8 Gb"
+          }
+        },
+        "79": {
+          "ID": "79",
+          "ComponentType_ID": "3",
+          "Name": "16 Gb",
+          "Price": "12.00",
+          "Options": {
+            "size": "16",
+            "short_name": "16 Gb"
+          }
         }
       },
       "10": {
@@ -684,11 +511,36 @@
           "Price": "0.00",
           "Options": {"short_name": "32-bit"}
         }
+      },
+      "12": {
+        "161": {
+          "ID": "161",
+          "ComponentType_ID": "12",
+          "Name": "MS SQL 2012 Standard Edition",
+          "Price": "120.00",
+          "Options": {"short_name": "SQL12SE"}
+        },
+        "176": {
+          "ID": "176",
+          "ComponentType_ID": "12",
+          "Name": "MS SQL 2008 Standard Edition",
+          "Price": "120.00",
+          "Options": {"short_name": "SQL08SE"}
+        }
+      },
+      "14": {
+        "147": {
+          "ID": "147",
+          "ComponentType_ID": "14",
+          "Name": "100Mbps unmetered (10Tb max)",
+          "Price": "0.00",
+          "Options": {"short_name": "100Mbps unmetered (10Tb max)"}
+        }
       }
     },
     "CostLicenseWin": "6.00",
-    "EURRUR": 70.3859,
+    "EURRUR": 77.04,
     "Currency": "eur",
-    "ComponentGroup": "NL,Mini"
+    "ComponentGroup": "RU,Micro"
   }
 }
