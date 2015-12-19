@@ -1,10 +1,41 @@
+<link href="/assets/css/slider_item.css" rel="stylesheet" type="text/css" media="all">
 <div class="b-page">
 
     <div class="b-page__promo b-page__promo_managed-cloud_yes">
         <h1 class="b-page__promo-title">Managed<br>
             cloud
         </h1>
+        <div onclick="$.scrollTo('#calc', 1000, { offset:-90 })" class="b-icon b-page__scroll-icon"></div>
     </div>
+
+
+
+    <div class="switch_country_for_container_VPS" id="calc">
+        {if ( $PID==531 )}
+        <div  class="b-dedicated__switch-item active">
+            netherland
+        </div>
+        {else}
+        <div  class="b-dedicated__switch-item">
+            <a href="/cloud/manager" target="_self" title="ckoud VDS Russia>">
+                netherland
+            </a>
+        </div>
+        {/if}
+        <div class="b-dedicated__switch-item">/</div>
+        {if ( $PID==539 )}
+        <div class="b-dedicated__switch-item active">
+            russia
+        </div>
+        {else}
+        <div class="b-dedicated__switch-item">
+            <a href="/cloud/manager/managerru" target="_self" title="ckoud VDS Russia>">
+                russia
+            </a>
+        </div>
+        {/if}
+    </div>
+
 
     <div class="b-managed-cloud">
 
@@ -15,22 +46,21 @@
             </h3>
         </div>
 
+
+
         <div class="b-container">
             <table class="b-managed-cloud__table">
                 <tr class="b-managed-cloud__table-row">
                     <td class="b-managed-cloud__table-cell b-managed-cloud__table-cell_title_yes b-managed-cloud__table-cell_top_yes">Select the
                         cloud server</td>
                     <td class="b-managed-cloud__table-cell">
-                        <div class="b-slider js-slider" data-slides="8"></div>
+                        <div class="b-slider js-slider" data-slides="{count($configuration)}" data-position="1" data_preset="Manage_Cloud_VDS"></div>
                         <div class="b-slider__legend-8">
-                            <div class="b-slider__legend-8-item b-slider__legend-8-item_place_1">Cloud 3</div>
-                            <div class="b-slider__legend-8-item b-slider__legend-8-item_place_2">Cloud 4</div>
-                            <div class="b-slider__legend-8-item b-slider__legend-8-item_place_3">Cloud 5</div>
-                            <div class="b-slider__legend-8-item b-slider__legend-8-item_place_4">Cloud 6</div>
-                            <div class="b-slider__legend-8-item b-slider__legend-8-item_place_5">Cloud 7</div>
-                            <div class="b-slider__legend-8-item b-slider__legend-8-item_place_6">Cloud 8</div>
-                            <div class="b-slider__legend-8-item b-slider__legend-8-item_place_7">Cloud 9</div>
-                            <div class="b-slider__legend-8-item b-slider__legend-8-item_place_8">Cloud 10</div>
+                            {foreach ($configuration as $key => $val)}
+                            {if ( $val['hidden'] == 0 )}
+                                <div class="b-slider__legend-{count($configuration)}-item b-slider__legend-{count($configuration)}-item_place_{$key+1}">{$val['name']}<br/>{$val['value']}</div>
+                            {/if}
+                            {/foreach}
                         </div>
                     </td>
                 </tr>
@@ -42,29 +72,17 @@
                     <td class="b-managed-cloud__table-cell">
                         <table class="b-managed-cloud__result-table">
                             <tr class="b-managed-cloud__result-table-row">
+                                {foreach ($configuration[0][0] as $key => $val)}
+                                {if ( $val['hidden'] == 0 )}
                                 <td class="b-managed-cloud__result-table-cell">
-                                    <div class="b-managed-cloud__result-table-cell-title">CPU cores</div>
-                                    <div class="b-managed-cloud__result-table-cell-text">2 cores</div>
+                                    <div class="b-managed-cloud__result-table-cell-title" data_preset_name="{$key}">{$val['name']}</div>
+                                    <div class="b-managed-cloud__result-table-cell-text" data_pole_id="{$key}">{$val['data'][0]['name']}</div>
                                 </td>
-                                <td class="b-managed-cloud__result-table-cell">
-                                    <div class="b-managed-cloud__result-table-cell-title">Ram</div>
-                                    <div class="b-managed-cloud__result-table-cell-text">3 008 Mb</div>
-                                </td>
-                                <td class="b-managed-cloud__result-table-cell">
-                                    <div class="b-managed-cloud__result-table-cell-title">disk</div>
-                                    <div class="b-managed-cloud__result-table-cell-text">80 Gb</div>
-                                </td>
-                                <td class="b-managed-cloud__result-table-cell">
-                                    <div class="b-managed-cloud__result-table-cell-title">Traffic: </div>
-                                    <div class="b-managed-cloud__result-table-cell-text">2000 Gb</div>
-                                </td>
-                                <td class="b-managed-cloud__result-table-cell">
-                                    <div class="b-managed-cloud__result-table-cell-title">Windows License: </div>
-                                    <div class="b-managed-cloud__result-table-cell-text">Include</div>
-                                </td>
+                                {/if}
+                                {/foreach}
                                 <td class="b-managed-cloud__result-table-cell b-managed-cloud__result-table-cell_border_no">
-                                    <div class="b-managed-cloud__result-table-cell-price">€475.99 / month </div>
-                                    <a class="b-submit b-managed-cloud__result-table-cell-submit" href="#">buy</a>
+                                    <div class="b-managed-cloud__result-table-cell-price" data_pole="Cost" id="Summa">{$currency} {$configuration[0]['summ']} / month </div>
+                                    <a class="b-submit b-managed-cloud__result-table-cell-submit" href="#" id="byu_cloud">buy</a>
                                 </td>
                             </tr>
                         </table>
@@ -86,3 +104,160 @@
 
     <div class="footer-push"></div>
 </div>
+
+<script>
+    $( document ).ready(function() {
+
+
+        var Zakaz = new Object();
+
+        var currency = {
+            "2": "€",
+            "1": "RUR",
+            "3": "$"
+        };
+        var currencyID = {$currencyId};
+
+        var listOfProducts = new Object();
+        var listOfProducts = {json_encode($configuration)};
+        listOfProducts.payment = {
+            "name": "payment",
+            "hidden": "0",
+            "data": {
+                "0": {
+                    "name": "monthly",
+                    "discount": "0",
+                    'period': "month"
+                },
+                "1": {
+                    "name": "quarterly",
+                    "discount": "3",
+                    "period": "quarter"
+                },
+                "2": {
+                    "name": "semiannually",
+                    "discount": "6",
+                    "period": "half-year"
+                },
+                "3": {
+                    "name": "annually",
+                    "discount": "12",
+                    "period": "year"
+                }
+            }
+        };
+
+
+        Zakaz = window.startZakaz(0, listOfProducts[0][0]); /*устанавливаем дефолтный заказ на нулевые позиции*/
+        window.set_payment_for_preset( Zakaz , listOfProducts, 0 );
+        window.write_summa( Zakaz, currency[currencyID], $('#Summa') );/*Запишем дефолтную сумму заказа без скидок*/
+        document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
+
+        if ( $( ".js-slider").length ) {
+
+            $(".js-slider").each(function (index, val) {
+                $(function ( ) {
+                    var slidesCount = $(val).data('slides');
+                    var Begin_position = $(val).data('position');
+                    $(val).slider({
+                        range: "min",
+                        min: 1,
+                        value: Begin_position,
+                        max: slidesCount,
+                        slide: function (event, ui ) {
+                            calculatePreset ( index, ui);
+                            for (var prop in Zakaz) {
+                               if ( prop != 'payment'){
+                                   if ( Zakaz[prop].hidden == 0 ){
+                                       $( '[data_pole_id=' + prop + ']' ).html( Zakaz[prop]['data'][0]['name'] );
+                                       console.log( '[data_pole="' + Zakaz[prop]['data'][0]['id'] + '"]' +  '----' +  Zakaz[prop]['data'][0]['name'] );
+                                   }
+
+                               }
+                            }
+
+                        },
+                        change: function(event, ui ) {
+                           /*calculatePreset ( index, ui, Preset);*/
+                        }
+                    });
+
+                });
+            });
+
+        };
+
+        function calculatePreset ( index, ui){
+            Zakaz = window.startZakaz ( 0, listOfProducts[ui.value-1][0] );
+            window.set_payment_for_preset( Zakaz , listOfProducts, 0 );
+            window.write_summa( Zakaz, currency[currencyID], $('#Summa') );
+        };
+
+
+  $( '#byu_cloud').bind( 'click', function () {
+      $ ( '.popup_callback').show();
+      crFrame( );
+      return false;
+  });
+
+
+  $('.close_window_information_manager_cloud').click(function(){
+            $('.popup').hide();
+            document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
+            return false;
+        });
+
+
+        function crFrame( )
+        {
+            document.getElementById('configure_cloud_VDS').src = 'https://bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
+                    + generate_post ( Zakaz ) ;
+        };
+
+    });
+
+  </script>
+
+<div class="popup popup_callback" style="display: none;" id="information_manage_cloud">
+    <a class="close close_window_information_manager_cloud" href="#"><img src="/assets/img/close.png"></a>
+
+    <h2>INFORMATION for REQUEST</h2>
+
+    <div class="message_pole" id="message_load_ajax"></div>
+    <div id="add_iframe_from_billing">
+        <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
+    </div>
+</div>
+
+<style>
+
+    #add_iframe_from_billing {
+        display: block;
+    }
+
+    #configure_cloud_VDS {
+        border: none;
+        display: block;
+        width: 570px;
+        height: 500px;
+        margin: 0 auto;
+    }
+
+    .popup_callback { width: 700px; height: 700px; margin: -225px 0 0 -350px; }
+
+    .popup { display: none; position: relative; background: #fff; position: fixed; z-index: 100000; top: 40%; left: 50%; }
+
+    .popup h2{ width: 100%; display: block; font: bold 24px KievitOT,Arial; color: #171819; text-transform: uppercase; text-align: center; margin: 45px auto 60px auto; }
+
+    .switch_country_for_container_VPS {
+        display: block;
+        padding: 50px 0 20px 485px;
+        background: #fff;
+    }
+
+    .switch_country_for_container_VPS a{
+        color: #000;
+        text-decoration: none;
+    }
+
+</style>

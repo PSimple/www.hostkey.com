@@ -1,0 +1,429 @@
+<div class="b-page">
+    <!--CLOUD VDS-->
+    <link href="/assets/css/slider_item.css" rel="stylesheet" type="text/css" media="all">
+    <div class="b-page__promo b-page__promo_vds-cloud_yes">
+        <h1 class="b-page__promo-title">
+            cloud vds
+        </h1>
+        <div onclick="$.scrollTo('#calc', 1000, { offset:-90 })" class="b-icon b-page__scroll-icon"></div>
+    </div>
+
+    <div class="b-vds-cloud">
+
+        <div class="b-vps__feature b-container">
+            <div class="b-vps__feature-item">
+                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-01.png" alt="иконка">
+
+                <h3 class="b-vps__feature-item-title">
+                    Always get
+                    enough power
+                </h3>
+
+                <p class="b-vps__feature-item-text">
+                    Rent the optimum server
+                    configuration, capable to
+                    sustain your infrastructure.
+                </p>
+            </div>
+            <div class="b-vps__feature-item">
+                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-02.png" alt="иконка">
+
+                <h3 class="b-vps__feature-item-title">
+                    Fluid power
+                </h3>
+
+                <p class="b-vps__feature-item-text">
+                    Computation is flexibly
+                    distributed over your pool
+                    of servers.
+                </p>
+            </div>
+            <div class="b-vps__feature-item">
+                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-03.png" alt="иконка">
+
+                <h3 class="b-vps__feature-item-title">
+                    Rule your pool
+                </h3>
+
+                <p class="b-vps__feature-item-text">
+                    Full administrative access
+                    to your pull of servers including
+                    OS installation.
+                    Unlimited reinstallation.
+                </p>
+            </div>
+
+            <div class="b-vps__feature-item">
+                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-04.png" alt="иконка">
+
+                <h3 class="b-vps__feature-item-title">
+                    Sure thing!
+                </h3>
+
+                <p class="b-vps__feature-item-text">
+                    All your actions while
+                    managing your pool of servers
+                    are fully backed up and can be restored without contacting the support team
+                </p>
+            </div>
+        </div>
+
+        <div class="switch_country_for_container_VPS" id="calc">
+                        {if ( $PID==531 )}
+                            <div  class="b-dedicated__switch-item active">
+                                    netherland
+                                </div>
+                        {else}
+                             <div  class="b-dedicated__switch-item">
+                                 <a href="/cloud/vds" target="_self" title="ckoud VDS Russia>">
+                                            netherland
+                                        </a>
+                                </div>
+                                {/if}
+                    <div class="b-dedicated__switch-item">/</div>
+                        {if ( $PID==539 )}
+                            <div class="b-dedicated__switch-item active">
+                                    russia
+                            </div>
+                        {else}
+                            <div class="b-dedicated__switch-item">
+                                <a href="/cloud/vds/russia" target="_self" title="ckoud VDS Russia>">
+                                    russia
+                                </a>
+                             </div>
+                        {/if}
+        </div>
+
+        </div>
+        <div class="b-vds-cloud__configurator">
+            <div class="b-dedicated__box">
+                <h3 class="b-dedicated__title b-dedicated__title_upline_yes">
+                    cloud vds
+                    Configurator
+                </h3>
+
+                <div class="b-dedicated__description">
+                    You can collect the server on your taste, or choose a ready-made configuration that is customized by our specialists.<br><br>
+                    <b>The server will be prepared for You within a few hours of receipt of payment.</b>
+                </div>
+            </div>
+
+            <div class="b-container">
+                <div class="b-vds-cloud__box">
+
+                    <div class="b-vds-cloud__content" id="scroll-box">
+
+                        <table class="b-vds-cloud__table">
+                                {foreach ($configuration as $key => $val)}
+                                {if ( !$val['hidden'] )}
+                            <tr class="b-vds-cloud__table-row">
+                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">{$val['name']}</td>
+                                <td class="b-vds-cloud__table-cell">
+                                    {if ( 696 == $key OR 700 == $key )}
+                                    <div class="b-slider__legend-5">
+                                        <select class="table-select__item js-select" name="tbl-select-1" id="vm_template" data_preset="{$key}">
+                                            {foreach ( $val['data'] as $k => $v )}
+                                            <option value="{$v['id']}"
+                                                    {if ( 0== $k )} selected="selected"{/if}>{$v['name']}</option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+                                    {else}
+
+                                    <div class="b-slider js-slider" data-slides="{count($val['data'])}" data-position="1" data_preset="{$key}"></div>
+                                    <div class="b-slider__legend-{count($val['data'])}">
+                                        {foreach ( $val['data'] as $k => $v )}
+                                        <div class="b-slider__legend-{count($val['data'])}-item b-slider__legend-{count($val['data'])}-item_place_{$k+1}">{$v['name']}</div>
+                                        {/foreach}
+                                    </div>
+
+                                    {/if}
+                                </td>
+                            </tr>
+                            {/if}
+                            {/foreach}
+
+                            <tr class="b-vds-cloud__table-row">
+                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">payment period:</td>
+                                <td class="b-vds-cloud__table-cell">
+                                    <div class="b-slider js-slider" data-slides="4" data-position="1" data_preset="payment"></div>
+                                    <div class="b-slider__legend-4">
+                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_1 payments">monthly</div>
+                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_2 payments">quarterly</div>
+                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_3 payments">semiannually</div>
+                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_4 payments">annually</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- блок с результатом подбора -->
+                    <div class="b-vds-cloud__summary b-vds-cloud__summary_is-purpur" id="scroll-block">
+                        <div class="b-vds-cloud__summary-title">Your VDS</div>
+                        {foreach ($configuration as $key => $val)}
+                        {if ( !$val['hidden'] )}
+                        <table class="b-vds-cloud__summary-table">
+                            <tr class="b-vds-cloud__summary-table-row">
+                                <td class="b-vds-cloud__summary-table-cell" data_preset_name="{$key}">{$val['name']}:</td>
+                                <td class="b-vds-cloud__summary-table-cell" data_preset_name_id="{$key}" data_pole_id="{$val['data'][0]['id']}">{$val['data'][0]['name']}</td>
+                            </tr>
+                        </table>
+                        {/if}
+                        {/foreach}
+                        <table class="b-vds-cloud__summary-table">
+                            <tr class="b-vds-cloud__summary-table-row">
+                                <td class="b-vds-cloud__summary-table-cell" data_preset_name="payment">Payment period:</td>
+                                <td class="b-vds-cloud__summary-table-cell" data_preset_name_id="payment">monthly</td>
+                            </tr>
+                        </table>
+                        <div class="b-vds-cloud__summary-price">
+                            <span class="b-vds-cloud__summary-price-value" id="Summa"></span>
+                            <span class="b-vds-cloud__summary-price-discount" id="Discount"></span>
+                        </div>
+                        <a class="b-submit b-vds-cloud__summary-submit" href="#" id="byu_cloud">continue</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="b-dedicated-try">
+            <div class="b-dedicated-try__line">
+                <span class="b-dedicated-try__line-text">need more resourses?</span>
+            </div>
+            <h3 class="b-dedicated-try__title">Try our<br>vds plan</h3>
+
+            <p class="b-dedicated-try__text"><span class="b-dedicated-try__text_red_yes">starts from 300 eur / month</span><br>or configurate your own</p>
+            <a class="b-submit b-dedicated-try__submit" href="#">see plans</a>
+        </div>
+    </div>
+
+    <div class="footer-push"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        
+        if ($(".js-slider").length) {
+            $(".js-slider").each(function (index, val) {
+                var slidesCount = $(val).data('slides');
+                var Begin_position = $(val).data('position');
+                $(function () {
+                    $(val).slider({
+                        range: "min",
+                        min: 1,
+                        value: Begin_position,
+                        max: slidesCount,
+                        slide: function (event, ui) {
+                            calculatePRoxMoxVDS_sliders(index, ui);
+                        },
+                        change: function (event, ui) {
+                            /*  calculatePRoxMoxVDS_sliders ( index, ui ); */
+                        }
+                    });
+
+                });
+            });
+        };
+
+
+        var currency = {
+            "2": "€",
+            "1": "RUR",
+            "3": "$"
+        };
+        var currencyID = {$currencyId};
+
+        /*
+         *  убираем рамки если исправили ошибки в обязательных полях
+         */
+        $('.popup_callback input[required = "required"]').bind('keyup', function () {
+            stroka = $(this).val().replace(/\s{2,}/g, '');
+            if (stroka.length < 5) {
+                console.log(stroka.length);
+            } else {
+                $(this).css('border', '2px solid #d9dcdd');
+            }
+        });
+        
+        
+        /*
+         *   Закрываем окно
+         */
+        $('.close_window_information_manager_cloud').click(function () {
+            $('.popup').hide();
+            /*$('#callback_btn_manage_cloud').removeClass('disabled_href_button').css('color', '#ff6a39'); при закрытии окна очищаем кнопку отправки
+            messager_windows_operator("", $("#message_load_ajax"), 'clear+hide');*/
+            document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
+            return false;
+        });
+
+        var listOfProducts = new Object();
+        var listOfProducts = {json_encode($configuration)};
+        listOfProducts.payment = new Object();
+        listOfProducts.payment = {
+            "name": "payment",
+            "hidden": "0",
+            "data": {
+                "0": {
+                    "name": "monthly",
+                    "discount": "0",
+                    'period': "month"
+                },
+                "1": {
+                    "name": "quarterly",
+                    "discount": "3",
+                    "period": "quarter"
+                },
+                "2": {
+                    "name": "semiannually",
+                    "discount": "6",
+                    "period": "half-year"
+                },
+                "3": {
+                    "name": "annually",
+                    "discount": "12",
+                    "period": "year"
+                }
+            }
+        };
+
+        Zakaz = window.startZakaz( 0, listOfProducts ); /*устанавливаем дефолтный заказ на нулевые позиции */
+        window.write_summa( Zakaz, currency[currencyID], $('#Summa') );/*Запишем дефолтную сумму заказа без скидок */
+        window.write_dis( Zakaz,currency[currencyID], $('.b-vds-cloud__summary-price-discount'));/*пишем дефолтный дискаунт */
+
+        document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
+
+
+        /*  AJAX_GET('http:site-f.hostke.ru/api/v1/cloud/config?pid=530&currencyId={$currencyId}&custom=1', 'JSON');  */
+
+        function calculatePRoxMoxVDS_sliders(index, ui) {
+            var UIP = ui.handle.parentElement.getAttribute('data_preset');
+            delete Zakaz[UIP]['data'][0];
+            Zakaz[UIP]['data'][0] = new Object();
+            Zakaz[UIP]['data'][0] = listOfProducts[UIP]['data'][ui.value - 1];
+            $('[ data_preset_name_id = "' + UIP + '"]').html(Zakaz[UIP]['data'][0].name);
+            window.write_summa( Zakaz, currency[currencyID], $('#Summa') );
+            window.write_dis( Zakaz, currency[currencyID], $('.b-vds-cloud__summary-price-discount')  );
+        };
+
+
+        function calculatePRoxMoxVDS_selects( UIP, UID ) {
+            for( var prop in listOfProducts[UIP]['data'] ) {
+                if ( listOfProducts[UIP]['data'][prop].id == UID ) {
+                    delete Zakaz[UIP]['data'][0];
+                    Zakaz[UIP]['data'][0] = new Object();
+                    Zakaz[UIP]['data'][0] = listOfProducts[UIP]['data'][prop];
+                }
+            }
+            $('[ data_preset_name_id = "' + UIP + '"]').html(Zakaz[UIP]['data'][0].name);
+            window.write_summa( Zakaz, currency[currencyID], $('#Summa') );
+            window.write_dis( Zakaz, currency[currencyID], $('.b-vds-cloud__summary-price-discount') );
+        };
+
+        var $eventSelect = $(".js-select");
+
+        $eventSelect.on("change", function (e) {
+            var UID = $( this ).select2("val");
+            var UIP =e.target.getAttribute('data_preset');
+            calculatePRoxMoxVDS_selects( UIP, UID );
+        });
+
+
+        $( '.b-vds-cloud__summary-submit').bind( 'click', function( ) {
+            $('.popup_callback').show();
+          /*var iframe = document.getElementById('configure_cloud_VDS');
+            $( '#configure_cloud_VDS' ).contents().find("body").html('Test');
+            document.getElementById('configure_cloud_VDS').src = '';*/
+            crFrame( );
+            /*
+            iframe.onload = function() {
+                var iframeDoc2 = iframe.contentWindow.document;
+                iframeDoc2.body.style.backgroundColor = 'orange';
+
+                win = window.frames.configure_cloud_VDS;
+                win.postMessage(
+
+               JSON.stringify( Zakaz ),
+
+                "https:bill.hostkey.com"  target domain
+
+                );
+
+            }
+           */
+
+            return false;
+        });
+
+
+
+        function crFrame( )
+        {
+         /*   var iframe = document.createElement("iframe");
+            iframe.id = "configure_cloud_VDS";
+            iframe.frameborder = 0;
+            iframe.height = '100%';
+            iframe.width = '80%';
+            iframe.style.display = "block";
+            iframe.src = 'https:billing.hostkey.ru/cart.php?systpl=siteF&a=add&pid=512&carttpl=cartF&currency=2&'
+                       + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
+            document.getElementById('add_iframe_from_billing').appendChild(iframe);
+            $( '<img src="/assets/img/220-3.GIF" alt="">').appendTo( '#configure_cloud_VDS');
+           document.getElementById('configure_cloud_VDS').src = "https:bill.hostkey.com/cart.php?systpl=siteF&a=confproduct&pid=530&carttpl=cartF&currency=2" ;
+         */
+           document.getElementById('configure_cloud_VDS').src = 'https:bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
+                 + generate_post ( Zakaz ) ;
+        }
+        
+    });
+
+
+</script>
+
+<div class="popup popup_callback" style="display: none;" id="information_manage_cloud">
+    <a class="close close_window_information_manager_cloud" href="#"><img src="/assets/img/close.png"></a>
+
+    <h2>INFORMATION for REQUEST</h2>
+
+    <div class="message_pole" id="message_load_ajax"></div>
+        <div id="add_iframe_from_billing">
+                <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
+        </div>
+</div>
+
+<style>
+
+    .b-vds-cloud__summary-table-cell {
+        vertical-align: middle;
+    }
+
+    #add_iframe_from_billing {
+        display: block;
+    }
+
+    #configure_cloud_VDS {
+        border: none;
+        display: block;
+        width: 570px;
+        height: 500px;
+        margin: 0 auto;
+    }
+
+    .popup_callback { width: 700px; height: 700px; margin: -225px 0 0 -350px; }
+
+    .popup { display: none; position: relative; background: #fff; position: fixed; z-index: 100000; top: 40%; left: 50%; }
+
+    .popup h2{ width: 100%; display: block; font: bold 24px KievitOT,Arial; color: #171819; text-transform: uppercase; text-align: center; margin: 45px auto 60px auto; }
+
+    .switch_country_for_container_VPS {
+        display: block;
+        padding: 50px 0 0 485px;
+        background: #fff;
+    }
+    .switch_country_for_container_VPS a{
+        color: #000;
+        text-decoration: none;
+    }
+
+</style>

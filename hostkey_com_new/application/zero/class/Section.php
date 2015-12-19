@@ -205,7 +205,8 @@ class Zero_Section extends Zero_Model
     /**
      * Dynamic factory method to create an object through the factory.
      */
-    protected function Init()
+    protected function
+    Init()
     {
         if ( $this->ID == 0 )
         {
@@ -221,6 +222,7 @@ class Zero_Section extends Zero_Model
     public function Init_Url($url)
     {
         $index = 'route' . $url . '/' . LANG . '/url';
+
         if ( false === $row = Zero_Cache::Get_Data($index) )
         {
             if ( Zero_App::$Config->Site_UseDB )
@@ -516,6 +518,7 @@ class Zero_Section extends Zero_Model
     public static function Instance($id = 0, $flagLoad = false)
     {
         $index = __CLASS__ . (0 < $id ? '_' . $id : '');
+
         if ( !isset(self::$Instance[$index]) )
         {
             $result = self::Make($id, $flagLoad);

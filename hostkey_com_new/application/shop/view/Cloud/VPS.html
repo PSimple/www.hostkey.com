@@ -1,0 +1,292 @@
+
+<div class="b-page">
+
+    <div class="b-page__promo b-page__promo_vps_yes">
+        <h1 class="b-page__promo-title">Container<br>
+            VPS
+        </h1>
+        <div onclick="$.scrollTo('#calc', 1000, { offset:-90 })" class="b-icon b-page__scroll-icon"></div>
+    </div>
+
+
+    <div class="b-vps">
+
+        <div class="b-vps__feature b-container">
+            <div class="b-vps__feature-item">
+                <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-01.png" alt="иконка">
+                <h3 class="b-vps__feature-item-title">
+                    Ready in minutes
+                </h3>
+                <p class="b-vps__feature-item-text">
+                    We start preparing your server while you order. Pay and play.
+                </p>
+            </div>
+            <div class="b-vps__feature-item">
+            <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-02.png" alt="иконка">
+            <h3 class="b-vps__feature-item-title">
+                Nothing gets lost
+            </h3>
+            <p class="b-vps__feature-item-text">
+                All your actions while
+                managing your server are fully backed up and can be instantly restored without contacting the support team
+            </p>
+        </div>
+            <div class="b-vps__feature-item">
+            <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-03.png" alt="иконка">
+            <h3 class="b-vps__feature-item-title">
+                Perfection achievable
+            </h3>
+            <p class="b-vps__feature-item-text">
+                You get an unlimited number
+                or reinstalls and a huge number of OS presets
+            </p>
+        </div>
+            <div class="b-vps__feature-item">
+            <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-04.png" alt="иконка">
+            <h3 class="b-vps__feature-item-title">
+                You’re the boss!
+            </h3>
+            <p class="b-vps__feature-item-text">
+                Full administrative access
+                to your server. No catch.
+            </p>
+        </div>
+        </div>
+
+
+        <div class="switch_country_for_container_VPS" id="calc">
+            {if ( $PID==530 )}
+            <div  class="b-dedicated__switch-item active">
+                netherland
+            </div>
+            {else}
+            <div  class="b-dedicated__switch-item">
+                <a href="/cloud/vps" target="_self" title="ckoud VDS Russia>">
+                    netherland
+                </a>
+            </div>
+            {/if}
+            <div class="b-dedicated__switch-item">/</div>
+            {if ( $PID==538 )}
+            <div class="b-dedicated__switch-item active">
+                russia
+            </div>
+            {else}
+            <div class="b-dedicated__switch-item">
+                <a href="/cloud/vps/russia" target="_self" title="ckoud VDS Russia>">
+                    russia
+                </a>
+            </div>
+            {/if}
+        </div>
+
+
+        <table class="b-vps__table">
+            <tr class="b-vps__table-row">
+                <td class="b-vps__table-cell b-vps__table-cell_head_yes"></td>
+                {foreach ( $configuration as $key => $value)}
+                    <td class="b-vps__table-cell b-vps__table-cell_head_yes">
+                        <h2 class="b-vps-table__title">{$value['name']}</h2>
+                        <div class="b-vps-table__subtitle">{$value['value']}</div>
+                    </td>
+                {/foreach}
+            </tr>
+            <tr class="b-vps__table-row">
+                <td class="b-vps__table-cell"></td>
+                {foreach ( $configuration as $key => $value)}
+                <td class="b-vps__table-cell">
+                    <div class="b-vps-table__price">{$value['summ']} EUR / month</div>
+                </td>
+                {/foreach}
+            </tr>
+
+            <tr class="b-vps__table-row">
+                <td class="b-vps__table-cell"></td>
+                {foreach ( $configuration as $key => $value)}
+                        <td class="b-vps__table-cell">
+                            <a class="b-vps-table__buy" href="#" data_preset="{$key}">BUY</a>
+                        </td>
+                {/foreach}
+
+            </tr>
+            {foreach ( $table_row_data as $key => $value)}
+                <tr class="b-vps__table-row">
+                    <td class="b-vps__table-cell b-vps__table-cell_border_yes">
+                        <h3 class="b-vps__table-cell_main_yes">{$key}</h3>
+                    </td>
+                    {foreach ( $value as $k => $v)}
+                    <td class="b-vps__table-cell b-vps__table-cell_border_yes">
+                        <div class="b-vps-table__text">{$v}</div>
+                    </td>
+                    {/foreach}
+                    </tr>
+            {/foreach}
+
+            <tr class="b-vps__table-row">
+
+                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
+                    <h3 class="b-vps__table-cell_main_yes">payment period</h3>
+                </td>
+                {foreach ( $configuration as $key => $value)}
+                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
+                    <div class="b-vps-table__text">{$payment_period}</div>
+                </td>
+                {/foreach}
+
+            </tr>
+
+            <tr class="b-vps__table-row">
+                <td class="b-vps__table-cell"></td>
+                {foreach ( $configuration as $key => $value)}
+                <td class="b-vps__table-cell">
+                    <div class="b-vps-table__price">{$value['summ']} EUR / month</div>
+                </td>
+                {/foreach}
+            </tr>
+            <tr class="b-vps__table-row">
+                <td class="b-vps__table-cell"></td>
+
+
+                {foreach ( $configuration as $key => $value)}
+                <td class="b-vps__table-cell">
+                    <a class="b-vps-table__buy" href="#" data_preset="{$key}">BUY</a>
+                </td>
+                {/foreach}
+            </tr>
+        </table>
+
+        <div class="b-vps__try">
+            <div class="b-vps__try-line">
+                <span class="b-vps__try-line-text">need more resourses?</span>
+            </div>
+            <h3 class="b-vps__try-title">Try our<br>vds plan</h3>
+            <p class="b-vps__try-text"><span class="b-vps__try-text_purpur_yes">starts from 300 eur / month</span><br>or configurate your own</p>
+            <a class="b-submit b-vps__try-submit" href="#">see plans</a>
+        </div>
+    </div>
+
+    <div class="footer-push"></div>
+</div>
+
+
+<div class="popup popup_callback" style="display: none;" id="information_manage_cloud">
+    <a class="close close_window_information_manager_cloud" href="#"><img src="/assets/img/close.png"></a>
+
+    <h2>INFORMATION for REQUEST</h2>
+
+    <div class="message_pole" id="message_load_ajax"></div>
+    <div id="add_iframe_from_billing">
+        <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function (){
+
+        var Zakaz = new Object();
+        var currency = {
+            "2": "€",
+            "1": "RUR",
+            "3": "$"
+        };
+        var currencyID = {$currencyId};
+
+    var listOfProducts = new Object();
+    var listOfProducts = {json_encode($configuration)};
+    listOfProducts.payment = {
+        "name": "payment",
+        "hidden": "0",
+        "data": {
+            "0": {
+                "name": "monthly",
+                "discount": "0",
+                'period': "month"
+            },
+            "1": {
+                "name": "quarterly",
+                "discount": "3",
+                "period": "quarter"
+            },
+            "2": {
+                "name": "semiannually",
+                "discount": "6",
+                "period": "half-year"
+            },
+            "3": {
+                "name": "annually",
+                "discount": "12",
+                "period": "year"
+            }
+        }
+    };
+
+        document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
+
+        /*
+         *   Закрываем окно
+         */
+        $('.close_window_information_manager_cloud').click(function () {
+            $('.popup').hide();
+            document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
+            return false;
+        });
+
+        $('.b-vps-table__buy').bind('click', function () {
+              $('.popup_callback').show();
+              var PRESET_ID = $( this).attr( 'data_preset' );
+              for( var prop in listOfProducts ) {
+                    if( prop == PRESET_ID ) {
+                        Zakaz = listOfProducts[prop][0];
+                        window.set_payment_for_preset( Zakaz, listOfProducts, 0);
+                    }
+              }
+              crFrame( );
+              return false;
+            ;
+        });
+
+        function crFrame( )
+        {
+            document.getElementById('configure_cloud_VDS').src = 'https://bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
+                    + generate_post ( Zakaz ) ;
+        };
+
+    });
+
+
+</script>
+<style>
+    .b-vds-cloud__summary-table-cell {
+        vertical-align: middle;
+    }
+
+    #add_iframe_from_billing {
+        display: block;
+    }
+
+
+    #configure_cloud_VDS {
+        border: none;
+        display: block;
+        width: 570px;
+        height: 500px;
+        margin: 0 auto;
+    }
+
+    .popup_callback { width: 700px; height: 700px; margin: -225px 0 0 -350px; }
+
+    .popup { display: none; position: relative; background: #fff; position: fixed; z-index: 100000; top: 40%; left: 50%; }
+
+    .popup h2{ width: 100%; display: block; font: bold 24px KievitOT,Arial; color: #171819; text-transform: uppercase; text-align: center; margin: 45px auto 60px auto; }
+
+
+    .switch_country_for_container_VPS {
+        display: block;
+        padding: 50px 0 20px 485px;
+        background: #fff;
+    }
+    .switch_country_for_container_VPS a{
+        color: #000;
+        text-decoration: none;
+    }
+</style>

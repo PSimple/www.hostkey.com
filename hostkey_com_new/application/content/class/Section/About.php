@@ -11,6 +11,7 @@
  */
 class Content_Section_About extends Zero_Controller
 {
+
     /**
      * Фабричный метод по созданию контроллера.
      *
