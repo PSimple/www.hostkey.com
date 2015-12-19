@@ -46,11 +46,6 @@ class Shop_Cloud_ManagerRU extends Zero_Controller
             $configuration = unserialize(file_get_contents($path));
         }
         $preset = Shop_PresetContainerVPS::Make();
-        //  pre( json_encode( $preset->getPreset( $configuration ) ) );
-        //  pre();
-        //  pre ($configuration );$begin_numerible_key
-        // die;
-        //pre( json_encode( $preset->getPreset( $configuration ) )); die;
         $payment_period = 'monthly';
         $p = $preset->getPreset( $configuration, $payment_period);
         sort( $p );

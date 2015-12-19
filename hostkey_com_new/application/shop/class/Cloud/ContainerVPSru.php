@@ -44,11 +44,6 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
             $configuration = unserialize(file_get_contents($path));
         }
         $preset = Shop_PresetContainerVPS::Make();
-      //  pre( json_encode( $preset->getPreset( $configuration ) ) );
-      //  pre();
-      //  pre ($configuration );
-       // die;
-       //pre( json_encode( $preset->getPreset( $configuration ) )); die;
         $payment_period = 'monthly';
         $p = $preset->getPreset( $configuration, $payment_period);
         $table_row_data = array();
@@ -61,11 +56,10 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
                 }
             }
         }
-
-      //  pre( $table_row_data ); die;
         $this->View->Assign('table_row_data', $table_row_data );
         $this->View->Assign('payment_period', $payment_period );
         $this->View->Assign('configuration', $p );
+
         return true;
     }
 

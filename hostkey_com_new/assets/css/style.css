@@ -2534,7 +2534,8 @@ p {
 .b-dedicated__item-title {
   font-size: 43px;
   line-height: 47px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  min-height: 100px;
 }
 .b-dedicated__item-start {
   font-size: 26px;
@@ -4629,11 +4630,14 @@ p {
   width: 680px;
   margin: 30px 0 30px 80px;
 }
+
+/*
 .b-text-page p {
   padding-left: 250px;
   font-size: 18px;
   line-height: 22px;
 }
+*/
 .b-main-page__title {
   width: 230px;
   font-size: 28px;
@@ -5423,4 +5427,9 @@ p {
 
 .editable-area table td, .editable-area table th {
   padding: 10px;
+}
+
+.b-dedicated__item-subtitle {
+  margin: 0 0 10px 0;
+  min-height: 40px;
 }

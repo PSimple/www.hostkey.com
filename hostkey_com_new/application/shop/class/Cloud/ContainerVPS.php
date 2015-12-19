@@ -11,8 +11,6 @@
  */
 class Shop_Cloud_ContainerVPS extends Zero_Controller
 {
-
-
     /**
      *
      * @return Zero_View
@@ -44,31 +42,28 @@ class Shop_Cloud_ContainerVPS extends Zero_Controller
             $configuration = unserialize(file_get_contents($path));
         }
         $preset = Shop_PresetContainerVPS::Make();
-      //  pre( json_encode( $preset->getPreset( $configuration ) ) );
-      //  pre();
-      //  pre ($configuration );
-       // die;
-       //pre( json_encode( $preset->getPreset( $configuration ) )); die;
         $payment_period = 'monthly';
-        $p = $preset->getPreset( $configuration, $payment_period);
+        $p = $preset->getPreset($configuration, $payment_period);
         $table_row_data = array();
-        foreach ( $p as $key => $value ) {
-            foreach( $value  as $k=> $v){
-                if ( $v['hidden'] == 0 ){
-                    foreach ($v as $kk => $vv){
+        foreach ($p as $key => $value)
+        {
+            foreach ($value as $k => $v)
+            {
+                if ( $v['hidden'] == 0 )
+                {
+                    foreach ($v as $kk => $vv)
+                    {
                         $table_row_data[$vv['name']][] = $vv['data'][0]['name'];
                     }
                 }
             }
         }
+        $this->View->Assign('table_row_data', $table_row_data);
+        $this->View->Assign('payment_period', $payment_period);
+        $this->View->Assign('configuration', $p);
 
-      //  pre( $table_row_data ); die;
-        $this->View->Assign('table_row_data', $table_row_data );
-        $this->View->Assign('payment_period', $payment_period );
-        $this->View->Assign('configuration', $p );
         return true;
     }
-
 
     /**
      * Фабричный метод по созданию контроллера.
@@ -85,7 +80,4 @@ class Shop_Cloud_ContainerVPS extends Zero_Controller
         }
         return $Controller;
     }
-
-
-
 }

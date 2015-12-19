@@ -27,10 +27,10 @@ class Content_ContentLittle_Plugin extends Zero_Controller
         if ( 'Header' == $this->Params['view'] )
         {
             $this->View = new Zero_View(__CLASS__ . '_' . $this->Params['view']);
-
             $sql = "SELECT ID, Value FROM ContentLittle WHERE ID = 1";
             $data = Zero_DB::Select_List_Index($sql);
             $this->View->Assign('data', $data);
+            $this->View->Assign('SECTION_ID', Zero_App::$Section->Section_ID);
 
             return $this->View;
         }

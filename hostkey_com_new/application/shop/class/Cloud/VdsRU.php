@@ -46,9 +46,7 @@ class Shop_Cloud_VdsRU extends Zero_Controller
             $configuration = unserialize(file_get_contents($path));
         }
         $preset = Shop_PresetContainerVPS::Make();
-       // pre( $configuration); die;
         $configuration = $preset -> getSortCloudVDS ( $configuration,$PID  );
-     //   pre( $configuration); die;
         $this->View->Assign('configuration', $configuration);
         return true;
     }

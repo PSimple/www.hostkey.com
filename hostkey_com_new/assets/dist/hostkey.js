@@ -90,7 +90,7 @@
 
 	__webpack_require__(28);
 
-	__webpack_require__(31);
+	__webpack_require__(32);
 
 	angular.module("dedicated.service", ["ngSanitize", "ui", "ui.router", "api", "dedicated.service.selected"]);
 
@@ -54383,7 +54383,7 @@
 
 	__webpack_require__(30);
 
-	__webpack_require__(40);
+	__webpack_require__(31);
 
 	angular.module("api", ["api.dedicated", "api.order", "api.solutions"]);
 
@@ -54692,9 +54692,71 @@
 
 /***/ },
 /* 31 */
+/***/ function(module, exports) {
+
+	angular.module("api.solutions", ["config"]);
+
+	angular.module("api.solutions").service("$solutions", ["$http", "$q", "CONFIG", function($http, $q, CONFIG) {
+	  var that;
+	  that = this;
+
+	  /*
+	      Список типовых серверных решений
+	   */
+	  this.getList = function() {
+	    var country, currency, deferred, type, url;
+	    deferred = $q.defer();
+	    type = window.type || 'dedicated';
+	    country = window.country || 'NL';
+	    currency = window.currency || 'eur';
+	    if (window.isDev) {
+	      url = "/assets/dist/api/solutions/" + type + "/" + country + ".json";
+	    } else {
+	      url = CONFIG.apiUrl + "/solutions";
+	    }
+	    $http({
+	      url: url,
+	      method: "GET",
+	      cache: true,
+	      params: {
+	        country: country,
+	        currency: currency,
+	        type: type
+	      }
+	    }).success(function(data) {
+	      return deferred.resolve(data);
+	    }).error(function(error) {
+	      return deferred.reject(error);
+	    });
+	    return deferred.promise;
+	  };
+	  this.getOne = function(type) {
+	    var deferred;
+	    deferred = $q.defer();
+	    that.getList().then(function(solutions) {
+	      var solution;
+	      solution = solutions.filter(function(s) {
+	        return s.type === type;
+	      });
+	      if (solution.length) {
+	        return deferred.resolve(angular.copy(solution[0]));
+	      } else {
+	        return deferred.resolve({});
+	      }
+	    })["catch"](function(error) {
+	      return deferred.reject(error);
+	    });
+	    return deferred.promise;
+	  };
+	  return that;
+	}]);
+
+
+/***/ },
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(32);
+	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(33);
 
 	angular.module("dedicated.service.selected", []);
 
@@ -54702,7 +54764,7 @@
 	  $stateProvider.state("dedicatedService.selected", {
 	    url: "/:type",
 	    controller: "SelectedCtrl",
-	    template: __webpack_require__(33),
+	    template: __webpack_require__(34),
 	    resolve: {
 	      components: ["$dedicated", function($dedicated) {
 	        return $dedicated.components();
@@ -55164,7 +55226,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -56718,10 +56780,10 @@
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(34);
+	var jade = __webpack_require__(35);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -56732,7 +56794,7 @@
 	}
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56952,7 +57014,7 @@
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(35).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(36).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -56984,13 +57046,12 @@
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 36 */,
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -57016,21 +57077,21 @@
 /* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(34);
+	var jade = __webpack_require__(35);
 
 	module.exports = function template(locals) {
 	var buf = [];
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div class=\"b-dedicated__switch-item active\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div ng-click=\"url('/dedicated/service/russia')\" class=\"b-dedicated__switch-item\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Detail</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
+	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div class=\"b-dedicated__switch-item active\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div ng-click=\"url('/dedicated/service/russia')\" class=\"b-dedicated__switch-item\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Details</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
 	}
 
 /***/ },
 /* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(34);
+	var jade = __webpack_require__(35);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -57039,68 +57100,6 @@
 
 	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div ng-click=\"url('/dedicated/service/netherlands')\" class=\"b-dedicated__switch-item\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><a class=\"b-dedicated__switch-item active\">russia</a></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Detail</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
 	}
-
-/***/ },
-/* 40 */
-/***/ function(module, exports) {
-
-	angular.module("api.solutions", ["config"]);
-
-	angular.module("api.solutions").service("$solutions", ["$http", "$q", "CONFIG", function($http, $q, CONFIG) {
-	  var that;
-	  that = this;
-
-	  /*
-	      Список типовых серверных решений
-	   */
-	  this.getList = function() {
-	    var country, currency, deferred, type, url;
-	    deferred = $q.defer();
-	    type = window.type || 'dedicated';
-	    country = window.country || 'NL';
-	    currency = window.currency || 'eur';
-	    if (window.isDev) {
-	      url = "/assets/dist/api/solutions/" + type + "/" + country + ".json";
-	    } else {
-	      url = CONFIG.apiUrl + "/solutions";
-	    }
-	    $http({
-	      url: url,
-	      method: "GET",
-	      cache: true,
-	      params: {
-	        country: country,
-	        currency: currency,
-	        type: type
-	      }
-	    }).success(function(data) {
-	      return deferred.resolve(data);
-	    }).error(function(error) {
-	      return deferred.reject(error);
-	    });
-	    return deferred.promise;
-	  };
-	  this.getOne = function(type) {
-	    var deferred;
-	    deferred = $q.defer();
-	    that.getList().then(function(solutions) {
-	      var solution;
-	      solution = solutions.filter(function(s) {
-	        return s.type === type;
-	      });
-	      if (solution.length) {
-	        return deferred.resolve(angular.copy(solution[0]));
-	      } else {
-	        return deferred.resolve({});
-	      }
-	    })["catch"](function(error) {
-	      return deferred.reject(error);
-	    });
-	    return deferred.promise;
-	  };
-	  return that;
-	}]);
-
 
 /***/ }
 /******/ ]);

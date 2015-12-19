@@ -228,10 +228,8 @@ class Zero_Section extends Zero_Model
             if ( Zero_App::$Config->Site_UseDB )
             {
                 $sql = "SELECT * FROM {$this->Source} WHERE Url = " . Zero_DB::EscT($url);
-                //print_r ( $sql );
                 $row = Zero_DB::Select_Row($sql);
                 $this->Set_Props($row);
-               // pre ( $this->Get_Props());
                 Zero_Cache::Set_Link('Section', $this->ID);
                 Zero_Cache::Set_Data($index, $row);
             }
