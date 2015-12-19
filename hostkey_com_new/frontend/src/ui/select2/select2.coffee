@@ -11,14 +11,19 @@ angular.module("ui.select").directive "select2", ($timeout) ->
 
     link: (scope, element, attrs, ngModel) ->
 
+        _minimumResultsForSearch = 10
+
         scope.$watch "model", (n, o) ->
             unless angular.equals(n, o)
                 newModel = angular.copy n
-                element.select2().val(JSON.stringify(newModel)).trigger("change") unless scope.$$phase
+                element.select2
+                    minimumResultsForSearch: _minimumResultsForSearch
+                .val(JSON.stringify(newModel)).trigger("change") unless scope.$$phase
         , true
 
         $timeout ->
-            element.select2()
+            element.select2
+                minimumResultsForSearch: _minimumResultsForSearch
 
             element.bind "change", ->
                 $timeout ->
