@@ -531,7 +531,7 @@ p {
 .b-container {
   position: relative;
   width: 1260px;
-  padding: 0 35px 0 75px;
+  padding: 10px 35px 0 75px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
