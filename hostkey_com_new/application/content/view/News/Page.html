@@ -9,7 +9,11 @@
                 <div class="b-news__list" id="scroll-anchor-01">
                     <div class="b-news__column">
                         {foreach ($newsList1 as $row)}
-                        <div class="b-news__item">
+                        <div class="b-news__item"
+                             {if ( $row['IsDetails'] )}
+                                   onClick="javascript: document.location.href='{URL}_{$row['ID']}';
+                            {/if}
+                            ">
                             <div class="b-news__item-date b-news__item-date_first_yes">{$row['Date']}</div>
                             {if ( $row['Name'] )}
                             <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
@@ -24,7 +28,7 @@
                                 {$row['Description']}
                             </p>
                             {if ( $row['IsDetails'] )}
-                            <a class="b-news__item-detail" href="{URL}_{$row['ID']}">Detail</a>
+                            <a class="b-news__item-detail" href="{URL}_{$row['ID']}">Details</a>
                             {/if}
                         </div>
                         {/foreach}

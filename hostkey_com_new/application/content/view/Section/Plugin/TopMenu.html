@@ -1,8 +1,9 @@
 <nav class="b-menu__item b-menu__item_nav_yes nav">
     {foreach ($NAVIGATION as $KEY => $VALUE )}
+      {if (isset($VALUE['child']) AND count( $VALUE['child']) >0)}
         <div class="nav__item nav__item_drop_yes">
             <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['Name']}</a>
-                {if (isset($VALUE['child']))}
+
                     <div class="b-sub-menu">
                         <div class="b-menu__item b-menu__item_nav_yes nav">
                             {foreach ($VALUE['child'] as $K => $V)}
@@ -12,15 +13,15 @@
                             {/foreach}
                         </div>
                     </div>
-                {/if}
         </div>
+      {else}
+            <div class="nav__item">
+                <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['Name']}</a>
+            </div>
+    {/if}
     {/foreach}
 
 
-
-    <div class="nav__item">
-        <a class="nav__link" href="https://my.hostkey.com">SUPPORT</a>
-    </div>
     <div class="nav__item">
         <a class="nav__link" href="https://bill.hostkey.com">CLIENT AREA</a>
     </div>
