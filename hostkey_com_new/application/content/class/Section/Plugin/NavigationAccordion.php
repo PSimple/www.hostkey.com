@@ -21,8 +21,8 @@ class Content_Section_Plugin_NavigationAccordion extends Zero_Controller
     {
 
         $index = __CLASS__ . Zero_App::$Users->Groups_ID . Zero_App::$Config->Site_DomainSub;
-        $Section = Zero_Model::Makes('Zero_Section');
-        /* @var $Section Zero_Section */
+        //  $Section = Zero_Model::Makes('Zero_Section');
+        $Section = Zero_Section::Make();
         if ( isset($this->Params['section_id']) && 0 < $this->Params['section_id'] )
         {
             $Section = Zero_Model::Makes('Zero_Section', $this->Params['section_id']);
@@ -42,23 +42,31 @@ class Content_Section_Plugin_NavigationAccordion extends Zero_Controller
             $Section->Cache->Set($index, $navigation);
         }
 
-        foreach ( $navigation as $key => $value ) {
+        foreach ($navigation as $key => $value)
+        {
             $navigation[$key]['action'] = 0;
+            $pattern = '*' . str_replace("/", "\/", $value["Url"]) . '*';
+            preg_match($pattern, Zero_App::$Section->Url, $m);
 
-            if ( $value["Url"] == Zero_App::$Section->Url ) {
+            if ( preg_match($pattern, Zero_App::$Section->Url) )
+            {
                 $navigation[$key]['action'] = 1;
             }
-                if ( isset($value['child'] ) ) {
-                    foreach ($value['child'] as $k => $v) {
-                        $navigation[$key]['child'][$k]['action'] = 0;
-                        if ( $v["Url"] == Zero_App::$Section->Url ) {
-                            $navigation[$key]['action'] = 1;
-                            $navigation[$key]['child'][$k]['action'] = 1;
-                        }
+            if ( isset($value['child']) )
+            {
+
+                foreach ($value['child'] as $k => $v)
+                {
+                    $pattern = '*(' . str_replace("/", "\/", $v["Url"]) . ')*';
+                    $navigation[$key]['child'][$k]['action'] = 0;
+                    if ( preg_match($pattern, Zero_App::$Section->Url, $m) )
+                    {
+                        $navigation[$key]['action'] = 1;
+                        $navigation[$key]['child'][$k]['action'] = 1;
                     }
                 }
+            }
         }
-//pre( $navigation );
         if ( isset($this->Params['view']) )
             $this->View = new Zero_View($this->Params['view']);
         else
@@ -67,6 +75,4 @@ class Content_Section_Plugin_NavigationAccordion extends Zero_Controller
         $this->View->Assign('NAVIGATION', $navigation);
         return $this->View;
     }
-
-
 }

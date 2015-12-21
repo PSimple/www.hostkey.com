@@ -2534,11 +2534,7 @@ p {
 .b-dedicated__item-title {
   font-size: 43px;
   line-height: 47px;
-<<<<<<< HEAD
-  margin-bottom: 10px;
-=======
   margin-bottom: 20px;
->>>>>>> master
   min-height: 100px;
 }
 .b-dedicated__item-start {
@@ -4657,7 +4653,7 @@ p {
 }
 .b-main-page__title-description {
   position: absolute;
-  top: 20px;
+  top: 18px;
   left: 560px;
   color: #ffffff;
   letter-spacing: 1px;
@@ -4726,7 +4722,7 @@ p {
 .b-main-page__news {
   padding: 0 0 100px 0;
   background: url(/assets/media/promo_main_3.png) no-repeat;
-  height: 600px;
+  height: auto;
 }
 .b-main-page__news-item {
   padding: 0px 20px 30px;
@@ -5422,21 +5418,24 @@ p {
   dispalay: block;
 }
 
-
+/*
 .b-container table {
   border-collapse:separate;
   border-spacing: 0;
 }
-
+*/
 
 .editable-area table td, .editable-area table th {
   padding: 10px;
-<<<<<<< HEAD
 }
 
 .b-dedicated__item-subtitle {
   margin: 0 0 10px 0;
   min-height: 40px;
-=======
->>>>>>> master
+
+}
+
+.White-header  {
+  color: #fff;  !impotant ;
+  text-decoration: underline;  !impotant
 }

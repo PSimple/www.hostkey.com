@@ -26,14 +26,8 @@
                                 $(".b-faq__answer-content[data-id='" + newId + "']").css("display", "block");
                                 $(".b-faq__questions-item").removeClass('active');
                                 $("#faq" + newId).addClass('active');
-                             //   first = $( '.b-faq__questions .b-faq__answer-content' );
-                             //   $(".b-faq__answer-content[data-id='" + newId + "']").before( first[0] );
-                               // $(LI[0]).remove();
-
                                 $( '#go_to_technical_description' ).after( $( "#faq" + newId ) );
-
-
-                                    var destination = $(".b-faq__list-head").offset().top;
+                                   var destination = $(".b-faq__list-head").offset().top;
                                       $("html,body").animate( { scrollTop: destination }, 1000);
 
                                 return false;
@@ -48,8 +42,7 @@
                     {/if}
                     {/foreach}
                 </div>
-                <!--
-                                        -->
+
                 <div class="b-faq__answer">
 
                     {foreach ($rows as $key => $row)}
