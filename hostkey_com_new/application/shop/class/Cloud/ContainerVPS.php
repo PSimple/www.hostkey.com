@@ -69,7 +69,7 @@ class Shop_Cloud_ContainerVPS extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Cloud_VpsStep1
+     * @return Shop_Cloud_ContainerVPS
      */
     public static function Make($properties = [])
     {

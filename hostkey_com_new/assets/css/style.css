@@ -531,7 +531,7 @@ p {
 .b-container {
   position: relative;
   width: 1260px;
-  padding: 0 35px 0 75px;
+  padding: 10px 35px 0 75px;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -5432,6 +5432,7 @@ p {
 .b-dedicated__item-subtitle {
   margin: 0 0 10px 0;
   min-height: 40px;
+<<<<<<< HEAD
 
 }
 
@@ -5439,3 +5440,8 @@ p {
   color: #fff;  !impotant ;
   text-decoration: underline;  !impotant
 }
+=======
+=======
+>>>>>>> master
+}
+>>>>>>> 185a5d412d71a41ef75f0d54b3ce1be33eb52319

@@ -28,6 +28,8 @@
  * @property string $IsIndex
  * @property integer $Sort
  * @property string $Name
+ * @property string $NameMenu
+ * @property string $NameSub
  * @property string $Title
  * @property string $Keywords
  * @property string $Description
@@ -101,6 +103,7 @@ class Zero_Section extends Zero_Model
             'IsIndex' => ['AliasDB' => 'z.IsIndex', 'DB' => 'E', 'IsNull' => 'NO', 'Default' => 'yes', 'Form' => 'Radio'],
             'Sort' => ['AliasDB' => 'z.Sort', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Number'],
             'Name' => ['AliasDB' => 'z.Name', 'DB' => 'T', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Text'],
+            'NameMenu' => ['AliasDB' => 'z.NameMenu', 'DB' => 'T', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Text'],
             'NameSub' => ['AliasDB' => 'z.NameSub', 'DB' => 'T', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Text'],
             'Title' => ['AliasDB' => 'z.Title', 'DB' => 'T', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Text'],
             'Keywords' => ['AliasDB' => 'z.Keywords', 'DB' => 'T', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Text'],
@@ -193,6 +196,7 @@ class Zero_Section extends Zero_Model
             'IsIndex' => [],
             'Sort' => [],
             'Name' => [],
+            'NameMenu' => [],
             'NameSub' => [],
             'Title' => [],
             'Keywords' => [],
@@ -337,34 +341,17 @@ class Zero_Section extends Zero_Model
             $sql_where = "
             s.Section_ID = {$id} AND s.IsVisible = 'yes'
             ";
-        //  Translation
-        if ( LANG != Zero_App::$Config->Site_Language )
-        {
-            $sql = "
-            SELECT
-              s.ID, l.Name, SUBSTRING(s.Url, POSITION('/' IN s.Url)) AS Url, s.UrlThis, l.Title
-            FROM Section AS s
-                INNER JOIN Content AS l ON l.Section_ID = s.ID AND l.Lang = '" . ZERO_LANG . "' AND l.Block = 'Content'
-                LEFT JOIN Action AS a ON a.`Section_ID` = s.`ID`
-            WHERE
-                {$sql_where}
-            ORDER BY
-              s.`Sort` ASC
-            ";
-        }
-        else
-        {
-            $sql = "
-            SELECT
-              s.ID, s.Name, SUBSTRING(s.Url, POSITION('/' IN s.Url)) AS Url, UrlThis, Title
-            FROM Section AS s
-                LEFT JOIN Action AS a ON a.`Section_ID` = s.`ID`
-            WHERE
-                {$sql_where}
-            ORDER BY
-              s.`Sort` ASC
-            ";
-        }
+        //
+        $sql = "
+        SELECT
+          s.ID, s.Name, s.NameMenu, SUBSTRING(s.Url, POSITION('/' IN s.Url)) AS Url, UrlThis, Title
+        FROM Section AS s
+            LEFT JOIN Action AS a ON a.`Section_ID` = s.`ID`
+        WHERE
+            {$sql_where}
+        ORDER BY
+          s.`Sort` ASC
+        ";
         return Zero_DB::Select_Array_Index($sql);
     }
 
