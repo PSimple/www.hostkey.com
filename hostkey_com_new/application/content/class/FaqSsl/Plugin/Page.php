@@ -20,7 +20,7 @@ class Content_FaqSsl_Plugin_Page extends Zero_Controller
     {
         $this->Chunk_Init();
 
-        $sql = "SELECT * FROM FaqSsl";
+        $sql = "SELECT * FROM FaqSsl ORDER BY Sort ASC";
         $rows = Zero_DB::Select_Array($sql);
         $this->View->Assign('rows', $rows);
 

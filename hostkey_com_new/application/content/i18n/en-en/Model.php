@@ -74,6 +74,7 @@ return [
     'Error_NotNull' => 'Поле не заполненно',
     'Error_PasswordValid' => 'Пароль задан неверно (не совпадают)',
     'News IsDetails' => 'Показать подробно',
+    'ContentBlock Description' => 'Описание',
     'ContentBlock Content' => 'Контент',
     'ContentBlock Head' => 'Заголовок',
     'ContentBlock IsFeatures' => 'Особенности',

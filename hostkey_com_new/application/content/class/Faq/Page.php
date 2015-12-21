@@ -20,7 +20,7 @@ class Content_Faq_Page extends Zero_Controller
     {
         $this->Chunk_Init();
 
-        $sql = "SELECT * FROM Faq";
+        $sql = "SELECT * FROM Faq ORDER BY Sort ASC";
         $rows = Zero_DB::Select_Array($sql);
         $this->View->Assign('rows', $rows);
 

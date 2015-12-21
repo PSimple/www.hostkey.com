@@ -17,11 +17,30 @@ class Shop_Dedicated_Sale extends Zero_Controller
     public function Action_Default()
     {
         $this->Chunk_Init();
+        return $this->View;
+    }
 
-        $head = str_replace(' ', '<br>', Zero_App::$Section->Name);
-        $this->View->Assign('head', $head);
-
-        return $this->View->Fetch(false);
+    /**
+     * Инициализация операции контроллера до его выполнения
+     *
+     * Может быть переопределен конкретным контроллером
+     *
+     * @return bool
+     */
+    protected function Chunk_Init()
+    {
+        // Шаблон
+        if ( isset($this->Params['view']) )
+            $this->View = new Zero_View($this->Params['view']);
+        else if ( isset($this->Params['tpl']) )
+            $this->View = new Zero_View($this->Params['tpl']);
+        else if ( isset($this->Params['template']) )
+            $this->View = new Zero_View($this->Params['template']);
+        else
+            $this->View = new Zero_View(get_class($this));
+        // Модель (пример)
+        // $this->Model = Zero_Model::Makes('Zero_Users');
+        return true;
     }
 
     /**
@@ -33,7 +52,8 @@ class Shop_Dedicated_Sale extends Zero_Controller
     public static function Make($properties = [])
     {
         $Controller = new self();
-        foreach ($properties as $property => $value) {
+        foreach ($properties as $property => $value)
+        {
             $Controller->Params[$property] = $value;
         }
         return $Controller;

@@ -18,25 +18,33 @@ class Content_ContentBlock_Plugin extends Zero_Controller
      */
     public function Action_Default()
     {
-        // Шаблон
-        if ( isset($this->Params['view']) )
-            $this->View = new Zero_View(__CLASS__ . '_' . $this->Params['view']);
-        else
-            $this->View = new Zero_View(__CLASS__);
-
+        $this->Chunk_Init();
         if ( isset($this->Params['IsFeatures']) )
-        {
-            $sql_where = "IsFeatures = 1";
-        }
+            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;
         else
-        {
-            $sql_where = "IsFeatures = 0";
-        }
-        $sql = "SELECT * FROM ContentBlock WHERE {$sql_where} AND Section_ID = " . Zero_App::$Section->ID;
+            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 0 AND Section_ID = " . Zero_App::$Section->ID;
+
         $data = Zero_DB::Select_Array($sql);
         $this->View->Assign('data', $data);
 
         return $this->View;
+    }
+
+    /**
+     * Инициализация контроллера
+     *
+     * Может быть переопределен конкретным контроллером
+     *
+     * @return bool
+     */
+    protected function Chunk_Init()
+    {
+        // Шаблон
+        if ( isset($this->Params['view']) )
+            $this->View = new Zero_View(get_class($this) . '_' . $this->Params['view']);
+        else
+            $this->View = new Zero_View(get_class($this));
+        return true;
     }
 
     /**

@@ -87,6 +87,13 @@ class Content_ContentBlock extends Zero_Model
 				'Default' => '',
 				'Form' => 'Img',
 			],
+			'Description' => [
+				'AliasDB' => 'z.Description',
+				'DB' => 'T',
+				'IsNull' => 'YES',
+				'Default' => '',
+				'Form' => 'Textarea',
+			],
 			'Content' => [
 				'AliasDB' => 'z.Content',
 				'DB' => 'T',
@@ -120,6 +127,7 @@ class Content_ContentBlock extends Zero_Model
 			'Head' => ['Visible' => true, 'AR' => true],
 			'IsFeatures' => ['Visible' => true, 'AR' => true],
 			'Img' => ['Visible' => true, 'AR' => true],
+			'Description' => ['Visible' => true, 'AR' => true],
 			'Content' => ['Visible' => true, 'AR' => true],
         ];
     }
@@ -162,6 +170,7 @@ class Content_ContentBlock extends Zero_Model
 			'Head' => [],
 			'IsFeatures' => [],
 			'Img' => [],
+			'Description' => [],
 			'Content' => [],
         ];
     }
