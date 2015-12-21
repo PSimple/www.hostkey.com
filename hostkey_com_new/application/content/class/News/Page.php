@@ -43,6 +43,12 @@ class Content_News_Page extends Zero_Controller
             $news->AR->Sql_Limit(4, 3);
             $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
             $view->Assign('newsList4', $newsList);
+            $news->AR->Sql_Order('DateCreate', 'DESC');
+            $news->AR->Sql_Limit(1, 12);
+            $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
+
+            $view->Assign('newsList', $newsList);
+//            pre($newsList);
         }
         return $view;
     }

@@ -99,7 +99,7 @@ class Content_ContentBlock extends Zero_Model
 				'DB' => 'T',
 				'IsNull' => 'YES',
 				'Default' => '',
-				'Form' => 'Textarea',
+				'Form' => 'Content',
 			],
         ];
     }
