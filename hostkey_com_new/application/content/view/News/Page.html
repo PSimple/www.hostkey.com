@@ -7,24 +7,25 @@
 
             <div class="b-news">
                 <div class="b-news__list" id="scroll-anchor-01">
-                    <div class="b-news__column">
-                        {foreach ($newsList1 as $row)}
+
+                        {foreach ($newsList1 as $key => $row)}
                         <div class="b-news__item"
                              {if ( $row['IsDetails'] )}
-                                   onClick="javascript: document.location.href='{URL}_{$row['ID']}';
+                                   onClick="javascript: document.location.href='{URL}_{$row['ID']}';"
                             {/if}
+                            {if ( 0 == $key )} style="background: #fff;" {/if}
                             ">
-                            <div class="b-news__item-date b-news__item-date_first_yes">{$row['Date']}</div>
-                            {if ( $row['Name'] )}
-                            <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
-                            <p class="b-news__item-text b-news__item-text_red_yes">
-                            {else}
-                            <div class="b-news__item-separate"></div>
-                            <p class="b-news__item-text">
-                            {/if}
+                                <div class="b-news__item-date b-news__item-date_first_yes">{$row['Date']}</div>
+                               {if ( $row['Name'] )}
+                                     <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
+                                     <p class="b-news__item-text b-news__item-text_red_yes news-height-title-block">
+                               {else}
+                                     <div class="b-news__item-separate"></div>
+                                     <p class="b-news__item-text news-height-anons-block">
+                               {/if}
                                 {$row['Name']}
                             </p>
-                            <p class="b-news__item-text">
+                            <p class="b-news__item-text news-height-anons-block">
                                 {$row['Description']}
                             </p>
                             {if ( $row['IsDetails'] )}
@@ -32,75 +33,8 @@
                             {/if}
                         </div>
                         {/foreach}
-                    </div><!--
-                            --><div class="b-news__column">
-                    {foreach ($newsList2 as $row)}
-                    <div class="b-news__item">
-                        <div class="b-news__item-date b-news__item-date_first_yes">{$row['Date']}</div>
-                        {if ( $row['Name'] )}
-                        <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
-                        <p class="b-news__item-text b-news__item-text_red_yes">
-                        {else}
-                        <div class="b-news__item-separate"></div>
-                        <p class="b-news__item-text">
-                        {/if}
-                            {$row['Name']}
-                        </p>
-                        <p class="b-news__item-text">
-                            {$row['Description']}
-                        </p>
-                        {if ( $row['IsDetails'] )}
-                        <a class="b-news__item-detail" href="{URL}_{$row['ID']}">Detail</a>
-                        {/if}
-                    </div>
-                    {/foreach}
-                </div><!--
-                            --><div class="b-news__column">
-                    {foreach ($newsList3 as $row)}
-                    <div class="b-news__item">
-                        <div class="b-news__item-date b-news__item-date_first_yes">{$row['Date']}</div>
-                        {if ( $row['Name'] )}
-                        <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
-                        <p class="b-news__item-text b-news__item-text_red_yes">
-                            {else}
-                        <div class="b-news__item-separate"></div>
-                        <p class="b-news__item-text">
-                            {/if}
-                            {$row['Name']}
-                        </p>
-                        <p class="b-news__item-text">
-                            {$row['Description']}
-                        </p>
-                        {if ( $row['IsDetails'] )}
-                        <a class="b-news__item-detail" href="{URL}_{$row['ID']}">Detail</a>
-                        {/if}
-                    </div>
-                    {/foreach}
-                </div><!--
-                            --><div class="b-news__column b-news__column_last_yes">
-                    {foreach ($newsList3 as $row)}
-                    <div class="b-news__item">
-                        <div class="b-news__item-date b-news__item-date_first_yes">{$row['Date']}</div>
-                        {if ( $row['Name'] )}
-                        <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
-                        <p class="b-news__item-text b-news__item-text_red_yes">
-                            {else}
-                        <div class="b-news__item-separate"></div>
-                        <p class="b-news__item-text">
-                            {/if}
-                            {$row['Name']}
-                        </p>
-                        <p class="b-news__item-text">
-                            {$row['Description']}
-                        </p>
-                        {if ( $row['IsDetails'] )}
-                        <a class="b-news__item-detail" href="{URL}_{$row['ID']}">Detail</a>
-                        {/if}
-                    </div>
-                    {/foreach}
                 </div>
 
-                </div>
                 <a class="b-news__more" href="#">
                     <div class="b-news__more-plus">
                         <span class="b-icon b-news__more-plus-icon"></span>

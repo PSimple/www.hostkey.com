@@ -1,0 +1,63 @@
+<style>
+    .site-map {
+        float: left;
+        box-sizing: border-box;
+        color: rgba(255, 255, 255, 0.5);
+        padding: 20px 35px 20px 65px;
+    }
+    .site-map-block{
+        float: left;
+        padding: 0 20px;
+        color: #888888;
+    }
+    .site-map-block ul li a{
+        text-decoration: none;
+        color: #888888;
+        font-size: 13px;
+        text-transform: lowercase;
+    }
+    .site-map-block  a{
+        text-decoration: none;
+        color: #888888;
+        font-size: 15px;
+        text-transform: uppercase;
+
+    }
+    .site-map-block  a.site-map-active {
+        text-decoration: underline;
+    }
+    .site-map-block ul li a.site-map-active {
+        text-decoration: underline;
+    }
+    .site-map-block ul {
+        padding: 0 15px;
+        margin: 0px;
+    }
+</style>
+
+<div class="site-map">
+    {foreach ($NAVIGATION as $KEY => $VALUE )}
+    {if (isset($VALUE['child']) AND count( $VALUE['child']) >0)}
+        <div class="site-map-block">
+            <a class="{if ($VALUE['action'])} site-map-active{/if}" href="{$VALUE['Url']}">{$VALUE['NameMenu']}</a>
+                 <ul>
+                     {foreach ($VALUE['child'] as $K => $V)}
+                     <li>
+                         <a class="{if ($V['action'])} site-map-active{/if}" href="{$V['Url']}">{$V['NameMenu']}</a>
+                     </li>
+                     {/foreach}
+                 </ul>
+        </div>
+        {else}
+        <div class="site-map-block">
+            <a class="{if ($VALUE['action'])} site-map-active{/if}" href="{$VALUE['Url']}">{$VALUE['NameMenu']}</a>
+        </div>
+    {/if}
+    {/foreach}
+   </div>
+<div style="float: right;  margin: 0 65px 0 45px">Follow us:
+                  <a class="b-link" href="http://facebook.com" title="Facebook"><img src="/assets/img/fb.png" border="0" style="margin: 0 0 -10px 0"/></a>
+                <a class="b-link" href="http://twitter.com" title="Twitter"><img src="/assets/img/tv.png" border="0" style="margin: 0 0 -10px 0"/></a>
+                 <a class="b-link" href="http://weibo.com" title="Sina Weibo"><img src="/assets/img/v.png" border="0" style="margin: 0 0 -10px 0"/></a>
+            </div>
+<div style="clear: both;"></div>

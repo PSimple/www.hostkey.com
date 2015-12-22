@@ -2,13 +2,13 @@
     {foreach ($NAVIGATION as $KEY => $VALUE )}
       {if (isset($VALUE['child']) AND count( $VALUE['child']) >0)}
         <div class="nav__item nav__item_drop_yes">
-            <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['Name']}</a>
+            <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['NameMenu']}</a>
 
                     <div class="b-sub-menu">
                         <div class="b-menu__item b-menu__item_nav_yes nav">
                             {foreach ($VALUE['child'] as $K => $V)}
                                 <div class="nav__item">
-                                    <a class="nav__link {if ($V['action'])} nav__link_active{/if}" href="{$V['Url']}">{$V['Name']}</a>
+                                    <a class="nav__link {if ($V['action'])} nav__link_active{/if}" href="{$V['Url']}">{$V['NameMenu']}</a>
                                 </div>
                             {/foreach}
                         </div>
@@ -16,7 +16,7 @@
         </div>
       {else}
             <div class="nav__item">
-                <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['Name']}</a>
+                <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['NameMenu']}</a>
             </div>
     {/if}
     {/foreach}
