@@ -87,6 +87,13 @@ class Content_ContentBlock extends Zero_Model
 				'Default' => '',
 				'Form' => 'Img',
 			],
+            'Link' => [
+                'AliasDB' => 'z.Link',
+                'DB' => 'T',
+                'IsNull' => 'YES',
+                'Default' => '',
+                'Form' => 'Text',
+            ],
 			'Description' => [
 				'AliasDB' => 'z.Description',
 				'DB' => 'T',
@@ -170,6 +177,7 @@ class Content_ContentBlock extends Zero_Model
 			'Head' => [],
 			'IsFeatures' => [],
 			'Img' => [],
+			'Link' => [],
 			'Description' => [],
 			'Content' => [],
         ];

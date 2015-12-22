@@ -91,4 +91,5 @@ return [
     'ConfigSolution Title' => 'Заголовок',
     'ConfigSolution Typ' => 'Тип конфигурации',
     'ConfigSolution Typ options' => ['dedicated' => 'dedicated'],
+    'Link' => 'Ссылка',
 ];

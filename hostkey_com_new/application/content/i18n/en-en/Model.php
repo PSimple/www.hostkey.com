@@ -80,6 +80,7 @@ return [
     'ContentBlock IsFeatures' => 'Особенности',
     'ContentBlock ID' => 'Идентификатор',
     'ContentBlock Img' => 'Картинка',
+    'ContentBlock Link' => 'Ссылка',
     'ContentLittle Content' => 'Значение',
     'ContentLittle ID' => 'Идентификатор',
     'ContentLittle Name' => 'Название',
