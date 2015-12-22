@@ -21,12 +21,9 @@
                     line-height: 22px;
                     color: rgba(255, 255, 255, 0.5);
                 }
-                .site-map {
-                    box-sizing: border-box;
-                    color: rgba(255, 255, 255, 0.5);
-                    padding: 60px 35px 0 75px;
+                .footer-push {
+                    height: 700px;
                 }
-
             </style>
             <p class="b-footer__contacts-text">
                 <span class="b-icon b-footer__contacts-text-icon b-footer__contacts-text-icon_1"></span>{$data[2]}
@@ -38,11 +35,6 @@
                 <span class="b-icon b-footer__contacts-text-icon b-footer__contacts-text-icon_3"></span>{$data[4]}
             </p>
         </div>
-
-   <!--<div class="site-map">
-
-        dsjdsjhdjshdjshdjshd
-    </div>-->
 
         <div class="b-footer__logos">
             <div class="b-container">
@@ -56,6 +48,10 @@
                 <img class="b-footer__logos-item" src="/assets/img/pay-logo-08.png" alt="logo"/>
             </div>
         </div>
+
+
+    {plugin "Content_Section_Plugin_NavigationAccordion" view="Content_Section_Plugin_SiteMap"}
+
         <div class="b-footer__wrapper">
             <div class="b-footer__dev">
                 <p class="b-footer__text">© 2015, HOSTKEY Ltd., All Rights Reserved</p>

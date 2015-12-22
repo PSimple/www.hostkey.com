@@ -44,6 +44,56 @@
 
 {$Content}
 
+
+<style type="text/css">
+    .table_stan {
+    border-spacing: 0;
+    /*border: 1px solid red;*/
+    border: none;
+    background: #fffff;
+    border-collapse: separate;
+    text-align: left;
+    border-radius: 10px;
+}
+
+.table_stan th {
+    background: #945ae0;
+    color: white;
+    padding: 15px 15px;
+    text-align: center;
+   /* border-left: 1px solid #945ae0; */
+    border-left: none;
+    border-top: 1px solid #945ae0;
+    /*border-top: none;*/
+}
+
+.table_stan tr:nth-child(odd) {
+    background: #e9ebee;
+}
+
+.table_stan td {
+    padding: 15px 15px;
+    transition: all 0.5s ease;
+    /*border-left: 1px solid #fff;*/
+    border-left: none;
+    border-top: 1px solid #945ae0;
+}
+
+
+.table_stan td:first-child, .table_stan th:first-child {
+    border-left: none;
+}
+
+.table_stan th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.table_stan th:last-child {
+    border-top-right-radius: 10px;
+}
+</style>
+
+
 {plugin "Content_ContentLittle_Plugin" view="Footer"}
 
 <!-- SlickJS -->
