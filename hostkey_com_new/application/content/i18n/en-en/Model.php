@@ -81,6 +81,8 @@ return [
     'ContentBlock ID' => 'Идентификатор',
     'ContentBlock Img' => 'Картинка',
     'ContentBlock Link' => 'Ссылка',
+    'ContentBlock PriceEUR' => 'Цена в евро',
+    'ContentBlock PriceRUR' => 'Цена в рублях',
     'ContentLittle Content' => 'Значение',
     'ContentLittle ID' => 'Идентификатор',
     'ContentLittle Name' => 'Название',
