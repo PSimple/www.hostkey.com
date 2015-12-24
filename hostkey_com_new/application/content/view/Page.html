@@ -44,17 +44,18 @@
 
 {$Content}
 
-
 <style type="text/css">
     .table_stan {
     border-spacing: 0;
     /*border: 1px solid red;*/
-    border: none;
+    border-bottom: 1px solid #945ae0;
     background: #fffff;
     border-collapse: separate;
     text-align: left;
     border-radius: 10px;
-}
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    }
 
 .table_stan th {
     background: #945ae0;
@@ -91,6 +92,10 @@
 .table_stan th:last-child {
     border-top-right-radius: 10px;
 }
+/*
+.table_stan tr:last-child {
+        border-bottom: 1px solid #945ae0;
+    }*/
 </style>
 
 
@@ -102,6 +107,19 @@
 <script src="/assets/js/slick-run.js"></script>
 <script src="/assets/dist/hostkey.js"></script>
 {include "Content_Include_include.all.script"}
+<script>
+    $(document).ready(function() {
+
+        $('.tabs a').click(function () {
+            $('.tabs a').removeClass('tab_sel');
+            $('.html_tab').hide();
+            var tabid = $(this).attr('class');
+            $(this).addClass('tab_sel');
+            $('.html_' + tabid).show();
+            return false;
+        });
+    });
+</script>
 
 </body>
 </html>
