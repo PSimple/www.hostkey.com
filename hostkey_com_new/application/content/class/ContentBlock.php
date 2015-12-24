@@ -94,6 +94,20 @@ class Content_ContentBlock extends Zero_Model
                 'Default' => '',
                 'Form' => 'Text',
             ],
+            'PriceRUR' => [
+                'AliasDB' => 'z.PriceRUR',
+                'DB' => 'F',
+                'IsNull' => 'YES',
+                'Default' => '',
+                'Form' => 'Number',
+            ],
+            'PriceEUR' => [
+                'AliasDB' => 'z.PriceEUR',
+                'DB' => 'F',
+                'IsNull' => 'YES',
+                'Default' => '',
+                'Form' => 'Number',
+            ],
 			'Description' => [
 				'AliasDB' => 'z.Description',
 				'DB' => 'T',
@@ -178,6 +192,8 @@ class Content_ContentBlock extends Zero_Model
 			'IsFeatures' => [],
 			'Img' => [],
 			'Link' => [],
+            'PriceRUR' => [],
+            'PriceEUR' => [],
 			'Description' => [],
 			'Content' => [],
         ];
