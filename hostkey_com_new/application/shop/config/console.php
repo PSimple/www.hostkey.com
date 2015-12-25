@@ -20,11 +20,24 @@ return [
         'IsActive' => true
     ],
     /**
-     * Кеширование конфигураций калькулятора (Dedicated)
+     * Кеширование конфигураций компонентов по группам для формирования серверов dedicated
      *
      * @see Shop_Dedicated_Console_Update
      */
-    'Shop_Dedicated_Console_Update' => [
+    'Shop_Dedicated_Console_ConfigCustom' => [
+        'Minute' => '*/2',
+        'Hour' => '*',
+        'Day' => '*',
+        'Month' => '*',
+        'Week' => '*',
+        'IsActive' => true
+    ],
+    /**
+     * Кеширование стока для доформирования серверов dedicated
+     *
+     * @see Shop_Dedicated_Console_ConfigStock
+     */
+    'Shop_Dedicated_Console_ConfigStock' => [
         'Minute' => '*/2',
         'Hour' => '*',
         'Day' => '*',
