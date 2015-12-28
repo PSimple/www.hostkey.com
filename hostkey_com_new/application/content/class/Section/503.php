@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Текстовые контент-блоки на страницах.
+ * Контент страницы.
  *
- * {plugin "Content_ContentBlock_Plugin" view="Page" IsFeatures="1"}
+ * Часто задаваемы вопросы
  *
- * @package Content.ContentBlock.Plugin
+ * @package Content.Section.Controller
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015.01.01
+ * @date 2015.07.20
  */
-class Content_ContentBlock_Plugin extends Zero_Controller
+class Content_Section_503 extends Zero_Controller
 {
     /**
      * Контроллер по умолчанию.
@@ -19,14 +19,13 @@ class Content_ContentBlock_Plugin extends Zero_Controller
     public function Action_Default()
     {
         $this->Chunk_Init();
-        if ( isset($this->Params['IsFeatures']) )
-            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;
-        else
-            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 0 AND Section_ID = " . Zero_App::$Section->ID;
-
-        $data = Zero_DB::Select_Array($sql);
-        $this->View->Assign('DATA', $data);
-
+        $Section = Zero_Model::Makes('Zero_Section');
+        $Section->Init_Url("/503");
+        $section_data = $Section->Get_Props();
+        preg_match_all('#(<.+?>)(.+?)(<\/.+?>)#is', $section_data['Name'], $match);
+        $head = str_replace(' ', '<br>', $match[2][0]);
+        $this->View->Assign('NAME', $match[1][0] . $head . $match[3][0]);
+        $this->View->Assign('DESC', $section_data['Description']);
         return $this->View;
     }
 
@@ -41,9 +40,15 @@ class Content_ContentBlock_Plugin extends Zero_Controller
     {
         // Шаблон
         if ( isset($this->Params['view']) )
-            $this->View = new Zero_View(get_class($this) . '_' . $this->Params['view']);
+            $this->View = new Zero_View($this->Params['view']);
+        else if ( isset($this->Params['tpl']) )
+            $this->View = new Zero_View($this->Params['tpl']);
+        else if ( isset($this->Params['template']) )
+            $this->View = new Zero_View($this->Params['template']);
         else
             $this->View = new Zero_View(get_class($this));
+        // Модель (пример)
+        // $this->Model = Zero_Model::Makes('Zero_Users');
         return true;
     }
 
@@ -51,7 +56,7 @@ class Content_ContentBlock_Plugin extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Content_ContentBlock_Plugin
+     * @return Content_Section_Faq
      */
     public static function Make($properties = [])
     {

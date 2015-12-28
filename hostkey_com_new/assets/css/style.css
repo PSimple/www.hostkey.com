@@ -526,7 +526,7 @@ p {
   position: relative;
 }
 .b-col__item_x4 {
-  width: 22%;
+  width: 21%;
 }
 .b-container {
   position: relative;
@@ -4739,7 +4739,7 @@ p {
 }
 .b-main-page__news-item {
   padding: 0px 20px 30px;
-  width: 33.3%;
+  width: 33%;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -5468,6 +5468,12 @@ p {
   text-decoration: underline;  !impotant
 }
 
+
+.Black-header  {
+  color: #000;  !impotant ;
+  text-decoration: underline;  !impotant
+}
+
 .select2-results__options li {
     font-size: 12px;
 }
@@ -5496,3 +5502,9 @@ p {
 .b-text-page__box .tabs a.tab3 { width: 228px; }
 .b-text-page__box .tabs a.tab4 { width: 229px; }
 .b-text-page__box .tab_html{ width: 960px; margin: 100px auto 0 auto; background: #fff; position: relative; }
+
+
+.flag_nl {
+  background: url("/assets/img/nl_flag.png") 0 0 no-repeat;
+  padding: 30px 0 0 0;
+}

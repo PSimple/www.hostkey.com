@@ -30,6 +30,13 @@
     <script src="/assets/vendors/timer/jquery.timeTo.min.js"></script>
     <script src="/assets/js/timeTo-run.js"></script>
 
+    <!-- arcticModal -->
+    <script src="/assets/vendors/arcticmodal/jquery.arcticmodal-0.3.min.js"></script>
+    <link rel="stylesheet" href="/assets/vendors/arcticmodal/jquery.arcticmodal-0.3.css">
+
+    <!-- arcticModal theme -->
+    <link rel="stylesheet" href="/assets/vendors/arcticmodal/themes/simple.css">
+
     <style>
         .b-page__promo_text-page_yes {
             background: url({HTTPD}/{Zero_App::$Section->Img}) no-repeat;
@@ -107,18 +114,40 @@
 <script src="/assets/js/slick-run.js"></script>
 <script src="/assets/dist/hostkey.js"></script>
 {include "Content_Include_include.all.script"}
-<script>
-    $(document).ready(function() {
 
-        $('.tabs a').click(function () {
-            $('.tabs a').removeClass('tab_sel');
-            $('.html_tab').hide();
-            var tabid = $(this).attr('class');
-            $(this).addClass('tab_sel');
-            $('.html_' + tabid).show();
-            return false;
+<div style="display: none;">
+    <div class="ArcticBoxModal box-modal" id="ArcticBoxModal">
+        <div class="box-modal_close arcticmodal-close"><img src="/assets/img/close.png"></div>
+        <div class="ArcticBoxModalContent"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.arctic-modal-popup').click(function() {
+            var c = $( "[data_id=" + $( this ).attr( 'data_more') + "]" );
+            var w = c.find( '[data-width]').attr( 'data-width' );
+            if ( typeof w === 'undefined' ){
+                w = "auto";
+            };
+            $( '.ArcticBoxModalContent').html( c.html() );
+
+            $( '#ArcticBoxModal' ).arcticmodal({
+                beforeOpen: function(data, el) {
+                    $( '.box-modal').css( 'width', w);
+                },
+                overlay: {
+                    css: {
+                        backgroundColor: '#000',
+                        //backgroundImage: 'url(/assets/img/logo.png)',
+                        backgroundRepeat: 'repeat',
+                        backgroundPosition: '50% 0',
+                        opacity: .25
+                    }
+                }
+            });
         });
     });
+
 </script>
 
 </body>

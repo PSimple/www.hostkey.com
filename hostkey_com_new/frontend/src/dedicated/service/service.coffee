@@ -67,3 +67,18 @@ angular.module("dedicated.service").controller "DedicatedServiceSolutionsCtrl", 
     $rootScope.loaded = true
 
     $scope.solutions = solutions
+
+    angular.module 'ui.anchor', []
+
+angular.module('ui.anchor').directive 'anchor', ($location, $timeout) ->
+    scope:
+        anchorId: '@anchor'
+
+    link: (scope, element, attrs) ->
+
+        if $location.hash() is scope.anchorId
+            $timeout ->
+                $("html, body").animate
+                    scrollTop: element.offset().top - 60
+                , 300
+            , 1000

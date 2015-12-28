@@ -15,11 +15,12 @@ window.type = 'dedicated';
     <div class="b-dedicated">
 
         <h3 class="b-dedicated__title">
-            DEDICATED<br>
+           DEDICATED<br>
             FEATURE
         </h3>
 
         {plugin "Content_ContentBlock_Plugin" view="SelectService"}
+
         <input type="hidden" name="currency" value="{$currency}">
         <input type="hidden" name="currencyId" value="{$currencyId}">
 
@@ -35,6 +36,9 @@ window.type = 'dedicated';
         {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" IsFeatures="1"}
 
         <div class="b-dedicated__free">
+            <div class="b-dedicated-try__line">
+                <span class="b-vps__try-line-text">Try before you buy</span>
+            </div>
             <a class="b-dedicated__free-title" href="#">free<br>
                 test<br>
                 drive
@@ -44,9 +48,7 @@ window.type = 'dedicated';
         </div>
 
         <div class="black-sale">
-
             <h2 class="black-sale__title">2014 SALE</h2>
-
             {include "Shop_Dedicated_include.black.sale.slider"}
         </div>
 
