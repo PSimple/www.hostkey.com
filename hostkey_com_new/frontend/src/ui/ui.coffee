@@ -6,6 +6,8 @@ require './scrollBlock/scrollBlock'
 require './select2/select2'
 require './columns/columns'
 require './notifications/index'
+require './anchor/anchor'
+
 
 angular.module "ui", [
 #    "ui.bootstrap"
@@ -15,6 +17,7 @@ angular.module "ui", [
     "ui.select"
     "ui.columns"
     "ui.notifications"
+    "ui.anchor"
 ]
 
 angular.module("ui").filter 'orderVerbose',  ->
