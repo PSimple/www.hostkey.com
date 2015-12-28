@@ -78,7 +78,7 @@
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(9);
+	/* WEBPACK VAR INJECTION */(function($) {__webpack_require__(9);
 
 	__webpack_require__(11);
 
@@ -142,9 +142,28 @@
 	    window.currency = $stateParams.currency;
 	  }
 	  $rootScope.loaded = true;
-	  return $scope.solutions = solutions;
+	  $scope.solutions = solutions;
+	  return angular.module('ui.anchor', []);
 	}]);
 
+	angular.module('ui.anchor').directive('anchor', ["$location", "$timeout", function($location, $timeout) {
+	  return {
+	    scope: {
+	      anchorId: '@anchor'
+	    },
+	    link: function(scope, element, attrs) {
+	      if ($location.hash() === scope.anchorId) {
+	        return $timeout(function() {
+	          return $("html, body").animate({
+	            scrollTop: element.offset().top - 60
+	          }, 300);
+	        }, 1000);
+	      }
+	    }
+	  };
+	}]);
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 8 */
@@ -57086,7 +57105,7 @@
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div class=\"b-dedicated__switch-item active\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div ng-click=\"url('/dedicated/service/russia')\" class=\"b-dedicated__switch-item\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Details</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
+	buf.push("<div class=\"b-dedicated__box\"><h3 anchor=\"nl\" class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div class=\"b-dedicated__switch-item active flag_nl\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div ng-click=\"url('/dedicated/service/russia')\" ui-sref=\"app.portal.agency.structure({'#': 'ru'})\" class=\"b-dedicated__switch-item flag_ru\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Details</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
 	}
 
 /***/ },
@@ -57100,7 +57119,7 @@
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div ng-click=\"url('/dedicated/service/netherlands')\" class=\"b-dedicated__switch-item\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><a class=\"b-dedicated__switch-item active\">russia</a></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Details</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
+	buf.push("<div class=\"b-dedicated__box\"><h3 anchor=\"ru\" class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div ng-click=\"url('/dedicated/service/netherlands')\" ui-sref=\"app.portal.agency.structure({'#': 'nl'})\" class=\"b-dedicated__switch-item\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><a class=\"b-dedicated__switch-item active\">russia</a></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Details</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
 	}
 
 /***/ }

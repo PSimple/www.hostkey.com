@@ -1,7 +1,7 @@
 {
   "name": "hostkey",
   "version": "0.0.1",
-  "description": "Hostkey",
+  "description": "HOSTKEY",
   "main": "index.html",
   "scripts": {
     "install": "bower install --silent",

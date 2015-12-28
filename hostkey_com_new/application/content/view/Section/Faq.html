@@ -21,12 +21,14 @@
                                     knowledge base
                                 </span>
                         <script>
-                            function faqControl(newId) {
-                                $(".b-faq__answer-content").hide('slow');
-                                $(".b-faq__answer-content[data-id='" + newId + "']").toggle('slow');
-                                $(".b-faq__questions-item").removeClass('active');
-                                $("#faq" + newId).addClass('active');
-                            }
+                            $( document ).ready(function() {
+                                function faqControl(newId) {
+                                    $(".b-faq__answer-content").hide('slow');
+                                    $(".b-faq__answer-content[data-id='" + newId + "']").toggle('slow');
+                                    $(".b-faq__questions-item").removeClass('active');
+                                    $("#faq" + newId).addClass('active');
+                                };
+                            });
                         </script>
                         <span class="b-icon b-faq__questions-item-icon b-faq__questions-item-icon_purpur"></span></a>
                     <a class="b-faq__questions-item" id="faq04" href="#" onclick="faqControl('04');">How to become your client?<span class="b-icon b-faq__questions-item-icon"></span></a>

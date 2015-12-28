@@ -9,7 +9,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.01.01
  */
-class Content_ContentBlock_Plugin extends Zero_Controller
+class Content_ContentBlock_Plugin_MainPageBestOffers extends Zero_Controller
 {
     /**
      * Контроллер по умолчанию.
@@ -25,8 +25,8 @@ class Content_ContentBlock_Plugin extends Zero_Controller
             $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 0 AND Section_ID = " . Zero_App::$Section->ID;
 
         $data = Zero_DB::Select_Array($sql);
-        $this->View->Assign('DATA', $data);
-
+        $this->View->Assign('data', $data);
+      //pre( $data );
         return $this->View;
     }
 

@@ -8,13 +8,13 @@
             <div class="b-news">
                 <div class="b-news__list" id="scroll-anchor-01">
 
-                        {foreach ($newsList1 as $key => $row)}
+                        {foreach ($newsList as $key => $row)}
                         <div class="b-news__item"
                              {if ( $row['IsDetails'] )}
                                    onClick="javascript: document.location.href='{URL}_{$row['ID']}';"
                             {/if}
                             {if ( 0 == $key )} style="background: #fff;" {/if}
-                            ">
+                            >
                                 <div class="b-news__item-date b-news__item-date_first_yes">{$row['Date']}</div>
                                {if ( $row['Name'] )}
                                      <div class="b-news__item-separate b-news__item-separate_red_yes"></div>

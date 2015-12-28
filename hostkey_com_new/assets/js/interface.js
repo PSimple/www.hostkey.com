@@ -1,6 +1,16 @@
 jQuery(function($){
     'use strict';
 
+    $(document).on('click', '.tabs a', function () {
+            $('.tabs a').removeClass('tab_sel');
+            $('.html_tab').hide();
+            var tabid = $(this).attr('class');
+            $(this).addClass('tab_sel');
+            $('.html_' + tabid).show();
+            return false;
+        });
+
+
     $(document).on('click', '.js-tab', function(){
         var $tab = $(this).data('tab');
         var $collection = $(this).parents('.js-tab-wrapper').find('.js-tab-content');
@@ -288,6 +298,16 @@ jQuery(function($){
         z.payment.data = new Object();
         z.payment.data[0] = l['payment']['data'][n];
     }
+
+
+    function ancorDetected (){
+        var anc = window.location.hash.replace("#","");
+       if( anc == 'ru' || anc == 'nl' ){
+           $.scrollTo('#calc', 1000, { offset:-90 });
+       }
+    }
+
+    ancorDetected ();
 
     });
 

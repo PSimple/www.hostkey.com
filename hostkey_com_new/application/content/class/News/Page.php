@@ -17,42 +17,63 @@ class Content_News_Page extends Zero_Controller
      */
     public function Action_Default()
     {
+
         if ( 0 < count(Zero_App::$RequestParams) )
         {
-            $view = new Zero_View(get_class($this) . 'Details');
+
+            $this->View = new Zero_View(get_class($this) . 'Details');
             $news = Content_News::Make(Zero_App::$RequestParams[0]);
             $news->Load_Page();
             if ( !$news->ID )
                 throw new Exception('Page Not Found', 404);
-            $view->Assign('news', $news);
+            $this->View->Assign('news', $news);
         }
         else
         {
-            $view = new Zero_View(get_class($this));
+            $this->Chunk_Init();
             $news = Content_News::Make();
             $news->AR->Sql_Order('DateCreate', 'DESC');
             $news->AR->Sql_Limit(1, 3);
             $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
-            $view->Assign('newsList1', $newsList);
+            $this->View->Assign('newsList1', $newsList);
             $news->AR->Sql_Limit(2, 3);
             $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
-            $view->Assign('newsList2', $newsList);
+            $this->View->Assign('newsList2', $newsList);
             $news->AR->Sql_Limit(3, 3);
             $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
-            $view->Assign('newsList3', $newsList);
+            $this->View->Assign('newsList3', $newsList);
             $news->AR->Sql_Limit(4, 3);
             $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
-            $view->Assign('newsList4', $newsList);
+            $this->View->Assign('newsList4', $newsList);
             $news->AR->Sql_Order('DateCreate', 'DESC');
             $news->AR->Sql_Limit(1, 12);
             $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
-
-            pre($newsList);
-            $view->Assign('newsList', $newsList);
+           // $NewsDetailPath = Zero_Config::Get_Config('content', 'config');
+            $this->View->Assign('NEWS_DETAIL_PATH', Zero_Config::Get_Config('content', 'config')['NewsDetailPath']);
+            $this->View->Assign('newsList', $newsList);
 //            pre($newsList);
         }
-        return $view;
+        return $this->View;
     }
+
+
+    /**
+     * Инициализация контроллера
+     *
+     * Может быть переопределен конкретным контроллером
+     *
+     * @return bool
+     */
+    protected function Chunk_Init()
+    {
+        // Шаблон
+        if ( isset($this->Params['view']) )
+            $this->View = new Zero_View(get_class($this) . '_' . $this->Params['view']);
+        else
+            $this->View = new Zero_View(get_class($this));
+        return $this->View ;
+    }
+
 
     /**
      * Фабричный метод по созданию контроллера.
