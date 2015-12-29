@@ -4915,6 +4915,8 @@ p {
   text-decoration: none;
   transition: all 0.3s ease 0s;
   width: 315px;
+  display: table-cell;
+  margin: 0 auto;
 }
 .main-page-offers__item:hover {
   background-color: #313842;
@@ -5504,7 +5506,17 @@ p {
 .b-text-page__box .tab_html{ width: 960px; margin: 100px auto 0 auto; background: #fff; position: relative; }
 
 
-.flag_nl {
+.js-switch-box .flag_nl, .switch_country_for_container_VPS .flag_nl {
   background: url("/assets/img/nl_flag.png") 0 0 no-repeat;
-  padding: 30px 0 0 0;
+  padding: 0 0 0 40px;
+}
+
+.js-switch-box .flag_ru, .switch_country_for_container_VPS .flag_ru {
+  background: url("/assets/img/ru_flag.png") 0 0 no-repeat;
+  padding: 0 0 0 40px;
+}
+
+.main-page-best-offers-row {
+  display: table-row;
+  text-align:  center;
 }

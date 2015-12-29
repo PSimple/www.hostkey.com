@@ -7,9 +7,7 @@
         .b-dedicated__switch-item.active.flag_nl netherland
         .b-dedicated__switch-item /
         .b-dedicated__switch-item.flag_ru(ng-click="url('/dedicated/service/russia?ru')") russia
-
 .b-dedicated__list.js-switch-box
-
     .b-dedicated__item(ng-repeat="s in solutions", ng-class="{active:$stateParams.type===s.type}", ui-sref=".selected({type:s.type})")
         img.b-dedicated__item-image(ng-src="{{s.image}}")
         h3.b-dedicated__item-title {{s.title}}
@@ -19,6 +17,5 @@
             span(ng-bind-html="s.price|verboseCurrency:false")
             | /month
         a.b-dedicated__item-detail(href="") Details
-
 //- выбранное решение
 .b-dedicated__hide-block.js-setting(id="selectedSolution", ui-view="", ng-class="{'_angular': $state.includes('dedicatedService.selected')}")
