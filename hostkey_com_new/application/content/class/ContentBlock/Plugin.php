@@ -25,7 +25,7 @@ class Content_ContentBlock_Plugin extends Zero_Controller
             $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 0 AND Section_ID = " . Zero_App::$Section->ID;
 
         $data = Zero_DB::Select_Array($sql);
-        $this->View->Assign('data', $data);
+        $this->View->Assign('DATA', $data);
 
         return $this->View;
     }

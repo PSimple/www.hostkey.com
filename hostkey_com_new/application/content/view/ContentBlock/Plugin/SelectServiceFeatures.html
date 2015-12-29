@@ -1,84 +1,46 @@
-{if ( 0 < count($data) )}
+{if ( 0 < count($DATA) )}
 <div class="b-container">
     <div class="b-dedicated-features">
         <table class="b-dedicated-features__table">
             <tr class="b-dedicated-features__row">
-            {set $i=0}
-            {foreach ($data as $k => $val)}
-            {if ( $i%2 == 0 && 0 < $k )}
+                {set $i=0}
+                {foreach ($DATA as $k => $val)}
+                {if ( $i%2 == 0 && 0 < $k )}
             </tr>
             <tr class="b-dedicated-features__row">
-            {/if}
+                {/if}
                 <td class="b-dedicated-features__cell">
                     <div class="b-dedicated-features__item">
                         <img class="b-dedicated-features__item-image" src="{HTTPD}/{$val['Img']}" alt="иконка"/>
+
                         <div class="b-dedicated-features__item-description">
                             <h3 class="b-dedicated-features__item-title">{$val['Head']}</h3>
+
                             <p class="b-dedicated-features__item-text">{$val['Description']}</p>
                             {if ( $val['Link'] == '' )}
-                                <a class="b-dedicated-features__item-link open-popup-in-page" href="#" data_more="{$val['ID']}">more
-                                           <span class="b-icon b-dedicated-features__item-link-icon"></span>
-                                </a>
+                            {if ( $val['Content'] !='')}
+                            <a class="b-dedicated-features__item-link open-popup-in-page arctic-modal-popup" href="#" data_more="{$val['ID']}">
+                                more
+                                <span class="b-icon b-dedicated-features__item-link-icon"></span>
+                            </a>
+                            {/if}
                             {else}
-                                <a class="b-dedicated-features__item-link" href="{$val['Link']}">more
-                                    <span class="b-icon b-dedicated-features__item-link-icon"></span>
-                                </a>
+                            <a class="b-dedicated-features__item-link" href="{$val['Link']}" target="_blank">
+                                more
+                                <span class="b-icon b-dedicated-features__item-link-icon"></span>
+                            </a>
                             {/if}
                         </div>
                     </div>
                     <div style="display: none;" data_id="{$val['ID']}">
-                         {$val['Content']}
+                        {$val['Content']}
                     </div>
                 </td>
-            {set $i++}
-            {/foreach}
+                {set $i++}
+                {/foreach}
             </tr>
         </table>
     </div>
-
-    <div class="popup popup_bothers" style="display: none;" id="information_manage_cloud">
-        <a class="close close_window_information_manager_cloud" href="#"><img src="/assets/img/close.png"></a>
-
-
-        <div id="add_iframe_from_billing">
-
-        </div>
-    </div>
-
 </div>
 {/if}
-<script>
-    $(document).ready(function () {
-            /*
-             *   Закрываем окно
-             */
-            $('.close_window_information_manager_cloud').click(function () {
-                $('.popup').hide();
-                $( '#add_iframe_from_billing' ).html('');
-                return false;
-            });
-            /*
-             * Открываем окно
-             */
-            $( '.open-popup-in-page').bind( 'click', function( ) {
-                $('.popup').show();
-                console.log ("'[data_id=" + $( this ).attr( 'data_more') + "]'" );
-                var c =  "[data_id=" + $( this ).attr( 'data_more') + "]";
-                $( '#add_iframe_from_billing').html( $( "[data_id=" + $( this ).attr( 'data_more') + "]" ).html() );
-                return false;
-            });
-        });
-</script>
-
-<style>
-    #add_iframe_from_billing {
-        padding: 20px;
-        margin: 30px 0 0 0;
-    }
-    .popup_bothers {
-        position: absolute;
-        top: 5%;
-    }
-
-</style>
 

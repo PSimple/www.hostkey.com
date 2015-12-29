@@ -1,12 +1,12 @@
 .b-dedicated__box
-    h3.b-dedicated__title.b-dedicated__title_upline_yes
+    h3.b-dedicated__title.b-dedicated__title_upline_yes(anchor="ru")
         | OUR
         br
         | SOLUTIONS
     .b-dedicated__switch.js-switch-box
-        .b-dedicated__switch-item(ng-click="url('/dedicated/service/netherlands')") netherland
+        .b-dedicated__switch-item.flag_nl(ng-click="url('/dedicated/service/netherlands?nl')") netherland
         .b-dedicated__switch-item /
-        a.b-dedicated__switch-item.active russia
+        a.b-dedicated__switch-item.active.flag_ru russia
 
 .b-dedicated__list.js-switch-box
 

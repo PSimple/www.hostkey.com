@@ -18,17 +18,17 @@
             </div>
 
             <script>
-                function faqControl(newId) {
-                    $(".b-faq__answer-content").css("display", "none");
-                    $(".b-faq__answer-content[data-id='" + newId + "']").css("display", "block");
-                    $(".b-faq__questions-item").removeClass('active');
-                    $("#faq" + newId).addClass('active');
-                    $( '#go_to_technical_description' ).after( $( "#faq" + newId ) );
-                    var destination = $(".b-faq__title").offset().top;
-                    $("html,body").animate( { scrollTop: destination }, 1000);
+                    function faqControl(newId) {
+                        $(".b-faq__answer-content").css("display", "none");
+                        $(".b-faq__answer-content[data-id='" + newId + "']").css("display", "block");
+                        $(".b-faq__questions-item").removeClass('active');
+                        $("#faq" + newId).addClass('active');
+                        $('#go_to_technical_description').after($("#faq" + newId));
+                        var destination = $(".b-faq__title").offset().top;
+                        $("html,body").animate({ scrollTop: destination }, 1000);
 
-                    return false;
-                }
+                        return false;
+                    };
             </script>
 
             <div class="b-faq__answer">

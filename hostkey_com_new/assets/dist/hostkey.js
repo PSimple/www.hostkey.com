@@ -88,9 +88,9 @@
 
 	__webpack_require__(15);
 
-	__webpack_require__(28);
+	__webpack_require__(29);
 
-	__webpack_require__(32);
+	__webpack_require__(33);
 
 	angular.module("dedicated.service", ["ngSanitize", "ui", "ui.router", "api", "dedicated.service.selected"]);
 
@@ -110,7 +110,7 @@
 	    views: {
 	      "solutions": {
 	        controller: "DedicatedServiceSolutionsCtrl",
-	        template: __webpack_require__(37)("./solutions." + window.country + ".jade"),
+	        template: __webpack_require__(38)("./solutions." + window.country + ".jade"),
 	        resolve: {
 	          solutions: ["$solutions", function($solutions) {
 	            return $solutions.getList();
@@ -42782,8 +42782,8 @@
 /***/ function(module, exports) {
 
 	/**
-	 * @license AngularJS v1.4.8
-	 * (c) 2010-2015 Google, Inc. http://angularjs.org
+	 * @license AngularJS v1.3.20
+	 * (c) 2010-2014 Google, Inc. http://angularjs.org
 	 * License: MIT
 	 */
 	(function(window, angular, undefined) {'use strict';
@@ -42994,11 +42994,10 @@
 
 	// SVG Elements
 	// https://wiki.whatwg.org/wiki/Sanitization_rules#svg_Elements
-	// Note: the elements animate,animateColor,animateMotion,animateTransform,set are intentionally omitted.
-	// They can potentially allow for arbitrary javascript to be executed. See #11290
-	var svgElements = makeMap("circle,defs,desc,ellipse,font-face,font-face-name,font-face-src,g,glyph," +
-	        "hkern,image,linearGradient,line,marker,metadata,missing-glyph,mpath,path,polygon,polyline," +
-	        "radialGradient,rect,stop,svg,switch,text,title,tspan,use");
+	var svgElements = makeMap("animate,animateColor,animateMotion,animateTransform,circle,defs," +
+	        "desc,ellipse,font-face,font-face-name,font-face-src,g,glyph,hkern,image,linearGradient," +
+	        "line,marker,metadata,missing-glyph,mpath,path,polygon,polyline,radialGradient,rect,set," +
+	        "stop,svg,switch,text,title,tspan,use");
 
 	// Special Elements (can contain anything)
 	var specialElements = makeMap("script,style");
@@ -43016,37 +43015,36 @@
 	var htmlAttrs = makeMap('abbr,align,alt,axis,bgcolor,border,cellpadding,cellspacing,class,clear,' +
 	    'color,cols,colspan,compact,coords,dir,face,headers,height,hreflang,hspace,' +
 	    'ismap,lang,language,nohref,nowrap,rel,rev,rows,rowspan,rules,' +
-	    'scope,scrolling,shape,size,span,start,summary,tabindex,target,title,type,' +
+	    'scope,scrolling,shape,size,span,start,summary,target,title,type,' +
 	    'valign,value,vspace,width');
 
 	// SVG attributes (without "id" and "name" attributes)
 	// https://wiki.whatwg.org/wiki/Sanitization_rules#svg_Attributes
 	var svgAttrs = makeMap('accent-height,accumulate,additive,alphabetic,arabic-form,ascent,' +
-	    'baseProfile,bbox,begin,by,calcMode,cap-height,class,color,color-rendering,content,' +
-	    'cx,cy,d,dx,dy,descent,display,dur,end,fill,fill-rule,font-family,font-size,font-stretch,' +
-	    'font-style,font-variant,font-weight,from,fx,fy,g1,g2,glyph-name,gradientUnits,hanging,' +
-	    'height,horiz-adv-x,horiz-origin-x,ideographic,k,keyPoints,keySplines,keyTimes,lang,' +
-	    'marker-end,marker-mid,marker-start,markerHeight,markerUnits,markerWidth,mathematical,' +
-	    'max,min,offset,opacity,orient,origin,overline-position,overline-thickness,panose-1,' +
-	    'path,pathLength,points,preserveAspectRatio,r,refX,refY,repeatCount,repeatDur,' +
-	    'requiredExtensions,requiredFeatures,restart,rotate,rx,ry,slope,stemh,stemv,stop-color,' +
-	    'stop-opacity,strikethrough-position,strikethrough-thickness,stroke,stroke-dasharray,' +
-	    'stroke-dashoffset,stroke-linecap,stroke-linejoin,stroke-miterlimit,stroke-opacity,' +
-	    'stroke-width,systemLanguage,target,text-anchor,to,transform,type,u1,u2,underline-position,' +
-	    'underline-thickness,unicode,unicode-range,units-per-em,values,version,viewBox,visibility,' +
-	    'width,widths,x,x-height,x1,x2,xlink:actuate,xlink:arcrole,xlink:role,xlink:show,xlink:title,' +
-	    'xlink:type,xml:base,xml:lang,xml:space,xmlns,xmlns:xlink,y,y1,y2,zoomAndPan', true);
+	    'attributeName,attributeType,baseProfile,bbox,begin,by,calcMode,cap-height,class,color,' +
+	    'color-rendering,content,cx,cy,d,dx,dy,descent,display,dur,end,fill,fill-rule,font-family,' +
+	    'font-size,font-stretch,font-style,font-variant,font-weight,from,fx,fy,g1,g2,glyph-name,' +
+	    'gradientUnits,hanging,height,horiz-adv-x,horiz-origin-x,ideographic,k,keyPoints,' +
+	    'keySplines,keyTimes,lang,marker-end,marker-mid,marker-start,markerHeight,markerUnits,' +
+	    'markerWidth,mathematical,max,min,offset,opacity,orient,origin,overline-position,' +
+	    'overline-thickness,panose-1,path,pathLength,points,preserveAspectRatio,r,refX,refY,' +
+	    'repeatCount,repeatDur,requiredExtensions,requiredFeatures,restart,rotate,rx,ry,slope,stemh,' +
+	    'stemv,stop-color,stop-opacity,strikethrough-position,strikethrough-thickness,stroke,' +
+	    'stroke-dasharray,stroke-dashoffset,stroke-linecap,stroke-linejoin,stroke-miterlimit,' +
+	    'stroke-opacity,stroke-width,systemLanguage,target,text-anchor,to,transform,type,u1,u2,' +
+	    'underline-position,underline-thickness,unicode,unicode-range,units-per-em,values,version,' +
+	    'viewBox,visibility,width,widths,x,x-height,x1,x2,xlink:actuate,xlink:arcrole,xlink:role,' +
+	    'xlink:show,xlink:title,xlink:type,xml:base,xml:lang,xml:space,xmlns,xmlns:xlink,y,y1,y2,' +
+	    'zoomAndPan');
 
 	var validAttrs = angular.extend({},
 	                                uriAttrs,
 	                                svgAttrs,
 	                                htmlAttrs);
 
-	function makeMap(str, lowercaseKeys) {
+	function makeMap(str) {
 	  var obj = {}, items = str.split(','), i;
-	  for (i = 0; i < items.length; i++) {
-	    obj[lowercaseKeys ? angular.lowercase(items[i]) : items[i]] = true;
-	  }
+	  for (i = 0; i < items.length; i++) obj[items[i]] = true;
 	  return obj;
 	}
 
@@ -43174,9 +43172,8 @@
 
 	    unary = voidElements[tagName] || !!unary;
 
-	    if (!unary) {
+	    if (!unary)
 	      stack.push(tagName);
-	    }
 
 	    var attrs = {};
 
@@ -43195,12 +43192,11 @@
 	  function parseEndTag(tag, tagName) {
 	    var pos = 0, i;
 	    tagName = angular.lowercase(tagName);
-	    if (tagName) {
+	    if (tagName)
 	      // Find the closest opened tag of the same type
-	      for (pos = stack.length - 1; pos >= 0; pos--) {
-	        if (stack[pos] == tagName) break;
-	      }
-	    }
+	      for (pos = stack.length - 1; pos >= 0; pos--)
+	        if (stack[pos] == tagName)
+	          break;
 
 	    if (pos >= 0) {
 	      // Close all the open elements, up the stack
@@ -43414,7 +43410,7 @@
 	 */
 	angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
 	  var LINKY_URL_REGEXP =
-	        /((ftp|https?):\/\/|(www\.)|(mailto:)?[A-Za-z0-9._%+-]+@)\S*[^\s.;,(){}<>"\u201d\u2019]/i,
+	        /((ftp|https?):\/\/|(www\.)|(mailto:)?[A-Za-z0-9._%+-]+@)\S*[^\s.;,(){}<>"”’]/i,
 	      MAILTO_REGEXP = /^mailto:/i;
 
 	  return function(text, target) {
@@ -43490,7 +43486,9 @@
 
 	__webpack_require__(26);
 
-	angular.module("ui", ["ui.buttons", "ui.scrollBlock", "ui.accordion", "ui.select", "ui.columns", "ui.notifications"]);
+	__webpack_require__(28);
+
+	angular.module("ui", ["ui.buttons", "ui.scrollBlock", "ui.accordion", "ui.select", "ui.columns", "ui.notifications", "ui.anchor"]);
 
 	angular.module("ui").filter('orderVerbose', function() {
 	  return function(obj) {
@@ -54388,11 +54386,48 @@
 /* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(29);
+	/* WEBPACK VAR INJECTION */(function($) {
+	/*
+
+	    Анкоры
+
+	    jade:
+	        //- ссылка на анкор
+	        a(ui-sref="app.portal.agency.structure({'#': 'regions'})") регионах
+
+	        //- анкор на который нужно отскролить
+	        h2.sub-title(anchor="regions") Органы исполнительной
+	 */
+	angular.module('ui.anchor', []);
+
+	angular.module('ui.anchor').directive('anchor', ["$location", "$timeout", function($location, $timeout) {
+	  return {
+	    scope: {
+	      anchorId: '@anchor'
+	    },
+	    link: function(scope, element, attrs) {
+	      if ($location.hash() === scope.anchorId || window.location.search.indexOf(scope.anchorId) > -1) {
+	        return $timeout(function() {
+	          return $("html, body").animate({
+	            scrollTop: element.offset().top - 70
+	          }, 300);
+	        }, 1000);
+	      }
+	    }
+	  };
+	}]);
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(30);
 
 	__webpack_require__(31);
+
+	__webpack_require__(32);
 
 	angular.module("api", ["api.dedicated", "api.order", "api.solutions"]);
 
@@ -54400,7 +54435,7 @@
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports) {
 
 	var objectToArray;
@@ -54571,7 +54606,7 @@
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports) {
 
 	angular.module("api.order", ["config"]);
@@ -54700,7 +54735,7 @@
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports) {
 
 	angular.module("api.solutions", ["config"]);
@@ -54762,10 +54797,10 @@
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(33);
+	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(34);
 
 	angular.module("dedicated.service.selected", []);
 
@@ -54773,7 +54808,7 @@
 	  $stateProvider.state("dedicatedService.selected", {
 	    url: "/type/:type",
 	    controller: "SelectedCtrl",
-	    template: __webpack_require__(34),
+	    template: __webpack_require__(35),
 	    resolve: {
 	      components: ["$dedicated", function($dedicated) {
 	        return $dedicated.components();
@@ -55228,7 +55263,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -56782,10 +56817,10 @@
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(35);
+	var jade = __webpack_require__(36);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -56796,7 +56831,7 @@
 	}
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57016,7 +57051,7 @@
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(36).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(37).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -57048,18 +57083,18 @@
 
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./solutions.NL.jade": 38,
-		"./solutions.RU.jade": 39
+		"./solutions.NL.jade": 39,
+		"./solutions.RU.jade": 40
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -57072,35 +57107,35 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 37;
+	webpackContext.id = 38;
 
-
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var jade = __webpack_require__(35);
-
-	module.exports = function template(locals) {
-	var buf = [];
-	var jade_mixins = {};
-	var jade_interp;
-
-	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div class=\"b-dedicated__switch-item active\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div ng-click=\"url('/dedicated/service/russia')\" class=\"b-dedicated__switch-item\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Details</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
-	}
 
 /***/ },
 /* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(35);
+	var jade = __webpack_require__(36);
 
 	module.exports = function template(locals) {
 	var buf = [];
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div ng-click=\"url('/dedicated/service/netherlands')\" class=\"b-dedicated__switch-item\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><a class=\"b-dedicated__switch-item active\">russia</a></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Details</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
+	buf.push("<div class=\"b-dedicated__box\"><h3 anchor=\"nl\" class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div class=\"b-dedicated__switch-item active flag_nl\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><div ng-click=\"url('/dedicated/service/russia?ru')\" class=\"b-dedicated__switch-item flag_ru\">russia</div></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Details</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
+	}
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var jade = __webpack_require__(36);
+
+	module.exports = function template(locals) {
+	var buf = [];
+	var jade_mixins = {};
+	var jade_interp;
+
+	buf.push("<div class=\"b-dedicated__box\"><h3 anchor=\"ru\" class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div ng-click=\"url('/dedicated/service/netherlands?nl')\" class=\"b-dedicated__switch-item flag_nl\">netherland</div><div class=\"b-dedicated__switch-item\">/</div><a class=\"b-dedicated__switch-item active flag_ru\">russia</a></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Details</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
 	}
 
 /***/ }

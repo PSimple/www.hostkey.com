@@ -17,12 +17,11 @@ class Content_Section_Page extends Zero_Controller
     public function Action_Default()
     {
         $this->Chunk_Init();
-        preg_match_all('#(<.+?>)(.+?)(<\/.+?>)#is', Zero_App::$Section->Name , $hh);
-      //  pre( $hh );
-        $head = str_replace(' ', '<br>', $hh[2][0]);
-        $this->View->Assign('head', $hh[1][0].$head.$hh[3][0]);
-        $this->View->Assign('HEADER_CONTENT', Zero_App::$Section -> NameSub );
-        $this->View->Assign('content', Zero_App::$Section->Content );
+        preg_match_all('#(<.+?>)(.+?)(<\/.+?>)#is', Zero_App::$Section->Name, $match);
+        $head = str_replace(' ', '<br>', $match[2][0]);
+        $this->View->Assign('head', $match[1][0] . $head . $match[3][0]);
+        $this->View->Assign('HEADER_CONTENT', Zero_App::$Section->NameSub);
+        $this->View->Assign('content', Zero_App::$Section->Content);
 
         return $this->View;
     }

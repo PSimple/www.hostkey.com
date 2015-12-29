@@ -19,7 +19,13 @@ class Content_Section_404 extends Zero_Controller
     public function Action_Default()
     {
         $this->Chunk_Init();
-        $this->View->Assign('qqqqqq', 'Popcorn');
+        $Section = Zero_Model::Makes('Zero_Section', 134);
+        $Section->Init_Url("/404");
+        $section_data = $Section->Get_Props();
+        preg_match_all('#(<.+?>)(.+?)(<\/.+?>)#is', $section_data['Name'], $match);
+        $head = str_replace(' ', '<br>', $match[2][0]);
+        $this->View->Assign('NAME', $match[1][0] . $head . $match[3][0]);
+        $this->View->Assign('DESC', $section_data['Description']);
         return $this->View;
     }
 
