@@ -12,7 +12,7 @@ return [
      * @deprecated
      */
     'Shop_Cloud_Console_Update' => [
-        'Minute' => '*/2',
+        'Minute' => '*/10',
         'Hour' => '*',
         'Day' => '*',
         'Month' => '*',
@@ -25,7 +25,7 @@ return [
      * @see Shop_Dedicated_Console_Update
      */
     'Shop_Dedicated_Console_ConfigCustom' => [
-        'Minute' => '*/2',
+        'Minute' => '*/10',
         'Hour' => '*',
         'Day' => '*',
         'Month' => '*',
@@ -38,6 +38,19 @@ return [
      * @see Shop_Dedicated_Console_ConfigStock
      */
     'Shop_Dedicated_Console_ConfigStock' => [
+        'Minute' => '*/2',
+        'Hour' => '*',
+        'Day' => '*',
+        'Month' => '*',
+        'Week' => '*',
+        'IsActive' => true
+    ],
+    /**
+     * Кеширование списка компоннетов по типам
+     *
+     * @see Shop_Dedicated_Console_ConfigList
+     */
+    'Shop_Dedicated_Console_ConfigList' => [
         'Minute' => '*/2',
         'Hour' => '*',
         'Day' => '*',

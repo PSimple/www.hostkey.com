@@ -7,7 +7,7 @@
  *
  * @package Shop.Dedicated.Console
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015-09-24
+ * @date 2015.09.24
  */
 class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
 {

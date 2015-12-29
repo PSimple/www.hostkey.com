@@ -21,15 +21,15 @@ class Shop_Dedicated_Sale extends Zero_Controller
         $config = Zero_Config::Get_Config('shop', 'config');
         $this->View->Assign("currency", $config['currency']);
         $this->View->Assign("currencyId", $config['currencyId']);
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorStock/' . md5($config['currency']) . '.data';
-        $configuration = [];
 
         $min = 0;
         $max = 0;
+        $configuration = [];
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorStock/' . md5($config['currency']) . '.data';
         if ( file_exists($path) )
         {
             $configuration = unserialize(file_get_contents($path));
-            foreach($configuration as $key => $row)
+            foreach ($configuration as $key => $row)
             {
                 // min
                 if ( 0 == $min )
@@ -52,7 +52,7 @@ class Shop_Dedicated_Sale extends Zero_Controller
                 $flagRaid = false;
                 if ( isset($row['Other']) )
                 {
-                    foreach($row['Other'] as $v)
+                    foreach ($row['Other'] as $v)
                     {
                         if ( preg_match('~Adaptec|LSI|RS2|SRC|RAID|SAS~s', $v) )
                         {
@@ -67,6 +67,26 @@ class Shop_Dedicated_Sale extends Zero_Controller
         $this->View->Assign('min', $min);
         $this->View->Assign('max', $max);
         $this->View->Assign('configuration', $configuration);
+//        pre($configuration);
+
+        // OS
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/' . md5($config['currency']) . '4.data';
+        $listOs = [];
+        if ( file_exists($path) )
+        {
+            $listOs = unserialize(file_get_contents($path));
+        }
+        $this->View->Assign('listOs', $listOs);
+
+        // Port
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/' . md5($config['currency']) . '13.data';
+        $listPort = [];
+        if ( file_exists($path) )
+        {
+            $listPort = unserialize(file_get_contents($path));
+        }
+        $this->View->Assign('listPort', $listPort);
+
         return $this->View;
     }
 

@@ -64,9 +64,9 @@
                             <td class="dedicated-extra-price__table-cell">processor</td>
                             <td class="dedicated-extra-price__table-cell">memory</td>
                             <td class="dedicated-extra-price__table-cell">hard drive</td>
-                            <td class="dedicated-extra-price__table-cell">hardware raid</td>
-                            <td class="dedicated-extra-price__table-cell">vlan</td>
-                            <td class="dedicated-extra-price__table-cell">free bonus</td>
+                            <td class="dedicated-extra-price__table-cell">hw raid</td>
+                            <td class="dedicated-extra-price__table-cell">PORT</td>
+                            <td class="dedicated-extra-price__table-cell">OS</td>
                             <td class="dedicated-extra-price__table-cell">monthly</td>
                             <td class="dedicated-extra-price__table-cell dedicated-extra-price__table-cell_red_yes">price will change after:</td>
                         </tr>
@@ -152,28 +152,27 @@
                         </tr>
 
                         {foreach ($configuration as $key => $row)}
-                        <script>
-                        $('#js-countdown-{$key}').timeTo({
-                        seconds: 4566,
-                        displayCaptions: true,
-                        captionSize: 12
-                        });
-                        </script>
                         <tr class="dedicated-extra-price__table-row">
-                            <td class="dedicated-extra-price__table-cell"><span class="b-icon b-flag b-flag_country_nether"></span></td>
+                            <td class="dedicated-extra-price__table-cell">
+                                {if ( 'NL' == $row['LocationCode'] )}
+                                <span class="b-icon b-flag b-flag_country_nether"></span>
+                                {else}
+                                <span class="b-icon b-flag"></span>
+                                {/if}
+                            </td>
                             <td class="dedicated-extra-price__table-cell">
                                 <div class="dedicated-extra-price__text">
                                     {$row['Cpu']['Name']}
                                 </div>
                                 <div class="b-range">
                                     <a href="{$row['Cpu']['KpdLink']}" target="_blank">
-                                    {for ($j = 0; $j < 15000; $j += 1000)}
-                                    {if ( $j <= $row['Cpu']['Kpd'] * 2 )}
-                                    <span class="b-range__item b-range__item_type_green"></span>
-                                    {else}
-                                    <span class="b-range__item"></span>
-                                    {/if}
-                                    {/for}
+                                        {for ($j = 0; $j < 15000; $j += 1000)}
+                                        {if ( $j <= $row['Cpu']['Kpd'] * 2 )}
+                                        <span class="b-range__item b-range__item_type_green"></span>
+                                        {else}
+                                        <span class="b-range__item"></span>
+                                        {/if}
+                                        {/for}
                                     </a>
                                 </div>
                             </td>
@@ -193,17 +192,24 @@
                                 {/if}
                             </td>
                             <td class="dedicated-extra-price__table-cell">
-                                <span class="dedicated-extra-price__text">None</span>
+                                <span class="dedicated-extra-price__text">
+                                  <select id='port{$key}' name="listOS" style="width: 100%;"><option value="">Не выбрано</option>
+                                      {foreach ($listPort as $r)}
+                                      <option value="{$r['ID']}">{$r['Name']}</option>
+                                      {/foreach}
+                                  </select>
+                                </span>
                             </td>
                             <td class="dedicated-extra-price__table-cell">
-                                20 IP, traffic,
-                                cPanel, Windows
+                                <select id='os{$key}' name="listOS" style="width: 100%;"><option value="">Не выбрано</option>
+                                    {foreach ($listOs as $r)}
+                                    <option value="{$r['ID']}">{$r['Name']}</option>
+                                    {/foreach}
+                                </select>
                             </td>
                             <td class="dedicated-extra-price__table-cell">
                                 {if ( $row['Price']['Price'] )}
-                                <a class="b-submit dedicated-item-content__submit" href="#">{$row['Price']['Price']}</a>
-                                {else}
-                                <a class="b-submit dedicated-item-content__submit" href="#"></a>
+                                <a class="b-submit dedicated-item-content__submit" onclick="return saleBuy({$key});" href="#">{$row['Price']['Price']}</a>
                                 {/if}
                             </td>
                             <td class="dedicated-extra-price__table-cell">
@@ -218,7 +224,7 @@
                 <div class="dedicated-extra-price__box dedicated-extra-price__box_last_yes">
                     <a class="b-submit dedicated-extra-price__banner" href="#">
                         SHOW EXTRA PRICE SERVERS IN RUSSIAN DATA CENTER /<br>
-                        starst from �15.99/month
+                        starst from РІвЂљВ¬15.99/month
                     </a>
                 </div>
 
@@ -227,6 +233,48 @@
         </div>
 
         <script>
+            function saleBuy(id)
+            {
+                var os = document.getElementById("os"+id).value;
+                if ( !os ) {
+                    alert('OS not selected');
+                    return false;
+                }
+                var port = document.getElementById("port"+id).value;
+                if ( !port ) {
+                    alert('Port not selected');
+                    return false;
+                }
+
+                //
+                var order = {};
+                order['os'] = os;
+                order['port'] = port;
+                order['compId'] = id;
+                window.console.log(os, port, id);
+
+                jQuery.post("/api/v1/dedicated/order-stock", order,
+                        function (data) {
+                            if (data) {
+                                if (data['ErrorStatus'] == true ) {
+                                    alert(data['Message']);
+                                    window.console.log(data);
+                                    return;
+                                }
+                                //window.console.log(data);
+                                var str = "https://bill.hostkey.com/cart.php?a=add&currency=" + data['Content']['currencyId'] + "&pid=448";
+                                str += "&configoption[600]=" + data['Content']['OptionID'];
+                                str += "&billingcycle=monthly&customfield[220]=" + data['Content']['Configuration'];
+                                window.console.log(str);
+                                document.location = str;
+                                //window.console.log(data);
+                                //document.location = "https://bill.hostkey.com/cart.php?a=view";
+                            } else {
+                                alert('Error order create');
+                            }
+                        });
+                return false;
+            }
             $('#js-countdown-6').timeTo({
                 seconds: 7660,
                 displayCaptions: true,
@@ -243,55 +291,15 @@
                 captionSize: 8
             });
         </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        {foreach ($configuration as $key => $row)}
+        <script>
+            $('#js-countdown-{$key}').timeTo({
+                seconds: 5660,
+                displayCaptions: true,
+                captionSize: 8
+            });
+        </script>
+        {/foreach}
     </div>
     <div class="footer-push"></div>
 </div>
