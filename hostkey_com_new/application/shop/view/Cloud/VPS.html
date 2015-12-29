@@ -55,11 +55,11 @@
 
         <div class="switch_country_for_container_VPS" id="calc">
             {if ( $PID==530 )}
-            <div  class="b-dedicated__switch-item active">
+            <div  class="b-dedicated__switch-item active  flag_nl">
                 netherland
             </div>
             {else}
-            <div  class="b-dedicated__switch-item">
+            <div  class="b-dedicated__switch-item  flag_nl">
                 <a href="/cloud/vps#nl" target="_self" title="ckoud VDS Russia>">
                     netherland
                 </a>
@@ -67,11 +67,11 @@
             {/if}
             <div class="b-dedicated__switch-item">/</div>
             {if ( $PID==538 )}
-            <div class="b-dedicated__switch-item active">
+            <div class="b-dedicated__switch-item active  flag_ru">
                 russia
             </div>
             {else}
-            <div class="b-dedicated__switch-item">
+            <div class="b-dedicated__switch-item  flag_ru">
                 <a href="/cloud/vps/russia#ru" target="_self" title="ckoud VDS Russia>">
                     russia
                 </a>
@@ -79,8 +79,22 @@
             {/if}
         </div>
 
+        <div class="b-dedicated__back" style="display: none;">
+            <a href="#" class="b-dedicated__back-text" id="calc-breadcrambs-back">
+                <span class="b-icon b-dedicated__back-icon"></span>
+                back
+            </a>
 
-        <table class="b-vps__table">
+            <div class="b-dedicated__back-breadcrumbs">
+                <div class="b-dedicated__back-breadcrumbs-item b-dedicated__back-breadcrumbs-item_disable" id="Service">Service</div>
+                <div class="b-dedicated__back-breadcrumbs-item b-dedicated__back-breadcrumbs-item_separate_yes"></div>
+                <div class="b-dedicated__back-breadcrumbs-item b-dedicated__back-breadcrumbs-item_active" id="Options">Options</div>
+                <div class="b-dedicated__back-breadcrumbs-item b-dedicated__back-breadcrumbs-item_disable b-dedicated__back-breadcrumbs-item_separate_yes"></div>
+                <div class="b-dedicated__back-breadcrumbs-item ">Payment</div>
+            </div>
+        </div>
+
+        <table class="b-vps__table" data_id="Service">
             <tr class="b-vps__table-row">
                 <td class="b-vps__table-cell b-vps__table-cell_head_yes"></td>
                 {foreach ( $configuration as $key => $value)}
@@ -103,7 +117,7 @@
                 <td class="b-vps__table-cell"></td>
                 {foreach ( $configuration as $key => $value)}
                         <td class="b-vps__table-cell">
-                            <a class="b-vps-table__buy" href="#" data_preset="{$key}">BUY</a>
+                            <a class="b-vps-table__buy" href="#" data_preset="{$key}" data_name="Container_VPS">BUY</a>
                         </td>
                 {/foreach}
 
@@ -145,12 +159,23 @@
             <tr class="b-vps__table-row">
                 <td class="b-vps__table-cell"></td>
 
-
                 {foreach ( $configuration as $key => $value)}
                 <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#" data_preset="{$key}">BUY</a>
+                    <a class="b-vps-table__buy" href="#" data_preset="{$key}" data_name="Container_VPS">BUY</a>
                 </td>
                 {/foreach}
+            </tr>
+        </table>
+
+
+        <table class="b-vps__table" data_id="Options" style="display: none;">
+            <tr>
+                <td>
+                    <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
+                </td>
+                <td>
+                    {include "Shop_Step2"}
+                </td>
             </tr>
         </table>
 
@@ -181,6 +206,12 @@
 
 <script>
     $(document).ready(function (){
+
+        var CoocieObjZakazContainer = new Object();
+        CoocieObjZakazContainer.type = '';
+        CoocieObjZakazContainer.select = '';
+        CoocieObjZakazContainer.Zakaz = new Object();
+
 
         var Zakaz = new Object();
         var currency = {
@@ -231,7 +262,9 @@
         });
 
         $('.b-vps-table__buy').bind('click', function () {
-              $('.popup_callback').show();
+            var name_kyki = $( this).attr( 'data_name' );
+
+             // $('.popup_callback').show();
               var PRESET_ID = $( this).attr( 'data_preset' );
               for( var prop in listOfProducts ) {
                     if( prop == PRESET_ID ) {
@@ -239,6 +272,27 @@
                         window.set_payment_for_preset( Zakaz, listOfProducts, 0);
                     }
               }
+
+            CoocieObjZakazContainer.type = name_kyki;
+            CoocieObjZakazContainer.select = 'options';
+            CoocieObjZakazContainer.Zakaz = Zakaz;
+
+            if ( name_kyki !== 'undefined' ){
+                  $.cookie( name_kyki, JSON.stringify( CoocieObjZakazContainer ) );
+            } else {
+                $.removeCookie( name_kyki );
+                $.cookie( name_kyki , JSON.stringify( CoocieObjZakazContainer ) );
+            }
+            $( '#calc').hide( 'slow' );
+            $( '.b-dedicated__back'). show( 'slow' );
+            $( '.b-page__promo_vps_yes').hide( 'slow' );
+            $( '.b-vps__feature').hide( 'slow');
+            $( '[data_id=Options]').show( 'slow');
+            $( '[data_id=Service]').hide( 'slow');
+            $( '.b-dedicated__summary-title').text( 'Your Solution');
+            $( '.b-dedicated__summary-table-cel').text( Zakaz.payment.data[0].name );
+           // console.log( JSON.stringify( Zakaz ) );
+            $.scrollTo(0, 1000);
               crFrame( );
               return false;
             ;

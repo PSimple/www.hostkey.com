@@ -3,7 +3,7 @@
         <a class="black-sale__link" href="#">
             <div class="black-sale__slider-item-price">€ 130.65</div>
             <div class="black-sale__slider-item-text black-sale__slider-item-text_red_yes">Price will change after:</div>
-            <div class="black-sale__slider-item-timer" id="js-countdown-1"></div>
+            <div class="black-sale__slider-item-timer timeTo timeTo-white" id="js-countdown-1"></div>
             <div class="black-sale__slider-item-text">Processor: Core2Duo
                 E6320 1.86 GHz (2 core)</div>
             <div class="black-sale__slider-item-text">Memory: 128 Gb</div>
@@ -75,3 +75,30 @@
         </a>
     </div>
 </div>
+<script>
+    $('#js-countdown-1').timeTo({
+        seconds: 7660,
+        displayCaptions: true,
+        captionSize: 12
+    });
+    $('#js-countdown-2').timeTo({
+        seconds: 8660,
+        displayCaptions: true,
+        captionSize: 12
+    });
+    $('#js-countdown-3').timeTo({
+        seconds: 3760,
+        displayCaptions: true,
+        captionSize: 12
+    });
+    $('#js-countdown-4').timeTo({
+        seconds: 13760,
+        displayCaptions: true,
+        captionSize: 12
+    });
+    $('#js-countdown-5').timeTo({
+        seconds: 4566,
+        displayCaptions: true,
+        captionSize: 12
+    });
+</script>

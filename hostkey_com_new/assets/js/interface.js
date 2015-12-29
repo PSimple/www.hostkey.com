@@ -256,7 +256,6 @@ jQuery(function($){
     }
 
 
-
     /*
      * Формируем дефолтный заказ
      */
@@ -310,7 +309,6 @@ jQuery(function($){
     ancorDetected ();
 
     });
-
 
 
 var AJAX_SEND = function ( object_input, object_message ) {
