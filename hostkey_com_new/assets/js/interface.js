@@ -51,6 +51,9 @@ jQuery(function($){
 
     // Select init
     $('.js-select').select2();
+    $(".js-select-test").select2({
+        minimumResultsForSearch: Infinity
+    });
 
     // Accordion
     if ($( ".b-accordion").length) {
@@ -183,8 +186,9 @@ jQuery(function($){
     };
 
     window.write_dis = function write_dis( z, curr, place ) {
-        var d = window.SumUpDiscountByMonthly( z );
-        if ( d > 0 ){
+      //  var d = window.SumUpDiscountByMonthly( z );
+        var d = window.SumUpDiscount( z );
+        if ( d != 0 ){
             place.html( z['payment']['data'][0].discount + "% discount, save " + curr + " " + d );
         } else {
             place.html('');
@@ -201,32 +205,33 @@ jQuery(function($){
         var summ = 0;
         for (var prop in z) {
             if (prop != 'payment') {
-                summ = parseInt( summ + parseInt( z[prop]['data'][0][period] * 100 ) );
+
+                summ = parseInt( summ  + parseFloat( z[prop]['data'][0][period] ) * 100 );
             }
         }
-        return summ / 100;
-
+        return Math.floor(summ ) / 100;
     }
 
     /*
      *  формируем дискаунт по периоду заказа
      */
     window.SumUpDiscount = function ( z ) {
-        console.log( z );
         var discount = z['payment']['data'][0].discount;
         var period = z['payment']['data'][0].name;
         var summ = 0;
+        var summMonthly = 0;
         var dis=0;
         for (var prop in z) {
             if (prop != 'payment') {
                 summ = parseInt( summ  + parseFloat( z[prop]['data'][0][period] ) * 100 );
+                summMonthly = parseInt( summMonthly  + parseFloat( z[prop]['data'][0]['monthly'] ) * 100 );
             }
         }
         if ( parseInt( discount ) == 0){
             return 0;
         } else {
-            dis = (summ/100)* parseInt( discount );
-            return Math.floor(dis)/100;
+           // dis = (summ/100)* parseInt( discount );
+            return Math.floor(summMonthly - summ)/100;
         }
 
     }
@@ -239,6 +244,7 @@ jQuery(function($){
 
         var discount = z['payment']['data'][0].discount;
         var period = z['payment']['data'][0].name;
+        var month = z['payment']['data'][0].month;
         var summ = 0;
         var dis=0;
         for (var prop in z) {
@@ -249,7 +255,7 @@ jQuery(function($){
         if ( parseInt( discount ) == 0){
             return 0;
         } else {
-            dis = (12*summ/100)* parseInt( discount );
+            dis = (month*summ/100)* parseInt( discount );
             return Math.floor(dis)/100;
         }
 
@@ -332,7 +338,7 @@ var AJAX_SEND = function ( object_input, object_message ) {
                     /// $('.close_window_information_manager_cloud').click();
                 },
                 error: function (jqXHR, exception) {
-                    console.log(jqXHR);
+                    //console.log(jqXHR);
                     // getErrorMessage(jqXHR, exception);
                 },
             });
@@ -430,7 +436,7 @@ var AJAX_GET = function ( url, return_type ) {
           //  $('#callback_btn_manage_cloud').addClass('disabled_href_button').css('color', '#fff');//блокируем кнопку отправки
         },
         success: function (msg) {
-           console.log( msg );
+          // console.log( msg );
             return JSON.parse( msg );
            // clear_input( object_input );// чистим поля
            // messager_windows_operator("", object_message, 'clear+hide');// чистим ошибки
@@ -441,7 +447,7 @@ var AJAX_GET = function ( url, return_type ) {
             /// $('.close_window_information_manager_cloud').click();
         },
         error: function (jqXHR, exception) {
-            console.log( exception );
+          //  console.log( exception );
             // getErrorMessage(jqXHR, exception);
         }
     });

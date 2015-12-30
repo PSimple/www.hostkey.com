@@ -42,7 +42,7 @@ class Shop_Cloud_ContainerVPS extends Zero_Controller
             $configuration = unserialize(file_get_contents($path));
         }
         $preset = Shop_PresetContainerVPS::Make();
-        $payment_period = 'monthly';
+        $payment_period = ['monthly'=> 0, 'quarterly' => 3, 'semiannually' => 6, 'annually' => 12];
         $p = $preset->getPreset($configuration, $payment_period);
         $table_row_data = array();
         foreach ($p as $key => $value)
