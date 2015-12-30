@@ -475,10 +475,10 @@ class Shop_PresetContainerVPS extends Zero_Model
      * Returns the array received by superimposing of an array of template on custom array
      *
      * @param null|array $container_VPS_custom
-     * @param string $billingcycle
+     * @param array $billingcycle
      * @return array
      */
-    public function getPreset($container_VPS_custom = null, $billingcycle = 'monthly')
+    public function getPreset($container_VPS_custom = null, $billingcycle = ['monthly' => 0] )
     {
         if ( is_null($container_VPS_custom) )
         {
@@ -517,10 +517,10 @@ class Shop_PresetContainerVPS extends Zero_Model
         {
             foreach ($v[0] as $key => $val)//Produts PID
             {
-                $a[$k]['summ'] = $a[$k]['summ'] + $val['data'][0][$billingcycle];
+                $a[$k]['summ'] = $a[$k]['summ'] + $val['data'][0][key($billingcycle)];
             }
         }
-
+//pre ( json_encode( $container_VPS_custom )); die;
         return $a;
     }
 

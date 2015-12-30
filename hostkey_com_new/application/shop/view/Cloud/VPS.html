@@ -108,7 +108,7 @@
                 <td class="b-vps__table-cell"></td>
                 {foreach ( $configuration as $key => $value)}
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">{$value['summ']} EUR / month</div>
+                    <div class="b-vps-table__price" data_summa_preset="{$key}">{$value['summ']} € / month</div>
                 </td>
                 {/foreach}
             </tr>
@@ -142,7 +142,16 @@
                 </td>
                 {foreach ( $configuration as $key => $value)}
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <div class="b-vps-table__text">{$payment_period}</div>
+                    <div class="b-vps-table__text">
+                        <select class="table-select__item js-select-test" name="tbl-select-{$key}" id="payment{$key}" data_preset="{$key}">
+                            {foreach ($payment_period as $k => $v)}
+                            <option value="{$k}"
+                                    {if ( 0== $v )} selected="selected"{/if}>{$k}{if ($v>0)} - {$v}%{/if}
+                            </option>
+                            {/foreach}
+                        </select>
+
+                    </div>
                 </td>
                 {/foreach}
 
@@ -152,7 +161,7 @@
                 <td class="b-vps__table-cell"></td>
                 {foreach ( $configuration as $key => $value)}
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price">{$value['summ']} EUR / month</div>
+                    <div class="b-vps-table__price" data_summa_preset="{$key}">{$value['summ']} € / month</div>
                 </td>
                 {/foreach}
             </tr>
@@ -207,13 +216,33 @@
 <script>
     $(document).ready(function (){
 
+
+        var Zakaz = new Object();
+
+        var $eventSelect = $(".js-select-test");
+
+        $eventSelect.on("change", function (e) {
+            var payment_period = $( this ).select2("val");
+            var preset_number =e.target.getAttribute('data_preset');
+            for( var prop in listOfProducts.payment.data ) {
+                if ( listOfProducts.payment.data[prop].name == payment_period ) {
+                    Zakaz = window.startZakaz ( 0, listOfProducts[preset_number][0] );/* формирование товарного наполнения заказа */
+                    window.set_payment_for_preset( Zakaz, listOfProducts, prop);/* устанавливаем платежный период для заказа */
+                    var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
+                    p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
+                    $( '[data_summa_preset=' + preset_number + ']').html( p );
+                }
+            }
+        });
+
+
         var CoocieObjZakazContainer = new Object();
         CoocieObjZakazContainer.type = '';
         CoocieObjZakazContainer.select = '';
         CoocieObjZakazContainer.Zakaz = new Object();
 
 
-        var Zakaz = new Object();
+
         var currency = {
             "2": "€",
             "1": "RUR",
@@ -223,6 +252,7 @@
 
     var listOfProducts = new Object();
     var listOfProducts = {json_encode($configuration)};
+        /* формируем дискаунт */
     listOfProducts.payment = {
         "name": "payment",
         "hidden": "0",
@@ -230,36 +260,31 @@
             "0": {
                 "name": "monthly",
                 "discount": "0",
-                'period': "month"
+                'period': "month",
+                'month': 1
             },
             "1": {
                 "name": "quarterly",
                 "discount": "3",
-                "period": "quarter"
+                "period": "quarter",
+                'month': 3
             },
             "2": {
                 "name": "semiannually",
                 "discount": "6",
-                "period": "half-year"
+                "period": "half-year",
+                'month': 6
             },
             "3": {
                 "name": "annually",
                 "discount": "12",
-                "period": "year"
+                "period": "year",
+                'month': 12
             }
         }
     };
 
         document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
-
-        /*
-         *   Закрываем окно
-         */
-        $('.close_window_information_manager_cloud').click(function () {
-            $('.popup').hide();
-            document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
-            return false;
-        });
 
         $('.b-vps-table__buy').bind('click', function () {
             var name_kyki = $( this).attr( 'data_name' );
@@ -268,7 +293,8 @@
               var PRESET_ID = $( this).attr( 'data_preset' );
               for( var prop in listOfProducts ) {
                     if( prop == PRESET_ID ) {
-                        Zakaz = listOfProducts[prop][0];
+                        Zakaz = listOfProducts[prop][0];/* Присваиваем пресет заказу без указания оплаты*/
+                        /* тут смотрим данные о каком периоде оплаты идет речь */
                         window.set_payment_for_preset( Zakaz, listOfProducts, 0);
                     }
               }
@@ -291,7 +317,6 @@
             $( '[data_id=Service]').hide( 'slow');
             $( '.b-dedicated__summary-title').text( 'Your Solution');
             $( '.b-dedicated__summary-table-cel').text( Zakaz.payment.data[0].name );
-           // console.log( JSON.stringify( Zakaz ) );
             $.scrollTo(0, 1000);
               crFrame( );
               return false;
