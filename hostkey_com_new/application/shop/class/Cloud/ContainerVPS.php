@@ -41,6 +41,7 @@ class Shop_Cloud_ContainerVPS extends Zero_Controller
         {
             $configuration = unserialize(file_get_contents($path));
         }
+
         $preset = Shop_PresetContainerVPS::Make();
         $payment_period = ['monthly'=> 0, 'quarterly' => 3, 'semiannually' => 6, 'annually' => 12];
         $p = $preset->getPreset($configuration, $payment_period);
@@ -53,14 +54,24 @@ class Shop_Cloud_ContainerVPS extends Zero_Controller
                 {
                     foreach ($v as $kk => $vv)
                     {
-                        $table_row_data[$vv['name']][] = $vv['data'][0]['name'];
+
+                            $table_row_data[$vv['name']][$key]['name'] = $vv['data'][0]['name'];
+                            $table_row_data[$vv['name']][$key]['id'] = $vv['data'][0]['id'];
+
                     }
                 }
             }
         }
+
+        $arr_VM_Template['696'] = $configuration['696']['data'];
+
+    // pre ( json_encode( $table_row_data ) ); die;
+
+
         $this->View->Assign('table_row_data', $table_row_data);
         $this->View->Assign('payment_period', $payment_period);
         $this->View->Assign('configuration', $p);
+        $this->View->Assign('arr_VM_Template' , $arr_VM_Template );
 
         return true;
     }
