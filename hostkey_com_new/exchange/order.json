@@ -43,5 +43,6 @@
   },
   "Currency": "eur",
   "Groups": "NL,Mini",
-  "Calculation": true
+  "Calculation": true,
+  "CompId": 18569
 }

@@ -9,7 +9,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */
-class Shop_Dedicated_SelectNL extends Zero_Controller
+class Shop_Dedicated_SaleNL extends Zero_Controller
 {
     /**
      * Контроллер по умолчанию.
@@ -42,7 +42,7 @@ class Shop_Dedicated_SelectNL extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Dedicated_SelectNL
+     * @return Shop_Dedicated_SaleNL
      */
     public static function Make($properties = [])
     {

@@ -16,7 +16,6 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
      * Формирование заказа.
      *
      * Если "Calculation" == true производится только расчет стоимости заказа и скидка
-     * @sample /api/v1/dedicated/order
      *
      * @return boolean flag статус выполнения
      */
@@ -25,27 +24,47 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         $config = Zero_Config::Get_Config('shop', 'config');
         if ( !isset($_REQUEST['Currency']) || !$_REQUEST['Groups'] )
             Zero_App::ResponseJson200(null, -1, ["параметры групп или валюта не заданы"]);
+        settype($_REQUEST['CompId'], 'integer');
+
+        // Получение стока по конфигурации
+        $responseStock = [];
+        if ( 0 < $_REQUEST['CompId'] )
+        {
+            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . md5($_REQUEST['Currency'] . $_REQUEST['Groups']) . '.data';
+            if ( !file_exists($path) )
+                Zero_App::ResponseJson200(null, -1, ["файл стока не найден"]);
+            $responseStock = unserialize(file_get_contents($path));
+            if ( !isset($responseStock['Data'][$_REQUEST['CompId']]['Price']) )
+                Zero_App::ResponseJson200(null, -1, ["стоковый сервер не найден"]);
+            $_REQUEST['Hardware']['Label'] = $responseStock['Data'][$_REQUEST['CompId']]['Cpu']['Name'];
+        }
 
         // Получение конфигурации
         $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($_REQUEST['Currency'] . $_REQUEST['Groups']) . '.data';
         if ( !file_exists($path) )
             Zero_App::ResponseJson200(null, -1, ["файл конфигурации не найден"]);
-
         $response = unserialize(file_get_contents($path));
 
         // Расчет
         $Calculate = $response['Data'];
         // Hardvare
         $costHardware = 0;
-        $costHardware += $Calculate[1][$_REQUEST['Hardware']['Cpu']]['Price'];
-        $costHardware += $Calculate[3][$_REQUEST['Hardware']['Ram']]['Price'];
-        $costHardware += $Calculate[6][$_REQUEST['Hardware']['Platform']]['Price'];
-        foreach ($_REQUEST['Hardware']['Hdd'] as $id)
+        if ( 0 < $_REQUEST['CompId'] )
         {
-            if ( $id > 0 )
-                $costHardware += $Calculate[2][$id]['Price'];
+            $costHardware = $responseStock['Data'][$_REQUEST['CompId']]['Price'];
         }
-        $costHardware += $Calculate[8][$_REQUEST['Hardware']['Raid']]['Price'];
+        else
+        {
+            $costHardware += $Calculate[1][$_REQUEST['Hardware']['Cpu']]['Price'];
+            $costHardware += $Calculate[3][$_REQUEST['Hardware']['Ram']]['Price'];
+            $costHardware += $Calculate[6][$_REQUEST['Hardware']['Platform']]['Price'];
+            foreach ($_REQUEST['Hardware']['Hdd'] as $id)
+            {
+                if ( $id > 0 )
+                    $costHardware += $Calculate[2][$id]['Price'];
+            }
+            $costHardware += $Calculate[8][$_REQUEST['Hardware']['Raid']]['Price'];
+        }
         //        Zero_Logs::File(__FUNCTION__, $costHardvare, $_REQUEST, $Calculate);
 
         // SoftWare
@@ -152,7 +171,7 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
             'Semiannually' => $sumSemiannually,
             'Annually' => $sumAnnually,
             'billingcycle' => $cycleNumber[$_REQUEST['SLA']['CycleDiscount']],
-            'InventoryID' => 0,
+            'InventoryID' => $_REQUEST['CompId'],
             'Groups' => $_REQUEST['Groups'],
             'CurrencyId' => $_REQUEST['Currency'] == 'eur' ? 2 : 2,
         ];

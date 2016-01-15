@@ -42,7 +42,7 @@ class Shop_Dedicated_SelectRU extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Dedicated_Select
+     * @return Shop_Dedicated_SelectRU
      */
     public static function Make($properties = [])
     {

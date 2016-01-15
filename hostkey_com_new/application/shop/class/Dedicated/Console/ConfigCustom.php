@@ -19,17 +19,16 @@ class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
     public function Action_Default()
     {
         $config = Zero_Config::Get_Config('shop', 'config');
-        $sectionRows = Shop_ConfigCalculator::Get_ConfigCalculatorAll();
-        foreach($sectionRows as $row)
+        $sectionRows = Shop_ConfigSolution::Get_ConfigGroupsAll();
+        foreach($sectionRows as $gr)
         {
-            $url = "https://ug.hostkey.ru/api/v1.0/inv/component/salenew?currency={$config['currency']}&groups={$row['ComponentGroup']}";
+            $url = "https://ug.hostkey.ru/api/v1.0/inv/component/salenew?currency={$config['currency']}&groups={$gr}";
             $data = Zero_App::RequestJson("GET", $url);
             if ( false == $data['ErrorStatus'] )
             {
-
                 $data['Content']['Currency'] = $config['currency'];
-                $data['Content']['ComponentGroup'] = $row['ComponentGroup'];
-                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($config['currency'] . $row['ComponentGroup']) . '.data';
+                $data['Content']['ComponentGroup'] = $gr;
+                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($config['currency'] . $gr) . '.data';
                 Zero_Helper_File::File_Save($path, serialize($data['Content']));
             }
         }
