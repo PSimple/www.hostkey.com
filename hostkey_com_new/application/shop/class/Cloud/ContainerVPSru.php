@@ -43,24 +43,59 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
         {
             $configuration = unserialize(file_get_contents($path));
         }
+
+
         $preset = Shop_PresetContainerVPS::Make();
-        $payment_period = 'monthly';
+        $payment_period = ['monthly'=> 0, 'quarterly' => 3, 'semiannually' => 6, 'annually' => 12];
         $p = $preset->getPreset( $configuration, $payment_period);
         $table_row_data = array();
-        foreach ( $p as $key => $value ) {
-            foreach( $value  as $k=> $v){
-                if ( $v['hidden'] == 0 ){
-                    foreach ($v as $kk => $vv){
-                        $table_row_data[$vv['name']][] = $vv['data'][0]['name'];
+
+        foreach ($p as $key => $value)
+        {
+            foreach ($value as $k => $v)
+            {
+                if ( $v['hidden'] == 0 )
+                {
+                    foreach ($v as $kk => $vv)
+                    {
+                        $table_row_data[$vv['name']][$key]['name'] = $vv['data'][0]['name'];
+                        $table_row_data[$vv['name']][$key]['id'] = $vv['data'][0]['id'];
                     }
                 }
             }
         }
-        $this->View->Assign('table_row_data', $table_row_data );
-        $this->View->Assign('payment_period', $payment_period );
+
+        foreach ( $p as $key_add_default => $val_add_default ){
+            if( $p[$key_add_default ][0][729]['data'][0]['id'] == 'NONE' )
+            {
+                $configuration[729]['data'][$p[$key_add_default][0][729]['data'][0]['id']] = $p[$key_add_default][0][729]['data'][0];
+            }
+            if( $p[$key_add_default ][0][728]['data'][0]['id'] == 'NONE' )
+            {
+                $configuration[728]['data'][$p[$key_add_default][0][728]['data'][0]['id']] = $p[$key_add_default][0][728]['data'][0];
+            }
+            if( $p[$key_add_default ][0][726]['data'][0]['id'] == 'NONE' ) {
+                $configuration[726]['data'][$p[$key_add_default ][0][726]['data'][0]['id']] = $p[$key_add_default ][0][726]['data'][0];
+            }
+
+        }
+
+        $arr_Backups_Limit[726] = $configuration[726]['data'];
+        $arr_Bandwidth_Limit[728] = $configuration[728]['data'];
+        $arr_VM_Template[729] = $configuration[729]['data'];
+
+
+        //pre ( json_encode( $p) ); die;
+
+        $this->View->Assign('table_row_data', $table_row_data);
+        $this->View->Assign('payment_period', $payment_period);
         $this->View->Assign('configuration', $p );
+        $this->View->Assign('arr_Backups_Limit' , $arr_Backups_Limit );
+        $this->View->Assign('arr_Bandwidth_Limit' , $arr_Bandwidth_Limit );
+        $this->View->Assign('arr_VM_Template' , $arr_VM_Template );
 
         return true;
+
     }
 
 

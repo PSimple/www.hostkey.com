@@ -57,7 +57,12 @@ jQuery(function($){
     $(".vm").select2({
         minimumResultsForSearch: Infinity
     });
-
+    $(".bwl").select2({
+        minimumResultsForSearch: Infinity
+    });
+    $(".bal").select2({
+        minimumResultsForSearch: Infinity
+    });
     // Accordion
     if ($( ".b-accordion").length) {
         $(function() {

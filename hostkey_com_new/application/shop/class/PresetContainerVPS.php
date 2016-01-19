@@ -137,8 +137,8 @@ class Shop_PresetContainerVPS extends Zero_Model
                 '689' => ['data' => ['0' => ['id' => 5230]]],
                 '690' => ['data' => ['0' => ['id' => 5231]]],
                 '691' => ['data' => ['0' => ['id' => 5233]]],
-                '693' => ['data' => ['0' => ['id' => 5240]]],
-                '695' => ['data' => ['0' => ['id' => 5249]]],
+                '693' => ['data' => ['0' => ['id' => 'NONE']]],
+                '695' => ['data' => ['0' => ['id' => 'NONE']]],
                 '696' => ['data' => ['0' => ['id' => 'NONE']]],
             ]
         ],
@@ -301,7 +301,7 @@ class Shop_PresetContainerVPS extends Zero_Model
                 '724' => ['data' => ['0' => ['id' => 6174]]],
                 '726' => ['data' => ['0' => ['id' => 6182]]],
                 '728' => ['data' => ['0' => ['id' => 6191]]],
-                '729' => ['data' => ['0' => ['id' => 6195]]]
+                '729' => ['data' => ['0' => ['id' => 'NONE']]]
 
             ]
         ],
@@ -503,39 +503,42 @@ class Shop_PresetContainerVPS extends Zero_Model
                             }
                             foreach ($val_custom['data'] as $key_product => $val_product)
                             {
+                               //pre ( $ID."---".$val_product['id'] );
+                            if ( $ID == $val_product['id'] ) {
+                                $a[$k][0][$key]['name'] = $val_custom ['name'];
+                                $a[$k][0][$key]['hidden'] = $val_custom ['hidden'];
+                                $a[$k][0][$key]['data'][0] = $val_product;// ID product template = ID product custom merge array to template
+                            } else {
+                                if(  $ID == 'NONE' )
+                                {
+                                    foreach ( $val_product as $key_bb => $val_bb ){
 
-                                switch ( $ID ) {
-                                    case $val_product ['id']:
-                                        $a[$k][0][$key]['data'][0] = $val_product;// ID product template = ID product custom merge array to template
-                                        //pre( $a[$k][0][$key]['data'][0] ); die;
-                                        break;
-                                    case 'NONE':
+                                        $a[$k][0][$key]['data'][0][$key_bb] = '0';
 
-                                        foreach ( $val_product as $key_bb => $val_bb ){
-                                            if ( $key_bb == 'name') {
-                                                $a[$k][0][$key]['data'][0]['name'] = 'NONE';
-                                            }
-                                            if ( $key_bb == 'id') {
-                                                $a[$k][0][$key]['data'][0]['id'] = 'NONE';
-                                            }
-                                            $a[$k][0][$key]['data'][0][$key_bb] = 'NONE';
+                                        if ( $key_bb == 'name') {
+                                            $a[$k][0][$key]['data'][0]['name'] = 'NONE';
                                         }
-                                        break;
-                                }
-                                /*
-                                if ( $val_product ['id'] == $ID ){
-                                    $a[$k][0][$key]['data'][0] = $val_product;// ID product template = ID product custom merge array to template
-                                }
-                                */
+                                        if ( $key_bb == 'id') {
+                                            $a[$k][0][$key]['data'][0]['id'] = 'NONE';
+
+                                        }
+
+                                    }
                                     $a[$k][0][$key]['name'] = $val_custom ['name'];
                                     $a[$k][0][$key]['hidden'] = $val_custom ['hidden'];
+
+                                }
+                            }
+
+                                    //$a[$k][0][$key]['name'] = $val_custom ['name'];
+                                 //  $a[$k][0][$key]['hidden'] = $val_custom ['hidden'];
                             }
                         }
                     }
                 }
             }
         }
-
+      //  pre ( json_encode( $a) ); die;
         foreach ($a as $k => $v)
         {
             foreach ($v[0] as $key => $val)//Produts PID
