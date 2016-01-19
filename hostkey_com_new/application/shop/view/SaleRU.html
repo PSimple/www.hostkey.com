@@ -292,7 +292,7 @@
                 order['compId'] = id;
                 window.console.log(os, port, id);
 
-                jQuery.post("/api/v1/dedicated/order-stock-fake", order,
+                jQuery.post("/api/v1/dedicated/order-stock", order,
                         function (data) {
                             if (data) {
                                 if (data['ErrorStatus'] == true ) {

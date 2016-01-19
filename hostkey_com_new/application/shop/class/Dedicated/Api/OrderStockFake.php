@@ -10,7 +10,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015-11-28
  */
-class Shop_Dedicated_Api_OrderStock extends Zero_Controller
+class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
 {
     /**
      * Формирование заказа.
@@ -206,7 +206,7 @@ class Shop_Dedicated_Api_OrderStock extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Dedicated_Api_OrderStock
+     * @return Shop_Dedicated_Api_OrderStockFake
      */
     public static function Make($properties = [])
     {

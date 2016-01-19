@@ -256,6 +256,17 @@ class Shop_ConfigSolution extends Zero_Model
         return [23 => 'Value'];
     }
 
+	/**
+	 * Получение всех вариантов конфигураций для калькуляторов
+	 *
+	 * @return array
+	 */
+	public static function Get_ConfigGroupsAll()
+	{
+		$sql = "SELECT CONCAT(`Location`, ',', `Groups`) FROM ConfigSolution";
+		return Zero_DB::Select_List($sql);
+	}
+
     /**
      * Динамический фабричный метод длиа создании объекта через фабрику и инстанс.
      */

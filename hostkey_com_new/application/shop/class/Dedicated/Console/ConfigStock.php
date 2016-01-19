@@ -19,12 +19,21 @@ class Shop_Dedicated_Console_ConfigStock extends Zero_Controller
     public function Action_Default()
     {
         $config = Zero_Config::Get_Config('shop', 'config');
-        $url = "https://ug.hostkey.ru/api/v1.0/inv/component1/stock?currency={$config['currency']}";
-        $data = Zero_App::RequestJson("GET", $url);
-        if ( false == $data['ErrorStatus'] )
+        $sectionRows = Shop_ConfigSolution::Get_ConfigGroupsAll();
+        foreach($sectionRows as $gr)
         {
-            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorStock/' . md5($config['currency']) . '.data';
-            Zero_Helper_File::File_Save($path, serialize($data['Content']));
+            $url = "https://ug.hostkey.ru/api/v1.0/inv/component1/stock?currency={$config['currency']}&groups={$gr}";
+            $data = Zero_App::RequestJson("GET", $url);
+            if ( false == $data['ErrorStatus'] )
+            {
+                $data = [
+                    'Data' => $data['Content'],
+                    'Currency' => $config['currency'],
+                    'ComponentGroup' => $gr,
+                ];
+                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . md5($config['currency'] . $gr) . '.data';
+                Zero_Helper_File::File_Save($path, serialize($data));
+            }
         }
         return true;
     }
