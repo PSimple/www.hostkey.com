@@ -54,7 +54,15 @@ jQuery(function($){
     $(".js-select-test").select2({
         minimumResultsForSearch: Infinity
     });
-
+    $(".vm").select2({
+        minimumResultsForSearch: Infinity
+    });
+    $(".bwl").select2({
+        minimumResultsForSearch: Infinity
+    });
+    $(".bal").select2({
+        minimumResultsForSearch: Infinity
+    });
     // Accordion
     if ($( ".b-accordion").length) {
         $(function() {
@@ -176,9 +184,30 @@ jQuery(function($){
     }
 
     function closeDrop(action) {
-        action.parent('.is-drop').removeClass('is-active');
+        action.parent('.is-drop').removeClass('is-actid_vm_templateive');
     }
 
+
+
+    /*
+    *   Выбираем из списков опций продукта опцию по ID который динамически меняется
+     */
+    window.AddOptionToZakaz = function AddOptionToZakaz (  list_of_option, id_option ) {
+         //window.ToStringJSON ( list_of_option );
+        for( var prop_1 in list_of_option ) {
+           // window.ToStringJSON ( prop_1 );
+            for( var prop_2 in list_of_option[prop_1] ) {
+
+                if(  list_of_option[prop_1][prop_2]['id'] == id_option ) {
+
+                   return list_of_option[prop_1][prop_2] ;
+                }
+
+            }
+
+        }
+
+    }
 
 
     window.write_summa = function write_summa( z , curr, place ) {
@@ -195,7 +224,9 @@ jQuery(function($){
         }
     };
 
-
+    window.ToStringJSON = function ToStringJSON ( JSONobj ) {
+        console.log( JSON.stringify ( JSONobj ));
+    }
 
     /*
      * рассчитываем стоимость заказа
@@ -285,7 +316,9 @@ jQuery(function($){
         var str ='';
         for (var prop in z) {
             if (prop != 'payment') {
-                str =   str + "configoption[" + prop +"]=" + z[prop]['data'][0]['id'] + "&" ;/// вставляем все выбранные продукты
+                if ( z[prop]['data'][0]['id'] != 'NONE' ) {
+                    str =   str + "configoption[" + prop +"]=" + z[prop]['data'][0]['id'] + "&" ;/// вставляем все выбранные продукты
+                }
             } else {
                 str =   str + "billingcycle=" + z[prop]['data'][0]['name'] + "&" ; ///вставляем период оплаты
             }
@@ -360,7 +393,7 @@ function checkout_empty_input ( e , object_message ) {
     var c = 0;
     messager_windows_operator ( "", object_message, 'clear+hide' );///Чистим и скрываем все мессанджи
     e.each(function () {
-        stroka = $(this).val().replace(/\s{2,}/g, '');
+        var stroka = $(this).val().replace(/\s{2,}/g, '');
         if (stroka == '' ) {
             $(this).css('border', '2px solid red');
             messager_windows_operator ( "empty " + $(this).attr( 'placeholder' ), object_message, 'error' );
@@ -385,7 +418,7 @@ function checkout_empty_input ( e , object_message ) {
  * status  success | info | error | fatal | hide | show | clear+hide | clear | clear+success | clear+info | clear+erorr | clear+fatal
  */
 function messager_windows_operator ( message, object, status ) {
-    s = object.css('display', 'block').html();
+    var s = object.css('display', 'block').html();
     if ( s != '') s = s + "<br/>";
     object.css('display', 'block').html( s + message );
     switch (status ){
@@ -409,6 +442,8 @@ function messager_windows_operator ( message, object, status ) {
         });
     };
 })(jQuery);
+
+
 
 /*
  *очистка полей

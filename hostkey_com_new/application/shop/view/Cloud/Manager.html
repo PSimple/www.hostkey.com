@@ -56,7 +56,7 @@
                         <div class="b-slider__legend-8">
                             {foreach ($configuration as $key => $val)}
                             {if ( $val['hidden'] == 0 )}
-                                <div class="b-slider__legend-{count($configuration)}-item b-slider__legend-{count($configuration)}-item_place_{$key+1}">{$val['name']}<br/>{$val['value']}</div>
+                                <div class="b-slider__legend-{count($configuration)}-item b-slider__legend-{count($configuration)}-item_place_{$key+1} clik_slider_position" data-number="{$key+1}" data-slider="Manage_Cloud_VDS">{$val['name']}<br/>{$val['value']}</div>
                             {/if}
                             {/foreach}
                         </div>
@@ -168,7 +168,6 @@
                                if ( prop != 'payment'){
                                    if ( Zakaz[prop].hidden == 0 ){
                                        $( '[data_pole_id=' + prop + ']' ).html( Zakaz[prop]['data'][0]['name'] );
-                                       console.log( '[data_pole="' + Zakaz[prop]['data'][0]['id'] + '"]' +  '----' +  Zakaz[prop]['data'][0]['name'] );
                                    }
 
                                }
@@ -176,7 +175,15 @@
 
                         },
                         change: function(event, ui ) {
-                           /*calculatePreset ( index, ui, Preset);*/
+                            calculatePreset ( index, ui);
+                            for (var prop in Zakaz) {
+                                if ( prop != 'payment'){
+                                    if ( Zakaz[prop].hidden == 0 ){
+                                        $( '[data_pole_id=' + prop + ']' ).html( Zakaz[prop]['data'][0]['name'] );
+                                    }
+
+                                }
+                            }
                         }
                     });
 
@@ -184,6 +191,12 @@
             });
 
         };
+
+        $( '.clik_slider_position').bind( 'click', function(){
+            var d =  $( this).data('number');
+            var slider_number = $( this).data('slider');
+            $( '[data_preset="' + slider_number+ '"]' ).slider( "value", d );
+        });
 
         function calculatePreset ( index, ui){
             Zakaz = window.startZakaz ( 0, listOfProducts[ui.value-1][0] );

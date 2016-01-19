@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Кеширование конфигураций dedicated
+ * Кеширование конфигураций компонентов по группам для формирования серверов dedicated
  *
  * Запршивает конфигурацию у инвентори.
  *
  * @package Shop.Dedicated.Console
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015-09-24
+ * @date 2015.09.24
  */
-class Shop_Dedicated_Console_Update extends Zero_Controller
+class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
 {
     /**
      * Контроллер по умолчанию
@@ -40,7 +40,7 @@ class Shop_Dedicated_Console_Update extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Dedicated_Console_Update
+     * @return Shop_Dedicated_Console_ConfigCustom
      */
     public static function Make($properties = [])
     {

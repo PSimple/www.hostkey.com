@@ -122,6 +122,7 @@
                 {/foreach}
 
             </tr>
+
             {foreach ( $table_row_data as $key => $value)}
                 <tr class="b-vps__table-row">
                     <td class="b-vps__table-cell b-vps__table-cell_border_yes">
@@ -129,7 +130,56 @@
                     </td>
                     {foreach ( $value as $k => $v)}
                     <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                        <div class="b-vps-table__text">{$v}</div>
+
+
+                        {if ( 'Backups Limit' == $key )}
+                        <div class="b-vps-table__text">
+                            <select class="table-select__item  bal" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
+                                {foreach ( $arr_Backups_Limit[key($arr_Backups_Limit)] as $key_arr_select => $val_arr_select )}
+                                {if ( $val_arr_select['name'] == $v['name'] )}
+                                <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}</option>
+                                {else}
+                                <option value="{$val_arr_select['id']}">{$val_arr_select['name']}</option>
+                                {/if}
+                                {/foreach}
+                            </select>
+                        </div>
+                        {else}
+
+
+                        {if ( 'Bandwidth Limit' == $key )}
+                        <div class="b-vps-table__text">
+                            <select class="table-select__item  bwl" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
+                                {foreach ( $arr_Bandwidth_Limit[key($arr_Bandwidth_Limit)] as $key_arr_select => $val_arr_select )}
+                                {if ( $val_arr_select['name'] == $v['name'] )}
+                                     <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}</option>
+                                {else}
+                                     <option value="{$val_arr_select['id']}">{$val_arr_select['name']}</option>
+                                {/if}
+                                {/foreach}
+                            </select>
+                        </div>
+                        {else}
+
+                        {if ( 'VM Template' == $key )}
+                        <div class="b-vps-table__text">
+                            <select class="table-select__item  vm" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
+                                {foreach ( $arr_VM_Template[key($arr_VM_Template)] as $key_arr_select => $val_arr_select )}
+                                {if ( $val_arr_select['name'] == $v['name'] )}
+                                     <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}</option>
+                                {else}
+                                <option value="{$val_arr_select['id']}">{$val_arr_select['name']}</option>
+                                {/if}
+                                {/foreach}
+                            </select>
+                        </div>
+                        {else}
+                            <div class="b-vps-table__text">{$v['name']}</div>
+                        {/if}
+                        {/if}
+                        {/if}
+
+
                     </td>
                     {/foreach}
                     </tr>
@@ -170,7 +220,7 @@
 
                 {foreach ( $configuration as $key => $value)}
                 <td class="b-vps__table-cell">
-                    <a class="b-vps-table__buy" href="#" data_preset="{$key}" data_name="Container_VPS">BUY</a>
+                    <a class="b-vps-table__buy  preset-buy" href="#" data_preset="{$key}" data_name="Container_VPS">BUY</a>
                 </td>
                 {/foreach}
             </tr>
@@ -179,7 +229,8 @@
 
         <table class="b-vps__table" data_id="Options" style="display: none;">
             <tr>
-                <td>
+                <td valign="top">
+                    <h3>Additional services and service options</h3>
                     <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
                 </td>
                 <td>
@@ -201,7 +252,7 @@
     <div class="footer-push"></div>
 </div>
 
-
+<!--
 <div class="popup popup_callback" style="display: none;" id="information_manage_cloud">
     <a class="close close_window_information_manager_cloud" href="#"><img src="/assets/img/close.png"></a>
 
@@ -212,35 +263,13 @@
         <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
     </div>
 </div>
-
+-->
 <script>
     $(document).ready(function (){
 
 
         var Zakaz = new Object();
-
-        var $eventSelect = $(".js-select-test");
-
-        $eventSelect.on("change", function (e) {
-            var payment_period = $( this ).select2("val");
-            var preset_number =e.target.getAttribute('data_preset');
-            for( var prop in listOfProducts.payment.data ) {
-                if ( listOfProducts.payment.data[prop].name == payment_period ) {
-                    Zakaz = window.startZakaz ( 0, listOfProducts[preset_number][0] );/* формирование товарного наполнения заказа */
-                    window.set_payment_for_preset( Zakaz, listOfProducts, prop);/* устанавливаем платежный период для заказа */
-                    var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
-                    p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
-                    $( '[data_summa_preset=' + preset_number + ']').html( p );
-                }
-            }
-        });
-
-
-        var CoocieObjZakazContainer = new Object();
-        CoocieObjZakazContainer.type = '';
-        CoocieObjZakazContainer.select = '';
-        CoocieObjZakazContainer.Zakaz = new Object();
-
+        var ZakazY = new Object();
 
 
         var currency = {
@@ -250,39 +279,139 @@
         };
         var currencyID = {$currencyId};
 
-    var listOfProducts = new Object();
-    var listOfProducts = {json_encode($configuration)};
-        /* формируем дискаунт */
-    listOfProducts.payment = {
-        "name": "payment",
-        "hidden": "0",
-        "data": {
-            "0": {
-                "name": "monthly",
-                "discount": "0",
-                'period': "month",
-                'month': 1
-            },
-            "1": {
-                "name": "quarterly",
-                "discount": "3",
-                "period": "quarter",
-                'month': 3
-            },
-            "2": {
-                "name": "semiannually",
-                "discount": "6",
-                "period": "half-year",
-                'month': 6
-            },
-            "3": {
-                "name": "annually",
-                "discount": "12",
-                "period": "year",
-                'month': 12
+        var VM_Template = {json_encode($arr_VM_Template)};
+        var Bandwidth_Limit = {json_encode($arr_Bandwidth_Limit)};
+        var Backups_Limit = {json_encode($arr_Backups_Limit)};
+
+        var Table_Row = {json_encode($table_row_data)};
+
+       // window.ToStringJSON ( VM_Template );
+
+        var listOfProducts = new Object();
+        var listOfProducts = {json_encode($configuration)};
+        listOfProducts.payment = {
+            "name": "payment",
+            "hidden": "0",
+            "data": {
+                "0": {
+                    "name": "monthly",
+                    "discount": "0",
+                    'period': "month",
+                    'month': 1
+                },
+                "1": {
+                    "name": "quarterly",
+                    "discount": "3",
+                    "period": "quarter",
+                    'month': 3
+                },
+                "2": {
+                    "name": "semiannually",
+                    "discount": "6",
+                    "period": "half-year",
+                    'month': 6
+                },
+                "3": {
+                    "name": "annually",
+                    "discount": "12",
+                    "period": "year",
+                    'month': 12
+                }
             }
-        }
-    };
+        };
+
+
+
+        var $eventSelect = $(".js-select-test");
+        var $eventSelectVM = $(".vm");
+        var $eventSelectBWL = $(".bwl");
+        var $eventSelectBAL = $(".bal");
+
+
+      //  window.ToStringJSON ( {json_encode ( $table_row_data)} );
+
+        /* формируем дефолтные пресеты */
+        $('.preset-buy').each(function () {
+            var preset_number = $( this ).attr( 'data_preset' );
+            //console.log( preset_number );
+            ZakazY[preset_number] = window.startZakaz ( 0, listOfProducts[preset_number][0] );
+            //ZakazY[preset_number]['696']['data']['0'] = window.AddOptionToZakaz( VM_Template, Table_Row[preset_number]['id'] );
+            if( Table_Row['VM Template'][preset_number].id  != "NONE"){
+               // ZakazY[preset_number] window.AddOptionToZakaz( VM_Template, Table_Row['VM Template'][preset_number].id ) );
+            } else {
+
+            }
+
+           // window.ToStringJSON (  Table_Row['VM Template'][preset_number].id   );
+            window.set_payment_for_preset( ZakazY[preset_number], listOfProducts, 0 );/* устанавливаем платежный период для заказа */
+        });
+
+       //window.ToStringJSON ( Table_Row['VM Template'][4].name );
+
+     // window.ToStringJSON ( ZakazY );
+
+        $eventSelect.on("change", function (e) {
+            var payment_period = $( this ).select2("val");
+            var preset_number =e.target.getAttribute('data_preset');
+            for( var prop in listOfProducts.payment.data ) {
+                if ( listOfProducts.payment.data[prop].name == payment_period ) {
+                    window.set_payment_for_preset( ZakazY[preset_number], listOfProducts, prop);/* устанавливаем платежный период для заказа */
+                    Zakaz = ZakazY[preset_number];/* формирование товарного наполнения заказа */
+                    var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
+                    p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
+                    $( '[data_summa_preset=' + preset_number + ']').html( p );
+                    window.ToStringJSON ( Zakaz );
+                }
+            }
+        });
+
+
+        $eventSelectVM.on("change", function (e) {
+            var id_vm_template = $( this ).select2("val");
+            var preset_number = e.target.getAttribute('data_preset');
+            console.log(  preset_number + "---" + id_vm_template );
+            ZakazY[preset_number][{key($arr_VM_Template)}]['data']['0'] = window.AddOptionToZakaz( VM_Template, id_vm_template );
+            Zakaz = ZakazY[preset_number];/* формирование товарного наполнения заказа */
+            var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
+            p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
+            $( '[data_summa_preset=' + preset_number + ']').html( p );
+            window.ToStringJSON ( Zakaz );
+
+        });
+
+        $eventSelectBWL.on("change", function (e) {
+            var id_vm_template = $( this ).select2("val");
+            var preset_number = e.target.getAttribute('data_preset');
+          //  console.log(  preset_number + "---" + id_vm_template );
+            ZakazY[preset_number][{key($arr_Bandwidth_Limit)}]['data']['0'] = window.AddOptionToZakaz( Bandwidth_Limit, id_vm_template );
+            Zakaz = ZakazY[preset_number];/* формирование товарного наполнения заказа */
+             var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
+             p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
+             $( '[data_summa_preset=' + preset_number + ']').html( p );
+            window.ToStringJSON ( Zakaz);
+
+        });
+
+        $eventSelectBAL.on("change", function (e) {
+            var id_vm_template = $( this ).select2("val");
+            var preset_number = e.target.getAttribute('data_preset');
+           // console.log(  preset_number + "---" + id_vm_template );
+            ZakazY[preset_number][{key($arr_Backups_Limit)}]['data']['0'] = window.AddOptionToZakaz( Backups_Limit, id_vm_template );
+            Zakaz = ZakazY[preset_number];/* формирование товарного наполнения заказа */
+             var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
+             p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
+             $( '[data_summa_preset=' + preset_number + ']').html( p );
+            window.ToStringJSON ( Zakaz );
+
+        });
+
+
+
+        var CoocieObjZakazContainer = new Object();
+        CoocieObjZakazContainer.type = '';
+        CoocieObjZakazContainer.select = '';
+        CoocieObjZakazContainer.Zakaz = new Object();
+
 
         document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
 
@@ -293,9 +422,9 @@
               var PRESET_ID = $( this).attr( 'data_preset' );
               for( var prop in listOfProducts ) {
                     if( prop == PRESET_ID ) {
-                        Zakaz = listOfProducts[prop][0];/* Присваиваем пресет заказу без указания оплаты*/
+                        Zakaz = ZakazY[prop];/* Присваиваем пресет заказу без указания оплаты*/
                         /* тут смотрим данные о каком периоде оплаты идет речь */
-                        window.set_payment_for_preset( Zakaz, listOfProducts, 0);
+                       // window.set_payment_for_preset( Zakaz, listOfProducts, 0);
                     }
               }
 
@@ -304,7 +433,7 @@
             CoocieObjZakazContainer.Zakaz = Zakaz;
 
             if ( name_kyki !== 'undefined' ){
-                  $.cookie( name_kyki, JSON.stringify( CoocieObjZakazContainer ) );
+                $.cookie( name_kyki, JSON.stringify( CoocieObjZakazContainer ) );
             } else {
                 $.removeCookie( name_kyki );
                 $.cookie( name_kyki , JSON.stringify( CoocieObjZakazContainer ) );
@@ -328,6 +457,10 @@
             document.getElementById('configure_cloud_VDS').src = 'https://bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
                     + generate_post ( Zakaz ) ;
         };
+
+
+
+
 
     });
 

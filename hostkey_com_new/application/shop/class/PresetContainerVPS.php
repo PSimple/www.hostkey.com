@@ -137,9 +137,9 @@ class Shop_PresetContainerVPS extends Zero_Model
                 '689' => ['data' => ['0' => ['id' => 5230]]],
                 '690' => ['data' => ['0' => ['id' => 5231]]],
                 '691' => ['data' => ['0' => ['id' => 5233]]],
-                '693' => ['data' => ['0' => ['id' => 5240]]],
-                '695' => ['data' => ['0' => ['id' => 5249]]],
-                '696' => ['data' => ['0' => ['id' => 5253]]],
+                '693' => ['data' => ['0' => ['id' => 'NONE']]],
+                '695' => ['data' => ['0' => ['id' => 'NONE']]],
+                '696' => ['data' => ['0' => ['id' => 'NONE']]],
             ]
         ],
         [
@@ -157,7 +157,7 @@ class Shop_PresetContainerVPS extends Zero_Model
                 '691' => ['data' => ['0' => ['id' => 5233]]],
                 '693' => ['data' => ['0' => ['id' => 5241]]],
                 '695' => ['data' => ['0' => ['id' => 5249]]],
-                '696' => ['data' => ['0' => ['id' => 5253]]],
+                '696' => ['data' => ['0' => ['id' => 6108]]],
             ]
         ],
         [
@@ -301,7 +301,7 @@ class Shop_PresetContainerVPS extends Zero_Model
                 '724' => ['data' => ['0' => ['id' => 6174]]],
                 '726' => ['data' => ['0' => ['id' => 6182]]],
                 '728' => ['data' => ['0' => ['id' => 6191]]],
-                '729' => ['data' => ['0' => ['id' => 6195]]]
+                '729' => ['data' => ['0' => ['id' => 'NONE']]]
 
             ]
         ],
@@ -475,7 +475,7 @@ class Shop_PresetContainerVPS extends Zero_Model
      * Returns the array received by superimposing of an array of template on custom array
      *
      * @param null|array $container_VPS_custom
-     * @param array $billingcycle
+     * @param array $billingcycle----reserve
      * @return array
      */
     public function getPreset($container_VPS_custom = null, $billingcycle = ['monthly' => 0] )
@@ -486,7 +486,7 @@ class Shop_PresetContainerVPS extends Zero_Model
         }
         else
         {
-            $a = array();
+            $a = [];
             foreach ($this->preset_template as $k => $v)
             {//level Preset{ name, id, value...}
                 foreach ($v[0] as $key => $val)
@@ -494,25 +494,51 @@ class Shop_PresetContainerVPS extends Zero_Model
                     $ID = $val['data'][0]['id'];// id producta in Options
                     foreach ($container_VPS_custom as $key_custom => $val_custom)
                     {//Level Options in custom
+
                         if ( $key_custom == $key )
                         {// option = option
-                            if ( !isset($a[$k]) )
+                            if ( !isset($a[$k])  )
                             {
-                                $a[$k] = $this->preset_template[$k];
+                               $a[$k] = $this->preset_template[$k];
                             }
                             foreach ($val_custom['data'] as $key_product => $val_product)
                             {
-                                if ( $val_product ['id'] == $ID )// ID product template = ID product custom merge array to template
-                                    $a[$k][0][$key]['data'][0] = $val_product;
+                               //pre ( $ID."---".$val_product['id'] );
+                            if ( $ID == $val_product['id'] ) {
                                 $a[$k][0][$key]['name'] = $val_custom ['name'];
                                 $a[$k][0][$key]['hidden'] = $val_custom ['hidden'];
+                                $a[$k][0][$key]['data'][0] = $val_product;// ID product template = ID product custom merge array to template
+                            } else {
+                                if(  $ID == 'NONE' )
+                                {
+                                    foreach ( $val_product as $key_bb => $val_bb ){
+
+                                        $a[$k][0][$key]['data'][0][$key_bb] = '0';
+
+                                        if ( $key_bb == 'name') {
+                                            $a[$k][0][$key]['data'][0]['name'] = 'NONE';
+                                        }
+                                        if ( $key_bb == 'id') {
+                                            $a[$k][0][$key]['data'][0]['id'] = 'NONE';
+
+                                        }
+
+                                    }
+                                    $a[$k][0][$key]['name'] = $val_custom ['name'];
+                                    $a[$k][0][$key]['hidden'] = $val_custom ['hidden'];
+
+                                }
+                            }
+
+                                    //$a[$k][0][$key]['name'] = $val_custom ['name'];
+                                 //  $a[$k][0][$key]['hidden'] = $val_custom ['hidden'];
                             }
                         }
                     }
                 }
             }
         }
-
+      //  pre ( json_encode( $a) ); die;
         foreach ($a as $k => $v)
         {
             foreach ($v[0] as $key => $val)//Produts PID
@@ -520,7 +546,6 @@ class Shop_PresetContainerVPS extends Zero_Model
                 $a[$k]['summ'] = $a[$k]['summ'] + $val['data'][0][key($billingcycle)];
             }
         }
-//pre ( json_encode( $container_VPS_custom )); die;
         return $a;
     }
 

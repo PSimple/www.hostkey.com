@@ -1,8 +1,9 @@
 <?php
 
 /**
- * Сохранение конфигурации сервера в биллинге.
+ *  Формирование заказа на новый выделенный сервере
  *
+ * Сохранение конфигурации сервера в биллинге.
  * Для дальнейшего оформления заказа на него.
  *
  * @package Shop.Dedicated.Api
@@ -15,13 +16,13 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
      * Формирование заказа.
      *
      * Если "Calculation" == true производится только расчет стоимости заказа и скидка
-     *
      * @sample /api/v1/dedicated/order
      *
      * @return boolean flag статус выполнения
      */
     public function Action_POST()
     {
+        $config = Zero_Config::Get_Config('shop', 'config');
         if ( !isset($_REQUEST['Currency']) || !$_REQUEST['Groups'] )
             Zero_App::ResponseJson200(null, -1, ["параметры групп или валюта не заданы"]);
 
@@ -156,7 +157,7 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
             'CurrencyId' => $_REQUEST['Currency'] == 'eur' ? 2 : 2,
         ];
         $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/orders/dedicated', $requestData);
-        $label = $_REQUEST['Hardware']['Label'] . '/' . $_REQUEST['Network']['Label'] . '/' . $_REQUEST['Software']['Label'] . '/' . $_REQUEST['SLA']['Label'];
+        $label = $_REQUEST['Hardware']['Label'] . '/' . $_REQUEST['Software']['Label'] . '/' . $_REQUEST['Network']['Label'] . '/' . $_REQUEST['SLA']['Label'];
         Zero_Logs::File("ordernew.log", $requestData, $result);
         if ( $result['ErrorStatus'] == false )
         {
@@ -165,11 +166,12 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
                 "Discount" => $discount,
                 "OptionID" => $result['Content']['OptionID'],
                 "Configuration" => $label,
+                "currencyId" => $config['currencyId'],
             ]);
         }
         else
         {
-            Zero_App::ResponseJson200(null, $result['Code'], [$result['Message']]);
+            Zero_App::ResponseJson500($result['Code'], [$result['Message']]);
         }
         return true;
     }
