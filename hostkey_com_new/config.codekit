@@ -1800,7 +1800,7 @@
 		"inputAbbreviatedPath": "\/assets\/css\/slider_item.less",
 		"outputAbbreviatedPath": "\/assets\/css\/slider_item.css",
 		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 1,
+		"outputPathIsSetByUser": 0,
 		"outputStyle": 0,
 		"relativeURLS": 0,
 		"shouldRunAutoprefixer": 0,
