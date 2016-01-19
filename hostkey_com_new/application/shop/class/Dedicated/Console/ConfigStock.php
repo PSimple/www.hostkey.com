@@ -35,6 +35,33 @@ class Shop_Dedicated_Console_ConfigStock extends Zero_Controller
                 Zero_Helper_File::File_Save($path, serialize($data));
             }
         }
+        // NL
+        $url = "https://ug.hostkey.ru/api/v1.0/inv/component1/stock?currency={$config['currency']}&groups=NL";
+        $data = Zero_App::RequestJson("GET", $url);
+        if ( false == $data['ErrorStatus'] )
+        {
+            $data = [
+                'Data' => $data['Content'],
+                'Currency' => $config['currency'],
+                'ComponentGroup' => 'NL',
+            ];
+            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . md5($config['currency'] . 'NL') . '.data';
+            Zero_Helper_File::File_Save($path, serialize($data));
+        }
+        // RU
+        $url = "https://ug.hostkey.ru/api/v1.0/inv/component1/stock?currency={$config['currency']}&groups=RU";
+        $data = Zero_App::RequestJson("GET", $url);
+        if ( false == $data['ErrorStatus'] )
+        {
+            $data = [
+                'Data' => $data['Content'],
+                'Currency' => $config['currency'],
+                'ComponentGroup' => 'RU',
+            ];
+            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . md5($config['currency'] . 'RU') . '.data';
+            Zero_Helper_File::File_Save($path, serialize($data));
+        }
+        //
         return true;
     }
 

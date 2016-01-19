@@ -177,6 +177,7 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         ];
         $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/orders/dedicated', $requestData);
         $label = $_REQUEST['Hardware']['Label'] . '/' . $_REQUEST['Software']['Label'] . '/' . $_REQUEST['Network']['Label'] . '/' . $_REQUEST['SLA']['Label'];
+        $label = preg_replace("~\([0-9]+\)~si", "", $label);
         Zero_Logs::File("ordernew.log", $requestData, $result);
         if ( $result['ErrorStatus'] == false )
         {

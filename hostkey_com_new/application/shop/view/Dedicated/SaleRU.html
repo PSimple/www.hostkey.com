@@ -189,74 +189,6 @@
                                 <div class="black-sale__slider-item-timer" id="js-countdown-8"></div>
                             </td>
                         </tr>
-
-                        {foreach ($configuration as $key => $row)}
-                        <tr class="dedicated-extra-price__table-row">
-                            <td class="dedicated-extra-price__table-cell">
-                                {if ( 'NL' == $row['LocationCode'] )}
-                                <span class="b-icon b-flag b-flag_country_nether"></span>
-                                {else}
-                                <span class="b-icon b-flag"></span>
-                                {/if}
-                            </td>
-                            <td class="dedicated-extra-price__table-cell">
-                                <div class="dedicated-extra-price__text">
-                                    {$row['Cpu']['Name']}
-                                </div>
-                                <div class="b-range">
-                                    <a href="{$row['Cpu']['KpdLink']}" target="_blank">
-                                        {for ($j = 0; $j < 15000; $j += 1000)}
-                                        {if ( $j <= $row['Cpu']['Kpd'] * 2 )}
-                                        <span class="b-range__item b-range__item_type_green"></span>
-                                        {else}
-                                        <span class="b-range__item"></span>
-                                        {/if}
-                                        {/for}
-                                    </a>
-                                </div>
-                            </td>
-                            <td class="dedicated-extra-price__table-cell">
-                                <span class="dedicated-extra-price__text">{$row['Ram']} GB</span>
-                            </td>
-                            <td class="dedicated-extra-price__table-cell">
-                                <span class="dedicated-extra-price__text">
-                                {foreach ($row['Hdd'] as $h)}
-                                {$h}<br>
-                                {/foreach}
-                                </span>
-                            </td>
-                            <td class="dedicated-extra-price__table-cell">
-                                {if ( $row['Raid'] )}
-                                <span class="b-icon dedicated-extra-price__icon-good"></span>
-                                {/if}
-                            </td>
-                            <td class="dedicated-extra-price__table-cell">
-                                <span class="dedicated-extra-price__text">
-                                  <select id='port{$key}' name="listOS" style="width: 100%;"><option value="">Не выбрано</option>
-                                      {foreach ($listPort as $r)}
-                                      <option value="{$r['ID']}">{$r['Name']}</option>
-                                      {/foreach}
-                                  </select>
-                                </span>
-                            </td>
-                            <td class="dedicated-extra-price__table-cell">
-                                <select id='os{$key}' name="listOS" style="width: 100%;"><option value="">Не выбрано</option>
-                                    {foreach ($listOs as $r)}
-                                    <option value="{$r['ID']}">{$r['Name']}</option>
-                                    {/foreach}
-                                </select>
-                            </td>
-                            <td class="dedicated-extra-price__table-cell">
-                                {if ( $row['Price']['Price'] )}
-                                <a class="b-submit dedicated-item-content__submit" onclick="return saleBuy({$key});" href="#">{$row['Price']['Price']}</a>
-                                {/if}
-                            </td>
-                            <td class="dedicated-extra-price__table-cell">
-                                <div class="black-sale__slider-item-timer" id="js-countdown-{$key}"></div>
-                            </td>
-                        </tr>
-                        {/foreach}
-
                     </table>
                 </div>
 
@@ -330,15 +262,6 @@
                 captionSize: 8
             });
         </script>
-        {foreach ($configuration as $key => $row)}
-        <script>
-            $('#js-countdown-{$key}').timeTo({
-                seconds: 5660,
-                displayCaptions: true,
-                captionSize: 8
-            });
-        </script>
-        {/foreach}
     </div>
     <div class="footer-push"></div>
 </div>

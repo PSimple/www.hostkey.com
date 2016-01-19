@@ -32,6 +32,27 @@ class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
                 Zero_Helper_File::File_Save($path, serialize($data['Content']));
             }
         }
+        // NL
+        $url = "https://ug.hostkey.ru/api/v1.0/inv/component/salenew?currency={$config['currency']}&groups=NL";
+        $data = Zero_App::RequestJson("GET", $url);
+        if ( false == $data['ErrorStatus'] )
+        {
+            $data['Content']['Currency'] = $config['currency'];
+            $data['Content']['ComponentGroup'] = 'NL';
+            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($config['currency'] . 'NL') . '.data';
+            Zero_Helper_File::File_Save($path, serialize($data['Content']));
+        }
+        // RU
+        $url = "https://ug.hostkey.ru/api/v1.0/inv/component/salenew?currency={$config['currency']}&groups=RU";
+        $data = Zero_App::RequestJson("GET", $url);
+        if ( false == $data['ErrorStatus'] )
+        {
+            $data['Content']['Currency'] = $config['currency'];
+            $data['Content']['ComponentGroup'] = 'RU';
+            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($config['currency'] . 'RU') . '.data';
+            Zero_Helper_File::File_Save($path, serialize($data['Content']));
+        }
+        //
         return true;
     }
 
