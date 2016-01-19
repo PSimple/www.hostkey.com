@@ -131,23 +131,52 @@
                     {foreach ( $value as $k => $v)}
                     <td class="b-vps__table-cell b-vps__table-cell_border_yes">
 
+
+                        {if ( 'Backups Limit' == $key )}
+                        <div class="b-vps-table__text">
+                            <select class="table-select__item  bal" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
+                                {foreach ( $arr_Backups_Limit[key($arr_Backups_Limit)] as $key_arr_select => $val_arr_select )}
+                                {if ( $val_arr_select['name'] == $v['name'] )}
+                                <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}</option>
+                                {else}
+                                <option value="{$val_arr_select['id']}">{$val_arr_select['name']}</option>
+                                {/if}
+                                {/foreach}
+                            </select>
+                        </div>
+                        {else}
+
+
+                        {if ( 'Bandwidth Limit' == $key )}
+                        <div class="b-vps-table__text">
+                            <select class="table-select__item  bwl" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
+                                {foreach ( $arr_Bandwidth_Limit[key($arr_Bandwidth_Limit)] as $key_arr_select => $val_arr_select )}
+                                {if ( $val_arr_select['name'] == $v['name'] )}
+                                     <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}</option>
+                                {else}
+                                     <option value="{$val_arr_select['id']}">{$val_arr_select['name']}</option>
+                                {/if}
+                                {/foreach}
+                            </select>
+                        </div>
+                        {else}
+
                         {if ( 'VM Template' == $key )}
                         <div class="b-vps-table__text">
                             <select class="table-select__item  vm" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
-                                {foreach ( $arr_VM_Template['696'] as $key_arr_select => $val_arr_select )}
+                                {foreach ( $arr_VM_Template[key($arr_VM_Template)] as $key_arr_select => $val_arr_select )}
                                 {if ( $val_arr_select['name'] == $v['name'] )}
                                      <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}</option>
                                 {else}
                                 <option value="{$val_arr_select['id']}">{$val_arr_select['name']}</option>
                                 {/if}
                                 {/foreach}
-                                {if ( $v['name'] == 'NONE')}
-                                <option value="{$v['name']}" selected="selected">{$v['name']}</option>
-                                {/if}
                             </select>
                         </div>
                         {else}
                             <div class="b-vps-table__text">{$v['name']}</div>
+                        {/if}
+                        {/if}
                         {/if}
 
 
@@ -200,7 +229,8 @@
 
         <table class="b-vps__table" data_id="Options" style="display: none;">
             <tr>
-                <td>
+                <td valign="top">
+                    <h3>Additional services and service options</h3>
                     <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
                 </td>
                 <td>
@@ -222,7 +252,7 @@
     <div class="footer-push"></div>
 </div>
 
-
+<!--
 <div class="popup popup_callback" style="display: none;" id="information_manage_cloud">
     <a class="close close_window_information_manager_cloud" href="#"><img src="/assets/img/close.png"></a>
 
@@ -233,7 +263,7 @@
         <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
     </div>
 </div>
-
+-->
 <script>
     $(document).ready(function (){
 
@@ -250,6 +280,8 @@
         var currencyID = {$currencyId};
 
         var VM_Template = {json_encode($arr_VM_Template)};
+        var Bandwidth_Limit = {json_encode($arr_Bandwidth_Limit)};
+        var Backups_Limit = {json_encode($arr_Backups_Limit)};
 
         var Table_Row = {json_encode($table_row_data)};
 
@@ -292,6 +324,8 @@
 
         var $eventSelect = $(".js-select-test");
         var $eventSelectVM = $(".vm");
+        var $eventSelectBWL = $(".bwl");
+        var $eventSelectBAL = $(".bal");
 
 
       //  window.ToStringJSON ( {json_encode ( $table_row_data)} );
@@ -314,7 +348,7 @@
 
        //window.ToStringJSON ( Table_Row['VM Template'][4].name );
 
-      window.ToStringJSON ( Table_Row );
+     // window.ToStringJSON ( ZakazY );
 
         $eventSelect.on("change", function (e) {
             var payment_period = $( this ).select2("val");
@@ -326,6 +360,7 @@
                     var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
                     p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
                     $( '[data_summa_preset=' + preset_number + ']').html( p );
+                    window.ToStringJSON ( Zakaz );
                 }
             }
         });
@@ -335,22 +370,41 @@
             var id_vm_template = $( this ).select2("val");
             var preset_number = e.target.getAttribute('data_preset');
             console.log(  preset_number + "---" + id_vm_template );
-            ZakazY[preset_number]['696']['data']['0'] = window.AddOptionToZakaz( VM_Template, id_vm_template );
+            ZakazY[preset_number][{key($arr_VM_Template)}]['data']['0'] = window.AddOptionToZakaz( VM_Template, id_vm_template );
+            Zakaz = ZakazY[preset_number];/* формирование товарного наполнения заказа */
+            var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
+            p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
+            $( '[data_summa_preset=' + preset_number + ']').html( p );
+            window.ToStringJSON ( Zakaz );
 
-           // window.ToStringJSON ( ZakazY );
-            /*
-            for( var prop in listOfProducts[preset_number][0]) {
-                if ( listOfProducts[preset_number][0][prop].name == "VM Template" ) {
-                    for( var prop2 in listOfProducts[preset_number][0][prop].data ) {
-                        alert ( id_vm_template + "---" + listOfProducts[preset_number][0][prop].data[prop2].id  );
-                        if ( listOfProducts[preset_number][0][prop].data[prop2].id == id_vm_template ) {
-                           // ZakazY[preset_number]['696']['data']['0'] = window.AddOptionToZakaz( VM_Template, Table_Row[preset_number]['id'] );
-                    }
-                    }
-                }
-            }
-            */
         });
+
+        $eventSelectBWL.on("change", function (e) {
+            var id_vm_template = $( this ).select2("val");
+            var preset_number = e.target.getAttribute('data_preset');
+          //  console.log(  preset_number + "---" + id_vm_template );
+            ZakazY[preset_number][{key($arr_Bandwidth_Limit)}]['data']['0'] = window.AddOptionToZakaz( Bandwidth_Limit, id_vm_template );
+            Zakaz = ZakazY[preset_number];/* формирование товарного наполнения заказа */
+             var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
+             p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
+             $( '[data_summa_preset=' + preset_number + ']').html( p );
+            window.ToStringJSON ( Zakaz);
+
+        });
+
+        $eventSelectBAL.on("change", function (e) {
+            var id_vm_template = $( this ).select2("val");
+            var preset_number = e.target.getAttribute('data_preset');
+           // console.log(  preset_number + "---" + id_vm_template );
+            ZakazY[preset_number][{key($arr_Backups_Limit)}]['data']['0'] = window.AddOptionToZakaz( Backups_Limit, id_vm_template );
+            Zakaz = ZakazY[preset_number];/* формирование товарного наполнения заказа */
+             var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
+             p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
+             $( '[data_summa_preset=' + preset_number + ']').html( p );
+            window.ToStringJSON ( Zakaz );
+
+        });
+
 
 
         var CoocieObjZakazContainer = new Object();
