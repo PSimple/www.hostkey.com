@@ -1,25 +1,22 @@
 {if ( count($newsList) > 0)}
-  <div class="b-main-page__news">
+<div class="b-main-page__news">
     <h2 class="b-main-page__title b-main-page__title_upline_yes">
         news
     </h2>
-      <div class="b-main-page__news-list">
+
+    <div class="b-main-page__news-list">
         {foreach ( $newsList as $key => $row )}
-          {if ( $key>2 )break;}{/if} {# counter item news in page; = 3 news #}
-          <div class="b-main-page__news-item"
-               {if ( $row['IsDetails'] )}
-                  onClick="javascript: document.location.href='{$NEWS_DETAIL_PATH}_{$row['ID']}';"
-               {/if}
-          >
-              <div class="b-main-page__news-item-title">
-                  {$row['Name']}
-              </div>
-              <div class="b-main-page__news-item-date b-main-page__news-item-date_first_yes">10.04.2015</div>
-              <p class="b-main-page__news-item-text">
-                  {$row['Description']}
-              </p>
-          </div>
-        {/foreach}
-      </div>
+        {if ( $key>2 )break;}{/if} {# counter item news in page; = 3 news #}
+        <div class="b-main-page__news-item" {if ( $row['IsDetails'] )} onClick="javascript: document.location.href='{$NEWS_DETAIL_PATH}_{$row['ID']}';" {/if}>
+        <div class="b-main-page__news-item-title">
+            {$row['Name']}
+        </div>
+        <div class="b-main-page__news-item-date b-main-page__news-item-date_first_yes">{$row['Date']}</div>
+        <p class="b-main-page__news-item-text">
+            {$row['Description']}
+        </p>
     </div>
-  {/if}
+    {/foreach}
+</div>
+</div>
+{/if}

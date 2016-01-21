@@ -5,7 +5,7 @@
 {else}
 <div class="main-page-offers">
 {foreach ($data as $key => $value)}
-<a class="main-page-offers__item" href="/cloud/vps" style="float: left; {if ($key>3)}display: none{/if}">
+<a class="main-page-offers__item" href="{$value['Link']}" style="float: left; {if ($key>3)}display: none{/if}">
     <h3 class="main-page-offers__item-title">{$value['Head']}</h3>
     <div class="main-page-offers__item-text">
         {$value['Description']}
