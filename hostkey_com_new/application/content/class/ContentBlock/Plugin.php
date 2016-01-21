@@ -20,14 +20,12 @@ class Content_ContentBlock_Plugin extends Zero_Controller
     {
         $this->Chunk_Init();
         if ( isset($this->Params['IsFeatures']) )
-            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;
+            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND IsEnable = 1 AND Section_ID = " . Zero_App::$Section->ID;
         else
-            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 0 AND Section_ID = " . Zero_App::$Section->ID;
+            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 0 AND IsEnable = 1 AND Section_ID = " . Zero_App::$Section->ID;
 
         $data = Zero_DB::Select_Array($sql);
-//pre( $data );
         $this->View->Assign('DATA', $data);
-
         return $this->View;
     }
 

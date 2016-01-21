@@ -73,6 +73,13 @@ class Content_ContentBlock extends Zero_Model
 				'Default' => '',
 				'Form' => 'Text',
 			],
+			'IsEnable' => [
+				'AliasDB' => 'z.IsEnable',
+				'DB' => 'I',
+				'IsNull' => 'YES',
+				'Default' => '1',
+				'Form' => 'Check',
+			],
 			'IsFeatures' => [
 				'AliasDB' => 'z.IsFeatures',
 				'DB' => 'I',
@@ -146,6 +153,7 @@ class Content_ContentBlock extends Zero_Model
         return [
             'ID' => ['Visible' => true, 'AR' => true],
 			'Head' => ['Visible' => true, 'AR' => true],
+			'IsEnable' => ['Visible' => true, 'AR' => true],
 			'IsFeatures' => ['Visible' => true, 'AR' => true],
 			'Img' => ['Visible' => true, 'AR' => true],
 			'Description' => ['Visible' => true, 'AR' => true],
@@ -189,6 +197,7 @@ class Content_ContentBlock extends Zero_Model
         return [
             'ID' => [],
 			'Head' => [],
+			'IsEnable' => [],
 			'IsFeatures' => [],
 			'Img' => [],
 			'Link' => [],

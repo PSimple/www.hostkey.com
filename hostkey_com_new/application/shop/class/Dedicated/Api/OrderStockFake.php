@@ -29,10 +29,11 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
         $_REQUEST['Groups'] = 'All';
 
         // Сервер
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorStock/' . md5($config['currency']) . '.data';
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . md5($config['currency']) . '.data';
         if ( !file_exists($path) )
             Zero_App::ResponseJson500(-1, ["файл конфигурации стоковых серверов не найден"]);
         $configuration = unserialize(file_get_contents($path));
+        $configuration = $configuration['Data'];
         if ( empty($configuration[$_REQUEST['compId']]) )
             Zero_App::ResponseJson500(-1, ["конфигурация стокового сервера не найдена"]);
         $server = $configuration[$_REQUEST['compId']];
@@ -154,19 +155,6 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
         ];
         // Инофрмация по месяцу для клиента с учетом выбранного периода
         $sum = $costHardware + $costNetwork + $costSLA;
-        $discountMonthly = ($sum / 100) * $percentCycle[$_REQUEST['SLA']['CycleDiscount']];
-        if ( 0 < $discountMonthly )
-            $discount = $discountMonthly * $percentCycle[$_REQUEST['SLA']['CycleDiscount']];
-        else
-            $discount = $discountMonthly;
-        if ( $_REQUEST['Calculation'] )
-        {
-            Zero_App::ResponseJson200([
-                "Summa" => $sum - $discountMonthly + $costSoftWare,
-                "Discount" => $discount,
-            ]);
-            return true;
-        }
         // Полная раскладка по месяцам и формирование заказа
         $sumMonthly = $sum + $costSoftWare;
         $sumQuarterly = ($sum - ($sum * 0.03) + $costSoftWare) * 3;
@@ -188,8 +176,6 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
         if ( $result['ErrorStatus'] == false )
         {
             Zero_App::ResponseJson200([
-                "Summa" => $sum,
-                "Discount" => $discount,
                 "OptionID" => $result['Content']['OptionID'],
                 "Configuration" => $label,
                 "currencyId" => $config['currencyId'],

@@ -77,6 +77,7 @@ return [
     'ContentBlock Description' => 'Описание',
     'ContentBlock Content' => 'Контент',
     'ContentBlock Head' => 'Заголовок',
+    'ContentBlock IsEnable' => 'Включен',
     'ContentBlock IsFeatures' => 'Особенности',
     'ContentBlock ID' => 'Идентификатор',
     'ContentBlock Img' => 'Картинка',

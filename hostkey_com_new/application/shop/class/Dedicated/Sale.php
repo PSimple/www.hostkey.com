@@ -25,11 +25,11 @@ class Shop_Dedicated_Sale extends Zero_Controller
         $min = 0;
         $max = 0;
         $configuration = [];
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorStock/' . md5($config['currency']) . '.data';
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . md5($config['currency']) . '.data';
         if ( file_exists($path) )
         {
             $configuration = unserialize(file_get_contents($path));
-            foreach ($configuration as $key => $row)
+            foreach ($configuration['Data'] as $key => $row)
             {
                 // min
                 if ( 0 == $min )
@@ -47,7 +47,7 @@ class Shop_Dedicated_Sale extends Zero_Controller
                     $cnt_cpu++;
                 else if ( preg_match("~3x|3 x~si", $row['Cpu']['Name']) )
                     $cnt_cpu++;
-                $configuration[$key]['CpuCnt'] = $cnt_cpu;
+                $configuration['Data'][$key]['Cpu']['Cnt'] = $cnt_cpu;
                 // RAID (Other)
                 $flagRaid = false;
                 if ( isset($row['Other']) )
@@ -61,12 +61,12 @@ class Shop_Dedicated_Sale extends Zero_Controller
                         }
                     }
                 }
-                $configuration[$key]['Raid'] = $flagRaid;
+                $configuration['Data'][$key]['Raid'] = $flagRaid;
             }
         }
         $this->View->Assign('min', $min);
         $this->View->Assign('max', $max);
-        $this->View->Assign('configuration', $configuration);
+        $this->View->Assign('configuration', $configuration['Data']);
 //        pre($configuration);
 
         // OS
