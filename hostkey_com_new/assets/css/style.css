@@ -1597,7 +1597,7 @@ p {
 .b-contacts__item-link {
   padding-left: 30px;
   position: relative;
-  color: #ff692d;
+  color: #945ae0;
   text-decoration: none;
   font-family: 'FranklinGothicBookCondC';
   font-weight: normal;
@@ -2227,6 +2227,7 @@ p {
 }
 .black-sale {
   background: url(/assets/img/bg_dots_dark.png) repeat;
+  display: none;
 }
 .black-sale__title {
   text-align: center;
@@ -4542,7 +4543,7 @@ p {
 #why .note .note_border{ width: 37px; height: 4px; background: #fff; margin: 10px 0; }
 
 #why .why_block1 { height: 306px; }
-#why .why_block1 .why_block_l{ line-height: 0; }
+#why .why_block1 .why_block_l{ line-height: 0; overflow: hidden;}
 #why .why_block1 .why_block_r{ background: #805acb; height: 306px;}
 #why .why_block1 .why_block_r > div{ width: 420px; color:#fff; margin: 75px 0 0 50px; }
 #why .why_block1 .why_block_r > div > span{ display:block; width: 20px; height: 39px; background: url(/assets/img/why_l_violet.png) no-repeat top left; position: absolute; left: -20px; top: 50%; margin: -20px 0 0 0; z-index: 3;}
@@ -4552,7 +4553,7 @@ p {
 #why .why_block2 .why_block_l{ background: #fff; height: 306px; }
 #why .why_block2 .why_block_l > div{ width: 500px; margin: 30px 0 0 50px; }
 #why .why_block2 .why_block_l > div > span{ display:block; width: 20px; height: 39px; background: url(/assets/img/why_r_white.png) no-repeat top left; position: absolute; right: -20px; top: 50%; margin: -20px 0 0 0; z-index: 3; }
-#why .why_block2 .why_block_r{ line-height: 0; }
+#why .why_block2 .why_block_r{ line-height: 0; overflow: hidden; }
 
 #why .why_block3 { height: 306px; }
 #why .why_block3 .why_block_r{ background: #fff; height: 306px;}
@@ -4561,7 +4562,7 @@ p {
 #why .why_block3 .why_block_l{ line-height: 0; }
 
 #why .why_block4 { height: 306px; }
-#why .why_block4 .why_block_r{ line-height: 0; }
+#why .why_block4 .why_block_r{ line-height: 0;  overflow: hidden; }
 #why .why_block4 .why_block_l{ background: #805acb; height: 306px;}
 #why .why_block4 .why_block_l > div{ width: 420px; color:#fff; margin: 30px 0 0 50px; }
 #why .why_block4 .why_block_l > div > span{ display:block; width: 20px; height: 39px; background: url(/assets/img/why_r_violet.png) no-repeat top left; position: absolute; right: -20px; top: 50%; margin: -20px 0 0 0; z-index: 3;}
@@ -4577,7 +4578,7 @@ p {
 #why .why_block6 .why_block_l{ background: #fff; height: 306px; }
 #why .why_block6 .why_block_l > div{ width: 525px; margin: 85px 0 0 50px; }
 #why .why_block6 .why_block_l > div > span{ display:block; width: 20px; height: 39px; background: url(/assets/img/why_r_white.png) no-repeat top left; position: absolute; right: -20px; top: 50%; margin: -20px 0 0 0; z-index: 3; }
-#why .why_block6 .why_block_r{ line-height: 0; }
+#why .why_block6 .why_block_r{ line-height: 0; overflow: hidden; }
 
 #service { background: url(/assets/img/service_level.png) no-repeat top left; height: 485px; text-align: center; font: 18px FranklinGothicMediCondOSC,Arial; color: #fff; line-height: 1.4; }
 #service > div{ width: 700px; margin: 0px auto 0 auto; padding: 110px 0 0 0; }
@@ -4632,7 +4633,7 @@ p {
     letter-spacing: 3px;
     line-height: 100px;
     margin-bottom: 30px;
-    padding: 200px 0 3px 70px;
+    padding: 0px 0 3px 70px;
     position: relative;
     text-decoration: underline;
     text-transform: uppercase;
@@ -4652,7 +4653,7 @@ p {
     margin: 50px auto;
     text-align: center;
 }
-#bothers .bothers_block { height: 335px; background: #ff6a39; }
+#bothers .bothers_block { height: 485px; background: #ff6a39; }
 #bothers .bothers_block_l { float: left; width: 465px; margin: 65px 0 0 40px; }
 #bothers .bothers_block_l h2{ font: 35px FranklinGothicMediCondOSC_Medium,Arial; color: #fff; line-height: 1; text-transform: uppercase; }
 #bothers .bothers_block_l div{ width: 320px; font: 24px FranklinGothicMediCondOSC,Arial; color: #fff; line-height: 1.2; text-transform: uppercase; margin: 20px 0 0 0px;}

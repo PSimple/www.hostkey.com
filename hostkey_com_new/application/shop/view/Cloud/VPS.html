@@ -9,7 +9,10 @@
 
 
     <div class="b-vps">
-
+        <h3 class="b-dedicated__title">
+            CONTAINER VPS<br>
+            FEATURE
+        </h3>
         <div class="b-vps__feature b-container">
             <div class="b-vps__feature-item">
                 <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-01.png" alt="иконка">
@@ -50,47 +53,69 @@
                 to your server. No catch.
             </p>
         </div>
-        </div>
 
-
-        <div class="switch_country_for_container_VPS" id="calc">
-            {if ( $PID==530 )}
-            <div  class="b-dedicated__switch-item active  flag_nl">
-                netherland
-            </div>
-            {else}
-            <div  class="b-dedicated__switch-item  flag_nl">
-                <a href="/cloud/vps#nl" target="_self" title="ckoud VDS Russia>">
+            <div class="switch_country_for_container_VPS" id="calc">
+                {if ( $PID==530 )}
+                <div  class="b-dedicated__switch-item active  flag_nl">
                     netherland
-                </a>
-            </div>
-            {/if}
-            <div class="b-dedicated__switch-item">/</div>
-            {if ( $PID==538 )}
-            <div class="b-dedicated__switch-item active  flag_ru">
-                russia
-            </div>
-            {else}
-            <div class="b-dedicated__switch-item  flag_ru">
-                <a href="/cloud/vps/russia#ru" target="_self" title="ckoud VDS Russia>">
+                </div>
+                {else}
+                <div  class="b-dedicated__switch-item  flag_nl">
+                    <a href="/cloud/vps#nl" target="_self" title="ckoud VDS Russia>">
+                        netherland
+                    </a>
+                </div>
+                {/if}
+                <div class="b-dedicated__switch-item">/</div>
+                {if ( $PID==538 )}
+                <div class="b-dedicated__switch-item active  flag_ru">
                     russia
-                </a>
+                </div>
+                {else}
+                <div class="b-dedicated__switch-item  flag_ru">
+                    <a href="/cloud/vps/russia#ru" target="_self" title="ckoud VDS Russia>">
+                        russia
+                    </a>
+                </div>
+                {/if}
             </div>
-            {/if}
+
         </div>
+
+
+
 
         <div class="b-dedicated__back" style="display: none;">
             <a href="#" class="b-dedicated__back-text" id="calc-breadcrambs-back">
                 <span class="b-icon b-dedicated__back-icon"></span>
                 back
             </a>
-
+<!--
             <div class="b-dedicated__back-breadcrumbs">
                 <div class="b-dedicated__back-breadcrumbs-item b-dedicated__back-breadcrumbs-item_disable" id="Service">Service</div>
                 <div class="b-dedicated__back-breadcrumbs-item b-dedicated__back-breadcrumbs-item_separate_yes"></div>
                 <div class="b-dedicated__back-breadcrumbs-item b-dedicated__back-breadcrumbs-item_active" id="Options">Options</div>
                 <div class="b-dedicated__back-breadcrumbs-item b-dedicated__back-breadcrumbs-item_disable b-dedicated__back-breadcrumbs-item_separate_yes"></div>
                 <div class="b-dedicated__back-breadcrumbs-item ">Payment</div>
+            </div>
+
+        -->
+
+        </div>
+
+
+        <div id="scroll-anchor-01" class="scroll-anchor-01"></div>
+        <div style="float: left; width: 100%; box-sizing: border-box; padding: 0px; background: #fff;" class="b-text-page__box">
+            <h3 style="overflow: hidden;" class="b-text-page__title b-text-page__title_upline_yes">
+                Container VPS configurator
+            </h3>
+            <div style="float: right; width: 800px; margin: 20px 0 0 0;" class="desc-container-vps">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Vestibulum molestie condimentum tellus, in bibendum odio pretium at.
+                Integer ultricies vulputate lorem, ut fringilla quam sollicitudin accumsan.
+                Etiam mauris arcu, maximus sit amet auctor et, dapibus nec libero. Curabitur
+                ullamcorper mollis dignissim. Nulla facilisi. Nulla efficitur lacus lectus, ut laoreet diam elementum in.
+                Nunc posuere odio ac tortor vestibulum, a mollis dolor congue.
             </div>
         </div>
 
@@ -132,6 +157,7 @@
                     <td class="b-vps__table-cell b-vps__table-cell_border_yes">
 
 
+
                         {if ( 'Backups Limit' == $key )}
                         <div class="b-vps-table__text">
                             <select class="table-select__item  bal" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
@@ -140,21 +166,6 @@
                                 <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}</option>
                                 {else}
                                 <option value="{$val_arr_select['id']}">{$val_arr_select['name']}</option>
-                                {/if}
-                                {/foreach}
-                            </select>
-                        </div>
-                        {else}
-
-
-                        {if ( 'Bandwidth Limit' == $key )}
-                        <div class="b-vps-table__text">
-                            <select class="table-select__item  bwl" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
-                                {foreach ( $arr_Bandwidth_Limit[key($arr_Bandwidth_Limit)] as $key_arr_select => $val_arr_select )}
-                                {if ( $val_arr_select['name'] == $v['name'] )}
-                                     <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}</option>
-                                {else}
-                                     <option value="{$val_arr_select['id']}">{$val_arr_select['name']}</option>
                                 {/if}
                                 {/foreach}
                             </select>
@@ -177,9 +188,6 @@
                             <div class="b-vps-table__text">{$v['name']}</div>
                         {/if}
                         {/if}
-                        {/if}
-
-
                     </td>
                     {/foreach}
                     </tr>
@@ -230,11 +238,11 @@
         <table class="b-vps__table" data_id="Options" style="display: none;">
             <tr>
                 <td valign="top">
-                    <h3>Additional services and service options</h3>
+                    <!--<h3 style="text-align: center;">Additional services and service options</h3>-->
                     <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
                 </td>
                 <td>
-                    {include "Shop_Step2"}
+                    {#{include "Shop_Step2"}#}
                 </td>
             </tr>
         </table>
@@ -247,25 +255,94 @@
             <p class="b-vps__try-text"><span class="b-vps__try-text_purpur_yes">starts from 300 eur / month</span><br>or configurate your own</p>
             <a class="b-submit b-vps__try-submit" href="#">see plans</a>
         </div>
+
+
+        <div class="need-more-resousrses">
+            <span class="b-vps__try-line-text">need more resourses?</span>
+        </div>
+        <div class="need-more-resousrses-container">
+            {foreach ( $need_more as $keu => $val )}
+            <div class="need-more-resousrses-container-header">
+                <div class="need-more-resousrses-container-zag" data_id_need="{$val['ID']}">{$val['Head']}</div>
+                <div class="need-more-resousrses-container-header-triangle" data_id_need_triangle="{$val['ID']}"></div>
+            </div>
+
+              <div class="need-more-resousrses-container-messager" data_id_need_content_position="{$val['ID']}">{$val['Description']}</div>
+            {/foreach}
+        </div>
+        <div style="clear:both;"></div>
     </div>
 
     <div class="footer-push"></div>
 </div>
-
-<!--
-<div class="popup popup_callback" style="display: none;" id="information_manage_cloud">
-    <a class="close close_window_information_manager_cloud" href="#"><img src="/assets/img/close.png"></a>
-
-    <h2>INFORMATION for REQUEST</h2>
-
-    <div class="message_pole" id="message_load_ajax"></div>
-    <div id="add_iframe_from_billing">
-        <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
-    </div>
-</div>
--->
+<style>
+    .need-more-resousrses {
+        background-color: #945ae0;
+        box-sizing: border-box;
+        padding:  20px;
+        color: #fff;
+        text-transform: uppercase;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+    }
+    .need-more-resousrses-container {
+        display: none;
+        background-color: #fff;
+        width: 100%;
+        padding: 0 0 20px 0;
+    }
+    .need-more-resousrses-container-messager {
+        display: none;
+        margin: 0 0 20px 20px;
+    }
+    .need-more-resousrses-container-header{
+        padding: 20px;
+        font-size: 20px;
+        color: #945ae0;
+        cursor: pointer;
+        margin: 1px;
+    }
+    .need-more-resousrses-container-zag {
+        display: inline-block;
+        text-decoration: underline;
+    }
+    .need-more-resousrses-container-header-triangle {
+        display: inline-block;
+        border: 10px solid transparent; /* Прозрачные границы */
+        border-top: 10px solid #945ae0; /* Добавляем треугольник */
+        position: relative;
+        top: 8px;
+        left: 0;
+    }
+</style>
 <script>
     $(document).ready(function (){
+
+
+        $( '.need-more-resousrses').bind( 'click', function(){
+            $( ".need-more-resousrses-container" ).toggle();
+        });
+
+        $( '.need-more-resousrses-container-zag' ).bind( 'click', function(){
+            var id = $( this).attr( 'data_id_need');
+            var d = $( '[data_id_need_content_position="' + id + '"]');
+            var t= $( '[data_id_need_triangle="' + id + '"]');
+            d.toggle();
+            t.css( 'border', '10px solid transparent' );
+            if ( d.css( 'display') == 'none' ){
+                t.css({
+                    "border-top": "10px solid #945ae0",
+                    "top": "8px"
+            });
+            } else {
+               t.css( {
+                    "border-bottom": "10px solid #945ae0",
+                    "top": "0px"
+        } );
+            }
+
+        });
 
 
         var Zakaz = new Object();
@@ -424,7 +501,7 @@
                     if( prop == PRESET_ID ) {
                         Zakaz = ZakazY[prop];/* Присваиваем пресет заказу без указания оплаты*/
                         /* тут смотрим данные о каком периоде оплаты идет речь */
-                       // window.set_payment_for_preset( Zakaz, listOfProducts, 0);
+                       /* window.set_payment_for_preset( Zakaz, listOfProducts, 0);*/
                     }
               }
 
@@ -439,18 +516,38 @@
                 $.cookie( name_kyki , JSON.stringify( CoocieObjZakazContainer ) );
             }
             $( '#calc').hide( 'slow' );
-            $( '.b-dedicated__back'). show( 'slow' );
+            $( '.b-dedicated__back').show( 'slow' );
             $( '.b-page__promo_vps_yes').hide( 'slow' );
             $( '.b-vps__feature').hide( 'slow');
             $( '[data_id=Options]').show( 'slow');
             $( '[data_id=Service]').hide( 'slow');
             $( '.b-dedicated__summary-title').text( 'Your Solution');
+            $( '.b-dedicated__title').hide( 'slow');
+            $( '#scroll-anchor-01').hide( 'slow');
+            $( '.b-text-page__title ').hide( 'slow');
+            $( '.desc-container-vps').hide( 'slow');
             $( '.b-dedicated__summary-table-cel').text( Zakaz.payment.data[0].name );
             $.scrollTo(0, 1000);
               crFrame( );
               return false;
             ;
-        });
+        })
+
+        $( '#calc-breadcrambs-back').bind('click', function(){
+            $( '#calc').show( 'slow' );
+            $( '.b-dedicated__back').hide( 'slow' );
+            $( '.b-page__promo_vps_yes').show( 'slow' );
+            $( '.b-vps__feature').show( 'slow');
+            $( '[data_id=Options]').hide( 'slow');
+            $( '[data_id=Service]').show( 'slow');
+            $( '.b-dedicated__title').show( 'slow');
+            $( '#scroll-anchor-01').show( 'slow');
+            $( '.b-text-page__title ').show( 'slow');
+            $( '.desc-container-vps').show( 'slow');
+            $.scrollTo('#calc', 1000, { offset:-1100 });
+            document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
+            return false;
+        })
 
         function crFrame( )
         {
@@ -479,8 +576,8 @@
     #configure_cloud_VDS {
         border: none;
         display: block;
-        width: 570px;
-        height: 500px;
+        width: 100%;
+        height: 1000px;
         margin: 0 auto;
     }
 
@@ -493,8 +590,8 @@
 
     .switch_country_for_container_VPS {
         display: block;
-        padding: 50px 0 20px 485px;
-        background: #fff;
+        padding: 50px 0 20px 385px;
+        background: none;
     }
     .switch_country_for_container_VPS a{
         color: #000;

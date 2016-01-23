@@ -536,42 +536,26 @@
     </div>
 </div>
 
-<div class="popup popup_bothers" style="display: none;">
-    <a class="close" href="#"><img src="/assets/img/close.png"></a>
+<div class="popup popup_bothers" data_id="law"  style="display: none;">
+  <div data-width="700px">
 
-    <h2>Russian law</h2>
+      <h2>Russian law</h2>
 
-    <div class="tab_block">
-        <div class="tab_html">
-            <p>On 1 September 2015, a new law comes into force in the Russian Federation - <i>“On Amendments to Certain Laws of the Russian Federation in Order to Clarify the
-                Procedure for Personal Data Processing in Information and Telecommunications Networks”</i>. </p>
+      <div class="tab_block">
+          <p>On 1 September 2015, a new law comes into force in the Russian Federation - <i>“On Amendments to Certain Laws of the Russian Federation in Order to Clarify the Procedure for Personal Data Processing in Information and Telecommunications Networks”</i>. </p>
+          <p>Under this new law companies collecting data of Russian citizens are obliged to perform any action related to the personal data of the Russian clients in databases located within the territory of the Russian Federation. </p>
+          <p>Even if you conduct your business online (i.e. web shops, hotel/airline reservations, social networking, etc.) you are still obligated to store the personal data of the Russian clients on a server situated in Russia. </p>
+          <p>Personal data refers to any information that identifies a specific person. </p>
+          <p>In order to comply with the law there are the following options:
+          <p>— Collocate your server on the territory on the Russian Federation</p>
+          <p>— Rent a physical or virtual server on the territory of the Russian Federation</p>
+          <p>— Install a server in your own premises in Russia if applicable. </p>
+          <p>Failing to comply with the law may lead to the administrative liability for violation as well as the company information being entered into a blacklist. On top of that, the website might be blocked from operating in Russia. </p>
+          <p>HOSTKEY stays on top of the current/new laws & requirements.
+              You can always contact us for consultation. We will be your right hand in case you require to rent or collocate a server/infrastructure in the Russian Federation.</p>
+          <p>Let’s work together.</p>
+      </div>
 
-            <p>Under this new law companies collecting data of Russian citizens are obliged to perform any action related to the personal data of the Russian clients in databases
-                located within the territory of the Russian Federation. </p>
-
-            <p>Even if you conduct your business online (i.e. web shops, hotel/airline reservations, social networking, etc.) you are still obligated to store the personal data of
-                the Russian clients on a server situated in Russia. </p>
-
-            <p>Personal data refers to any information that identifies a specific person. </p>
-
-            <p>In order to comply with the law there are the following options:
-            </p>
-
-            <p>&mdash; Collocate your server on the territory on the Russian Federation</p>
-
-            <p>&mdash; Rent a physical or virtual server on the territory of the Russian Federation</p>
-
-            <p>&mdash; Install a server in your own premises in Russia if applicable. </p>
-
-            <p>Failing to comply with the law may lead to the administrative liability for violation as well as the company information being entered into a blacklist. On top of
-                that, the webassets might be blocked from operating in Russia. </p>
-
-            <p>HOSTKEY stays on top of the current/new laws &amp; requirements.
-                You can always contact us for consultation. We will be your right hand in case you require to rent or collocate a server/infrastructure in the Russian
-                Federation.</p>
-
-            <p>Let’s work together.</p>
-        </div>
 
     </div>
 </div>
@@ -593,13 +577,13 @@
             $('.popup_datacenters').show();
             return false;
         });
-
+/*
         $('.bothers_more').click(function(){
             $('#bgJS').show();
             $('.popup_bothers').show();
             return false;
         });
-
+*/
         $('.popup .close, #bgJS').click(function(){
             $('#bgJS').hide();
             $('.popup').hide();
@@ -817,54 +801,51 @@
         <h1>Our data centers span over</h1>
 
         <div class="datacenters_block">
-            <div class="datacenters_block3">
-                <a href="#" class="tier_datacenters_in_russia">
-                    <span><span>1. </span>DATAPRO MOSCOW, TIER <span>3</span></span>
+            <div class="datacenters_block3" style="padding-top: 80px;">
+                <a href="#" class="tier_datacenters_in_russia arctic-modal-popup" data_more="Service_In_Russia" data_table="tab4">
+                    <span><span>1. </span>DATAPRO, MOSCOW, TIER <span>3</span></span>
                 </a>
-                    <a href="#" class="tier_datacenters_in_russia">
-                            <span><span>2. </span>DATALINE MOSCOW TIER <span>3</span></span>
+                    <a href="#" class="tier_datacenters_in_russia arctic-modal-popup" data_more="Service_In_Russia" data_table="tab3">
+                            <span><span>2. </span>DATALINE, MOSCOW TIER <span>3</span></span>
                     </a>
-                    <a href="#" class="tier_datacenters_in_russia">
+                    <a href="#" class="tier_datacenters_in_russia arctic-modal-popup" data_more="Service_In_Russia" data_table="tab2">
                         <span><span>3.</span> CITY SYSTEMS, MOSCOW, TIER <span>2</span></span>
                     </a>
-            </a>
             <div class="datacenters_descr">
                 We are also ready and fully able to setup a separate data facility for your needs
-                <a href="#" class="datacenters arctic-modal-popup" data_more="Service_In_Russia"><b>more about our datacenters</b></a>
+                <a href="#" class="datacenters arctic-modal-popup" data_more="Service_In_Russia"  data_table="tab1"><b>more about our datacenters</b></a>
             </div>
         </div>
     </div>
 
-    <div id="bothers">
-        <h1>Why bother</h1>
+        <div id="bothers">
+            <h1>Why bother</h1>
 
-        <div class="bothers_block">
-            <div class="bothers_block_l">
-                <h2>Are you ready to work in the Russian law space?</h2>
-
-                <div>September, 1, 2015 is sooner than you might think</div>
-            </div>
-            <div class="bothers_block_r">
-                <p>The new Russian information legislation includes an obligation for all
-                    operators to ensure that personal data* of Russian citizens is collected,
-                    recorded, systemized, stored, clarified (updated and modified) and retrieved only through the use of databases physically located on the territory of the
-                    Russian Federation. </p>
-                <a class="bothers_more" href="#">Read more</a>
-
-                <div class="clear"></div>
-                <div class="note">
-                    <div class="note_border"></div>
-                    *According to Russian law, the primary characteristic of “personal data” is the ability to identify a specific, unique individual.&nbsp;
-
+            <div class="bothers_block">
+                <div id="service2">
+                    <div>
+                        <h2>You can choose the data center that is the most appropriate for your needs.</h2>
+                        <p>
+                            Simply call our managers and describe the situation. You will be offered the best suitable option. For example, if you plan to host an entertaining resource, you can use any of data centers offered. If your company is engaged in financial transactions or activities involving high demands for information security, then you should pay attention to DataPro and DataLine data centers.
+                            DataPro is one of the most reliable data centers in Russia in terms of availability, which has been confirmed by Uptime Institute Tier III resiliency level certification. The data center is suitable for equipment collocation for companies involved in financial activities, as it has PCI Data Security 3.1 certificate. This certificate confirms compliance with the international Payment Card Industry Security Standard.
+                            DataLine also suits financial institutions, as it has PCI Data Security 3.0 certificate. This data center is one of the most reliable in terms of information security. It is compliant with the international standard for Information Security ISO / IEC 27001 (ISO / IEC 27001: 2013 certification).
+                            In addition to choosing a data center, our staff can help you with the choice of services.<br>
+                        </p><ul>
+                        You can:
+                        <li>	Colocate your server on the territory on the Russian Federation
+                        </li><li>	Rent a physical or virtual server on the territory of the Russian Federation
+                    </li><li>	Install a server in your own premises in Russia if applicable.
+                    </li></ul>
+                        <p></p>
+                    </div>
                 </div>
+                <div class="clear"></div>
             </div>
-            <div class="clear"></div>
         </div>
-    </div>
 
 
     <div id="contacts">
-        <div class="contacts_descr">We’re sure that your case deserves A personal approach, so please feel free to contact our sales team lead <span>Maxim Danilov</span></div>
+        <div class="contacts_descr">We’re sure that your case deserves A personal approach, so please feel free to contact our SALES DEPARTMENT</span></div>
         <div class="contacts_data">
             <div class="contacts_phone"><span>+</span><span>31</span><span>20</span><span>820</span><span>37</span><span>77</span></div>
             <div class="contacts_email">sales@hostkey.com</div>
@@ -913,5 +894,23 @@
     }
     .b-text-page__box h2 {
         width: 80%;
+    }
+    #service2 {
+        background: url("/assets/img/service_level_1.png") no-repeat scroll left top;
+        color: #fff;
+        font-size: 18px;
+        height: 485px;
+        text-align: left;
+    }
+    #service2 > div {
+        margin: 0 auto;
+        padding: 10px 0 0;
+        width: 900px;
+    }
+    #service2 h2 {
+        color: #fff;
+        font-size: 28px;
+        text-align: center;
+        text-transform: uppercase;
     }
 </style>

@@ -128,11 +128,21 @@
 
         $('.arctic-modal-popup').click(function() {
             /* установка ширины контейнер для отображения контента в модальном окне */
-            var c = $( "[data_id=" + $( this ).attr( 'data_more') + "]" );
+            var atr = $( this ).attr( 'data_more');
+            var c = $( "[data_id=" + atr + "]" );
             var w = c.find( '[data-width]').attr( 'data-width' );
             if ( typeof w === 'undefined' ){
                 w = "auto";
             };
+
+            if( atr == 'Service_In_Russia') {
+                var tabid = $( this ).attr( 'data_table' );
+
+                    $( '.tabs a' ).removeClass( 'tab_sel' );
+                    $('.html_tab').hide();
+                    $( '.'+tabid ).addClass( 'tab_sel' );
+                    $( '.html_'+tabid ).show();
+            }
             /* --------------------------------------------------------------------*/
 
             $( '.ArcticBoxModalContent').html( c.html() );
@@ -143,13 +153,14 @@
                 overlay: {
                     css: {
                         backgroundColor: '#000',
-                        //backgroundImage: 'url(/assets/img/logo.png)',
+                        /*backgroundImage: 'url(/assets/img/logo.png)',*/
                         backgroundRepeat: 'repeat',
                         backgroundPosition: '50% 0',
                         opacity: .25
                     }
                 }
             });
+            return false;
         });
     });
 
