@@ -81,7 +81,25 @@ class Shop_Cloud_ContainerVPS extends Zero_Controller
         $arr_Bandwidth_Limit['695'] = $configuration['695']['data'];
         $arr_VM_Template['696'] = $configuration['696']['data'];
 
-         //pre ( json_encode( $p ) ); die;
+        $BWL = $table_row_data['Bandwidth Limit'] ;
+        unset ( $table_row_data['Bandwidth Limit']  );
+        $BKL = $table_row_data['Backups Limit'] ;
+        unset ( $table_row_data['Backups Limit']  );
+        $VMT = $table_row_data['VM Template'] ;
+        unset ( $table_row_data['VM Template']  );
+
+        $table_row_data ['Bandwidth Limit'] =  $BWL;
+        $table_row_data ['Backups Limit'] =  $BKL;
+        $table_row_data ['VM Template'] =  $VMT;
+
+        if ( isset($this->Params['IsFeatures']) )
+            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;
+        else
+            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 0 AND Section_ID = " . Zero_App::$Section->ID;
+
+        $need = Zero_DB::Select_Array($sql);
+
+     // pre (   $need   ); die;
 
         $this->View->Assign('table_row_data', $table_row_data);
         $this->View->Assign('payment_period', $payment_period);
@@ -89,7 +107,7 @@ class Shop_Cloud_ContainerVPS extends Zero_Controller
         $this->View->Assign('arr_Backups_Limit' , $arr_Backups_Limit );
         $this->View->Assign('arr_Bandwidth_Limit' , $arr_Bandwidth_Limit );
         $this->View->Assign('arr_VM_Template' , $arr_VM_Template );
-
+        $this->View->Assign('need_more' , $need );
         return true;
     }
 
