@@ -4250,7 +4250,7 @@ p {
 .b-main-page__slider-item-hint-logo {
   display: inline-block;
   vertical-align: top;
-  width: 170px;
+  width: auto;
   margin-right: 30px;
 }
 .b-main-page__slider-item-hint-logo-title {

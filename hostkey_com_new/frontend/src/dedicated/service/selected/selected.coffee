@@ -189,7 +189,7 @@ angular.module("dedicated.service.selected").controller "SelectedCtrl", (notific
         $order.post(order)
         .then (orderLink) ->
             console.log orderLink
-            window.location = orderLink
+          document.getElementById('configure_cloud_VDS').src = orderLink
 
         .catch (error) ->
             if error.Message
