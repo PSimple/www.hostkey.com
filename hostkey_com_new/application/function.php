@@ -27,6 +27,7 @@ function app_route()
     {
         $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], 0, -1);
     }
+    app_redirect($_SERVER['REQUEST_URI']);
     $row = explode('/', strtolower(rtrim(ltrim(explode('?', $_SERVER['REQUEST_URI'])[0], '/'), '/')));
 
     // язык
@@ -70,4 +71,21 @@ function app_request_data_api()
     {
         $_REQUEST = json_decode($GLOBALS["HTTP_RAW_POST_DATA"], true);
     }
+}
+
+function app_redirect($uri)
+{
+    $path = ZERO_PATH_SITE . '/redirect.ini';
+    $data = parse_ini_file($path);
+    //        pre($uri);
+    //        pre($data);
+    if ( isset($data[$uri]) && $data[$uri] != "404" )
+    {
+//        if ( substr($data[$uri], 0, 1) == '/' )
+//        {
+//            $data[$uri] = 'http://hostkey.com' . $data[$uri];
+//        }
+        Zero_App::ResponseRedirect($data[$uri]);
+    }
+//    Zero_Logs::File(__FUNCTION__, $uri);
 }
