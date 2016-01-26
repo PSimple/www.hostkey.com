@@ -11,6 +11,7 @@ test
 config.php
 test.php
 www/zero
+www/exchange
 www/library
 www/application/mail
 www/application/document
