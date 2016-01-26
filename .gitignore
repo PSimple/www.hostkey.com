@@ -11,6 +11,12 @@ test
 config.php
 test.php
 www/zero
+www/library
+www/application/mail
+www/application/document
+www/assets/ckeditor
+www/assets/ckfinder
+www/assets/editor
 
 # External dependences
 
