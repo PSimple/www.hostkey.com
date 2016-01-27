@@ -34,6 +34,19 @@ window.type = 'dedicated';
 
         {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" IsFeatures="1"}
 
+        <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
+        <table class="b-vps__table" data_id="Options" style="display: none;">
+            <tr>
+                <td valign="top">
+                    <!--<h3 style="text-align: center;">Additional services and service options</h3>-->
+                    <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
+                </td>
+                <td>
+                    {#{include "Shop_Step2"}#}
+                </td>
+            </tr>
+        </table>
+
         <div class="b-dedicated__free">
             <a class="b-dedicated__free-title" href="#">Request<br>a free<br>test drive</a>
             <div class="b-dedicated__free-period"></div>
