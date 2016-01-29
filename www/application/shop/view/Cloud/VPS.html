@@ -110,12 +110,10 @@
                 Container VPS configurator
             </h3>
             <div style="float: right; width: 800px; margin: 20px 0 0 0;" class="desc-container-vps">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Vestibulum molestie condimentum tellus, in bibendum odio pretium at.
-                Integer ultricies vulputate lorem, ut fringilla quam sollicitudin accumsan.
-                Etiam mauris arcu, maximus sit amet auctor et, dapibus nec libero. Curabitur
-                ullamcorper mollis dignissim. Nulla facilisi. Nulla efficitur lacus lectus, ut laoreet diam elementum in.
-                Nunc posuere odio ac tortor vestibulum, a mollis dolor congue.
+                1.	VPS (Virtual Private Server) — friendly VPS. You can make use of all the features of VPS via the intuitive interface. You get full root access and the ability to configure and manage the virtual private server with ease.
+                VPS are deployed on Proxmox platform and OpenVZ virtualization technology.
+                VPS will be ready in minutes from the moment the order is paid for.
+
             </div>
         </div>
 
@@ -258,7 +256,8 @@
 
 
         <div class="need-more-resousrses">
-            <span class="b-vps__try-line-text">need more resourses?</span>
+            <span class="b-vps__try-line-text need-more-resousrses-container-zag" data_id_need="need_more">need more resourses?</span>
+            <div class="need-more-resousrses-container-header-triangle-white" data_id_need_triangle="need_more"></div>
         </div>
         <div class="need-more-resousrses-container">
             {foreach ( $need_more as $keu => $val )}
@@ -285,6 +284,7 @@
         text-align: center;
         cursor: pointer;
         width: 100%;
+        margin: 20px 0 0 0;
     }
     .need-more-resousrses-container {
         display: none;
@@ -315,6 +315,14 @@
         top: 8px;
         left: 0;
     }
+    .need-more-resousrses-container-header-triangle-white {
+        display: inline-block;
+        border: 10px solid transparent; /* Прозрачные границы */
+        border-top: 10px solid #fff; /* Добавляем треугольник */
+        position: relative;
+        top: 8px;
+        left: 0;
+    }
 </style>
 <script>
     $(document).ready(function (){
@@ -330,14 +338,14 @@
             var t= $( '[data_id_need_triangle="' + id + '"]');
             d.toggle();
             t.css( 'border', '10px solid transparent' );
-            if ( d.css( 'display') == 'none' ){
+            if ( t.css( 'top') == '0px' ){
                 t.css({
-                    "border-top": "10px solid #945ae0",
+                    "border-top": "10px solid",
                     "top": "8px"
             });
             } else {
                t.css( {
-                    "border-bottom": "10px solid #945ae0",
+                    "border-bottom": "10px solid",
                     "top": "0px"
         } );
             }
