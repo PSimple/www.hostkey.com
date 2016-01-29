@@ -25,7 +25,7 @@ return [
      * @see Shop_Dedicated_Console_Update
      */
     'Shop_Dedicated_Console_ConfigCustom' => [
-        'Minute' => '*/5',
+        'Minute' => '*/2',
         'Hour' => '*',
         'Day' => '*',
         'Month' => '*',

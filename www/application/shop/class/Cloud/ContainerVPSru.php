@@ -11,8 +11,6 @@
  */
 class Shop_Cloud_ContainerVPSru extends Zero_Controller
 {
-
-
     /**
      *
      * @return Zero_View
@@ -44,10 +42,9 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
             $configuration = unserialize(file_get_contents($path));
         }
 
-
         $preset = Shop_PresetContainerVPS::Make();
-        $payment_period = ['monthly'=> 0, 'quarterly' => 3, 'semiannually' => 6, 'annually' => 12];
-        $p = $preset->getPreset( $configuration, $payment_period);
+        $payment_period = ['monthly' => 0, 'quarterly' => 3, 'semiannually' => 6, 'annually' => 12];
+        $p = $preset->getPreset($configuration, $payment_period);
         $table_row_data = array();
 
         foreach ($p as $key => $value)
@@ -65,45 +62,47 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
             }
         }
 
-        foreach ( $p as $key_add_default => $val_add_default ){
-            if( $p[$key_add_default ][0][729]['data'][0]['id'] == 'NONE' )
+        foreach ($p as $key_add_default => $val_add_default)
+        {
+            if ( $p[$key_add_default][0][729]['data'][0]['id'] == 'NONE' )
             {
                 $configuration[729]['data'][$p[$key_add_default][0][729]['data'][0]['id']] = $p[$key_add_default][0][729]['data'][0];
             }
-            if( $p[$key_add_default ][0][728]['data'][0]['id'] == 'NONE' )
+            if ( $p[$key_add_default][0][728]['data'][0]['id'] == 'NONE' )
             {
                 $configuration[728]['data'][$p[$key_add_default][0][728]['data'][0]['id']] = $p[$key_add_default][0][728]['data'][0];
             }
-            if( $p[$key_add_default ][0][726]['data'][0]['id'] == 'NONE' ) {
-                $configuration[726]['data'][$p[$key_add_default ][0][726]['data'][0]['id']] = $p[$key_add_default ][0][726]['data'][0];
+            if ( $p[$key_add_default][0][726]['data'][0]['id'] == 'NONE' )
+            {
+                $configuration[726]['data'][$p[$key_add_default][0][726]['data'][0]['id']] = $p[$key_add_default][0][726]['data'][0];
             }
-
         }
 
         $arr_Backups_Limit[726] = $configuration[726]['data'];
         $arr_Bandwidth_Limit[728] = $configuration[728]['data'];
         $arr_VM_Template[729] = $configuration[729]['data'];
 
-
-        //pre ( json_encode( $p) ); die;
+        if ( isset($this->Params['IsFeatures']) )
+            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;
+        else
+            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 0 AND Section_ID = " . Zero_App::$Section->ID;
+        $need = Zero_DB::Select_Array($sql);
+        $this->View->Assign('need_more', $need);
 
         $this->View->Assign('table_row_data', $table_row_data);
         $this->View->Assign('payment_period', $payment_period);
-        $this->View->Assign('configuration', $p );
-        $this->View->Assign('arr_Backups_Limit' , $arr_Backups_Limit );
-        $this->View->Assign('arr_Bandwidth_Limit' , $arr_Bandwidth_Limit );
-        $this->View->Assign('arr_VM_Template' , $arr_VM_Template );
-
+        $this->View->Assign('configuration', $p);
+        $this->View->Assign('arr_Backups_Limit', $arr_Backups_Limit);
+        $this->View->Assign('arr_Bandwidth_Limit', $arr_Bandwidth_Limit);
+        $this->View->Assign('arr_VM_Template', $arr_VM_Template);
         return true;
-
     }
-
 
     /**
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Cloud_VpsStep1
+     * @return Shop_Cloud_ContainerVPSru
      */
     public static function Make($properties = [])
     {
@@ -114,7 +113,4 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
         }
         return $Controller;
     }
-
-
-
 }

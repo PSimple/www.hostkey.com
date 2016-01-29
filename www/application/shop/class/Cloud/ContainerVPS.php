@@ -43,7 +43,7 @@ class Shop_Cloud_ContainerVPS extends Zero_Controller
         }
 
         $preset = Shop_PresetContainerVPS::Make();
-        $payment_period = ['monthly'=> 0, 'quarterly' => 3, 'semiannually' => 6, 'annually' => 12];
+        $payment_period = ['monthly' => 0, 'quarterly' => 3, 'semiannually' => 6, 'annually' => 12];
         $p = $preset->getPreset($configuration, $payment_period);
         $table_row_data = array();
         foreach ($p as $key => $value)
@@ -62,52 +62,51 @@ class Shop_Cloud_ContainerVPS extends Zero_Controller
             }
         }
 
-        foreach ( $p as $key_add_default => $val_add_default ){
-         if( $p[$key_add_default ][0][696]['data'][0]['id'] == 'NONE' )
-         {
-             $configuration['696']['data'][$p[$key_add_default][0][696]['data'][0]['id']] = $p[$key_add_default][0][696]['data'][0];
-         }
-         if( $p[$key_add_default ][0][695]['data'][0]['id'] == 'NONE' )
-         {
-             $configuration['695']['data'][$p[$key_add_default][0][695]['data'][0]['id']] = $p[$key_add_default][0][695]['data'][0];
-         }
-         if( $p[$key_add_default ][0][693]['data'][0]['id'] == 'NONE' ) {
-             $configuration['693']['data'][$p[$key_add_default ][0][693]['data'][0]['id']] = $p[$key_add_default ][0][693]['data'][0];
-         }
-
+        foreach ($p as $key_add_default => $val_add_default)
+        {
+            if ( $p[$key_add_default][0][696]['data'][0]['id'] == 'NONE' )
+            {
+                $configuration['696']['data'][$p[$key_add_default][0][696]['data'][0]['id']] = $p[$key_add_default][0][696]['data'][0];
+            }
+            if ( $p[$key_add_default][0][695]['data'][0]['id'] == 'NONE' )
+            {
+                $configuration['695']['data'][$p[$key_add_default][0][695]['data'][0]['id']] = $p[$key_add_default][0][695]['data'][0];
+            }
+            if ( $p[$key_add_default][0][693]['data'][0]['id'] == 'NONE' )
+            {
+                $configuration['693']['data'][$p[$key_add_default][0][693]['data'][0]['id']] = $p[$key_add_default][0][693]['data'][0];
+            }
         }
 
         $arr_Backups_Limit['693'] = $configuration['693']['data'];
         $arr_Bandwidth_Limit['695'] = $configuration['695']['data'];
         $arr_VM_Template['696'] = $configuration['696']['data'];
 
-        $BWL = $table_row_data['Bandwidth Limit'] ;
-        unset ( $table_row_data['Bandwidth Limit']  );
-        $BKL = $table_row_data['Backups Limit'] ;
-        unset ( $table_row_data['Backups Limit']  );
-        $VMT = $table_row_data['VM Template'] ;
-        unset ( $table_row_data['VM Template']  );
+        $BWL = $table_row_data['Bandwidth Limit'];
+        unset ($table_row_data['Bandwidth Limit']);
+        $BKL = $table_row_data['Backups Limit'];
+        unset ($table_row_data['Backups Limit']);
+        $VMT = $table_row_data['VM Template'];
+        unset ($table_row_data['VM Template']);
 
-        $table_row_data ['Bandwidth Limit'] =  $BWL;
-        $table_row_data ['Backups Limit'] =  $BKL;
-        $table_row_data ['VM Template'] =  $VMT;
+        $table_row_data ['Bandwidth Limit'] = $BWL;
+        $table_row_data ['Backups Limit'] = $BKL;
+        $table_row_data ['VM Template'] = $VMT;
 
         if ( isset($this->Params['IsFeatures']) )
             $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;
         else
             $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 0 AND Section_ID = " . Zero_App::$Section->ID;
-
         $need = Zero_DB::Select_Array($sql);
-
-     // pre (   $need   ); die;
+        $this->View->Assign('need_more', $need);
 
         $this->View->Assign('table_row_data', $table_row_data);
         $this->View->Assign('payment_period', $payment_period);
-        $this->View->Assign('configuration', $p );
-        $this->View->Assign('arr_Backups_Limit' , $arr_Backups_Limit );
-        $this->View->Assign('arr_Bandwidth_Limit' , $arr_Bandwidth_Limit );
-        $this->View->Assign('arr_VM_Template' , $arr_VM_Template );
-        $this->View->Assign('need_more' , $need );
+        $this->View->Assign('configuration', $p);
+        $this->View->Assign('arr_Backups_Limit', $arr_Backups_Limit);
+        $this->View->Assign('arr_Bandwidth_Limit', $arr_Bandwidth_Limit);
+        $this->View->Assign('arr_VM_Template', $arr_VM_Template);
+
         return true;
     }
 
