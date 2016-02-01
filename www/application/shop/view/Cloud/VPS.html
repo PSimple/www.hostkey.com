@@ -40,7 +40,7 @@
             </h3>
             <p class="b-vps__feature-item-text">
                 You get an unlimited number
-                or reinstalls and a huge number of OS presets
+                of reinstalls and a huge number of OS presets
             </p>
         </div>
             <div class="b-vps__feature-item">
@@ -110,8 +110,8 @@
                 Container VPS configurator
             </h3>
             <div style="float: right; width: 800px; margin: 20px 0 0 0;" class="desc-container-vps">
-                1.	VPS (Virtual Private Server) — friendly VPS. You can make use of all the features of VPS via the intuitive interface. You get full root access and the ability to configure and manage the virtual private server with ease.
-                VPS are deployed on Proxmox platform and OpenVZ virtualization technology.
+                VPS (Virtual Private Server) — friendly VPS. You can make use of all the features of VPS via the intuitive interface. You get full root access and the ability to configure and manage the virtual private server with ease.
+                <br/>VPS are deployed on Proxmox platform and OpenVZ virtualization technology.
                 VPS will be ready in minutes from the moment the order is paid for.
 
             </div>
@@ -194,7 +194,7 @@
             <tr class="b-vps__table-row">
 
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <h3 class="b-vps__table-cell_main_yes">payment period</h3>
+                    <h3 class="b-vps__table-cell_main_yes">payment term</h3>
                 </td>
                 {foreach ( $configuration as $key => $value)}
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
@@ -232,7 +232,6 @@
             </tr>
         </table>
 
-
         <table class="b-vps__table" data_id="Options" style="display: none;">
             <tr>
                 <td valign="top">
@@ -245,18 +244,13 @@
             </tr>
         </table>
 
-
-
-
-
-
         <div class="b-dedicated__free">
             <div class="b-dedicated-try__line">
                 <span class="b-vps__try-line-text">Try before you buy</span>
             </div>
             <a class="b-dedicated__free-title" href="#">Request<br>a free<br>test drive</a>
             <div class="b-dedicated__free-period"></div>
-            <a class="b-submit b-dedicated__free-submit" href="mailto:sales@hostkey.com">contact us</a>
+            <a class="b-submit b-dedicated__free-submit" href="http://site-f.hostke.ru/about/contacts">contact us</a>
         </div>
 
         <!--
@@ -271,7 +265,7 @@
         -->
 
         <div class="need-more-resousrses">
-            <span class="b-vps__try-line-text need-more-resousrses-container-zag" data_id_need="need_more">need more resourses?</span>
+            <span class="b-vps__try-line-text need-more-resousrses-container-zag" data_id_need="need_more">need more information?</span>
             <div class="need-more-resousrses-container-header-triangle-white" data_id_need_triangle="need_more"></div>
         </div>
         <div class="need-more-resousrses-container">
@@ -385,7 +379,6 @@
 
         var Table_Row = {json_encode($table_row_data)};
 
-       // window.ToStringJSON ( VM_Template );
 
         var listOfProducts = new Object();
         var listOfProducts = {json_encode($configuration)};
@@ -428,36 +421,27 @@
         var $eventSelectBAL = $(".bal");
 
 
-      //  window.ToStringJSON ( {json_encode ( $table_row_data)} );
-
-        /* формируем дефолтные пресеты */
         $('.preset-buy').each(function () {
             var preset_number = $( this ).attr( 'data_preset' );
             //console.log( preset_number );
             ZakazY[preset_number] = window.startZakaz ( 0, listOfProducts[preset_number][0] );
-            //ZakazY[preset_number]['696']['data']['0'] = window.AddOptionToZakaz( VM_Template, Table_Row[preset_number]['id'] );
             if( Table_Row['VM Template'][preset_number].id  != "NONE"){
-               // ZakazY[preset_number] window.AddOptionToZakaz( VM_Template, Table_Row['VM Template'][preset_number].id ) );
             } else {
 
             }
 
-           // window.ToStringJSON (  Table_Row['VM Template'][preset_number].id   );
-            window.set_payment_for_preset( ZakazY[preset_number], listOfProducts, 0 );/* устанавливаем платежный период для заказа */
+            window.set_payment_for_preset( ZakazY[preset_number], listOfProducts, 0 );
         });
 
-       //window.ToStringJSON ( Table_Row['VM Template'][4].name );
-
-     // window.ToStringJSON ( ZakazY );
 
         $eventSelect.on("change", function (e) {
             var payment_period = $( this ).select2("val");
             var preset_number =e.target.getAttribute('data_preset');
             for( var prop in listOfProducts.payment.data ) {
                 if ( listOfProducts.payment.data[prop].name == payment_period ) {
-                    window.set_payment_for_preset( ZakazY[preset_number], listOfProducts, prop);/* устанавливаем платежный период для заказа */
-                    Zakaz = ZakazY[preset_number];/* формирование товарного наполнения заказа */
-                    var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
+                    window.set_payment_for_preset( ZakazY[preset_number], listOfProducts, prop);
+                    Zakaz = ZakazY[preset_number];
+                    var p = window.SumUpResultZakaz( Zakaz );
                     p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
                     $( '[data_summa_preset=' + preset_number + ']').html( p );
                     window.ToStringJSON ( Zakaz );
@@ -471,8 +455,8 @@
             var preset_number = e.target.getAttribute('data_preset');
             console.log(  preset_number + "---" + id_vm_template );
             ZakazY[preset_number][{key($arr_VM_Template)}]['data']['0'] = window.AddOptionToZakaz( VM_Template, id_vm_template );
-            Zakaz = ZakazY[preset_number];/* формирование товарного наполнения заказа */
-            var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
+            Zakaz = ZakazY[preset_number];
+            var p = window.SumUpResultZakaz( Zakaz );
             p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
             $( '[data_summa_preset=' + preset_number + ']').html( p );
             window.ToStringJSON ( Zakaz );
@@ -482,10 +466,9 @@
         $eventSelectBWL.on("change", function (e) {
             var id_vm_template = $( this ).select2("val");
             var preset_number = e.target.getAttribute('data_preset');
-          //  console.log(  preset_number + "---" + id_vm_template );
             ZakazY[preset_number][{key($arr_Bandwidth_Limit)}]['data']['0'] = window.AddOptionToZakaz( Bandwidth_Limit, id_vm_template );
-            Zakaz = ZakazY[preset_number];/* формирование товарного наполнения заказа */
-             var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
+            Zakaz = ZakazY[preset_number];
+             var p = window.SumUpResultZakaz( Zakaz );
              p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
              $( '[data_summa_preset=' + preset_number + ']').html( p );
             window.ToStringJSON ( Zakaz);
@@ -497,8 +480,8 @@
             var preset_number = e.target.getAttribute('data_preset');
            // console.log(  preset_number + "---" + id_vm_template );
             ZakazY[preset_number][{key($arr_Backups_Limit)}]['data']['0'] = window.AddOptionToZakaz( Backups_Limit, id_vm_template );
-            Zakaz = ZakazY[preset_number];/* формирование товарного наполнения заказа */
-             var p = window.SumUpResultZakaz( Zakaz );// - window.SumUpDiscountByMonthly( Zakaz );
+            Zakaz = ZakazY[preset_number];
+             var p = window.SumUpResultZakaz( Zakaz );
              p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
              $( '[data_summa_preset=' + preset_number + ']').html( p );
             window.ToStringJSON ( Zakaz );
@@ -518,13 +501,10 @@
         $('.b-vps-table__buy').bind('click', function () {
             var name_kyki = $( this).attr( 'data_name' );
 
-             // $('.popup_callback').show();
               var PRESET_ID = $( this).attr( 'data_preset' );
               for( var prop in listOfProducts ) {
                     if( prop == PRESET_ID ) {
-                        Zakaz = ZakazY[prop];/* Присваиваем пресет заказу без указания оплаты*/
-                        /* тут смотрим данные о каком периоде оплаты идет речь */
-                       /* window.set_payment_for_preset( Zakaz, listOfProducts, 0);*/
+                        Zakaz = ZakazY[prop];
                     }
               }
 

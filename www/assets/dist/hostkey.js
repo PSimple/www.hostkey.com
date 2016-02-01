@@ -55810,10 +55810,8 @@
 	      notifications.error("Please choose hard disk!");
 	      return;
 	    }
-	    return $order.post(order).then(function(orderLink) {
-	      console.log(orderLink);
-	      return document.getElementById('configure_cloud_VDS').src = orderLink;
-	    })["catch"](function(error) {
+	    $order.post(order).then(function(orderLink) {});
+	    return window.location = orderLink["catch"](function(error) {
 	      if (error.Message) {
 	        return alert(error.Message);
 	      }

@@ -25,6 +25,8 @@ window.type = 'dedicated';
 
         <div ui-view="solutions"></div>
 
+        <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
+
         <div class="b-dedicated__box">
             <h3 class="b-dedicated__title b-dedicated__title_upline_yes">
                 features
@@ -34,37 +36,22 @@ window.type = 'dedicated';
 
         {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" IsFeatures="1"}
 
-        <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
-        <table class="b-vps__table" data_id="Options" style="display: none;">
-            <tr>
-                <td valign="top">
-                    <!--<h3 style="text-align: center;">Additional services and service options</h3>-->
-                    <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
-                </td>
-                <td>
-                    {#{include "Shop_Step2"}#}
-                </td>
-            </tr>
-        </table>
+
 
         <div class="b-dedicated__free">
+            <div class="b-dedicated-try__line">
+                <span class="b-vps__try-line-text">Try before you buy</span>
+            </div>
             <a class="b-dedicated__free-title" href="#">Request<br>a free<br>test drive</a>
             <div class="b-dedicated__free-period"></div>
-            <a class="b-submit b-dedicated__free-submit" href="mailto:sales@hostkey.com">contact us</a>
+            <a class="b-submit b-dedicated__free-submit" href="http://site-f.hostke.ru/about/contacts">contact us</a>
         </div>
 
         <div class="need-more-resousrses">
             <span class="b-vps__try-line-text">need more resourses?</span>
         </div>
         <div class="need-more-resousrses-container">
-            {foreach ( $need_more as $keu => $val )}
-            <div class="need-more-resousrses-container-header">
-                <div class="need-more-resousrses-container-zag" data_id_need="{$val['ID']}">{$val['Head']}</div>
-                <div class="need-more-resousrses-container-header-triangle" data_id_need_triangle="{$val['ID']}"></div>
-            </div>
-
-            <div class="need-more-resousrses-container-messager" data_id_need_content_position="{$val['ID']}">{$val['Description']}</div>
-            {/foreach}
+            {plugin "Zero_Content_Plugin_Page" block="content_Left"}
         </div>
         <div style="clear:both;"></div>
 
@@ -111,15 +98,28 @@ window.type = 'dedicated';
     }
     .need-more-resousrses-container-header-triangle {
         display: inline-block;
-        border: 10px solid transparent; /* Прозрачные границы */
-        border-top: 10px solid #945ae0; /* Добавляем треугольник */
+        border: 10px solid transparent; /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+        border-top: 10px solid #945ae0; /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
         position: relative;
         top: 8px;
         left: 0;
     }
+    #configure_cloud_VDS {
+        border: none;
+        display: none;
+        width: 100%;
+        height: 1000px;
+        margin: 0 auto;
+        background: #fff;
+    }
 </style>
 <script>
     $(document).ready(function (){
+
+        $("body").on("click", ".b-submit", function () {
+            $( 'body #selectedSolution').hide( 'slow');
+            $( '#configure_cloud_VDS').show( 'slow');
+        })
 
         $( '.need-more-resousrses').bind( 'click', function(){
             $( ".need-more-resousrses-container" ).toggle();
