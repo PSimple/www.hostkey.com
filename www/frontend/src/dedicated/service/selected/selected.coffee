@@ -160,7 +160,7 @@ angular.module("dedicated.service.selected").controller "SelectedCtrl", (notific
 
         discount:
             billingCycle:
-                name: "Billing cycle discount:"
+                name: "Payment term:"
                 options: billingCycleDiscount
 
     $scope.isValidOption = (opt) ->
@@ -188,7 +188,8 @@ angular.module("dedicated.service.selected").controller "SelectedCtrl", (notific
 
         $order.post(order)
         .then (orderLink) ->
-        window.location = orderLink
+            console.log orderLink
+            window.location = orderLink
 
         .catch (error) ->
             if error.Message

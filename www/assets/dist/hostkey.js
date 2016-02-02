@@ -55772,7 +55772,7 @@
 	    },
 	    discount: {
 	      billingCycle: {
-	        name: "Billing cycle discount:",
+	        name: "Payment term:",
 	        options: billingCycleDiscount
 	      }
 	    }
@@ -55806,8 +55806,10 @@
 	      notifications.error("Please choose hard disk!");
 	      return;
 	    }
-	    $order.post(order).then(function(orderLink) {});
-	    return window.location = orderLink["catch"](function(error) {
+	    return $order.post(order).then(function(orderLink) {
+	      console.log(orderLink);
+	      return window.location = orderLink;
+	    })["catch"](function(error) {
 	      if (error.Message) {
 	        return alert(error.Message);
 	      }
