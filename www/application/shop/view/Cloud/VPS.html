@@ -131,7 +131,7 @@
                 <td class="b-vps__table-cell"></td>
                 {foreach ( $configuration as $key => $value)}
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" data_summa_preset="{$key}">{$value['summ']} € / month</div>
+                    <div class="b-vps-table__price" data_summa_preset="{$key}">€{$value['summ']}/month</div>
                 </td>
                 {/foreach}
             </tr>
@@ -163,13 +163,13 @@
                                 {if ( $val_arr_select['name'] == $v['name'] )}
                                 <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}
                                     {if ($val_arr_select['monthly'] != '0.00' )}
-                                    [{$val_arr_select['monthly']}]
+                                    ({$val_arr_select['monthly']})
                                     {/if}
                                 </option>
                                 {else}
                                 <option value="{$val_arr_select['id']}">{$val_arr_select['name']}
                                     {if ($val_arr_select['monthly'] != '0.00' )}
-                                    [{$val_arr_select['monthly']}]
+                                    ({$val_arr_select['monthly']})
                                     {/if}
                                 </option>
                                 {/if}
@@ -185,13 +185,13 @@
                                 {if ( $val_arr_select['name'] == $v['name'] )}
                                      <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}
                                      {if ($val_arr_select['monthly'] != '0.00' )}
-                                            [{$val_arr_select['monthly']}\
+                                            ({$val_arr_select['monthly']})
                                      {/if}
                                      </option>
                                 {else}
                                 <option value="{$val_arr_select['id']}">{$val_arr_select['name']}
                                     {if ($val_arr_select['monthly'] != '0.00' )}
-                                            [{$val_arr_select['monthly']}]
+                                            ({$val_arr_select['monthly']})
                                     {/if}
 
                                 </option>
@@ -234,7 +234,7 @@
                 <td class="b-vps__table-cell"></td>
                 {foreach ( $configuration as $key => $value)}
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" data_summa_preset="{$key}">{$value['summ']} € / month</div>
+                    <div class="b-vps-table__price" data_summa_preset="{$key}">€{$value['summ']}/month</div>
                 </td>
                 {/foreach}
             </tr>
@@ -459,7 +459,7 @@
                     window.set_payment_for_preset( ZakazY[preset_number], listOfProducts, prop);
                     Zakaz = ZakazY[preset_number];
                     var p = window.SumUpResultZakaz( Zakaz );
-                    p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
+                    p = currency[currencyID] +p + "/" + Zakaz.payment.data[0].period;
                     $( '[data_summa_preset=' + preset_number + ']').html( p );
                     window.ToStringJSON ( Zakaz );
                 }
@@ -470,11 +470,10 @@
         $eventSelectVM.on("change", function (e) {
             var id_vm_template = $( this ).select2("val");
             var preset_number = e.target.getAttribute('data_preset');
-            console.log(  preset_number + "---" + id_vm_template );
             ZakazY[preset_number][{key($arr_VM_Template)}]['data']['0'] = window.AddOptionToZakaz( VM_Template, id_vm_template );
             Zakaz = ZakazY[preset_number];
             var p = window.SumUpResultZakaz( Zakaz );
-            p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
+            p = currency[currencyID] +p + "/" + Zakaz.payment.data[0].period;
             $( '[data_summa_preset=' + preset_number + ']').html( p );
             window.ToStringJSON ( Zakaz );
 
@@ -486,7 +485,7 @@
             ZakazY[preset_number][{key($arr_Bandwidth_Limit)}]['data']['0'] = window.AddOptionToZakaz( Bandwidth_Limit, id_vm_template );
             Zakaz = ZakazY[preset_number];
              var p = window.SumUpResultZakaz( Zakaz );
-             p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
+            p = currency[currencyID] +p + "/" + Zakaz.payment.data[0].period;
              $( '[data_summa_preset=' + preset_number + ']').html( p );
             window.ToStringJSON ( Zakaz);
 
@@ -499,7 +498,7 @@
             ZakazY[preset_number][{key($arr_Backups_Limit)}]['data']['0'] = window.AddOptionToZakaz( Backups_Limit, id_vm_template );
             Zakaz = ZakazY[preset_number];
              var p = window.SumUpResultZakaz( Zakaz );
-             p = p  + " " + currency[currencyID] + " / " + Zakaz.payment.data[0].period;
+            p = currency[currencyID] +p + "/" + Zakaz.payment.data[0].period;
              $( '[data_summa_preset=' + preset_number + ']').html( p );
             window.ToStringJSON ( Zakaz );
 
