@@ -36,8 +36,6 @@ window.type = 'dedicated';
 
         {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" IsFeatures="1"}
 
-
-
         <div class="b-dedicated__free">
             <div class="b-dedicated-try__line">
                 <span class="b-vps__try-line-text">Try before you buy</span>
@@ -48,7 +46,8 @@ window.type = 'dedicated';
         </div>
 
         <div class="need-more-resousrses">
-            <span class="b-vps__try-line-text">need more resourses?</span>
+            <span class="b-vps__try-line-text need-more-resousrses-container-zag" data_id_need="need_more">need more information?</span>
+            <div class="need-more-resousrses-container-header-triangle-white" data_id_need_triangle="need_more"></div>
         </div>
         <div class="need-more-resousrses-container">
             {plugin "Zero_Content_Plugin_Page" block="content_Left"}
@@ -112,6 +111,26 @@ window.type = 'dedicated';
         margin: 0 auto;
         background: #fff;
     }
+    .need-more-resousrses {
+        background-color: #945ae0;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        margin: 20px 0 0;
+        padding: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        width: 100%;
+        text-decoration: underline;
+    }
+    .need-more-resousrses-container-header-triangle-white {
+        display: inline-block;
+        border: 10px solid transparent; /* Прозрачные границы */
+        border-top: 10px solid #fff; /* Добавляем треугольник */
+        position: relative;
+        top: 8px;
+        left: 0;
+    }
 </style>
 <script>
     $(document).ready(function (){
@@ -133,12 +152,12 @@ window.type = 'dedicated';
             t.css( 'border', '10px solid transparent' );
             if ( d.css( 'display') == 'none' ){
                 t.css({
-                    "border-top": "10px solid #945ae0",
+                    "border-top": "10px solid",
                     "top": "8px"
                 });
             } else {
                 t.css( {
-                    "border-bottom": "10px solid #945ae0",
+                    "border-bottom": "10px solid",
                     "top": "0px"
                 } );
             }

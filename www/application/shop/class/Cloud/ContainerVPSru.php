@@ -82,6 +82,17 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
         $arr_Bandwidth_Limit[728] = $configuration[728]['data'];
         $arr_VM_Template[729] = $configuration[729]['data'];
 
+        $BWL = $table_row_data['Bandwidth Limit'];
+        unset ($table_row_data['Bandwidth Limit']);
+        $BKL = $table_row_data['Backups Limit'];
+        unset ($table_row_data['Backups Limit']);
+        $VMT = $table_row_data['VM Template'];
+        unset ($table_row_data['VM Template']);
+
+        $table_row_data ['Bandwidth Limit'] = $BWL;
+        $table_row_data ['Backups Limit'] = $BKL;
+        $table_row_data ['VM Template'] = $VMT;
+
         if ( isset($this->Params['IsFeatures']) )
             $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;
         else

@@ -161,9 +161,17 @@
                             <select class="table-select__item  bal" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
                                 {foreach ( $arr_Backups_Limit[key($arr_Backups_Limit)] as $key_arr_select => $val_arr_select )}
                                 {if ( $val_arr_select['name'] == $v['name'] )}
-                                <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}</option>
+                                <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}
+                                    {if ($val_arr_select['monthly'] != '0.00' )}
+                                    [{$val_arr_select['monthly']}]
+                                    {/if}
+                                </option>
                                 {else}
-                                <option value="{$val_arr_select['id']}">{$val_arr_select['name']}</option>
+                                <option value="{$val_arr_select['id']}">{$val_arr_select['name']}
+                                    {if ($val_arr_select['monthly'] != '0.00' )}
+                                    [{$val_arr_select['monthly']}]
+                                    {/if}
+                                </option>
                                 {/if}
                                 {/foreach}
                             </select>
@@ -175,9 +183,18 @@
                             <select class="table-select__item  vm" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
                                 {foreach ( $arr_VM_Template[key($arr_VM_Template)] as $key_arr_select => $val_arr_select )}
                                 {if ( $val_arr_select['name'] == $v['name'] )}
-                                     <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}</option>
+                                     <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}
+                                     {if ($val_arr_select['monthly'] != '0.00' )}
+                                            [{$val_arr_select['monthly']}\
+                                     {/if}
+                                     </option>
                                 {else}
-                                <option value="{$val_arr_select['id']}">{$val_arr_select['name']}</option>
+                                <option value="{$val_arr_select['id']}">{$val_arr_select['name']}
+                                    {if ($val_arr_select['monthly'] != '0.00' )}
+                                            [{$val_arr_select['monthly']}]
+                                    {/if}
+
+                                </option>
                                 {/if}
                                 {/foreach}
                             </select>
