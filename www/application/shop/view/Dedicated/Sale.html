@@ -131,23 +131,32 @@
                             </td>
                             <td class="dedicated-extra-price__table-cell">
                                 <span class="dedicated-extra-price__text">
-                                  <select id='port{$key}' name="listOS" style="width: 80px;">
+                                  <select id='port{$key}' name="listPort" style="width: 80px;" onchange="changeSum({$key});">
                                       {foreach ($listPort as $r)}
-                                      <option value="{$r['ID']}">{$r['Name']}</option>
+                                      {if ( 0 < $r['Price'] )}
+                                      <option value="{$r['ID']};{$r['Price']}">{$r['Name']} ({$r['Price']})</option>
+                                      {else}
+                                      <option value="{$r['ID']};{$r['Price']}">{$r['Name']}</option>
+                                      {/if}
                                       {/foreach}
                                   </select>
                                 </span>
                             </td>
                             <td class="dedicated-extra-price__table-cell">
-                                <select id='os{$key}' name="listOS" style="width: 230px;">
+                                <select id='os{$key}' name="listOS" style="width: 230px;" onchange="changeSum({$key});">
                                     {foreach ($listOs as $r)}
-                                    <option value="{$r['ID']}">{$r['Name']}</option>
+                                    {if ( 0 < $r['Price'] )}
+                                    <option value="{$r['ID']};{$r['Price']}">{$r['Name']} ({$r['Price']})</option>
+                                    {else}
+                                    <option value="{$r['ID']};{$r['Price']}">{$r['Name']}</option>
+                                    {/if}
                                     {/foreach}
                                 </select>
                             </td>
                             <td class="dedicated-extra-price__table-cell">
                                 {if ( $row['Price']['Price'] )}
-                                <a class="b-submit dedicated-item-content__submit" onclick="return saleBuy({$key});" href="#">€&nbsp;{$row['Price']['Price']}.00</a>
+                                <input type="hidden" id="price{$key}" value="{$row['Price']['Price']}">
+                                <a class="b-submit dedicated-item-content__submit" onclick="return saleBuy({$key});" href="#" id="sum{$key}">€{$row['Price']['Price']}.00</a>
                                 {/if}
                             </td>
                         </tr>
@@ -169,14 +178,31 @@
         </div>
 
         <script>
+            function changeSum(id)
+            {
+                var port = document.getElementById("port"+id);
+                var portPrice = port.value.split(";")[1];
+
+                var os = document.getElementById("os"+id);
+                var osPrice = os.value.split(";")[1];
+
+                var price = document.getElementById("price"+id);
+
+                var sum = Number(portPrice) + Number(osPrice) + Number(price.value)
+
+                var obj = document.getElementById("sum"+id);
+                obj.innerHTML = '€' + sum + '.00';
+            }
             function saleBuy(id)
             {
                 var os = document.getElementById("os"+id).value;
+                os = os.split(";")[0];
                 if ( !os ) {
                     alert('OS not selected');
                     return false;
                 }
                 var port = document.getElementById("port"+id).value;
+                port = port.split(";")[0];
                 if ( !port ) {
                     alert('Port not selected');
                     return false;
@@ -187,7 +213,7 @@
                 order['os'] = os;
                 order['port'] = port;
                 order['compId'] = id;
-                window.console.log(os, port, id);
+                window.console.log(order);
 
                 jQuery.post("/api/v1/dedicated/order-stock-fake", order,
                         function (data) {

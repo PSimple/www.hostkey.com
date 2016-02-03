@@ -42,6 +42,10 @@ class Shop_Dedicated_Api_ConfigCustom extends Zero_Controller
                 $responseSort['Data'][$componentTypeID][] = $row;
             }
         }
+        $responseSort['CostLicenseWin'] = $response['CostLicenseWin'];
+        $responseSort['EURRUR'] = $response['EURRUR'];
+        $responseSort['Currency'] = $response['Currency'];
+        $responseSort['ComponentGroup'] = $response['ComponentGroup'];
 
         Zero_App::ResponseJson200($responseSort);
         return true;
