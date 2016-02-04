@@ -29,10 +29,6 @@ class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
                 $data['Content']['Currency'] = $config['currency'];
                 $data['Content']['ComponentGroup'] = $gr;
                 $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($config['currency'] . $gr) . '.data';
-
-
-
-                Zero_Logs::File(__CLASS__, $data['Content']);
                 Zero_Helper_File::File_Save($path, serialize($data['Content']));
             }
         }
