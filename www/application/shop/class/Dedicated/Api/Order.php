@@ -170,15 +170,13 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
             'Quarterly' => $sumQuarterly,
             'Semiannually' => $sumSemiannually,
             'Annually' => $sumAnnually,
-            'billingcycle' => $cycleNumber[$_REQUEST['SLA']['CycleDiscount']],
             'InventoryID' => $_REQUEST['CompId'],
             'Groups' => $_REQUEST['Groups'],
-            'CurrencyId' => $_REQUEST['Currency'] == 'eur' ? 2 : 2,
+            'CurrencyId' => 2,
         ];
-        $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/orders/dedicated', $requestData);
+        $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/dedicated/orders', $requestData);
         $label = $_REQUEST['Hardware']['Label'] . '/' . $_REQUEST['Software']['Label'] . '/' . $_REQUEST['Network']['Label'] . '/' . $_REQUEST['SLA']['Label'];
         $label = preg_replace("~\([0-9]+\)~si", "", $label);
-        Zero_Logs::File("ordernew.log", $requestData, $result);
         if ( $result['ErrorStatus'] == false )
         {
             Zero_App::ResponseJson200([

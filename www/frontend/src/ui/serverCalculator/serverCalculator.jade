@@ -1,177 +1,10 @@
-.b-dedicated__hide-block-close(ng-click="close()")
+//-.b-dedicated__hide-block-close(ng-click="close()")
     span.b-icon.b-dedicated__hide-block-close-image
     span.b-dedicated__hide-block-close-text hide
 
-//-.b-dedicated__item-content.b-dedicated__item-content_padding-top_yes.dedicated-item-content
-    .b-dedicated__box
-        h3.b-dedicated__title.b-dedicated__title_upline_yes Visualisation nodes
-        .b-dedicated__description
-            | HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia.
-            | We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+
-            | international resellers. Virtually any server configuration could be provided to our customers. We offer
-            | full range of modern and stock servers for every task. You could lease Cisco network equipment or collocate
-            | your own servers in Moscow.
+#selectedSolution.b-dedicated__item-content.dedicated-item-content
 
-    table.dedicated-item-content__table
-
-        tr.dedicated-item-content__row.dedicated-item-content__row_title_yes
-            td.dedicated-item-content__cell
-            td.dedicated-item-content__cell processor
-            td.dedicated-item-content__cell memory
-            td.dedicated-item-content__cell hard drive
-            td.dedicated-item-content__cell hardwear raid
-            td.dedicated-item-content__cell vlan
-            td.dedicated-item-content__cell impi
-            td.dedicated-item-content__cell free bonus
-            td.dedicated-item-content__cell monthly (€)
-
-        tr.dedicated-item-content__row
-
-            td.dedicated-item-content__cell
-                span.dedicated-item-content__title Video streaming
-                span.dedicated-item-content__subtitle For small projects
-
-            td.dedicated-item-content__cell
-                .dedicate-select-red.dedicate-select-red__proc_yes.js-drop-block
-                    .dedicate-select-red__value.is-value CoreDuo2 E6320 1.86 GHz (2 core)
-                    .dedicate-select-red__drop.is-drop
-                        .dedicate-select-red__drop-item.js-drop-item.is-active CoreDuo2 E6320 1.86 GHz (2 core)
-                        .dedicate-select-red__drop-item.js-drop-item CoreDuo2 E6320 2.86 GHz (4 core)
-                        .dedicate-select-red__drop-item.js-drop-item CoreDuo2 E6320 3.86 GHz (8 core)
-
-            td.dedicated-item-content__cell
-                select#mem-1.dedicate-select-red.js-select(name='mem-1')
-                    option(value='1') 24 Gb
-                    option(value='2') 128 Gb
-                    option(value='3') 512 Gb
-
-            td.dedicated-item-content__cell
-                select#hard-1.dedicate-select-red.dedicate-select-red__hard_yes.js-select(name='hard-1')
-                    option(value='1') 2x500Gb SATA
-                    option(value='2') 4x500Gb SATA
-                    option(value='3') 2x2Tb SATA
-
-            td.dedicated-item-content__cell
-                label.fake-checkbox-label
-                    span.fake-checkbox-label__box.js-check
-                    input.hidden-input(name='222', type='checkbox')
-
-            td.dedicated-item-content__cell
-                select#vlan-1.dedicate-select-red.js-select(name='vlan-1')
-                    option(value='1') 100 Mbps
-                    option(value='2') 200 Mbps
-                    option(value='3') 50 Mbps
-
-            td.dedicated-item-content__cell
-                label.fake-checkbox-label
-                    span.fake-checkbox-label__box.js-check
-                    input.hidden-input(name='1111', type='checkbox')
-
-            td.dedicated-item-content__cell
-                span.dedicate-item-content__text 20 IP, traffic, cPanel, Windows
-
-            td.dedicated-item-content__cell
-                a.b-submit.dedicated-item-content__submit(href='#') 1650.65
-
-        tr.dedicated-item-content__row
-
-            td.dedicated-item-content__cell
-                span.dedicated-item-content__title First server
-                span.dedicated-item-content__subtitle For small projects
-
-            td.dedicated-item-content__cell
-                .dedicate-select-red.dedicate-select-red__proc_yes.js-drop-block
-                    .dedicate-select-red__value.is-value CoreDuo2 E6320 1.86 GHz (2 core)
-                    .dedicate-select-red__drop.is-drop
-                        .dedicate-select-red__drop-item.js-drop-item.is-active CoreDuo2 E6320 1.86 GHz (2 core)
-                        .dedicate-select-red__drop-item.js-drop-item CoreDuo2 E6320 2.86 GHz (4 core)
-                        .dedicate-select-red__drop-item.js-drop-item CoreDuo2 E6320 3.86 GHz (8 core)
-
-            td.dedicated-item-content__cell
-                select#mem-1.dedicate-select-red.js-select(name='mem-1')
-                    option(value='1') 24 Gb
-                    option(value='2') 128 Gb
-                    option(value='3') 512 Gb
-
-            td.dedicated-item-content__cell
-                select#hard-1.dedicate-select-red.dedicate-select-red__hard_yes.js-select(name='hard-1')
-                    option(value='1') 2x500Gb SATA
-                    option(value='2') 4x500Gb SATA
-                    option(value='3') 2x2Tb SATA
-
-            td.dedicated-item-content__cell
-                label.fake-checkbox-label
-                    span.fake-checkbox-label__box.js-check
-                    input.hidden-input(name='222', type='checkbox')
-
-            td.dedicated-item-content__cell
-                select#vlan-1.dedicate-select-red.js-select(name='vlan-1')
-                    option(value='1') 100 Mbps
-                    option(value='2') 200 Mbps
-                    option(value='3') 50 Mbps
-
-            td.dedicated-item-content__cell
-                label.fake-checkbox-label
-                    span.fake-checkbox-label__box.js-check
-                    input.hidden-input(name='1111', type='checkbox')
-
-            td.dedicated-item-content__cell
-                span.dedicate-item-content__text 20 IP, traffic, cPanel, Windows, VPS, premium SLA, super backup
-
-            td.dedicated-item-content__cell
-                a.b-submit.dedicated-item-content__submit(href='#') 1650.65
-
-        tr.dedicated-item-content__row
-
-            td.dedicated-item-content__cell
-                span.dedicated-item-content__title Extra power
-                span.dedicated-item-content__subtitle For small projects
-
-            td.dedicated-item-content__cell
-                .dedicate-select-red.dedicate-select-red__proc_yes.js-drop-block
-                    .dedicate-select-red__value.is-value CoreDuo2 E6320 1.86 GHz (2 core)
-                    .dedicate-select-red__drop.is-drop
-                        .dedicate-select-red__drop-item.js-drop-item.is-active CoreDuo2 E6320 1.86 GHz (2 core)
-                        .dedicate-select-red__drop-item.js-drop-item CoreDuo2 E6320 2.86 GHz (4 core)
-                        .dedicate-select-red__drop-item.js-drop-item CoreDuo2 E6320 3.86 GHz (8 core)
-
-            td.dedicated-item-content__cell
-                select#mem-1.dedicate-select-red.js-select(name='mem-1')
-                    option(value='1') 24 Gb
-                    option(value='2') 128 Gb
-                    option(value='3') 512 Gb
-
-            td.dedicated-item-content__cell
-                select#hard-1.dedicate-select-red.dedicate-select-red__hard_yes.js-select(name='hard-1')
-                    option(value='1') 2x500Gb SATA
-                    option(value='2') 4x500Gb SATA
-                    option(value='3') 2x2Tb SATA
-
-            td.dedicated-item-content__cell
-                label.fake-checkbox-label
-                    span.fake-checkbox-label__box.js-check
-                    input.hidden-input(name='222', type='checkbox')
-
-            td.dedicated-item-content__cell
-                select#vlan-1.dedicate-select-red.js-select(name='vlan-1')
-                    option(value='1') 100 Mbps
-                    option(value='2') 200 Mbps
-                    option(value='3') 50 Mbps
-
-            td.dedicated-item-content__cell
-                label.fake-checkbox-label
-                    span.fake-checkbox-label__box.js-check
-                    input.hidden-input(name='1111', type='checkbox')
-
-            td.dedicated-item-content__cell
-                span.dedicate-item-content__text 20 IP, traffic, cPanel, Windows
-
-            td.dedicated-item-content__cell
-                a.b-submit.dedicated-item-content__submit(href='#') 1650.65
-
-.b-dedicated__item-content.dedicated-item-content
-
-    .b-dedicated__box
+    //-.b-dedicated__box
         h3.b-dedicated__title.b-dedicated__title_upline_yes configurator of {{solution.title}} SOLUTIONS
         .b-dedicated__description(ng-bind-html="solution.description")
 
@@ -181,8 +14,7 @@
 
             #scroll-box(accordion="")
 
-                accordion-group(is-open='tabs.hardware.open')
-
+                //-accordion-group(is-open='tabs.hardware.open')
                     accordion-heading
                         span.b-accordion__title-main(ng-bind="::tabs.hardware.name")
                         span.b-accordion__title-submain {{order.hardware|orderVerbose}}
@@ -240,8 +72,7 @@
                                             .table-select__item(ui-select="order.hardware.RaidLevel", options="tabs.hardware.RaidLevel.options", width="170")
 
 
-                accordion-group
-
+                accordion-group(is-open='tabs.software.open')
                     accordion-heading
                         span.b-accordion__title-main(ng-bind="::tabs.software.name")
                         span.b-accordion__title-submain {{order.software|orderVerbose}}
@@ -305,7 +136,6 @@
                                         td.table-select__cell
 
                 accordion-group
-
                     accordion-heading
                         span.b-accordion__title-main {{tabs.network.name}}
                         span.b-accordion__title-submain {{order.network|orderVerbose}}
@@ -394,11 +224,9 @@
 
 
                 accordion-group
-
                     accordion-heading
                         span.b-accordion__title-main(ng-bind="::tabs.sla.name")
                         span.b-accordion__title-submain {{order.sla|orderVerbose}}
-
 
                     table.b-dedicated__accordion-table
                         tr.b-dedicated__accordion-table-row
@@ -458,8 +286,8 @@
                     td.b-dedicated__summary-table-cell Monthly Base Price
                     td.b-dedicated__summary-table-cell € 759
 
-            .b-dedicated__summary-subtitle(ng-bind="::tabs.hardware.name")
-            table.b-dedicated__summary-table
+            //-.b-dedicated__summary-subtitle(ng-bind="::tabs.hardware.name")
+            //-table.b-dedicated__summary-table
                 tr.b-dedicated__summary-table-row(ng-repeat="opt in order.hardware", ng-show="isValidOption(opt)")
                     td.b-dedicated__summary-table-cell(ng-bind-html="opt|optName")
                     td.b-dedicated__summary-table-cell {{opt|optPrice:order|verboseCurrency}}

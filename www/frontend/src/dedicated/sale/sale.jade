@@ -1,0 +1,92 @@
+.b-text-page__box
+    h3.b-text-page__title.b-text-page__title_upline_yes
+        | EXTRA PRICE
+
+    .b-dedicated__description
+        p
+            | HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia. We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+ international resellers. Virtually any server configuration could be provided to our customers. We offer full range of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own servers in Moscow.
+
+.b-dedicated__hide-block-close.js-close
+    span.b-icon.b-dedicated__hide-block-close-image
+    span.b-dedicated__hide-block-close-text hide
+
+div
+    .b-container
+
+        .dedicated-extra-price__box
+            table.dedicated-extra-price__table.dedicated-extra-price__table_type_head
+                tr.dedicated-extra-price__table-row
+                    td.dedicated-extra-price__table-cell(style="width:300px;")
+
+                    //-td.dedicated-extra-price__table-cell.js-checked
+                        .dedicated-extra-price__table-title CPU number
+                        label.b-checkbox-submit.b-checkbox-submit_size_70
+                            span.b-checkbox-submit__text 1 CPU
+                            input.js-checked-submit(name='check-01', type='radio')
+                        label.b-checkbox-submit.b-checkbox-submit_size_70
+                            span.b-checkbox-submit__text 2 CPU
+                            input.js-checked-submit(name='check-01', type='radio')
+
+                    td.dedicated-extra-price__table-cell
+                    td.dedicated-extra-price__table-cell(style="width:370px;")
+                        .dedicated-extra-price__table-title Sort
+                        span(ui-select="filter.sort", options="list.sort", width="280", style="display:inline-block;")
+                    //-td.dedicated-extra-price__table-cell
+                        button.b-submit.dedicated-extra-price__table-submit(type='button') find
+
+        .dedicated-extra-price__box
+
+            table.dedicated-extra-price__table
+
+                thead
+
+                    tr.dedicated-extra-price__table-row.dedicated-extra-price__table-row_title_yes
+                        td.dedicated-extra-price__table-cell
+                        td.dedicated-extra-price__table-cell processor
+                        td.dedicated-extra-price__table-cell memory
+                        td.dedicated-extra-price__table-cell(style="width:200px;") hard drive
+                        td.dedicated-extra-price__table-cell hw raid
+                        td.dedicated-extra-price__table-cell Port
+                        td.dedicated-extra-price__table-cell(style="width:280px;") OS
+                        td.dedicated-extra-price__table-cell(style="width:220px;") monthly
+                        td.dedicated-extra-price__table-cell.dedicated-extra-price__table-cell_red_yes(style="width:220px;") price will change after:
+
+                tbody(ng-repeat="s in configStock")
+                    tr.dedicated-extra-price__table-row
+                        td.dedicated-extra-price__table-cell
+                            span.b-icon.b-flag(ng-class="{'b-flag_country_nether': s.LocationCode==='NL'}")
+
+                        td.dedicated-extra-price__table-cell
+                            .dedicated-extra-price__text
+                                | {{s.Cpu.Name}}
+
+                            kpd-indicator(cpu="s.Cpu")
+
+                        td.dedicated-extra-price__table-cell
+                            span.dedicated-extra-price__text {{s.Ram}} GB
+
+                        td.dedicated-extra-price__table-cell
+                            span.dedicated-extra-price__text(ng-repeat="hdd in s.Hdd")
+                                | {{hdd}}
+                                br
+
+                        td.dedicated-extra-price__table-cell
+                            span.b-icon.dedicated-extra-price__icon-good
+
+                        td.dedicated-extra-price__table-cell
+                            | 100 Mbps
+
+                        td.dedicated-extra-price__table-cell
+                            | 20 IP, traffic, cPanel, Windows, VPS, premium SLA, super backup
+
+                        td.dedicated-extra-price__table-cell
+                            a.b-submit.dedicated-item-content__submit(href="", ng-click="selectSale(s)") {{s.Price.Price|verboseCurrency}}
+
+                        td.dedicated-extra-price__table-cell
+                            .black-sale__slider-item-timer(time-to="s.Id")
+
+                    tr.dedicated-extra-price__table-row(ng-if="s.Id === selectedSale.Id")
+                        td.dedicated-extra-price__table-cell(colspan="9")
+                            div(server-calculator="")
+
+
