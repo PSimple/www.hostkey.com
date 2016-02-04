@@ -73,6 +73,8 @@
 
 	__webpack_require__(7);
 
+	__webpack_require__(44);
+
 
 /***/ },
 /* 7 */
@@ -88,9 +90,9 @@
 
 	__webpack_require__(15);
 
-	__webpack_require__(29);
+	__webpack_require__(32);
 
-	__webpack_require__(33);
+	__webpack_require__(36);
 
 	angular.module("dedicated.service", ["ngSanitize", "ui", "ui.router", "api", "dedicated.service.selected"]);
 
@@ -110,7 +112,7 @@
 	    views: {
 	      "solutions": {
 	        controller: "DedicatedServiceSolutionsCtrl",
-	        template: __webpack_require__(38)("./solutions." + window.country + ".jade"),
+	        template: __webpack_require__(41)("./solutions." + window.country + ".jade"),
 	        resolve: {
 	          solutions: ["$solutions", function($solutions) {
 	            return $solutions.getList();
@@ -44284,7 +44286,11 @@
 
 	__webpack_require__(28);
 
-	angular.module("ui", ["ui.buttons", "ui.scrollBlock", "ui.accordion", "ui.select", "ui.columns", "ui.notifications", "ui.anchor"]);
+	__webpack_require__(29);
+
+	__webpack_require__(30);
+
+	angular.module("ui", ["ui.buttons", "ui.scrollBlock", "ui.accordion", "ui.select", "ui.columns", "ui.notifications", "ui.anchor", "ui.kpdIndicator", "ui.timeTo"]);
 
 	angular.module("ui").filter('orderVerbose', function() {
 	  return function(obj) {
@@ -55217,13 +55223,71 @@
 
 /***/ },
 /* 29 */
+/***/ function(module, exports) {
+
+	angular.module("ui.kpdIndicator", []);
+
+	angular.module("ui.kpdIndicator").directive("kpdIndicator", function() {
+	  return {
+	    restrict: "AE",
+	    replace: true,
+	    scope: {
+	      cpu: "=cpu"
+	    },
+	    template: "<div class=\"b-range\" ng-repeat=\"count in Cnt\">\n    <a ng-href=\"{{$parent.cpu.KpdLink}}\" title=\"Performance per CPU: {{$parent.cpu.Kpd}}, total: {{$parent.cpu.Kpd}}\" target=\"_blank\">\n        <span\n            class=\"b-range__item\"\n            ng-repeat=\"kpd in $parent.kpdItems\"\n            ng-class=\"{'b-range__item_type_green': $parent.$parent.cpu.Kpd >= kpd*1500}\">\n        </span>\n    </a>\n</div>",
+	    link: function(scope, element, attrs, ngModel) {
+	      var i, ref, results;
+	      scope.Cnt = (function() {
+	        results = [];
+	        for (var i = 1, ref = scope.cpu.Cnt; 1 <= ref ? i <= ref : i >= ref; 1 <= ref ? i++ : i--){ results.push(i); }
+	        return results;
+	      }).apply(this);
+	      return scope.kpdItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+	    }
+	  };
+	});
+
+
+/***/ },
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(30);
+	__webpack_require__(46);
 
-	__webpack_require__(31);
+	angular.module("ui.timeTo", []);
 
-	__webpack_require__(32);
+	angular.module("ui.timeTo").directive("timeTo", function() {
+	  return {
+	    restrict: "AE",
+	    replace: true,
+	    scope: {
+	      seconds: "=timeTo"
+	    },
+	    link: function(scope, element, attrs, ngModel) {
+	      var seconds;
+	      seconds = parseInt(scope.seconds, 10);
+	      if (seconds) {
+	        return element.timeTo({
+	          seconds: seconds,
+	          displayCaptions: true,
+	          captionSize: 8
+	        });
+	      }
+	    }
+	  };
+	});
+
+
+/***/ },
+/* 31 */,
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(33);
+
+	__webpack_require__(34);
+
+	__webpack_require__(35);
 
 	angular.module("api", ["api.dedicated", "api.order", "api.solutions"]);
 
@@ -55231,7 +55295,7 @@
 
 
 /***/ },
-/* 30 */
+/* 33 */
 /***/ function(module, exports) {
 
 	var objectToArray;
@@ -55388,6 +55452,33 @@
 	    };
 	    return components;
 	  };
+	  this.getConfigStock = function() {
+	    var country, deferred, groups, url;
+	    deferred = $q.defer();
+	    country = window.country || 'NL';
+	    if (window.isDev) {
+	      url = "/assets/dist/api/config-stock/" + country + ".json";
+	    } else {
+	      url = CONFIG.apiUrl + "/dedicated/config-stock";
+	    }
+	    groups = [country].join(',');
+	    $http({
+	      url: url,
+	      method: "GET",
+	      params: {
+	        currency: window.currency,
+	        groups: groups
+	      }
+	    }).success(function(data) {
+	      var ref, stocks;
+	      stocks = [];
+	      if ((ref = data.Content) != null ? ref.Data : void 0) {
+	        stocks = objectToArray(data.Content.Data);
+	      }
+	      return deferred.resolve(stocks);
+	    });
+	    return deferred.promise;
+	  };
 	  return that;
 	}]);
 
@@ -55402,7 +55493,7 @@
 
 
 /***/ },
-/* 31 */
+/* 34 */
 /***/ function(module, exports) {
 
 	angular.module("api.order", ["config"]);
@@ -55531,7 +55622,7 @@
 
 
 /***/ },
-/* 32 */
+/* 35 */
 /***/ function(module, exports) {
 
 	angular.module("api.solutions", ["config"]);
@@ -55593,10 +55684,10 @@
 
 
 /***/ },
-/* 33 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(34);
+	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(37);
 
 	angular.module("dedicated.service.selected", []);
 
@@ -55604,7 +55695,7 @@
 	  $stateProvider.state("dedicatedService.selected", {
 	    url: "/type/:type",
 	    controller: "SelectedCtrl",
-	    template: __webpack_require__(35),
+	    template: __webpack_require__(38),
 	    resolve: {
 	      components: ["$dedicated", function($dedicated) {
 	        return $dedicated.components();
@@ -55801,14 +55892,14 @@
 	      return $scope.tabs.hardware.open = true;
 	    }, 1000);
 	  });
-	  $scope.buy = function(order) {
+	  $scope.buy = function($event, order) {
 	    if (!order.hardware.hdd.ID.length) {
 	      notifications.error("Please choose hard disk!");
+	      $event.stopPropagation();
 	      return;
 	    }
 	    return $order.post(order).then(function(orderLink) {
-	      console.log(orderLink);
-	      return window.location = orderLink;
+	      return document.getElementById('configure_cloud_VDS').src = orderLink;
 	    })["catch"](function(error) {
 	      if (error.Message) {
 	        return alert(error.Message);
@@ -56059,7 +56150,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 34 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -57613,21 +57704,21 @@
 
 
 /***/ },
-/* 35 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(36);
+	var jade = __webpack_require__(39);
 
 	module.exports = function template(locals) {
 	var buf = [];
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div ng-click=\"close()\" class=\"b-dedicated__hide-block-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div class=\"b-dedicated__item-content dedicated-item-content\"><div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">configurator of {{solution.title}} SOLUTIONS</h3><div ng-bind-html=\"solution.description\" class=\"b-dedicated__description\"></div></div><div style=\"padding-bottom: 30px;\" class=\"b-container\"><div class=\"b-dedicated__accordion\"><div id=\"scroll-box\" accordion=\"\"><accordion-group is-open=\"tabs.hardware.open\"><accordion-heading><span ng-bind=\"::tabs.hardware.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.hardware|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.hardware.cpu.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell\"><label ng-repeat=\"(id, cpu) in tabs.hardware.cpu.options\" ng-model=\"order.hardware.cpu\" btn-radio=\"{{cpu}}\" class=\"b-checkbox-submit\"><span class=\"b-checkbox-submit__text\">{{cpu.Name}}</span></label></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.hardware.ram.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell js-checked\"><label ng-repeat=\"ram in tabs.hardware.ram.options\" ng-model=\"order.hardware.ram\" btn-radio=\"{{ram}}\" ng-class=\"{disable: !ram.Options.enable}\" class=\"b-checkbox-submit b-checkbox-submit_size_70\"><span class=\"b-checkbox-submit__text\">{{ram.Name}}</span></label></td></tr><tr id=\"platform\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.hardware.platform.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell js-checked\"><label ng-repeat=\"platform in tabs.hardware.platform.options\" ng-model=\"order.hardware.platform\" btn-radio=\"{{platform}}\" class=\"b-checkbox-submit b-checkbox-submit_size_170\"><span class=\"b-checkbox-submit__text\">{{platform.Name}}</span></label></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td class=\"table-select__cell\"><div ng-show=\"hddItem&lt;=tabs.hardware.hdd.size\" ng-repeat=\"hddItem in tabs.hardware.hdd.sizeAvailable\" class=\"table-select__cell-item\"><label class=\"table-select__item-label\">{{hddItem}} disk</label><div ui-select=\"tabs.hardware.hdd.selected[$index]\" options=\"tabs.hardware.hdd.options\" width=\"170\" class=\"table-select__item\"></div></div></td></tr></table><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"3\" class=\"table-select__cell\"><label class=\"table-select__item-label\">RAID:</label><div ui-select=\"order.hardware.raid\" options=\"tabs.hardware.raid.options\" width=\"520\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"><label class=\"table-select__item-label\">LEVEL:</label><div ui-select=\"order.hardware.RaidLevel\" options=\"tabs.hardware.RaidLevel.options\" width=\"170\" class=\"table-select__item\"></div></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span ng-bind=\"::tabs.software.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.software|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.os.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.os\" options=\"tabs.software.os.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"><div ui-select=\"order.software.bit\" options=\"tabs.software.bit.options\" width=\"170\" class=\"table-select__item\"></div></td><td ng-style=\"{visibility: tabs.software.RdpLicCount.enable ? 'initial': 'hidden'}\" class=\"table-select__cell\"><label ng-bind-html=\"::tabs.software.RdpLicCount.name\" class=\"table-select__item-label table-select__item-label_inline_yes\"></label><input type=\"text\" ng-model=\"order.software.RdpLicCount.Value\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X {{order.software.RdpLicCount.Price|verboseCurrency}}</span></td></tr></table></td></tr><tr ng-show=\"tabs.software.controlPanel.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.controlPanel.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.controlPanel\" options=\"tabs.software.controlPanel.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-show=\"tabs.software.MSSql.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.MSSql.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.MSSql\" options=\"tabs.software.MSSql.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-show=\"tabs.software.MSExchange.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind-html=\"::tabs.software.MSExchange.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.MSExchange\" options=\"tabs.software.MSExchange.options\" width=\"340\" class=\"table-select__item\"></div></td><td ng-show=\"order.software.MSExchange.ID\" class=\"table-select__cell\"><label class=\"table-select__item-label table-select__item-label_inline_yes\">Count</label><input type=\"text\" ng-model=\"order.software.ExchangeCount.Value\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X {{order.software.MSExchange.Price|verboseCurrency}}</span></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span class=\"b-accordion__title-main\">{{tabs.network.name}}</span><span class=\"b-accordion__title-submain\">{{order.network|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.traffic.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.traffic\" options=\"tabs.network.traffic.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.Bandwidth.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.Bandwidth\" options=\"tabs.network.Bandwidth.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.ip.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.ip\" options=\"tabs.network.ip.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.vlan.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.vlan\" options=\"tabs.network.vlan.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.ftpBackup.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.ftpBackup\" options=\"tabs.network.ftpBackup.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.DDOSProtection.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.DDOSProtection\" options=\"tabs.network.DDOSProtection.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.IPv6.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><label class=\"fake-checkbox-label\"><span ng-model=\"order.network.IPv6.Value\" btn-checkbox=\"\" ng-class=\"{'js-check':order.network.IPv6.Value}\" class=\"fake-checkbox-label__box\"></span></label></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span ng-bind=\"::tabs.sla.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.sla|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.serviceLevel.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.serviceLevel\" options=\"tabs.sla.serviceLevel.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.management.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.management\" options=\"tabs.sla.management.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.DCGrade.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.DCGrade\" options=\"tabs.sla.DCGrade.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.discount.billingCycle.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td class=\"table-select__cell\"><div ui-select=\"order.discount.billingCycle\" options=\"tabs.discount.billingCycle.options\" width=\"340\" class=\"table-select__item\"><td class=\"table-select__cell\"></td></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></div></div><!-- Скролящийся блок с результатом выбора--><div scroll-block=\"\" class=\"b-dedicated__summary\"><div class=\"b-dedicated__summary-title\">Your dedicated</div><div ng-bind=\"::tabs.hardware.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.hardware\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-bind=\"::tabs.software.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.software\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-bind=\"::tabs.network.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.network\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-bind=\"::tabs.sla.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.sla\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-show=\"totalPrice.Summa\" class=\"b-dedicated__summary-price\"><span class=\"b-dedicated__summary-price-value\">{{totalPrice.Summa|verboseCurrency}}/month</span><span ng-show=\"order.discount.billingCycle.Percent\" class=\"b-dedicated__summary-price-discount\">{{order.discount.billingCycle.Percent}}% discount,<br/>save {{totalPrice.Discount|verboseCurrency}}</span></div><a href=\"\" ng-click=\"buy(order)\" class=\"b-submit b-dedicated__summary-submit\">Buy</a></div></div></div>");;return buf.join("");
+	buf.push("<div ng-click=\"close()\" class=\"b-dedicated__hide-block-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div class=\"b-dedicated__item-content dedicated-item-content\"><div class=\"b-dedicated__box\"><h3 class=\"b-dedicated__title b-dedicated__title_upline_yes\">configurator of {{solution.title}} SOLUTIONS</h3><div ng-bind-html=\"solution.description\" class=\"b-dedicated__description\"></div></div><div style=\"padding-bottom: 30px;\" class=\"b-container\"><div class=\"b-dedicated__accordion\"><div id=\"scroll-box\" accordion=\"\"><accordion-group is-open=\"tabs.hardware.open\"><accordion-heading><span ng-bind=\"::tabs.hardware.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.hardware|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.hardware.cpu.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell\"><label ng-repeat=\"(id, cpu) in tabs.hardware.cpu.options\" ng-model=\"order.hardware.cpu\" btn-radio=\"{{cpu}}\" class=\"b-checkbox-submit\"><span class=\"b-checkbox-submit__text\">{{cpu.Name}}</span></label></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.hardware.ram.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell js-checked\"><label ng-repeat=\"ram in tabs.hardware.ram.options\" ng-model=\"order.hardware.ram\" btn-radio=\"{{ram}}\" ng-class=\"{disable: !ram.Options.enable}\" class=\"b-checkbox-submit b-checkbox-submit_size_70\"><span class=\"b-checkbox-submit__text\">{{ram.Name}}</span></label></td></tr><tr id=\"platform\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.hardware.platform.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell js-checked\"><label ng-repeat=\"platform in tabs.hardware.platform.options\" ng-model=\"order.hardware.platform\" btn-radio=\"{{platform}}\" class=\"b-checkbox-submit b-checkbox-submit_size_170\"><span class=\"b-checkbox-submit__text\">{{platform.Name}}</span></label></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_yes\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td class=\"table-select__cell\"><div ng-show=\"hddItem&lt;=tabs.hardware.hdd.size\" ng-repeat=\"hddItem in tabs.hardware.hdd.sizeAvailable\" class=\"table-select__cell-item\"><label class=\"table-select__item-label\">{{hddItem}} disk</label><div ui-select=\"tabs.hardware.hdd.selected[$index]\" options=\"tabs.hardware.hdd.options\" width=\"170\" class=\"table-select__item\"></div></div></td></tr></table><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"3\" class=\"table-select__cell\"><label class=\"table-select__item-label\">RAID:</label><div ui-select=\"order.hardware.raid\" options=\"tabs.hardware.raid.options\" width=\"520\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"><label class=\"table-select__item-label\">LEVEL:</label><div ui-select=\"order.hardware.RaidLevel\" options=\"tabs.hardware.RaidLevel.options\" width=\"170\" class=\"table-select__item\"></div></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span ng-bind=\"::tabs.software.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.software|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.os.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.os\" options=\"tabs.software.os.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"><div ui-select=\"order.software.bit\" options=\"tabs.software.bit.options\" width=\"170\" class=\"table-select__item\"></div></td><td ng-style=\"{visibility: tabs.software.RdpLicCount.enable ? 'initial': 'hidden'}\" class=\"table-select__cell\"><label ng-bind-html=\"::tabs.software.RdpLicCount.name\" class=\"table-select__item-label table-select__item-label_inline_yes\"></label><input type=\"text\" ng-model=\"order.software.RdpLicCount.Value\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X {{order.software.RdpLicCount.Price|verboseCurrency}}</span></td></tr></table></td></tr><tr ng-show=\"tabs.software.controlPanel.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.controlPanel.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.controlPanel\" options=\"tabs.software.controlPanel.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-show=\"tabs.software.MSSql.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.MSSql.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.MSSql\" options=\"tabs.software.MSSql.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-show=\"tabs.software.MSExchange.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind-html=\"::tabs.software.MSExchange.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.MSExchange\" options=\"tabs.software.MSExchange.options\" width=\"340\" class=\"table-select__item\"></div></td><td ng-show=\"order.software.MSExchange.ID\" class=\"table-select__cell\"><label class=\"table-select__item-label table-select__item-label_inline_yes\">Count</label><input type=\"text\" ng-model=\"order.software.ExchangeCount.Value\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X {{order.software.MSExchange.Price|verboseCurrency}}</span></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span class=\"b-accordion__title-main\">{{tabs.network.name}}</span><span class=\"b-accordion__title-submain\">{{order.network|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.traffic.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.traffic\" options=\"tabs.network.traffic.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.Bandwidth.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.Bandwidth\" options=\"tabs.network.Bandwidth.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.ip.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.ip\" options=\"tabs.network.ip.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.vlan.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.vlan\" options=\"tabs.network.vlan.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.ftpBackup.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.ftpBackup\" options=\"tabs.network.ftpBackup.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.DDOSProtection.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.DDOSProtection\" options=\"tabs.network.DDOSProtection.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.IPv6.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><label class=\"fake-checkbox-label\"><span ng-model=\"order.network.IPv6.Value\" btn-checkbox=\"\" ng-class=\"{'js-check':order.network.IPv6.Value}\" class=\"fake-checkbox-label__box\"></span></label></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span ng-bind=\"::tabs.sla.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.sla|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.serviceLevel.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.serviceLevel\" options=\"tabs.sla.serviceLevel.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.management.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.management\" options=\"tabs.sla.management.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.DCGrade.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.DCGrade\" options=\"tabs.sla.DCGrade.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.discount.billingCycle.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td class=\"table-select__cell\"><div ui-select=\"order.discount.billingCycle\" options=\"tabs.discount.billingCycle.options\" width=\"340\" class=\"table-select__item\"><td class=\"table-select__cell\"></td></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></div></div><!-- Скролящийся блок с результатом выбора--><div scroll-block=\"\" class=\"b-dedicated__summary\"><div class=\"b-dedicated__summary-title\">Your dedicated</div><div ng-bind=\"::tabs.hardware.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.hardware\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-bind=\"::tabs.software.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.software\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-bind=\"::tabs.network.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.network\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-bind=\"::tabs.sla.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.sla\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency}}</td></tr></table><div ng-show=\"totalPrice.Summa\" class=\"b-dedicated__summary-price\"><span class=\"b-dedicated__summary-price-value\">{{totalPrice.Summa|verboseCurrency}}/month</span><span ng-show=\"order.discount.billingCycle.Percent\" class=\"b-dedicated__summary-price-discount\">{{order.discount.billingCycle.Percent}}% discount,<br/>save {{totalPrice.Discount|verboseCurrency}}</span></div><a href=\"\" ng-click=\"buy($event, order)\" class=\"b-submit b-dedicated__summary-submit\">Buy</a></div></div></div>");;return buf.join("");
 	}
 
 /***/ },
-/* 36 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57847,7 +57938,7 @@
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(37).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(40).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -57879,18 +57970,18 @@
 
 
 /***/ },
-/* 37 */
+/* 40 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 38 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./solutions.NL.jade": 39,
-		"./solutions.RU.jade": 40
+		"./solutions.NL.jade": 42,
+		"./solutions.RU.jade": 43
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -57903,14 +57994,14 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 38;
+	webpackContext.id = 41;
 
 
 /***/ },
-/* 39 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(36);
+	var jade = __webpack_require__(39);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -57921,10 +58012,10 @@
 	}
 
 /***/ },
-/* 40 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(36);
+	var jade = __webpack_require__(39);
 
 	module.exports = function template(locals) {
 	var buf = [];
@@ -57933,6 +58024,94 @@
 
 	buf.push("<div class=\"b-dedicated__box\"><h3 anchor=\"ru\" class=\"b-dedicated__title b-dedicated__title_upline_yes\">OUR<br/>SOLUTIONS</h3><div class=\"b-dedicated__switch js-switch-box\"><div ng-click=\"url('/dedicated/service/netherlands?nl')\" class=\"b-dedicated__switch-item flag_nl\">netherlands</div><div class=\"b-dedicated__switch-item\">/</div><a class=\"b-dedicated__switch-item active flag_ru\">russia</a></div></div><div class=\"b-dedicated__list js-switch-box\"><div ng-repeat=\"s in solutions\" ng-class=\"{active:$stateParams.type===s.type}\" ui-sref=\".selected({type:s.type})\" class=\"b-dedicated__item\"><img ng-src=\"{{s.image}}\" class=\"b-dedicated__item-image\"/><h3 class=\"b-dedicated__item-title\">{{s.title}}</h3><h4 class=\"b-dedicated__item-subtitle\">{{s.subtitle}}</h4><div class=\"b-dedicated__item-start\">Starts from</div><div class=\"b-dedicated__item-price\"><span ng-bind-html=\"s.price|verboseCurrency:false\"></span>/month</div><a href=\"\" class=\"b-dedicated__item-detail\">Details</a></div></div><div id=\"selectedSolution\" ui-view=\"\" ng-class=\"{'_angular': $state.includes('dedicatedService.selected')}\" class=\"b-dedicated__hide-block js-setting\"></div>");;return buf.join("");
 	}
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(8);
+
+	__webpack_require__(11);
+
+	__webpack_require__(15);
+
+	__webpack_require__(32);
+
+	angular.module("app.dedicated.sale", ["ui", "ui.router", "api"]);
+
+	angular.module("app.dedicated.sale").config(["$httpProvider", "$stateProvider", "$urlRouterProvider", function($httpProvider, $stateProvider, $urlRouterProvider) {
+	  $urlRouterProvider.otherwise("");
+	  return $stateProvider.state("sale", {
+	    url: "",
+	    template: __webpack_require__(45),
+	    controller: "AppDedicatedSaleCtrl",
+	    resolve: {
+	      configStock: ["$dedicated", function($dedicated) {
+	        return $dedicated.getConfigStock();
+	      }],
+	      listSort: function() {
+	        return [
+	          {
+	            "ID": "1",
+	            "Name": "Price (low -> high)"
+	          }, {
+	            "ID": "2",
+	            "Name": "Price (high -> low)"
+	          }
+	        ];
+	      }
+	    }
+	  });
+	}]);
+
+	angular.module("app.dedicated.sale").controller("AppDedicatedSaleCtrl", ["$state", "$stateParams", "$scope", "$rootScope", "configStock", "listSort", function($state, $stateParams, $scope, $rootScope, configStock, listSort) {
+	  $scope.list = {
+	    sort: listSort
+	  };
+	  $scope.filter = {
+	    sort: angular.copy(listSort[0])
+	  };
+	  $rootScope.$stateParams = $stateParams;
+	  $rootScope.$state = $state;
+	  $rootScope.bodyClass = function() {
+	    return {
+	      "in": $rootScope.loaded
+	    };
+	  };
+	  $rootScope.loaded = true;
+	  return $scope.configStock = configStock;
+	}]);
+
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var jade = __webpack_require__(39);
+
+	module.exports = function template(locals) {
+	var buf = [];
+	var jade_mixins = {};
+	var jade_interp;
+
+	buf.push("<div class=\"b-text-page__box\"><h3 class=\"b-text-page__title b-text-page__title_upline_yes\">EXTRA PRICE</h3><div class=\"b-dedicated__description\"><p>HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia. We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+ international resellers. Virtually any server configuration could be provided to our customers. We offer full range of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own servers in Moscow.</p></div></div><div class=\"b-dedicated__hide-block-close js-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div><div class=\"b-container\"><div class=\"dedicated-extra-price__box\"><table class=\"dedicated-extra-price__table dedicated-extra-price__table_type_head\"><tr class=\"dedicated-extra-price__table-row\"><td style=\"width:300px;\" class=\"dedicated-extra-price__table-cell\"></td><td class=\"dedicated-extra-price__table-cell\"></td><td style=\"width:370px;\" class=\"dedicated-extra-price__table-cell\"><div class=\"dedicated-extra-price__table-title\">Sort</div><span ui-select=\"filter.sort\" options=\"list.sort\" width=\"280\" style=\"display:inline-block;\"></span></td></tr></table></div><div class=\"dedicated-extra-price__box\"><table class=\"dedicated-extra-price__table\"><tr class=\"dedicated-extra-price__table-row dedicated-extra-price__table-row_title_yes\"><td class=\"dedicated-extra-price__table-cell\"></td><td class=\"dedicated-extra-price__table-cell\">processor</td><td class=\"dedicated-extra-price__table-cell\">memory</td><td style=\"width:200px;\" class=\"dedicated-extra-price__table-cell\">hard drive</td><td class=\"dedicated-extra-price__table-cell\">hw raid</td><td class=\"dedicated-extra-price__table-cell\">Port</td><td style=\"width:280px;\" class=\"dedicated-extra-price__table-cell\">OS</td><td style=\"width:180px;\" class=\"dedicated-extra-price__table-cell\">monthly</td><td style=\"width:200px;\" class=\"dedicated-extra-price__table-cell dedicated-extra-price__table-cell_red_yes\">price will change after:</td></tr><tr ng-repeat=\"s in configStock\" class=\"dedicated-extra-price__table-row\"><td class=\"dedicated-extra-price__table-cell\"><span ng-class=\"{'b-flag_country_nether': s.LocationCode==='NL'}\" class=\"b-icon b-flag\"></span></td><td class=\"dedicated-extra-price__table-cell\"><div class=\"dedicated-extra-price__text\">{{s.Cpu.Name}}</div><kpd-indicator cpu=\"s.Cpu\"></kpd-indicator></td><td class=\"dedicated-extra-price__table-cell\"><span class=\"dedicated-extra-price__text\">{{s.Ram}} GB</span></td><td class=\"dedicated-extra-price__table-cell\"><span ng-repeat=\"hdd in s.Hdd\" class=\"dedicated-extra-price__text\">{{hdd}}<br/></span></td><td class=\"dedicated-extra-price__table-cell\"><span class=\"b-icon dedicated-extra-price__icon-good\"></span></td><td class=\"dedicated-extra-price__table-cell\">100 Mbps</td><td class=\"dedicated-extra-price__table-cell\">20 IP, traffic, cPanel, Windows, VPS, premium SLA, super backup</td><td class=\"dedicated-extra-price__table-cell\"><a href=\"\" class=\"b-submit dedicated-item-content__submit\">{{s.Price.Price|verboseCurrency}}</a></td><td class=\"dedicated-extra-price__table-cell\"><div time-to=\"s.Id\" class=\"black-sale__slider-item-timer\"></div></td></tr></table></div></div></div>");;return buf.join("");
+	}
+
+/***/ },
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(jQuery, $) {/**
+	 * TimeTo jQuery plug-in
+	 * Show countdown timer or realtime clock
+	 *
+	 * @author Alexey Teterin <altmoc@gmail.com>
+	 * @version 1.0.13
+	 * @license MIT http://opensource.org/licenses/MIT
+	 * @date 2014-01-17
+	 */
+	(function(k){if(true){var n=__webpack_require__(10);module.exports=k(n||$)}else"function"===typeof define&&define.amd?define(["jquery"],k):k(n||$)})(function(k){function n(c){var g=this.data(),a=this.find("ul");if(g.vals&&0!==a.length){c||(c=g.seconds);var f=!1;g.intervalId&&(f=!0,clearTimeout(g.intervalId));var e=Math.floor(c/86400),d=86400*e,h=Math.floor((c-d)/3600),d=d+3600*h,l=Math.floor((c-d)/60);c-=d+60*l;e=(100>e?"0"+(10>e?"0":""):"")+e+(10>h?"0":"")+h+(10>l?"0":"")+l+(10>c?"0":"")+c;h=g.vals.length-1;for(l=e.length-1;0<=h;h--,l--)c=parseInt(e.substr(l,1)),g.vals[h]=c,a.eq(h).children().html(c);if(f){var b=this;g.ttStartTime=Date.now();g.intervalId=setTimeout(function(){q.call(b)},1E3);this.data("intervalId",g.intervalId)}}}function q(c){var g=this.find("ul"),a=this.data();if(a.vals&&0!=g.length){void 0==c&&(c=a.iSec);var f=a.vals[c],e=g.eq(c),d=e.children(),h=a.countdown?-1:1;d.eq(1).html(f);f+=h;if(c==a.iSec){var l=a.tickTimeout,b=(new Date).getTime()-a.ttStartTime;a.sec+=h;l+=Math.abs(a.seconds-a.sec)*l-b;a.intervalId=setTimeout(function(){q.call(t)},l)}if(0>f||f>a.limits[c])0>f?(f=a.limits[c],c==a.iHour&&0<a.displayDays&&0<c&&0==a.vals[c-1]&&(f=3)):f=0,0<c&&q.call(this,c-1);d.eq(0).html(f);var t=this;k.support.transition?(e.addClass("transition"),e.css({top:0}),setTimeout(function(){e.removeClass("transition");d.eq(1).html(f);e.css({top:"-"+a.height+"px"});0<h||c!=a.iSec||(a.sec==a.countdownAlertLimit&&g.parent().addClass("timeTo-alert"),0===a.sec&&(g.parent().removeClass("timeTo-alert"),a.intervalId&&(clearTimeout(a.intervalId),t.data("intervalId",null)),"function"===typeof a.callback&&a.callback()))},410)):e.stop().animate({top:0},400,c!=a.iSec?null:function(){d.eq(1).html(f);e.css({top:"-"+a.height+"px"});0<h||c!=a.iSec||(a.sec==a.countdownAlertLimit?g.parent().addClass("timeTo-alert"):0==a.sec&&(g.parent().removeClass("timeTo-alert"),a.intervalId&&(clearTimeout(a.intervalId),t.data("intervalId",null)),"function"===typeof a.callback&&a.callback()))});a.vals[c]=f}else a.intervalId&&(clearTimeout(a.intervalId),this.data("intervalId",null)),a.callback&&a.callback()}var r={start:function(c){c&&n.call(this,c);var g=this;c=setTimeout(function(){q.call(g)},1E3);this.data("ttStartTime",(new Date).getTime());this.data("intervalId",c)},stop:function(){var c=this.data();c.intervalId&&(clearTimeout(c.intervalId),this.data("intervalId",null));return c},reset:function(c){var g=r.stop.call(this);this.find("div").css({backgroundPosition:"left center"});this.find("ul").parent().removeClass("timeTo-alert");"undefined"===typeof c&&(c=g.value);g.vals&&(g.vals=null);n.call(this,c)}},s={en:{days:"days",hours:"hours",min:"min",sec:"sec"},ru:{days:"\u0434\u043d\u0435\u0439",hours:"\u0447\u0430\u0441\u043e\u0432",min:"\u043c\u0438\u043d\u0443\u0442",sec:"\u0441\u0435\u043a\u0443\u043d\u0434"},ua:{days:"\u0434\u043di\u0432",hours:"\u0433\u043e\u0434\u0438\u043d",min:"\u0445\u0432\u0438\u043b\u0438\u043d",sec:"\u0441\u0435\u043a\u0443\u043d\u0434"},de:{days:"Tag",hours:"Uhr",min:"Minuten",sec:"Secunden"},fr:{days:"jours",hours:"heures",min:"minutes",sec:"secondes"},sp:{days:"d\u00edas",hours:"reloj",min:"minutos",sec:"segundos"},it:{days:"giorni",hours:"ore",min:"minuti",sec:"secondi"},nl:{days:"dagen",hours:"uren",min:"minuten",sec:"seconden"},no:{days:"dager",hours:"timer",min:"minutter",sec:"sekunder"},pt:{days:"dias",hours:"horas",min:"minutos",sec:"segundos"}};"undefined"===typeof k.support.transition&&(k.support.transition=function(){var c=(document.body||document.documentElement).style;return void 0!==c.transition||void 0!==c.WebkitTransition||void 0!==c.MozTransition||void 0!==c.MsTransition||void 0!==c.OTransition}());k.fn.timeTo=function(){for(var c={callback:null,captionSize:0,countdown:!0,countdownAlertLimit:10,displayCaptions:!1,displayDays:0,displayHours:!0,fontFamily:"Verdana, sans-serif",fontSize:28,lang:"en",seconds:0,start:!0,theme:"white",vals:[0,0,0,0,0,0,0,0,0],limits:[9,9,9,2,9,5,9,5,9],iSec:8,iHour:4,tickTimeout:1E3,intervalId:null},g,a={},f=0,e;e=arguments[f];++f)0==f&&"string"===typeof e?g=e:"object"==typeof e?"function"===typeof e.getTime?a.timeTo=e:a=k.extend(a,e):"function"==typeof e?a.callback=e:(e=parseInt(e),isNaN(e)||(a.seconds=e));if(a.timeTo){var d,f=(new Date).getTime();a.timeTo.getTime?d=a.timeTo.getTime():"number"===typeof a.timeTo&&(d=a.timeTo);a.timeTo>f&&(a.seconds=Math.floor((d-f)/1E3))}else if(a.time||!a.seconds)if((d=a.time)||(d=new Date),"object"===typeof d&&d.getTime)a.seconds=3600*d.getHours()+60*d.getMinutes()+d.getSeconds(),a.countdown=!1;else if("string"===typeof d){d=d.split(":");f=0;e=1;for(var h;h=d.pop();)f+=h*e,e*=60;a.seconds=f;a.countdown=!1}!1!==a.countdown&&86400<a.seconds&&"undefined"===typeof a.displayDays?(d=Math.floor(a.seconds/86400),a.displayDays=10>d&&1||100>d&&2||3):!0===a.displayDays?a.displayDays=3:a.displayDays&&(a.displayDays=0<a.displayDays?Math.floor(a.displayDays):3);return this.each(function(){var e=k(this),b=e.data(),d;if(b.vals)b.intervalId&&(clearInterval(b.intervalId),b.intervalId=null),k.extend(b,a);else{b=k.extend(c,a);b.height=Math.round(100*b.fontSize/93);b.width=Math.round(0.8*b.fontSize+0.13*b.height);b.displayHours=!(!b.displayDays&&!b.displayHours);e.addClass("timeTo").addClass("timeTo-"+b.theme).css({fontFamily:b.fontFamily,fontSize:b.fontSize+"px"});var f='<ul style="left:'+Math.round(b.height/10)+"px; top:-"+b.height+'px"><li>0</li><li>0</li></ul></div>',h=' style="width:'+b.width+"px; height:"+b.height+'px;"';d='<div class="first"'+h+">"+f;var f="<div"+h+">"+f,m=Math.round(2*b.width+3),h=b.captionSize||Math.round(0.43*b.fontSize);thtml=(b.displayCaptions?(b.displayHours?'<figure style="max-width:'+m+'px">$1<figcaption style="font-size:'+h+'px">'+s[b.lang].hours+"</figcaption></figure><span>:</span>":"")+'<figure style="max-width:'+m+'px">$1<figcaption style="font-size:'+h+'px">'+s[b.lang].min+'</figcaption></figure><span>:</span><figure style="max-width:'+m+'px">$1<figcaption style="font-size:'+h+'px">'+s[b.lang].sec+"</figcaption></figure>":(b.displayHours?"$1<span>:</span>":"")+"$1<span>:</span>$1").replace(/\$1/g,d+f);if(0<b.displayDays){var m=0.4*b.fontSize,p=d;for(d=b.displayDays-1;0<d;d--)p+=1===d?f.replace('">'," margin-right:"+Math.round(m)+'px">'):f;thtml=(b.displayCaptions?'<figure style="width:'+Math.round(b.width*b.displayDays+m+4)+'px">$1<figcaption style="font-size:'+h+"px; padding-right:"+Math.round(m)+'px">'+s[b.lang].days+"</figcaption></figure>":"$1").replace(/\$1/,p)+thtml}e.html(thtml)}f=e.find("div");if(f.length<b.vals.length){h=b.vals.length-f.length;m=b.vals;p=b.limits;b.vals=[];b.limits=[];for(d=0;d<f.length;d++)b.vals[d]=m[h+d],b.limits[d]=p[h+d];b.iSec=b.vals.length-1;b.iHour=b.vals.length-5}b.sec=b.seconds;e.data(b);g&&r[g]?r[g].call(e,b.seconds):b.start?r.start.call(e,b.seconds):n.call(e,b.seconds)})};return jQuery});
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(10)))
 
 /***/ }
 /******/ ]);
