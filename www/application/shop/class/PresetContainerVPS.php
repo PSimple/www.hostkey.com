@@ -89,7 +89,7 @@ class Shop_PresetContainerVPS extends Zero_Model
             ]
         ],
         [
-            'name' => 'Container VPS NL 1/256/10',
+            'name' => 'Container VPS<br/>NL 1/256/10',
             'id' => 0,
             'hidden' => 0,
             'value' => '1/256/10',
@@ -107,7 +107,7 @@ class Shop_PresetContainerVPS extends Zero_Model
             ]
         ],
         [
-            'name' => 'Container VPS NL 1/256/10',
+            'name' => 'Container VPS<br/>NL 1/256/10',
             'id' => 0,
             'hidden' => 0,
             'value' => '1/1/10',
@@ -125,7 +125,7 @@ class Shop_PresetContainerVPS extends Zero_Model
             ]
         ],
         [
-            'name' => 'Container VPS NL 2/2/20',
+            'name' => 'Container VPS<br/>NL 2/2/20',
             'id' => 0,
             'hidden' => 0,
             'value' => '2/2/20',
@@ -143,7 +143,7 @@ class Shop_PresetContainerVPS extends Zero_Model
             ]
         ],
         [
-            'name' => 'Container VPS NL 2/4/40',
+            'name' => 'Container VPS<br/>NL 2/4/40',
             'id' => 0,
             'hidden' => 0,
             'value' => '2/4/40',
@@ -161,7 +161,7 @@ class Shop_PresetContainerVPS extends Zero_Model
             ]
         ],
         [
-            'name' => 'Container VPS NL 4/8/100',
+            'name' => 'Container VPS<br/>NL 4/8/100',
             'id' => 0,
             'hidden' => 0,
             'value' => '4/8/100',
@@ -287,7 +287,7 @@ class Shop_PresetContainerVPS extends Zero_Model
             ]
         ],
         [
-            'name' => 'Container VPS RU 1/256/10',
+            'name' => 'Container VPS<br/>RU 1/256/10',
             'id' => 0,
             'hidden' => 0,
             'value' => '1/256/10',
@@ -306,7 +306,7 @@ class Shop_PresetContainerVPS extends Zero_Model
             ]
         ],
         [
-            'name' => 'Container VPS RU 1/1/30',
+            'name' => 'Container VPS<br/>RU 1/1/30',
             'id' => 0,
             'hidden' => 0,
             'value' => '1/1/30',
@@ -324,7 +324,7 @@ class Shop_PresetContainerVPS extends Zero_Model
             ]
         ],
         [
-            'name' => 'Container VPS RU 2/2/40',
+            'name' => 'Container VPS<br/>RU 2/2/40',
             'id' => 0,
             'hidden' => 0,
             'value' => '2/2/40',
@@ -342,7 +342,7 @@ class Shop_PresetContainerVPS extends Zero_Model
             ]
         ],
         [
-            'name' => 'Container VPS RU 2/4/50',
+            'name' => 'Container VPS<br/>RU 2/4/50',
             'id' => 0,
             'hidden' => 0,
             'value' => '2/4/50',
@@ -360,7 +360,7 @@ class Shop_PresetContainerVPS extends Zero_Model
             ]
         ],
         [
-            'name' => 'Container VPS RU 4/8/100',
+            'name' => 'Container VPS<br/>RU 4/8/100',
             'id' => 0,
             'hidden' => 0,
             'value' => '4/8/100',

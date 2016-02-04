@@ -7,6 +7,8 @@ require './select2/select2'
 require './columns/columns'
 require './notifications/index'
 require './anchor/anchor'
+require './kpdIndicator/kpdIndicator'
+require './timeTo/timeTo'
 
 
 angular.module "ui", [
@@ -18,6 +20,8 @@ angular.module "ui", [
     "ui.columns"
     "ui.notifications"
     "ui.anchor"
+    "ui.kpdIndicator"
+    "ui.timeTo"
 ]
 
 angular.module("ui").filter 'orderVerbose',  ->

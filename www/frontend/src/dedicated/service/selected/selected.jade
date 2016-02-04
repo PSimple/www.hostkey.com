@@ -489,7 +489,7 @@
                     br
                     |save {{totalPrice.Discount|verboseCurrency}}
 
-            a.b-submit.b-dedicated__summary-submit(href="", ng-click="buy(order)") Buy
+            a.b-submit.b-dedicated__summary-submit(href="", ng-click="buy($event, order)") Buy
 
     //-.b-container
         table.b-dedicated__accordion-table

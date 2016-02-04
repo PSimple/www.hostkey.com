@@ -162,6 +162,36 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
         }
         components
 
+    @getConfigStock = ->
+        deferred = $q.defer()
+
+        country = window.country or 'NL'
+
+        if window.isDev
+            url = "/assets/dist/api/config-stock/#{country}.json"
+        else
+            url = "#{CONFIG.apiUrl}/dedicated/config-stock"
+
+        groups = [country].join(',')
+
+        $http
+            url: url
+            method: "GET"
+            params:
+                currency: window.currency
+                groups: groups
+
+        .success (data) ->
+
+            stocks = []
+            if data.Content?.Data
+                stocks = objectToArray(data.Content.Data)
+
+            deferred.resolve stocks
+
+
+        deferred.promise
+
     that
 
 
