@@ -32,9 +32,8 @@ class Shop_Dedicated_SelectRU extends Zero_Controller
      */
     protected function Chunk_View()
     {
-        $config = Zero_Config::Get_Config('shop', 'config');
-        $this->View->Assign("currency", $config['currency']);
-        $this->View->Assign("currencyId", $config['currencyId']);
+        $this->View->Assign("currency", 'eur');
+        $this->View->Assign("currencyId", 2);
         if ( isset($this->Params['IsFeatures']) )
             $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;
         else

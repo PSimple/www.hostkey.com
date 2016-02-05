@@ -9,7 +9,6 @@
  * @package Shop.Dedicated.Api
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2016-02-04
- * @todo проверить цену лицензии сейчас должно работать не правильно потому как не инициализирована
  */
 class Shop_Dedicated_Api_Custom extends Zero_Controller
 {
@@ -41,15 +40,24 @@ class Shop_Dedicated_Api_Custom extends Zero_Controller
             foreach ($rows as $row)
             {
                 if ( 'eur' == $_REQUEST['currency'] )
+                {
                     $row['Price'] = $row['PriceEUR'];
+                    if ( 138 == $row['ID'] )
+                        $response['CostLicenseWin'] = $row['PriceEUR'];
+                }
                 else
+                {
                     $row['Price'] = $row['PriceRUR'];
+                    if ( 138 == $row['ID'] )
+                        $response['CostLicenseWin'] = $row['PriceRUR'];
+                }
                 $responseSort['Data'][$componentTypeID][] = $row;
             }
         }
+
         $responseSort['CostLicenseWin'] = $response['CostLicenseWin'];
         $responseSort['EURRUR'] = $response['EURRUR'];
-        $responseSort['Currency'] = $response['Currency'];
+        $responseSort['Currency'] = $_REQUEST['currency'];
         $responseSort['ComponentGroup'] = $response['ComponentGroup'];
 
         Zero_App::ResponseJson200($responseSort);

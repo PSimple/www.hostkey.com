@@ -9,13 +9,25 @@
  */
 class Shop_Config_General extends Zero_Model
 {
-    const CURRENCY_EUR = 2;
+    /**
+     * URL API К Инвентори
+     */
     const URL_API_INVENTORY = 'https://ug.hostkey.ru';
 
+    /**
+     * Идентификаторы валют в биллинге
+     *
+     * @var array
+     */
     public static $CurrencyID = [
         'eur' => 2,
     ];
 
+    /**
+     * Индексы цен в инвентори (В полученных и закешированных конфигураций)
+     *
+     * @var array
+     */
     public static $CurrencyPrice = [
         'eur' => 'PriceEUR',
     ];

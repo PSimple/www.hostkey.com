@@ -263,7 +263,7 @@ class Shop_Solution extends Zero_Model
 	 */
 	public static function Get_ConfigGroupsAll()
 	{
-		$sql = "SELECT CONCAT(`Location`, ',', `Groups`) FROM ConfigSolution";
+		$sql = "SELECT CONCAT(`Location`, ',', `Groups`) FROM Solution";
 		return Zero_DB::Select_List($sql);
 	}
 

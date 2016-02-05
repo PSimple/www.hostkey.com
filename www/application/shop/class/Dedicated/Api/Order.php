@@ -22,7 +22,6 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
     public function Action_POST()
     {
         // Проверки
-        $config = Zero_Config::Get_Config('shop', 'config');
         if ( !isset($_REQUEST['Currency']) || !$_REQUEST['Groups'] )
             Zero_App::ResponseJson200(null, -1, ["параметры групп или валюта не заданы"]);
         settype($_REQUEST['CompId'], 'integer');
@@ -31,7 +30,8 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         $responseStock = [];
         if ( 0 < $_REQUEST['CompId'] )
         {
-            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . md5($_REQUEST['Currency'] . $_REQUEST['Groups']) . '.data';
+            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . str_replace(',', '_', $_REQUEST['Groups']) . '.data';
+            Zero_Logs::File(__FUNCTION__, $path);
             if ( !file_exists($path) )
                 Zero_App::ResponseJson200(null, -1, ["файл стока не найден"]);
             $responseStock = unserialize(file_get_contents($path));
@@ -42,7 +42,9 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         }
 
         // Получение конфигурации custom
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($_REQUEST['Currency'] . $_REQUEST['Groups']) . '.data';
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . str_replace(',', '_', $_REQUEST['Groups']) . '.data';
+        Zero_Logs::File(__FUNCTION__, $path);
+        Zero_Logs::File(__FUNCTION__, $_REQUEST['CompId']);
         if ( !file_exists($path) )
             Zero_App::ResponseJson200(null, -1, ["файл конфигурации не найден"]);
         $response = unserialize(file_get_contents($path));
@@ -81,9 +83,9 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/dedicated/orders', $requestData);
         if ( $result['ErrorStatus'] == false )
         {
-            foreach ($currencyArr as $index)
+            foreach ($currencyArr as $key => $priceIndex)
             {
-                $order = $this->calculate($response['Data'], $responseStock, $index);
+                $order = $this->calculate($response['Data'], $responseStock, $priceIndex);
                 $requestData = [
                     'Monthly' => $order->PriceMonthly,
                     'Quarterly' => $order->PriceQuarterly,
@@ -91,17 +93,13 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
                     'Annually' => $order->PriceAnnually,
                     'InventoryID' => $_REQUEST['CompId'],
                     'Groups' => $_REQUEST['Groups'],
-                    'CurrencyId' => Shop_Config_General::$CurrencyID[$index],
+                    'CurrencyId' => Shop_Config_General::$CurrencyID[$key],
                     'OptionID' => $result['Content']['OptionID'],
                 ];
                 $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/dedicated/orders', $requestData);
                 if ( $result['ErrorStatus'] == true )
                     Zero_App::ResponseJson500($result['Code'], [$result['Message']]);
             }
-
-//            "Summa" => $order->Price,
-//                "Discount" => $order->Discount,
-
             Zero_App::ResponseJson200([
                 "OptionID" => $result['Content']['OptionID'],
                 "Configuration" => $label,
@@ -115,6 +113,14 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         return true;
     }
 
+    /**
+     * Калькулирвоание суммы и скидки заказы в указанной валюте
+     *
+     * @param array $Calculate
+     * @param array $responseStock
+     * @param string $currency
+     * @return Shop_Dedicated_Api_OrderType
+     */
     private function calculate($Calculate, $responseStock, $currency)
     {
         $order = new Shop_Dedicated_Api_OrderType();
@@ -243,6 +249,9 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
     }
 }
 
+/**
+ * Shop_Dedicated_Api_OrderType - Структура для вычисления суммы заказа
+ */
 class Shop_Dedicated_Api_OrderType
 {
     /**
