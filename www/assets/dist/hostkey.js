@@ -56656,13 +56656,13 @@
 	    }, 1000);
 	  });
 	  $scope.buy = function($event, order) {
+	    $event.stopPropagation();
 	    if (!order.hardware.hdd.ID.length) {
 	      notifications.error("Please choose hard disk!");
-	      $event.stopPropagation();
 	      return;
 	    }
 	    return $order.post(order).then(function(orderLink) {
-	      return document.getElementById('configure_cloud_VDS').src = orderLink;
+	      return window.location = orderLink;
 	    })["catch"](function(error) {
 	      if (error.Message) {
 	        return alert(error.Message);
