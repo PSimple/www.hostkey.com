@@ -8,9 +8,10 @@
  *
  * @package Shop.Dedicated.Api
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015-11-28
+ * @date 2016-02-04
+ * @todo проверить цену лицензии сейчас должно работать не правильно потому как не инициализирована
  */
-class Shop_Dedicated_Api_ConfigCustom extends Zero_Controller
+class Shop_Dedicated_Api_Custom extends Zero_Controller
 {
     /**
      * Получение кеширонной конфигурации для кастомизатора указанного раздела
@@ -21,24 +22,28 @@ class Shop_Dedicated_Api_ConfigCustom extends Zero_Controller
      */
     public function Action_GET()
     {
+        // Проверки
         if ( !isset($_REQUEST['groups']) || !$_REQUEST['groups'] )
-            Zero_App::ResponseJson200(null, -1, ["параметр групп не задан"]);
+            Zero_App::ResponseJson500(-1, ["параметр групп не задан"]);
         else if ( !isset($_REQUEST['currency']) || !$_REQUEST['currency'] )
-            Zero_App::ResponseJson200(null, -1, ["параметр валюта не задан"]);
+            Zero_App::ResponseJson500(-1, ["параметр валюта не задан"]);
 
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($_REQUEST['currency'] . $_REQUEST['groups']) . '.data';
+        // Получаем конфигурацию
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . str_replace(',', '_', $_REQUEST['groups']) . '.data';
         if ( !file_exists($path) )
-            Zero_App::ResponseJson200(null, -1, ["файл конфигурации не найден"]);
-
-        Zero_Logs::File('Shop_Dedicated_Api_ConfigCustom', $path);
+            Zero_App::ResponseJson500(-1, ["файл конфигурации не найден"]);
         $response = unserialize(file_get_contents($path));
 
-        // Заплатка для правильно сортировки
+        // Заплатка для правильной сортировки и инициализация выбранной цены
         $responseSort = [];
         foreach ($response['Data'] as $componentTypeID => $rows)
         {
             foreach ($rows as $row)
             {
+                if ( 'eur' == $_REQUEST['currency'] )
+                    $row['Price'] = $row['PriceEUR'];
+                else
+                    $row['Price'] = $row['PriceRUR'];
                 $responseSort['Data'][$componentTypeID][] = $row;
             }
         }
@@ -55,7 +60,7 @@ class Shop_Dedicated_Api_ConfigCustom extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Dedicated_Api_ConfigCustom
+     * @return Shop_Dedicated_Api_Custom
      */
     public static function Make($properties = [])
     {

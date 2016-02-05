@@ -21,12 +21,13 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
      */
     public function Action_POST()
     {
+        // Проверки
         $config = Zero_Config::Get_Config('shop', 'config');
         if ( !isset($_REQUEST['Currency']) || !$_REQUEST['Groups'] )
             Zero_App::ResponseJson200(null, -1, ["параметры групп или валюта не заданы"]);
         settype($_REQUEST['CompId'], 'integer');
 
-        // Получение стока по конфигурации
+        // Получение конфигурации стока
         $responseStock = [];
         if ( 0 < $_REQUEST['CompId'] )
         {
@@ -34,36 +35,107 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
             if ( !file_exists($path) )
                 Zero_App::ResponseJson200(null, -1, ["файл стока не найден"]);
             $responseStock = unserialize(file_get_contents($path));
-            if ( !isset($responseStock['Data'][$_REQUEST['CompId']]['Price']) )
+            if ( !isset($responseStock['Data'][$_REQUEST['CompId']]) )
                 Zero_App::ResponseJson200(null, -1, ["стоковый сервер не найден"]);
-            $_REQUEST['Hardware']['Label'] = $responseStock['Data'][$_REQUEST['CompId']]['Cpu']['Name'];
+            $responseStock = $responseStock['Data'][$_REQUEST['CompId']];
+            $_REQUEST['Hardware']['Label'] = $responseStock['Cpu']['Name'];
         }
 
-        // Получение конфигурации
+        // Получение конфигурации custom
         $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($_REQUEST['Currency'] . $_REQUEST['Groups']) . '.data';
         if ( !file_exists($path) )
             Zero_App::ResponseJson200(null, -1, ["файл конфигурации не найден"]);
         $response = unserialize(file_get_contents($path));
 
-        // Расчет
-        $Calculate = $response['Data'];
+        // Индексы валют
+        $currencyArr = Shop_Config_General::$CurrencyPrice;
+
+        // Конфигурация
+        $label = $_REQUEST['Hardware']['Label'] . '/' . $_REQUEST['Software']['Label'] . '/' . $_REQUEST['Network']['Label'] . '/' . $_REQUEST['SLA']['Label'];
+        $label = preg_replace("~\([0-9]+\)~si", "", $label);
+
+        // Расчет по выбранной валюте
+        $order = $this->calculate($response['Data'], $responseStock, $currencyArr[$_REQUEST['Currency']]);
+        unset($currencyArr[$_REQUEST['Currency']]);
+
+        // Если идет процесс формирования заказа.
+        if ( $_REQUEST['Calculation'] )
+        {
+            Zero_App::ResponseJson200([
+                "Summa" => $order->Price,
+                "Discount" => $order->Discount,
+            ]);
+            return true;
+        }
+
+        // Расчет по остальным валютам и формирование заказа
+        $requestData = [
+            'Monthly' => $order->PriceMonthly,
+            'Quarterly' => $order->PriceQuarterly,
+            'Semiannually' => $order->PriceSemiannually,
+            'Annually' => $order->PriceAnnually,
+            'InventoryID' => $_REQUEST['CompId'],
+            'Groups' => $_REQUEST['Groups'],
+            'CurrencyId' => Shop_Config_General::$CurrencyID[$_REQUEST['Currency']],
+        ];
+        $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/dedicated/orders', $requestData);
+        if ( $result['ErrorStatus'] == false )
+        {
+            foreach ($currencyArr as $index)
+            {
+                $order = $this->calculate($response['Data'], $responseStock, $index);
+                $requestData = [
+                    'Monthly' => $order->PriceMonthly,
+                    'Quarterly' => $order->PriceQuarterly,
+                    'Semiannually' => $order->PriceSemiannually,
+                    'Annually' => $order->PriceAnnually,
+                    'InventoryID' => $_REQUEST['CompId'],
+                    'Groups' => $_REQUEST['Groups'],
+                    'CurrencyId' => Shop_Config_General::$CurrencyID[$index],
+                    'OptionID' => $result['Content']['OptionID'],
+                ];
+                $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/dedicated/orders', $requestData);
+                if ( $result['ErrorStatus'] == true )
+                    Zero_App::ResponseJson500($result['Code'], [$result['Message']]);
+            }
+
+//            "Summa" => $order->Price,
+//                "Discount" => $order->Discount,
+
+            Zero_App::ResponseJson200([
+                "OptionID" => $result['Content']['OptionID'],
+                "Configuration" => $label,
+                "currencyId" => Shop_Config_General::$CurrencyID[$_REQUEST['Currency']],
+            ]);
+        }
+        else
+        {
+            Zero_App::ResponseJson500($result['Code'], [$result['Message']]);
+        }
+        return true;
+    }
+
+    private function calculate($Calculate, $responseStock, $currency)
+    {
+        $order = new Shop_Dedicated_Api_OrderType();
+
         // Hardvare
         $costHardware = 0;
         if ( 0 < $_REQUEST['CompId'] )
         {
-            $costHardware = $responseStock['Data'][$_REQUEST['CompId']]['Price'];
+            $costHardware = $responseStock['Price'][$currency];
         }
         else
         {
-            $costHardware += $Calculate[1][$_REQUEST['Hardware']['Cpu']]['Price'];
-            $costHardware += $Calculate[3][$_REQUEST['Hardware']['Ram']]['Price'];
-            $costHardware += $Calculate[6][$_REQUEST['Hardware']['Platform']]['Price'];
+            $costHardware += $Calculate[1][$_REQUEST['Hardware']['Cpu']][$currency];
+            $costHardware += $Calculate[3][$_REQUEST['Hardware']['Ram']][$currency];
+            $costHardware += $Calculate[6][$_REQUEST['Hardware']['Platform']][$currency];
             foreach ($_REQUEST['Hardware']['Hdd'] as $id)
             {
                 if ( $id > 0 )
-                    $costHardware += $Calculate[2][$id]['Price'];
+                    $costHardware += $Calculate[2][$id][$currency];
             }
-            $costHardware += $Calculate[8][$_REQUEST['Hardware']['Raid']]['Price'];
+            $costHardware += $Calculate[8][$_REQUEST['Hardware']['Raid']][$currency];
         }
         //        Zero_Logs::File(__FUNCTION__, $costHardvare, $_REQUEST, $Calculate);
 
@@ -71,66 +143,66 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         $costSoftWare = 0;
         if ( false !== strpos($Calculate[4][$_REQUEST['Software']['OS']]['Name'], 'Windows') )
         {
-            $costSoftWare += $Calculate[4][$_REQUEST['Software']['OS']]['Price'] * $Calculate[1][$_REQUEST['Hardware']['Cpu']]['Options']['cpu_count'];
+            $costSoftWare += $Calculate[4][$_REQUEST['Software']['OS']][$currency] * $Calculate[1][$_REQUEST['Hardware']['Cpu']]['Options']['cpu_count'];
         }
         else
         {
-            $costSoftWare += $Calculate[4][$_REQUEST['Software']['OS']]['Price'];
+            $costSoftWare += $Calculate[4][$_REQUEST['Software']['OS']][$currency];
         }
-        $costSoftWare += $Calculate[10][$_REQUEST['Software']['Bit']]['Price'];
+        $costSoftWare += $Calculate[10][$_REQUEST['Software']['Bit']][$currency];
         // Windows
         if ( isset($_REQUEST['Software']['RdpLicCount']) && $_REQUEST['Software']['RdpLicCount'] > 0 )
         {
-            $costSoftWare += $_REQUEST['Software']['RdpLicCount'] * $Calculate[11][138]['Price'];
+            $costSoftWare += $_REQUEST['Software']['RdpLicCount'] * $Calculate[11][138][$currency];
         }
         // Sql
         if ( isset($_REQUEST['Software']['Sql']) && $_REQUEST['Software']['Sql'] > 0 )
         {
-            $costSoftWare += $Calculate[12][$_REQUEST['Software']['Sql']]['Price'];
+            $costSoftWare += $Calculate[12][$_REQUEST['Software']['Sql']][$currency];
         }
         // MS Exchange Cals
         if ( isset($_REQUEST['Software']['Exchange']) && $_REQUEST['Software']['Exchange'] > 0 )
         {
-            $costSoftWare += $_REQUEST['Software']['ExchangeCount'] * $Calculate[20][$_REQUEST['Software']['Exchange']]['Price'];
+            $costSoftWare += $_REQUEST['Software']['ExchangeCount'] * $Calculate[20][$_REQUEST['Software']['Exchange']][$currency];
         }
         // Unix
         if ( isset($_REQUEST['Software']['CP']) && $_REQUEST['Software']['CP'] > 0 )
         {
-            $costSoftWare += $Calculate[5][$_REQUEST['Software']['CP']]['Price'];
+            $costSoftWare += $Calculate[5][$_REQUEST['Software']['CP']][$currency];
         }
 
         // Network
         $costNetwork = 0;
         if ( $_REQUEST['Network']['Traffic'] > 0 )
         {
-            $costNetwork += $Calculate[14][$_REQUEST['Network']['Traffic']]['Price'];
+            $costNetwork += $Calculate[14][$_REQUEST['Network']['Traffic']][$currency];
         }
         if ( $_REQUEST['Network']['Bandwidth'] > 0 )
         {
-            $costNetwork += $Calculate[18][$_REQUEST['Network']['Bandwidth']]['Price'];
+            $costNetwork += $Calculate[18][$_REQUEST['Network']['Bandwidth']][$currency];
         }
         if ( isset($_REQUEST['Network']['DDOSProtection']) && $_REQUEST['Network']['DDOSProtection'] > 0 )
         {
-            $costNetwork += $Calculate[22][$_REQUEST['Network']['DDOSProtection']]['Price'];
+            $costNetwork += $Calculate[22][$_REQUEST['Network']['DDOSProtection']][$currency];
         }
         if ( $_REQUEST['Network']['IP'] > 0 )
         {
-            $costNetwork += $Calculate[7][$_REQUEST['Network']['IP']]['Price'];
+            $costNetwork += $Calculate[7][$_REQUEST['Network']['IP']][$currency];
         }
         if ( isset($_REQUEST['Network']['Vlan']) && $_REQUEST['Network']['Vlan'] > 0 )
         {
-            $costNetwork += $Calculate[15][$_REQUEST['Network']['Vlan']]['Price'];
+            $costNetwork += $Calculate[15][$_REQUEST['Network']['Vlan']][$currency];
         }
         if ( isset($_REQUEST['Network']['FtpBackup']) && $_REQUEST['Network']['FtpBackup'] > 0 )
         {
-            $costNetwork += $Calculate[19][$_REQUEST['Network']['FtpBackup']]['Price'];
+            $costNetwork += $Calculate[19][$_REQUEST['Network']['FtpBackup']][$currency];
         }
 
         // SLA
         $costSLA = 0;
-        $costSLA += $Calculate[16][$_REQUEST['SLA']['ServiceLevel']]['Price'];
-        $costSLA += $Calculate[17][$_REQUEST['SLA']['Management']]['Price'];
-        $costSLA += $Calculate[21][$_REQUEST['SLA']['DCGrade']]['Price'] * $Calculate[6][$_REQUEST['Hardware']['Platform']]['Options']['unit'];
+        $costSLA += $Calculate[16][$_REQUEST['SLA']['ServiceLevel']][$currency];
+        $costSLA += $Calculate[17][$_REQUEST['SLA']['Management']][$currency];
+        $costSLA += $Calculate[21][$_REQUEST['SLA']['DCGrade']][$currency] * $Calculate[6][$_REQUEST['Hardware']['Platform']]['Options']['unit'];
 
         // РАСЧЕТ
         $percentCycle = [
@@ -139,59 +211,19 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
             'semiannually' => 6,
             'annually' => 12,
         ];
-        $cycleNumber = [
-            'monthly' => 1,
-            'quarterly' => 3,
-            'semiannually' => 6,
-            'annually' => 12,
-        ];
         // Инофрмация по месяцу для клиента с учетом выбранного периода
         $sum = $costHardware + $costNetwork + $costSLA;
         $discountMonthly = ($sum / 100) * $percentCycle[$_REQUEST['SLA']['CycleDiscount']];
         if ( 0 < $discountMonthly )
-            $discount = $discountMonthly * $percentCycle[$_REQUEST['SLA']['CycleDiscount']];
+            $order->Discount = $discountMonthly * $percentCycle[$_REQUEST['SLA']['CycleDiscount']];
         else
-            $discount = $discountMonthly;
-        if ( $_REQUEST['Calculation'] )
-        {
-            Zero_App::ResponseJson200([
-                "Summa" => $sum - $discountMonthly + $costSoftWare,
-                "Discount" => $discount,
-            ]);
-            return true;
-        }
-        // Полная раскладка по месяцам и формирование заказа
-        $sumMonthly = $sum + $costSoftWare;
-        $sumQuarterly = ($sum - ($sum * 0.03) + $costSoftWare) * 3;
-        $sumSemiannually = ($sum - ($sum * 0.06) + $costSoftWare) * 6;
-        $sumAnnually = ($sum - ($sum * 0.12) + $costSoftWare) * 12;
-        $requestData = [
-            'Monthly' => $sumMonthly,
-            'Quarterly' => $sumQuarterly,
-            'Semiannually' => $sumSemiannually,
-            'Annually' => $sumAnnually,
-            'InventoryID' => $_REQUEST['CompId'],
-            'Groups' => $_REQUEST['Groups'],
-            'CurrencyId' => 2,
-        ];
-        $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/dedicated/orders', $requestData);
-        $label = $_REQUEST['Hardware']['Label'] . '/' . $_REQUEST['Software']['Label'] . '/' . $_REQUEST['Network']['Label'] . '/' . $_REQUEST['SLA']['Label'];
-        $label = preg_replace("~\([0-9]+\)~si", "", $label);
-        if ( $result['ErrorStatus'] == false )
-        {
-            Zero_App::ResponseJson200([
-                "Summa" => $sum,
-                "Discount" => $discount,
-                "OptionID" => $result['Content']['OptionID'],
-                "Configuration" => $label,
-                "currencyId" => $config['currencyId'],
-            ]);
-        }
-        else
-        {
-            Zero_App::ResponseJson500($result['Code'], [$result['Message']]);
-        }
-        return true;
+            $order->Discount = $discountMonthly;
+        $order->Price = $sum - $discountMonthly + $costSoftWare;
+        $order->PriceMonthly = $sum + $costSoftWare;
+        $order->PriceQuarterly = ($sum - ($sum * 0.03) + $costSoftWare) * 3;
+        $order->PriceSemiannually = ($sum - ($sum * 0.06) + $costSoftWare) * 6;
+        $order->PriceAnnually = ($sum - ($sum * 0.12) + $costSoftWare) * 12;
+        return $order;
     }
 
     /**
@@ -209,4 +241,49 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         }
         return $Controller;
     }
+}
+
+class Shop_Dedicated_Api_OrderType
+{
+    /**
+     * Цена ежемесячного платежа
+     *
+     * @var float
+     */
+    public $Price;
+
+    /**
+     * Скидка для всего выбранного платежного периода
+     *
+     * @var float
+     */
+    public $Discount;
+
+    /**
+     * Цена за месяц
+     *
+     * @var float
+     */
+    public $PriceMonthly;
+
+    /**
+     * Цена за квартал
+     *
+     * @var float
+     */
+    public $PriceQuarterly;
+
+    /**
+     * Цена за полгода
+     *
+     * @var float
+     */
+    public $PriceSemiannually;
+
+    /**
+     * Цена за год
+     *
+     * @var float
+     */
+    public $PriceAnnually;
 }

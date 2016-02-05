@@ -18,21 +18,20 @@ class Shop_Dedicated_Console_ConfigList extends Zero_Controller
      */
     public function Action_Default()
     {
-        $config = Zero_Config::Get_Config('shop', 'config');
         // OS
-        $url = "https://ug.hostkey.ru/api/v1.0/inv/component/list?typ=4&currency={$config['currency']}";
+        $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/list?typ=4";
         $data = Zero_App::RequestJson("GET", $url);
         if ( false == $data['ErrorStatus'] )
         {
-            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/' . md5($config['currency']) . '4.data';
+            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/4.data';
             Zero_Helper_File::File_Save($path, serialize($data['Content']));
         }
         // Port
-        $url = "https://ug.hostkey.ru/api/v1.0/inv/component/list?typ=13&currency={$config['currency']}";
+        $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/list?typ=13";
         $data = Zero_App::RequestJson("GET", $url);
         if ( false == $data['ErrorStatus'] )
         {
-            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/' . md5($config['currency']) . '13.data';
+            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/13.data';
             Zero_Helper_File::File_Save($path, serialize($data['Content']));
         }
         return true;

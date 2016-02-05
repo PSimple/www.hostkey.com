@@ -1,22 +1,20 @@
 <?php
 
 /**
- * View a list of objects by page.
+ * Список решений
  *
- * To work with the item.
- *
- * @package Shop.ConfigSolution
+ * @package Shop.Solution
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015.12.16
+ * @date 2015-02-04
  */
-class Shop_ConfigSolution_Grid extends Zero_Crud_Grid
+class Shop_Solution_Grid extends Zero_Crud_Grid
 {
     /**
      * The table stores the objects handled by this controller.
      *
      * @var string
      */
-    protected $ModelName = 'Shop_ConfigSolution';
+    protected $ModelName = 'Shop_Solution';
 
     /**
      * Template view

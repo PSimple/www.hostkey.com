@@ -1,11 +1,11 @@
 <?php
 
 /**
- * ConfigSolution.
+ * Решения, группы.
  *
- * @package Shop.ConfigSolution
+ * @package Shop
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015.12.16
+ * @date 2015-02-04
  *
  * @property string $Typ
  * @property string $Image
@@ -17,14 +17,14 @@
  * @property string $Groups
  * @property string $Locatio
  */
-class Shop_ConfigSolution extends Zero_Model
+class Shop_Solution extends Zero_Model
 {
     /**
      * The table stores the objects this model
      *
      * @var string
      */
-    protected $Source = 'ConfigSolution';
+    protected $Source = 'Solution';
 
     /**
      * Configuration links many to many
@@ -279,7 +279,7 @@ class Shop_ConfigSolution extends Zero_Model
      *
      * @param integer $id идентификатор объекта
      * @param bool $flagLoad флаг полной загрузки объекта
-     * @return ConfigSolution
+     * @return Shop_Solution
      */
     public static function Make($id = 0, $flagLoad = false)
     {
@@ -293,7 +293,7 @@ class Shop_ConfigSolution extends Zero_Model
      *
      * @param integer $id идентификатор объекта
      * @param bool $flagLoad флаг полной загрузки объекта
-     * @return ConfigSolution
+     * @return Shop_Solution
      */
     public static function Instance($id = 0, $flagLoad = false)
     {
@@ -315,7 +315,7 @@ class Shop_ConfigSolution extends Zero_Model
      *
      * @param integer $id идентификатор объекта
      * @param bool $flagLoad флаг полной загрузки объекта
-     * @return Shop_ConfigSolution
+     * @return Shop_Solution
      */
     public static function Factor($id = 0, $flagLoad = false)
     {

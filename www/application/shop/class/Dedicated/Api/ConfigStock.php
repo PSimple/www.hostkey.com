@@ -21,18 +21,31 @@ class Shop_Dedicated_Api_ConfigStock extends Zero_Controller
      */
     public function Action_GET()
     {
+        // Проверки
         if ( !isset($_REQUEST['groups']) || !$_REQUEST['groups'] )
-            Zero_App::ResponseJson200(null, -1, ["параметр групп не задан"]);
+            Zero_App::ResponseJson500(-1, ["параметр групп не задан"]);
         else if ( !isset($_REQUEST['currency']) || !$_REQUEST['currency'] )
-            Zero_App::ResponseJson200(null, -1, ["параметр валюта не задан"]);
+            Zero_App::ResponseJson500(-1, ["параметр валюта не задан"]);
 
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . md5($_REQUEST['currency'] . $_REQUEST['groups']) . '.data';
+        // Получаем конфигурацию
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . str_replace(',', '_', $_REQUEST['groups']) . '.data';
         if ( !file_exists($path) )
-            Zero_App::ResponseJson200(null, -1, ["файл конфигурации не найден"]);
-
+            Zero_App::ResponseJson500(-1, ["файл конфигурации не найден"]);
         $response = unserialize(file_get_contents($path));
 
-        Zero_App::ResponseJson200($response);
+        // Инициализация выбранной цены
+        $responseSort = [];
+        foreach ($response['Data'] as $compID => $row)
+        {
+            if ( 'eur' == $_REQUEST['currency'] )
+                $row['Price']['Price'] = $row['Price']['PriceEUR'];
+            else
+                $row['Price']['Price'] = $row['Price']['PriceRUR'];
+            $responseSort['Data'][$compID] = $row;
+        }
+        $responseSort['ComponentGroup'] = $response['ComponentGroup'];
+
+        Zero_App::ResponseJson200($responseSort);
         return true;
     }
 

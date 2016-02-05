@@ -7,49 +7,45 @@
  *
  * @package Shop.Dedicated.Console
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015.09.24
+ * @date 2016-02-04
  */
 class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
 {
     /**
-     * Контроллер по умолчанию
+     * Кеширование конфигураций компонентов по группам для формирования серверов dedicated
      *
      * @return boolean flag статус выполнения
      */
     public function Action_Default()
     {
-        $config = Zero_Config::Get_Config('shop', 'config');
-        $sectionRows = Shop_ConfigSolution::Get_ConfigGroupsAll();
-        foreach($sectionRows as $gr)
+        $sectionRows = Shop_Solution::Get_ConfigGroupsAll();
+        foreach ($sectionRows as $gr)
         {
-            $url = "https://ug.hostkey.ru/api/v1.0/inv/component/salenew?currency={$config['currency']}&groups={$gr}";
+            $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/salenew?groups={$gr}";
             $data = Zero_App::RequestJson("GET", $url);
             if ( false == $data['ErrorStatus'] )
             {
-                $data['Content']['Currency'] = $config['currency'];
                 $data['Content']['ComponentGroup'] = $gr;
-                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($config['currency'] . $gr) . '.data';
+                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . str_replace(',', '_', $gr) . '.data';
                 Zero_Helper_File::File_Save($path, serialize($data['Content']));
             }
         }
         // NL
-        $url = "https://ug.hostkey.ru/api/v1.0/inv/component/salenew?currency={$config['currency']}&groups=NL";
+        $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/salenew?groups=NL";
         $data = Zero_App::RequestJson("GET", $url);
         if ( false == $data['ErrorStatus'] )
         {
-            $data['Content']['Currency'] = $config['currency'];
             $data['Content']['ComponentGroup'] = 'NL';
-            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($config['currency'] . 'NL') . '.data';
+            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/NL.data';
             Zero_Helper_File::File_Save($path, serialize($data['Content']));
         }
         // RU
-        $url = "https://ug.hostkey.ru/api/v1.0/inv/component/salenew?currency={$config['currency']}&groups=RU";
+        $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/salenew?groups=RU";
         $data = Zero_App::RequestJson("GET", $url);
         if ( false == $data['ErrorStatus'] )
         {
-            $data['Content']['Currency'] = $config['currency'];
             $data['Content']['ComponentGroup'] = 'RU';
-            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . md5($config['currency'] . 'RU') . '.data';
+            $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/RU.data';
             Zero_Helper_File::File_Save($path, serialize($data['Content']));
         }
         //
