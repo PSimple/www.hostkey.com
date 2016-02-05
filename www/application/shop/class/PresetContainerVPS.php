@@ -107,7 +107,7 @@ class Shop_PresetContainerVPS extends Zero_Model
             ]
         ],
         [
-            'name' => 'Container VPS<br/>NL 1/256/10',
+            'name' => 'Container VPS<br/>NL 1/1/10',
             'id' => 0,
             'hidden' => 0,
             'value' => '1/1/10',
