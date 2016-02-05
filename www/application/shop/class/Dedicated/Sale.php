@@ -3,9 +3,9 @@
 /**
  * Продажи стока
  *
- * @package Shop.Dedicated.Controller
+ * @package Shop.Dedicated
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
- * @date 2015.11.20
+ * @date 2016-02-04
  */
 class Shop_Dedicated_Sale extends Zero_Controller
 {
@@ -19,13 +19,13 @@ class Shop_Dedicated_Sale extends Zero_Controller
         $this->Chunk_Init();
 
         $config = Zero_Config::Get_Config('shop', 'config');
-        $this->View->Assign("currency", $config['currency']);
-        $this->View->Assign("currencyId", $config['currencyId']);
+        $this->View->Assign("currency", 'eur');
+        $this->View->Assign("currencyId", 2);
 
         $min = 0;
         $max = 0;
         $configuration = [];
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . md5($config['currency']) . '.data';
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/All.data';
         if ( file_exists($path) )
         {
             $configuration = unserialize(file_get_contents($path));
@@ -70,7 +70,7 @@ class Shop_Dedicated_Sale extends Zero_Controller
 //        pre($configuration);
 
         // OS
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/' . md5($config['currency']) . '4.data';
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/4.data';
         $listOs = [];
         if ( file_exists($path) )
         {
@@ -79,7 +79,7 @@ class Shop_Dedicated_Sale extends Zero_Controller
         $this->View->Assign('listOs', $listOs);
 
         // Port
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/' . md5($config['currency']) . '13.data';
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/13.data';
         $listPort = [];
         if ( file_exists($path) )
         {

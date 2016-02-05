@@ -133,10 +133,10 @@
                                 <span class="dedicated-extra-price__text">
                                   <select id='port{$key}' name="listPort" style="width: 80px;" onchange="changeSum({$key});">
                                       {foreach ($listPort as $r)}
-                                      {if ( 0 < $r['Price'] )}
-                                      <option value="{$r['ID']};{$r['Price']}">{$r['Name']} ({$r['Price']})</option>
+                                      {if ( 0 < $r['PriceEUR'] )}
+                                      <option value="{$r['ID']};{$r['PriceEUR']}">{$r['Name']} ({$r['PriceEUR']})</option>
                                       {else}
-                                      <option value="{$r['ID']};{$r['Price']}">{$r['Name']}</option>
+                                      <option value="{$r['ID']};{$r['PriceEUR']}">{$r['Name']}</option>
                                       {/if}
                                       {/foreach}
                                   </select>
@@ -145,18 +145,18 @@
                             <td class="dedicated-extra-price__table-cell">
                                 <select id='os{$key}' name="listOS" style="width: 230px;" onchange="changeSum({$key});">
                                     {foreach ($listOs as $r)}
-                                    {if ( 0 < $r['Price'] )}
-                                    <option value="{$r['ID']};{$r['Price']}">{$r['Name']} ({$r['Price']})</option>
+                                    {if ( 0 < $r['PriceEUR'] )}
+                                    <option value="{$r['ID']};{$r['PriceEUR']}">{$r['Name']} ({$r['PriceEUR']})</option>
                                     {else}
-                                    <option value="{$r['ID']};{$r['Price']}">{$r['Name']}</option>
+                                    <option value="{$r['ID']};{$r['PriceEUR']}">{$r['Name']}</option>
                                     {/if}
                                     {/foreach}
                                 </select>
                             </td>
                             <td class="dedicated-extra-price__table-cell">
-                                {if ( $row['Price']['Price'] )}
-                                <input type="hidden" id="price{$key}" value="{$row['Price']['Price']}">
-                                <a class="b-submit dedicated-item-content__submit" onclick="return saleBuy({$key});" href="#" id="sum{$key}">€{$row['Price']['Price']}.00</a>
+                                {if ( $row['Price']['PriceEUR'] )}
+                                <input type="hidden" id="price{$key}" value="{$row['Price']['PriceEUR']}">
+                                <a class="b-submit dedicated-item-content__submit" onclick="return saleBuy({$key});" href="#" id="sum{$key}">€{$row['Price']['PriceEUR']}.00</a>
                                 {/if}
                             </td>
                         </tr>

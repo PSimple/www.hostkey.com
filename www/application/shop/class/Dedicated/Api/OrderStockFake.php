@@ -21,7 +21,6 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
      */
     public function Action_POST()
     {
-        $config = Zero_Config::Get_Config('shop', 'config');
         if ( empty($_REQUEST['os']) ||  empty($_REQUEST['port']) || empty($_REQUEST['compId']) )
             Zero_App::ResponseJson500(-1, ["параметры для заказа стокового сервера не заданы"]);
         $_REQUEST['SLA']['CycleDiscount'] = 'monthly';
@@ -29,7 +28,7 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
         $_REQUEST['Groups'] = 'All';
 
         // Сервер
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . md5($config['currency']) . '.data';
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/All.data';
         if ( !file_exists($path) )
             Zero_App::ResponseJson500(-1, ["файл конфигурации стоковых серверов не найден"]);
         $configuration = unserialize(file_get_contents($path));
@@ -39,7 +38,7 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
         $server = $configuration[$_REQUEST['compId']];
 
         // OS
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/' . md5($config['currency']) . '4.data';
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/4.data';
         if ( !file_exists($path) )
             Zero_App::ResponseJson500(-1, ["файл конфигурации os не найден"]);
         $configuration = unserialize(file_get_contents($path));
@@ -49,7 +48,7 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
 
 
         // PORT
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/' . md5($config['currency']) . '13.data';
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/13.data';
         if ( !file_exists($path) )
             Zero_App::ResponseJson500(-1, ["файл конфигурации портов не найдена"]);
         $configuration = unserialize(file_get_contents($path));
@@ -60,7 +59,7 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
 //        $sum = $server['Price']['Price'] + $os['Price'] + $port['Price'];
 
         // Hardvare
-        $costHardware = $server['Price']['Price'];
+        $costHardware = $server['Price']['PriceEUR'];
 //        $costHardware += $Calculate[1][$_REQUEST['Hardware']['Cpu']]['Price'];
 //        $costHardware += $Calculate[3][$_REQUEST['Hardware']['Ram']]['Price'];
 //        $costHardware += $Calculate[6][$_REQUEST['Hardware']['Platform']]['Price'];
@@ -73,7 +72,7 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
         $_REQUEST['Hardware']['Label'] = $server['Cpu']['Name'];
 
         // SoftWare
-        $costSoftWare = $os['Price'];
+        $costSoftWare = $os['PriceEUR'];
 //        if ( false !== strpos($Calculate[4][$_REQUEST['Software']['OS']]['Name'], 'Windows') )
 //        {
 //            $costSoftWare += $Calculate[4][$_REQUEST['Software']['OS']]['Price'] * $Calculate[1][$_REQUEST['Hardware']['Cpu']]['Options']['cpu_count'];
@@ -106,7 +105,7 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
         $_REQUEST['Software']['Label'] = $os['Name'];
 
         // Network
-        $costNetwork = $port['Price'];
+        $costNetwork = $port['PriceEUR'];
 //        if ( $_REQUEST['Network']['Traffic'] > 0 )
 //        {
 //            $costNetwork += $Calculate[14][$_REQUEST['Network']['Traffic']]['Price'];
@@ -141,18 +140,6 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
         $_REQUEST['SLA']['Label'] = 'None';
 
         // РАСЧЕТ
-        $percentCycle = [
-            'monthly' => 0,
-            'quarterly' => 3,
-            'semiannually' => 6,
-            'annually' => 12,
-        ];
-        $cycleNumber = [
-            'monthly' => 1,
-            'quarterly' => 3,
-            'semiannually' => 6,
-            'annually' => 12,
-        ];
         // Инофрмация по месяцу для клиента с учетом выбранного периода
         $sum = $costHardware + $costNetwork + $costSLA;
         // Полная раскладка по месяцам и формирование заказа
@@ -165,12 +152,11 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
             'Quarterly' => $sumQuarterly,
             'Semiannually' => $sumSemiannually,
             'Annually' => $sumAnnually,
-            'billingcycle' => $cycleNumber[$_REQUEST['SLA']['CycleDiscount']],
             'InventoryID' => $_REQUEST['compId'],
             'Groups' => $_REQUEST['Groups'],
-            'CurrencyId' => $_REQUEST['Currency'] == 'eur' ? 2 : 2,
+            'CurrencyId' => 2,
         ];
-        $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/orders/dedicated', $requestData);
+        $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/dedicated/orders', $requestData);
         $label = $_REQUEST['Hardware']['Label'] . '/' . $_REQUEST['Software']['Label'] . '/' . $_REQUEST['Network']['Label'] . '/' . $_REQUEST['SLA']['Label'];
         Zero_Logs::File("orderstock.log", $requestData, $result);
         if ( $result['ErrorStatus'] == false )
@@ -178,7 +164,7 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
             Zero_App::ResponseJson200([
                 "OptionID" => $result['Content']['OptionID'],
                 "Configuration" => $label,
-                "currencyId" => $config['currencyId'],
+                "currencyId" => 2,
             ]);
         }
         else
