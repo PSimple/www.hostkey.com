@@ -182,18 +182,19 @@ angular.module("dedicated.service.selected").controller "SelectedCtrl", (notific
         , 1000
 
     $scope.buy = ($event, order) ->
+        $event.stopPropagation()
+
         unless order.hardware.hdd.ID.length
             notifications.error "Please choose hard disk!"
-            $event.stopPropagation()
             return
 
         $order.post(order)
         .then (orderLink) ->
             # или редирект на форму оплаты
-            #window.location = orderLink
+            window.location = orderLink
 
             # или открыть форму оплаты в ифрейме не уходя с сайта
-            document.getElementById('configure_cloud_VDS').src = orderLink
+            #document.getElementById('configure_cloud_VDS').src = orderLink
 
         .catch (error) ->
             if error.Message

@@ -134,6 +134,12 @@ tbody.collapse.in {
 ._angular .table-select__cell {
   padding-right: 5px;
 }
+.dedicated-extra-price__table-row .b-container {
+  margin: 0 -35px 0 -85px !important;
+}
+.dedicated-extra-price__table-row .b-dedicated__summary.is-fixed {
+  margin-left: 40px !important;
+}
 .select2-container {
   box-sizing: border-box;
   display: inline-block;
