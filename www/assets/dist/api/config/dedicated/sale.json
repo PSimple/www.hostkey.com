@@ -1,0 +1,1255 @@
+{
+  "Code": 0,
+  "Message": "",
+  "ErrorStatus": false,
+  "Content": {
+    "Data": {
+      "9": [
+        {
+          "ComponentType_ID": "9",
+          "ID": "175",
+          "Name": "Intel X520-DA2 2x10GbE",
+          "PriceRUR": "3894.00",
+          "PriceEUR": "45.00",
+          "Options": {"short_name": "2x10GbE"},
+          "Sort": null,
+          "Price": "45.00"
+        },
+        {
+          "ComponentType_ID": "9",
+          "ID": "174",
+          "Name": "Intel I340-T4 4x1GbE",
+          "PriceRUR": "1990.00",
+          "PriceEUR": "23.00",
+          "Options": {"short_name": "4xGbE"},
+          "Sort": null,
+          "Price": "23.00"
+        }
+      ],
+      "21": [
+        {
+          "ComponentType_ID": "21",
+          "ID": "332",
+          "Name": "DC Tier3",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "DC Tier3"},
+          "Sort": null,
+          "Price": "0.00"
+        }
+      ],
+      "5": [
+        {
+          "ComponentType_ID": "5",
+          "ID": "113",
+          "Name": "cPanel dedicated",
+          "PriceRUR": "2855.00",
+          "PriceEUR": "33.00",
+          "Options": {"short_name": "cPanel dedicated"},
+          "Sort": "1",
+          "Price": "33.00"
+        }
+      ],
+      "15": [
+        {
+          "ComponentType_ID": "15",
+          "ID": "140",
+          "Name": "VLAN port 1Gbps",
+          "PriceRUR": "866.00",
+          "PriceEUR": "10.00",
+          "Options": {"short_name": "VLAN port 1Gbps"},
+          "Sort": "1",
+          "Price": "10.00"
+        },
+        {
+          "ComponentType_ID": "15",
+          "ID": "139",
+          "Name": "VLAN port 100Mbps",
+          "PriceRUR": "174.00",
+          "PriceEUR": "2.00",
+          "Options": {"short_name": "VLAN port 100Mbps"},
+          "Sort": "1",
+          "Price": "2.00"
+        }
+      ],
+      "6": [
+        {
+          "ComponentType_ID": "6",
+          "ID": "231",
+          "Name": "2 disks",
+          "PriceRUR": "2596.00",
+          "PriceEUR": "30.00",
+          "Options": {
+            "size": "2",
+            "short_name": "2xHDD server NL MC",
+            "unit": "1"
+          },
+          "Sort": "1",
+          "Price": "30.00"
+        },
+        {
+          "ComponentType_ID": "6",
+          "ID": "321",
+          "Name": "4 disks",
+          "PriceRUR": "5191.00",
+          "PriceEUR": "60.00",
+          "Options": {
+            "size": "4",
+            "short_name": "4xHDD server NL SM",
+            "unit": "1"
+          },
+          "Sort": "30",
+          "Price": "60.00"
+        }
+      ],
+      "11": [
+        {
+          "ComponentType_ID": "11",
+          "ID": "138",
+          "Name": "Extra Windows Terminal licenses",
+          "PriceRUR": "560.00",
+          "PriceEUR": "7.00",
+          "Options": {"short_name": "Extra Windows Terminal licenses"},
+          "Sort": "1",
+          "Price": "7.00"
+        }
+      ],
+      "3": [
+        {
+          "ComponentType_ID": "3",
+          "ID": "233",
+          "Name": "8Gb",
+          "PriceRUR": "347.00",
+          "PriceEUR": "4.00",
+          "Options": {
+            "size": "8",
+            "short_name": "8Gb"
+          },
+          "Sort": "2",
+          "Price": "4.00"
+        },
+        {
+          "ComponentType_ID": "3",
+          "ID": "234",
+          "Name": "16Gb",
+          "PriceRUR": "693.00",
+          "PriceEUR": "8.00",
+          "Options": {
+            "size": "16",
+            "short_name": "16Gb"
+          },
+          "Sort": "3",
+          "Price": "8.00"
+        },
+        {
+          "ComponentType_ID": "3",
+          "ID": "235",
+          "Name": "32Gb",
+          "PriceRUR": "1385.00",
+          "PriceEUR": "16.00",
+          "Options": {
+            "size": "32",
+            "short_name": "32Gb"
+          },
+          "Sort": "4",
+          "Price": "16.00"
+        },
+        {
+          "ComponentType_ID": "3",
+          "ID": "237",
+          "Name": "64Gb",
+          "PriceRUR": "2077.00",
+          "PriceEUR": "24.00",
+          "Options": {
+            "size": "64",
+            "short_name": "64Gb"
+          },
+          "Sort": "5",
+          "Price": "24.00"
+        },
+        {
+          "ComponentType_ID": "3",
+          "ID": "239",
+          "Name": "96Gb",
+          "PriceRUR": "2423.00",
+          "PriceEUR": "28.00",
+          "Options": {
+            "size": "96",
+            "short_name": "96Gb"
+          },
+          "Sort": "6",
+          "Price": "28.00"
+        },
+        {
+          "ComponentType_ID": "3",
+          "ID": "238",
+          "Name": "128Gb",
+          "PriceRUR": "4153.00",
+          "PriceEUR": "48.00",
+          "Options": {
+            "size": "128",
+            "short_name": "128Gb"
+          },
+          "Sort": "7",
+          "Price": "48.00"
+        },
+        {
+          "ComponentType_ID": "3",
+          "ID": "240",
+          "Name": "192Gb",
+          "PriceRUR": "6229.00",
+          "PriceEUR": "72.00",
+          "Options": {
+            "size": "192",
+            "short_name": "192Gb"
+          },
+          "Sort": "8",
+          "Price": "72.00"
+        },
+        {
+          "ComponentType_ID": "3",
+          "ID": "241",
+          "Name": "256Gb",
+          "PriceRUR": "8306.00",
+          "PriceEUR": "96.00",
+          "Options": {
+            "size": "256",
+            "short_name": "256Gb"
+          },
+          "Sort": "9",
+          "Price": "96.00"
+        }
+      ],
+      "1": [
+        {
+          "ComponentType_ID": "1",
+          "ID": "230",
+          "Name": "Xeon E3-1230v3 4x3.3GHz",
+          "PriceRUR": "1125.00",
+          "PriceEUR": "13.00",
+          "Options": {
+            "cpu_count": "1",
+            "max_mem": "32",
+            "short_name": "E3-1230v3"
+          },
+          "Sort": "4",
+          "Price": "13.00"
+        },
+        {
+          "ComponentType_ID": "1",
+          "ID": "278",
+          "Name": "Xeon E3-1271v3 4x3.6GHz",
+          "PriceRUR": "1558.00",
+          "PriceEUR": "18.00",
+          "Options": {
+            "cpu_count": "1",
+            "short_name": "E3-1271v3",
+            "max_mem": "32"
+          },
+          "Sort": "44",
+          "Price": "18.00"
+        },
+        {
+          "ComponentType_ID": "1",
+          "ID": "263",
+          "Name": "Xeon E5-1650 6x3.2GHz",
+          "PriceRUR": "2163.00",
+          "PriceEUR": "25.00",
+          "Options": {
+            "cpu_count": "1",
+            "max_mem": "128",
+            "short_name": "E5-1650"
+          },
+          "Sort": "50",
+          "Price": "25.00"
+        },
+        {
+          "ComponentType_ID": "1",
+          "ID": "266",
+          "Name": "Xeon E5-1650v3 6x3.5GHz",
+          "PriceRUR": "2596.00",
+          "PriceEUR": "30.00",
+          "Options": {
+            "cpu_count": "1",
+            "max_mem": "128",
+            "short_name": "E5-1650v3"
+          },
+          "Sort": "51",
+          "Price": "30.00"
+        },
+        {
+          "ComponentType_ID": "1",
+          "ID": "310",
+          "Name": "2xXeon E5645 12x2.4GHz",
+          "PriceRUR": "1731.00",
+          "PriceEUR": "20.00",
+          "Options": {
+            "max_mem": "128",
+            "cpu_count": "2",
+            "short_name": "2xE5645"
+          },
+          "Sort": "100",
+          "Price": "20.00"
+        },
+        {
+          "ComponentType_ID": "1",
+          "ID": "331",
+          "Name": "2xXeon E5-2630 12x2.3GHz",
+          "PriceRUR": "3461.00",
+          "PriceEUR": "40.00",
+          "Options": {
+            "cpu_count": "2",
+            "max_mem": "256",
+            "short_name": "2xE5-2630"
+          },
+          "Sort": "110",
+          "Price": "40.00"
+        },
+        {
+          "ComponentType_ID": "1",
+          "ID": "55",
+          "Name": "2xXeon E5-2620v3 12x2.4GHz",
+          "PriceRUR": "3461.00",
+          "PriceEUR": "40.00",
+          "Options": {
+            "cpu_count": "2",
+            "max_mem": "256",
+            "short_name": "2xE5-2620v3"
+          },
+          "Sort": "120",
+          "Price": "40.00"
+        },
+        {
+          "ComponentType_ID": "1",
+          "ID": "320",
+          "Name": "2xXeon E5-2650v3 20x2.3GHz",
+          "PriceRUR": "9776.00",
+          "PriceEUR": "113.00",
+          "Options": {
+            "cpu_count": "2",
+            "max_mem": "256",
+            "short_name": "2xE5-2650v3"
+          },
+          "Sort": "140",
+          "Price": "113.00"
+        }
+      ],
+      "4": [
+        {
+          "ComponentType_ID": "4",
+          "ID": "226",
+          "Name": "Centos 7",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Centos 7"},
+          "Sort": "4",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "225",
+          "Name": "Centos 6",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Centos 6"},
+          "Sort": "6",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "224",
+          "Name": "Centos 5",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Centos 5"},
+          "Sort": "8",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "247",
+          "Name": "Debian 7",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Debian 7"},
+          "Sort": "10",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "246",
+          "Name": "Debian 6",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Debian 6"},
+          "Sort": "11",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "227",
+          "Name": "Debian 5",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Debian 5"},
+          "Sort": "12",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "97",
+          "Name": "Ubuntu Server",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Ubuntu Server"},
+          "Sort": "20",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "98",
+          "Name": "Ubuntu Desktop",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Ubuntu Desktop"},
+          "Sort": "21",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "104",
+          "Name": "Windows Server 08 Standard",
+          "PriceRUR": "2400.00",
+          "PriceEUR": "30.00",
+          "Options": {"short_name": "W8SE"},
+          "Sort": "31",
+          "Price": "30.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "105",
+          "Name": "Windows Server 08 Datacenter",
+          "PriceRUR": "13600.00",
+          "PriceEUR": "170.00",
+          "Options": {"short_name": "W08DC"},
+          "Sort": "32",
+          "Price": "170.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "106",
+          "Name": "Windows Server 12 Essentials",
+          "PriceRUR": "2000.00",
+          "PriceEUR": "25.00",
+          "Options": {"short_name": "W12ES"},
+          "Sort": "40",
+          "Price": "25.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "107",
+          "Name": "Windows Server 12 Standard",
+          "PriceRUR": "2400.00",
+          "PriceEUR": "30.00",
+          "Options": {"short_name": "W12SE"},
+          "Sort": "41",
+          "Price": "30.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "108",
+          "Name": "Windows Server 12 Datacenter",
+          "PriceRUR": "13600.00",
+          "PriceEUR": "170.00",
+          "Options": {"short_name": "W12DC"},
+          "Sort": "42",
+          "Price": "170.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "109",
+          "Name": "Windows Server 08 Standard (trial)",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "W8SE(trl)"},
+          "Sort": "50",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "110",
+          "Name": "Windows Server 12 Standard (trial)",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "W12SE(trl)"},
+          "Sort": "51",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "111",
+          "Name": "Windows 7 trial",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "W7(trl)"},
+          "Sort": "52",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "112",
+          "Name": "Windows 8 trial",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Win8(trl)"},
+          "Sort": "53",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "102",
+          "Name": "FreeBSD",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "FreeBSD"},
+          "Sort": "150",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "101",
+          "Name": "ESXi 5.5",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "ESXi 5.5"},
+          "Sort": "160",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "100",
+          "Name": "Citrix Xen",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Citrix Xen"},
+          "Sort": "170",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "99",
+          "Name": "Centos KVM",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Centos KVM"},
+          "Sort": "180",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "4",
+          "ID": "248",
+          "Name": "Own OS via IPMI",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Own OS via IPMI"},
+          "Sort": "200",
+          "Price": "0.00"
+        }
+      ],
+      "8": [
+        {
+          "ComponentType_ID": "8",
+          "ID": "132",
+          "Name": "Integrated RST RAID 0/1/10",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {
+            "disc": "0",
+            "short_name": "Integrated",
+            "raid": "0-1-10"
+          },
+          "Sort": "5",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "8",
+          "ID": "128",
+          "Name": "LSI HBA 9300 12G SAS no cache (RAID 0/1/10)",
+          "PriceRUR": "2163.00",
+          "PriceEUR": "25.00",
+          "Options": {
+            "disc": "2",
+            "short_name": "HBA",
+            "raid": "0-1-10"
+          },
+          "Sort": "10",
+          "Price": "25.00"
+        },
+        {
+          "ComponentType_ID": "8",
+          "ID": "129",
+          "Name": "LSI MegaRAID 12G SAS 9341 no cache (RAID 0-5)",
+          "PriceRUR": "1990.00",
+          "PriceEUR": "23.00",
+          "Options": {
+            "disc": "2",
+            "short_name": "MegaRAID 9341",
+            "raid": "0-1-5-10"
+          },
+          "Sort": "20",
+          "Price": "23.00"
+        },
+        {
+          "ComponentType_ID": "8",
+          "ID": "131",
+          "Name": "LSI MegaRAID 12G SAS 9361 1G cache (RAID 0-6)",
+          "PriceRUR": "4932.00",
+          "PriceEUR": "57.00",
+          "Options": {
+            "disc": "2",
+            "short_name": "MegaRAID 9361",
+            "raid": "0-1-5-6-10"
+          },
+          "Sort": "30",
+          "Price": "57.00"
+        }
+      ],
+      "7": [
+        {
+          "ComponentType_ID": "7",
+          "ID": "50",
+          "Name": "1 IPv4",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "1 IPv4"},
+          "Sort": "10",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "7",
+          "ID": "86",
+          "Name": "2 IPv4",
+          "PriceRUR": "87.00",
+          "PriceEUR": "1.00",
+          "Options": {"short_name": "2 IPv4"},
+          "Sort": "20",
+          "Price": "1.00"
+        },
+        {
+          "ComponentType_ID": "7",
+          "ID": "87",
+          "Name": "4 IPv4",
+          "PriceRUR": "260.00",
+          "PriceEUR": "3.00",
+          "Options": {"short_name": "4 IPv4"},
+          "Sort": "30",
+          "Price": "3.00"
+        },
+        {
+          "ComponentType_ID": "7",
+          "ID": "88",
+          "Name": "8 IPv4",
+          "PriceRUR": "606.00",
+          "PriceEUR": "7.00",
+          "Options": {"short_name": "8 IPv4"},
+          "Sort": "40",
+          "Price": "7.00"
+        },
+        {
+          "ComponentType_ID": "7",
+          "ID": "89",
+          "Name": "16 IPv4",
+          "PriceRUR": "1298.00",
+          "PriceEUR": "15.00",
+          "Options": {"short_name": "16 IPv4"},
+          "Sort": "50",
+          "Price": "15.00"
+        },
+        {
+          "ComponentType_ID": "7",
+          "ID": "90",
+          "Name": "32 IPv4",
+          "PriceRUR": "2682.00",
+          "PriceEUR": "31.00",
+          "Options": {"short_name": "32 IPv4"},
+          "Sort": "60",
+          "Price": "31.00"
+        },
+        {
+          "ComponentType_ID": "7",
+          "ID": "91",
+          "Name": "64 IPv4",
+          "PriceRUR": "5537.00",
+          "PriceEUR": "64.00",
+          "Options": {"short_name": "64 IPv4"},
+          "Sort": "70",
+          "Price": "64.00"
+        },
+        {
+          "ComponentType_ID": "7",
+          "ID": "92",
+          "Name": "128 IPv4",
+          "PriceRUR": "11074.00",
+          "PriceEUR": "128.00",
+          "Options": {"short_name": "128 IPv4"},
+          "Sort": "80",
+          "Price": "128.00"
+        },
+        {
+          "ComponentType_ID": "7",
+          "ID": "93",
+          "Name": "256 IPv4",
+          "PriceRUR": "22147.00",
+          "PriceEUR": "256.00",
+          "Options": {"short_name": "256 IPv4"},
+          "Sort": "90",
+          "Price": "256.00"
+        }
+      ],
+      "13": [
+        {
+          "ComponentType_ID": "13",
+          "ID": "267",
+          "Name": "100Mbps",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "100Mbps"},
+          "Sort": "10",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "13",
+          "ID": "251",
+          "Name": "1Gbps",
+          "PriceRUR": "866.00",
+          "PriceEUR": "10.00",
+          "Options": {"short_name": "1Gbps"},
+          "Sort": "20",
+          "Price": "10.00"
+        }
+      ],
+      "19": [
+        {
+          "ComponentType_ID": "19",
+          "ID": "168",
+          "Name": "Backup 100Gb",
+          "PriceRUR": "100.00",
+          "PriceEUR": "1.00",
+          "Options": {"short_name": "Backup 100Gb"},
+          "Sort": "10",
+          "Price": "1.00"
+        },
+        {
+          "ComponentType_ID": "19",
+          "ID": "169",
+          "Name": "Backup 500Gb",
+          "PriceRUR": "500.00",
+          "PriceEUR": "5.00",
+          "Options": {"short_name": "Backup 500Gb"},
+          "Sort": "20",
+          "Price": "5.00"
+        },
+        {
+          "ComponentType_ID": "19",
+          "ID": "170",
+          "Name": "Backup 1Tb",
+          "PriceRUR": "1000.00",
+          "PriceEUR": "10.00",
+          "Options": {"short_name": "Backup 1Tb"},
+          "Sort": "30",
+          "Price": "10.00"
+        }
+      ],
+      "12": [
+        {
+          "ComponentType_ID": "12",
+          "ID": "159",
+          "Name": "MS SQL 2012 Web Edition (2 Core)",
+          "PriceRUR": "1040.00",
+          "PriceEUR": "13.00",
+          "Options": {"short_name": "SQL12WE"},
+          "Sort": "10",
+          "Price": "13.00"
+        },
+        {
+          "ComponentType_ID": "12",
+          "ID": "160",
+          "Name": "MS SQL 2008 Web Edition (2 Core)",
+          "PriceRUR": "1040.00",
+          "PriceEUR": "13.00",
+          "Options": {"short_name": "SQL08WE"},
+          "Sort": "20",
+          "Price": "13.00"
+        },
+        {
+          "ComponentType_ID": "12",
+          "ID": "327",
+          "Name": "MS SQL 2012 Standard Edition (1 SAL)",
+          "PriceRUR": "1760.00",
+          "PriceEUR": "22.00",
+          "Options": {"short_name": "SQL12SEsal"},
+          "Sort": "30",
+          "Price": "22.00"
+        },
+        {
+          "ComponentType_ID": "12",
+          "ID": "328",
+          "Name": "MS SQL 2008 Standard Edition (1 SAL)",
+          "PriceRUR": "1760.00",
+          "PriceEUR": "22.00",
+          "Options": {"short_name": "SQL08SEsal"},
+          "Sort": "40",
+          "Price": "22.00"
+        },
+        {
+          "ComponentType_ID": "12",
+          "ID": "329",
+          "Name": "SQL Server Business Intelligence (1 SAL)",
+          "PriceRUR": "2480.00",
+          "PriceEUR": "31.00",
+          "Options": {"short_name": "SQL12BIsal"},
+          "Sort": "50",
+          "Price": "31.00"
+        },
+        {
+          "ComponentType_ID": "12",
+          "ID": "161",
+          "Name": "MS SQL 2012 Standard Edition (2 Core)",
+          "PriceRUR": "16160.00",
+          "PriceEUR": "202.00",
+          "Options": {"short_name": "SQL12SE"},
+          "Sort": "60",
+          "Price": "202.00"
+        },
+        {
+          "ComponentType_ID": "12",
+          "ID": "176",
+          "Name": "MS SQL 2008 Standard Edition (2 Core)",
+          "PriceRUR": "16160.00",
+          "PriceEUR": "202.00",
+          "Options": {"short_name": "SQL08SE"},
+          "Sort": "70",
+          "Price": "202.00"
+        },
+        {
+          "ComponentType_ID": "12",
+          "ID": "178",
+          "Name": "MS SQL 2012 Enterprise Edition (2 Core)",
+          "PriceRUR": "62000.00",
+          "PriceEUR": "775.00",
+          "Options": {"short_name": "SQL12EE"},
+          "Sort": "80",
+          "Price": "775.00"
+        },
+        {
+          "ComponentType_ID": "12",
+          "ID": "177",
+          "Name": "MS SQL 2008 Enterprise Edition (2 Core)",
+          "PriceRUR": "62000.00",
+          "PriceEUR": "775.00",
+          "Options": {"short_name": "SQL08EE"},
+          "Sort": "90",
+          "Price": "775.00"
+        }
+      ],
+      "18": [
+        {
+          "ComponentType_ID": "18",
+          "ID": "249",
+          "Name": "100Mbps",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "100Mbps"},
+          "Sort": "10",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "18",
+          "ID": "250",
+          "Name": "1Gbps",
+          "PriceRUR": "866.00",
+          "PriceEUR": "10.00",
+          "Options": {"short_name": "1Gbps"},
+          "Sort": "20",
+          "Price": "10.00"
+        }
+      ],
+      "14": [
+        {
+          "ComponentType_ID": "14",
+          "ID": "148",
+          "Name": "100Mbps unmetered (26Tb max)",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "100Mbps unmetered (26Tb max)"},
+          "Sort": "10",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "143",
+          "Name": "2Tb",
+          "PriceRUR": "866.00",
+          "PriceEUR": "10.00",
+          "Options": {"short_name": "2Tb"},
+          "Sort": "210",
+          "Price": "10.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "145",
+          "Name": "4Tb",
+          "PriceRUR": "2596.00",
+          "PriceEUR": "30.00",
+          "Options": {"short_name": "4Tb"},
+          "Sort": "230",
+          "Price": "30.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "146",
+          "Name": "5Tb",
+          "PriceRUR": "3461.00",
+          "PriceEUR": "40.00",
+          "Options": {"short_name": "5Tb"},
+          "Sort": "240",
+          "Price": "40.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "256",
+          "Name": "10Tb (1Gbps port)",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "10Tb (1Gbps port)"},
+          "Sort": "300",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "257",
+          "Name": "20Tb (1Gbps port)",
+          "PriceRUR": "3461.00",
+          "PriceEUR": "40.00",
+          "Options": {"short_name": "20Tb (1Gbps port)"},
+          "Sort": "310",
+          "Price": "40.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "258",
+          "Name": "30Tb (1Gbps port)",
+          "PriceRUR": "6921.00",
+          "PriceEUR": "80.00",
+          "Options": {"short_name": "30Tb (1Gbps port)"},
+          "Sort": "320",
+          "Price": "80.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "259",
+          "Name": "50Tb (1Gbps port)",
+          "PriceRUR": "13842.00",
+          "PriceEUR": "160.00",
+          "Options": {"short_name": "50Tb (1Gbps port)"},
+          "Sort": "330",
+          "Price": "160.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "158",
+          "Name": "200Mbps unmetered (52Tb max)",
+          "PriceRUR": "6921.00",
+          "PriceEUR": "80.00",
+          "Options": {"short_name": "200Mbps unmetered (52Tb max)"},
+          "Sort": "400",
+          "Price": "80.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "150",
+          "Name": "300Mbps unmetered (78Tb max)",
+          "PriceRUR": "10382.00",
+          "PriceEUR": "120.00",
+          "Options": {"short_name": "300Mbps unmetered (78Tb max)"},
+          "Sort": "410",
+          "Price": "120.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "151",
+          "Name": "400Mbps unmetered (104Tb max)",
+          "PriceRUR": "13842.00",
+          "PriceEUR": "160.00",
+          "Options": {"short_name": "400Mbps unmetered (104Tb max)"},
+          "Sort": "420",
+          "Price": "160.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "152",
+          "Name": "500Mbps unmetered (130Tb max)",
+          "PriceRUR": "17303.00",
+          "PriceEUR": "200.00",
+          "Options": {"short_name": "500Mbps unmetered (130Tb max)"},
+          "Sort": "430",
+          "Price": "200.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "153",
+          "Name": "600Mbps unmetered (156Tb max)",
+          "PriceRUR": "20763.00",
+          "PriceEUR": "240.00",
+          "Options": {"short_name": "600Mbps unmetered (156Tb max)"},
+          "Sort": "440",
+          "Price": "240.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "154",
+          "Name": "700Mbps unmetered (182Tb max)",
+          "PriceRUR": "24224.00",
+          "PriceEUR": "280.00",
+          "Options": {"short_name": "700Mbps unmetered (182Tb max)"},
+          "Sort": "450",
+          "Price": "280.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "155",
+          "Name": "800Mbps unmetered (208Tb max)",
+          "PriceRUR": "27684.00",
+          "PriceEUR": "320.00",
+          "Options": {"short_name": "800Mbps unmetered (208Tb max)"},
+          "Sort": "460",
+          "Price": "320.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "156",
+          "Name": "900Mbps unmetered (234Tb max)",
+          "PriceRUR": "31145.00",
+          "PriceEUR": "360.00",
+          "Options": {"short_name": "900Mbps unmetered (234Tb max)"},
+          "Sort": "470",
+          "Price": "360.00"
+        },
+        {
+          "ComponentType_ID": "14",
+          "ID": "157",
+          "Name": "1Gbps unmetered (260Tb max)",
+          "PriceRUR": "34605.00",
+          "PriceEUR": "400.00",
+          "Options": {"short_name": "1Gbps unmetered (260Tb max)"},
+          "Sort": "500",
+          "Price": "400.00"
+        }
+      ],
+      "17": [
+        {
+          "ComponentType_ID": "17",
+          "ID": "135",
+          "Name": "Self-service",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Self-service"},
+          "Sort": "10",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "17",
+          "ID": "137",
+          "Name": "Core OS management",
+          "PriceRUR": "1731.00",
+          "PriceEUR": "20.00",
+          "Options": {"short_name": "Core OS management"},
+          "Sort": "20",
+          "Price": "20.00"
+        },
+        {
+          "ComponentType_ID": "17",
+          "ID": "136",
+          "Name": "Node management - 6 hours",
+          "PriceRUR": "8652.00",
+          "PriceEUR": "100.00",
+          "Options": {"short_name": "Node management - 6 hours"},
+          "Sort": "30",
+          "Price": "100.00"
+        },
+        {
+          "ComponentType_ID": "17",
+          "ID": "255",
+          "Name": "Managed server cPanel",
+          "PriceRUR": "3461.00",
+          "PriceEUR": "40.00",
+          "Options": {"short_name": "Managed server cPanel"},
+          "Sort": "40",
+          "Price": "40.00"
+        }
+      ],
+      "16": [
+        {
+          "ComponentType_ID": "16",
+          "ID": "134",
+          "Name": "Best effort (email/phone)",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "Basic SLA"},
+          "Sort": "10",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "16",
+          "ID": "282",
+          "Name": "Priority (email/phone/skype)",
+          "PriceRUR": "2596.00",
+          "PriceEUR": "30.00",
+          "Options": {"short_name": "Priority SLA"},
+          "Sort": "13",
+          "Price": "30.00"
+        },
+        {
+          "ComponentType_ID": "16",
+          "ID": "283",
+          "Name": "TOP Priority SLA (30 mins/phone/email/skype)",
+          "PriceRUR": "4326.00",
+          "PriceEUR": "50.00",
+          "Options": {"short_name": "Top SLA"},
+          "Sort": "20",
+          "Price": "50.00"
+        }
+      ],
+      "2": [
+        {
+          "ComponentType_ID": "2",
+          "ID": "322",
+          "Name": "240Gb SSD",
+          "PriceRUR": "606.00",
+          "PriceEUR": "7.00",
+          "Options": {"short_name": "240Gb SSD"},
+          "Sort": "20",
+          "Price": "7.00"
+        },
+        {
+          "ComponentType_ID": "2",
+          "ID": "323",
+          "Name": "480Gb SSD",
+          "PriceRUR": "1039.00",
+          "PriceEUR": "12.00",
+          "Options": {"short_name": "480Gb SSD"},
+          "Sort": "30",
+          "Price": "12.00"
+        },
+        {
+          "ComponentType_ID": "2",
+          "ID": "63",
+          "Name": "500Gb SATA 7,2K",
+          "PriceRUR": "260.00",
+          "PriceEUR": "3.00",
+          "Options": {"short_name": "500Gb SATA 7,2K"},
+          "Sort": "50",
+          "Price": "3.00"
+        },
+        {
+          "ComponentType_ID": "2",
+          "ID": "324",
+          "Name": "1Tb SATA 7,2K",
+          "PriceRUR": "347.00",
+          "PriceEUR": "4.00",
+          "Options": {"short_name": "1Tb SATA 7,2K"},
+          "Sort": "60",
+          "Price": "4.00"
+        },
+        {
+          "ComponentType_ID": "2",
+          "ID": "325",
+          "Name": "3Tb SATA 7,2K",
+          "PriceRUR": "779.00",
+          "PriceEUR": "9.00",
+          "Options": {"short_name": "3Tb SATA 7,2K"},
+          "Sort": "130",
+          "Price": "9.00"
+        },
+        {
+          "ComponentType_ID": "2",
+          "ID": "326",
+          "Name": "8Tb SATA 7,2K",
+          "PriceRUR": "2250.00",
+          "PriceEUR": "26.00",
+          "Options": {"short_name": "8Tb SATA 7,2K"},
+          "Sort": "180",
+          "Price": "26.00"
+        },
+        {
+          "ComponentType_ID": "2",
+          "ID": "68",
+          "Name": "300Gb SAS 15K",
+          "PriceRUR": "1039.00",
+          "PriceEUR": "12.00",
+          "Options": {"short_name": "300Gb SAS 15K"},
+          "Sort": "200",
+          "Price": "12.00"
+        },
+        {
+          "ComponentType_ID": "2",
+          "ID": "69",
+          "Name": "600Gb SAS 15K",
+          "PriceRUR": "2077.00",
+          "PriceEUR": "24.00",
+          "Options": {"short_name": "600Gb SAS 15K"},
+          "Sort": "203",
+          "Price": "24.00"
+        }
+      ],
+      "20": [
+        {
+          "ComponentType_ID": "20",
+          "ID": "180",
+          "Name": "MS Exchange Standard",
+          "PriceRUR": "240.00",
+          "PriceEUR": "3.00",
+          "Options": {"short_name": "MS Exchange Standard"},
+          "Sort": "20",
+          "Price": "3.00"
+        },
+        {
+          "ComponentType_ID": "20",
+          "ID": "181",
+          "Name": "MS Exchange Enterprise",
+          "PriceRUR": "400.00",
+          "PriceEUR": "5.00",
+          "Options": {"short_name": "MS Exchange Enterprise"},
+          "Sort": "30",
+          "Price": "5.00"
+        }
+      ],
+      "10": [
+        {
+          "ComponentType_ID": "10",
+          "ID": "121",
+          "Name": "64-bit",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "64-bit"},
+          "Sort": "30",
+          "Price": "0.00"
+        },
+        {
+          "ComponentType_ID": "10",
+          "ID": "120",
+          "Name": "32-bit",
+          "PriceRUR": "0.00",
+          "PriceEUR": "0.00",
+          "Options": {"short_name": "32-bit"},
+          "Sort": "60",
+          "Price": "0.00"
+        }
+      ]
+    },
+    "CostLicenseWin": "560.00",
+    "EURRUR": 86.5115,
+    "Currency": null,
+    "ComponentGroup": "NL"
+  }
+}

@@ -9,13 +9,18 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
         if window.isDev
             url = "/assets/dist/api/config/dedicated/#{type}.json"
         else
+            type = '' if type is 'sale'
             url = "#{CONFIG.apiUrl}/dedicated/config"
 
-        groups = [window.country,type].join(',')
+        if type
+            groups = [window.country,type].join(',')
+        else
+            groups = window.country
 
         $http
             url: url
             method: "GET"
+            cache: true
             params:
                 currency: window.currency
                 groups: groups

@@ -55477,21 +55477,24 @@
 	    };
 	    $timeout(function() {
 	      $.scrollTo('#selectedSolution', {
-	        offset: -68,
+	        offset: -236,
 	        duration: 1000
 	      });
 	      return $timeout(function() {
 	        return $scope.tabs.software.open = true;
-	      }, 1000);
+	      }, 300);
 	    });
 	    $scope.buy = function($event, order) {
-	      if (!order.hardware.hdd.ID.length) {
-	        notifications.error("Please choose hard disk!");
-	        $event.stopPropagation();
-	        return;
-	      }
+
+	      /*
+	       * у sale-серверов нет hardware
+	      unless order.hardware.hdd.ID.length
+	          notifications.error "Please choose hard disk!"
+	          $event.stopPropagation()
+	          return
+	       */
 	      return $order.post(order).then(function(orderLink) {
-	        return document.getElementById('configure_cloud_VDS').src = orderLink;
+	        return window.location = orderLink;
 	      })["catch"](function(error) {
 	        if (error.Message) {
 	          return alert(error.Message);
@@ -55746,7 +55749,7 @@
 	    },
 	    template: __webpack_require__(33),
 	    controller: ["notifications", "$scope", "$state", "$stateParams", "$timeout", "$order", "$q", "$dedicated", function(notifications, $scope, $state, $stateParams, $timeout, $order, $q, $dedicated) {
-	      return $q.all([$dedicated.components(), $dedicated.getConfigCalculator('Micro'), $dedicated.billingCycleDiscount()]).then(function(data) {
+	      return $q.all([$dedicated.components(), $dedicated.getConfigCalculator('sale'), $dedicated.billingCycleDiscount()]).then(function(data) {
 	        var billingCycleDiscount, components, configCalculator;
 	        components = data[0];
 	        configCalculator = data[1];
@@ -56063,12 +56066,20 @@
 	    if (window.isDev) {
 	      url = "/assets/dist/api/config/dedicated/" + type + ".json";
 	    } else {
+	      if (type === 'sale') {
+	        type = '';
+	      }
 	      url = CONFIG.apiUrl + "/dedicated/config";
 	    }
-	    groups = [window.country, type].join(',');
+	    if (type) {
+	      groups = [window.country, type].join(',');
+	    } else {
+	      groups = window.country;
+	    }
 	    $http({
 	      url: url,
 	      method: "GET",
+	      cache: true,
 	      params: {
 	        currency: window.currency,
 	        groups: groups

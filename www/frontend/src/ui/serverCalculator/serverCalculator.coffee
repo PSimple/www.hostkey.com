@@ -156,25 +156,28 @@ angular.module("ui.serverCalculator").directive "serverCalculator", ->
 
         $timeout ->
             $.scrollTo '#selectedSolution',
-                offset: -68
+                offset: -236
                 duration: 1000
             $timeout ->
                 $scope.tabs.software.open = true
-            , 1000
+            , 300
 
         $scope.buy = ($event, order) ->
+            ###
+            # у sale-серверов нет hardware
             unless order.hardware.hdd.ID.length
                 notifications.error "Please choose hard disk!"
                 $event.stopPropagation()
                 return
+            ###
 
             $order.post(order)
             .then (orderLink) ->
                 # или редирект на форму оплаты
-                #window.location = orderLink
+                window.location = orderLink
 
                 # или открыть форму оплаты в ифрейме не уходя с сайта
-                document.getElementById('configure_cloud_VDS').src = orderLink
+                #document.getElementById('configure_cloud_VDS').src = orderLink
 
             .catch (error) ->
                 if error.Message
@@ -423,7 +426,7 @@ angular.module("ui.serverCalculator").directive "serverCalculator", ->
     controller: (notifications, $scope, $state, $stateParams, $timeout, $order, $q, $dedicated) ->
         $q.all([
             $dedicated.components()
-            $dedicated.getConfigCalculator('Micro')
+            $dedicated.getConfigCalculator('sale')
             $dedicated.billingCycleDiscount()
         ]).then (data) ->
             components = data[0]
