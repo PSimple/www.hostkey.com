@@ -34,7 +34,6 @@ angular.module("app.dedicated.sale").config ($httpProvider, $stateProvider, $url
                 ]
 
 
-
 angular.module("app.dedicated.sale").controller "AppDedicatedSaleCtrl", ($state, $stateParams, $scope, $rootScope, configStock, listSort) ->
 
     $scope.list =
@@ -52,4 +51,11 @@ angular.module("app.dedicated.sale").controller "AppDedicatedSaleCtrl", ($state,
     $rootScope.loaded = true
 
     $scope.configStock = configStock
+
+    $scope.selectSale = (s) ->
+
+        if s.Id is $scope.selectedSale?.Id
+            $scope.selectedSale = null
+        else
+            $scope.selectedSale = s
 

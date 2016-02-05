@@ -38,46 +38,55 @@ div
 
             table.dedicated-extra-price__table
 
-                tr.dedicated-extra-price__table-row.dedicated-extra-price__table-row_title_yes
-                    td.dedicated-extra-price__table-cell
-                    td.dedicated-extra-price__table-cell processor
-                    td.dedicated-extra-price__table-cell memory
-                    td.dedicated-extra-price__table-cell(style="width:200px;") hard drive
-                    td.dedicated-extra-price__table-cell hw raid
-                    td.dedicated-extra-price__table-cell Port
-                    td.dedicated-extra-price__table-cell(style="width:280px;") OS
-                    td.dedicated-extra-price__table-cell(style="width:180px;") monthly
-                    td.dedicated-extra-price__table-cell.dedicated-extra-price__table-cell_red_yes(style="width:200px;") price will change after:
+                thead
 
-                tr.dedicated-extra-price__table-row(ng-repeat="s in configStock")
-                    td.dedicated-extra-price__table-cell
-                        span.b-icon.b-flag(ng-class="{'b-flag_country_nether': s.LocationCode==='NL'}")
+                    tr.dedicated-extra-price__table-row.dedicated-extra-price__table-row_title_yes
+                        td.dedicated-extra-price__table-cell
+                        td.dedicated-extra-price__table-cell processor
+                        td.dedicated-extra-price__table-cell memory
+                        td.dedicated-extra-price__table-cell(style="width:200px;") hard drive
+                        td.dedicated-extra-price__table-cell hw raid
+                        td.dedicated-extra-price__table-cell Port
+                        td.dedicated-extra-price__table-cell(style="width:280px;") OS
+                        td.dedicated-extra-price__table-cell(style="width:220px;") monthly
+                        td.dedicated-extra-price__table-cell.dedicated-extra-price__table-cell_red_yes(style="width:220px;") price will change after:
 
-                    td.dedicated-extra-price__table-cell
-                        .dedicated-extra-price__text
-                            | {{s.Cpu.Name}}
+                tbody(ng-repeat="s in configStock")
+                    tr.dedicated-extra-price__table-row
+                        td.dedicated-extra-price__table-cell
+                            span.b-icon.b-flag(ng-class="{'b-flag_country_nether': s.LocationCode==='NL'}")
 
-                        kpd-indicator(cpu="s.Cpu")
+                        td.dedicated-extra-price__table-cell
+                            .dedicated-extra-price__text
+                                | {{s.Cpu.Name}}
 
-                    td.dedicated-extra-price__table-cell
-                        span.dedicated-extra-price__text {{s.Ram}} GB
+                            kpd-indicator(cpu="s.Cpu")
 
-                    td.dedicated-extra-price__table-cell
-                        span.dedicated-extra-price__text(ng-repeat="hdd in s.Hdd")
-                            | {{hdd}}
-                            br
+                        td.dedicated-extra-price__table-cell
+                            span.dedicated-extra-price__text {{s.Ram}} GB
 
-                    td.dedicated-extra-price__table-cell
-                        span.b-icon.dedicated-extra-price__icon-good
+                        td.dedicated-extra-price__table-cell
+                            span.dedicated-extra-price__text(ng-repeat="hdd in s.Hdd")
+                                | {{hdd}}
+                                br
 
-                    td.dedicated-extra-price__table-cell
-                        | 100 Mbps
+                        td.dedicated-extra-price__table-cell
+                            span.b-icon.dedicated-extra-price__icon-good
 
-                    td.dedicated-extra-price__table-cell
-                        | 20 IP, traffic, cPanel, Windows, VPS, premium SLA, super backup
+                        td.dedicated-extra-price__table-cell
+                            | 100 Mbps
 
-                    td.dedicated-extra-price__table-cell
-                        a.b-submit.dedicated-item-content__submit(href="") {{s.Price.Price|verboseCurrency}}
+                        td.dedicated-extra-price__table-cell
+                            | 20 IP, traffic, cPanel, Windows, VPS, premium SLA, super backup
 
-                    td.dedicated-extra-price__table-cell
-                        .black-sale__slider-item-timer(time-to="s.Id")
+                        td.dedicated-extra-price__table-cell
+                            a.b-submit.dedicated-item-content__submit(href="", ng-click="selectSale(s)") {{s.Price.Price|verboseCurrency}}
+
+                        td.dedicated-extra-price__table-cell
+                            .black-sale__slider-item-timer(time-to="s.Id")
+
+                    tr.dedicated-extra-price__table-row(ng-if="s.Id === selectedSale.Id")
+                        td.dedicated-extra-price__table-cell(colspan="9")
+                            div(server-calculator="")
+
+
