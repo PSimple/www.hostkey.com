@@ -1,0 +1,23 @@
+{if ( count($newsList) > 0)}
+  <div class="b-main-page__news">
+    <h2 class="b-main-page__title b-main-page__title_upline_yes">
+        news
+    </h2>
+      <div class="b-main-page__news-list">
+
+        {foreach ( $newsList as $key => $val )}
+          <div class="b-main-page__news-item">
+              <div class="b-main-page__news-item-title">
+                  HOSTKEY finally deployed
+                  HYPER-V cluster in our NL facility and proud to offer reliable
+                  Windows hosts.
+              </div>
+              <div class="b-main-page__news-item-date b-main-page__news-item-date_first_yes">10.04.2015</div>
+              <p class="b-main-page__news-item-text">
+                  We would like to inform you that the European Directive 2002/38/EC has introduced new VAT rules involving business to consumer supplies of digital services, which came into force on the 1st January 2015.
+              </p>
+          </div>
+        {/foreach}
+      </div>
+    </div>
+  {/if}
