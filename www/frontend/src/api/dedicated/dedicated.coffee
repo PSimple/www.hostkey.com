@@ -137,14 +137,8 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
             }
         ]
 
-    @components = ->
+    @components = (type)->
         components = {
-            1: ['hardware', 'cpu'] # id: ['category', 'name']
-            3: ['hardware', 'ram']
-            6: ['hardware', 'platform']
-            8: ['hardware', 'raid']
-            94: ['hardware', 'RaidLevel']
-
             4: ['software', 'os']
             10:['software', 'bit']
             5: ['software', 'controlPanel']
@@ -165,6 +159,19 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
             17:['sla', 'management']
             21:['sla', 'DCGrade']
         }
+
+        # hardware опционально
+        if type isnt 'sale'
+            hardware = {
+                1: ['hardware', 'cpu'] # id: ['category', 'name']
+                3: ['hardware', 'ram']
+                6: ['hardware', 'platform']
+                8: ['hardware', 'raid']
+                94: ['hardware', 'RaidLevel']
+            }
+
+            components = angular.merge components, hardware
+
         components
 
     @getConfigStock = ->

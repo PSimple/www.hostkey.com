@@ -4,14 +4,15 @@ angular.module "ui.serverCalculator", [
     'ngSanitize'
 ]
 
-angular.module("ui.serverCalculator").directive "serverCalculator", ->
+angular.module("ui.serverCalculator").directive "saleServerCalculator", ->
 
-    InitServerCalculatorCtrl = (notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components) ->
+    InitServerCalculatorCtrl = (CompId, notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components) ->
 
         initOrderComponents = (components, config)->
             defaultOrder =
                 Currency: window.currency or 'eur'
-                Groups: [window.country, $stateParams.type].join(',')
+                Groups: window.country
+                CompId: CompId # ID sale-сервера
 
             angular.forEach components, (component, componentId) ->
                 id = componentId
@@ -246,6 +247,8 @@ angular.module("ui.serverCalculator").directive "serverCalculator", ->
             return
 
         watchRaid = (tabs, order) ->
+            return unless order?.hardware?.hdd
+
             # Список зависит от количества выбранных дисков и выбранных “SAS” дисков.
             # Если количество дисков равно или больше “disc” (RAID) либо выбран хотя бы один “SAS” диск.
             # То данный RAID контроллер отображается в списке активным.
@@ -285,6 +288,8 @@ angular.module("ui.serverCalculator").directive "serverCalculator", ->
             return
 
         watchRaidLevel = (tabs, order) ->
+            return unless order?.hardware?.raid
+
             # Проверяется поддерживает ли выбранный контроллер очередной уровень “raid” (0,1,5,6,10).
             raidLevels = order.hardware.raid.Options.raid.split("-")
             raidLevels.unshift("-1") # No Raid
@@ -313,6 +318,8 @@ angular.module("ui.serverCalculator").directive "serverCalculator", ->
 
         # обновим доступные блоки памяти
         watchRAM = (tabs, order)->
+            return unless order?.hardware?.cpu
+
             max_mem = order.hardware.cpu.Options.max_mem
             #console.log "watchRAM", order.hardware.cpu.Name, max_mem
 
@@ -327,7 +334,7 @@ angular.module("ui.serverCalculator").directive "serverCalculator", ->
             return
 
         watchHdd = (tabs, order) ->
-            return unless order.hardware?.platform
+            return unless order?.hardware?.platform
 
             size = order.hardware.platform.Options.size
             # количество дисков
@@ -338,6 +345,7 @@ angular.module("ui.serverCalculator").directive "serverCalculator", ->
                 tabs.hardware.hdd.selected[i-1] = _.values(tabs.hardware.hdd.options)[0]
 
         watchHddSelected = (tabs, order) ->
+            return unless order?.hardware?.hdd
 
             price = 0
             hddCount = 0
@@ -418,14 +426,15 @@ angular.module("ui.serverCalculator").directive "serverCalculator", ->
 
     restrict: "AE"
     scope:
-        model: "=serverCalculator"
+        model: "=saleServerCalculator"
+        saleServer: "="
         config: "="
 
     template: require './serverCalculator.jade'
 
     controller: (notifications, $scope, $state, $stateParams, $timeout, $order, $q, $dedicated) ->
         $q.all([
-            $dedicated.components()
+            $dedicated.components('sale')
             $dedicated.getConfigCalculator('sale')
             $dedicated.billingCycleDiscount()
         ]).then (data) ->
@@ -433,4 +442,4 @@ angular.module("ui.serverCalculator").directive "serverCalculator", ->
             configCalculator = data[1]
             billingCycleDiscount = data[2]
 
-            InitServerCalculatorCtrl(notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components)
+            InitServerCalculatorCtrl($scope.saleServer.Id, notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components)

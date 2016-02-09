@@ -73,7 +73,7 @@
 
 	__webpack_require__(7);
 
-	__webpack_require__(46);
+	__webpack_require__(47);
 
 
 /***/ },
@@ -92,7 +92,7 @@
 
 	__webpack_require__(36);
 
-	__webpack_require__(40);
+	__webpack_require__(41);
 
 	angular.module("dedicated.service", ["ngSanitize", "ui", "ui.router", "api", "dedicated.service.selected"]);
 
@@ -112,7 +112,7 @@
 	    views: {
 	      "solutions": {
 	        controller: "DedicatedServiceSolutionsCtrl",
-	        template: __webpack_require__(43)("./solutions." + window.country + ".jade"),
+	        template: __webpack_require__(44)("./solutions." + window.country + ".jade"),
 	        resolve: {
 	          solutions: ["$solutions", function($solutions) {
 	            return $solutions.getList();
@@ -44367,7 +44367,7 @@
 	     */
 	    if (ComponentType_ID === "4") {
 	      if (/Windows/.test(option.Name)) {
-	        if ((ref = order.hardware.cpu.Options) != null ? ref.cpu_count : void 0) {
+	        if (order != null ? (ref = order.hardware.cpu.Options) != null ? ref.cpu_count : void 0 : void 0) {
 	          multiplicator = Number(order.hardware.cpu.Options.cpu_count, 10);
 	        } else {
 	          multiplicator = 1;
@@ -44387,7 +44387,7 @@
 	      price = price * Number(option.Value, 10);
 	    }
 	    if (ComponentType_ID === "21") {
-	      if ((ref2 = order.hardware.platform.Options) != null ? ref2.unit : void 0) {
+	      if (order.hardware && ((ref2 = order.hardware.platform.Options) != null ? ref2.unit : void 0)) {
 	        multiplicator = Number(order.hardware.platform.Options.unit, 10);
 	      } else {
 	        multiplicator = 1;
@@ -48694,7 +48694,7 @@
 	            return scope.model = JSON.parse(element.select2('val'));
 	          });
 	        });
-	      });
+	      }, 300);
 	    }
 	  };
 	}]);
@@ -55304,15 +55304,16 @@
 
 	angular.module("ui.serverCalculator", ['ngSanitize']);
 
-	angular.module("ui.serverCalculator").directive("serverCalculator", function() {
+	angular.module("ui.serverCalculator").directive("saleServerCalculator", function() {
 	  var InitServerCalculatorCtrl;
-	  InitServerCalculatorCtrl = function(notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components) {
+	  InitServerCalculatorCtrl = function(CompId, notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components) {
 	    var initOrderComponents, j, results, watchHdd, watchHddSelected, watchOS, watchRAM, watchRaid, watchRaidLevel, watchTraffic;
 	    initOrderComponents = function(components, config) {
 	      var defaultOrder;
 	      defaultOrder = {
 	        Currency: window.currency || 'eur',
-	        Groups: [window.country, $stateParams.type].join(',')
+	        Groups: window.country,
+	        CompId: CompId
 	      };
 	      angular.forEach(components, function(component, componentId) {
 	        var category, id, name;
@@ -55572,7 +55573,10 @@
 	      }
 	    };
 	    watchRaid = function(tabs, order) {
-	      var RaidOptions, diskCount, filterRaidOptions, findSASDisks, isIncludeSASDisks, ref;
+	      var RaidOptions, diskCount, filterRaidOptions, findSASDisks, isIncludeSASDisks, ref, ref1;
+	      if (!(order != null ? (ref = order.hardware) != null ? ref.hdd : void 0 : void 0)) {
+	        return;
+	      }
 	      findSASDisks = function(diskIds) {
 	        var disks, filterDisks, filterDisksSAS;
 	        disks = configCalculator.Data[2];
@@ -55584,7 +55588,7 @@
 	        });
 	        return filterDisksSAS.length;
 	      };
-	      if ((ref = order.hardware.hdd) != null ? ref.ID : void 0) {
+	      if ((ref1 = order.hardware.hdd) != null ? ref1.ID : void 0) {
 	        diskCount = order.hardware.hdd.ID.length;
 	        RaidOptions = configCalculator.Data[8];
 	        isIncludeSASDisks = findSASDisks(order.hardware.hdd.ID);
@@ -55606,14 +55610,17 @@
 	      }
 	    };
 	    watchRaidLevel = function(tabs, order) {
-	      var diskCount, filteredLevels, listRaidLevel, raidLevels, ref;
+	      var diskCount, filteredLevels, listRaidLevel, raidLevels, ref, ref1;
+	      if (!(order != null ? (ref = order.hardware) != null ? ref.raid : void 0 : void 0)) {
+	        return;
+	      }
 	      raidLevels = order.hardware.raid.Options.raid.split("-");
 	      raidLevels.unshift("-1");
 	      listRaidLevel = configCalculator.Data[94];
 	      filteredLevels = listRaidLevel.filter(function(l) {
 	        return raidLevels.indexOf(l.ID) > -1;
 	      });
-	      if ((ref = order.hardware.hdd) != null ? ref.ID : void 0) {
+	      if ((ref1 = order.hardware.hdd) != null ? ref1.ID : void 0) {
 	        diskCount = order.hardware.hdd.ID.length;
 	        filteredLevels = listRaidLevel.filter(function(l) {
 	          if (l.ID === "-1") {
@@ -55642,7 +55649,10 @@
 	      });
 	    };
 	    watchRAM = function(tabs, order) {
-	      var max_mem;
+	      var max_mem, ref;
+	      if (!(order != null ? (ref = order.hardware) != null ? ref.cpu : void 0 : void 0)) {
+	        return;
+	      }
 	      max_mem = order.hardware.cpu.Options.max_mem;
 	      angular.forEach(tabs.hardware.ram.options, function(opt, optId) {
 	        if (Number(opt.Options.size, 10) <= Number(max_mem, 10)) {
@@ -55655,7 +55665,7 @@
 	    };
 	    watchHdd = function(tabs, order) {
 	      var i, k, ref, ref1, results1, size;
-	      if (!((ref = order.hardware) != null ? ref.platform : void 0)) {
+	      if (!(order != null ? (ref = order.hardware) != null ? ref.platform : void 0 : void 0)) {
 	        return;
 	      }
 	      size = order.hardware.platform.Options.size;
@@ -55668,7 +55678,10 @@
 	      return results1;
 	    };
 	    watchHddSelected = function(tabs, order) {
-	      var hddCount, ids, names, price, reduceNames;
+	      var hddCount, ids, names, price, reduceNames, ref;
+	      if (!(order != null ? (ref = order.hardware) != null ? ref.hdd : void 0 : void 0)) {
+	        return;
+	      }
 	      price = 0;
 	      hddCount = 0;
 	      names = {};
@@ -55744,17 +55757,18 @@
 	  return {
 	    restrict: "AE",
 	    scope: {
-	      model: "=serverCalculator",
+	      model: "=saleServerCalculator",
+	      saleServer: "=",
 	      config: "="
 	    },
 	    template: __webpack_require__(33),
 	    controller: ["notifications", "$scope", "$state", "$stateParams", "$timeout", "$order", "$q", "$dedicated", function(notifications, $scope, $state, $stateParams, $timeout, $order, $q, $dedicated) {
-	      return $q.all([$dedicated.components(), $dedicated.getConfigCalculator('sale'), $dedicated.billingCycleDiscount()]).then(function(data) {
+	      return $q.all([$dedicated.components('sale'), $dedicated.getConfigCalculator('sale'), $dedicated.billingCycleDiscount()]).then(function(data) {
 	        var billingCycleDiscount, components, configCalculator;
 	        components = data[0];
 	        configCalculator = data[1];
 	        billingCycleDiscount = data[2];
-	        return InitServerCalculatorCtrl(notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components);
+	        return InitServerCalculatorCtrl($scope.saleServer.Id, notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components);
 	      });
 	    }]
 	  };
@@ -56042,7 +56056,7 @@
 
 	__webpack_require__(38);
 
-	__webpack_require__(39);
+	__webpack_require__(40);
 
 	angular.module("api", ["api.dedicated", "api.order", "api.solutions"]);
 
@@ -56187,14 +56201,9 @@
 	      }
 	    ];
 	  };
-	  this.components = function() {
-	    var components;
+	  this.components = function(type) {
+	    var components, hardware;
 	    components = {
-	      1: ['hardware', 'cpu'],
-	      3: ['hardware', 'ram'],
-	      6: ['hardware', 'platform'],
-	      8: ['hardware', 'raid'],
-	      94: ['hardware', 'RaidLevel'],
 	      4: ['software', 'os'],
 	      10: ['software', 'bit'],
 	      5: ['software', 'controlPanel'],
@@ -56213,6 +56222,16 @@
 	      17: ['sla', 'management'],
 	      21: ['sla', 'DCGrade']
 	    };
+	    if (type !== 'sale') {
+	      hardware = {
+	        1: ['hardware', 'cpu'],
+	        3: ['hardware', 'ram'],
+	        6: ['hardware', 'platform'],
+	        8: ['hardware', 'raid'],
+	        94: ['hardware', 'RaidLevel']
+	      };
+	      components = angular.merge(components, hardware);
+	    }
 	    return components;
 	  };
 	  this.getConfigStock = function() {
@@ -56294,12 +56313,20 @@
 	    });
 	    return deferred.promise;
 	  };
+
+	  /*
+	      преобразуем объект заказа в нужный формат, который понимает метод $order.post()
+	      используется для расчета стоимости
+	      - dedicated-серверов
+	      - sale-серверов (без hardware)
+	   */
 	  this.orderFormat = function(rawOrder) {
 	    var deferred, order, ref, ref1, ref2;
 	    deferred = $q.defer();
 	    rawOrder = angular.copy(rawOrder);
-	    order = {
-	      Hardware: {
+	    order = {};
+	    if (rawOrder.hardware) {
+	      order.Hardware = {
 	        Cpu: rawOrder.hardware.cpu.ID,
 	        Ram: rawOrder.hardware.ram.ID,
 	        Platform: rawOrder.hardware.platform.ID,
@@ -56307,8 +56334,10 @@
 	        Raid: rawOrder.hardware.raid.ID,
 	        RaidLevel: rawOrder.hardware.RaidLevel.ID,
 	        Label: $filter('orderVerbose')(rawOrder.hardware)
-	      },
-	      Software: {
+	      };
+	    }
+	    if (rawOrder.software) {
+	      order.Software = {
 	        OS: rawOrder.software.os.ID,
 	        Bit: rawOrder.software.bit.ID,
 	        CP: (ref = rawOrder.software.controlPanel) != null ? ref.ID : void 0,
@@ -56317,8 +56346,10 @@
 	        Exchange: (ref2 = rawOrder.software.MSExchange) != null ? ref2.ID : void 0,
 	        ExchangeCount: Number(rawOrder.software.ExchangeCount.Value, 10),
 	        Label: $filter('orderVerbose')(rawOrder.software)
-	      },
-	      Network: {
+	      };
+	    }
+	    if (rawOrder.network) {
+	      order.Network = {
 	        Traffic: rawOrder.network.traffic.ID,
 	        Bandwidth: rawOrder.network.Bandwidth.ID,
 	        DDOSProtection: rawOrder.network.DDOSProtection.ID,
@@ -56327,18 +56358,27 @@
 	        FtpBackup: rawOrder.network.ftpBackup.ID,
 	        IPv6: rawOrder.network.IPv6.Value,
 	        Label: $filter('orderVerbose')(rawOrder.network)
-	      },
-	      SLA: {
+	      };
+	    }
+	    if (rawOrder.sla) {
+	      order.SLA = {
 	        ServiceLevel: rawOrder.sla.serviceLevel.ID,
 	        Management: rawOrder.sla.management.ID,
 	        DCGrade: rawOrder.sla.DCGrade.ID,
 	        Comment: "",
 	        CycleDiscount: rawOrder.discount.billingCycle.Period,
 	        Label: $filter('orderVerbose')(rawOrder.sla)
-	      },
-	      Currency: rawOrder.Currency,
-	      Groups: rawOrder.Groups
-	    };
+	      };
+	    }
+	    if (rawOrder.sla) {
+	      order.Currency = rawOrder.Currency;
+	    }
+	    if (rawOrder.Groups) {
+	      order.Groups = rawOrder.Groups;
+	    }
+	    if (rawOrder.CompId) {
+	      order.CompId = rawOrder.CompId;
+	    }
 	    deferred.resolve(order);
 	    return deferred.promise;
 	  };
@@ -56385,7 +56425,8 @@
 
 
 /***/ },
-/* 39 */
+/* 39 */,
+/* 40 */
 /***/ function(module, exports) {
 
 	angular.module("api.solutions", ["config"]);
@@ -56447,10 +56488,10 @@
 
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(41);
+	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(42);
 
 	angular.module("dedicated.service.selected", []);
 
@@ -56458,7 +56499,7 @@
 	  $stateProvider.state("dedicatedService.selected", {
 	    url: "/type/:type",
 	    controller: "SelectedCtrl",
-	    template: __webpack_require__(42),
+	    template: __webpack_require__(43),
 	    resolve: {
 	      components: ["$dedicated", function($dedicated) {
 	        return $dedicated.components();
@@ -56913,7 +56954,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -58467,7 +58508,7 @@
 
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(34);
@@ -58481,12 +58522,12 @@
 	}
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./solutions.NL.jade": 44,
-		"./solutions.RU.jade": 45
+		"./solutions.NL.jade": 45,
+		"./solutions.RU.jade": 46
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -58499,11 +58540,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 43;
+	webpackContext.id = 44;
 
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(34);
@@ -58517,7 +58558,7 @@
 	}
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(34);
@@ -58531,7 +58572,7 @@
 	}
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(8);
@@ -58548,7 +58589,7 @@
 	  $urlRouterProvider.otherwise("");
 	  return $stateProvider.state("sale", {
 	    url: "",
-	    template: __webpack_require__(47),
+	    template: __webpack_require__(48),
 	    controller: "AppDedicatedSaleCtrl",
 	    resolve: {
 	      configStock: ["$dedicated", function($dedicated) {
@@ -58597,7 +58638,7 @@
 
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(34);
@@ -58607,7 +58648,7 @@
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-text-page__box\"><h3 class=\"b-text-page__title b-text-page__title_upline_yes\">EXTRA PRICE</h3><div class=\"b-dedicated__description\"><p>HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia. We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+ international resellers. Virtually any server configuration could be provided to our customers. We offer full range of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own servers in Moscow.</p></div></div><div class=\"b-dedicated__hide-block-close js-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div><div class=\"b-container\"><div class=\"dedicated-extra-price__box\"><table class=\"dedicated-extra-price__table dedicated-extra-price__table_type_head\"><tr class=\"dedicated-extra-price__table-row\"><td style=\"width:300px;\" class=\"dedicated-extra-price__table-cell\"></td><td class=\"dedicated-extra-price__table-cell\"></td><td style=\"width:370px;\" class=\"dedicated-extra-price__table-cell\"><div class=\"dedicated-extra-price__table-title\">Sort</div><span ui-select=\"filter.sort\" options=\"list.sort\" width=\"280\" style=\"display:inline-block;\"></span></td></tr></table></div><div class=\"dedicated-extra-price__box\"><table class=\"dedicated-extra-price__table\"><thead><tr class=\"dedicated-extra-price__table-row dedicated-extra-price__table-row_title_yes\"><td class=\"dedicated-extra-price__table-cell\"></td><td class=\"dedicated-extra-price__table-cell\">processor</td><td class=\"dedicated-extra-price__table-cell\">memory</td><td style=\"width:200px;\" class=\"dedicated-extra-price__table-cell\">hard drive</td><td class=\"dedicated-extra-price__table-cell\">hw raid</td><td class=\"dedicated-extra-price__table-cell\">Port</td><td style=\"width:280px;\" class=\"dedicated-extra-price__table-cell\">OS</td><td style=\"width:220px;\" class=\"dedicated-extra-price__table-cell\">monthly</td><td style=\"width:220px;\" class=\"dedicated-extra-price__table-cell dedicated-extra-price__table-cell_red_yes\">price will change after:</td></tr></thead><tbody ng-repeat=\"s in configStock\"><tr class=\"dedicated-extra-price__table-row\"><td class=\"dedicated-extra-price__table-cell\"><span ng-class=\"{'b-flag_country_nether': s.LocationCode==='NL'}\" class=\"b-icon b-flag\"></span></td><td class=\"dedicated-extra-price__table-cell\"><div class=\"dedicated-extra-price__text\">{{s.Cpu.Name}}</div><kpd-indicator cpu=\"s.Cpu\"></kpd-indicator></td><td class=\"dedicated-extra-price__table-cell\"><span class=\"dedicated-extra-price__text\">{{s.Ram}} GB</span></td><td class=\"dedicated-extra-price__table-cell\"><span ng-repeat=\"hdd in s.Hdd\" class=\"dedicated-extra-price__text\">{{hdd}}<br/></span></td><td class=\"dedicated-extra-price__table-cell\"><span class=\"b-icon dedicated-extra-price__icon-good\"></span></td><td class=\"dedicated-extra-price__table-cell\">100 Mbps</td><td class=\"dedicated-extra-price__table-cell\">20 IP, traffic, cPanel, Windows, VPS, premium SLA, super backup</td><td class=\"dedicated-extra-price__table-cell\"><a href=\"\" ng-click=\"selectSale(s)\" class=\"b-submit dedicated-item-content__submit\">{{s.Price.Price|verboseCurrency}}</a></td><td class=\"dedicated-extra-price__table-cell\"><div time-to=\"s.Id\" class=\"black-sale__slider-item-timer\"></div></td></tr><tr ng-if=\"s.Id === selectedSale.Id\" class=\"dedicated-extra-price__table-row\"><td colspan=\"9\" class=\"dedicated-extra-price__table-cell\"><div server-calculator=\"\"></div></td></tr></tbody></table></div></div></div>");;return buf.join("");
+	buf.push("<div class=\"b-text-page__box\"><h3 class=\"b-text-page__title b-text-page__title_upline_yes\">EXTRA PRICE</h3><div class=\"b-dedicated__description\"><p>HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia. We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+ international resellers. Virtually any server configuration could be provided to our customers. We offer full range of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own servers in Moscow.</p></div></div><div class=\"b-dedicated__hide-block-close js-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div><div class=\"b-container\"><div class=\"dedicated-extra-price__box\"><table class=\"dedicated-extra-price__table dedicated-extra-price__table_type_head\"><tr class=\"dedicated-extra-price__table-row\"><td style=\"width:300px;\" class=\"dedicated-extra-price__table-cell\"></td><td class=\"dedicated-extra-price__table-cell\"></td><td style=\"width:370px;\" class=\"dedicated-extra-price__table-cell\"><div class=\"dedicated-extra-price__table-title\">Sort</div><span ui-select=\"filter.sort\" options=\"list.sort\" width=\"280\" style=\"display:inline-block;\"></span></td></tr></table></div><div class=\"dedicated-extra-price__box\"><table class=\"dedicated-extra-price__table\"><thead><tr class=\"dedicated-extra-price__table-row dedicated-extra-price__table-row_title_yes\"><td class=\"dedicated-extra-price__table-cell\"></td><td class=\"dedicated-extra-price__table-cell\">processor</td><td class=\"dedicated-extra-price__table-cell\">memory</td><td style=\"width:200px;\" class=\"dedicated-extra-price__table-cell\">hard drive</td><td class=\"dedicated-extra-price__table-cell\">hw raid</td><td class=\"dedicated-extra-price__table-cell\">Port</td><td style=\"width:280px;\" class=\"dedicated-extra-price__table-cell\">OS</td><td style=\"width:220px;\" class=\"dedicated-extra-price__table-cell\">monthly</td><td style=\"width:220px;\" class=\"dedicated-extra-price__table-cell dedicated-extra-price__table-cell_red_yes\">price will change after:</td></tr></thead><tbody ng-repeat=\"s in configStock\"><tr class=\"dedicated-extra-price__table-row\"><td class=\"dedicated-extra-price__table-cell\"><span ng-class=\"{'b-flag_country_nether': s.LocationCode==='NL'}\" class=\"b-icon b-flag\"></span></td><td class=\"dedicated-extra-price__table-cell\"><div class=\"dedicated-extra-price__text\">{{s.Cpu.Name}}</div><kpd-indicator cpu=\"s.Cpu\"></kpd-indicator></td><td class=\"dedicated-extra-price__table-cell\"><span class=\"dedicated-extra-price__text\">{{s.Ram}} GB</span></td><td class=\"dedicated-extra-price__table-cell\"><span ng-repeat=\"hdd in s.Hdd\" class=\"dedicated-extra-price__text\">{{hdd}}<br/></span></td><td class=\"dedicated-extra-price__table-cell\"><span class=\"b-icon dedicated-extra-price__icon-good\"></span></td><td class=\"dedicated-extra-price__table-cell\">100 Mbps</td><td class=\"dedicated-extra-price__table-cell\">20 IP, traffic, cPanel, Windows, VPS, premium SLA, super backup</td><td class=\"dedicated-extra-price__table-cell\"><a href=\"\" ng-click=\"selectSale(s)\" class=\"b-submit dedicated-item-content__submit\">{{s.Price.Price|verboseCurrency}}</a></td><td class=\"dedicated-extra-price__table-cell\"><div time-to=\"s.Id\" class=\"black-sale__slider-item-timer\"></div></td></tr><tr ng-if=\"s.Id === selectedSale.Id\" class=\"dedicated-extra-price__table-row\"><td colspan=\"9\" class=\"dedicated-extra-price__table-cell\"><div sale-server-calculator=\"\" sale-server=\"s\"></div></td></tr></tbody></table></div></div></div>");;return buf.join("");
 	}
 
 /***/ }

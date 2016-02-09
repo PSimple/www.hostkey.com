@@ -34,15 +34,22 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
 
         deferred.promise
 
-    # преобразуем объект заказа в нужный формат, который понимает метод $order.post()
+    ###
+        преобразуем объект заказа в нужный формат, который понимает метод $order.post()
+        используется для расчета стоимости
+        - dedicated-серверов
+        - sale-серверов (без hardware)
+    ###
     @orderFormat = (rawOrder) ->
 
         deferred = $q.defer()
 
         rawOrder = angular.copy(rawOrder)
 
-        order =
-            Hardware:
+        order = {}
+
+        if rawOrder.hardware
+            order.Hardware =
                 Cpu: rawOrder.hardware.cpu.ID
                 Ram: rawOrder.hardware.ram.ID
                 Platform: rawOrder.hardware.platform.ID
@@ -51,7 +58,8 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
                 RaidLevel: rawOrder.hardware.RaidLevel.ID
                 Label: $filter('orderVerbose')(rawOrder.hardware)
 
-            Software:
+        if rawOrder.software
+            order.Software =
                 OS: rawOrder.software.os.ID
                 Bit: rawOrder.software.bit.ID
                 CP: rawOrder.software.controlPanel?.ID
@@ -61,7 +69,8 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
                 ExchangeCount: Number(rawOrder.software.ExchangeCount.Value, 10)
                 Label: $filter('orderVerbose')(rawOrder.software)
 
-            Network:
+        if rawOrder.network
+            order.Network =
                 Traffic: rawOrder.network.traffic.ID
                 Bandwidth: rawOrder.network.Bandwidth.ID
                 DDOSProtection: rawOrder.network.DDOSProtection.ID
@@ -71,7 +80,8 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
                 IPv6: rawOrder.network.IPv6.Value
                 Label: $filter('orderVerbose')(rawOrder.network)
 
-            SLA:
+        if rawOrder.sla
+            order.SLA =
                 ServiceLevel: rawOrder.sla.serviceLevel.ID
                 Management: rawOrder.sla.management.ID
                 DCGrade: rawOrder.sla.DCGrade.ID
@@ -79,8 +89,14 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
                 CycleDiscount: rawOrder.discount.billingCycle.Period
                 Label: $filter('orderVerbose')(rawOrder.sla)
 
-            Currency: rawOrder.Currency
-            Groups: rawOrder.Groups
+        if rawOrder.sla
+            order.Currency = rawOrder.Currency
+
+        if rawOrder.Groups
+            order.Groups = rawOrder.Groups
+
+        if rawOrder.CompId
+            order.CompId = rawOrder.CompId
 
         deferred.resolve order
 
