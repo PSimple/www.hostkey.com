@@ -44,10 +44,12 @@ div
                             div processor
                         th.dedicated-extra-price__table-cell.sortable(ng-class="{'sort-asc': tableData.isSortBy('Ram', 'asc'), 'sort-desc': tableData.isSortBy('Ram', 'desc')}", ng-click="tableData.sorting('Ram', tableData.isSortBy('Ram', 'asc') ? 'desc' : 'asc')")
                             div memory
-                        th.dedicated-extra-price__table-cell(ng-class="{'sort-asc': tableData.isSortBy('Hdd', 'asc'), 'sort-desc': tableData.isSortBy('Hdd', 'desc')}", ng-click="tableData.sorting('Hdd', tableData.isSortBy('Hdd', 'asc') ? 'desc' : 'asc')", style="width:200px;")
-                            | hard drive
-                        th.dedicated-extra-price__table-cell hw raid
-                        th.dedicated-extra-price__table-cell Port
+                        th.dedicated-extra-price__table-cell.sortable(ng-class="{'sort-asc': tableData.isSortBy('Hdd', 'asc'), 'sort-desc': tableData.isSortBy('Hdd', 'desc')}", ng-click="tableData.sorting('Hdd', tableData.isSortBy('Hdd', 'asc') ? 'desc' : 'asc')", style="width:200px;")
+                            div hard drive
+                        th.dedicated-extra-price__table-cell
+                            div hw raid
+                        th.dedicated-extra-price__table-cell
+                            div Port
                         th.dedicated-extra-price__table-cell.sortable(ng-class="{'sort-asc': tableData.isSortBy('Os', 'asc'), 'sort-desc': tableData.isSortBy('Os', 'desc')}", ng-click="tableData.sorting('Os', tableData.isSortBy('Os', 'asc') ? 'desc' : 'asc')", style="width:280px;")
                             div OS
                         th.dedicated-extra-price__table-cell.sortable(ng-class="{'sort-asc': tableData.isSortBy('Price', 'asc'), 'sort-desc': tableData.isSortBy('Price', 'desc')}", ng-click="tableData.sorting('Price', tableData.isSortBy('Price', 'asc') ? 'desc' : 'asc')", style="width:220px;")
@@ -68,7 +70,7 @@ div
                             span.dedicated-extra-price__text {{s.Ram}} GB
 
                         td.dedicated-extra-price__table-cell(sortable="'Hdd'")
-                            span {{s.Hdd}}
+                            span(ng-bind-html="s.Hdd")
 
                         td.dedicated-extra-price__table-cell
                             span.b-icon.dedicated-extra-price__icon-good

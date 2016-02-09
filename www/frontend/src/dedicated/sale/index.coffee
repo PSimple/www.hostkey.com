@@ -55,7 +55,7 @@ angular.module("app.dedicated.sale").controller "AppDedicatedSaleCtrl", (ngTable
                 CpuCnt: parseInt(r.Cpu.Cnt, 10)
                 CpuKpdLink: r.Cpu.KpdLink
                 Ram: parseInt(r.Ram, 10)
-                Hdd: r.Hdd.join(",")
+                Hdd: r.Hdd.join("<br>")
                 Price: parseInt(r.Price.Price, 10)
                 Timer: parseInt(r.Id, 10)
         arr
