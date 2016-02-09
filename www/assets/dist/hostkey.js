@@ -48694,7 +48694,7 @@
 	            return scope.model = JSON.parse(element.select2('val'));
 	          });
 	        });
-	      });
+	      }, 300);
 	    }
 	  };
 	}]);

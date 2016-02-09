@@ -28,6 +28,7 @@ angular.module("ui.select").directive "select2", ($timeout) ->
             element.bind "change", ->
                 $timeout ->
                     scope.model = JSON.parse(element.select2('val'))
+        , 300
 
 
 angular.module("ui.select").directive "uiSelect",  ->
