@@ -6,18 +6,17 @@
 *.log
 
 # Project
-cache
-test
-config.php
 test.php
+config.php
+test
+cache
+ckeditor
+ckfinder
 www/zero
 www/exchange
 www/library
 www/application/mail
 www/application/document
-www/assets/ckeditor
-www/assets/ckfinder
-www/assets/editor
 
 # External dependences
 
