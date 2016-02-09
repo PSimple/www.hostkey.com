@@ -73,7 +73,7 @@
 
 	__webpack_require__(7);
 
-	__webpack_require__(50);
+	__webpack_require__(48);
 
 
 /***/ },
@@ -90,9 +90,9 @@
 
 	__webpack_require__(15);
 
-	__webpack_require__(40);
+	__webpack_require__(38);
 
-	__webpack_require__(44);
+	__webpack_require__(42);
 
 	angular.module("dedicated.service", ["ngSanitize", "ui", "ui.router", "api", "dedicated.service.selected"]);
 
@@ -112,7 +112,7 @@
 	    views: {
 	      "solutions": {
 	        controller: "DedicatedServiceSolutionsCtrl",
-	        template: __webpack_require__(47)("./solutions." + window.country + ".jade"),
+	        template: __webpack_require__(45)("./solutions." + window.country + ".jade"),
 	        resolve: {
 	          solutions: ["$solutions", function($solutions) {
 	            return $solutions.getList();
@@ -44292,7 +44292,9 @@
 
 	__webpack_require__(32);
 
-	angular.module("ui", ["ui.buttons", "ui.scrollBlock", "ui.accordion", "ui.select", "ui.columns", "ui.notifications", "ui.anchor", "ui.kpdIndicator", "ui.timeTo", "ui.serverCalculator"]);
+	__webpack_require__(36);
+
+	angular.module("ui", ["ui.buttons", "ui.scrollBlock", "ui.accordion", "ui.select", "ui.columns", "ui.notifications", "ui.anchor", "ui.kpdIndicator", "ui.timeTo", "ui.serverCalculator", "ui.ngTable"]);
 
 	angular.module("ui").filter('orderVerbose', function() {
 	  return function(obj) {
@@ -55234,14 +55236,16 @@
 	    restrict: "AE",
 	    replace: true,
 	    scope: {
-	      cpu: "=cpu"
+	      cpuKpd: "=",
+	      cpuCnt: "=",
+	      cpuKpdLink: "="
 	    },
-	    template: "<div class=\"b-range\" ng-repeat=\"count in Cnt\">\n    <a ng-href=\"{{$parent.cpu.KpdLink}}\" title=\"Performance per CPU: {{$parent.cpu.Kpd}}, total: {{$parent.cpu.Kpd}}\" target=\"_blank\">\n        <span\n            class=\"b-range__item\"\n            ng-repeat=\"kpd in $parent.kpdItems\"\n            ng-class=\"{'b-range__item_type_green': $parent.$parent.cpu.Kpd >= kpd*1500}\">\n        </span>\n    </a>\n</div>",
+	    template: "<div class=\"b-range\" ng-repeat=\"count in Cnt\">\n    <a ng-href=\"{{$parent.cpuKpdLink}}\" title=\"Performance per CPU: {{$parent.cpuKpd}}, total: {{$parent.cpuKpd}}\" target=\"_blank\">\n        <span\n            class=\"b-range__item\"\n            ng-repeat=\"kpd in $parent.kpdItems\"\n            ng-class=\"{'b-range__item_type_green': $parent.$parent.cpuKpd >= kpd*1500}\">\n        </span>\n    </a>\n</div>",
 	    link: function(scope, element, attrs, ngModel) {
 	      var i, ref, results;
 	      scope.Cnt = (function() {
 	        results = [];
-	        for (var i = 1, ref = scope.cpu.Cnt; 1 <= ref ? i <= ref : i >= ref; 1 <= ref ? i++ : i--){ results.push(i); }
+	        for (var i = 1, ref = scope.cpuCnt; 1 <= ref ? i <= ref : i >= ref; 1 <= ref ? i++ : i--){ results.push(i); }
 	        return results;
 	      }).apply(this);
 	      return scope.kpdItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
@@ -56049,18 +56053,21 @@
 	/* (ignored) */
 
 /***/ },
-/* 36 */,
+/* 36 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
 /* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
+	__webpack_require__(39);
+
+	__webpack_require__(40);
+
 	__webpack_require__(41);
-
-	__webpack_require__(42);
-
-	__webpack_require__(43);
 
 	angular.module("api", ["api.dedicated", "api.order", "api.solutions"]);
 
@@ -56068,7 +56075,7 @@
 
 
 /***/ },
-/* 41 */
+/* 39 */
 /***/ function(module, exports) {
 
 	var objectToArray;
@@ -56251,6 +56258,7 @@
 	    $http({
 	      url: url,
 	      method: "GET",
+	      cache: true,
 	      params: {
 	        currency: window.currency,
 	        groups: groups
@@ -56279,7 +56287,7 @@
 
 
 /***/ },
-/* 42 */
+/* 40 */
 /***/ function(module, exports) {
 
 	angular.module("api.order", ["config"]);
@@ -56429,7 +56437,7 @@
 
 
 /***/ },
-/* 43 */
+/* 41 */
 /***/ function(module, exports) {
 
 	angular.module("api.solutions", ["config"]);
@@ -56491,10 +56499,10 @@
 
 
 /***/ },
-/* 44 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(45);
+	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(43);
 
 	angular.module("dedicated.service.selected", []);
 
@@ -56502,7 +56510,7 @@
 	  $stateProvider.state("dedicatedService.selected", {
 	    url: "/type/:type",
 	    controller: "SelectedCtrl",
-	    template: __webpack_require__(46),
+	    template: __webpack_require__(44),
 	    resolve: {
 	      components: ["$dedicated", function($dedicated) {
 	        return $dedicated.components();
@@ -56957,7 +56965,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 45 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -58511,7 +58519,7 @@
 
 
 /***/ },
-/* 46 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(34);
@@ -58525,12 +58533,12 @@
 	}
 
 /***/ },
-/* 47 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./solutions.NL.jade": 48,
-		"./solutions.RU.jade": 49
+		"./solutions.NL.jade": 46,
+		"./solutions.RU.jade": 47
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -58543,11 +58551,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 47;
+	webpackContext.id = 45;
 
 
 /***/ },
-/* 48 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(34);
@@ -58561,7 +58569,7 @@
 	}
 
 /***/ },
-/* 49 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(34);
@@ -58575,7 +58583,7 @@
 	}
 
 /***/ },
-/* 50 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(8);
@@ -58584,7 +58592,7 @@
 
 	__webpack_require__(15);
 
-	__webpack_require__(40);
+	__webpack_require__(38);
 
 	angular.module("app.dedicated.sale", ["ui", "ui.router", "api"]);
 
@@ -58592,7 +58600,7 @@
 	  $urlRouterProvider.otherwise("");
 	  return $stateProvider.state("sale", {
 	    url: "",
-	    template: __webpack_require__(51),
+	    template: __webpack_require__(49),
 	    controller: "AppDedicatedSaleCtrl",
 	    resolve: {
 	      configStock: ["$dedicated", function($dedicated) {
@@ -58613,13 +58621,46 @@
 	  });
 	}]);
 
-	angular.module("app.dedicated.sale").controller("AppDedicatedSaleCtrl", ["$state", "$stateParams", "$scope", "$rootScope", "configStock", "listSort", function($state, $stateParams, $scope, $rootScope, configStock, listSort) {
+	angular.module("app.dedicated.sale").controller("AppDedicatedSaleCtrl", ["ngTableParams", "$filter", "$state", "$stateParams", "$scope", "$rootScope", "configStock", "listSort", function(ngTableParams, $filter, $state, $stateParams, $scope, $rootScope, configStock, listSort) {
+	  var prepareData, tableData;
 	  $scope.list = {
 	    sort: listSort
 	  };
 	  $scope.filter = {
 	    sort: angular.copy(listSort[0])
 	  };
+	  $scope.configStock = configStock;
+	  prepareData = function(rawArray) {
+	    var arr;
+	    arr = [];
+	    rawArray.forEach(function(r) {
+	      return arr.push({
+	        Id: r.Id,
+	        LocationCode: r.LocationCode,
+	        CpuKpd: parseInt(r.Cpu.Kpd, 10),
+	        CpuName: r.Cpu.Name,
+	        CpuCnt: parseInt(r.Cpu.Cnt, 10),
+	        CpuKpdLink: r.Cpu.KpdLink,
+	        Ram: parseInt(r.Ram, 10),
+	        Hdd: r.Hdd.join(","),
+	        Price: parseInt(r.Price.Price, 10),
+	        Timer: parseInt(r.Id, 10)
+	      });
+	    });
+	    return arr;
+	  };
+	  tableData = prepareData(configStock);
+	  $scope.tableData = new ngTableParams({
+	    page: 1,
+	    count: 10
+	  }, {
+	    total: configStock.length,
+	    getData: function($defer, params) {
+	      var orderedData;
+	      orderedData = params.sorting() ? $filter('orderBy')(tableData, params.orderBy()) : tableData;
+	      return $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+	    }
+	  });
 	  $rootScope.$stateParams = $stateParams;
 	  $rootScope.$state = $state;
 	  $rootScope.bodyClass = function() {
@@ -58628,7 +58669,6 @@
 	    };
 	  };
 	  $rootScope.loaded = true;
-	  $scope.configStock = configStock;
 	  return $scope.selectSale = function(s) {
 	    var ref;
 	    if (s.Id === ((ref = $scope.selectedSale) != null ? ref.Id : void 0)) {
@@ -58641,7 +58681,7 @@
 
 
 /***/ },
-/* 51 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(34);
@@ -58651,7 +58691,7 @@
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-text-page__box\"><h3 class=\"b-text-page__title b-text-page__title_upline_yes\">EXTRA PRICE</h3><div class=\"b-dedicated__description\"><p>HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia. We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+ international resellers. Virtually any server configuration could be provided to our customers. We offer full range of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own servers in Moscow.</p></div></div><div class=\"b-dedicated__hide-block-close js-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div><div class=\"b-container\"><div class=\"dedicated-extra-price__box\"><table class=\"dedicated-extra-price__table dedicated-extra-price__table_type_head\"><tr class=\"dedicated-extra-price__table-row\"><td style=\"width:300px;\" class=\"dedicated-extra-price__table-cell\"></td><td class=\"dedicated-extra-price__table-cell\"></td><td style=\"width:370px;\" class=\"dedicated-extra-price__table-cell\"><div class=\"dedicated-extra-price__table-title\">Sort</div><span ui-select=\"filter.sort\" options=\"list.sort\" width=\"280\" style=\"display:inline-block;\"></span></td></tr></table></div><div class=\"dedicated-extra-price__box\"><table class=\"dedicated-extra-price__table\"><thead><tr class=\"dedicated-extra-price__table-row dedicated-extra-price__table-row_title_yes\"><td class=\"dedicated-extra-price__table-cell\"></td><td class=\"dedicated-extra-price__table-cell\">processor</td><td class=\"dedicated-extra-price__table-cell\">memory</td><td style=\"width:200px;\" class=\"dedicated-extra-price__table-cell\">hard drive</td><td class=\"dedicated-extra-price__table-cell\">hw raid</td><td class=\"dedicated-extra-price__table-cell\">Port</td><td style=\"width:280px;\" class=\"dedicated-extra-price__table-cell\">OS</td><td style=\"width:220px;\" class=\"dedicated-extra-price__table-cell\">monthly</td><td style=\"width:220px;\" class=\"dedicated-extra-price__table-cell dedicated-extra-price__table-cell_red_yes\">price will change after:</td></tr></thead><tbody ng-repeat=\"s in configStock\"><tr class=\"dedicated-extra-price__table-row\"><td class=\"dedicated-extra-price__table-cell\"><span ng-class=\"{'b-flag_country_nether': s.LocationCode==='NL'}\" class=\"b-icon b-flag\"></span></td><td class=\"dedicated-extra-price__table-cell\"><div class=\"dedicated-extra-price__text\">{{s.Cpu.Name}}</div><kpd-indicator cpu=\"s.Cpu\"></kpd-indicator></td><td class=\"dedicated-extra-price__table-cell\"><span class=\"dedicated-extra-price__text\">{{s.Ram}} GB</span></td><td class=\"dedicated-extra-price__table-cell\"><span ng-repeat=\"hdd in s.Hdd\" class=\"dedicated-extra-price__text\">{{hdd}}<br/></span></td><td class=\"dedicated-extra-price__table-cell\"><span class=\"b-icon dedicated-extra-price__icon-good\"></span></td><td class=\"dedicated-extra-price__table-cell\">100 Mbps</td><td class=\"dedicated-extra-price__table-cell\">20 IP, traffic, cPanel, Windows, VPS, premium SLA, super backup</td><td class=\"dedicated-extra-price__table-cell\"><a href=\"\" ng-click=\"selectSale(s)\" class=\"b-submit dedicated-item-content__submit\">{{s.Price.Price|verboseCurrency}}</a></td><td class=\"dedicated-extra-price__table-cell\"><div time-to=\"s.Id\" class=\"black-sale__slider-item-timer\"></div></td></tr><tr ng-if=\"s.Id === selectedSale.Id\" class=\"dedicated-extra-price__table-row\"><td colspan=\"9\" class=\"dedicated-extra-price__table-cell\"><div sale-server-calculator=\"\" sale-server=\"s\"></div></td></tr></tbody></table></div></div></div>");;return buf.join("");
+	buf.push("<div class=\"b-text-page__box\"><h3 class=\"b-text-page__title b-text-page__title_upline_yes\">EXTRA PRICE</h3><div class=\"b-dedicated__description\"><p>HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia. We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+ international resellers. Virtually any server configuration could be provided to our customers. We offer full range of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own servers in Moscow.</p></div></div><div class=\"b-dedicated__hide-block-close js-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div><div class=\"b-container\"><div class=\"dedicated-extra-price__box\"><table ng-table=\"tableData\" show-filter=\"true\" class=\"dedicated-extra-price__table\"><thead><tr class=\"dedicated-extra-price__table-row dedicated-extra-price__table-row_title_yes\"><th class=\"dedicated-extra-price__table-cell\"></th><th ng-class=\"{'sort-asc': tableData.isSortBy('CpuKpd', 'asc'), 'sort-desc': tableData.isSortBy('CpuKpd', 'desc')}\" ng-click=\"tableData.sorting('CpuKpd', tableData.isSortBy('CpuKpd', 'asc') ? 'desc' : 'asc')\" class=\"dedicated-extra-price__table-cell sortable\"><div>processor</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Ram', 'asc'), 'sort-desc': tableData.isSortBy('Ram', 'desc')}\" ng-click=\"tableData.sorting('Ram', tableData.isSortBy('Ram', 'asc') ? 'desc' : 'asc')\" class=\"dedicated-extra-price__table-cell sortable\"><div>memory</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Hdd', 'asc'), 'sort-desc': tableData.isSortBy('Hdd', 'desc')}\" ng-click=\"tableData.sorting('Hdd', tableData.isSortBy('Hdd', 'asc') ? 'desc' : 'asc')\" style=\"width:200px;\" class=\"dedicated-extra-price__table-cell\">hard drive</th><th class=\"dedicated-extra-price__table-cell\">hw raid</th><th class=\"dedicated-extra-price__table-cell\">Port</th><th ng-class=\"{'sort-asc': tableData.isSortBy('Os', 'asc'), 'sort-desc': tableData.isSortBy('Os', 'desc')}\" ng-click=\"tableData.sorting('Os', tableData.isSortBy('Os', 'asc') ? 'desc' : 'asc')\" style=\"width:280px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>OS</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Price', 'asc'), 'sort-desc': tableData.isSortBy('Price', 'desc')}\" ng-click=\"tableData.sorting('Price', tableData.isSortBy('Price', 'asc') ? 'desc' : 'asc')\" style=\"width:220px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>monthly</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Timer', 'asc'), 'sort-desc': tableData.isSortBy('Timer', 'desc')}\" ng-click=\"tableData.sorting('Timer', tableData.isSortBy('Timer', 'asc') ? 'desc' : 'asc')\" style=\"width:220px;\" class=\"dedicated-extra-price__table-cell dedicated-extra-price__table-cell_red_yes sortable\"><div>price will change after:</div></th></tr></thead><tbody ng-repeat=\"s in $data\"><tr class=\"dedicated-extra-price__table-row\"><td class=\"dedicated-extra-price__table-cell\"><span ng-class=\"{'b-flag_country_nether': s.LocationCode==='NL'}\" class=\"b-icon b-flag\"></span></td><td sortable=\"'CpuKpd'\" class=\"dedicated-extra-price__table-cell\"><div ng-bind=\"s.CpuName\" class=\"dedicated-extra-price__text\"></div><kpd-indicator cpu-kpd=\"s.CpuKpd\" cpu-kpd-link=\"s.CpuKpdLink\" cpu-cnt=\"s.CpuCnt\"></kpd-indicator></td><td sortable=\"'Ram'\" class=\"dedicated-extra-price__table-cell\"><span class=\"dedicated-extra-price__text\">{{s.Ram}} GB</span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span>{{s.Hdd}}</span></td><td class=\"dedicated-extra-price__table-cell\"><span class=\"b-icon dedicated-extra-price__icon-good\"></span></td><td class=\"dedicated-extra-price__table-cell\">100 Mbps</td><td class=\"dedicated-extra-price__table-cell\">20 IP, traffic, cPanel, Windows, VPS, premium SLA, super backup</td><td sortable=\"'Price'\" class=\"dedicated-extra-price__table-cell\"><a href=\"\" ng-click=\"selectSale(s)\" class=\"b-submit dedicated-item-content__submit\">{{s.Price|verboseCurrency}}</a></td><td sortable=\"'Timer'\" class=\"dedicated-extra-price__table-cell\"><div time-to=\"s.Timer\" class=\"black-sale__slider-item-timer\"></div></td></tr><tr ng-if=\"s.Id === selectedSale.Id\" class=\"dedicated-extra-price__table-row\"><td colspan=\"9\" class=\"dedicated-extra-price__table-cell\"><div sale-server-calculator=\"\" sale-server=\"s\"></div></td></tr></tbody></table></div></div></div>");;return buf.join("");
 	}
 
 /***/ }

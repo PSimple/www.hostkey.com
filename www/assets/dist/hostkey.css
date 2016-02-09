@@ -100,6 +100,18 @@ tbody.collapse.in {
     margin: 0;
   }
 }
+.pagination li {
+  display: inline-block;
+}
+.pagination li a {
+  text-decoration: none !important;
+  font-size: 20px;
+  padding: 10px;
+  color: #ff692d;
+}
+.pagination li.disabled a {
+  color: #ccc;
+}
 ._angular .b-dedicated__summary {
   margin-left: 45px;
 }
@@ -139,6 +151,9 @@ tbody.collapse.in {
 }
 .dedicated-extra-price__table-row .b-dedicated__summary.is-fixed {
   margin-left: 40px !important;
+}
+.dedicated-extra-price__box .btn-group {
+  display: none;
 }
 .select2-container {
   box-sizing: border-box;
@@ -571,3 +586,80 @@ tbody.collapse.in {
   padding: 6px; }
 .select2-container--classic.select2-container--open .select2-dropdown {
   border-color: #5897fb; }
+table th.sortable {
+  cursor: pointer;
+}
+table th.sortable div {
+  padding-right: 25px;
+  position: relative;
+  display: inline-block;
+}
+table th.sortable div:after,
+table th.sortable div:before {
+  content: "";
+  border-width: 0 4px 4px;
+  border-style: solid;
+  border-color: #979797 transparent;
+  visibility: visible;
+  right: 8px;
+  top: 50%;
+  position: absolute;
+  opacity: 1;
+  margin-top: -8px;
+}
+table th.sortable div:before {
+  margin-top: 2px;
+  border-bottom: none;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #979797;
+}
+table th.sortable div:hover:after,
+table th.sortable div:hover:before {
+  opacity: 1;
+  visibility: visible;
+}
+table th.sortable.sort-desc,
+table th.sortable.sort-asc {
+  background-color: transparent;
+  text-shadow: none;
+}
+table th.sortable.sort-desc div:after,
+table th.sortable.sort-asc div:after {
+  margin-top: -8px;
+}
+table th.sortable.sort-desc div:before,
+table th.sortable.sort-asc div:before {
+  visibility: visible;
+}
+table th.sortable.sort-asc div:after,
+table th.sortable.sort-asc div:hover:after {
+  visibility: visible;
+  filter: alpha(opacity=100);
+  -khtml-opacity: 1;
+  -moz-opacity: 1;
+  opacity: 1;
+}
+table th.sortable.sort-asc div:before {
+  border-top: 4px solid #cbcbc9;
+}
+table th.sortable.sort-desc div:after {
+  border-bottom: 4px solid #cbcbc9;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: none;
+  visibility: visible;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  filter: alpha(opacity=100);
+  -khtml-opacity: 100;
+  -moz-opacity: 100;
+  opacity: 100;
+}
+table th.sortable.sort-desc div:before {
+  border-top-color: #ff692d;
+}
+table th.sortable.sort-asc div:after {
+  border-bottom-color: #ff692d;
+}
