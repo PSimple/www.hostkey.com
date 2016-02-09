@@ -208,7 +208,6 @@
                     return false;
                 }
 
-                //
                 var order = {};
                 order['os'] = os;
                 order['port'] = port;
@@ -223,14 +222,11 @@
                                     window.console.log(data);
                                     return;
                                 }
-                                //window.console.log(data);
                                 var str = "https://bill.hostkey.com/cart.php?a=add&currency=" + data['Content']['currencyId'] + "&pid=448";
                                 str += "&configoption[600]=" + data['Content']['OptionID'];
                                 str += "&billingcycle=monthly&customfield[220]=" + data['Content']['Configuration'];
                                 window.console.log(str);
                                 document.location = str;
-                                //window.console.log(data);
-                                //document.location = "https://bill.hostkey.com/cart.php?a=view";
                             } else {
                                 alert('Error order create');
                             }
