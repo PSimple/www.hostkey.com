@@ -493,7 +493,6 @@
         $eventSelectBAL.on("change", function (e) {
             var id_vm_template = $( this ).select2("val");
             var preset_number = e.target.getAttribute('data_preset');
-           // console.log(  preset_number + "---" + id_vm_template );
             ZakazY[preset_number][{key($arr_Backups_Limit)}]['data']['0'] = window.AddOptionToZakaz( Backups_Limit, id_vm_template );
             Zakaz = ZakazY[preset_number];
              var p = window.SumUpResultZakaz( Zakaz );
@@ -548,8 +547,7 @@
             $.scrollTo(0, 1000);
               crFrame( );
               return false;
-            ;
-        })
+        });
 
         $( '#calc-breadcrambs-back').bind('click', function(){
             $( '#calc').show( 'slow' );
@@ -565,13 +563,13 @@
             $.scrollTo('#calc', 1000, { offset:-1100 });
             document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
             return false;
-        })
+        });
 
         function crFrame( )
         {
             document.getElementById('configure_cloud_VDS').src = 'https://bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
                     + generate_post ( Zakaz ) ;
-        };
+        }
 
 
 
