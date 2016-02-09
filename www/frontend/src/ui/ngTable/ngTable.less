@@ -1,0 +1,79 @@
+table {
+  th{
+    &.sortable {
+      cursor: pointer;
+
+      div {
+        padding-right: 25px;
+        position: relative;
+        display: inline-block;
+
+        &:after, &:before {
+          content: "";
+          border-width: 0 4px 4px;
+          border-style: solid;
+          border-color: #979797 transparent;
+          visibility: visible;
+          right: 8px;
+          top: 50%;
+          position: absolute;
+          opacity: 1;
+          margin-top: -8px;
+        }
+        &:before {
+          margin-top: 2px;
+          border-bottom: none;
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+          border-top: 4px solid #979797;
+        }
+      }
+
+      div:hover:after, div:hover:before {
+        opacity: 1;
+        visibility: visible;
+      }
+      &.sort-desc, &.sort-asc {
+        background-color: transparent;
+        text-shadow: none;
+
+        div:after {
+          margin-top: -8px;
+        }
+        div:before {
+          visibility: visible;
+        }
+      }
+      &.sort-asc div:after, &.sort-asc div:hover:after {
+        visibility: visible;
+        filter: alpha(opacity=100);
+        -khtml-opacity: 1;
+        -moz-opacity: 1;
+        opacity: 1;
+      }
+      &.sort-asc div:before {
+        border-top: 4px solid #cbcbc9;
+      }
+      &.sort-desc div:after {
+        border-bottom: 4px solid #cbcbc9;
+        border-left: 4px solid transparent;
+        border-right: 4px solid transparent;
+        border-top: none;
+        visibility: visible;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        filter: alpha(opacity=100);
+        -khtml-opacity: 100;
+        -moz-opacity: 100;
+        opacity: 100;
+      }
+      &.sort-desc div:before {
+        border-top-color: #ff692d;
+      }
+      &.sort-asc div:after {
+        border-bottom-color: #ff692d;
+      }
+    }
+  }
+}

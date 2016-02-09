@@ -34,13 +34,43 @@ angular.module("app.dedicated.sale").config ($httpProvider, $stateProvider, $url
                 ]
 
 
-angular.module("app.dedicated.sale").controller "AppDedicatedSaleCtrl", ($state, $stateParams, $scope, $rootScope, configStock, listSort) ->
+angular.module("app.dedicated.sale").controller "AppDedicatedSaleCtrl", (ngTableParams, $filter, $state, $stateParams, $scope, $rootScope, configStock, listSort) ->
 
     $scope.list =
         sort: listSort
 
     $scope.filter =
         sort: angular.copy listSort[0]
+
+    $scope.configStock = configStock
+
+    prepareData = (rawArray) ->
+        arr = []
+        rawArray.forEach (r) ->
+            arr.push
+                Id: r.Id
+                LocationCode: r.LocationCode
+                CpuKpd: parseInt(r.Cpu.Kpd, 10)
+                CpuName: r.Cpu.Name
+                CpuCnt: parseInt(r.Cpu.Cnt, 10)
+                CpuKpdLink: r.Cpu.KpdLink
+                Ram: parseInt(r.Ram, 10)
+                Hdd: r.Hdd.join(",")
+                Price: parseInt(r.Price.Price, 10)
+                Timer: parseInt(r.Id, 10)
+        arr
+
+    tableData = prepareData(configStock)
+
+    $scope.tableData = new ngTableParams({
+        page: 1,
+        count: 10
+    }, {
+        total: configStock.length,
+        getData: ($defer, params) ->
+            orderedData = if params.sorting() then $filter('orderBy')(tableData, params.orderBy()) else tableData
+            $defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()))
+    })
 
     $rootScope.$stateParams = $stateParams
     $rootScope.$state = $state
@@ -49,8 +79,6 @@ angular.module("app.dedicated.sale").controller "AppDedicatedSaleCtrl", ($state,
         {in: $rootScope.loaded}
 
     $rootScope.loaded = true
-
-    $scope.configStock = configStock
 
     $scope.selectSale = (s) ->
 

@@ -73,7 +73,7 @@
 
 	__webpack_require__(7);
 
-	__webpack_require__(47);
+	__webpack_require__(50);
 
 
 /***/ },
@@ -90,9 +90,9 @@
 
 	__webpack_require__(15);
 
-	__webpack_require__(36);
+	__webpack_require__(40);
 
-	__webpack_require__(41);
+	__webpack_require__(44);
 
 	angular.module("dedicated.service", ["ngSanitize", "ui", "ui.router", "api", "dedicated.service.selected"]);
 
@@ -112,7 +112,7 @@
 	    views: {
 	      "solutions": {
 	        controller: "DedicatedServiceSolutionsCtrl",
-	        template: __webpack_require__(44)("./solutions." + window.country + ".jade"),
+	        template: __webpack_require__(47)("./solutions." + window.country + ".jade"),
 	        resolve: {
 	          solutions: ["$solutions", function($solutions) {
 	            return $solutions.getList();
@@ -56049,14 +56049,18 @@
 	/* (ignored) */
 
 /***/ },
-/* 36 */
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(37);
+	__webpack_require__(41);
 
-	__webpack_require__(38);
+	__webpack_require__(42);
 
-	__webpack_require__(40);
+	__webpack_require__(43);
 
 	angular.module("api", ["api.dedicated", "api.order", "api.solutions"]);
 
@@ -56064,7 +56068,7 @@
 
 
 /***/ },
-/* 37 */
+/* 41 */
 /***/ function(module, exports) {
 
 	var objectToArray;
@@ -56275,7 +56279,7 @@
 
 
 /***/ },
-/* 38 */
+/* 42 */
 /***/ function(module, exports) {
 
 	angular.module("api.order", ["config"]);
@@ -56425,8 +56429,7 @@
 
 
 /***/ },
-/* 39 */,
-/* 40 */
+/* 43 */
 /***/ function(module, exports) {
 
 	angular.module("api.solutions", ["config"]);
@@ -56488,10 +56491,10 @@
 
 
 /***/ },
-/* 41 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(42);
+	/* WEBPACK VAR INJECTION */(function($) {window._ = __webpack_require__(45);
 
 	angular.module("dedicated.service.selected", []);
 
@@ -56499,7 +56502,7 @@
 	  $stateProvider.state("dedicatedService.selected", {
 	    url: "/type/:type",
 	    controller: "SelectedCtrl",
-	    template: __webpack_require__(43),
+	    template: __webpack_require__(46),
 	    resolve: {
 	      components: ["$dedicated", function($dedicated) {
 	        return $dedicated.components();
@@ -56954,7 +56957,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ },
-/* 42 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -58508,7 +58511,7 @@
 
 
 /***/ },
-/* 43 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(34);
@@ -58522,12 +58525,12 @@
 	}
 
 /***/ },
-/* 44 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./solutions.NL.jade": 45,
-		"./solutions.RU.jade": 46
+		"./solutions.NL.jade": 48,
+		"./solutions.RU.jade": 49
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -58540,11 +58543,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 44;
+	webpackContext.id = 47;
 
 
 /***/ },
-/* 45 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(34);
@@ -58558,7 +58561,7 @@
 	}
 
 /***/ },
-/* 46 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(34);
@@ -58572,7 +58575,7 @@
 	}
 
 /***/ },
-/* 47 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(8);
@@ -58581,7 +58584,7 @@
 
 	__webpack_require__(15);
 
-	__webpack_require__(36);
+	__webpack_require__(40);
 
 	angular.module("app.dedicated.sale", ["ui", "ui.router", "api"]);
 
@@ -58589,7 +58592,7 @@
 	  $urlRouterProvider.otherwise("");
 	  return $stateProvider.state("sale", {
 	    url: "",
-	    template: __webpack_require__(48),
+	    template: __webpack_require__(51),
 	    controller: "AppDedicatedSaleCtrl",
 	    resolve: {
 	      configStock: ["$dedicated", function($dedicated) {
@@ -58638,7 +58641,7 @@
 
 
 /***/ },
-/* 48 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var jade = __webpack_require__(34);

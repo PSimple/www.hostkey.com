@@ -10,7 +10,7 @@ require './anchor/anchor'
 require './kpdIndicator/kpdIndicator'
 require './timeTo/timeTo'
 require './serverCalculator/serverCalculator'
-
+require './ngTable/ngTable'
 
 angular.module "ui", [
 #    "ui.bootstrap"
@@ -24,6 +24,7 @@ angular.module "ui", [
     "ui.kpdIndicator"
     "ui.timeTo"
     "ui.serverCalculator"
+    "ui.ngTable"
 ]
 
 angular.module("ui").filter 'orderVerbose',  ->
