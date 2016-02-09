@@ -48,7 +48,6 @@ class Shop_Cloud_ContainerVPS extends Zero_Controller
         $table_row_data = array();
         foreach ($p as $key => $value)
         {
-
             foreach ($value as $k => $v)
             {
                 if ( $v['hidden'] == 0 )
