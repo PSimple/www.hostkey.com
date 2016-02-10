@@ -1078,12 +1078,11 @@ p {
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  width: 135px;
+  width: 155px;
   display: inline-block;
   vertical-align: top;
   margin: 0 5px 5px 0;
   cursor: pointer;
-  text-transform: uppercase;
 }
 .b-checkbox-submit_size_70 {
   width: 65px;
