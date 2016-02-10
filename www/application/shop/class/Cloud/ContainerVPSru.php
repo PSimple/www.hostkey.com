@@ -48,19 +48,31 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
         $table_row_data = array();
         foreach ($p as $key => $value)
         {
-            foreach ($value as $k => $v)
+            if ( $value['hidden'] == 0 )
             {
-                if ( $v['hidden'] == 0 )
+                foreach ($value[0] as $kk => $vv)
                 {
-                    foreach ($v as $kk => $vv)
-                    {
-                        $table_row_data[$vv['name']][$key]['name'] = $vv['data'][0]['name'];
-                        $table_row_data[$vv['name']][$key]['id'] = $vv['data'][0]['id'];
-                        $table_row_data[$vv['name']][$key]['monthly'] = $vv['data'][0]['monthly'];
-                    }
+                    $table_row_data[$vv['name']][$key]['name'] = $vv['data'][0]['name'];
+                    $table_row_data[$vv['name']][$key]['id'] = $vv['data'][0]['id'];
+                    $table_row_data[$vv['name']][$key]['monthly'] = $vv['data'][0]['monthly'];
                 }
             }
         }
+//        foreach ($p as $key => $value)
+//        {
+//            foreach ($value as $k => $v)
+//            {
+//                if ( $v['hidden'] == 0 )
+//                {
+//                    foreach ($v as $kk => $vv)
+//                    {
+//                        $table_row_data[$vv['name']][$key]['name'] = $vv['data'][0]['name'];
+//                        $table_row_data[$vv['name']][$key]['id'] = $vv['data'][0]['id'];
+//                        $table_row_data[$vv['name']][$key]['monthly'] = $vv['data'][0]['monthly'];
+//                    }
+//                }
+//            }
+//        }
 
         foreach ($p as $key_add_default => $val_add_default)
         {
