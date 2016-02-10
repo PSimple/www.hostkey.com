@@ -31,7 +31,6 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         if ( 0 < $_REQUEST['CompId'] )
         {
             $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . str_replace(',', '_', $_REQUEST['Groups']) . '.data';
-            Zero_Logs::File(__FUNCTION__, $path);
             if ( !file_exists($path) )
                 Zero_App::ResponseJson200(null, -1, ["файл стока не найден"]);
             $responseStock = unserialize(file_get_contents($path));
@@ -43,8 +42,6 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
 
         // Получение конфигурации custom
         $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . str_replace(',', '_', $_REQUEST['Groups']) . '.data';
-        Zero_Logs::File(__FUNCTION__, $path);
-        Zero_Logs::File(__FUNCTION__, $_REQUEST['CompId']);
         if ( !file_exists($path) )
             Zero_App::ResponseJson200(null, -1, ["файл конфигурации не найден"]);
         $response = unserialize(file_get_contents($path));
