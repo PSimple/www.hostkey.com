@@ -75,17 +75,13 @@ function app_request_data_api()
 
 function app_redirect($uri)
 {
-    $path = ZERO_PATH_SITE . '/redirect.ini';
-    $data = parse_ini_file($path);
-    //        pre($uri);
-    //        pre($data);
+    $data = [];
+    if ( file_exists($path = ZERO_PATH_SITE . '/redirect.ini') )
+        $data = parse_ini_file($path);
+    else if ( file_exists($path = ZERO_PATH_EXCHANGE . '/redirect.ini') )
+        $data = parse_ini_file($path);
     if ( isset($data[$uri]) && $data[$uri] != "404" )
     {
-//        if ( substr($data[$uri], 0, 1) == '/' )
-//        {
-//            $data[$uri] = 'http://hostkey.com' . $data[$uri];
-//        }
         Zero_App::ResponseRedirect($data[$uri]);
     }
-//    Zero_Logs::File(__FUNCTION__, $uri);
 }
