@@ -189,6 +189,7 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
         $http
             url: url
             method: "GET"
+            cache: true
             params:
                 currency: window.currency
                 groups: groups
