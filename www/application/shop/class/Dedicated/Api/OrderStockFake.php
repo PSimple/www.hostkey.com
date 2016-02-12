@@ -149,6 +149,7 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
         $sumSemiannually = ($sum - ($sum * 0.06) + $costSoftWare) * 6;
         $sumAnnually = ($sum - ($sum * 0.12) + $costSoftWare) * 12;
         $requestData = [
+            'Cycle' => 'monthly',
             'Monthly' => $sumMonthly,
             'Quarterly' => $sumQuarterly,
             'Semiannually' => $sumSemiannually,

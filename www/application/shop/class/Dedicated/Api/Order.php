@@ -69,6 +69,7 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
 
         // Расчет по остальным валютам и формирование заказа
         $requestData = [
+            'Cycle' => $_REQUEST['SLA']['CycleDiscount'],
             'Monthly' => $order->PriceMonthly,
             'Quarterly' => $order->PriceQuarterly,
             'Semiannually' => $order->PriceSemiannually,
@@ -84,6 +85,7 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
             {
                 $order = $this->calculate($response['Data'], $responseStock, $priceIndex);
                 $requestData = [
+                    'Cycle' => $_REQUEST['SLA']['CycleDiscount'],
                     'Monthly' => $order->PriceMonthly,
                     'Quarterly' => $order->PriceQuarterly,
                     'Semiannually' => $order->PriceSemiannually,
@@ -116,11 +118,11 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
      * @param array $Calculate
      * @param array $responseStock
      * @param string $currency
-     * @return Shop_Dedicated_Api_OrderType
+     * @return Shop_Dedicated_Api_Order_Type
      */
     private function calculate($Calculate, $responseStock, $currency)
     {
-        $order = new Shop_Dedicated_Api_OrderType();
+        $order = new Shop_Dedicated_Api_Order_Type();
 
         // Hardvare
         $costHardware = 0;
@@ -244,52 +246,4 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         }
         return $Controller;
     }
-}
-
-/**
- * Shop_Dedicated_Api_OrderType - Структура для вычисления суммы заказа
- */
-class Shop_Dedicated_Api_OrderType
-{
-    /**
-     * Цена ежемесячного платежа
-     *
-     * @var float
-     */
-    public $Price;
-
-    /**
-     * Скидка для всего выбранного платежного периода
-     *
-     * @var float
-     */
-    public $Discount;
-
-    /**
-     * Цена за месяц
-     *
-     * @var float
-     */
-    public $PriceMonthly;
-
-    /**
-     * Цена за квартал
-     *
-     * @var float
-     */
-    public $PriceQuarterly;
-
-    /**
-     * Цена за полгода
-     *
-     * @var float
-     */
-    public $PriceSemiannually;
-
-    /**
-     * Цена за год
-     *
-     * @var float
-     */
-    public $PriceAnnually;
 }
