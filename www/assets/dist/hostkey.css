@@ -216,13 +216,17 @@ table th.sortable.sort-asc div:after {
   padding-right: 5px;
 }
 .dedicated-extra-price__table-row .b-container {
-  margin: 0 -35px 0 -85px !important;
+  margin: 0 -85px 0 -85px !important;
+  width: initial !important;
 }
 .dedicated-extra-price__table-row .b-dedicated__summary.is-fixed {
   margin-left: 40px !important;
 }
 .dedicated-extra-price__box .btn-group {
   display: none;
+}
+th.dedicated-extra-price__table-cell {
+  text-align: left;
 }
 .select2-container {
   box-sizing: border-box;
