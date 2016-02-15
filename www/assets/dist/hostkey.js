@@ -55923,6 +55923,7 @@
 	          displayCaptions: true,
 	          captionSize: 8,
 	          countdownAlertLimit: false,
+	          displayDays: 1,
 	          callback: function() {
 	            element.remove();
 	            if (attrs.callback) {

@@ -16,6 +16,7 @@ angular.module("ui.timeTo").directive "timeTo", ->
                 displayCaptions: true
                 captionSize: 8
                 countdownAlertLimit: false
+                displayDays: 1
                 callback: ->
                     element.remove()
                     if attrs.callback
