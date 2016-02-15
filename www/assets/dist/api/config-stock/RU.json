@@ -4,20 +4,460 @@
   "ErrorStatus": false,
   "Content": {
     "Data": {
+      "13473": {
+        "Id": "13473",
+        "LocationCode": "RU",
+        "BestOffer": "1",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "2696",
+          "PriceEUR": "30",
+          "Price": "30"
+        },
+        "Ram": 4,
+        "Platform": ["1 x Atom server"],
+        "Cpu": {
+          "Name": "Atom D510 1.66GHz (2 cores)",
+          "Cnt": 1,
+          "Kpd": "682",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Atom+D510+%40+1.66GHz&id=610"
+        },
+        "Hdd": ["500Gb SATA"],
+        "motherboard": ["1 x Intel D510MO"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "18016": {
+        "Id": "18016",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "2696",
+          "PriceEUR": "30",
+          "Price": "30"
+        },
+        "Ram": 2,
+        "Platform": ["1 x ASUS RS120-E3"],
+        "Cpu": {
+          "Name": "Pentium D 930 3.0GHz (2 cores)",
+          "Cnt": 1,
+          "Kpd": "700",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Pentium+D+940+%40+3.20GHz&id=1128"
+        },
+        "Hdd": ["1Tb SATA"],
+        "motherboard": ["1 x ASUS P5MT-R"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "22042": {
+        "Id": "22042",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "3415",
+          "PriceEUR": "38",
+          "Price": "38"
+        },
+        "Ram": 4,
+        "Platform": ["1 x Intel USN Zeus UltraSlim"],
+        "Cpu": {
+          "Name": "Core2Duo E6300 1.86GHz (2 cores)",
+          "Cnt": 1,
+          "Kpd": "1124",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+E6300+%40+1.86GHz&id=908"
+        },
+        "Hdd": ["2 x 250Gb SATA"],
+        "motherboard": ["1 x SM PDSMI+"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "22041": {
+        "Id": "22041",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "3594",
+          "PriceEUR": "40",
+          "Price": "40"
+        },
+        "Ram": 4,
+        "Platform": ["1 x Intel USN Zeus UltraSlim"],
+        "Cpu": {
+          "Name": "AMD Athlon 64 X2 4200+ 2.2GHz (2 cores)",
+          "Cnt": 1,
+          "Kpd": "1285",
+          "KpdLink": "http://www.cpubenchmark.net/cpu.php?cpu=AMD+Athlon+64+X2+4200%2B&id=1512"
+        },
+        "Hdd": ["2 x 160Gb SATA"],
+        "motherboard": ["1 x SM h8ssl"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "21180": {
+        "Id": "21180",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "3684",
+          "PriceEUR": "41",
+          "Price": "41"
+        },
+        "Ram": 8,
+        "Platform": ["1 x 2 disks - micro"],
+        "Cpu": {
+          "Name": "Celeron J1800 2.4GHz (2 cores)",
+          "Cnt": 1,
+          "Kpd": "1046",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Celeron+J1800+%40+2.41GHz&id=2167"
+        },
+        "Hdd": ["1Tb SATA"],
+        "motherboard": ["1 x MSI J1800I"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "4257": {
+        "Id": "4257",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "RAID1 software",
+        "Price": {
+          "PriceRUR": "4044",
+          "PriceEUR": "45",
+          "Price": "45"
+        },
+        "Ram": 8,
+        "Platform": ["1 x Intel SR1530SH"],
+        "Cpu": {
+          "Name": "Core2Quad Q8400 2.66GHz (4 cores)",
+          "Cnt": 1,
+          "Kpd": "3230",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Quad+Q8400+%40+2.66GHz&id=1041"
+        },
+        "Hdd": ["2 x 500Gb SATA"],
+        "motherboard": ["1 x Intel S3200SH"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "21505": {
+        "Id": "21505",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "4044",
+          "PriceEUR": "45",
+          "Price": "45"
+        },
+        "Ram": 4,
+        "Platform": ["1 x Procase 1U"],
+        "Cpu": {
+          "Name": "AMD Athlon 64 X2 6000+ 3.0GHz (2 cores)",
+          "Cnt": 1,
+          "Kpd": "1612",
+          "KpdLink": "http://www.cpubenchmark.net/cpu.php?cpu=AMD+Athlon+64+X2+Dual+Core+6000%2B&id=88"
+        },
+        "Hdd": ["2 x 250Gb SATA"],
+        "motherboard": ["1 x Asus M2N-LR"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "2199": {
+        "Id": "2199",
+        "LocationCode": "RU",
+        "BestOffer": "1",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "4313",
+          "PriceEUR": "48",
+          "Price": "48"
+        },
+        "Ram": 4,
+        "Platform": ["1 x Intel SR1530SH"],
+        "Cpu": {
+          "Name": "Core2Quad Q8400 2.66GHz (4 cores)",
+          "Cnt": 1,
+          "Kpd": "3230",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Quad+Q8400+%40+2.66GHz&id=1041"
+        },
+        "Hdd": ["2 x 250Gb SATA"],
+        "motherboard": ["1 x Intel S3200SH"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "4173": {
+        "Id": "4173",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "4493",
+          "PriceEUR": "50",
+          "Price": "50"
+        },
+        "Ram": 4,
+        "Platform": ["1 x Intel SR1630GP"],
+        "Cpu": {
+          "Name": "Core i3-540 3.06GHz (2 cores)",
+          "Cnt": 1,
+          "Kpd": "2691",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i3+540+%40+3.07GHz&id=738"
+        },
+        "Hdd": ["128Gb SSD"],
+        "motherboard": ["1 x Intel S3420GP"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "8569": {
+        "Id": "8569",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "4493",
+          "PriceEUR": "50",
+          "Price": "50"
+        },
+        "Ram": 4,
+        "Platform": ["1 x Asus RS100-E6/PI2"],
+        "Cpu": {
+          "Name": "Core i3-540 3.06GHz (2 cores)",
+          "Cnt": 1,
+          "Kpd": "2691",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i3+540+%40+3.07GHz&id=738"
+        },
+        "Hdd": ["2 x 500Gb SATA"],
+        "motherboard": ["1 x ASUS P7F-M"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "17716": {
+        "Id": "17716",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "5930",
+          "PriceEUR": "66",
+          "Price": "66"
+        },
+        "Ram": 4,
+        "Platform": ["1 x SM 1U CSE-512L-260"],
+        "Cpu": {
+          "Name": "Core2Quad Q6600 2.4GHz (4 cores)",
+          "Cnt": 1,
+          "Kpd": "2990",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Quad+Q6600+%40+2.40GHz&id=1038"
+        },
+        "Hdd": ["128Gb SSD"],
+        "motherboard": ["1 x SM PDSMI+"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "22158": {
+        "Id": "22158",
+        "LocationCode": "RU",
+        "BestOffer": "1",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "6110",
+          "PriceEUR": "68",
+          "Price": "68"
+        },
+        "Ram": 8,
+        "Platform": ["1 x SM SuperServer 6015B-UR"],
+        "Cpu": {
+          "Name": "2 x Xeon 5140 2.33 GHz (2 cores)",
+          "Cnt": 2,
+          "Kpd": "1653",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+5140+%40+2.33GHz&id=1184"
+        },
+        "Hdd": ["2 x 1Tb SATA"],
+        "motherboard": ["1 x SM X7DBR-3"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "8987": {
+        "Id": "8987",
+        "LocationCode": "RU",
+        "BestOffer": "1",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "6290",
+          "PriceEUR": "70",
+          "Price": "70"
+        },
+        "Ram": 8,
+        "Platform": ["1 x Procase 1U"],
+        "Cpu": {
+          "Name": "Xeon X3440 2.53 GHz (4 cores)",
+          "Cnt": 1,
+          "Kpd": "4174",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+X3440+%40+2.53GHz&id=1288"
+        },
+        "Hdd": ["2 x 250Gb SATA"],
+        "motherboard": ["1 x Intel S3420GP"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "21199": {
+        "Id": "21199",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "6290",
+          "PriceEUR": "70",
+          "Price": "70"
+        },
+        "Ram": 8,
+        "Platform": ["1 x SM AS-1021m-82/t2"],
+        "Cpu": {
+          "Name": "2 x AMD Opteron 2216 2.4GHz (2 cores)",
+          "Cnt": 2,
+          "Kpd": "1518",
+          "KpdLink": "http://www.cpubenchmark.net/cpu.php?cpu=AMD+Opteron+2216&id=536"
+        },
+        "Hdd": ["1Tb SATA"],
+        "motherboard": ["1 x SM H8DMR-82"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "21226": {
+        "Id": "21226",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "6290",
+          "PriceEUR": "70",
+          "Price": "70"
+        },
+        "Ram": 8,
+        "Platform": ["1 x SM AS-1021m-82/t2"],
+        "Cpu": {
+          "Name": "2 x AMD Opteron 2216 2.4GHz (2 cores)",
+          "Cnt": 2,
+          "Kpd": "1518",
+          "KpdLink": "http://www.cpubenchmark.net/cpu.php?cpu=AMD+Opteron+2216&id=536"
+        },
+        "Hdd": ["1Tb SATA"],
+        "motherboard": ["1 x SM H8DMR-82"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "21231": {
+        "Id": "21231",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "6290",
+          "PriceEUR": "70",
+          "Price": "70"
+        },
+        "Ram": 8,
+        "Platform": ["1 x SM AS-1021m-82/t2"],
+        "Cpu": {
+          "Name": "2 x AMD Opteron 2216 2.4GHz (2 cores)",
+          "Cnt": 2,
+          "Kpd": "1518",
+          "KpdLink": "http://www.cpubenchmark.net/cpu.php?cpu=AMD+Opteron+2216&id=536"
+        },
+        "Hdd": ["1Tb SATA"],
+        "motherboard": ["1 x SM H8DMR-82"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "22532": {
+        "Id": "22532",
+        "LocationCode": "RU",
+        "BestOffer": "1",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "6290",
+          "PriceEUR": "70",
+          "Price": "70"
+        },
+        "Ram": 8,
+        "Platform": ["1 x SM AS-1021m-82/t2"],
+        "Cpu": {
+          "Name": "2 x AMD Opteron 2216 2.4GHz (2 cores)",
+          "Cnt": 2,
+          "Kpd": "1518",
+          "KpdLink": "http://www.cpubenchmark.net/cpu.php?cpu=AMD+Opteron+2216&id=536"
+        },
+        "Hdd": ["2 x 1Tb SATA"],
+        "motherboard": ["1 x SM H8DMR-82"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
       "3790": {
         "Id": "3790",
         "LocationCode": "RU",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "6316",
+          "PriceRUR": "6559",
           "PriceEUR": "73",
           "Price": "73"
         },
         "Ram": 8,
-        "Platform": [
-          "1 x Intel SR1630GP"
-        ],
+        "Platform": ["1 x Intel SR1630GP"],
         "Cpu": {
           "Name": "Xeon X3440 2.53 GHz (4 cores)",
           "Cnt": 1,
@@ -28,147 +468,38 @@
           "250Gb SATA",
           "128Gb SSD"
         ],
-        "motherboard": [
-          "1 x Intel S3420GP"
-        ]
+        "motherboard": ["1 x Intel S3420GP"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
       },
-      "4167": {
-        "Id": "4167",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "партиция клиента",
-        "Price": {
-          "PriceRUR": "9517",
-          "PriceEUR": "110",
-          "Price": "110"
-        },
-        "Ram": 32,
-        "Platform": [
-          "1 x Procase 1U"
-        ],
-        "Cpu": {
-          "Name": "Xeon E3-1230 3.2GHz (4 cores)",
-          "Cnt": 1,
-          "Kpd": "8026",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+%40+3.20GHz&id=1199"
-        },
-        "Hdd": [
-          "2 x 1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x Intel S1200BTS"
-        ]
-      },
-      "4983": {
-        "Id": "4983",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "без салазок!",
-        "Price": {
-          "PriceRUR": "8652",
-          "PriceEUR": "100",
-          "Price": "100"
-        },
-        "Ram": 16,
-        "Platform": [
-          "1 x Intel SR1630BC"
-        ],
-        "Cpu": {
-          "Name": "2 x Xeon E5645 2.4 GHz (6 cores)",
-          "Cnt": 2,
-          "Kpd": "6735",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5645+%40+2.40GHz&id=1252"
-        },
-        "Hdd": [
-          "1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x Intel S5500BC"
-        ]
-      },
-      "5256": {
-        "Id": "5256",
+      "22131": {
+        "Id": "22131",
         "LocationCode": "RU",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "4759",
-          "PriceEUR": "55",
-          "Price": "55"
+          "PriceRUR": "6739",
+          "PriceEUR": "75",
+          "Price": "75"
         },
-        "Ram": 8,
-        "Platform": [
-          "1 x Intel SR1530HSH"
-        ],
+        "Ram": 4,
+        "Platform": ["1 x SM SuperServer 6015B-UR"],
         "Cpu": {
-          "Name": "Core2Duo E7400 2.80GHz (2 cores)",
-          "Cnt": 1,
-          "Kpd": "1771",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+E7400+%40+2.80GHz&id=946"
-        },
-        "Hdd": [
-          "500Gb SATA"
-        ],
-        "motherboard": [
-          "1 x Intel S3200SH"
-        ]
-      },
-      "8489": {
-        "Id": "8489",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "7354",
-          "PriceEUR": "85",
-          "Price": "85"
-        },
-        "Ram": 16,
-        "Platform": [
-          "1 x Intel SR1630BC"
-        ],
-        "Cpu": {
-          "Name": "2 x Xeon L5520 2.26 GHz (4 cores)",
+          "Name": "2 x Xeon E5320 1.86 GHz (4 cores)",
           "Cnt": 2,
-          "Kpd": "4356",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+L5520+%40+2.27GHz&id=1260"
+          "Kpd": "2269",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5320+%40+1.86GHz&id=1228"
         },
-        "Hdd": [
-          "500Gb SATA"
-        ],
-        "Other": [
-          "IPMI"
-        ],
-        "motherboard": [
-          "1 x Intel S5500BC"
-        ]
-      },
-      "8608": {
-        "Id": "8608",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "10295",
-          "PriceEUR": "119",
-          "Price": "119"
+        "Hdd": ["2 x 1Tb SATA"],
+        "motherboard": ["1 x SM X7DBP-8"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
         },
-        "Ram": 32,
-        "Platform": [
-          "1 x Intel SR1630BC"
-        ],
-        "Cpu": {
-          "Name": "2 x Xeon E5645 2.4 GHz (6 cores)",
-          "Cnt": 2,
-          "Kpd": "6735",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5645+%40+2.40GHz&id=1252"
-        },
-        "Hdd": [
-          "2 x 500Gb SATA"
-        ],
-        "motherboard": [
-          "1 x Intel S5500BC"
-        ]
+        "Raid": false
       },
       "8704": {
         "Id": "8704",
@@ -176,134 +507,25 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "6921",
+          "PriceRUR": "7188",
           "PriceEUR": "80",
           "Price": "80"
         },
         "Ram": 16,
-        "Platform": [
-          "1 x Procase 1U"
-        ],
+        "Platform": ["1 x Procase 1U"],
         "Cpu": {
           "Name": "Core i3-2100 3.1GHz (2 cores)",
           "Cnt": 1,
           "Kpd": "3621",
           "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i3-2100+%40+3.10GHz&id=749"
         },
-        "Hdd": [
-          "500Gb SATA"
-        ],
-        "motherboard": [
-          "1 x Intel S1200BTS"
-        ]
-      },
-      "8728": {
-        "Id": "8728",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "17303",
-          "PriceEUR": "200",
-          "Price": "200"
+        "Hdd": ["500Gb SATA"],
+        "motherboard": ["1 x Intel S1200BTS"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
         },
-        "Ram": 128,
-        "Platform": [
-          "1 x Procase 1U"
-        ],
-        "Cpu": {
-          "Name": "2 x Xeon E5645 2.4 GHz (6 cores)",
-          "Cnt": 2,
-          "Kpd": "6735",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5645+%40+2.40GHz&id=1252"
-        },
-        "Hdd": [
-          "2Tb SATA"
-        ],
-        "motherboard": [
-          "1 x SM X8DTE-F"
-        ]
-      },
-      "8943": {
-        "Id": "8943",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "9517",
-          "PriceEUR": "110",
-          "Price": "110"
-        },
-        "Ram": 32,
-        "Platform": [
-          "1 x Procase 1U"
-        ],
-        "Cpu": {
-          "Name": "Xeon E3-1230 3.2GHz (4 cores)",
-          "Cnt": 1,
-          "Kpd": "8026",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+%40+3.20GHz&id=1199"
-        },
-        "Hdd": [
-          "2 x 1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x Intel S1200BTS"
-        ]
-      },
-      "9000": {
-        "Id": "9000",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "8306",
-          "PriceEUR": "96",
-          "Price": "96"
-        },
-        "Ram": 16,
-        "Platform": [
-          "1 x Procase 1U"
-        ],
-        "Cpu": {
-          "Name": "Xeon E3-1230 3.2GHz (4 cores)",
-          "Cnt": 1,
-          "Kpd": "8026",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+%40+3.20GHz&id=1199"
-        },
-        "Hdd": [
-          "2 x 500Gb SATA"
-        ],
-        "motherboard": [
-          "1 x Intel S1200BTS"
-        ]
-      },
-      "9026": {
-        "Id": "9026",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "8998",
-          "PriceEUR": "104",
-          "Price": "104"
-        },
-        "Ram": 16,
-        "Platform": [
-          "1 x Procase 1U"
-        ],
-        "Cpu": {
-          "Name": "Xeon E3-1230 3.2GHz (4 cores)",
-          "Cnt": 1,
-          "Kpd": "8026",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+%40+3.20GHz&id=1199"
-        },
-        "Hdd": [
-          "2 x 120Gb SSD"
-        ],
-        "motherboard": [
-          "1 x Intel S1200BTS"
-        ]
+        "Raid": false
       },
       "9027": {
         "Id": "9027",
@@ -311,26 +533,25 @@
         "BestOffer": "0",
         "Description": " ",
         "Price": {
-          "PriceRUR": "6921",
+          "PriceRUR": "7188",
           "PriceEUR": "80",
           "Price": "80"
         },
         "Ram": 8,
-        "Platform": [
-          "1 x Procase 1U"
-        ],
+        "Platform": ["1 x Procase 1U"],
         "Cpu": {
           "Name": "Xeon E3-1230 3.2GHz (4 cores)",
           "Cnt": 1,
           "Kpd": "8026",
           "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+%40+3.20GHz&id=1199"
         },
-        "Hdd": [
-          "1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x Intel S1200BTS"
-        ]
+        "Hdd": ["1Tb SATA"],
+        "motherboard": ["1 x Intel S1200BTS"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
       },
       "9053": {
         "Id": "9053",
@@ -338,26 +559,52 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "6921",
+          "PriceRUR": "7188",
           "PriceEUR": "80",
           "Price": "80"
         },
         "Ram": 8,
-        "Platform": [
-          "1 x Procase 1U"
-        ],
+        "Platform": ["1 x Procase 1U"],
         "Cpu": {
           "Name": "Xeon E3-1220 3.1GHz (4 cores)",
           "Cnt": 1,
           "Kpd": "6149",
           "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1220+%40+3.10GHz&id=1196"
         },
-        "Hdd": [
-          "2 x 500Gb SATA"
-        ],
-        "motherboard": [
-          "1 x Intel S1200BTS"
-        ]
+        "Hdd": ["2 x 500Gb SATA"],
+        "motherboard": ["1 x Intel S1200BTS"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "8489": {
+        "Id": "8489",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "7637",
+          "PriceEUR": "85",
+          "Price": "85"
+        },
+        "Ram": 16,
+        "Platform": ["1 x Intel SR1630BC"],
+        "Cpu": {
+          "Name": "2 x Xeon L5520 2.26 GHz (4 cores)",
+          "Cnt": 2,
+          "Kpd": "4356",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+L5520+%40+2.27GHz&id=1260"
+        },
+        "Hdd": ["500Gb SATA"],
+        "Other": ["IPMI"],
+        "motherboard": ["1 x Intel S5500BC"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
       },
       "9552": {
         "Id": "9552",
@@ -365,107 +612,51 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "7527",
+          "PriceRUR": "7817",
           "PriceEUR": "87",
           "Price": "87"
         },
         "Ram": 32,
-        "Platform": [
-          "1 x Intel SR1630BC"
-        ],
+        "Platform": ["1 x Intel SR1630BC"],
         "Cpu": {
           "Name": "2 x Xeon E5507 2.26 GHz (4 cores)",
           "Cnt": 2,
           "Kpd": "3236",
           "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5507+%40+2.27GHz&id=1242"
         },
-        "Hdd": [
-          "2Tb SATA"
-        ],
-        "motherboard": [
-          "1 x Intel S5500BC"
-        ]
+        "Hdd": ["2Tb SATA"],
+        "motherboard": ["1 x Intel S5500BC"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
       },
-      "10539": {
-        "Id": "10539",
+      "9000": {
+        "Id": "9000",
         "LocationCode": "RU",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "8998",
-          "PriceEUR": "104",
-          "Price": "104"
+          "PriceRUR": "8626",
+          "PriceEUR": "96",
+          "Price": "96"
         },
-        "Ram": 32,
-        "Platform": [
-          "1 x SM MicroCloud"
-        ],
+        "Ram": 16,
+        "Platform": ["1 x Procase 1U"],
         "Cpu": {
-          "Name": "Xeon E3-1220 3.1GHz (4 cores)",
+          "Name": "Xeon E3-1230 3.2GHz (4 cores)",
           "Cnt": 1,
-          "Kpd": "6149",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1220+%40+3.10GHz&id=1196"
+          "Kpd": "8026",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+%40+3.20GHz&id=1199"
         },
-        "Hdd": [
-          "1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x SM X9SCD"
-        ]
-      },
-      "12384": {
-        "Id": "12384",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "8911",
-          "PriceEUR": "103",
-          "Price": "103"
+        "Hdd": ["2 x 500Gb SATA"],
+        "motherboard": ["1 x Intel S1200BTS"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
         },
-        "Ram": 32,
-        "Platform": [
-          "1 x Procase 1U"
-        ],
-        "Cpu": {
-          "Name": "Xeon E3-1225 3.1GHz (4 cores)",
-          "Cnt": 1,
-          "Kpd": "5972",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1225+%40+3.10GHz&id=1198"
-        },
-        "Hdd": [
-          "1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x SM X9SCM-F"
-        ]
-      },
-      "17534": {
-        "Id": "17534",
-        "LocationCode": "RU",
-        "BestOffer": "1",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "4326",
-          "PriceEUR": "50",
-          "Price": "50"
-        },
-        "Ram": 8,
-        "Platform": [
-          "1 x Procase 1U"
-        ],
-        "Cpu": {
-          "Name": "Core2Quad Q6600 2.4GHz (4 cores)",
-          "Cnt": 1,
-          "Kpd": "2990",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Quad+Q6600+%40+2.40GHz&id=1038"
-        },
-        "Hdd": [
-          "2 x 250Gb SATA"
-        ],
-        "motherboard": [
-          "1 x SM PDSMI+"
-        ]
+        "Raid": false
       },
       "17697": {
         "Id": "17697",
@@ -473,107 +664,129 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "8479",
+          "PriceRUR": "8805",
           "PriceEUR": "98",
           "Price": "98"
         },
         "Ram": 16,
-        "Platform": [
-          "1 x SM 1020-A"
-        ],
+        "Platform": ["1 x SM 1020-A"],
         "Cpu": {
           "Name": "2 x Xeon E5530 2.4 GHz (4 cores)",
           "Cnt": 2,
           "Kpd": "4719",
           "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5530+%40+2.40GHz&id=1244"
         },
-        "Hdd": [
-          "1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x SM X8DT6-F"
-        ]
+        "Hdd": ["1Tb SATA"],
+        "motherboard": ["1 x SM X8DT6-F"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
       },
-      "17882": {
-        "Id": "17882",
-        "LocationCode": "RU",
-        "BestOffer": "1",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "12285",
-          "PriceEUR": "142",
-          "Price": "142"
-        },
-        "Ram": 64,
-        "Platform": [
-          "1 x Procase 1U"
-        ],
-        "Cpu": {
-          "Name": "2 x Xeon E5645 2.4 GHz (6 cores)",
-          "Cnt": 2,
-          "Kpd": "6735",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5645+%40+2.40GHz&id=1252"
-        },
-        "Hdd": [
-          "128Gb SSD"
-        ],
-        "motherboard": [
-          "1 x SM X8DTi-F"
-        ]
-      },
-      "17988": {
-        "Id": "17988",
-        "LocationCode": "RU",
-        "BestOffer": "1",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "12545",
-          "PriceEUR": "145",
-          "Price": "145"
-        },
-        "Ram": 32,
-        "Platform": [
-          "1 x SM SuperServer 5013C-T"
-        ],
-        "Cpu": {
-          "Name": "Xeon E5-2620v3 6x2.4GHz cores",
-          "Cnt": 1,
-          "Kpd": "10000",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-2620+v3+%40+2.40GHz&id=2418"
-        },
-        "Hdd": [
-          "2 x 1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x SM X10SRL-F"
-        ]
-      },
-      "18016": {
-        "Id": "18016",
+      "13168": {
+        "Id": "13168",
         "LocationCode": "RU",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "2596",
-          "PriceEUR": "30",
-          "Price": "30"
+          "PriceRUR": "8895",
+          "PriceEUR": "99",
+          "Price": "99"
         },
-        "Ram": 2,
-        "Platform": [
-          "1 x ASUS RS120-E3"
-        ],
+        "Ram": 16,
+        "Platform": ["1 x HP ProLiant DL160 G6"],
         "Cpu": {
-          "Name": "Pentium D 930 3.0GHz (2 cores)",
-          "Cnt": 1,
-          "Kpd": "700",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Pentium+D+940+%40+3.20GHz&id=1128"
+          "Name": "2 x Xeon E5530 2.4 GHz (4 cores)",
+          "Cnt": 2,
+          "Kpd": "4719",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5530+%40+2.40GHz&id=1244"
         },
-        "Hdd": [
-          "1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x ASUS P5MT-R"
-        ]
+        "Hdd": ["2 x 500Gb SATA"],
+        "motherboard": ["1 x HP 494274-002 / 4K09C4 "],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "10539": {
+        "Id": "10539",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "9344",
+          "PriceEUR": "104",
+          "Price": "104"
+        },
+        "Ram": 32,
+        "Platform": ["1 x SM MicroCloud"],
+        "Cpu": {
+          "Name": "Xeon E3-1220 3.1GHz (4 cores)",
+          "Cnt": 1,
+          "Kpd": "6149",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1220+%40+3.10GHz&id=1196"
+        },
+        "Hdd": ["1Tb SATA"],
+        "motherboard": ["1 x SM X9SCD"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "1846": {
+        "Id": "1846",
+        "LocationCode": "RU",
+        "BestOffer": "1",
+        "Description": "!!!без салазок!!!",
+        "Price": {
+          "PriceRUR": "9794",
+          "PriceEUR": "109",
+          "Price": "109"
+        },
+        "Ram": 16,
+        "Platform": ["1 x Intel SR1630BC"],
+        "Cpu": {
+          "Name": "2 x Xeon E5630 2.53 GHz (4 cores)",
+          "Cnt": 2,
+          "Kpd": "5093",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5630+%40+2.53GHz&id=1250"
+        },
+        "Hdd": ["2 x 1Tb SATA"],
+        "motherboard": ["1 x Intel S5500BC"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "4167": {
+        "Id": "4167",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "партиция клиента",
+        "Price": {
+          "PriceRUR": "9883",
+          "PriceEUR": "110",
+          "Price": "110"
+        },
+        "Ram": 32,
+        "Platform": ["1 x Procase 1U"],
+        "Cpu": {
+          "Name": "Xeon E3-1230 3.2GHz (4 cores)",
+          "Cnt": 1,
+          "Kpd": "8026",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+%40+3.20GHz&id=1199"
+        },
+        "Hdd": ["2 x 1Tb SATA"],
+        "motherboard": ["1 x Intel S1200BTS"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
       },
       "18248": {
         "Id": "18248",
@@ -581,53 +794,51 @@
         "BestOffer": "0",
         "Description": "в салазках от ДЦ, на нем сервер без салазок",
         "Price": {
-          "PriceRUR": "9949",
+          "PriceRUR": "10333",
           "PriceEUR": "115",
           "Price": "115"
         },
         "Ram": 32,
-        "Platform": [
-          "1 x Hyperion RS130 G3"
-        ],
+        "Platform": ["1 x Hyperion RS130 G3"],
         "Cpu": {
           "Name": "2 x Xeon E5620 2.4 GHz (4 cores)",
           "Cnt": 2,
           "Kpd": "4929",
           "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5620+%40+2.40GHz&id=1249"
         },
-        "Hdd": [
-          "2 x 500Gb SATA"
-        ],
-        "motherboard": [
-          "1 x Intel ETRS130G3"
-        ]
+        "Hdd": ["2 x 500Gb SATA"],
+        "motherboard": ["1 x Intel ETRS130G3"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
       },
-      "19110": {
-        "Id": "19110",
+      "8608": {
+        "Id": "8608",
         "LocationCode": "RU",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "3028",
-          "PriceEUR": "35",
-          "Price": "35"
+          "PriceRUR": "10692",
+          "PriceEUR": "119",
+          "Price": "119"
         },
-        "Ram": 4,
-        "Platform": [
-          "1 x 2 disks - micro"
-        ],
+        "Ram": 32,
+        "Platform": ["1 x Intel SR1630BC"],
         "Cpu": {
-          "Name": "Celeron J1800 2.4GHz (2 cores)",
-          "Cnt": 1,
-          "Kpd": "1046",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Celeron+J1800+%40+2.41GHz&id=2167"
+          "Name": "2 x Xeon E5645 2.4 GHz (6 cores)",
+          "Cnt": 2,
+          "Kpd": "6735",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5645+%40+2.40GHz&id=1252"
         },
-        "Hdd": [
-          "500Gb 2.5 SATA 10k"
-        ],
-        "motherboard": [
-          "1 x MSI J1800I"
-        ]
+        "Hdd": ["2 x 500Gb SATA"],
+        "motherboard": ["1 x Intel S5500BC"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
       },
       "19355": {
         "Id": "19355",
@@ -635,53 +846,25 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "11853",
+          "PriceRUR": "12309",
           "PriceEUR": "137",
           "Price": "137"
         },
         "Ram": 32,
-        "Platform": [
-          "1 x T-Platforms - V5000 Blade Chassis"
-        ],
+        "Platform": ["1 x T-Platforms - V5000 Blade Chassis"],
         "Cpu": {
           "Name": "Xeon E5-1650v2 3.5GHz (6 cores)",
           "Cnt": 1,
           "Kpd": "12495",
           "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-1650+v2+%40+3.50GHz&id=2066"
         },
-        "Hdd": [
-          "2 x 120Gb SSD"
-        ],
-        "motherboard": [
-          "1 x TP-V200-F3D"
-        ]
-      },
-      "19422": {
-        "Id": "19422",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "39882",
-          "PriceEUR": "461",
-          "Price": "461"
+        "Hdd": ["2 x 120Gb SSD"],
+        "motherboard": ["1 x TP-V200-F3D"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
         },
-        "Ram": 128,
-        "Platform": [
-          "1 x T-Platforms - V5000 Blade Chassis"
-        ],
-        "Cpu": {
-          "Name": "2 x Xeon E5-2670v2 10x2.5GHz cores",
-          "Cnt": 2,
-          "Kpd": "15056",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-2670+v2+%40+2.50GHz&id=2152"
-        },
-        "Hdd": [
-          "2 x 500Gb 2.5 SATA 10k"
-        ],
-        "motherboard": [
-          "1 x TP-V200-F3D"
-        ]
+        "Raid": false
       },
       "19436": {
         "Id": "19436",
@@ -689,215 +872,51 @@
         "BestOffer": "0",
         "Description": "ecc память",
         "Price": {
-          "PriceRUR": "13842",
+          "PriceRUR": "14376",
           "PriceEUR": "160",
           "Price": "160"
         },
         "Ram": 16,
-        "Platform": [
-          "1 x T-Platforms - V5000 Blade Chassis"
-        ],
+        "Platform": ["1 x T-Platforms - V5000 Blade Chassis"],
         "Cpu": {
           "Name": "Xeon E5-1650v2 3.5GHz (6 cores)",
           "Cnt": 1,
           "Kpd": "12495",
           "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-1650+v2+%40+3.50GHz&id=2066"
         },
-        "Hdd": [
-          "2 x 128Gb SSD"
-        ],
-        "motherboard": [
-          "1 x TP-V200-F3D"
-        ]
+        "Hdd": ["2 x 128Gb SSD"],
+        "motherboard": ["1 x TP-V200-F3D"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
       },
-      "19752": {
-        "Id": "19752",
+      "21618": {
+        "Id": "21618",
         "LocationCode": "RU",
-        "BestOffer": "0",
+        "BestOffer": "1",
         "Description": "",
         "Price": {
-          "PriceRUR": "3720",
-          "PriceEUR": "43",
-          "Price": "43"
+          "PriceRUR": "17700",
+          "PriceEUR": "197",
+          "Price": "197"
         },
-        "Ram": 8,
-        "Platform": [
-          "1 x 2 disks - micro"
-        ],
+        "Ram": 32,
+        "Platform": ["1 x 2 disks - micro"],
         "Cpu": {
-          "Name": "Pentium J2900  2.67GHz (4 cores)",
-          "Cnt": 1,
-          "Kpd": "2052",
-          "KpdLink": "http://www.cpubenchmark.net/cpu.php?cpu=Intel+Pentium+J2900+%40+2.41GHz&id=2173"
-        },
-        "Hdd": [
-          "128Gb SSD"
-        ],
-        "motherboard": [
-          "1 x ASRock Q2900-ITX"
-        ]
-      },
-      "21094": {
-        "Id": "21094",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "8565",
-          "PriceEUR": "99",
-          "Price": "99"
-        },
-        "Ram": 8,
-        "Platform": [
-          "1 x 2 disks - micro"
-        ],
-        "Cpu": {
-          "Name": "Xeon E3-1271v3 3.6GHz (4 cores)",
-          "Cnt": 1,
-          "Kpd": "10204",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1271+v3+%40+3.60GHz&id=2334"
-        },
-        "Hdd": [
-          "128Gb SSD"
-        ],
-        "motherboard": [
-          "1 x ASUS P9D-I"
-        ]
-      },
-      "21095": {
-        "Id": "21095",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "8565",
-          "PriceEUR": "99",
-          "Price": "99"
-        },
-        "Ram": 8,
-        "Platform": [
-          "1 x 2 disks - micro"
-        ],
-        "Cpu": {
-          "Name": "Xeon E3-1271v3 3.6GHz (4 cores)",
-          "Cnt": 1,
-          "Kpd": "10204",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1271+v3+%40+3.60GHz&id=2334"
-        },
-        "Hdd": [
-          "2 x 128Gb SSD"
-        ],
-        "motherboard": [
-          "1 x ASUS P9D-I"
-        ]
-      },
-      "21199": {
-        "Id": "21199",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "6056",
-          "PriceEUR": "70",
-          "Price": "70"
-        },
-        "Ram": 8,
-        "Platform": [
-          "1 x SM AS-1021m-82/t2"
-        ],
-        "Cpu": {
-          "Name": "2 x AMD Opteron 2216 2.4GHz (2 cores)",
+          "Name": "2 x Xeon E5-2630v2 6x2.6GHz cores",
           "Cnt": 2,
-          "Kpd": "1518",
-          "KpdLink": "http://www.cpubenchmark.net/cpu.php?cpu=AMD+Opteron+2216&id=536"
+          "Kpd": "8915",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-2630+v2+%40+2.60GHz&id=2052"
         },
-        "Hdd": [
-          "1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x SM H8DMR-82"
-        ]
-      },
-      "21226": {
-        "Id": "21226",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "6056",
-          "PriceEUR": "70",
-          "Price": "70"
+        "Hdd": ["2 x 600Gb SAS"],
+        "motherboard": ["1 x TP-V200-F3D"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
         },
-        "Ram": 8,
-        "Platform": [
-          "1 x SM AS-1021m-82/t2"
-        ],
-        "Cpu": {
-          "Name": "2 x AMD Opteron 2216 2.4GHz (2 cores)",
-          "Cnt": 2,
-          "Kpd": "1518",
-          "KpdLink": "http://www.cpubenchmark.net/cpu.php?cpu=AMD+Opteron+2216&id=536"
-        },
-        "Hdd": [
-          "1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x SM H8DMR-82"
-        ]
-      },
-      "21231": {
-        "Id": "21231",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "6056",
-          "PriceEUR": "70",
-          "Price": "70"
-        },
-        "Ram": 8,
-        "Platform": [
-          "1 x SM AS-1021m-82/t2"
-        ],
-        "Cpu": {
-          "Name": "2 x AMD Opteron 2216 2.4GHz (2 cores)",
-          "Cnt": 2,
-          "Kpd": "1518",
-          "KpdLink": "http://www.cpubenchmark.net/cpu.php?cpu=AMD+Opteron+2216&id=536"
-        },
-        "Hdd": [
-          "1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x SM H8DMR-82"
-        ]
-      },
-      "21505": {
-        "Id": "21505",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "3894",
-          "PriceEUR": "45",
-          "Price": "45"
-        },
-        "Ram": 4,
-        "Platform": [
-          "1 x Procase 1U"
-        ],
-        "Cpu": {
-          "Name": "AMD Athlon 64 X2 6000+ 3.0GHz (2 cores)",
-          "Cnt": 1,
-          "Kpd": "1612",
-          "KpdLink": "http://www.cpubenchmark.net/cpu.php?cpu=AMD+Athlon+64+X2+Dual+Core+6000%2B&id=88"
-        },
-        "Hdd": [
-          "2 x 250Gb SATA"
-        ],
-        "motherboard": [
-          "1 x Asus M2N-LR"
-        ]
+        "Raid": false
       },
       "21613": {
         "Id": "21613",
@@ -905,14 +924,12 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "19293",
+          "PriceRUR": "20036",
           "PriceEUR": "223",
           "Price": "223"
         },
         "Ram": 64,
-        "Platform": [
-          "1 x 2 disks - micro"
-        ],
+        "Platform": ["1 x 2 disks - micro"],
         "Cpu": {
           "Name": "2 x Xeon E5-2630v2 6x2.6GHz cores",
           "Cnt": 2,
@@ -923,12 +940,13 @@
           "1Tb SSD ",
           "1Tb SATA"
         ],
-        "Other": [
-          "IPMI"
-        ],
-        "motherboard": [
-          "1 x TP-V200-F3D"
-        ]
+        "Other": ["IPMI"],
+        "motherboard": ["1 x TP-V200-F3D"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
       },
       "21616": {
         "Id": "21616",
@@ -936,14 +954,12 @@
         "BestOffer": "1",
         "Description": "",
         "Price": {
-          "PriceRUR": "28895",
+          "PriceRUR": "30009",
           "PriceEUR": "334",
           "Price": "334"
         },
         "Ram": 128,
-        "Platform": [
-          "1 x 2 disks - micro"
-        ],
+        "Platform": ["1 x 2 disks - micro"],
         "Cpu": {
           "Name": "2 x Xeon E5-2630v2 6x2.6GHz cores",
           "Cnt": 2,
@@ -954,12 +970,39 @@
           "2Tb SATA",
           "2Tb SSD"
         ],
-        "Other": [
-          "IPMI"
-        ],
-        "motherboard": [
-          "1 x TP-V200-F3D"
-        ]
+        "Other": ["IPMI"],
+        "motherboard": ["1 x TP-V200-F3D"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "19422": {
+        "Id": "19422",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "37376",
+          "PriceEUR": "416",
+          "Price": "416"
+        },
+        "Ram": 64,
+        "Platform": ["1 x T-Platforms - V5000 Blade Chassis"],
+        "Cpu": {
+          "Name": "2 x Xeon E5-2670v2 10x2.5GHz cores",
+          "Cnt": 2,
+          "Kpd": "15056",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-2670+v2+%40+2.50GHz&id=2152"
+        },
+        "Hdd": ["2 x 128Gb SSD"],
+        "motherboard": ["1 x TP-V200-F3D"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
       },
       "21617": {
         "Id": "21617",
@@ -967,137 +1010,29 @@
         "BestOffer": "1",
         "Description": "",
         "Price": {
-          "PriceRUR": "43083",
+          "PriceRUR": "44744",
           "PriceEUR": "498",
           "Price": "498"
         },
         "Ram": 256,
-        "Platform": [
-          "1 x 2 disks - micro"
-        ],
+        "Platform": ["1 x 2 disks - micro"],
         "Cpu": {
           "Name": "2 x Xeon E5-2630v2 6x2.6GHz cores",
           "Cnt": 2,
           "Kpd": "8915",
           "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-2630+v2+%40+2.60GHz&id=2052"
         },
-        "Hdd": [
-          "2 x 2Tb SSD"
-        ],
-        "motherboard": [
-          "1 x TP-V200-F3D"
-        ]
-      },
-      "21618": {
-        "Id": "21618",
-        "LocationCode": "RU",
-        "BestOffer": "1",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "17043",
-          "PriceEUR": "197",
-          "Price": "197"
+        "Hdd": ["2 x 2Tb SSD"],
+        "motherboard": ["1 x TP-V200-F3D"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
         },
-        "Ram": 32,
-        "Platform": [
-          "1 x 2 disks - micro"
-        ],
-        "Cpu": {
-          "Name": "2 x Xeon E5-2630v2 6x2.6GHz cores",
-          "Cnt": 2,
-          "Kpd": "8915",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-2630+v2+%40+2.60GHz&id=2052"
-        },
-        "Hdd": [
-          "2 x 600Gb SAS"
-        ],
-        "motherboard": [
-          "1 x TP-V200-F3D"
-        ]
-      },
-      "22131": {
-        "Id": "22131",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "6489",
-          "PriceEUR": "75",
-          "Price": "75"
-        },
-        "Ram": 4,
-        "Platform": [
-          "1 x SM SuperServer 6015B-UR"
-        ],
-        "Cpu": {
-          "Name": "2 x Xeon E5320 1.86 GHz (4 cores)",
-          "Cnt": 2,
-          "Kpd": "2269",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5320+%40+1.86GHz&id=1228"
-        },
-        "Hdd": [
-          "2 x 1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x SM X7DBP-8"
-        ]
-      },
-      "22158": {
-        "Id": "22158",
-        "LocationCode": "RU",
-        "BestOffer": "1",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "5883",
-          "PriceEUR": "68",
-          "Price": "68"
-        },
-        "Ram": 8,
-        "Platform": [
-          "1 x SM SuperServer 6015B-UR"
-        ],
-        "Cpu": {
-          "Name": "2 x Xeon 5140 2.33 GHz (2 cores)",
-          "Cnt": 2,
-          "Kpd": "1653",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+5140+%40+2.33GHz&id=1184"
-        },
-        "Hdd": [
-          "2 x 1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x SM X7DBR-3"
-        ]
-      },
-      "22532": {
-        "Id": "22532",
-        "LocationCode": "RU",
-        "BestOffer": "1",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "6056",
-          "PriceEUR": "70",
-          "Price": "70"
-        },
-        "Ram": 8,
-        "Platform": [
-          "1 x SM AS-1021m-82/t2"
-        ],
-        "Cpu": {
-          "Name": "2 x AMD Opteron 2216 2.4GHz (2 cores)",
-          "Cnt": 2,
-          "Kpd": "1518",
-          "KpdLink": "http://www.cpubenchmark.net/cpu.php?cpu=AMD+Opteron+2216&id=536"
-        },
-        "Hdd": [
-          "2 x 1Tb SATA"
-        ],
-        "motherboard": [
-          "1 x SM H8DMR-82"
-        ]
+        "Raid": false
       }
     },
-    "Currency": "eur",
+    "CpuMinKpd": "682",
+    "CpuMaxKpd": "15056",
     "ComponentGroup": "RU"
   }
 }
