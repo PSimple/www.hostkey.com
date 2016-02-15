@@ -55913,17 +55913,25 @@
 	    restrict: "AE",
 	    replace: true,
 	    scope: {
-	      seconds: "=timeTo"
+	      date: "=timeTo",
+	      callback: "&"
 	    },
 	    link: function(scope, element, attrs, ngModel) {
-	      var seconds;
-	      seconds = parseInt(scope.seconds, 10);
-	      if (seconds) {
+	      if (scope.date) {
 	        return element.timeTo({
-	          seconds: seconds,
+	          timeTo: new Date(scope.date),
 	          displayCaptions: true,
-	          captionSize: 8
+	          captionSize: 8,
+	          countdownAlertLimit: false,
+	          callback: function() {
+	            element.remove();
+	            if (attrs.callback) {
+	              return scope.$apply(scope.callback());
+	            }
+	          }
 	        });
+	      } else {
+	        return element.remove();
 	      }
 	    }
 	  };
@@ -59284,7 +59292,8 @@
 	        Raid: r.Raid,
 	        Hdd: r.Hdd.join("<br>"),
 	        Price: parseInt(r.Price.Price, 10),
-	        Timer: parseInt(r.Id, 10)
+	        Timer: r.Auction.DateTime,
+	        TimerDiscount: parseInt(r.Auction.Discount, 10)
 	      });
 	    });
 	    return arr;
@@ -59309,13 +59318,16 @@
 	    };
 	  };
 	  $rootScope.loaded = true;
-	  return $scope.selectSale = function(s) {
+	  $scope.selectSale = function(s) {
 	    var ref;
 	    if (s.Id === ((ref = $scope.selectedSale) != null ? ref.Id : void 0)) {
 	      return $scope.selectedSale = null;
 	    } else {
 	      return $scope.selectedSale = s;
 	    }
+	  };
+	  return $scope.changePrice = function(obj) {
+	    return obj.Price = obj.Price + obj.TimerDiscount;
 	  };
 	}]);
 
@@ -59331,7 +59343,7 @@
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-text-page__box\"><h3 class=\"b-text-page__title b-text-page__title_upline_yes\">EXTRA PRICE</h3><div class=\"b-dedicated__description\"><p>HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia. We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+ international resellers. Virtually any server configuration could be provided to our customers. We offer full range of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own servers in Moscow.</p></div></div><div class=\"b-dedicated__hide-block-close js-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div><div class=\"b-container\"><div class=\"dedicated-extra-price__box\"><table ng-table=\"tableData\" show-filter=\"true\" class=\"dedicated-extra-price__table\"><thead><tr class=\"dedicated-extra-price__table-row dedicated-extra-price__table-row_title_yes\"><th class=\"dedicated-extra-price__table-cell\"></th><th ng-class=\"{'sort-asc': tableData.isSortBy('CpuKpd', 'asc'), 'sort-desc': tableData.isSortBy('CpuKpd', 'desc')}\" ng-click=\"tableData.sorting('CpuKpd', tableData.isSortBy('CpuKpd', 'asc') ? 'desc' : 'asc')\" style=\"width:400px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>processor</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Ram', 'asc'), 'sort-desc': tableData.isSortBy('Ram', 'desc')}\" ng-click=\"tableData.sorting('Ram', tableData.isSortBy('Ram', 'asc') ? 'desc' : 'asc')\" class=\"dedicated-extra-price__table-cell sortable\"><div>memory</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Hdd', 'asc'), 'sort-desc': tableData.isSortBy('Hdd', 'desc')}\" ng-click=\"tableData.sorting('Hdd', tableData.isSortBy('Hdd', 'asc') ? 'desc' : 'asc')\" style=\"width:200px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>hard drive</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Raid', 'asc'), 'sort-desc': tableData.isSortBy('Raid', 'desc')}\" ng-click=\"tableData.sorting('Raid', tableData.isSortBy('Raid', 'asc') ? 'desc' : 'asc')\" style=\"width:120px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>hw raid</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Price', 'asc'), 'sort-desc': tableData.isSortBy('Price', 'desc')}\" ng-click=\"tableData.sorting('Price', tableData.isSortBy('Price', 'asc') ? 'desc' : 'asc')\" style=\"width:220px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>monthly</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Timer', 'asc'), 'sort-desc': tableData.isSortBy('Timer', 'desc')}\" ng-click=\"tableData.sorting('Timer', tableData.isSortBy('Timer', 'asc') ? 'desc' : 'asc')\" style=\"width:220px;\" class=\"dedicated-extra-price__table-cell dedicated-extra-price__table-cell_red_yes sortable\"><div>price will change after:</div></th></tr></thead><tbody ng-repeat=\"s in $data\"><tr class=\"dedicated-extra-price__table-row\"><td class=\"dedicated-extra-price__table-cell\"><span ng-class=\"{'b-flag_country_nether': s.LocationCode==='NL'}\" class=\"b-icon b-flag\"></span></td><td sortable=\"'CpuKpd'\" class=\"dedicated-extra-price__table-cell\"><div ng-bind=\"s.CpuName\" class=\"dedicated-extra-price__text\"></div><kpd-indicator cpu-kpd=\"s.CpuKpd\" cpu-kpd-link=\"s.CpuKpdLink\" cpu-cnt=\"s.CpuCnt\"></kpd-indicator></td><td sortable=\"'Ram'\" class=\"dedicated-extra-price__table-cell\"><span class=\"dedicated-extra-price__text\">{{s.Ram}} GB</span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span ng-bind-html=\"s.Hdd\"></span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span ng-if=\"s.Raid\" class=\"b-icon dedicated-extra-price__icon-good\"></span></td><td sortable=\"'Price'\" class=\"dedicated-extra-price__table-cell\"><a href=\"\" ng-click=\"selectSale(s)\" class=\"b-submit dedicated-item-content__submit\">{{s.Price|verboseCurrency}}</a></td><td sortable=\"'Timer'\" class=\"dedicated-extra-price__table-cell\"><div time-to=\"s.Timer\" class=\"black-sale__slider-item-timer\"></div></td></tr><tr ng-if=\"s.Id === selectedSale.Id\" class=\"dedicated-extra-price__table-row\"><td colspan=\"9\" class=\"dedicated-extra-price__table-cell\"><div sale-server-calculator=\"\" sale-server=\"s\"></div></td></tr></tbody></table></div></div></div>");;return buf.join("");
+	buf.push("<div class=\"b-text-page__box\"><h3 class=\"b-text-page__title b-text-page__title_upline_yes\">EXTRA PRICE</h3><div class=\"b-dedicated__description\"><p>HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia. We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+ international resellers. Virtually any server configuration could be provided to our customers. We offer full range of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own servers in Moscow.</p></div></div><div class=\"b-dedicated__hide-block-close js-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div><div class=\"b-container\"><div class=\"dedicated-extra-price__box\"><table ng-table=\"tableData\" show-filter=\"true\" class=\"dedicated-extra-price__table\"><thead><tr class=\"dedicated-extra-price__table-row dedicated-extra-price__table-row_title_yes\"><th class=\"dedicated-extra-price__table-cell\"></th><th ng-class=\"{'sort-asc': tableData.isSortBy('CpuKpd', 'asc'), 'sort-desc': tableData.isSortBy('CpuKpd', 'desc')}\" ng-click=\"tableData.sorting('CpuKpd', tableData.isSortBy('CpuKpd', 'asc') ? 'desc' : 'asc')\" style=\"width:400px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>processor</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Ram', 'asc'), 'sort-desc': tableData.isSortBy('Ram', 'desc')}\" ng-click=\"tableData.sorting('Ram', tableData.isSortBy('Ram', 'asc') ? 'desc' : 'asc')\" class=\"dedicated-extra-price__table-cell sortable\"><div>memory</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Hdd', 'asc'), 'sort-desc': tableData.isSortBy('Hdd', 'desc')}\" ng-click=\"tableData.sorting('Hdd', tableData.isSortBy('Hdd', 'asc') ? 'desc' : 'asc')\" style=\"width:200px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>hard drive</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Raid', 'asc'), 'sort-desc': tableData.isSortBy('Raid', 'desc')}\" ng-click=\"tableData.sorting('Raid', tableData.isSortBy('Raid', 'asc') ? 'desc' : 'asc')\" style=\"width:120px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>hw raid</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Price', 'asc'), 'sort-desc': tableData.isSortBy('Price', 'desc')}\" ng-click=\"tableData.sorting('Price', tableData.isSortBy('Price', 'asc') ? 'desc' : 'asc')\" style=\"width:240px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>monthly</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Timer', 'asc'), 'sort-desc': tableData.isSortBy('Timer', 'desc')}\" ng-click=\"tableData.sorting('Timer', tableData.isSortBy('Timer', 'asc') ? 'desc' : 'asc')\" style=\"width:230px;\" class=\"dedicated-extra-price__table-cell dedicated-extra-price__table-cell_red_yes sortable\"><div>price will change after:</div></th></tr></thead><tbody ng-repeat=\"s in $data\"><tr class=\"dedicated-extra-price__table-row\"><td class=\"dedicated-extra-price__table-cell\"><span ng-class=\"{'b-flag_country_nether': s.LocationCode==='NL'}\" class=\"b-icon b-flag\"></span></td><td sortable=\"'CpuKpd'\" class=\"dedicated-extra-price__table-cell\"><div ng-bind=\"s.CpuName\" class=\"dedicated-extra-price__text\"></div><kpd-indicator cpu-kpd=\"s.CpuKpd\" cpu-kpd-link=\"s.CpuKpdLink\" cpu-cnt=\"s.CpuCnt\"></kpd-indicator></td><td sortable=\"'Ram'\" class=\"dedicated-extra-price__table-cell\"><span class=\"dedicated-extra-price__text\">{{s.Ram}} GB</span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span ng-bind-html=\"s.Hdd\"></span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span ng-if=\"s.Raid\" class=\"b-icon dedicated-extra-price__icon-good\"></span></td><td sortable=\"'Price'\" class=\"dedicated-extra-price__table-cell\"><a ng-if=\"s.Price\" href=\"\" ng-click=\"selectSale(s)\" class=\"b-submit dedicated-item-content__submit\">{{s.Price|verboseCurrency}}</a></td><td sortable=\"'Timer'\" class=\"dedicated-extra-price__table-cell\"><div time-to=\"s.Timer\" callback=\"changePrice(s)\" class=\"black-sale__slider-item-timer\"></div></td></tr><tr ng-if=\"s.Id === selectedSale.Id\" class=\"dedicated-extra-price__table-row\"><td colspan=\"9\" class=\"dedicated-extra-price__table-cell\"><div sale-server-calculator=\"\" sale-server=\"s\"></div></td></tr></tbody></table></div></div></div>");;return buf.join("");
 	}
 
 /***/ }

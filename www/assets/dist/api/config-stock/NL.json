@@ -54,7 +54,7 @@
         "motherboard": ["1 x SM X10SLE-F"],
         "Auction": {
           "Discount": "10",
-          "DateTime": "2016-02-17 14:44:52"
+          "DateTime": "2016-02-15 20:44:52"
         },
         "Raid": false
       },
@@ -403,8 +403,8 @@
         },
         "Hdd": ["240Gb SSD"],
         "Auction": {
-          "Discount": 0,
-          "DateTime": ""
+          "Discount": "-20",
+          "DateTime": "2016-02-15 16:51:45"
         },
         "Raid": false
       },
