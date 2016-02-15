@@ -33,18 +33,48 @@ class Shop_Dedicated_Api_ConfigStock extends Zero_Controller
             Zero_App::ResponseJson500(-1, ["файл конфигурации не найден"]);
         $response = unserialize(file_get_contents($path));
 
-        // Инициализация выбранной цены
+        // Корректировка данных
+        $min = 0;
+        $max = 0;
         $responseSort = [];
         foreach ($response['Data'] as $compID => $row)
         {
+            // min
+            if ( 0 == $min )
+                $min = $row['Cpu']['Kpd'];
+            else if ( $row['Cpu']['Kpd'] < $min )
+                $min = $row['Cpu']['Kpd'];
+            // max
+            if ( 0 == $max )
+                $max = $row['Cpu']['Kpd'];
+            else if ( $row['Cpu']['Kpd'] > $max )
+                $max = $row['Cpu']['Kpd'];
+            // выбранная цена
             if ( 'eur' == $_REQUEST['currency'] )
                 $row['Price']['Price'] = $row['Price']['PriceEUR'];
             else
                 $row['Price']['Price'] = $row['Price']['PriceRUR'];
             $responseSort['Data'][$compID] = $row;
+            // RAID (Other)
+            $flagRaid = false;
+            if ( isset($row['Other']) )
+            {
+                foreach ($row['Other'] as $v)
+                {
+                    if ( preg_match('~Adaptec|LSI|RS2|SRC|RAID|SAS~s', $v) )
+                    {
+                        $flagRaid = true;
+                        break;
+                    }
+                }
+            }
+            $responseSort['Data'][$compID]['Raid'] = $flagRaid;
         }
+        $responseSort['CpuMinKpd'] = $min;
+        $responseSort['CpuMaxKpd'] = $max;
         $responseSort['ComponentGroup'] = $response['ComponentGroup'];
 
+//        Zero_App::ResponseJson500(-1, ['ffff']);
         Zero_App::ResponseJson200($responseSort);
         return true;
     }
