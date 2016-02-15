@@ -51,10 +51,10 @@
             <br>
             <br>
             <br>
-            <a name="country"></a>
+            <a name="nl"></a>
             <div class="switch_country_for_container_VPS" id="calc" style="position: relative; left: 350px;">
                 <div  class="b-dedicated__switch-item  flag_nl">
-                    <a href="/cloud/winvps/netherlands#country" target="_self" title="ckoud VDS Russia" style="text-decoration: none; color: black;">
+                    <a href="/cloud/winvps/netherlands#nl" target="_self" title="ckoud VDS Russia" style="text-decoration: none; color: black;">
                         netherlands
                     </a>
                 </div>
@@ -106,22 +106,22 @@
             <tr class="b-vps__table-row">
                 <td class="b-vps__table-cell"></td>
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" id="winh1">€5.00/monthly</div>
+                    <div class="b-vps-table__price" id="winh1">€5.00/month</div>
                 </td>
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" id="winh2">€7.00/monthly</div>
+                    <div class="b-vps-table__price" id="winh2">€7.00/month</div>
                 </td>
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" id="winh3">€10.00/monthly</div>
+                    <div class="b-vps-table__price" id="winh3">€10.00/month</div>
                 </td>
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" id="winh4">€15.00/monthly</div>
+                    <div class="b-vps-table__price" id="winh4">€15.00/month</div>
                 </td>
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" id="winh5">€20.00/monthly</div>
+                    <div class="b-vps-table__price" id="winh5">€20.00/month</div>
                 </td>
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" id="winh6">€30.00/monthly</div>
+                    <div class="b-vps-table__price" id="winh6">€30.00/month</div>
                 </td>
             </tr>
 
@@ -220,7 +220,7 @@
             </tr>
             <!-- IPv4 Addresses -->
             <tr class="b-vps__table-row">
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
+                <td class="b-vps__table-cell b-vps__table-cell_border_yes" nowrap>
                     <h3 class="b-vps__table-cell_main_yes">IPv4 Addresses</h3>
                 </td>
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
@@ -330,7 +330,7 @@
             </tr>
             <!-- payment period -->
             <tr class="b-vps__table-row">
-                <td class="b-vps__table-cell b-vps__table-cell_border_yes">
+                <td class="b-vps__table-cell b-vps__table-cell_border_yes" nowrap>
                     <h3 class="b-vps__table-cell_main_yes">payment period</h3>
                 </td>
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
@@ -398,22 +398,22 @@
             <tr class="b-vps__table-row">
                 <td class="b-vps__table-cell"></td>
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" id="winf1">€5.00/monthly</div>
+                    <div class="b-vps-table__price" id="winf1">€5.00/month</div>
                 </td>
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" id="winf2">€7.00/monthly</div>
+                    <div class="b-vps-table__price" id="winf2">€7.00/month</div>
                 </td>
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" id="winf3">€10.00/monthly</div>
+                    <div class="b-vps-table__price" id="winf3">€10.00/month</div>
                 </td>
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" id="winf4">€15.00/monthly</div>
+                    <div class="b-vps-table__price" id="winf4">€15.00/month</div>
                 </td>
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" id="winf5">€20.00/monthly</div>
+                    <div class="b-vps-table__price" id="winf5">€20.00/month</div>
                 </td>
                 <td class="b-vps__table-cell">
-                    <div class="b-vps-table__price" id="winf6">€30.00/monthly</div>
+                    <div class="b-vps-table__price" id="winf6">€30.00/month</div>
                 </td>
             </tr>
             <tr class="b-vps__table-row">
@@ -485,6 +485,12 @@
         semiannually: 0.06,
         annually: 0.12
     };
+    var periodMonth = {
+        monthly: 'month',
+        quarterly: 'quarter',
+        semiannually: 'half-year',
+        annually: 'year'
+    };
     var periodArr = {
         monthly: 1,
         quarterly: 3,
@@ -503,9 +509,9 @@
         sum = Math.round(sum * periodArr[period] * 100) / 100;
 
         var obj = document.getElementById("winh"+id);
-        obj.innerHTML = '€' + sum + '/' + period;
+        obj.innerHTML = '€' + sum + '/' + periodMonth[period];
         obj = document.getElementById("winf"+id);
-        obj.innerHTML = '€' + sum + '/' + period;
+        obj.innerHTML = '€' + sum + '/' + periodMonth[period];
     }
     function saleBuy(id)
     {
