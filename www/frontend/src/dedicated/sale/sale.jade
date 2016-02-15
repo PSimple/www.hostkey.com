@@ -50,7 +50,7 @@ div
                             div hw raid
                         th.dedicated-extra-price__table-cell.sortable(ng-class="{'sort-asc': tableData.isSortBy('Price', 'asc'), 'sort-desc': tableData.isSortBy('Price', 'desc')}", ng-click="tableData.sorting('Price', tableData.isSortBy('Price', 'asc') ? 'desc' : 'asc')", style="width:240px;")
                             div monthly
-                        th.dedicated-extra-price__table-cell.dedicated-extra-price__table-cell_red_yes.sortable(ng-class="{'sort-asc': tableData.isSortBy('Timer', 'asc'), 'sort-desc': tableData.isSortBy('Timer', 'desc')}", ng-click="tableData.sorting('Timer', tableData.isSortBy('Timer', 'asc') ? 'desc' : 'asc')", style="width:230px;")
+                        th.dedicated-extra-price__table-cell.dedicated-extra-price__table-cell_red_yes(style="width:230px;")
                             div price will change after:
 
                 tbody(ng-repeat="s in $data")
@@ -74,7 +74,7 @@ div
                         td.dedicated-extra-price__table-cell(sortable="'Price'")
                             a.b-submit.dedicated-item-content__submit(ng-if="s.Price", href="", ng-click="selectSale(s)") {{s.Price|verboseCurrency}}
 
-                        td.dedicated-extra-price__table-cell(sortable="'Timer'")
+                        td.dedicated-extra-price__table-cell
                             .black-sale__slider-item-timer(time-to="s.Timer", callback="changePrice(s)")
 
                     tr.dedicated-extra-price__table-row(ng-if="s.Id === selectedSale.Id")
