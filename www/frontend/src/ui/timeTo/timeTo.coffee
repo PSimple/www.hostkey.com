@@ -1,4 +1,4 @@
-require './jquery.timeTo.min.js'
+require './jquery.time-to.js'
 
 angular.module "ui.timeTo", []
 
@@ -16,7 +16,7 @@ angular.module("ui.timeTo").directive "timeTo", ->
                 displayCaptions: true
                 captionSize: 8
                 countdownAlertLimit: false
-                displayDays: 1
+                displayDays: 2
                 callback: ->
                     element.remove()
                     if attrs.callback

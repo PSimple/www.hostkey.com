@@ -3226,6 +3226,9 @@ p {
   text-align: center;
   background: url(/assets/img/clock-bg-light.png) no-repeat;
 }
+.dedicated-extra-price__table-cell .timeTo figure:first-child {
+  width: 50px !important;
+}
 .dedicated-extra-price__table-cell .timeTo figure:after {
   border-bottom: 0;
 }

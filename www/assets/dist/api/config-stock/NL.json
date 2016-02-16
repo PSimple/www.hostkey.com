@@ -26,8 +26,8 @@
         "Other": ["IPMI"],
         "motherboard": ["1 x some"],
         "Auction": {
-          "Discount": 0,
-          "DateTime": ""
+          "Discount": "-10",
+          "DateTime": "2016-02-18 20:44:52"
         },
         "Raid": false
       },
@@ -211,8 +211,8 @@
         "Hdd": ["2 x 500Gb SATA"],
         "Other": ["IPMI"],
         "Auction": {
-          "Discount": 0,
-          "DateTime": ""
+          "Discount": "-10",
+          "DateTime": "2016-02-18 20:44:52"
         },
         "Raid": false
       },
@@ -295,8 +295,8 @@
         "Other": ["IPMI"],
         "motherboard": ["1 x SM X8DTL"],
         "Auction": {
-          "Discount": 0,
-          "DateTime": ""
+          "Discount": "-10",
+          "DateTime": "2016-02-18 20:44:52"
         },
         "Raid": false
       },
@@ -404,7 +404,7 @@
         "Hdd": ["240Gb SSD"],
         "Auction": {
           "Discount": "-20",
-          "DateTime": "2016-04-15 20:51:45"
+          "DateTime": "2016-02-16 15:51:45"
         },
         "Raid": false
       },
