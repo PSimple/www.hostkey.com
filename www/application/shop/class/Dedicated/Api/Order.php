@@ -38,6 +38,25 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
                 Zero_App::ResponseJson200(null, -1, ["стоковый сервер не найден"]);
             $responseStock = $responseStock['Data'][$_REQUEST['CompId']];
             $_REQUEST['Hardware']['Label'] = $responseStock['Cpu']['Name'];
+            // Корректировка аукциона и цен.
+            if ( $responseStock['Auction']['DateTime'] )
+            {   // если дата и время просрочены (кеш, консольное обновление)
+                $d1 = new DateTime();
+                $d2 = new DateTime($responseStock['Auction']['DateTime']);
+                $flag = $d1->diff($d2);
+                if ( 0 < $flag->invert )
+                {
+                    $discount = $responseStock['Price']['Price'] * $responseStock['Auction']['Discount'];
+                    $responseStock['Price']['Price'] = $responseStock['Price']['Price'] + $discount;
+                    foreach (Shop_Config_General::$CurrencyPrice as $priceIndex)
+                    {
+                        $discount = $responseStock['Price'][$priceIndex] * $responseStock['Auction']['Discount'];
+                        $responseStock['Price'][$priceIndex] = $responseStock['Price'][$priceIndex] + $discount;
+                    }
+                    $responseStock['Auction']['Discount'] = 0;
+                    $responseStock['Auction']['DateTime'] = '';
+                }
+            }
         }
 
         // Получение конфигурации custom

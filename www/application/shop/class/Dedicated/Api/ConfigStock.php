@@ -54,7 +54,26 @@ class Shop_Dedicated_Api_ConfigStock extends Zero_Controller
                 $row['Price']['Price'] = $row['Price']['PriceEUR'];
             else
                 $row['Price']['Price'] = $row['Price']['PriceRUR'];
-            $responseSort['Data'][$compID] = $row;
+            // ditetime auction
+            if ( $row['Auction']['DateTime'] )
+            {   // если дата и время просрочены (кеш, консольное обновление)
+                $d1 = new DateTime();
+                $d2 = new DateTime($row['Auction']['DateTime']);
+                $flag = $d1->diff($d2);
+                if ( 0 < $flag->invert )
+                {
+                    $discount = $row['Price']['Price'] * $row['Auction']['Discount'];
+                    $row['Price']['Price'] = $row['Price']['Price'] + $discount;
+                    foreach (Shop_Config_General::$CurrencyPrice as $priceIndex)
+                    {
+                        $discount = $row['Price'][$priceIndex] * $row['Auction']['Discount'];
+                        $row['Price'][$priceIndex] = $row['Price'][$priceIndex] + $discount;
+                    }
+                    $row['Auction']['Discount'] = 0;
+                    $row['Auction']['DateTime'] = '';
+                }
+            }
+            $row['Auction']['DateTime'] = app_datetimeGr($row['Auction']['DateTime']);
             // RAID (Other)
             $flagRaid = false;
             if ( isset($row['Other']) )
@@ -68,13 +87,15 @@ class Shop_Dedicated_Api_ConfigStock extends Zero_Controller
                     }
                 }
             }
-            $responseSort['Data'][$compID]['Raid'] = $flagRaid;
+            $row['Raid'] = $flagRaid;
+            //
+            $responseSort['Data'][$compID] = $row;
         }
         $responseSort['CpuMinKpd'] = $min;
         $responseSort['CpuMaxKpd'] = $max;
         $responseSort['ComponentGroup'] = $response['ComponentGroup'];
 
-//        Zero_App::ResponseJson500(-1, ['ffff']);
+        //        Zero_App::ResponseJson500(-1, ['ffff']);
         Zero_App::ResponseJson200($responseSort);
         return true;
     }

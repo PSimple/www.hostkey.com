@@ -23,7 +23,7 @@ class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
         {
             $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/salenew?groups={$gr}";
             $data = Zero_App::RequestJson("GET", $url);
-            if ( false == $data['ErrorStatus'] )
+            if ( false == $data['ErrorStatus'] && isset($data['Content']) )
             {
                 $data['Content']['ComponentGroup'] = $gr;
                 $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . str_replace(',', '_', $gr) . '.data';
@@ -33,7 +33,7 @@ class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
         // NL
         $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/salenew?groups=NL";
         $data = Zero_App::RequestJson("GET", $url);
-        if ( false == $data['ErrorStatus'] )
+        if ( false == $data['ErrorStatus'] && isset($data['Content']) )
         {
             $data['Content']['ComponentGroup'] = 'NL';
             $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/NL.data';
@@ -42,7 +42,7 @@ class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
         // RU
         $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/salenew?groups=RU";
         $data = Zero_App::RequestJson("GET", $url);
-        if ( false == $data['ErrorStatus'] )
+        if ( false == $data['ErrorStatus'] && isset($data['Content']) )
         {
             $data['Content']['ComponentGroup'] = 'RU';
             $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/RU.data';

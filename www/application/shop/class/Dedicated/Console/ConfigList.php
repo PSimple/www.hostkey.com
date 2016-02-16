@@ -21,7 +21,7 @@ class Shop_Dedicated_Console_ConfigList extends Zero_Controller
         // OS
         $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/list?typ=4";
         $data = Zero_App::RequestJson("GET", $url);
-        if ( false == $data['ErrorStatus'] )
+        if ( false == $data['ErrorStatus'] && isset($data['Content']) )
         {
             $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/4.data';
             Zero_Helper_File::File_Save($path, serialize($data['Content']));
@@ -29,7 +29,7 @@ class Shop_Dedicated_Console_ConfigList extends Zero_Controller
         // Port
         $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/list?typ=13";
         $data = Zero_App::RequestJson("GET", $url);
-        if ( false == $data['ErrorStatus'] )
+        if ( false == $data['ErrorStatus'] && isset($data['Content']) )
         {
             $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorList/13.data';
             Zero_Helper_File::File_Save($path, serialize($data['Content']));
