@@ -56,9 +56,11 @@ angular.module("app.dedicated.sale").controller "AppDedicatedSaleCtrl", (ngTable
                 CpuKpdLink: r.Cpu.KpdLink
                 Ram: parseInt(r.Ram, 10)
                 Raid: r.Raid
-                Hdd: r.Hdd.join("<br>")
+                Hdd: if r.Hdd then r.Hdd.join("<br>") else ""
                 Price: parseInt(r.Price.Price, 10)
-                Timer: parseInt(r.Id, 10)
+                Timer: r.Auction.DateTime
+                TimerDiscount: parseInt(r.Auction.Discount, 10)
+
         arr
 
     tableData = prepareData(configStock)
@@ -87,4 +89,7 @@ angular.module("app.dedicated.sale").controller "AppDedicatedSaleCtrl", (ngTable
             $scope.selectedSale = null
         else
             $scope.selectedSale = s
+
+    # меняем цену сервера когда закончился таймер
+    $scope.changePrice = (obj) -> obj.Price = obj.Price + obj.TimerDiscount
 

@@ -1,4 +1,4 @@
-require './jquery.timeTo.min.js'
+require './jquery.time-to.js'
 
 angular.module "ui.timeTo", []
 
@@ -6,14 +6,21 @@ angular.module("ui.timeTo").directive "timeTo", ->
     restrict: "AE"
     replace: true
     scope:
-        seconds: "=timeTo"
+        date: "=timeTo"
+        callback: "&"
 
     link: (scope, element, attrs, ngModel) ->
-        seconds = parseInt(scope.seconds, 10)
-
-        if seconds
+        if scope.date
             element.timeTo
-                seconds: seconds
+                timeTo: new Date(scope.date)
                 displayCaptions: true
                 captionSize: 8
+                countdownAlertLimit: false
+                displayDays: 2
+                callback: ->
+                    element.remove()
+                    if attrs.callback
+                        scope.$apply(scope.callback())
 
+        else
+            element.remove()
