@@ -32,12 +32,13 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         {
             $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicatedStock/' . str_replace(',', '_', $_REQUEST['Groups']) . '.data';
             if ( !file_exists($path) )
-                Zero_App::ResponseJson200(null, -1, ["файл стока не найден"]);
+                Zero_App::ResponseJson500(-1, ["файл стока не найден"]);
             $responseStock = unserialize(file_get_contents($path));
             if ( !isset($responseStock['Data'][$_REQUEST['CompId']]) )
-                Zero_App::ResponseJson200(null, -1, ["стоковый сервер не найден"]);
+                Zero_App::ResponseJson500(-1, ["стоковый сервер не найден"]);
             $responseStock = $responseStock['Data'][$_REQUEST['CompId']];
-            $_REQUEST['Hardware']['Label'] = $responseStock['Cpu']['Name'];
+
+            $_REQUEST['Hardware']['Label'] = $responseStock['Cpu']['Name'] . '/' . $responseStock['Ram'] . ' GB' . '/' . implode(' + ', $responseStock['Hdd']);
             // Корректировка аукциона и цен.
             if ( $responseStock['Auction']['DateTime'] )
             {   // если дата и время просрочены (кеш, консольное обновление)
@@ -226,7 +227,10 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         $costSLA = 0;
         $costSLA += $Calculate[16][$_REQUEST['SLA']['ServiceLevel']][$currency];
         $costSLA += $Calculate[17][$_REQUEST['SLA']['Management']][$currency];
-        $costSLA += $Calculate[21][$_REQUEST['SLA']['DCGrade']][$currency] * $Calculate[6][$_REQUEST['Hardware']['Platform']]['Options']['unit'];
+        if ( 0 < $_REQUEST['CompId'] )
+            $costSLA += $Calculate[21][$_REQUEST['SLA']['DCGrade']][$currency] * $responseStock['Cpu']['Cnt'];
+        else
+            $costSLA += $Calculate[21][$_REQUEST['SLA']['DCGrade']][$currency] * $Calculate[6][$_REQUEST['Hardware']['Platform']]['Options']['unit'];
 
         // РАСЧЕТ
         $percentCycle = [

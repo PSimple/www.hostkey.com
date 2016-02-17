@@ -12,7 +12,7 @@ return [
      * @deprecated
      */
     'Shop_Cloud_Console_Update' => [
-        'Minute' => '*/5',
+        'Minute' => '0',
         'Hour' => '*',
         'Day' => '*',
         'Month' => '*',
@@ -25,7 +25,7 @@ return [
      * @see Shop_Dedicated_Console_Update
      */
     'Shop_Dedicated_Console_ConfigCustom' => [
-        'Minute' => '*/5',
+        'Minute' => '0',
         'Hour' => '*',
         'Day' => '*',
         'Month' => '*',
@@ -38,7 +38,7 @@ return [
      * @see Shop_Dedicated_Console_ConfigStock
      */
     'Shop_Dedicated_Console_ConfigStock' => [
-        'Minute' => '*/5',
+        'Minute' => '0',
         'Hour' => '*',
         'Day' => '*',
         'Month' => '*',
@@ -51,7 +51,7 @@ return [
      * @see Shop_Dedicated_Console_ConfigList
      */
     'Shop_Dedicated_Console_ConfigList' => [
-        'Minute' => '*/5',
+        'Minute' => '0',
         'Hour' => '*',
         'Day' => '*',
         'Month' => '*',

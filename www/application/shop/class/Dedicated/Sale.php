@@ -76,6 +76,9 @@ class Shop_Dedicated_Sale extends Zero_Controller
         {
             $listOs = unserialize(file_get_contents($path));
         }
+        unset($listOs[346]);
+        unset($listOs[347]);
+        unset($listOs[348]);
         $this->View->Assign('listOs', $listOs);
 
         // Port
