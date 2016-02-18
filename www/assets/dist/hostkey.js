@@ -39041,7 +39041,7 @@
 
 	/**
 	 * State-based routing for AngularJS
-	 * @version v0.2.18
+	 * @version v0.2.17
 	 * @link http://angular-ui.github.com/
 	 * @license MIT License, http://www.opensource.org/licenses/MIT
 	 */
@@ -39564,7 +39564,7 @@
 	   * propagated immediately. Once the `$resolve` promise has been rejected, no 
 	   * further invocables will be called.
 	   * 
-	   * Cyclic dependencies between invocables are not permitted and will cause `$resolve`
+	   * Cyclic dependencies between invocables are not permitted and will caues `$resolve`
 	   * to throw an error. As a special case, an injectable can depend on a parameter 
 	   * with the same name as the injectable, which will be fulfilled from the `parent` 
 	   * injectable of the same name. This allows inherited values to be decorated. 
@@ -40311,7 +40311,7 @@
 	  function valFromString(val) { return val != null ? val.toString().replace(/~2F/g, "/").replace(/~~/g, "~") : val; }
 
 	  var $types = {}, enqueue = true, typeQueue = [], injector, defaultTypes = {
-	    "string": {
+	    string: {
 	      encode: valToString,
 	      decode: valFromString,
 	      // TODO: in 1.0, make string .is() return false if value is undefined/null by default.
@@ -40319,19 +40319,19 @@
 	      is: function(val) { return val == null || !isDefined(val) || typeof val === "string"; },
 	      pattern: /[^/]*/
 	    },
-	    "int": {
+	    int: {
 	      encode: valToString,
 	      decode: function(val) { return parseInt(val, 10); },
 	      is: function(val) { return isDefined(val) && this.decode(val.toString()) === val; },
 	      pattern: /\d+/
 	    },
-	    "bool": {
+	    bool: {
 	      encode: function(val) { return val ? 1 : 0; },
 	      decode: function(val) { return parseInt(val, 10) !== 0; },
 	      is: function(val) { return val === true || val === false; },
 	      pattern: /0|1/
 	    },
-	    "date": {
+	    date: {
 	      encode: function (val) {
 	        if (!this.is(val))
 	          return undefined;
@@ -40350,14 +40350,14 @@
 	      pattern: /[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2][0-9]|3[0-1])/,
 	      capture: /([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/
 	    },
-	    "json": {
+	    json: {
 	      encode: angular.toJson,
 	      decode: angular.fromJson,
 	      is: angular.isObject,
 	      equals: angular.equals,
 	      pattern: /[^/]*/
 	    },
-	    "any": { // does not encode/decode
+	    any: { // does not encode/decode
 	      encode: angular.identity,
 	      decode: angular.identity,
 	      equals: angular.equals,
@@ -41099,6 +41099,12 @@
 	      return listener;
 	    }
 
+	    rules.sort(function(ruleA, ruleB) {
+	      var aLength = ruleA.prefix ? ruleA.prefix.length : 0;
+	      var bLength = ruleB.prefix ? ruleB.prefix.length : 0;
+	      return bLength - aLength;
+	    });
+
 	    if (!interceptDeferred) listen();
 
 	    return {
@@ -41301,8 +41307,7 @@
 
 	    // Derive parameters for this state and ensure they're a super-set of parent's parameters
 	    params: function(state) {
-	      var ownParams = pick(state.ownParams, state.ownParams.$$keys());
-	      return state.parent && state.parent.params ? extend(state.parent.params.$$new(), ownParams) : new $$UMFP.ParamSet();
+	      return state.parent && state.parent.params ? extend(state.parent.params.$$new(), state.ownParams) : new $$UMFP.ParamSet();
 	    },
 
 	    // If there is no explicit multi-view configuration, make one up so we don't have
@@ -42794,8 +42799,6 @@
 
 	angular.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProvider);
 
-	var ngMajorVer = angular.version.major;
-	var ngMinorVer = angular.version.minor;
 	/**
 	 * @ngdoc directive
 	 * @name ui.router.state.directive:ui-view
@@ -42819,9 +42822,6 @@
 	 * when a view is populated. By default, $anchorScroll is overridden by ui-router's custom scroll
 	 * service, {@link ui.router.state.$uiViewScroll}. This custom service let's you
 	 * scroll ui-view elements into view when they are populated during a state activation.
-	 *
-	 * @param {string=} noanimation If truthy, the non-animated renderer will be selected (no animations
-	 * will be applied to the ui-view)
 	 *
 	 * *Note: To revert back to old [`$anchorScroll`](http://docs.angularjs.org/api/ng.$anchorScroll)
 	 * functionality, call `$uiViewScrollProvider.useAnchorScroll()`.*
@@ -42934,35 +42934,24 @@
 	  // Returns a set of DOM manipulation functions based on which Angular version
 	  // it should use
 	  function getRenderer(attrs, scope) {
-	    var statics = {
-	      enter: function (element, target, cb) { target.after(element); cb(); },
-	      leave: function (element, cb) { element.remove(); cb(); }
+	    var statics = function() {
+	      return {
+	        enter: function (element, target, cb) { target.after(element); cb(); },
+	        leave: function (element, cb) { element.remove(); cb(); }
+	      };
 	    };
 
-	    if (!!attrs.noanimation) return statics;
-
-	    function animEnabled(element) {
-	      if (ngMajorVer === 1 && ngMinorVer >= 4) return !!$animate.enabled(element);
-	      if (ngMajorVer === 1 && ngMinorVer >= 2) return !!$animate.enabled();
-	      return (!!$animator);
-	    }
-
-	    // ng 1.2+
 	    if ($animate) {
 	      return {
 	        enter: function(element, target, cb) {
-	          if (!animEnabled(element)) {
-	            statics.enter(element, target, cb);
-	          } else if (angular.version.minor > 2) {
+	          if (angular.version.minor > 2) {
 	            $animate.enter(element, null, target).then(cb);
 	          } else {
 	            $animate.enter(element, null, target, cb);
 	          }
 	        },
 	        leave: function(element, cb) {
-	          if (!animEnabled(element)) {
-	            statics.leave(element, cb);
-	          } else if (angular.version.minor > 2) {
+	          if (angular.version.minor > 2) {
 	            $animate.leave(element).then(cb);
 	          } else {
 	            $animate.leave(element, cb);
@@ -42971,7 +42960,6 @@
 	      };
 	    }
 
-	    // ng 1.1.5
 	    if ($animator) {
 	      var animate = $animator && $animator(scope, attrs);
 
@@ -42981,7 +42969,7 @@
 	      };
 	    }
 
-	    return statics;
+	    return statics();
 	  }
 
 	  var directive = {
@@ -43326,7 +43314,7 @@
 	        def.state = group[0]; def.params = group[1]; def.options = group[2];
 	        def.href = $state.href(def.state, def.params, def.options);
 
-	        if (active) active.$$addStateInfo(def.state, def.params);
+	        if (active) active.$$addStateInfo(ref.state, def.params);
 	        if (def.href) attrs.$set(type.attr, def.href);
 	      }
 
@@ -43592,8 +43580,8 @@
 /***/ function(module, exports) {
 
 	/**
-	 * @license AngularJS v1.3.20
-	 * (c) 2010-2014 Google, Inc. http://angularjs.org
+	 * @license AngularJS v1.4.9
+	 * (c) 2010-2015 Google, Inc. http://angularjs.org
 	 * License: MIT
 	 */
 	(function(window, angular, undefined) {'use strict';
@@ -43804,10 +43792,11 @@
 
 	// SVG Elements
 	// https://wiki.whatwg.org/wiki/Sanitization_rules#svg_Elements
-	var svgElements = makeMap("animate,animateColor,animateMotion,animateTransform,circle,defs," +
-	        "desc,ellipse,font-face,font-face-name,font-face-src,g,glyph,hkern,image,linearGradient," +
-	        "line,marker,metadata,missing-glyph,mpath,path,polygon,polyline,radialGradient,rect,set," +
-	        "stop,svg,switch,text,title,tspan,use");
+	// Note: the elements animate,animateColor,animateMotion,animateTransform,set are intentionally omitted.
+	// They can potentially allow for arbitrary javascript to be executed. See #11290
+	var svgElements = makeMap("circle,defs,desc,ellipse,font-face,font-face-name,font-face-src,g,glyph," +
+	        "hkern,image,linearGradient,line,marker,metadata,missing-glyph,mpath,path,polygon,polyline," +
+	        "radialGradient,rect,stop,svg,switch,text,title,tspan,use");
 
 	// Special Elements (can contain anything)
 	var specialElements = makeMap("script,style");
@@ -43825,36 +43814,37 @@
 	var htmlAttrs = makeMap('abbr,align,alt,axis,bgcolor,border,cellpadding,cellspacing,class,clear,' +
 	    'color,cols,colspan,compact,coords,dir,face,headers,height,hreflang,hspace,' +
 	    'ismap,lang,language,nohref,nowrap,rel,rev,rows,rowspan,rules,' +
-	    'scope,scrolling,shape,size,span,start,summary,target,title,type,' +
+	    'scope,scrolling,shape,size,span,start,summary,tabindex,target,title,type,' +
 	    'valign,value,vspace,width');
 
 	// SVG attributes (without "id" and "name" attributes)
 	// https://wiki.whatwg.org/wiki/Sanitization_rules#svg_Attributes
 	var svgAttrs = makeMap('accent-height,accumulate,additive,alphabetic,arabic-form,ascent,' +
-	    'attributeName,attributeType,baseProfile,bbox,begin,by,calcMode,cap-height,class,color,' +
-	    'color-rendering,content,cx,cy,d,dx,dy,descent,display,dur,end,fill,fill-rule,font-family,' +
-	    'font-size,font-stretch,font-style,font-variant,font-weight,from,fx,fy,g1,g2,glyph-name,' +
-	    'gradientUnits,hanging,height,horiz-adv-x,horiz-origin-x,ideographic,k,keyPoints,' +
-	    'keySplines,keyTimes,lang,marker-end,marker-mid,marker-start,markerHeight,markerUnits,' +
-	    'markerWidth,mathematical,max,min,offset,opacity,orient,origin,overline-position,' +
-	    'overline-thickness,panose-1,path,pathLength,points,preserveAspectRatio,r,refX,refY,' +
-	    'repeatCount,repeatDur,requiredExtensions,requiredFeatures,restart,rotate,rx,ry,slope,stemh,' +
-	    'stemv,stop-color,stop-opacity,strikethrough-position,strikethrough-thickness,stroke,' +
-	    'stroke-dasharray,stroke-dashoffset,stroke-linecap,stroke-linejoin,stroke-miterlimit,' +
-	    'stroke-opacity,stroke-width,systemLanguage,target,text-anchor,to,transform,type,u1,u2,' +
-	    'underline-position,underline-thickness,unicode,unicode-range,units-per-em,values,version,' +
-	    'viewBox,visibility,width,widths,x,x-height,x1,x2,xlink:actuate,xlink:arcrole,xlink:role,' +
-	    'xlink:show,xlink:title,xlink:type,xml:base,xml:lang,xml:space,xmlns,xmlns:xlink,y,y1,y2,' +
-	    'zoomAndPan');
+	    'baseProfile,bbox,begin,by,calcMode,cap-height,class,color,color-rendering,content,' +
+	    'cx,cy,d,dx,dy,descent,display,dur,end,fill,fill-rule,font-family,font-size,font-stretch,' +
+	    'font-style,font-variant,font-weight,from,fx,fy,g1,g2,glyph-name,gradientUnits,hanging,' +
+	    'height,horiz-adv-x,horiz-origin-x,ideographic,k,keyPoints,keySplines,keyTimes,lang,' +
+	    'marker-end,marker-mid,marker-start,markerHeight,markerUnits,markerWidth,mathematical,' +
+	    'max,min,offset,opacity,orient,origin,overline-position,overline-thickness,panose-1,' +
+	    'path,pathLength,points,preserveAspectRatio,r,refX,refY,repeatCount,repeatDur,' +
+	    'requiredExtensions,requiredFeatures,restart,rotate,rx,ry,slope,stemh,stemv,stop-color,' +
+	    'stop-opacity,strikethrough-position,strikethrough-thickness,stroke,stroke-dasharray,' +
+	    'stroke-dashoffset,stroke-linecap,stroke-linejoin,stroke-miterlimit,stroke-opacity,' +
+	    'stroke-width,systemLanguage,target,text-anchor,to,transform,type,u1,u2,underline-position,' +
+	    'underline-thickness,unicode,unicode-range,units-per-em,values,version,viewBox,visibility,' +
+	    'width,widths,x,x-height,x1,x2,xlink:actuate,xlink:arcrole,xlink:role,xlink:show,xlink:title,' +
+	    'xlink:type,xml:base,xml:lang,xml:space,xmlns,xmlns:xlink,y,y1,y2,zoomAndPan', true);
 
 	var validAttrs = angular.extend({},
 	                                uriAttrs,
 	                                svgAttrs,
 	                                htmlAttrs);
 
-	function makeMap(str) {
+	function makeMap(str, lowercaseKeys) {
 	  var obj = {}, items = str.split(','), i;
-	  for (i = 0; i < items.length; i++) obj[items[i]] = true;
+	  for (i = 0; i < items.length; i++) {
+	    obj[lowercaseKeys ? angular.lowercase(items[i]) : items[i]] = true;
+	  }
 	  return obj;
 	}
 
@@ -43982,8 +43972,9 @@
 
 	    unary = voidElements[tagName] || !!unary;
 
-	    if (!unary)
+	    if (!unary) {
 	      stack.push(tagName);
+	    }
 
 	    var attrs = {};
 
@@ -44002,11 +43993,12 @@
 	  function parseEndTag(tag, tagName) {
 	    var pos = 0, i;
 	    tagName = angular.lowercase(tagName);
-	    if (tagName)
+	    if (tagName) {
 	      // Find the closest opened tag of the same type
-	      for (pos = stack.length - 1; pos >= 0; pos--)
-	        if (stack[pos] == tagName)
-	          break;
+	      for (pos = stack.length - 1; pos >= 0; pos--) {
+	        if (stack[pos] == tagName) break;
+	      }
+	    }
 
 	    if (pos >= 0) {
 	      // Close all the open elements, up the stack
@@ -44220,7 +44212,7 @@
 	 */
 	angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
 	  var LINKY_URL_REGEXP =
-	        /((ftp|https?):\/\/|(www\.)|(mailto:)?[A-Za-z0-9._%+-]+@)\S*[^\s.;,(){}<>"”’]/i,
+	        /((ftp|https?):\/\/|(www\.)|(mailto:)?[A-Za-z0-9._%+-]+@)\S*[^\s.;,(){}<>"\u201d\u2019]/i,
 	      MAILTO_REGEXP = /^mailto:/i;
 
 	  return function(text, target) {

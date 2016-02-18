@@ -91,7 +91,5 @@ function app_datetimeGr($datetime)
     if ( !$datetime )
         return '';
     $a = explode(' ', $datetime);
-    //    $ad = explode('-', $a[0]);
-    //    return $ad[0] . '-' . $ad[2] . '-' . $ad[1] . 'T' . $a[1] . 'Z';
     return $a[0] . 'T' . $a[1] . 'Z';
 }

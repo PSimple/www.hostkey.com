@@ -160,7 +160,6 @@ class Shop_Dedicated_Api_OrderStockFake extends Zero_Controller
         ];
         $result = Zero_App::RequestJson('POST', 'https://bill.hostkey.com/api/v1.0/shop/dedicated/orders', $requestData);
         $label = $_REQUEST['Hardware']['Label'] . '/' . $_REQUEST['Software']['Label'] . '/' . $_REQUEST['Network']['Label'] . '/' . $_REQUEST['SLA']['Label'];
-        Zero_Logs::File("orderstock.log", $requestData, $result);
         if ( $result['ErrorStatus'] == false )
         {
             Zero_App::ResponseJson200([
