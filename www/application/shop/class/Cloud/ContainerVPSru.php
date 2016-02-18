@@ -31,7 +31,7 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
      */
     protected function Chunk_View()
     {
-        $config = Zero_Config::Get_Config('shop', 'config');
+        $config = Zero_Config::Get_Config('shop');
         $this->View->Assign("currency", $config['currency']);
         $this->View->Assign("currencyId", $config['currencyId']);
         $this->View->Assign("PID", 538);

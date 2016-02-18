@@ -21,7 +21,7 @@ class Shop_Cloud_Console_Update extends Zero_Controller
      */
     public function Action_Default()
     {
-        $config = Zero_Config::Get_Config('shop', 'config');
+        $config = Zero_Config::Get_Config('shop');
 
         foreach ($this->pidList as $pid)
         {

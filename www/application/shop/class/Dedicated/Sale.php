@@ -18,7 +18,6 @@ class Shop_Dedicated_Sale extends Zero_Controller
     {
         $this->Chunk_Init();
 
-        $config = Zero_Config::Get_Config('shop', 'config');
         $this->View->Assign("currency", 'eur');
         $this->View->Assign("currencyId", 2);
 
