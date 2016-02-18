@@ -7,7 +7,7 @@
 // Including the class Zero_App
 require __DIR__ . '/zero/class/App.php';
 
-Zero_App::Init('app');
+Zero_App::Init();
 
 // General Authorization Application
 if ( Zero_App::$Config->Site_AccessLogin )
