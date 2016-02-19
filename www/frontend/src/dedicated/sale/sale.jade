@@ -40,7 +40,7 @@ div
                 thead
                     tr.dedicated-extra-price__table-row.dedicated-extra-price__table-row_title_yes
                         th.dedicated-extra-price__table-cell
-                        th.dedicated-extra-price__table-cell.sortable(ng-class="{'sort-asc': tableData.isSortBy('CpuKpd', 'asc'), 'sort-desc': tableData.isSortBy('CpuKpd', 'desc')}", ng-click="tableData.sorting('CpuKpd', tableData.isSortBy('CpuKpd', 'asc') ? 'desc' : 'asc')", style="width:400px;")
+                        th.dedicated-extra-price__table-cell.sortable(ng-class="{'sort-asc': tableData.isSortBy('CpuKpdCnt', 'asc'), 'sort-desc': tableData.isSortBy('CpuKpdCnt', 'desc')}", ng-click="tableData.sorting('CpuKpdCnt', tableData.isSortBy('CpuKpdCnt', 'asc') ? 'desc' : 'asc')", style="width:400px;")
                             div processor
                         th.dedicated-extra-price__table-cell.sortable(ng-class="{'sort-asc': tableData.isSortBy('Ram', 'asc'), 'sort-desc': tableData.isSortBy('Ram', 'desc')}", ng-click="tableData.sorting('Ram', tableData.isSortBy('Ram', 'asc') ? 'desc' : 'asc')")
                             div memory
@@ -58,7 +58,7 @@ div
                         td.dedicated-extra-price__table-cell
                             span.b-icon.b-flag(ng-class="{'b-flag_country_nether': s.LocationCode==='NL'}")
 
-                        td.dedicated-extra-price__table-cell(sortable="'CpuKpd'")
+                        td.dedicated-extra-price__table-cell(sortable="'CpuKpdCnt'")
                             .dedicated-extra-price__text(ng-bind="s.CpuName")
                             kpd-indicator(cpu-kpd="s.CpuKpd", cpu-kpd-link="s.CpuKpdLink", cpu-cnt="s.CpuCnt")
 

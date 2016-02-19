@@ -50,6 +50,7 @@ angular.module("app.dedicated.sale").controller "AppDedicatedSaleCtrl", (ngTable
             arr.push
                 Id: r.Id
                 LocationCode: r.LocationCode
+                CpuKpdCnt: parseInt(r.Cpu.Kpd, 10) * parseInt(r.Cpu.Cnt, 10)
                 CpuKpd: parseInt(r.Cpu.Kpd, 10)
                 CpuName: r.Cpu.Name
                 CpuCnt: parseInt(r.Cpu.Cnt, 10)
@@ -67,7 +68,7 @@ angular.module("app.dedicated.sale").controller "AppDedicatedSaleCtrl", (ngTable
 
     $scope.tableData = new ngTableParams({
         page: 1,
-        count: 10
+        count: 100
     }, {
         total: configStock.length,
         getData: ($defer, params) ->
