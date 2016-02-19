@@ -2900,9 +2900,11 @@ p {
 }
 .dedicated-item-content__submit {
   padding-right: 70px;
-  font-size: 17px;
-  line-height: 21px;
+  font-size: 16px;
+  line-height: 16px;
   position: relative;
+  display: inline-block;
+  cursor: pointer;
 }
 .dedicated-item-content__submit:after {
   content: 'BUY';

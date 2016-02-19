@@ -72,7 +72,7 @@ div
                             span.b-icon.dedicated-extra-price__icon-good(ng-if="s.Raid")
 
                         td.dedicated-extra-price__table-cell(sortable="'Price'")
-                            a.b-submit.dedicated-item-content__submit(ng-if="s.Price", href="", ng-click="selectSale(s)") {{s.Price|verboseCurrency}}
+                            .b-submit.dedicated-item-content__submit(ng-if="s.Price", href="", ng-click="selectSale(s)") {{s.Price|verboseCurrency}}
 
                         td.dedicated-extra-price__table-cell
                             .black-sale__slider-item-timer(time-to="s.Timer", callback="changePrice(s)")

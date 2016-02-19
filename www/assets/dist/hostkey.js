@@ -39041,7 +39041,7 @@
 
 	/**
 	 * State-based routing for AngularJS
-	 * @version v0.2.17
+	 * @version v0.2.18
 	 * @link http://angular-ui.github.com/
 	 * @license MIT License, http://www.opensource.org/licenses/MIT
 	 */
@@ -39564,7 +39564,7 @@
 	   * propagated immediately. Once the `$resolve` promise has been rejected, no 
 	   * further invocables will be called.
 	   * 
-	   * Cyclic dependencies between invocables are not permitted and will caues `$resolve`
+	   * Cyclic dependencies between invocables are not permitted and will cause `$resolve`
 	   * to throw an error. As a special case, an injectable can depend on a parameter 
 	   * with the same name as the injectable, which will be fulfilled from the `parent` 
 	   * injectable of the same name. This allows inherited values to be decorated. 
@@ -40311,7 +40311,7 @@
 	  function valFromString(val) { return val != null ? val.toString().replace(/~2F/g, "/").replace(/~~/g, "~") : val; }
 
 	  var $types = {}, enqueue = true, typeQueue = [], injector, defaultTypes = {
-	    string: {
+	    "string": {
 	      encode: valToString,
 	      decode: valFromString,
 	      // TODO: in 1.0, make string .is() return false if value is undefined/null by default.
@@ -40319,19 +40319,19 @@
 	      is: function(val) { return val == null || !isDefined(val) || typeof val === "string"; },
 	      pattern: /[^/]*/
 	    },
-	    int: {
+	    "int": {
 	      encode: valToString,
 	      decode: function(val) { return parseInt(val, 10); },
 	      is: function(val) { return isDefined(val) && this.decode(val.toString()) === val; },
 	      pattern: /\d+/
 	    },
-	    bool: {
+	    "bool": {
 	      encode: function(val) { return val ? 1 : 0; },
 	      decode: function(val) { return parseInt(val, 10) !== 0; },
 	      is: function(val) { return val === true || val === false; },
 	      pattern: /0|1/
 	    },
-	    date: {
+	    "date": {
 	      encode: function (val) {
 	        if (!this.is(val))
 	          return undefined;
@@ -40350,14 +40350,14 @@
 	      pattern: /[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2][0-9]|3[0-1])/,
 	      capture: /([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/
 	    },
-	    json: {
+	    "json": {
 	      encode: angular.toJson,
 	      decode: angular.fromJson,
 	      is: angular.isObject,
 	      equals: angular.equals,
 	      pattern: /[^/]*/
 	    },
-	    any: { // does not encode/decode
+	    "any": { // does not encode/decode
 	      encode: angular.identity,
 	      decode: angular.identity,
 	      equals: angular.equals,
@@ -41099,12 +41099,6 @@
 	      return listener;
 	    }
 
-	    rules.sort(function(ruleA, ruleB) {
-	      var aLength = ruleA.prefix ? ruleA.prefix.length : 0;
-	      var bLength = ruleB.prefix ? ruleB.prefix.length : 0;
-	      return bLength - aLength;
-	    });
-
 	    if (!interceptDeferred) listen();
 
 	    return {
@@ -41307,7 +41301,8 @@
 
 	    // Derive parameters for this state and ensure they're a super-set of parent's parameters
 	    params: function(state) {
-	      return state.parent && state.parent.params ? extend(state.parent.params.$$new(), state.ownParams) : new $$UMFP.ParamSet();
+	      var ownParams = pick(state.ownParams, state.ownParams.$$keys());
+	      return state.parent && state.parent.params ? extend(state.parent.params.$$new(), ownParams) : new $$UMFP.ParamSet();
 	    },
 
 	    // If there is no explicit multi-view configuration, make one up so we don't have
@@ -42799,6 +42794,8 @@
 
 	angular.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProvider);
 
+	var ngMajorVer = angular.version.major;
+	var ngMinorVer = angular.version.minor;
 	/**
 	 * @ngdoc directive
 	 * @name ui.router.state.directive:ui-view
@@ -42822,6 +42819,9 @@
 	 * when a view is populated. By default, $anchorScroll is overridden by ui-router's custom scroll
 	 * service, {@link ui.router.state.$uiViewScroll}. This custom service let's you
 	 * scroll ui-view elements into view when they are populated during a state activation.
+	 *
+	 * @param {string=} noanimation If truthy, the non-animated renderer will be selected (no animations
+	 * will be applied to the ui-view)
 	 *
 	 * *Note: To revert back to old [`$anchorScroll`](http://docs.angularjs.org/api/ng.$anchorScroll)
 	 * functionality, call `$uiViewScrollProvider.useAnchorScroll()`.*
@@ -42934,24 +42934,35 @@
 	  // Returns a set of DOM manipulation functions based on which Angular version
 	  // it should use
 	  function getRenderer(attrs, scope) {
-	    var statics = function() {
-	      return {
-	        enter: function (element, target, cb) { target.after(element); cb(); },
-	        leave: function (element, cb) { element.remove(); cb(); }
-	      };
+	    var statics = {
+	      enter: function (element, target, cb) { target.after(element); cb(); },
+	      leave: function (element, cb) { element.remove(); cb(); }
 	    };
 
+	    if (!!attrs.noanimation) return statics;
+
+	    function animEnabled(element) {
+	      if (ngMajorVer === 1 && ngMinorVer >= 4) return !!$animate.enabled(element);
+	      if (ngMajorVer === 1 && ngMinorVer >= 2) return !!$animate.enabled();
+	      return (!!$animator);
+	    }
+
+	    // ng 1.2+
 	    if ($animate) {
 	      return {
 	        enter: function(element, target, cb) {
-	          if (angular.version.minor > 2) {
+	          if (!animEnabled(element)) {
+	            statics.enter(element, target, cb);
+	          } else if (angular.version.minor > 2) {
 	            $animate.enter(element, null, target).then(cb);
 	          } else {
 	            $animate.enter(element, null, target, cb);
 	          }
 	        },
 	        leave: function(element, cb) {
-	          if (angular.version.minor > 2) {
+	          if (!animEnabled(element)) {
+	            statics.leave(element, cb);
+	          } else if (angular.version.minor > 2) {
 	            $animate.leave(element).then(cb);
 	          } else {
 	            $animate.leave(element, cb);
@@ -42960,6 +42971,7 @@
 	      };
 	    }
 
+	    // ng 1.1.5
 	    if ($animator) {
 	      var animate = $animator && $animator(scope, attrs);
 
@@ -42969,7 +42981,7 @@
 	      };
 	    }
 
-	    return statics();
+	    return statics;
 	  }
 
 	  var directive = {
@@ -43314,7 +43326,7 @@
 	        def.state = group[0]; def.params = group[1]; def.options = group[2];
 	        def.href = $state.href(def.state, def.params, def.options);
 
-	        if (active) active.$$addStateInfo(ref.state, def.params);
+	        if (active) active.$$addStateInfo(def.state, def.params);
 	        if (def.href) attrs.$set(type.attr, def.href);
 	      }
 
@@ -43580,8 +43592,8 @@
 /***/ function(module, exports) {
 
 	/**
-	 * @license AngularJS v1.4.9
-	 * (c) 2010-2015 Google, Inc. http://angularjs.org
+	 * @license AngularJS v1.3.20
+	 * (c) 2010-2014 Google, Inc. http://angularjs.org
 	 * License: MIT
 	 */
 	(function(window, angular, undefined) {'use strict';
@@ -43792,11 +43804,10 @@
 
 	// SVG Elements
 	// https://wiki.whatwg.org/wiki/Sanitization_rules#svg_Elements
-	// Note: the elements animate,animateColor,animateMotion,animateTransform,set are intentionally omitted.
-	// They can potentially allow for arbitrary javascript to be executed. See #11290
-	var svgElements = makeMap("circle,defs,desc,ellipse,font-face,font-face-name,font-face-src,g,glyph," +
-	        "hkern,image,linearGradient,line,marker,metadata,missing-glyph,mpath,path,polygon,polyline," +
-	        "radialGradient,rect,stop,svg,switch,text,title,tspan,use");
+	var svgElements = makeMap("animate,animateColor,animateMotion,animateTransform,circle,defs," +
+	        "desc,ellipse,font-face,font-face-name,font-face-src,g,glyph,hkern,image,linearGradient," +
+	        "line,marker,metadata,missing-glyph,mpath,path,polygon,polyline,radialGradient,rect,set," +
+	        "stop,svg,switch,text,title,tspan,use");
 
 	// Special Elements (can contain anything)
 	var specialElements = makeMap("script,style");
@@ -43814,37 +43825,36 @@
 	var htmlAttrs = makeMap('abbr,align,alt,axis,bgcolor,border,cellpadding,cellspacing,class,clear,' +
 	    'color,cols,colspan,compact,coords,dir,face,headers,height,hreflang,hspace,' +
 	    'ismap,lang,language,nohref,nowrap,rel,rev,rows,rowspan,rules,' +
-	    'scope,scrolling,shape,size,span,start,summary,tabindex,target,title,type,' +
+	    'scope,scrolling,shape,size,span,start,summary,target,title,type,' +
 	    'valign,value,vspace,width');
 
 	// SVG attributes (without "id" and "name" attributes)
 	// https://wiki.whatwg.org/wiki/Sanitization_rules#svg_Attributes
 	var svgAttrs = makeMap('accent-height,accumulate,additive,alphabetic,arabic-form,ascent,' +
-	    'baseProfile,bbox,begin,by,calcMode,cap-height,class,color,color-rendering,content,' +
-	    'cx,cy,d,dx,dy,descent,display,dur,end,fill,fill-rule,font-family,font-size,font-stretch,' +
-	    'font-style,font-variant,font-weight,from,fx,fy,g1,g2,glyph-name,gradientUnits,hanging,' +
-	    'height,horiz-adv-x,horiz-origin-x,ideographic,k,keyPoints,keySplines,keyTimes,lang,' +
-	    'marker-end,marker-mid,marker-start,markerHeight,markerUnits,markerWidth,mathematical,' +
-	    'max,min,offset,opacity,orient,origin,overline-position,overline-thickness,panose-1,' +
-	    'path,pathLength,points,preserveAspectRatio,r,refX,refY,repeatCount,repeatDur,' +
-	    'requiredExtensions,requiredFeatures,restart,rotate,rx,ry,slope,stemh,stemv,stop-color,' +
-	    'stop-opacity,strikethrough-position,strikethrough-thickness,stroke,stroke-dasharray,' +
-	    'stroke-dashoffset,stroke-linecap,stroke-linejoin,stroke-miterlimit,stroke-opacity,' +
-	    'stroke-width,systemLanguage,target,text-anchor,to,transform,type,u1,u2,underline-position,' +
-	    'underline-thickness,unicode,unicode-range,units-per-em,values,version,viewBox,visibility,' +
-	    'width,widths,x,x-height,x1,x2,xlink:actuate,xlink:arcrole,xlink:role,xlink:show,xlink:title,' +
-	    'xlink:type,xml:base,xml:lang,xml:space,xmlns,xmlns:xlink,y,y1,y2,zoomAndPan', true);
+	    'attributeName,attributeType,baseProfile,bbox,begin,by,calcMode,cap-height,class,color,' +
+	    'color-rendering,content,cx,cy,d,dx,dy,descent,display,dur,end,fill,fill-rule,font-family,' +
+	    'font-size,font-stretch,font-style,font-variant,font-weight,from,fx,fy,g1,g2,glyph-name,' +
+	    'gradientUnits,hanging,height,horiz-adv-x,horiz-origin-x,ideographic,k,keyPoints,' +
+	    'keySplines,keyTimes,lang,marker-end,marker-mid,marker-start,markerHeight,markerUnits,' +
+	    'markerWidth,mathematical,max,min,offset,opacity,orient,origin,overline-position,' +
+	    'overline-thickness,panose-1,path,pathLength,points,preserveAspectRatio,r,refX,refY,' +
+	    'repeatCount,repeatDur,requiredExtensions,requiredFeatures,restart,rotate,rx,ry,slope,stemh,' +
+	    'stemv,stop-color,stop-opacity,strikethrough-position,strikethrough-thickness,stroke,' +
+	    'stroke-dasharray,stroke-dashoffset,stroke-linecap,stroke-linejoin,stroke-miterlimit,' +
+	    'stroke-opacity,stroke-width,systemLanguage,target,text-anchor,to,transform,type,u1,u2,' +
+	    'underline-position,underline-thickness,unicode,unicode-range,units-per-em,values,version,' +
+	    'viewBox,visibility,width,widths,x,x-height,x1,x2,xlink:actuate,xlink:arcrole,xlink:role,' +
+	    'xlink:show,xlink:title,xlink:type,xml:base,xml:lang,xml:space,xmlns,xmlns:xlink,y,y1,y2,' +
+	    'zoomAndPan');
 
 	var validAttrs = angular.extend({},
 	                                uriAttrs,
 	                                svgAttrs,
 	                                htmlAttrs);
 
-	function makeMap(str, lowercaseKeys) {
+	function makeMap(str) {
 	  var obj = {}, items = str.split(','), i;
-	  for (i = 0; i < items.length; i++) {
-	    obj[lowercaseKeys ? angular.lowercase(items[i]) : items[i]] = true;
-	  }
+	  for (i = 0; i < items.length; i++) obj[items[i]] = true;
 	  return obj;
 	}
 
@@ -43972,9 +43982,8 @@
 
 	    unary = voidElements[tagName] || !!unary;
 
-	    if (!unary) {
+	    if (!unary)
 	      stack.push(tagName);
-	    }
 
 	    var attrs = {};
 
@@ -43993,12 +44002,11 @@
 	  function parseEndTag(tag, tagName) {
 	    var pos = 0, i;
 	    tagName = angular.lowercase(tagName);
-	    if (tagName) {
+	    if (tagName)
 	      // Find the closest opened tag of the same type
-	      for (pos = stack.length - 1; pos >= 0; pos--) {
-	        if (stack[pos] == tagName) break;
-	      }
-	    }
+	      for (pos = stack.length - 1; pos >= 0; pos--)
+	        if (stack[pos] == tagName)
+	          break;
 
 	    if (pos >= 0) {
 	      // Close all the open elements, up the stack
@@ -44212,7 +44220,7 @@
 	 */
 	angular.module('ngSanitize').filter('linky', ['$sanitize', function($sanitize) {
 	  var LINKY_URL_REGEXP =
-	        /((ftp|https?):\/\/|(www\.)|(mailto:)?[A-Za-z0-9._%+-]+@)\S*[^\s.;,(){}<>"\u201d\u2019]/i,
+	        /((ftp|https?):\/\/|(www\.)|(mailto:)?[A-Za-z0-9._%+-]+@)\S*[^\s.;,(){}<>"”’]/i,
 	      MAILTO_REGEXP = /^mailto:/i;
 
 	  return function(text, target) {
@@ -49334,7 +49342,7 @@
 	            return scope.model = JSON.parse(element.select2('val'));
 	          });
 	        });
-	      }, 300);
+	      }, 600);
 	    }
 	  };
 	}]);
@@ -59731,7 +59739,7 @@
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-text-page__box\"><h3 class=\"b-text-page__title b-text-page__title_upline_yes\">EXTRA PRICE</h3><div class=\"b-dedicated__description\"><p>HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia. We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+ international resellers. Virtually any server configuration could be provided to our customers. We offer full range of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own servers in Moscow.</p></div></div><div class=\"b-dedicated__hide-block-close js-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div><div class=\"b-container\"><div class=\"dedicated-extra-price__box\"><table ng-table=\"tableData\" show-filter=\"true\" class=\"dedicated-extra-price__table\"><thead><tr class=\"dedicated-extra-price__table-row dedicated-extra-price__table-row_title_yes\"><th class=\"dedicated-extra-price__table-cell\"></th><th ng-class=\"{'sort-asc': tableData.isSortBy('CpuKpd', 'asc'), 'sort-desc': tableData.isSortBy('CpuKpd', 'desc')}\" ng-click=\"tableData.sorting('CpuKpd', tableData.isSortBy('CpuKpd', 'asc') ? 'desc' : 'asc')\" style=\"width:400px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>processor</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Ram', 'asc'), 'sort-desc': tableData.isSortBy('Ram', 'desc')}\" ng-click=\"tableData.sorting('Ram', tableData.isSortBy('Ram', 'asc') ? 'desc' : 'asc')\" class=\"dedicated-extra-price__table-cell sortable\"><div>memory</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Hdd', 'asc'), 'sort-desc': tableData.isSortBy('Hdd', 'desc')}\" ng-click=\"tableData.sorting('Hdd', tableData.isSortBy('Hdd', 'asc') ? 'desc' : 'asc')\" style=\"width:200px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>hard drive</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Raid', 'asc'), 'sort-desc': tableData.isSortBy('Raid', 'desc')}\" ng-click=\"tableData.sorting('Raid', tableData.isSortBy('Raid', 'asc') ? 'desc' : 'asc')\" style=\"width:120px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>hw raid</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Price', 'asc'), 'sort-desc': tableData.isSortBy('Price', 'desc')}\" ng-click=\"tableData.sorting('Price', tableData.isSortBy('Price', 'asc') ? 'desc' : 'asc')\" style=\"width:240px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>monthly</div></th><th style=\"width:315px;\" class=\"dedicated-extra-price__table-cell dedicated-extra-price__table-cell_red_yes\"><div>price will change after:</div></th></tr></thead><tbody ng-repeat=\"s in $data\"><tr class=\"dedicated-extra-price__table-row\"><td class=\"dedicated-extra-price__table-cell\"><span ng-class=\"{'b-flag_country_nether': s.LocationCode==='NL'}\" class=\"b-icon b-flag\"></span></td><td sortable=\"'CpuKpd'\" class=\"dedicated-extra-price__table-cell\"><div ng-bind=\"s.CpuName\" class=\"dedicated-extra-price__text\"></div><kpd-indicator cpu-kpd=\"s.CpuKpd\" cpu-kpd-link=\"s.CpuKpdLink\" cpu-cnt=\"s.CpuCnt\"></kpd-indicator></td><td sortable=\"'Ram'\" class=\"dedicated-extra-price__table-cell\"><span class=\"dedicated-extra-price__text\">{{s.Ram}} GB</span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span ng-bind-html=\"s.Hdd\"></span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span ng-if=\"s.Raid\" class=\"b-icon dedicated-extra-price__icon-good\"></span></td><td sortable=\"'Price'\" class=\"dedicated-extra-price__table-cell\"><a ng-if=\"s.Price\" href=\"\" ng-click=\"selectSale(s)\" class=\"b-submit dedicated-item-content__submit\">{{s.Price|verboseCurrency}}</a></td><td class=\"dedicated-extra-price__table-cell\"><div time-to=\"s.Timer\" callback=\"changePrice(s)\" class=\"black-sale__slider-item-timer\"></div></td></tr><tr ng-if=\"s.Id === selectedSale.Id\" class=\"dedicated-extra-price__table-row\"><td colspan=\"9\" class=\"dedicated-extra-price__table-cell\"><div sale-server-calculator=\"\" sale-server=\"s\"></div></td></tr></tbody></table></div></div></div>");;return buf.join("");
+	buf.push("<div class=\"b-text-page__box\"><h3 class=\"b-text-page__title b-text-page__title_upline_yes\">EXTRA PRICE</h3><div class=\"b-dedicated__description\"><p>HOSTKEY offers own dedicated and virtual servers in various Datacenters in Moscow, Russia. We are first hands for offshore Dedicated servers in Russia since 2008, managing 600+ servers here with 20+ international resellers. Virtually any server configuration could be provided to our customers. We offer full range of modern and stock servers for every task. You could lease Cisco network equipment or collocate your own servers in Moscow.</p></div></div><div class=\"b-dedicated__hide-block-close js-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div><div class=\"b-container\"><div class=\"dedicated-extra-price__box\"><table ng-table=\"tableData\" show-filter=\"true\" class=\"dedicated-extra-price__table\"><thead><tr class=\"dedicated-extra-price__table-row dedicated-extra-price__table-row_title_yes\"><th class=\"dedicated-extra-price__table-cell\"></th><th ng-class=\"{'sort-asc': tableData.isSortBy('CpuKpd', 'asc'), 'sort-desc': tableData.isSortBy('CpuKpd', 'desc')}\" ng-click=\"tableData.sorting('CpuKpd', tableData.isSortBy('CpuKpd', 'asc') ? 'desc' : 'asc')\" style=\"width:400px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>processor</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Ram', 'asc'), 'sort-desc': tableData.isSortBy('Ram', 'desc')}\" ng-click=\"tableData.sorting('Ram', tableData.isSortBy('Ram', 'asc') ? 'desc' : 'asc')\" class=\"dedicated-extra-price__table-cell sortable\"><div>memory</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Hdd', 'asc'), 'sort-desc': tableData.isSortBy('Hdd', 'desc')}\" ng-click=\"tableData.sorting('Hdd', tableData.isSortBy('Hdd', 'asc') ? 'desc' : 'asc')\" style=\"width:200px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>hard drive</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Raid', 'asc'), 'sort-desc': tableData.isSortBy('Raid', 'desc')}\" ng-click=\"tableData.sorting('Raid', tableData.isSortBy('Raid', 'asc') ? 'desc' : 'asc')\" style=\"width:120px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>hw raid</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Price', 'asc'), 'sort-desc': tableData.isSortBy('Price', 'desc')}\" ng-click=\"tableData.sorting('Price', tableData.isSortBy('Price', 'asc') ? 'desc' : 'asc')\" style=\"width:240px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>monthly</div></th><th style=\"width:315px;\" class=\"dedicated-extra-price__table-cell dedicated-extra-price__table-cell_red_yes\"><div>price will change after:</div></th></tr></thead><tbody ng-repeat=\"s in $data\"><tr class=\"dedicated-extra-price__table-row\"><td class=\"dedicated-extra-price__table-cell\"><span ng-class=\"{'b-flag_country_nether': s.LocationCode==='NL'}\" class=\"b-icon b-flag\"></span></td><td sortable=\"'CpuKpd'\" class=\"dedicated-extra-price__table-cell\"><div ng-bind=\"s.CpuName\" class=\"dedicated-extra-price__text\"></div><kpd-indicator cpu-kpd=\"s.CpuKpd\" cpu-kpd-link=\"s.CpuKpdLink\" cpu-cnt=\"s.CpuCnt\"></kpd-indicator></td><td sortable=\"'Ram'\" class=\"dedicated-extra-price__table-cell\"><span class=\"dedicated-extra-price__text\">{{s.Ram}} GB</span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span ng-bind-html=\"s.Hdd\"></span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span ng-if=\"s.Raid\" class=\"b-icon dedicated-extra-price__icon-good\"></span></td><td sortable=\"'Price'\" class=\"dedicated-extra-price__table-cell\"><div ng-if=\"s.Price\" href=\"\" ng-click=\"selectSale(s)\" class=\"b-submit dedicated-item-content__submit\">{{s.Price|verboseCurrency}}</div></td><td class=\"dedicated-extra-price__table-cell\"><div time-to=\"s.Timer\" callback=\"changePrice(s)\" class=\"black-sale__slider-item-timer\"></div></td></tr><tr ng-if=\"s.Id === selectedSale.Id\" class=\"dedicated-extra-price__table-row\"><td colspan=\"9\" class=\"dedicated-extra-price__table-cell\"><div sale-server-calculator=\"\" sale-server=\"s\"></div></td></tr></tbody></table></div></div></div>");;return buf.join("");
 	}
 
 /***/ }
