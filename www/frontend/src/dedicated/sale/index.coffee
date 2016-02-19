@@ -49,6 +49,7 @@ angular.module("app.dedicated.sale").controller "AppDedicatedSaleCtrl", (ngTable
         rawArray.forEach (r) ->
             arr.push
                 Id: r.Id
+                Groups: r.Groups
                 LocationCode: r.LocationCode
                 CpuKpdCnt: parseInt(r.Cpu.Kpd, 10) * parseInt(r.Cpu.Cnt, 10)
                 CpuKpd: parseInt(r.Cpu.Kpd, 10)

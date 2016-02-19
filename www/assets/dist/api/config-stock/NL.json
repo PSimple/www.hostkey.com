@@ -4,106 +4,27 @@
   "ErrorStatus": false,
   "Content": {
     "Data": {
-      "10926": {
-        "Id": "10926",
+      "9452": {
+        "Id": "9452",
         "LocationCode": "NL",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": null,
-          "PriceEUR": null,
-          "Price": null
+          "PriceRUR": "4455",
+          "PriceEUR": "53",
+          "Price": "53"
         },
-        "Ram": 16,
-        "Platform": ["1 x 2 disks - micro"],
+        "Groups": "NL",
+        "Ram": 8,
+        "Platform": ["1 x SM MicroCloud"],
         "Cpu": {
-          "Name": "Xeon E5645 2.4 GHz (6 cores)",
+          "Name": "Xeon E3-1230 3.2GHz (4 cores)",
           "Cnt": 1,
-          "Kpd": "6735",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5645+%40+2.40GHz&id=1252"
+          "Kpd": "8026",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+%40+3.20GHz&id=1199"
         },
         "Hdd": ["2 x 500Gb SATA"],
         "Other": ["IPMI"],
-        "motherboard": ["1 x some"],
-        "Auction": {
-          "Discount": "-10",
-          "DateTime": "2016-02-18 20:44:52"
-        },
-        "Raid": false
-      },
-      "16909": {
-        "Id": "16909",
-        "LocationCode": "NL",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": null,
-          "PriceEUR": null,
-          "Price": null
-        },
-        "Ram": 8,
-        "Platform": ["1 x Supermicro 5038ML-H12TRF"],
-        "Cpu": {
-          "Name": "Xeon E3-1230v3 3.3GHz (4 cores)",
-          "Cnt": 1,
-          "Kpd": "9392",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+v3+%40+3.30GHz&id=1942"
-        },
-        "Hdd": ["240Gb SSD"],
-        "Other": ["IPMI"],
-        "motherboard": ["1 x SM X10SLE-F"],
-        "Auction": {
-          "Discount": "10",
-          "DateTime": "2016-02-15 20:44:52"
-        },
-        "Raid": false
-      },
-      "17403": {
-        "Id": "17403",
-        "LocationCode": "NL",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": null,
-          "PriceEUR": null,
-          "Price": null
-        },
-        "Ram": 32,
-        "Platform": ["1 x SM CSE-811T-300"],
-        "Cpu": {
-          "Name": "Xeon E5-1650 3.2GHz (6 cores)",
-          "Cnt": 1,
-          "Kpd": "11664",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-1650+%40+3.20GHz&id=1211"
-        },
-        "Hdd": ["240Gb SSD"],
-        "Other": ["IPMI"],
-        "motherboard": ["1 x SM X9SRI-3F"],
-        "Auction": {
-          "Discount": "12",
-          "DateTime": "2016-02-25 14:45:02"
-        },
-        "Raid": false
-      },
-      "9960": {
-        "Id": "9960",
-        "LocationCode": "NL",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "4493",
-          "PriceEUR": "50",
-          "Price": "50"
-        },
-        "Ram": 16,
-        "Platform": ["1 x SM 1U 1156"],
-        "Cpu": {
-          "Name": "Xeon X3440 2.53 GHz (4 cores)",
-          "Cnt": 1,
-          "Kpd": "4174",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+X3440+%40+2.53GHz&id=1288"
-        },
-        "Hdd": ["4 x 500Gb SATA"],
         "Auction": {
           "Discount": 0,
           "DateTime": ""
@@ -116,10 +37,11 @@
         "BestOffer": "1",
         "Description": "",
         "Price": {
-          "PriceRUR": "4762",
+          "PriceRUR": "4455",
           "PriceEUR": "53",
           "Price": "53"
         },
+        "Groups": "NL",
         "Ram": 16,
         "Platform": ["1 x SM 1U 1156"],
         "Cpu": {
@@ -132,32 +54,141 @@
         "Other": ["IPMI"],
         "motherboard": ["1 x SM X8SIE-F"],
         "Auction": {
-          "Discount": 0,
-          "DateTime": ""
+          "Discount": 10,
+          "DateTime": "2016-02-20T16:14:22Z"
         },
         "Raid": false
       },
-      "10243": {
-        "Id": "10243",
+      "10894": {
+        "Id": "10894",
         "LocationCode": "NL",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "4852",
-          "PriceEUR": "54",
-          "Price": "54"
+          "PriceRUR": "4791",
+          "PriceEUR": "57",
+          "Price": "57"
         },
+        "Groups": "NL",
         "Ram": 8,
-        "Platform": ["1 x some"],
+        "Platform": ["1 x SM MicroCloud"],
         "Cpu": {
           "Name": "Xeon E3-1230 3.2GHz (4 cores)",
           "Cnt": 1,
           "Kpd": "8026",
           "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+%40+3.20GHz&id=1199"
         },
-        "Hdd": ["240Gb SSD"],
+        "Hdd": ["2 x 500Gb SATA"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "18584": {
+        "Id": "18584",
+        "LocationCode": "NL",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "4960",
+          "PriceEUR": "59",
+          "Price": "59"
+        },
+        "Groups": "NL",
+        "Ram": 16,
+        "Platform": ["1 x Supermicro 5038ML-H12TRF"],
+        "Cpu": {
+          "Name": "Xeon E3-1230v3 3.3GHz (4 cores)",
+          "Cnt": 1,
+          "Kpd": "9392",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+v3+%40+3.30GHz&id=1942"
+        },
+        "Hdd": ["2 x 1Tb SATA"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "10926": {
+        "Id": "10926",
+        "LocationCode": "NL",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "5464",
+          "PriceEUR": "65",
+          "Price": "65"
+        },
+        "Groups": "NL",
+        "Ram": 16,
+        "Platform": ["1 x 2 disks - micro"],
+        "Cpu": {
+          "Name": "Xeon E5645 2.4 GHz (6 cores)",
+          "Cnt": 1,
+          "Kpd": "6735",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5645+%40+2.40GHz&id=1252"
+        },
+        "Hdd": ["2 x 500Gb SATA"],
         "Other": ["IPMI"],
         "motherboard": ["1 x some"],
+        "Auction": {
+          "Discount": 12,
+          "DateTime": "2016-03-03T12:45:25Z"
+        },
+        "Raid": false
+      },
+      "17079": {
+        "Id": "17079",
+        "LocationCode": "NL",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "5884",
+          "PriceEUR": "70",
+          "Price": "70"
+        },
+        "Groups": "NL",
+        "Ram": 16,
+        "Platform": ["1 x SM CSE-811T-300"],
+        "Cpu": {
+          "Name": "Xeon E5-1650 3.2GHz (6 cores)",
+          "Cnt": 1,
+          "Kpd": "11664",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-1650+%40+3.20GHz&id=1211"
+        },
+        "Hdd": ["2 x 1Tb SATA"],
+        "Other": ["IPMI"],
+        "motherboard": ["1 x SM X9SRI-3F"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "17130": {
+        "Id": "17130",
+        "LocationCode": "NL",
+        "BestOffer": "0",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "5884",
+          "PriceEUR": "70",
+          "Price": "70"
+        },
+        "Groups": "NL",
+        "Ram": 16,
+        "Platform": ["1 x SM CSE-811T-300"],
+        "Cpu": {
+          "Name": "Xeon E5-1650 3.2GHz (6 cores)",
+          "Cnt": 1,
+          "Kpd": "11664",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-1650+%40+3.20GHz&id=1211"
+        },
+        "Hdd": ["2 x 1Tb SATA"],
+        "Other": ["IPMI"],
+        "motherboard": ["1 x SM X9SRI-3F"],
         "Auction": {
           "Discount": 0,
           "DateTime": ""
@@ -170,10 +201,11 @@
         "BestOffer": "1",
         "Description": "",
         "Price": {
-          "PriceRUR": "6290",
+          "PriceRUR": "5884",
           "PriceEUR": "70",
           "Price": "70"
         },
+        "Groups": "NL",
         "Ram": 16,
         "Platform": ["1 x 2 disks - micro"],
         "Cpu": {
@@ -185,8 +217,8 @@
         "Hdd": ["2 x 240Gb SSD"],
         "motherboard": ["1 x some"],
         "Auction": {
-          "Discount": 0,
-          "DateTime": ""
+          "Discount": 12,
+          "DateTime": "2016-02-27T14:45:02Z"
         },
         "Raid": false
       },
@@ -196,10 +228,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "6469",
+          "PriceRUR": "6052",
           "PriceEUR": "72",
           "Price": "72"
         },
+        "Groups": "NL",
         "Ram": 16,
         "Platform": ["1 x SM X8DTL"],
         "Cpu": {
@@ -211,8 +244,8 @@
         "Hdd": ["2 x 500Gb SATA"],
         "Other": ["IPMI"],
         "Auction": {
-          "Discount": "-10",
-          "DateTime": "2016-02-18 20:44:52"
+          "Discount": 0,
+          "DateTime": ""
         },
         "Raid": false
       },
@@ -222,10 +255,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "6649",
+          "PriceRUR": "6220",
           "PriceEUR": "74",
           "Price": "74"
         },
+        "Groups": "NL",
         "Ram": 32,
         "Platform": ["1 x SM CSE-811T-300"],
         "Cpu": {
@@ -249,10 +283,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "7008",
+          "PriceRUR": "6557",
           "PriceEUR": "78",
           "Price": "78"
         },
+        "Groups": "NL",
         "Ram": 32,
         "Platform": ["1 x SM CSE-811T-300"],
         "Cpu": {
@@ -273,30 +308,31 @@
         },
         "Raid": false
       },
-      "10922": {
-        "Id": "10922",
+      "17403": {
+        "Id": "17403",
         "LocationCode": "NL",
-        "BestOffer": "1",
+        "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "7278",
-          "PriceEUR": "81",
-          "Price": "81"
+          "PriceRUR": "6557",
+          "PriceEUR": "78",
+          "Price": "78"
         },
+        "Groups": "NL",
         "Ram": 32,
-        "Platform": ["1 x SM 6016T-MT"],
+        "Platform": ["1 x SM CSE-811T-300"],
         "Cpu": {
-          "Name": "2 x Xeon E5645 2.4 GHz (6 cores)",
-          "Cnt": 2,
-          "Kpd": "6735",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5645+%40+2.40GHz&id=1252"
+          "Name": "Xeon E5-1650 3.2GHz (6 cores)",
+          "Cnt": 1,
+          "Kpd": "11664",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-1650+%40+3.20GHz&id=1211"
         },
-        "Hdd": ["1Tb SATA"],
+        "Hdd": ["240Gb SSD"],
         "Other": ["IPMI"],
-        "motherboard": ["1 x SM X8DTL"],
+        "motherboard": ["1 x SM X9SRI-3F"],
         "Auction": {
-          "Discount": "-10",
-          "DateTime": "2016-02-18 20:44:52"
+          "Discount": 5,
+          "DateTime": "2016-02-21T19:19:17Z"
         },
         "Raid": false
       },
@@ -306,10 +342,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "7368",
+          "PriceRUR": "6893",
           "PriceEUR": "82",
           "Price": "82"
         },
+        "Groups": "NL",
         "Ram": 16,
         "Platform": ["1 x SM CSE-811T-300"],
         "Cpu": {
@@ -327,16 +364,44 @@
         },
         "Raid": false
       },
+      "9133": {
+        "Id": "9133",
+        "LocationCode": "NL",
+        "BestOffer": "0",
+        "Description": "no raid",
+        "Price": {
+          "PriceRUR": "7985",
+          "PriceEUR": "95",
+          "Price": "95"
+        },
+        "Groups": "NL",
+        "Ram": 16,
+        "Platform": ["1 x SM X8DTL"],
+        "Cpu": {
+          "Name": "2 x Xeon E5645 2.4 GHz (6 cores)",
+          "Cnt": 2,
+          "Kpd": "6735",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5645+%40+2.40GHz&id=1252"
+        },
+        "Hdd": ["240Gb SSD"],
+        "Other": ["IPMI"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
       "10936": {
         "Id": "10936",
         "LocationCode": "NL",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "9614",
+          "PriceRUR": "8994",
           "PriceEUR": "107",
           "Price": "107"
         },
+        "Groups": "NL",
         "Ram": 32,
         "Platform": ["1 x SM X9SCL"],
         "Cpu": {
@@ -357,54 +422,62 @@
         },
         "Raid": false
       },
-      "13482": {
-        "Id": "13482",
+      "10935": {
+        "Id": "10935",
         "LocationCode": "NL",
-        "BestOffer": "1",
-        "Description": "no raid",
+        "BestOffer": "0",
+        "Description": "raid 10 intel matrix ",
         "Price": {
-          "PriceRUR": "10243",
-          "PriceEUR": "114",
-          "Price": "114"
+          "PriceRUR": "10507",
+          "PriceEUR": "125",
+          "Price": "125"
         },
+        "Groups": "NL",
         "Ram": 32,
-        "Platform": ["1 x some"],
+        "Platform": ["1 x SM X9SCL"],
         "Cpu": {
-          "Name": "2 x Xeon E5-2630 6x2.3GHz cores",
-          "Cnt": 2,
-          "Kpd": "8875",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-2630+%40+2.30GHz&id=1215"
+          "Name": "Xeon E3-1230 3.2GHz (4 cores)",
+          "Cnt": 1,
+          "Kpd": "8026",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+%40+3.20GHz&id=1199"
         },
-        "Hdd": ["2 x 500Gb SATA"],
-        "motherboard": ["1 x SM X9DRW"],
+        "Hdd": ["4 x 3Tb SATA"],
+        "Other": ["IPMI"],
+        "motherboard": ["1 x SM X9SCL-F"],
         "Auction": {
           "Discount": 0,
           "DateTime": ""
         },
         "Raid": false
       },
-      "8894": {
-        "Id": "8894",
+      "13583": {
+        "Id": "13583",
         "LocationCode": "NL",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "10872",
-          "PriceEUR": "121",
-          "Price": "121"
+          "PriceRUR": "17399",
+          "PriceEUR": "207",
+          "Price": "207"
         },
-        "Ram": 64,
-        "Platform": ["1 x SM X8DTL"],
+        "Groups": "NL",
+        "Ram": 256,
+        "Platform": ["1 x SM CSE-815TQ-720CB"],
         "Cpu": {
-          "Name": "2 x Xeon E5645 2.4 GHz (6 cores)",
+          "Name": "2 x Xeon E5-2630 6x2.3GHz cores",
           "Cnt": 2,
-          "Kpd": "6735",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5645+%40+2.40GHz&id=1252"
+          "Kpd": "8875",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5-2630+%40+2.30GHz&id=1215"
         },
-        "Hdd": ["240Gb SSD"],
+        "Hdd": [
+          "240Gb SSD",
+          "1Tb SATA"
+        ],
+        "Other": ["IPMI"],
+        "motherboard": ["1 x SM X9DRW"],
         "Auction": {
-          "Discount": "-20",
-          "DateTime": "2016-02-16 15:51:45"
+          "Discount": 0,
+          "DateTime": ""
         },
         "Raid": false
       },
@@ -414,10 +487,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "24079",
+          "PriceRUR": "22526",
           "PriceEUR": "268",
           "Price": "268"
         },
+        "Groups": "NL",
         "Ram": 64,
         "Platform": ["1 x 2 disks - micro"],
         "Cpu": {
@@ -441,10 +515,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "37286",
+          "PriceRUR": "34882",
           "PriceEUR": "415",
           "Price": "415"
         },
+        "Groups": "NL",
         "Ram": 32,
         "Platform": ["1 x SM CSE-846BE16-R920B"],
         "Cpu": {
@@ -461,8 +536,8 @@
         ],
         "motherboard": ["1 x SM X9DRi-F"],
         "Auction": {
-          "Discount": 0,
-          "DateTime": ""
+          "Discount": -15,
+          "DateTime": "2016-02-24T12:45:02Z"
         },
         "Raid": true
       }

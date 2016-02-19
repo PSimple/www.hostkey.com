@@ -56817,7 +56817,7 @@
 	    },
 	    template: __webpack_require__(34),
 	    controller: ["notifications", "$scope", "$state", "$stateParams", "$timeout", "$order", "$q", "$dedicated", function(notifications, $scope, $state, $stateParams, $timeout, $order, $q, $dedicated) {
-	      return $q.all([$dedicated.components('sale'), $dedicated.getConfigCalculator('sale'), $dedicated.billingCycleDiscount()]).then(function(data) {
+	      return $q.all([$dedicated.components('sale'), $dedicated.getConfigCalculator('sale', $scope.saleServer), $dedicated.billingCycleDiscount()]).then(function(data) {
 	        var billingCycleDiscount, components, configCalculator;
 	        components = data[0];
 	        configCalculator = data[1];
@@ -57128,21 +57128,21 @@
 	angular.module("api.dedicated").service("$dedicated", ["$http", "$q", "CONFIG", function($http, $q, CONFIG) {
 	  var that;
 	  that = this;
-	  this.getConfigCalculator = function(type) {
+	  this.getConfigCalculator = function(type, serverOptions) {
 	    var deferred, groups, url;
+	    if (serverOptions == null) {
+	      serverOptions = null;
+	    }
 	    deferred = $q.defer();
 	    if (window.isDev) {
 	      url = "/assets/dist/api/config/dedicated/" + type + ".json";
 	    } else {
-	      if (type === 'sale') {
-	        type = '';
-	      }
 	      url = CONFIG.apiUrl + "/dedicated/config";
 	    }
-	    if (type) {
-	      groups = [window.country, type].join(',');
+	    if (serverOptions != null ? serverOptions.Groups : void 0) {
+	      groups = serverOptions.Groups;
 	    } else {
-	      groups = window.country;
+	      groups = [window.country, type].join(',');
 	    }
 	    $http({
 	      url: url,
@@ -59679,6 +59679,7 @@
 	    rawArray.forEach(function(r) {
 	      return arr.push({
 	        Id: r.Id,
+	        Groups: r.Groups,
 	        LocationCode: r.LocationCode,
 	        CpuKpdCnt: parseInt(r.Cpu.Kpd, 10) * parseInt(r.Cpu.Cnt, 10),
 	        CpuKpd: parseInt(r.Cpu.Kpd, 10),

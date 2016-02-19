@@ -3,19 +3,18 @@ angular.module "api.dedicated", ['config']
 angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
     that = this
 
-    @getConfigCalculator = (type)->
+    @getConfigCalculator = (type, serverOptions=null)->
         deferred = $q.defer()
 
         if window.isDev
             url = "/assets/dist/api/config/dedicated/#{type}.json"
         else
-            type = '' if type is 'sale'
             url = "#{CONFIG.apiUrl}/dedicated/config"
 
-        if type
-            groups = [window.country,type].join(',')
+        if serverOptions?.Groups
+            groups = serverOptions.Groups
         else
-            groups = window.country
+            groups = [window.country,type].join(',')
 
         $http
             url: url
