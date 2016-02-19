@@ -30,7 +30,22 @@ class Shop_Dedicated_Api_Custom extends Zero_Controller
         // Получаем конфигурацию
         $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . str_replace(',', '_', $_REQUEST['groups']) . '.data';
         if ( !file_exists($path) )
-            Zero_App::ResponseJson500(-1, ["файл конфигурации не найден"]);
+        {
+            $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/salenew?groups={$_REQUEST['groups']}";
+            $data = Zero_App::RequestJson("GET", $url);
+            if ( false == $data['ErrorStatus'] && isset($data['Content']) )
+            {
+                $data['Content']['ComponentGroup'] = $_REQUEST['groups'];
+                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/' . str_replace(',', '_', $_REQUEST['groups']) . '.data';
+                Zero_Helper_File::File_Save($path, serialize($data['Content']));
+            }
+            else
+            {
+                Zero_App::ResponseJson500(-1, ["не удалось получить конфигурацию"]);
+//                Zero_App::ResponseJson500(-1, ["файл конфигурации не найден"]);
+            }
+
+        }
         $response = unserialize(file_get_contents($path));
 
         // Заплатка для правильной сортировки и инициализация выбранной цены

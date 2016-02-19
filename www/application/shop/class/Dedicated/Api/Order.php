@@ -168,7 +168,10 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         $costSoftWare = 0;
         if ( false !== strpos($Calculate[4][$_REQUEST['Software']['OS']]['Name'], 'Windows') )
         {
-            $costSoftWare += $Calculate[4][$_REQUEST['Software']['OS']][$currency] * $Calculate[1][$_REQUEST['Hardware']['Cpu']]['Options']['cpu_count'];
+            if ( 0 < $_REQUEST['CompId'] )
+                $costSoftWare += $Calculate[4][$_REQUEST['Software']['OS']][$currency] * $responseStock['Cpu']['Cnt'];
+            else
+                $costSoftWare += $Calculate[4][$_REQUEST['Software']['OS']][$currency] * $Calculate[1][$_REQUEST['Hardware']['Cpu']]['Options']['cpu_count'];
         }
         else
         {

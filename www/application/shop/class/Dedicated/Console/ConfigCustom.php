@@ -30,7 +30,7 @@ class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
                 Zero_Helper_File::File_Save($path, serialize($data['Content']));
             }
         }
-        // NL
+        // NL старое не используется
         $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/salenew?groups=NL";
         $data = Zero_App::RequestJson("GET", $url);
         if ( false == $data['ErrorStatus'] && isset($data['Content']) )
@@ -39,7 +39,7 @@ class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
             $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/NL.data';
             Zero_Helper_File::File_Save($path, serialize($data['Content']));
         }
-        // RU
+        // RU старое не используется
         $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/salenew?groups=RU";
         $data = Zero_App::RequestJson("GET", $url);
         if ( false == $data['ErrorStatus'] && isset($data['Content']) )
