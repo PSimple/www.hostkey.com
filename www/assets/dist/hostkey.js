@@ -44362,7 +44362,7 @@
 
 	angular.module("ui").filter('optPrice', ["$dedicated", function($dedicated) {
 	  return function(option, order, tabs) {
-	    var ComponentType_ID, getParams, multiplicator, price, ref, ref1, ref2;
+	    var ComponentType_ID, getParams, multiplicator, price, ref, ref1, ref2, ref3;
 	    if (!(option != null ? option.ComponentType_ID : void 0)) {
 	      return 0;
 	    }
@@ -44381,7 +44381,7 @@
 	     */
 	    if (ComponentType_ID === "4") {
 	      if (/Windows/.test(option.Name)) {
-	        if (order != null ? (ref = order.hardware.cpu.Options) != null ? ref.cpu_count : void 0 : void 0) {
+	        if (order != null ? (ref = order.hardware) != null ? (ref1 = ref.cpu.Options) != null ? ref1.cpu_count : void 0 : void 0 : void 0) {
 	          multiplicator = Number(order.hardware.cpu.Options.cpu_count, 10);
 	        } else {
 	          multiplicator = 1;
@@ -44390,7 +44390,7 @@
 	      }
 	    }
 	    if (ComponentType_ID === "20") {
-	      if ((ref1 = order.software.ExchangeCount) != null ? ref1.Value : void 0) {
+	      if ((ref2 = order.software.ExchangeCount) != null ? ref2.Value : void 0) {
 	        multiplicator = Number(order.software.ExchangeCount.Value, 10);
 	      } else {
 	        multiplicator = 1;
@@ -44401,7 +44401,7 @@
 	      price = price * Number(option.Value, 10);
 	    }
 	    if (ComponentType_ID === "21") {
-	      if (order.hardware && ((ref2 = order.hardware.platform.Options) != null ? ref2.unit : void 0)) {
+	      if (order.hardware && ((ref3 = order.hardware.platform.Options) != null ? ref3.unit : void 0)) {
 	        multiplicator = Number(order.hardware.platform.Options.unit, 10);
 	      } else {
 	        multiplicator = 1;
