@@ -92,7 +92,7 @@ angular.module("ui").filter 'optPrice', ($dedicated) ->
         if ComponentType_ID is "4"
             # Если выбрана ОС семейства Windows (п. 2.1) то цена ОС умножается на количество процессоров. параметр ”cpu_count”
             if /Windows/.test(option.Name)
-                if order?.hardware.cpu.Options?.cpu_count
+                if order?.hardware?.cpu.Options?.cpu_count
                     multiplicator = Number(order.hardware.cpu.Options.cpu_count, 10)
                 else
                     multiplicator = 1

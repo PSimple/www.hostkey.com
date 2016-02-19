@@ -435,7 +435,7 @@ angular.module("ui.serverCalculator").directive "saleServerCalculator", ->
     controller: (notifications, $scope, $state, $stateParams, $timeout, $order, $q, $dedicated) ->
         $q.all([
             $dedicated.components('sale')
-            $dedicated.getConfigCalculator('sale')
+            $dedicated.getConfigCalculator('sale', $scope.saleServer)
             $dedicated.billingCycleDiscount()
         ]).then (data) ->
             components = data[0]

@@ -4,41 +4,17 @@
   "ErrorStatus": false,
   "Content": {
     "Data": {
-      "13473": {
-        "Id": "13473",
-        "LocationCode": "RU",
-        "BestOffer": "1",
-        "Description": "",
-        "Price": {
-          "PriceRUR": null,
-          "PriceEUR": null,
-          "Price": null
-        },
-        "Ram": 4,
-        "Platform": ["1 x Atom server"],
-        "Cpu": {
-          "Name": "Atom D510 1.66GHz (2 cores)",
-          "Cnt": 1,
-          "Kpd": "682",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Atom+D510+%40+1.66GHz&id=610"
-        },
-        "motherboard": ["1 x Intel D510MO"],
-        "Auction": {
-          "Discount": 0,
-          "DateTime": ""
-        },
-        "Raid": false
-      },
       "18016": {
         "Id": "18016",
         "LocationCode": "RU",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "2616",
+          "PriceRUR": "2522",
           "PriceEUR": "30",
           "Price": "30"
         },
+        "Groups": "RU",
         "Ram": 2,
         "Platform": ["1 x ASUS RS120-E3"],
         "Cpu": {
@@ -55,16 +31,71 @@
         },
         "Raid": false
       },
+      "2163": {
+        "Id": "2163",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "3.5 дюймовый диск",
+        "Price": {
+          "PriceRUR": "2942",
+          "PriceEUR": "35",
+          "Price": "35"
+        },
+        "Groups": "RU",
+        "Ram": 2,
+        "Platform": ["1 x Atom server"],
+        "Cpu": {
+          "Name": "Atom D510 1.66GHz (2 cores)",
+          "Cnt": 1,
+          "Kpd": "682",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Atom+D510+%40+1.66GHz&id=610"
+        },
+        "Hdd": ["250Gb SATA"],
+        "motherboard": ["1 x Intel D510MO"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
+      "5249": {
+        "Id": "5249",
+        "LocationCode": "RU",
+        "BestOffer": "1",
+        "Description": "",
+        "Price": {
+          "PriceRUR": "3194",
+          "PriceEUR": "38",
+          "Price": "38"
+        },
+        "Groups": "RU",
+        "Ram": 4,
+        "Platform": ["1 x Asus RS100-E5/PI2"],
+        "Cpu": {
+          "Name": "Core2Duo E7500 2.93GHz (2 cores)",
+          "Cnt": 1,
+          "Kpd": "1885",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+E7500+%40+2.93GHz&id=947"
+        },
+        "Hdd": ["2 x 250Gb SATA"],
+        "motherboard": ["1 x ASUS P5BV-M"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
       "22042": {
         "Id": "22042",
         "LocationCode": "RU",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "3314",
+          "PriceRUR": "3194",
           "PriceEUR": "38",
           "Price": "38"
         },
+        "Groups": "RU",
         "Ram": 4,
         "Platform": ["1 x Intel USN Zeus UltraSlim"],
         "Cpu": {
@@ -87,10 +118,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "3488",
+          "PriceRUR": "3363",
           "PriceEUR": "40",
           "Price": "40"
         },
+        "Groups": "RU",
         "Ram": 4,
         "Platform": ["1 x Intel USN Zeus UltraSlim"],
         "Cpu": {
@@ -107,26 +139,27 @@
         },
         "Raid": false
       },
-      "21180": {
-        "Id": "21180",
+      "2197": {
+        "Id": "2197",
         "LocationCode": "RU",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "3575",
-          "PriceEUR": "41",
-          "Price": "41"
+          "PriceRUR": "3783",
+          "PriceEUR": "45",
+          "Price": "45"
         },
-        "Ram": 8,
-        "Platform": ["1 x 2 disks - micro"],
+        "Groups": "RU",
+        "Ram": 4,
+        "Platform": ["1 x Intel SR1530SH"],
         "Cpu": {
-          "Name": "Celeron J1800 2.4GHz (2 cores)",
+          "Name": "Core2Duo E8400 3.00GHz (2 cores)",
           "Cnt": 1,
-          "Kpd": "1046",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Celeron+J1800+%40+2.41GHz&id=2167"
+          "Kpd": "2171",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core2+Duo+E8400+%40+3.00GHz&id=955"
         },
-        "Hdd": ["1Tb SATA"],
-        "motherboard": ["1 x MSI J1800I"],
+        "Hdd": ["2 x 250Gb SATA"],
+        "motherboard": ["1 x Intel S3200SH"],
         "Auction": {
           "Discount": 0,
           "DateTime": ""
@@ -139,10 +172,11 @@
         "BestOffer": "0",
         "Description": "RAID1 software",
         "Price": {
-          "PriceRUR": "3924",
+          "PriceRUR": "3783",
           "PriceEUR": "45",
           "Price": "45"
         },
+        "Groups": "RU",
         "Ram": 8,
         "Platform": ["1 x Intel SR1530SH"],
         "Cpu": {
@@ -165,10 +199,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "3924",
+          "PriceRUR": "3783",
           "PriceEUR": "45",
           "Price": "45"
         },
+        "Groups": "RU",
         "Ram": 4,
         "Platform": ["1 x Procase 1U"],
         "Cpu": {
@@ -191,10 +226,11 @@
         "BestOffer": "1",
         "Description": "",
         "Price": {
-          "PriceRUR": "4186",
+          "PriceRUR": "4035",
           "PriceEUR": "48",
           "Price": "48"
         },
+        "Groups": "RU",
         "Ram": 4,
         "Platform": ["1 x Intel SR1530SH"],
         "Cpu": {
@@ -211,68 +247,17 @@
         },
         "Raid": false
       },
-      "4173": {
-        "Id": "4173",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "4360",
-          "PriceEUR": "50",
-          "Price": "50"
-        },
-        "Ram": 4,
-        "Platform": ["1 x Intel SR1630GP"],
-        "Cpu": {
-          "Name": "Core i3-540 3.06GHz (2 cores)",
-          "Cnt": 1,
-          "Kpd": "2691",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i3+540+%40+3.07GHz&id=738"
-        },
-        "Hdd": ["128Gb SSD"],
-        "motherboard": ["1 x Intel S3420GP"],
-        "Auction": {
-          "Discount": 0,
-          "DateTime": ""
-        },
-        "Raid": false
-      },
-      "8569": {
-        "Id": "8569",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "4360",
-          "PriceEUR": "50",
-          "Price": "50"
-        },
-        "Ram": 4,
-        "Platform": ["1 x Asus RS100-E6/PI2"],
-        "Cpu": {
-          "Name": "Core i3-540 3.06GHz (2 cores)",
-          "Cnt": 1,
-          "Kpd": "2691",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i3+540+%40+3.07GHz&id=738"
-        },
-        "Hdd": ["2 x 500Gb SATA"],
-        "motherboard": ["1 x ASUS P7F-M"],
-        "Auction": {
-          "Discount": 0,
-          "DateTime": ""
-        },
-        "Raid": false
-      },
       "17716": {
         "Id": "17716",
         "LocationCode": "RU",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "5755",
+          "PriceRUR": "5548",
           "PriceEUR": "66",
           "Price": "66"
         },
+        "Groups": "RU",
         "Ram": 4,
         "Platform": ["1 x SM 1U CSE-512L-260"],
         "Cpu": {
@@ -295,10 +280,11 @@
         "BestOffer": "1",
         "Description": "",
         "Price": {
-          "PriceRUR": "5929",
+          "PriceRUR": "5716",
           "PriceEUR": "68",
           "Price": "68"
         },
+        "Groups": "RU",
         "Ram": 8,
         "Platform": ["1 x SM SuperServer 6015B-UR"],
         "Cpu": {
@@ -321,10 +307,11 @@
         "BestOffer": "1",
         "Description": "",
         "Price": {
-          "PriceRUR": "6104",
+          "PriceRUR": "5884",
           "PriceEUR": "70",
           "Price": "70"
         },
+        "Groups": "RU",
         "Ram": 8,
         "Platform": ["1 x Procase 1U"],
         "Cpu": {
@@ -347,10 +334,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "6104",
+          "PriceRUR": "5884",
           "PriceEUR": "70",
           "Price": "70"
         },
+        "Groups": "RU",
         "Ram": 8,
         "Platform": ["1 x SM AS-1021m-82/t2"],
         "Cpu": {
@@ -373,10 +361,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "6104",
+          "PriceRUR": "5884",
           "PriceEUR": "70",
           "Price": "70"
         },
+        "Groups": "RU",
         "Ram": 8,
         "Platform": ["1 x SM AS-1021m-82/t2"],
         "Cpu": {
@@ -399,10 +388,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "6104",
+          "PriceRUR": "5884",
           "PriceEUR": "70",
           "Price": "70"
         },
+        "Groups": "RU",
         "Ram": 8,
         "Platform": ["1 x SM AS-1021m-82/t2"],
         "Cpu": {
@@ -425,10 +415,11 @@
         "BestOffer": "1",
         "Description": "",
         "Price": {
-          "PriceRUR": "6104",
+          "PriceRUR": "5884",
           "PriceEUR": "70",
           "Price": "70"
         },
+        "Groups": "RU",
         "Ram": 8,
         "Platform": ["1 x SM AS-1021m-82/t2"],
         "Cpu": {
@@ -451,10 +442,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "6365",
+          "PriceRUR": "6136",
           "PriceEUR": "73",
           "Price": "73"
         },
+        "Groups": "RU",
         "Ram": 8,
         "Platform": ["1 x Intel SR1630GP"],
         "Cpu": {
@@ -480,10 +472,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "6540",
+          "PriceRUR": "6304",
           "PriceEUR": "75",
           "Price": "75"
         },
+        "Groups": "RU",
         "Ram": 4,
         "Platform": ["1 x SM SuperServer 6015B-UR"],
         "Cpu": {
@@ -500,42 +493,17 @@
         },
         "Raid": false
       },
-      "8704": {
-        "Id": "8704",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "6976",
-          "PriceEUR": "80",
-          "Price": "80"
-        },
-        "Ram": 16,
-        "Platform": ["1 x Procase 1U"],
-        "Cpu": {
-          "Name": "Core i3-2100 3.1GHz (2 cores)",
-          "Cnt": 1,
-          "Kpd": "3621",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Core+i3-2100+%40+3.10GHz&id=749"
-        },
-        "Hdd": ["500Gb SATA"],
-        "motherboard": ["1 x Intel S1200BTS"],
-        "Auction": {
-          "Discount": 0,
-          "DateTime": ""
-        },
-        "Raid": false
-      },
       "9027": {
         "Id": "9027",
         "LocationCode": "RU",
         "BestOffer": "0",
         "Description": " ",
         "Price": {
-          "PriceRUR": "6976",
+          "PriceRUR": "6725",
           "PriceEUR": "80",
           "Price": "80"
         },
+        "Groups": "RU",
         "Ram": 8,
         "Platform": ["1 x Procase 1U"],
         "Cpu": {
@@ -558,10 +526,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "6976",
+          "PriceRUR": "6725",
           "PriceEUR": "80",
           "Price": "80"
         },
+        "Groups": "RU",
         "Ram": 8,
         "Platform": ["1 x Procase 1U"],
         "Cpu": {
@@ -584,10 +553,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "7412",
+          "PriceRUR": "7145",
           "PriceEUR": "85",
           "Price": "85"
         },
+        "Groups": "RU",
         "Ram": 16,
         "Platform": ["1 x Intel SR1630BC"],
         "Cpu": {
@@ -605,68 +575,17 @@
         },
         "Raid": false
       },
-      "9552": {
-        "Id": "9552",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "7586",
-          "PriceEUR": "87",
-          "Price": "87"
-        },
-        "Ram": 32,
-        "Platform": ["1 x Intel SR1630BC"],
-        "Cpu": {
-          "Name": "2 x Xeon E5507 2.26 GHz (4 cores)",
-          "Cnt": 2,
-          "Kpd": "3236",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5507+%40+2.27GHz&id=1242"
-        },
-        "Hdd": ["2Tb SATA"],
-        "motherboard": ["1 x Intel S5500BC"],
-        "Auction": {
-          "Discount": 0,
-          "DateTime": ""
-        },
-        "Raid": false
-      },
-      "9000": {
-        "Id": "9000",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "8371",
-          "PriceEUR": "96",
-          "Price": "96"
-        },
-        "Ram": 16,
-        "Platform": ["1 x Procase 1U"],
-        "Cpu": {
-          "Name": "Xeon E3-1230 3.2GHz (4 cores)",
-          "Cnt": 1,
-          "Kpd": "8026",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E3-1230+%40+3.20GHz&id=1199"
-        },
-        "Hdd": ["2 x 500Gb SATA"],
-        "motherboard": ["1 x Intel S1200BTS"],
-        "Auction": {
-          "Discount": 0,
-          "DateTime": ""
-        },
-        "Raid": false
-      },
       "17697": {
         "Id": "17697",
         "LocationCode": "RU",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "8545",
+          "PriceRUR": "8238",
           "PriceEUR": "98",
           "Price": "98"
         },
+        "Groups": "RU",
         "Ram": 16,
         "Platform": ["1 x SM 1020-A"],
         "Cpu": {
@@ -683,42 +602,17 @@
         },
         "Raid": false
       },
-      "13168": {
-        "Id": "13168",
-        "LocationCode": "RU",
-        "BestOffer": "0",
-        "Description": "",
-        "Price": {
-          "PriceRUR": "8632",
-          "PriceEUR": "99",
-          "Price": "99"
-        },
-        "Ram": 16,
-        "Platform": ["1 x HP ProLiant DL160 G6"],
-        "Cpu": {
-          "Name": "2 x Xeon E5530 2.4 GHz (4 cores)",
-          "Cnt": 2,
-          "Kpd": "4719",
-          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5530+%40+2.40GHz&id=1244"
-        },
-        "Hdd": ["2 x 500Gb SATA"],
-        "motherboard": ["1 x HP 494274-002 / 4K09C4 "],
-        "Auction": {
-          "Discount": 0,
-          "DateTime": ""
-        },
-        "Raid": false
-      },
       "10539": {
         "Id": "10539",
         "LocationCode": "RU",
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "9068",
+          "PriceRUR": "8742",
           "PriceEUR": "104",
           "Price": "104"
         },
+        "Groups": "RU",
         "Ram": 32,
         "Platform": ["1 x SM MicroCloud"],
         "Cpu": {
@@ -741,10 +635,11 @@
         "BestOffer": "1",
         "Description": "!!!без салазок!!!",
         "Price": {
-          "PriceRUR": "9504",
+          "PriceRUR": "9162",
           "PriceEUR": "109",
           "Price": "109"
         },
+        "Groups": "RU",
         "Ram": 16,
         "Platform": ["1 x Intel SR1630BC"],
         "Cpu": {
@@ -767,10 +662,11 @@
         "BestOffer": "0",
         "Description": "партиция клиента",
         "Price": {
-          "PriceRUR": "9591",
+          "PriceRUR": "9246",
           "PriceEUR": "110",
           "Price": "110"
         },
+        "Groups": "RU",
         "Ram": 32,
         "Platform": ["1 x Procase 1U"],
         "Cpu": {
@@ -793,10 +689,11 @@
         "BestOffer": "0",
         "Description": "в салазках от ДЦ, на нем сервер без салазок",
         "Price": {
-          "PriceRUR": "10027",
+          "PriceRUR": "9666",
           "PriceEUR": "115",
           "Price": "115"
         },
+        "Groups": "RU",
         "Ram": 32,
         "Platform": ["1 x Hyperion RS130 G3"],
         "Cpu": {
@@ -819,10 +716,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "10376",
+          "PriceRUR": "10003",
           "PriceEUR": "119",
           "Price": "119"
         },
+        "Groups": "RU",
         "Ram": 32,
         "Platform": ["1 x Intel SR1630BC"],
         "Cpu": {
@@ -845,10 +743,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "11946",
+          "PriceRUR": "11516",
           "PriceEUR": "137",
           "Price": "137"
         },
+        "Groups": "RU",
         "Ram": 32,
         "Platform": ["1 x T-Platforms - V5000 Blade Chassis"],
         "Cpu": {
@@ -871,10 +770,11 @@
         "BestOffer": "0",
         "Description": "ecc память",
         "Price": {
-          "PriceRUR": "13951",
+          "PriceRUR": "13449",
           "PriceEUR": "160",
           "Price": "160"
         },
+        "Groups": "RU",
         "Ram": 16,
         "Platform": ["1 x T-Platforms - V5000 Blade Chassis"],
         "Cpu": {
@@ -891,16 +791,44 @@
         },
         "Raid": false
       },
+      "18250": {
+        "Id": "18250",
+        "LocationCode": "RU",
+        "BestOffer": "0",
+        "Description": "raid 10 fake",
+        "Price": {
+          "PriceRUR": "15886",
+          "PriceEUR": "189",
+          "Price": "189"
+        },
+        "Groups": "RU",
+        "Ram": 64,
+        "Platform": ["1 x Hyperion RS130 G3"],
+        "Cpu": {
+          "Name": "2 x Xeon E5620 2.4 GHz (4 cores)",
+          "Cnt": 2,
+          "Kpd": "4929",
+          "KpdLink": "http://www.cpubenchmark.net/cpu_lookup.php?cpu=Intel+Xeon+E5620+%40+2.40GHz&id=1249"
+        },
+        "Hdd": ["4 x 256Gb SSD"],
+        "motherboard": ["1 x Intel ETRS130G3"],
+        "Auction": {
+          "Discount": 0,
+          "DateTime": ""
+        },
+        "Raid": false
+      },
       "21618": {
         "Id": "21618",
         "LocationCode": "RU",
         "BestOffer": "1",
         "Description": "",
         "Price": {
-          "PriceRUR": "17177",
+          "PriceRUR": "16559",
           "PriceEUR": "197",
           "Price": "197"
         },
+        "Groups": "RU",
         "Ram": 32,
         "Platform": ["1 x 2 disks - micro"],
         "Cpu": {
@@ -923,10 +851,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "19444",
+          "PriceRUR": "18744",
           "PriceEUR": "223",
           "Price": "223"
         },
+        "Groups": "RU",
         "Ram": 64,
         "Platform": ["1 x 2 disks - micro"],
         "Cpu": {
@@ -953,10 +882,11 @@
         "BestOffer": "1",
         "Description": "",
         "Price": {
-          "PriceRUR": "29122",
+          "PriceRUR": "28074",
           "PriceEUR": "334",
           "Price": "334"
         },
+        "Groups": "RU",
         "Ram": 128,
         "Platform": ["1 x 2 disks - micro"],
         "Cpu": {
@@ -983,10 +913,11 @@
         "BestOffer": "0",
         "Description": "",
         "Price": {
-          "PriceRUR": "36272",
+          "PriceRUR": "34966",
           "PriceEUR": "416",
           "Price": "416"
         },
+        "Groups": "RU",
         "Ram": 64,
         "Platform": ["1 x T-Platforms - V5000 Blade Chassis"],
         "Cpu": {
@@ -1009,10 +940,11 @@
         "BestOffer": "1",
         "Description": "",
         "Price": {
-          "PriceRUR": "43421",
+          "PriceRUR": "41858",
           "PriceEUR": "498",
           "Price": "498"
         },
+        "Groups": "RU",
         "Ram": 256,
         "Platform": ["1 x 2 disks - micro"],
         "Cpu": {
