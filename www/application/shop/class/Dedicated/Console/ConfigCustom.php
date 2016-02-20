@@ -48,7 +48,25 @@ class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
             $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/RU.data';
             Zero_Helper_File::File_Save($path, serialize($data['Content']));
         }
-        //
+        // обновляем нестандартные группы
+        foreach (glob(ZERO_PATH_EXCHANGE . '/ConfigCalculatorDedicated/*.data') as $filePath)
+        {
+            if ( 240 < (time() - filemtime($filePath)) )
+            {
+                $arr = explode('/', $filePath);
+                $arr = explode('.', array_pop($arr));
+                $arr = explode('_', $arr[0]);
+                Zero_Logs::Set_Message_Notice($arr);
+
+                $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/salenew?groups=" . implode(',', $arr);
+                $data = Zero_App::RequestJson("GET", $url);
+                if ( false == $data['ErrorStatus'] && isset($data['Content']) )
+                {
+                    $data['Content']['ComponentGroup'] = implode(',', $arr);
+                    Zero_Helper_File::File_Save($filePath, serialize($data['Content']));
+                }
+            }
+        }
         return true;
     }
 
