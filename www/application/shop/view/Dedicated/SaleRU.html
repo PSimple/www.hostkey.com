@@ -12,7 +12,30 @@
         <h1 class="b-page__promo-title">{$Head}</h1>
     </div>
 
-    <div class="b-text-page" ui-view=""></div>
+    <h3 class="b-dedicated__title">
+        Sale<br>
+        FEATURE
+    </h3>
+    {plugin "Content_ContentBlock_Plugin" view="SelectService"}
+
+    <br>
+    <br>
+    <br>
+    <a name="country-ru"></a>
+    <div class="switch_country_for_container_VPS" id="calc" style="position: relative; left: 420px;">
+        <div  class="b-dedicated__switch-item  flag_nl">
+            <a href="/dedicated/sale/netherlands#country-nl" target="_self" title="ckoud VDS Russia" style="text-decoration: none; color: black;">
+                netherlands
+            </a>
+        </div>
+        <div class="b-dedicated__switch-item">/</div>
+        <div class="b-dedicated__switch-item active  flag_ru">
+            russia
+        </div>
+    </div>
+    <br>
+
+    <div class="b-text-page" ui-view="" id="scroll-anchor-01"></div>
 
     <div class="footer-push"></div>
 </div>
