@@ -6,11 +6,7 @@
         p
             | Ready to use discounted servers - get them while they are hot. Limited amount. Find your best deal.
 
-.b-dedicated__hide-block-close.js-close
-    span.b-icon.b-dedicated__hide-block-close-image
-    span.b-dedicated__hide-block-close-text hide
-
-div
+._angular
     .b-container
 
         //-.dedicated-extra-price__box
@@ -72,11 +68,15 @@ div
                             span.b-icon.dedicated-extra-price__icon-good(ng-if="s.Raid")
 
                         td.dedicated-extra-price__table-cell(sortable="'Price'")
-                            .b-submit.dedicated-item-content__submit(ng-if="s.Price", href="", ng-click="selectSale(s)") {{s.Price|verboseCurrency}}
+                            .b-submit.dedicated-item-content__submit(ng-if="s.Price", href="", ng-click="selectSale(s)") {{s.Price|verboseCurrency:false}}
 
                         td.dedicated-extra-price__table-cell
                             .black-sale__slider-item-timer(time-to="s.Timer", callback="changePrice(s)")
 
                     tr.dedicated-extra-price__table-row(ng-if="s.Id === selectedSale.Id")
                         td.dedicated-extra-price__table-cell(colspan="9")
+                            .b-dedicated__hide-block-close(ng-click="selectSale(s)")
+                                span.b-icon.b-dedicated__hide-block-close-image
+                                span.b-dedicated__hide-block-close-text hide
+
                             div(sale-server-calculator="", sale-server="s")

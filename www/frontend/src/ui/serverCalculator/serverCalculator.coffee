@@ -419,6 +419,14 @@ angular.module("ui.serverCalculator").directive "saleServerCalculator", ->
             else
                 enableUnixOptions()
 
+            # Условие для sale-серверов
+            # Показывать Cpanel только когда Centos (Centos KVM - сPanel не нужна)
+            if /Centos (5|6|7|8)/.test(order.software.os.Name)
+                tabs.software.controlPanel.enable = true
+            else
+                tabs.software.controlPanel.enable = false
+                order.software.controlPanel = Name: "None"
+
             return
 
         return

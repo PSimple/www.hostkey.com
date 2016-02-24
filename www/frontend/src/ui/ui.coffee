@@ -164,12 +164,12 @@ angular.module("ui").run ($templateCache) ->
         </div>
         <ul class="pagination">
             <li ng-class="{'disabled': !page.active}" ng-repeat="page in pages" ng-switch="page.type">
-                <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">предыдущая</a>
+                <a ng-switch-when="prev" ng-click="params.page(page.number)" href="">back</a>
                 <a ng-switch-when="first" ng-click="params.page(page.number)" href=""><span ng-bind="page.number"></span></a>
                 <a ng-switch-when="page" ng-click="params.page(page.number)" href=""><span ng-bind="page.number"></span></a>
                 <a ng-switch-when="more" ng-click="params.page(page.number)" href="">…</a>
                 <a ng-switch-when="last" ng-click="params.page(page.number)" href="">
-                <span ng-bind="page.number"></span></a><a ng-switch-when="next" ng-click="params.page(page.number)" href="">следующая</a>
+                <span ng-bind="page.number"></span></a><a ng-switch-when="next" ng-click="params.page(page.number)" href="">next</a>
             </li>
         </ul>
     </div>

@@ -222,6 +222,11 @@ table th.sortable.sort-asc div:after {
 .dedicated-extra-price__table-row .b-dedicated__summary.is-fixed {
   margin-left: 40px !important;
 }
+.dedicated-extra-price__table-row .b-dedicated__hide-block-close {
+  position: initial;
+  text-align: right;
+  margin-top: 0;
+}
 .dedicated-extra-price__box .btn-group {
   display: none;
 }
