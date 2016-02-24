@@ -33,16 +33,16 @@ class Shop_Cloud_Console_Update extends Zero_Controller
                 Zero_Helper_File::File_Save($path, serialize($data['Content']));
             }
         }
-        foreach ($this->pidList as $pid)
-        {
-            $http = "https://bill.hostkey.com/api/v1.0/shop/proxmox/configset?pid={$pid}&currencyId={$config['currencyId']}";
-            $data = Zero_App::RequestJson("GET", $http);
-            if ( false == $data['ErrorStatus'] && isset($data['Content']) )
-            {
-                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudSet/' . md5($config['currencyId'] . $pid) . '.data';
-                Zero_Helper_File::File_Save($path, serialize($data['Content']));
-            }
-        }
+//        foreach ($this->pidList as $pid)
+//        {
+//            $http = "https://bill.hostkey.com/api/v1.0/shop/proxmox/configset?pid={$pid}&currencyId={$config['currencyId']}";
+//            $data = Zero_App::RequestJson("GET", $http);
+//            if ( false == $data['ErrorStatus'] && isset($data['Content']) )
+//            {
+//                $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudSet/' . md5($config['currencyId'] . $pid) . '.data';
+//                Zero_Helper_File::File_Save($path, serialize($data['Content']));
+//            }
+//        }
         return true;
     }
 
