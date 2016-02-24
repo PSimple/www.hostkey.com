@@ -56,7 +56,6 @@ class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
                 $arr = explode('/', $filePath);
                 $arr = explode('.', array_pop($arr));
                 $arr = explode('_', $arr[0]);
-                Zero_Logs::Set_Message_Notice($arr);
 
                 $url = Shop_Config_General::URL_API_INVENTORY . "/api/v1.0/inv/component/salenew?groups=" . implode(',', $arr);
                 $data = Zero_App::RequestJson("GET", $url);
