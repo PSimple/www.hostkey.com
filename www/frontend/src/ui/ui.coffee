@@ -27,6 +27,9 @@ angular.module "ui", [
     "ui.serverCalculator"
 ]
 
+angular.module("ui").run ($rootScope) ->
+    $rootScope.url = (url) -> window.location = url
+
 angular.module("ui").filter 'orderVerbose',  ->
     (obj) ->
         str = ""

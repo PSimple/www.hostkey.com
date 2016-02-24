@@ -227,11 +227,18 @@ table th.sortable.sort-asc div:after {
   text-align: right;
   margin-top: 0;
 }
+.dedicated-extra-price__table-row .dedicated-item-content__submit {
+  width: 135px;
+}
 .dedicated-extra-price__box .btn-group {
   display: none;
 }
 th.dedicated-extra-price__table-cell {
   text-align: left;
+}
+.extra-links-submit {
+  padding: 20px;
+  margin-right: 20px;
 }
 .select2-container {
   box-sizing: border-box;

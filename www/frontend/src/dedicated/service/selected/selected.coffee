@@ -164,7 +164,7 @@ angular.module("dedicated.service.selected").controller "SelectedCtrl", (notific
                 options: billingCycleDiscount
 
     $scope.isValidOption = (opt) ->
-        return false unless opt.Options?.short_name
+        return false unless opt?.Options?.short_name
 
         if opt.hasOwnProperty('Value')
             if opt.Value > 0

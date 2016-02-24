@@ -69,7 +69,7 @@ angular.module("app.dedicated.sale").controller "AppDedicatedSaleCtrl", (ngTable
 
     $scope.tableData = new ngTableParams({
         page: 1,
-        count: 10
+        count: 100
     }, {
         total: configStock.length,
         getData: ($defer, params) ->

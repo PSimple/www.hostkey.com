@@ -129,9 +129,6 @@
 	angular.module("dedicated.service").run(["$stateParams", "$state", "$rootScope", function($stateParams, $state, $rootScope) {
 	  $rootScope.$stateParams = $stateParams;
 	  $rootScope.$state = $state;
-	  $rootScope.url = function(url) {
-	    return window.location = url;
-	  };
 	  return $rootScope.bodyClass = function() {
 	    return {
 	      "in": $rootScope.loaded
@@ -44308,6 +44305,12 @@
 
 	angular.module("ui", ["ngTable", "ui.buttons", "ui.scrollBlock", "ui.accordion", "ui.select", "ui.columns", "ui.notifications", "ui.anchor", "ui.kpdIndicator", "ui.timeTo", "ui.serverCalculator"]);
 
+	angular.module("ui").run(["$rootScope", function($rootScope) {
+	  return $rootScope.url = function(url) {
+	    return window.location = url;
+	  };
+	}]);
+
 	angular.module("ui").filter('orderVerbose', function() {
 	  return function(obj) {
 	    var names, str;
@@ -56517,7 +56520,7 @@
 	    };
 	    $scope.isValidOption = function(opt) {
 	      var ref;
-	      if (!((ref = opt.Options) != null ? ref.short_name : void 0)) {
+	      if (!(opt != null ? (ref = opt.Options) != null ? ref.short_name : void 0 : void 0)) {
 	        return false;
 	      }
 	      if (opt.hasOwnProperty('Value')) {
@@ -57224,17 +57227,17 @@
 	        ID: 2,
 	        Percent: 3,
 	        Period: "quarterly",
-	        Name: "3 months"
+	        Name: "3 months (3%)"
 	      }, {
 	        ID: 3,
 	        Percent: 6,
 	        Period: "semiannually",
-	        Name: "6 months"
+	        Name: "6 months (6%)"
 	      }, {
 	        ID: 4,
 	        Percent: 12,
 	        Period: "annually",
-	        Name: "1 year"
+	        Name: "1 year (12%)"
 	      }
 	    ];
 	    deferred.resolve(discount);
@@ -57736,7 +57739,7 @@
 	  };
 	  $scope.isValidOption = function(opt) {
 	    var ref;
-	    if (!((ref = opt.Options) != null ? ref.short_name : void 0)) {
+	    if (!(opt != null ? (ref = opt.Options) != null ? ref.short_name : void 0 : void 0)) {
 	      return false;
 	    }
 	    if (opt.hasOwnProperty('Value')) {
@@ -59707,7 +59710,7 @@
 	  tableData = prepareData(configStock);
 	  $scope.tableData = new ngTableParams({
 	    page: 1,
-	    count: 10
+	    count: 100
 	  }, {
 	    total: configStock.length,
 	    getData: function($defer, params) {
@@ -59749,7 +59752,7 @@
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div class=\"b-text-page__box\"><h3 class=\"b-text-page__title b-text-page__title_upline_yes\">CHECK OUR SPECIAL OFFERS!</h3><div class=\"b-dedicated__description\"><p>Ready to use discounted servers - get them while they are hot. Limited amount. Find your best deal.</p></div></div><div class=\"_angular\"><div class=\"b-container\"><div class=\"dedicated-extra-price__box\"><table ng-table=\"tableData\" show-filter=\"true\" class=\"dedicated-extra-price__table\"><thead><tr class=\"dedicated-extra-price__table-row dedicated-extra-price__table-row_title_yes\"><th class=\"dedicated-extra-price__table-cell\"></th><th ng-class=\"{'sort-asc': tableData.isSortBy('CpuKpdCnt', 'asc'), 'sort-desc': tableData.isSortBy('CpuKpdCnt', 'desc')}\" ng-click=\"tableData.sorting('CpuKpdCnt', tableData.isSortBy('CpuKpdCnt', 'asc') ? 'desc' : 'asc')\" style=\"width:400px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>processor</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Ram', 'asc'), 'sort-desc': tableData.isSortBy('Ram', 'desc')}\" ng-click=\"tableData.sorting('Ram', tableData.isSortBy('Ram', 'asc') ? 'desc' : 'asc')\" class=\"dedicated-extra-price__table-cell sortable\"><div>memory</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Hdd', 'asc'), 'sort-desc': tableData.isSortBy('Hdd', 'desc')}\" ng-click=\"tableData.sorting('Hdd', tableData.isSortBy('Hdd', 'asc') ? 'desc' : 'asc')\" style=\"width:200px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>hard drive</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Raid', 'asc'), 'sort-desc': tableData.isSortBy('Raid', 'desc')}\" ng-click=\"tableData.sorting('Raid', tableData.isSortBy('Raid', 'asc') ? 'desc' : 'asc')\" style=\"width:120px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>hw raid</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Price', 'asc'), 'sort-desc': tableData.isSortBy('Price', 'desc')}\" ng-click=\"tableData.sorting('Price', tableData.isSortBy('Price', 'asc') ? 'desc' : 'asc')\" style=\"width:240px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>monthly</div></th><th style=\"width:315px;\" class=\"dedicated-extra-price__table-cell dedicated-extra-price__table-cell_red_yes\"><div>price will change after:</div></th></tr></thead><tbody ng-repeat=\"s in $data\"><tr class=\"dedicated-extra-price__table-row\"><td class=\"dedicated-extra-price__table-cell\"><span ng-class=\"{'b-flag_country_nether': s.LocationCode==='NL'}\" class=\"b-icon b-flag\"></span></td><td sortable=\"'CpuKpdCnt'\" class=\"dedicated-extra-price__table-cell\"><div ng-bind=\"s.CpuName\" class=\"dedicated-extra-price__text\"></div><kpd-indicator cpu-kpd=\"s.CpuKpd\" cpu-kpd-link=\"s.CpuKpdLink\" cpu-cnt=\"s.CpuCnt\"></kpd-indicator></td><td sortable=\"'Ram'\" class=\"dedicated-extra-price__table-cell\"><span class=\"dedicated-extra-price__text\">{{s.Ram}} GB</span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span ng-bind-html=\"s.Hdd\"></span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span ng-if=\"s.Raid\" class=\"b-icon dedicated-extra-price__icon-good\"></span></td><td sortable=\"'Price'\" class=\"dedicated-extra-price__table-cell\"><div ng-if=\"s.Price\" href=\"\" ng-click=\"selectSale(s)\" class=\"b-submit dedicated-item-content__submit\">{{s.Price|verboseCurrency:false}}</div></td><td class=\"dedicated-extra-price__table-cell\"><div time-to=\"s.Timer\" callback=\"changePrice(s)\" class=\"black-sale__slider-item-timer\"></div></td></tr><tr ng-if=\"s.Id === selectedSale.Id\" class=\"dedicated-extra-price__table-row\"><td colspan=\"9\" class=\"dedicated-extra-price__table-cell\"><div ng-click=\"selectSale(s)\" class=\"b-dedicated__hide-block-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div sale-server-calculator=\"\" sale-server=\"s\"></div></td></tr></tbody></table></div></div></div>");;return buf.join("");
+	buf.push("<div class=\"b-text-page__box\"><h3 class=\"b-text-page__title b-text-page__title_upline_yes\">CHECK OUR SPECIAL OFFERS!</h3><div class=\"b-dedicated__description\"><p>Ready to use discounted servers - get them while they are hot. Limited amount. Find your best deal.</p></div></div><div class=\"_angular\"><div class=\"b-container\"><div class=\"dedicated-extra-price__box\"><table ng-table=\"tableData\" show-filter=\"true\" class=\"dedicated-extra-price__table\"><thead><tr class=\"dedicated-extra-price__table-row dedicated-extra-price__table-row_title_yes\"><th class=\"dedicated-extra-price__table-cell\"></th><th ng-class=\"{'sort-asc': tableData.isSortBy('CpuKpdCnt', 'asc'), 'sort-desc': tableData.isSortBy('CpuKpdCnt', 'desc')}\" ng-click=\"tableData.sorting('CpuKpdCnt', tableData.isSortBy('CpuKpdCnt', 'asc') ? 'desc' : 'asc')\" style=\"width:400px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>processor</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Ram', 'asc'), 'sort-desc': tableData.isSortBy('Ram', 'desc')}\" ng-click=\"tableData.sorting('Ram', tableData.isSortBy('Ram', 'asc') ? 'desc' : 'asc')\" class=\"dedicated-extra-price__table-cell sortable\"><div>memory</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Hdd', 'asc'), 'sort-desc': tableData.isSortBy('Hdd', 'desc')}\" ng-click=\"tableData.sorting('Hdd', tableData.isSortBy('Hdd', 'asc') ? 'desc' : 'asc')\" style=\"width:200px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>hard drive</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Raid', 'asc'), 'sort-desc': tableData.isSortBy('Raid', 'desc')}\" ng-click=\"tableData.sorting('Raid', tableData.isSortBy('Raid', 'asc') ? 'desc' : 'asc')\" style=\"width:120px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>hw raid</div></th><th ng-class=\"{'sort-asc': tableData.isSortBy('Price', 'asc'), 'sort-desc': tableData.isSortBy('Price', 'desc')}\" ng-click=\"tableData.sorting('Price', tableData.isSortBy('Price', 'asc') ? 'desc' : 'asc')\" style=\"width:240px;\" class=\"dedicated-extra-price__table-cell sortable\"><div>monthly</div></th><th style=\"width:315px;\" class=\"dedicated-extra-price__table-cell dedicated-extra-price__table-cell_red_yes\"><div>price will change after:</div></th></tr></thead><tbody ng-repeat=\"s in $data\"><tr class=\"dedicated-extra-price__table-row\"><td class=\"dedicated-extra-price__table-cell\"><span ng-class=\"{'b-flag_country_nether': s.LocationCode==='NL'}\" class=\"b-icon b-flag\"></span></td><td sortable=\"'CpuKpdCnt'\" style=\"height: 60px;\" class=\"dedicated-extra-price__table-cell\"><div ng-bind=\"s.CpuName\" class=\"dedicated-extra-price__text\"></div><kpd-indicator cpu-kpd=\"s.CpuKpd\" cpu-kpd-link=\"s.CpuKpdLink\" cpu-cnt=\"s.CpuCnt\"></kpd-indicator></td><td sortable=\"'Ram'\" class=\"dedicated-extra-price__table-cell\"><span class=\"dedicated-extra-price__text\">{{s.Ram}} GB</span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span ng-bind-html=\"s.Hdd\"></span></td><td sortable=\"'Hdd'\" class=\"dedicated-extra-price__table-cell\"><span ng-if=\"s.Raid\" class=\"b-icon dedicated-extra-price__icon-good\"></span></td><td sortable=\"'Price'\" class=\"dedicated-extra-price__table-cell\"><div ng-if=\"s.Price\" href=\"\" ng-click=\"selectSale(s)\" class=\"b-submit dedicated-item-content__submit\">{{s.Price|verboseCurrency:false}}</div></td><td style=\"position:relative;\" class=\"dedicated-extra-price__table-cell\"><div time-to=\"s.Timer\" callback=\"changePrice(s)\" style=\"position:absolute;top:0;\" class=\"black-sale__slider-item-timer\"></div></td></tr><tr ng-if=\"s.Id === selectedSale.Id\" class=\"dedicated-extra-price__table-row\"><td colspan=\"9\" class=\"dedicated-extra-price__table-cell\"><div ng-click=\"selectSale(s)\" class=\"b-dedicated__hide-block-close\"><span class=\"b-icon b-dedicated__hide-block-close-image\"></span><span class=\"b-dedicated__hide-block-close-text\">hide</span></div><div sale-server-calculator=\"\" sale-server=\"s\"></div></td></tr></tbody></table><div class=\"extra-links\"><a href=\"/about/datacenter\" target=\"_blank\" class=\"b-submit extra-links-submit\">About data centers</a><a href=\"/support/speedtest\" target=\"_blank\" class=\"b-submit extra-links-submit\">Speedtest</a><a href=\"/about/contacts\" target=\"_blank\" class=\"b-submit extra-links-submit\">Try before you buy</a></div></div></div></div>");;return buf.join("");
 	}
 
 /***/ }

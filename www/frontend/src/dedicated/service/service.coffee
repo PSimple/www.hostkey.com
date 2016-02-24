@@ -52,9 +52,6 @@ angular.module("dedicated.service").run ($stateParams, $state, $rootScope) ->
     $rootScope.$stateParams = $stateParams
     $rootScope.$state = $state
 
-    $rootScope.url = (url) ->
-        window.location = url
-
     $rootScope.bodyClass = ->
         {in: $rootScope.loaded}
 

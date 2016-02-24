@@ -146,7 +146,7 @@ angular.module("ui.serverCalculator").directive "saleServerCalculator", ->
                     options: billingCycleDiscount
 
         $scope.isValidOption = (opt) ->
-            return false unless opt.Options?.short_name
+            return false unless opt?.Options?.short_name
 
             if opt.hasOwnProperty('Value')
                 if opt.Value > 0
