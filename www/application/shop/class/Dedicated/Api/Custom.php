@@ -69,6 +69,24 @@ class Shop_Dedicated_Api_Custom extends Zero_Controller
                 $responseSort['Data'][$componentTypeID][] = $row;
             }
         }
+        if ( !isset($responseSort['Data'][14]) )
+            $responseSort['Data'][14] = [];
+        if ( !isset($responseSort['Data'][18]) )
+            $responseSort['Data'][18] = [];
+        if ( !isset($responseSort['Data'][1]) )
+            $responseSort['Data'][1] = [];
+        if ( !isset($responseSort['Data'][2]) )
+            $responseSort['Data'][2] = [];
+        if ( !isset($responseSort['Data'][3]) )
+            $responseSort['Data'][3] = [];
+        if ( !isset($responseSort['Data'][6]) )
+            $responseSort['Data'][6] = [];
+        if ( !isset($responseSort['Data'][8]) )
+            $responseSort['Data'][8] = [];
+        if ( !isset($responseSort['Data'][21]) )
+            $responseSort['Data'][21] = [];
+
+
 
         $responseSort['CostLicenseWin'] = $response['CostLicenseWin'];
         $responseSort['EURRUR'] = $response['EURRUR'];

@@ -109,7 +109,6 @@
         <div style="float: left; width: 100%; box-sizing: border-box; padding: 0px; background: #fff;" class="b-text-page__box">
             <h3 style="overflow: hidden;" class="b-text-page__title b-text-page__title_upline_yes">
                 Container VPS
-                <b style="font-size:18px; font-family:franklingothicbookcondc;">PROMO: order before the end of March and get lifetime 1TB of traffic included for the price of 250GB.</b>
             </h3>
 
             <div style="float: right; width: 800px; margin: 20px 0 0 0;" class="desc-container-vps">
@@ -118,6 +117,7 @@
                 You get full root access and the ability to configure and manage the virtual<br> private server with ease.&nbsp;
                 VPS are deployed on Proxmox platform and OpenVZ<br>virtualization technology.<br><br>
                 VPS will be ready in minutes from the moment the order is paid for.<br><br>
+                <b style="margin-left: 15px; margin-right: 0px;">PROMO: order before the end of March and get lifetime 1 TB of traffic included for the price of 250 GB.</b>
             </div>
         </div>
 
@@ -207,6 +207,8 @@
                                 {/foreach}
                             </select>
                         </div>
+                        {else if ( $key == 'Bandwidth Limit' )}
+                            <div class="b-vps-table__text"><span style="text-decoration: line-through;">250 GB</span> 1000 GB</div>
                         {else}
                             <div class="b-vps-table__text">{$v['name']}</div>
                         {/if}
