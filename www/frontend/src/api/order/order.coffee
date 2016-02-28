@@ -59,35 +59,35 @@ angular.module("api.order").service "$order", ($http, $q, $timeout, CONFIG, $fil
                 Label: $filter('orderVerbose')(rawOrder.hardware)
 
         if rawOrder.software
-            order.Software =
-                OS: rawOrder.software.os.ID
-                Bit: rawOrder.software.bit.ID
-                CP: rawOrder.software.controlPanel?.ID
-                RdpLicCount: Number(rawOrder.software.RdpLicCount.Value, 10)
-                Sql: rawOrder.software.MSSql?.ID
-                Exchange: rawOrder.software.MSExchange?.ID
-                ExchangeCount: Number(rawOrder.software.ExchangeCount.Value, 10)
-                Label: $filter('orderVerbose')(rawOrder.software)
+            order.Software = {}
+            order.Software.OS = rawOrder.software.os.ID if rawOrder.software?.os
+            order.Software.Bit = rawOrder.software.bit.ID if rawOrder.software?.bit
+            order.Software.CP = rawOrder.software.controlPanel?.ID if rawOrder.software?.controlPanel
+            order.Software.RdpLicCount = Number(rawOrder.software.RdpLicCount.Value, 10) if rawOrder.software?.RdpLicCount
+            order.Software.Sql = rawOrder.software.MSSql?.ID if rawOrder.software?.MSSql
+            order.Software.Exchange = rawOrder.software.MSExchange?.ID if rawOrder.software?.MSExchange
+            order.Software.ExchangeCount = Number(rawOrder.software.ExchangeCount.Value, 10) if rawOrder.software?.ExchangeCount
+            order.Software.Label = $filter('orderVerbose')(rawOrder.software)
 
         if rawOrder.network
-            order.Network =
-                Traffic: rawOrder.network.traffic.ID
-                Bandwidth: rawOrder.network.Bandwidth.ID
-                DDOSProtection: rawOrder.network.DDOSProtection.ID
-                IP: rawOrder.network.ip.ID
-                Vlan: rawOrder.network.vlan.ID
-                FtpBackup: rawOrder.network.ftpBackup.ID
-                IPv6: rawOrder.network.IPv6.Value
-                Label: $filter('orderVerbose')(rawOrder.network)
+            order.Network = {}
+            order.Network.Traffic = rawOrder.network.traffic.ID if rawOrder.network?.traffic
+            order.Network.Bandwidth = rawOrder.network.Bandwidth.ID if rawOrder.network?.Bandwidth
+            order.Network.DDOSProtection = rawOrder.network.DDOSProtection.ID if rawOrder.network?.DDOSProtection
+            order.Network.IP = rawOrder.network.ip.ID if rawOrder.network?.ip
+            order.Network.Vlan = rawOrder.network.vlan.ID if rawOrder.network?.vlan
+            order.Network.FtpBackup = rawOrder.network.ftpBackup.ID if rawOrder.network?.ftpBackup
+            order.Network.IPv6 = rawOrder.network.IPv6.Value if rawOrder.network?.IPv6
+            order.Network.Label = $filter('orderVerbose')(rawOrder.network)
 
         if rawOrder.sla
-            order.SLA =
-                ServiceLevel: rawOrder.sla.serviceLevel.ID
-                Management: rawOrder.sla.management.ID
-                DCGrade: rawOrder.sla.DCGrade.ID
-                Comment: ""
-                CycleDiscount: rawOrder.discount.billingCycle.Period
-                Label: $filter('orderVerbose')(rawOrder.sla)
+            order.SLA = {}
+            order.SLA.ServiceLevel = rawOrder.sla.serviceLevel.ID if rawOrder.sla?.serviceLevel
+            order.SLA.Management = rawOrder.sla.management.ID  if rawOrder.sla?.management
+            order.SLA.DCGrade = rawOrder.sla.DCGrade.ID if rawOrder.sla?.DCGrade
+            order.SLA.Comment = ""
+            order.SLA.CycleDiscount = rawOrder.discount.billingCycle.Period
+            order.SLA.Label = $filter('orderVerbose')(rawOrder.sla)
 
         if rawOrder.sla
             order.Currency = rawOrder.Currency

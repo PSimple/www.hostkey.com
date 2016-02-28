@@ -4,50 +4,6 @@
   "ErrorStatus": false,
   "Content": {
     "Data": {
-      "9": [
-        {
-          "ComponentType_ID": 9,
-          "ID": 175,
-          "Name": "Intel X520-DA2 2x10GbE",
-          "PriceRUR": 3864,
-          "PriceEUR": 45,
-          "Options": {"short_name": "2x10GbE"},
-          "Sort": null,
-          "Price": 45
-        },
-        {
-          "ComponentType_ID": 9,
-          "ID": 174,
-          "Name": "Intel I340-T4 4x1GbE",
-          "PriceRUR": 1975,
-          "PriceEUR": 23,
-          "Options": {"short_name": "4xGbE"},
-          "Sort": null,
-          "Price": 23
-        }
-      ],
-      "15": [
-        {
-          "ComponentType_ID": 15,
-          "ID": 140,
-          "Name": "VLAN port 1Gbps",
-          "PriceRUR": 859,
-          "PriceEUR": 10,
-          "Options": {"short_name": "VLAN port 1Gbps"},
-          "Sort": 1,
-          "Price": 10
-        },
-        {
-          "ComponentType_ID": 15,
-          "ID": 139,
-          "Name": "VLAN port 100Mbps",
-          "PriceRUR": 172,
-          "PriceEUR": 2,
-          "Options": {"short_name": "VLAN port 100Mbps"},
-          "Sort": 1,
-          "Price": 2
-        }
-      ],
       "11": [
         {
           "ComponentType_ID": 11,
@@ -65,65 +21,11 @@
           "ComponentType_ID": 5,
           "ID": 113,
           "Name": "cPanel dedicated",
-          "PriceRUR": 2834,
+          "PriceRUR": 2739,
           "PriceEUR": 33,
           "Options": {"short_name": "cPanel dedicated"},
           "Sort": 1,
           "Price": 33
-        }
-      ],
-      "3": [
-        {
-          "ComponentType_ID": 3,
-          "ID": 235,
-          "Name": "32Gb",
-          "PriceRUR": 1374,
-          "PriceEUR": 16,
-          "Options": {
-            "size": 32,
-            "short_name": "32Gb"
-          },
-          "Sort": 4,
-          "Price": 16
-        },
-        {
-          "ComponentType_ID": 3,
-          "ID": 237,
-          "Name": "64Gb",
-          "PriceRUR": 2061,
-          "PriceEUR": 24,
-          "Options": {
-            "size": 64,
-            "short_name": "64Gb"
-          },
-          "Sort": 5,
-          "Price": 24
-        },
-        {
-          "ComponentType_ID": 3,
-          "ID": 239,
-          "Name": "96Gb",
-          "PriceRUR": 2404,
-          "PriceEUR": 28,
-          "Options": {
-            "size": 96,
-            "short_name": "96Gb"
-          },
-          "Sort": 6,
-          "Price": 28
-        },
-        {
-          "ComponentType_ID": 3,
-          "ID": 238,
-          "Name": "128Gb",
-          "PriceRUR": 4122,
-          "PriceEUR": 48,
-          "Options": {
-            "size": 128,
-            "short_name": "128Gb"
-          },
-          "Sort": 7,
-          "Price": 48
         }
       ],
       "4": [
@@ -199,6 +101,16 @@
         },
         {
           "ComponentType_ID": 4,
+          "ID": 98,
+          "Name": "Ubuntu Desktop",
+          "PriceRUR": 0,
+          "PriceEUR": 0,
+          "Options": {"short_name": "Ubuntu Desktop"},
+          "Sort": 21,
+          "Price": 0
+        },
+        {
+          "ComponentType_ID": 4,
           "ID": 104,
           "Name": "Windows Server 08 Standard",
           "PriceRUR": 2400,
@@ -209,6 +121,16 @@
         },
         {
           "ComponentType_ID": 4,
+          "ID": 106,
+          "Name": "Windows Server 12 Essentials",
+          "PriceRUR": 2000,
+          "PriceEUR": 25,
+          "Options": {"short_name": "W12ES"},
+          "Sort": 40,
+          "Price": 25
+        },
+        {
+          "ComponentType_ID": 4,
           "ID": 107,
           "Name": "Windows Server 12 Standard",
           "PriceRUR": 2400,
@@ -216,16 +138,6 @@
           "Options": {"short_name": "W12SE"},
           "Sort": 41,
           "Price": 30
-        },
-        {
-          "ComponentType_ID": 4,
-          "ID": 108,
-          "Name": "Windows Server 12 Datacenter",
-          "PriceRUR": 13600,
-          "PriceEUR": 170,
-          "Options": {"short_name": "W12DC"},
-          "Sort": 42,
-          "Price": 170
         },
         {
           "ComponentType_ID": 4,
@@ -249,42 +161,32 @@
         },
         {
           "ComponentType_ID": 4,
+          "ID": 111,
+          "Name": "Windows 7 trial",
+          "PriceRUR": 0,
+          "PriceEUR": 0,
+          "Options": {"short_name": "W7(trl)"},
+          "Sort": 52,
+          "Price": 0
+        },
+        {
+          "ComponentType_ID": 4,
+          "ID": 112,
+          "Name": "Windows 8 trial",
+          "PriceRUR": 0,
+          "PriceEUR": 0,
+          "Options": {"short_name": "Win8(trl)"},
+          "Sort": 53,
+          "Price": 0
+        },
+        {
+          "ComponentType_ID": 4,
           "ID": 102,
           "Name": "FreeBSD",
           "PriceRUR": 0,
           "PriceEUR": 0,
           "Options": {"short_name": "FreeBSD"},
           "Sort": 150,
-          "Price": 0
-        },
-        {
-          "ComponentType_ID": 4,
-          "ID": 100,
-          "Name": "Citrix Xen",
-          "PriceRUR": 0,
-          "PriceEUR": 0,
-          "Options": {"short_name": "Citrix Xen"},
-          "Sort": 170,
-          "Price": 0
-        },
-        {
-          "ComponentType_ID": 4,
-          "ID": 99,
-          "Name": "Centos KVM",
-          "PriceRUR": 0,
-          "PriceEUR": 0,
-          "Options": {"short_name": "Centos KVM"},
-          "Sort": 180,
-          "Price": 0
-        },
-        {
-          "ComponentType_ID": 4,
-          "ID": 248,
-          "Name": "Own OS via IPMI",
-          "PriceRUR": 0,
-          "PriceEUR": 0,
-          "Options": {"short_name": "Own OS via IPMI"},
-          "Sort": 200,
           "Price": 0
         }
       ],
@@ -302,48 +204,6 @@
           },
           "Sort": 5,
           "Price": 0
-        },
-        {
-          "ComponentType_ID": 8,
-          "ID": 128,
-          "Name": "LSI HBA 9300 12G SAS no cache (RAID 0/1/10)",
-          "PriceRUR": 2147,
-          "PriceEUR": 25,
-          "Options": {
-            "disc": 2,
-            "short_name": "HBA",
-            "raid": "0-1-10"
-          },
-          "Sort": 10,
-          "Price": 25
-        },
-        {
-          "ComponentType_ID": 8,
-          "ID": 129,
-          "Name": "LSI MegaRAID 12G SAS 9341 no cache (RAID 0-5)",
-          "PriceRUR": 1975,
-          "PriceEUR": 23,
-          "Options": {
-            "disc": 2,
-            "short_name": "MegaRAID 9341",
-            "raid": "0-1-5-10"
-          },
-          "Sort": 20,
-          "Price": 23
-        },
-        {
-          "ComponentType_ID": 8,
-          "ID": 131,
-          "Name": "LSI MegaRAID 12G SAS 9361 1G cache (RAID 0-6)",
-          "PriceRUR": 4894,
-          "PriceEUR": 57,
-          "Options": {
-            "disc": 2,
-            "short_name": "MegaRAID 9361",
-            "raid": "0-1-5-6-10"
-          },
-          "Sort": 30,
-          "Price": 57
         }
       ],
       "7": [
@@ -361,7 +221,7 @@
           "ComponentType_ID": 7,
           "ID": 86,
           "Name": "2 IPv4",
-          "PriceRUR": 86,
+          "PriceRUR": 83,
           "PriceEUR": 1,
           "Options": {"short_name": "2 IPv4"},
           "Sort": 20,
@@ -371,7 +231,7 @@
           "ComponentType_ID": 7,
           "ID": 87,
           "Name": "4 IPv4",
-          "PriceRUR": 258,
+          "PriceRUR": 249,
           "PriceEUR": 3,
           "Options": {"short_name": "4 IPv4"},
           "Sort": 30,
@@ -381,7 +241,7 @@
           "ComponentType_ID": 7,
           "ID": 88,
           "Name": "8 IPv4",
-          "PriceRUR": 601,
+          "PriceRUR": 581,
           "PriceEUR": 7,
           "Options": {"short_name": "8 IPv4"},
           "Sort": 40,
@@ -391,163 +251,11 @@
           "ComponentType_ID": 7,
           "ID": 89,
           "Name": "16 IPv4",
-          "PriceRUR": 1288,
+          "PriceRUR": 1245,
           "PriceEUR": 15,
           "Options": {"short_name": "16 IPv4"},
           "Sort": 50,
           "Price": 15
-        },
-        {
-          "ComponentType_ID": 7,
-          "ID": 90,
-          "Name": "32 IPv4",
-          "PriceRUR": 2662,
-          "PriceEUR": 31,
-          "Options": {"short_name": "32 IPv4"},
-          "Sort": 60,
-          "Price": 31
-        },
-        {
-          "ComponentType_ID": 7,
-          "ID": 91,
-          "Name": "64 IPv4",
-          "PriceRUR": 5495,
-          "PriceEUR": 64,
-          "Options": {"short_name": "64 IPv4"},
-          "Sort": 70,
-          "Price": 64
-        },
-        {
-          "ComponentType_ID": 7,
-          "ID": 92,
-          "Name": "128 IPv4",
-          "PriceRUR": 10990,
-          "PriceEUR": 128,
-          "Options": {"short_name": "128 IPv4"},
-          "Sort": 80,
-          "Price": 128
-        }
-      ],
-      "14": [
-        {
-          "ComponentType_ID": 14,
-          "ID": 148,
-          "Name": "100Mbps unmetered (26Tb max)",
-          "PriceRUR": 0,
-          "PriceEUR": 0,
-          "Options": {"short_name": "100Mbps unmetered (26Tb max)"},
-          "Sort": 10,
-          "Price": 0
-        },
-        {
-          "ComponentType_ID": 14,
-          "ID": 256,
-          "Name": "10Tb (1Gbps port)",
-          "PriceRUR": 0,
-          "PriceEUR": 0,
-          "Options": {"short_name": "10Tb (1Gbps port)"},
-          "Sort": 300,
-          "Price": 0
-        },
-        {
-          "ComponentType_ID": 14,
-          "ID": 257,
-          "Name": "20Tb (1Gbps port)",
-          "PriceRUR": 3435,
-          "PriceEUR": 40,
-          "Options": {"short_name": "20Tb (1Gbps port)"},
-          "Sort": 310,
-          "Price": 40
-        },
-        {
-          "ComponentType_ID": 14,
-          "ID": 258,
-          "Name": "30Tb (1Gbps port)",
-          "PriceRUR": 6869,
-          "PriceEUR": 80,
-          "Options": {"short_name": "30Tb (1Gbps port)"},
-          "Sort": 320,
-          "Price": 80
-        },
-        {
-          "ComponentType_ID": 14,
-          "ID": 259,
-          "Name": "50Tb (1Gbps port)",
-          "PriceRUR": 13738,
-          "PriceEUR": 160,
-          "Options": {"short_name": "50Tb (1Gbps port)"},
-          "Sort": 330,
-          "Price": 160
-        },
-        {
-          "ComponentType_ID": 14,
-          "ID": 158,
-          "Name": "200Mbps unmetered (52Tb max)",
-          "PriceRUR": 6869,
-          "PriceEUR": 80,
-          "Options": {"short_name": "200Mbps unmetered (52Tb max)"},
-          "Sort": 400,
-          "Price": 80
-        },
-        {
-          "ComponentType_ID": 14,
-          "ID": 150,
-          "Name": "300Mbps unmetered (78Tb max)",
-          "PriceRUR": 10303,
-          "PriceEUR": 120,
-          "Options": {"short_name": "300Mbps unmetered (78Tb max)"},
-          "Sort": 410,
-          "Price": 120
-        },
-        {
-          "ComponentType_ID": 14,
-          "ID": 151,
-          "Name": "400Mbps unmetered (104Tb max)",
-          "PriceRUR": 13738,
-          "PriceEUR": 160,
-          "Options": {"short_name": "400Mbps unmetered (104Tb max)"},
-          "Sort": 420,
-          "Price": 160
-        },
-        {
-          "ComponentType_ID": 14,
-          "ID": 153,
-          "Name": "600Mbps unmetered (156Tb max)",
-          "PriceRUR": 20606,
-          "PriceEUR": 240,
-          "Options": {"short_name": "600Mbps unmetered (156Tb max)"},
-          "Sort": 440,
-          "Price": 240
-        },
-        {
-          "ComponentType_ID": 14,
-          "ID": 155,
-          "Name": "800Mbps unmetered (208Tb max)",
-          "PriceRUR": 27475,
-          "PriceEUR": 320,
-          "Options": {"short_name": "800Mbps unmetered (208Tb max)"},
-          "Sort": 460,
-          "Price": 320
-        },
-        {
-          "ComponentType_ID": 14,
-          "ID": 156,
-          "Name": "900Mbps unmetered (234Tb max)",
-          "PriceRUR": 30909,
-          "PriceEUR": 360,
-          "Options": {"short_name": "900Mbps unmetered (234Tb max)"},
-          "Sort": 470,
-          "Price": 360
-        },
-        {
-          "ComponentType_ID": 14,
-          "ID": 157,
-          "Name": "1Gbps unmetered (260Tb max)",
-          "PriceRUR": 34343,
-          "PriceEUR": 400,
-          "Options": {"short_name": "1Gbps unmetered (260Tb max)"},
-          "Sort": 500,
-          "Price": 400
         }
       ],
       "17": [
@@ -563,13 +271,23 @@
         },
         {
           "ComponentType_ID": 17,
-          "ID": 136,
-          "Name": "Node management - 6 hours",
-          "PriceRUR": 8586,
-          "PriceEUR": 100,
-          "Options": {"short_name": "Node management - 6 hours"},
-          "Sort": 30,
-          "Price": 100
+          "ID": 137,
+          "Name": "Core OS management",
+          "PriceRUR": 1660,
+          "PriceEUR": 20,
+          "Options": {"short_name": "Core OS management"},
+          "Sort": 20,
+          "Price": 20
+        },
+        {
+          "ComponentType_ID": 17,
+          "ID": 255,
+          "Name": "Managed server cPanel",
+          "PriceRUR": 3319,
+          "PriceEUR": 40,
+          "Options": {"short_name": "Managed server cPanel"},
+          "Sort": 40,
+          "Price": 40
         }
       ],
       "16": [
@@ -587,7 +305,7 @@
           "ComponentType_ID": 16,
           "ID": 282,
           "Name": "Priority (email/phone/skype)",
-          "PriceRUR": 2576,
+          "PriceRUR": 2490,
           "PriceEUR": 30,
           "Options": {"short_name": "Priority SLA"},
           "Sort": 13,
@@ -597,11 +315,23 @@
           "ComponentType_ID": 16,
           "ID": 283,
           "Name": "TOP Priority SLA (30 mins/phone/email/skype)",
-          "PriceRUR": 4293,
+          "PriceRUR": 4149,
           "PriceEUR": 50,
           "Options": {"short_name": "Top SLA"},
           "Sort": 20,
           "Price": 50
+        }
+      ],
+      "21": [
+        {
+          "ComponentType_ID": 21,
+          "ID": 284,
+          "Name": "DC Tier2",
+          "PriceRUR": 0,
+          "PriceEUR": 0,
+          "Options": {"short_name": "DC Tier2"},
+          "Sort": 10,
+          "Price": 0
         }
       ],
       "19": [
@@ -636,6 +366,58 @@
           "Price": 10
         }
       ],
+      "2": [
+        {
+          "ComponentType_ID": 2,
+          "ID": 72,
+          "Name": "120Gb SSD",
+          "PriceRUR": 747,
+          "PriceEUR": 9,
+          "Options": {"short_name": "120Gb SSD"},
+          "Sort": 10,
+          "Price": 9
+        },
+        {
+          "ComponentType_ID": 2,
+          "ID": 73,
+          "Name": "240Gb SSD",
+          "PriceRUR": 1162,
+          "PriceEUR": 14,
+          "Options": {"short_name": "240Gb SSD"},
+          "Sort": 20,
+          "Price": 14
+        },
+        {
+          "ComponentType_ID": 2,
+          "ID": 74,
+          "Name": "480Gb SSD",
+          "PriceRUR": 2075,
+          "PriceEUR": 25,
+          "Options": {"short_name": "480Gb SSD"},
+          "Sort": 30,
+          "Price": 25
+        },
+        {
+          "ComponentType_ID": 2,
+          "ID": 309,
+          "Name": "2000Gb SSD",
+          "PriceRUR": 8298,
+          "PriceEUR": 100,
+          "Options": {"short_name": "2000Gb SSD"},
+          "Sort": 41,
+          "Price": 100
+        },
+        {
+          "ComponentType_ID": 2,
+          "ID": 297,
+          "Name": "500Gb SATA 7,2K",
+          "PriceRUR": 415,
+          "PriceEUR": 5,
+          "Options": {"short_name": "500Gb SATA 7,2K"},
+          "Sort": 50,
+          "Price": 5
+        }
+      ],
       "18": [
         {
           "ComponentType_ID": 18,
@@ -646,16 +428,6 @@
           "Options": {"short_name": "100Mbps"},
           "Sort": 10,
           "Price": 0
-        },
-        {
-          "ComponentType_ID": 18,
-          "ID": 250,
-          "Name": "1Gbps",
-          "PriceRUR": 859,
-          "PriceEUR": 10,
-          "Options": {"short_name": "1Gbps"},
-          "Sort": 20,
-          "Price": 10
         }
       ],
       "20": [
@@ -680,16 +452,58 @@
           "Price": 5
         }
       ],
-      "13": [
+      "3": [
         {
-          "ComponentType_ID": 13,
-          "ID": 251,
-          "Name": "1Gbps (10Tb max)",
-          "PriceRUR": 859,
-          "PriceEUR": 10,
-          "Options": {"short_name": "1Gbps (10Tb max)"},
+          "ComponentType_ID": 3,
+          "ID": 76,
+          "Name": "4 Gb",
+          "PriceRUR": 249,
+          "PriceEUR": 3,
+          "Options": {
+            "size": 4,
+            "short_name": "4 Gb"
+          },
           "Sort": 20,
-          "Price": 10
+          "Price": 3
+        },
+        {
+          "ComponentType_ID": 3,
+          "ID": 78,
+          "Name": "8 Gb",
+          "PriceRUR": 498,
+          "PriceEUR": 6,
+          "Options": {
+            "size": 8,
+            "short_name": "8 Gb"
+          },
+          "Sort": 30,
+          "Price": 6
+        },
+        {
+          "ComponentType_ID": 3,
+          "ID": 79,
+          "Name": "16 Gb",
+          "PriceRUR": 996,
+          "PriceEUR": 12,
+          "Options": {
+            "size": 16,
+            "short_name": "16 Gb"
+          },
+          "Sort": 40,
+          "Price": 12
+        },
+        {
+          "ComponentType_ID": 3,
+          "ID": 80,
+          "Name": "32 Gb",
+          "PriceRUR": 1992,
+          "PriceEUR": 24,
+          "Options": {
+            "size": 32,
+            "short_name": "32 Gb"
+          },
+          "Sort": 50,
+          "Price": 24
         }
       ],
       "10": [
@@ -717,45 +531,62 @@
       "12": [
         {
           "ComponentType_ID": 12,
-          "ID": 178,
-          "Name": "MS SQL 2012 Enterprise Edition (2 Core)",
-          "PriceRUR": 62000,
-          "PriceEUR": 775,
-          "Options": {"short_name": "SQL12EE"},
-          "Sort": 80,
-          "Price": 775
+          "ID": 327,
+          "Name": "MS SQL 2012 Standard Edition (1 SAL)",
+          "PriceRUR": 1760,
+          "PriceEUR": 22,
+          "Options": {"short_name": "SQL12SEsal"},
+          "Sort": 30,
+          "Price": 22
         },
         {
           "ComponentType_ID": 12,
-          "ID": 177,
-          "Name": "MS SQL 2008 Enterprise Edition (2 Core)",
-          "PriceRUR": 62000,
-          "PriceEUR": 775,
-          "Options": {"short_name": "SQL08EE"},
-          "Sort": 90,
-          "Price": 775
+          "ID": 328,
+          "Name": "MS SQL 2008 Standard Edition (1 SAL)",
+          "PriceRUR": 1760,
+          "PriceEUR": 22,
+          "Options": {"short_name": "SQL08SEsal"},
+          "Sort": 40,
+          "Price": 22
+        },
+        {
+          "ComponentType_ID": 12,
+          "ID": 329,
+          "Name": "SQL Server Business Intelligence (1 SAL)",
+          "PriceRUR": 2480,
+          "PriceEUR": 31,
+          "Options": {"short_name": "SQL12BIsal"},
+          "Sort": 50,
+          "Price": 31
+        },
+        {
+          "ComponentType_ID": 12,
+          "ID": 161,
+          "Name": "MS SQL 2012 Standard Edition (2 Core)",
+          "PriceRUR": 16160,
+          "PriceEUR": 202,
+          "Options": {"short_name": "SQL12SE"},
+          "Sort": 60,
+          "Price": 202
+        },
+        {
+          "ComponentType_ID": 12,
+          "ID": 176,
+          "Name": "MS SQL 2008 Standard Edition (2 Core)",
+          "PriceRUR": 16160,
+          "PriceEUR": 202,
+          "Options": {"short_name": "SQL08SE"},
+          "Sort": 70,
+          "Price": 202
         }
       ],
-      "1": [
-        {
-          "ComponentType_ID": 1,
-          "ID": 172,
-          "Name": "2xXeon E5-2630v3 16x2.4GHz",
-          "PriceRUR": 5581,
-          "PriceEUR": 65,
-          "Options": {
-            "cpu_count": 2,
-            "max_mem": 256,
-            "short_name": "2xE5-2630v3"
-          },
-          "Sort": 130,
-          "Price": 65
-        }
-      ]
+      "14": [],
+      "1": [],
+      "6": []
     },
     "CostLicenseWin": 7,
-    "EURRUR": 85.8563,
+    "EURRUR": 82.9748,
     "Currency": "eur",
-    "ComponentGroup": "NL,Hosting,Nodes,Enterprise,2CPU"
+    "ComponentGroup": "RU,Micro,1CPU"
   }
 }

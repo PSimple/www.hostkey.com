@@ -22,5 +22,5 @@ angular.module('ui.anchor').directive 'anchor', ($location, $timeout) ->
             $timeout ->
                 $("html, body").animate
                     scrollTop: element.offset().top - 70
-                , 300
+                , 1200
             , 1000
