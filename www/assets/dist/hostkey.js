@@ -44365,24 +44365,17 @@
 
 	angular.module("ui").filter('optPrice', ["$dedicated", function($dedicated) {
 	  return function(option, order, tabs) {
-	    var ComponentType_ID, getParams, multiplicator, price, ref, ref1, ref2, ref3;
+	    var ComponentType_ID, multiplicator, price, ref, ref1, ref2, ref3;
 	    if (!(option != null ? option.ComponentType_ID : void 0)) {
 	      return 0;
 	    }
-	    ComponentType_ID = option != null ? option.ComponentType_ID : void 0;
+	    ComponentType_ID = Number(option != null ? option.ComponentType_ID : void 0, 10);
 	    price = Number(option.Price, 10);
-	    getParams = function() {
-	      var component, components, optionParams;
-	      components = $dedicated.components();
-	      component = components[ComponentType_ID];
-	      optionParams = tabs[component[0]][component[1]];
-	      return optionParams;
-	    };
 
 	    /*
 	        Обработка всех зависимостей расчет цены от выбранной опции компонента
 	     */
-	    if (ComponentType_ID === "4") {
+	    if (ComponentType_ID === 4) {
 	      if (/Windows/.test(option.Name)) {
 	        if (order != null ? (ref = order.hardware) != null ? (ref1 = ref.cpu.Options) != null ? ref1.cpu_count : void 0 : void 0 : void 0) {
 	          multiplicator = Number(order.hardware.cpu.Options.cpu_count, 10);
@@ -44392,7 +44385,7 @@
 	        price = price * multiplicator;
 	      }
 	    }
-	    if (ComponentType_ID === "20") {
+	    if (ComponentType_ID === 20) {
 	      if ((ref2 = order.software.ExchangeCount) != null ? ref2.Value : void 0) {
 	        multiplicator = Number(order.software.ExchangeCount.Value, 10);
 	      } else {
@@ -44400,10 +44393,10 @@
 	      }
 	      price = price * multiplicator;
 	    }
-	    if (ComponentType_ID === "91") {
+	    if (ComponentType_ID === 91) {
 	      price = price * Number(option.Value, 10);
 	    }
-	    if (ComponentType_ID === "21") {
+	    if (ComponentType_ID === 21) {
 	      if (order.hardware && ((ref3 = order.hardware.platform.Options) != null ? ref3.unit : void 0)) {
 	        multiplicator = Number(order.hardware.platform.Options.unit, 10);
 	      } else {

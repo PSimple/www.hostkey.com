@@ -77,22 +77,15 @@ angular.module("ui").filter 'optPrice', ($dedicated) ->
         unless option?.ComponentType_ID
             return 0
 
-        ComponentType_ID = option?.ComponentType_ID
+        ComponentType_ID = Number(option?.ComponentType_ID, 10)
         price = Number(option.Price, 10)
-
-        # получить параметры опции: зависимости, компонент
-        getParams = ->
-            components = $dedicated.components()
-            component = components[ComponentType_ID]
-            optionParams = tabs[component[0]][component[1]]
-            optionParams
 
         ###
             Обработка всех зависимостей расчет цены от выбранной опции компонента
         ###
 
         # расчет стоимости OS
-        if ComponentType_ID is "4"
+        if ComponentType_ID is 4
             # Если выбрана ОС семейства Windows (п. 2.1) то цена ОС умножается на количество процессоров. параметр ”cpu_count”
             if /Windows/.test(option.Name)
                 if order?.hardware?.cpu.Options?.cpu_count
@@ -103,7 +96,7 @@ angular.module("ui").filter 'optPrice', ($dedicated) ->
                 price = price * multiplicator
 
         # расчет стоимости MSExchange
-        if ComponentType_ID is "20"
+        if ComponentType_ID is 20
             if order.software.ExchangeCount?.Value
                 multiplicator = Number(order.software.ExchangeCount.Value, 10)
             else
@@ -112,11 +105,11 @@ angular.module("ui").filter 'optPrice', ($dedicated) ->
             price = price * multiplicator
 
         # расчет стоимости RdpLicCount
-        if ComponentType_ID is "91"
+        if ComponentType_ID is 91
             price = price * Number(option.Value, 10)
 
         # расчет стоимости DCGrade
-        if ComponentType_ID is "21"
+        if ComponentType_ID is 21
             if order.hardware and order.hardware.platform.Options?.unit
                 multiplicator = Number(order.hardware.platform.Options.unit, 10)
             else
