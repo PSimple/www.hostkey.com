@@ -88,19 +88,19 @@ angular.module("api.dedicated").service "$dedicated", ($http, $q, CONFIG) ->
                 ID: 2
                 Percent: 3
                 Period: "quarterly"
-                Name: "3 months (3%)"
+                Name: "3 months - 3%"
             }
             {
                 ID: 3
                 Percent: 6
                 Period: "semiannually"
-                Name: "6 months (6%)"
+                Name: "6 months - 6%"
             }
             {
                 ID: 4
                 Percent: 12
                 Period: "annually"
-                Name: "1 year (12%)"
+                Name: "1 year - 12%"
             }
         ]
 

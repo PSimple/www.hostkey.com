@@ -44365,24 +44365,17 @@
 
 	angular.module("ui").filter('optPrice', ["$dedicated", function($dedicated) {
 	  return function(option, order, tabs) {
-	    var ComponentType_ID, getParams, multiplicator, price, ref, ref1, ref2, ref3;
+	    var ComponentType_ID, multiplicator, price, ref, ref1, ref2, ref3;
 	    if (!(option != null ? option.ComponentType_ID : void 0)) {
 	      return 0;
 	    }
-	    ComponentType_ID = option != null ? option.ComponentType_ID : void 0;
+	    ComponentType_ID = Number(option != null ? option.ComponentType_ID : void 0, 10);
 	    price = Number(option.Price, 10);
-	    getParams = function() {
-	      var component, components, optionParams;
-	      components = $dedicated.components();
-	      component = components[ComponentType_ID];
-	      optionParams = tabs[component[0]][component[1]];
-	      return optionParams;
-	    };
 
 	    /*
 	        Обработка всех зависимостей расчет цены от выбранной опции компонента
 	     */
-	    if (ComponentType_ID === "4") {
+	    if (ComponentType_ID === 4) {
 	      if (/Windows/.test(option.Name)) {
 	        if (order != null ? (ref = order.hardware) != null ? (ref1 = ref.cpu.Options) != null ? ref1.cpu_count : void 0 : void 0 : void 0) {
 	          multiplicator = Number(order.hardware.cpu.Options.cpu_count, 10);
@@ -44392,7 +44385,7 @@
 	        price = price * multiplicator;
 	      }
 	    }
-	    if (ComponentType_ID === "20") {
+	    if (ComponentType_ID === 20) {
 	      if ((ref2 = order.software.ExchangeCount) != null ? ref2.Value : void 0) {
 	        multiplicator = Number(order.software.ExchangeCount.Value, 10);
 	      } else {
@@ -44400,10 +44393,10 @@
 	      }
 	      price = price * multiplicator;
 	    }
-	    if (ComponentType_ID === "91") {
+	    if (ComponentType_ID === 91) {
 	      price = price * Number(option.Value, 10);
 	    }
-	    if (ComponentType_ID === "21") {
+	    if (ComponentType_ID === 21) {
 	      if (order.hardware && ((ref3 = order.hardware.platform.Options) != null ? ref3.unit : void 0)) {
 	        multiplicator = Number(order.hardware.platform.Options.unit, 10);
 	      } else {
@@ -55865,7 +55858,7 @@
 	        return $timeout(function() {
 	          return $("html, body").animate({
 	            scrollTop: element.offset().top - 70
-	          }, 300);
+	          }, 1200);
 	        }, 1000);
 	      }
 	    }
@@ -56852,7 +56845,7 @@
 	var jade_mixins = {};
 	var jade_interp;
 
-	buf.push("<div id=\"selectedSolution\" class=\"b-dedicated__item-content dedicated-item-content\"><div style=\"padding-bottom: 30px;\" class=\"b-container\"><div class=\"b-dedicated__accordion\"><div id=\"scroll-box\" accordion=\"\"><accordion-group is-open=\"tabs.software.open\"><accordion-heading><span ng-bind=\"::tabs.software.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.software|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.os.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.os\" options=\"tabs.software.os.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"><div ui-select=\"order.software.bit\" options=\"tabs.software.bit.options\" width=\"170\" class=\"table-select__item\"></div></td><td ng-style=\"{visibility: tabs.software.RdpLicCount.enable ? 'initial': 'hidden'}\" class=\"table-select__cell\"><label ng-bind-html=\"::tabs.software.RdpLicCount.name\" class=\"table-select__item-label table-select__item-label_inline_yes\"></label><input type=\"text\" ng-model=\"order.software.RdpLicCount.Value\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X {{order.software.RdpLicCount.Price|verboseCurrency:false}}</span></td></tr></table></td></tr><tr ng-show=\"tabs.software.controlPanel.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.controlPanel.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.controlPanel\" options=\"tabs.software.controlPanel.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-show=\"tabs.software.MSSql.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.MSSql.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.MSSql\" options=\"tabs.software.MSSql.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-show=\"tabs.software.MSExchange.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind-html=\"::tabs.software.MSExchange.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.MSExchange\" options=\"tabs.software.MSExchange.options\" width=\"340\" class=\"table-select__item\"></div></td><td ng-show=\"order.software.MSExchange.ID\" class=\"table-select__cell\"><label class=\"table-select__item-label table-select__item-label_inline_yes\">Count</label><input type=\"text\" ng-model=\"order.software.ExchangeCount.Value\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X {{order.software.MSExchange.Price|verboseCurrency:false}}</span></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span class=\"b-accordion__title-main\">{{tabs.network.name}}</span><span class=\"b-accordion__title-submain\">{{order.network|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.traffic.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.traffic\" options=\"tabs.network.traffic.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.Bandwidth.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.Bandwidth\" options=\"tabs.network.Bandwidth.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.ip.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.ip\" options=\"tabs.network.ip.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.vlan.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.vlan\" options=\"tabs.network.vlan.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.ftpBackup.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.ftpBackup\" options=\"tabs.network.ftpBackup.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.DDOSProtection.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.DDOSProtection\" options=\"tabs.network.DDOSProtection.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.IPv6.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><label class=\"fake-checkbox-label\"><span ng-model=\"order.network.IPv6.Value\" btn-checkbox=\"\" ng-class=\"{'js-check':order.network.IPv6.Value}\" class=\"fake-checkbox-label__box\"></span></label></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span ng-bind=\"::tabs.sla.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.sla|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.serviceLevel.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.serviceLevel\" options=\"tabs.sla.serviceLevel.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.management.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.management\" options=\"tabs.sla.management.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.DCGrade.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.DCGrade\" options=\"tabs.sla.DCGrade.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.discount.billingCycle.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td class=\"table-select__cell\"><div ui-select=\"order.discount.billingCycle\" options=\"tabs.discount.billingCycle.options\" width=\"340\" class=\"table-select__item\"><td class=\"table-select__cell\"></td></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></div></div><!-- Скролящийся блок с результатом выбора--><div scroll-block=\"\" class=\"b-dedicated__summary\"><div class=\"b-dedicated__summary-title\">Your dedicated</div><div ng-bind=\"::tabs.software.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.software\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency:false}}</td></tr></table><div ng-bind=\"::tabs.network.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.network\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency:false}}</td></tr></table><div ng-bind=\"::tabs.sla.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.sla\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency:false}}</td></tr></table><div ng-show=\"totalPrice.Summa\" class=\"b-dedicated__summary-price\"><span class=\"b-dedicated__summary-price-value\">{{totalPrice.Summa|verboseCurrency:false}}/month</span><span ng-show=\"order.discount.billingCycle.Percent\" class=\"b-dedicated__summary-price-discount\">{{order.discount.billingCycle.Percent}}% discount,<br/>save {{totalPrice.Discount|verboseCurrency:false}}</span></div><a href=\"\" ng-click=\"buy($event, order)\" class=\"b-submit b-dedicated__summary-submit\">Buy</a></div></div></div>");;return buf.join("");
+	buf.push("<div id=\"selectedSolution\" class=\"b-dedicated__item-content dedicated-item-content\"><div style=\"padding-bottom: 30px;\" class=\"b-container\"><div class=\"b-dedicated__accordion\"><div id=\"scroll-box\" accordion=\"\"><accordion-group is-open=\"tabs.software.open\"><accordion-heading><span ng-bind=\"::tabs.software.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.software|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.os.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.os\" options=\"tabs.software.os.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"><div ui-select=\"order.software.bit\" options=\"tabs.software.bit.options\" width=\"170\" class=\"table-select__item\"></div></td><td ng-style=\"{visibility: tabs.software.RdpLicCount.enable ? 'initial': 'hidden'}\" class=\"table-select__cell\"><label ng-bind-html=\"::tabs.software.RdpLicCount.name\" class=\"table-select__item-label table-select__item-label_inline_yes\"></label><input type=\"text\" ng-model=\"order.software.RdpLicCount.Value\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X {{order.software.RdpLicCount.Price|verboseCurrency:false}}</span></td></tr></table></td></tr><tr ng-show=\"tabs.software.controlPanel.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.controlPanel.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.controlPanel\" options=\"tabs.software.controlPanel.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-show=\"tabs.software.MSSql.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.software.MSSql.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.MSSql\" options=\"tabs.software.MSSql.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-show=\"tabs.software.MSExchange.enable\" class=\"b-dedicated__accordion-table-row\"><td ng-bind-html=\"::tabs.software.MSExchange.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.software.MSExchange\" options=\"tabs.software.MSExchange.options\" width=\"340\" class=\"table-select__item\"></div></td><td ng-show=\"order.software.MSExchange.ID\" class=\"table-select__cell\"><label class=\"table-select__item-label table-select__item-label_inline_yes\">Count</label><input type=\"text\" ng-model=\"order.software.ExchangeCount.Value\" class=\"table-select__input\"/><span class=\"table-select__input-x\">X {{order.software.MSExchange.Price|verboseCurrency:false}}</span></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span class=\"b-accordion__title-main\">{{tabs.network.name}}</span><span class=\"b-accordion__title-submain\">{{order.network|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr ng-if=\"tabs.network.traffic.options.length\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.traffic.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.traffic\" options=\"tabs.network.traffic.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-if=\"tabs.network.Bandwidth.options.length\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.Bandwidth.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.Bandwidth\" options=\"tabs.network.Bandwidth.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-if=\"tabs.network.ip.options.length\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.ip.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.ip\" options=\"tabs.network.ip.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-if=\"tabs.network.vlan.options.length\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.vlan.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.vlan\" options=\"tabs.network.vlan.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-if=\"tabs.network.ftpBackup.options.length\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.ftpBackup.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.ftpBackup\" options=\"tabs.network.ftpBackup.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-if=\"tabs.network.DDOSProtection.options.length\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.DDOSProtection.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.network.DDOSProtection\" options=\"tabs.network.DDOSProtection.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.network.IPv6.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><label class=\"fake-checkbox-label\"><span ng-model=\"order.network.IPv6.Value\" btn-checkbox=\"\" ng-class=\"{'js-check':order.network.IPv6.Value}\" class=\"fake-checkbox-label__box\"></span></label></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><accordion-group><accordion-heading><span ng-bind=\"::tabs.sla.name\" class=\"b-accordion__title-main\"></span><span class=\"b-accordion__title-submain\">{{order.sla|orderVerbose}}</span></accordion-heading><table class=\"b-dedicated__accordion-table\"><tr ng-if=\"tabs.sla.serviceLevel.options.length\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.serviceLevel.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.serviceLevel\" options=\"tabs.sla.serviceLevel.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-if=\"tabs.sla.management.options.length\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.management.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.management\" options=\"tabs.sla.management.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr><tr ng-if=\"tabs.sla.DCGrade.options.length\" class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.sla.DCGrade.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td colspan=\"2\" class=\"table-select__cell table-select__cell_double_yes\"><div ui-select=\"order.sla.DCGrade\" options=\"tabs.sla.DCGrade.options\" width=\"340\" class=\"table-select__item\"></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></accordion-group><table class=\"b-dedicated__accordion-table\"><tr class=\"b-dedicated__accordion-table-row\"><td ng-bind=\"::tabs.discount.billingCycle.name\" class=\"b-dedicated__accordion-table-cell b-dedicated__accordion-table-cell_title_select\"></td><td class=\"b-dedicated__accordion-table-cell\"><table class=\"table-select\"><tr class=\"table-select__row\"><td class=\"table-select__cell\"><div ui-select=\"order.discount.billingCycle\" options=\"tabs.discount.billingCycle.options\" width=\"340\" class=\"table-select__item\"><td class=\"table-select__cell\"></td></div></td><td class=\"table-select__cell\"></td><td class=\"table-select__cell\"></td></tr></table></td></tr></table></div></div><!-- Скролящийся блок с результатом выбора--><div scroll-block=\"\" class=\"b-dedicated__summary\"><div class=\"b-dedicated__summary-title\">Your dedicated</div><div ng-bind=\"::tabs.software.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.software\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency:false}}</td></tr></table><div ng-bind=\"::tabs.network.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.network\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency:false}}</td></tr></table><div ng-bind=\"::tabs.sla.name\" class=\"b-dedicated__summary-subtitle\"></div><table class=\"b-dedicated__summary-table\"><tr ng-repeat=\"opt in order.sla\" ng-show=\"isValidOption(opt)\" class=\"b-dedicated__summary-table-row\"><td ng-bind-html=\"opt|optName\" class=\"b-dedicated__summary-table-cell\"></td><td class=\"b-dedicated__summary-table-cell\">{{opt|optPrice:order|verboseCurrency:false}}</td></tr></table><div ng-show=\"totalPrice.Summa\" class=\"b-dedicated__summary-price\"><span class=\"b-dedicated__summary-price-value\">{{totalPrice.Summa|verboseCurrency:false}}/month</span><span ng-show=\"order.discount.billingCycle.Percent\" class=\"b-dedicated__summary-price-discount\">{{order.discount.billingCycle.Percent}}% discount,<br/>save {{totalPrice.Discount|verboseCurrency:false}}</span></div><a href=\"\" ng-click=\"buy($event, order)\" class=\"b-submit b-dedicated__summary-submit\">Buy</a></div></div></div>");;return buf.join("");
 	}
 
 /***/ },
@@ -57227,17 +57220,17 @@
 	        ID: 2,
 	        Percent: 3,
 	        Period: "quarterly",
-	        Name: "3 months (3%)"
+	        Name: "3 months - 3%"
 	      }, {
 	        ID: 3,
 	        Percent: 6,
 	        Period: "semiannually",
-	        Name: "6 months (6%)"
+	        Name: "6 months - 6%"
 	      }, {
 	        ID: 4,
 	        Percent: 12,
 	        Period: "annually",
-	        Name: "1 year (12%)"
+	        Name: "1 year - 12%"
 	      }
 	    ];
 	    deferred.resolve(discount);
@@ -57387,7 +57380,7 @@
 	      - sale-серверов (без hardware)
 	   */
 	  this.orderFormat = function(rawOrder) {
-	    var deferred, order, ref, ref1, ref2;
+	    var deferred, order, ref, ref1, ref10, ref11, ref12, ref13, ref14, ref15, ref16, ref17, ref18, ref19, ref2, ref3, ref4, ref5, ref6, ref7, ref8, ref9;
 	    deferred = $q.defer();
 	    rawOrder = angular.copy(rawOrder);
 	    order = {};
@@ -57403,38 +57396,69 @@
 	      };
 	    }
 	    if (rawOrder.software) {
-	      order.Software = {
-	        OS: rawOrder.software.os.ID,
-	        Bit: rawOrder.software.bit.ID,
-	        CP: (ref = rawOrder.software.controlPanel) != null ? ref.ID : void 0,
-	        RdpLicCount: Number(rawOrder.software.RdpLicCount.Value, 10),
-	        Sql: (ref1 = rawOrder.software.MSSql) != null ? ref1.ID : void 0,
-	        Exchange: (ref2 = rawOrder.software.MSExchange) != null ? ref2.ID : void 0,
-	        ExchangeCount: Number(rawOrder.software.ExchangeCount.Value, 10),
-	        Label: $filter('orderVerbose')(rawOrder.software)
-	      };
+	      order.Software = {};
+	      if ((ref = rawOrder.software) != null ? ref.os : void 0) {
+	        order.Software.OS = rawOrder.software.os.ID;
+	      }
+	      if ((ref1 = rawOrder.software) != null ? ref1.bit : void 0) {
+	        order.Software.Bit = rawOrder.software.bit.ID;
+	      }
+	      if ((ref2 = rawOrder.software) != null ? ref2.controlPanel : void 0) {
+	        order.Software.CP = (ref3 = rawOrder.software.controlPanel) != null ? ref3.ID : void 0;
+	      }
+	      if ((ref4 = rawOrder.software) != null ? ref4.RdpLicCount : void 0) {
+	        order.Software.RdpLicCount = Number(rawOrder.software.RdpLicCount.Value, 10);
+	      }
+	      if ((ref5 = rawOrder.software) != null ? ref5.MSSql : void 0) {
+	        order.Software.Sql = (ref6 = rawOrder.software.MSSql) != null ? ref6.ID : void 0;
+	      }
+	      if ((ref7 = rawOrder.software) != null ? ref7.MSExchange : void 0) {
+	        order.Software.Exchange = (ref8 = rawOrder.software.MSExchange) != null ? ref8.ID : void 0;
+	      }
+	      if ((ref9 = rawOrder.software) != null ? ref9.ExchangeCount : void 0) {
+	        order.Software.ExchangeCount = Number(rawOrder.software.ExchangeCount.Value, 10);
+	      }
+	      order.Software.Label = $filter('orderVerbose')(rawOrder.software);
 	    }
 	    if (rawOrder.network) {
-	      order.Network = {
-	        Traffic: rawOrder.network.traffic.ID,
-	        Bandwidth: rawOrder.network.Bandwidth.ID,
-	        DDOSProtection: rawOrder.network.DDOSProtection.ID,
-	        IP: rawOrder.network.ip.ID,
-	        Vlan: rawOrder.network.vlan.ID,
-	        FtpBackup: rawOrder.network.ftpBackup.ID,
-	        IPv6: rawOrder.network.IPv6.Value,
-	        Label: $filter('orderVerbose')(rawOrder.network)
-	      };
+	      order.Network = {};
+	      if ((ref10 = rawOrder.network) != null ? ref10.traffic : void 0) {
+	        order.Network.Traffic = rawOrder.network.traffic.ID;
+	      }
+	      if ((ref11 = rawOrder.network) != null ? ref11.Bandwidth : void 0) {
+	        order.Network.Bandwidth = rawOrder.network.Bandwidth.ID;
+	      }
+	      if ((ref12 = rawOrder.network) != null ? ref12.DDOSProtection : void 0) {
+	        order.Network.DDOSProtection = rawOrder.network.DDOSProtection.ID;
+	      }
+	      if ((ref13 = rawOrder.network) != null ? ref13.ip : void 0) {
+	        order.Network.IP = rawOrder.network.ip.ID;
+	      }
+	      if ((ref14 = rawOrder.network) != null ? ref14.vlan : void 0) {
+	        order.Network.Vlan = rawOrder.network.vlan.ID;
+	      }
+	      if ((ref15 = rawOrder.network) != null ? ref15.ftpBackup : void 0) {
+	        order.Network.FtpBackup = rawOrder.network.ftpBackup.ID;
+	      }
+	      if ((ref16 = rawOrder.network) != null ? ref16.IPv6 : void 0) {
+	        order.Network.IPv6 = rawOrder.network.IPv6.Value;
+	      }
+	      order.Network.Label = $filter('orderVerbose')(rawOrder.network);
 	    }
 	    if (rawOrder.sla) {
-	      order.SLA = {
-	        ServiceLevel: rawOrder.sla.serviceLevel.ID,
-	        Management: rawOrder.sla.management.ID,
-	        DCGrade: rawOrder.sla.DCGrade.ID,
-	        Comment: "",
-	        CycleDiscount: rawOrder.discount.billingCycle.Period,
-	        Label: $filter('orderVerbose')(rawOrder.sla)
-	      };
+	      order.SLA = {};
+	      if ((ref17 = rawOrder.sla) != null ? ref17.serviceLevel : void 0) {
+	        order.SLA.ServiceLevel = rawOrder.sla.serviceLevel.ID;
+	      }
+	      if ((ref18 = rawOrder.sla) != null ? ref18.management : void 0) {
+	        order.SLA.Management = rawOrder.sla.management.ID;
+	      }
+	      if ((ref19 = rawOrder.sla) != null ? ref19.DCGrade : void 0) {
+	        order.SLA.DCGrade = rawOrder.sla.DCGrade.ID;
+	      }
+	      order.SLA.Comment = "";
+	      order.SLA.CycleDiscount = rawOrder.discount.billingCycle.Period;
+	      order.SLA.Label = $filter('orderVerbose')(rawOrder.sla);
 	    }
 	    if (rawOrder.sla) {
 	      order.Currency = rawOrder.Currency;

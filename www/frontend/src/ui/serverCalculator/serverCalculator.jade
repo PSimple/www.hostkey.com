@@ -141,7 +141,7 @@
                         span.b-accordion__title-submain {{order.network|orderVerbose}}
 
                     table.b-dedicated__accordion-table
-                        tr.b-dedicated__accordion-table-row
+                        tr.b-dedicated__accordion-table-row(ng-if="tabs.network.traffic.options.length")
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.traffic.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
@@ -152,7 +152,7 @@
                                         td.table-select__cell
                                         td.table-select__cell
 
-                        tr.b-dedicated__accordion-table-row
+                        tr.b-dedicated__accordion-table-row(ng-if="tabs.network.Bandwidth.options.length")
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.Bandwidth.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
@@ -164,7 +164,7 @@
                                         td.table-select__cell
 
 
-                        tr.b-dedicated__accordion-table-row
+                        tr.b-dedicated__accordion-table-row(ng-if="tabs.network.ip.options.length")
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.ip.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
@@ -176,7 +176,7 @@
                                         td.table-select__cell
 
 
-                        tr.b-dedicated__accordion-table-row
+                        tr.b-dedicated__accordion-table-row(ng-if="tabs.network.vlan.options.length")
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.vlan.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
@@ -188,7 +188,7 @@
                                         td.table-select__cell
 
 
-                        tr.b-dedicated__accordion-table-row
+                        tr.b-dedicated__accordion-table-row(ng-if="tabs.network.ftpBackup.options.length")
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.ftpBackup.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
@@ -199,7 +199,7 @@
                                         td.table-select__cell
                                         td.table-select__cell
 
-                        tr.b-dedicated__accordion-table-row
+                        tr.b-dedicated__accordion-table-row(ng-if="tabs.network.DDOSProtection.options.length")
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.network.DDOSProtection.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
@@ -229,7 +229,7 @@
                         span.b-accordion__title-submain {{order.sla|orderVerbose}}
 
                     table.b-dedicated__accordion-table
-                        tr.b-dedicated__accordion-table-row
+                        tr.b-dedicated__accordion-table-row(ng-if="tabs.sla.serviceLevel.options.length")
 
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.sla.serviceLevel.name")
 
@@ -242,7 +242,7 @@
                                         td.table-select__cell
                                         td.table-select__cell
 
-                        tr.b-dedicated__accordion-table-row
+                        tr.b-dedicated__accordion-table-row(ng-if="tabs.sla.management.options.length")
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.sla.management.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
@@ -253,7 +253,7 @@
                                         td.table-select__cell
                                         td.table-select__cell
 
-                        tr.b-dedicated__accordion-table-row
+                        tr.b-dedicated__accordion-table-row(ng-if="tabs.sla.DCGrade.options.length")
                             td.b-dedicated__accordion-table-cell.b-dedicated__accordion-table-cell_title_select(ng-bind="::tabs.sla.DCGrade.name")
                             td.b-dedicated__accordion-table-cell
                                 table.table-select
