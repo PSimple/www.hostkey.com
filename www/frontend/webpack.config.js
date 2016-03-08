@@ -74,7 +74,7 @@ module.exports = {
         configEnvironment: ENV
     },
 
-    devtool: "eval",
+    devtool: (ENV === 'development') ? "eval":null,
 
     plugins: [
         new webpack.ProvidePlugin({
