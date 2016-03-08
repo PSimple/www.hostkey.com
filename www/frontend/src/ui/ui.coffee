@@ -133,6 +133,11 @@ angular.module("ui").filter 'optName',  ->
 
         ComponentType_ID = Number(component?.ComponentType_ID, 10)
 
+        if ComponentType_ID is 91
+            count = order.software.RdpLicCount.Value
+            if count > 1
+                shortName = "#{count}x#{shortName}"
+
         # вывод названия компонента MSExchange в виде "4xMS Exchange Standard", где 4 это количество лицензий
         if ComponentType_ID is 20
             count = order.software.ExchangeCount.Value
