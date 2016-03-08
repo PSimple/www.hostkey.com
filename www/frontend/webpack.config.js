@@ -74,6 +74,8 @@ module.exports = {
         configEnvironment: ENV
     },
 
+    devtool: "eval",
+
     plugins: [
         new webpack.ProvidePlugin({
             $: "jquery",

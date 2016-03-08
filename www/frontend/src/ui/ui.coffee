@@ -126,10 +126,18 @@ angular.module("ui").filter 'optPrice', ($dedicated) ->
     tabs - содержим все вкладки и зависимости опций, если они есть
 ###
 angular.module("ui").filter 'optName',  ->
-    (component, tabs) ->
+    (component, order) ->
         shortName = ""
 
         shortName = component.Options.short_name if component?.Options?.short_name
+
+        ComponentType_ID = Number(component?.ComponentType_ID, 10)
+
+        # вывод названия компонента MSExchange в виде "4xMS Exchange Standard", где 4 это количество лицензий
+        if ComponentType_ID is 20
+            count = order.software.ExchangeCount.Value
+            if count > 1
+                shortName = "#{count}x#{shortName}"
 
         shortName.replace(/\*/g, "<br>")
 
