@@ -66,6 +66,11 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
             Zero_App::ResponseJson200(null, -1, ["файл конфигурации не найден"]);
         $response = unserialize(file_get_contents($path));
 
+        if ( !isset($response['Data'][4]) || !isset($response['Data'][7]) || !isset($response['Data'][10]) )
+        {
+            Zero_Logs::File(__CLASS__, $_REQUEST);
+        }
+
         // Индексы валют
         $currencyArr = Shop_Config_General::$CurrencyPrice;
 
@@ -230,10 +235,11 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
         $costSLA = 0;
         $costSLA += $Calculate[16][$_REQUEST['SLA']['ServiceLevel']][$currency];
         $costSLA += $Calculate[17][$_REQUEST['SLA']['Management']][$currency];
-        if ( 0 < $_REQUEST['CompId'] )
-            $costSLA += $Calculate[21][$_REQUEST['SLA']['DCGrade']][$currency] * $responseStock['Cpu']['Cnt'];
-        else
-            $costSLA += $Calculate[21][$_REQUEST['SLA']['DCGrade']][$currency] * $Calculate[6][$_REQUEST['Hardware']['Platform']]['Options']['unit'];
+        if ( isset($_REQUEST['SLA']['DCGrade']) )
+            if ( 0 < $_REQUEST['CompId'] )
+                $costSLA += $Calculate[21][$_REQUEST['SLA']['DCGrade']][$currency] * $responseStock['Cpu']['Cnt'];
+            else
+                $costSLA += $Calculate[21][$_REQUEST['SLA']['DCGrade']][$currency] * $Calculate[6][$_REQUEST['Hardware']['Platform']]['Options']['unit'];
 
         // РАСЧЕТ
         $percentCycle = [
