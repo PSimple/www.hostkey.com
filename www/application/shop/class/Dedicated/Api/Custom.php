@@ -42,9 +42,7 @@ class Shop_Dedicated_Api_Custom extends Zero_Controller
             else
             {
                 Zero_App::ResponseJson500(-1, ["не удалось получить конфигурацию"]);
-//                Zero_App::ResponseJson500(-1, ["файл конфигурации не найден"]);
             }
-
         }
         $response = unserialize(file_get_contents($path));
 
@@ -85,8 +83,6 @@ class Shop_Dedicated_Api_Custom extends Zero_Controller
             $responseSort['Data'][8] = [];
         if ( !isset($responseSort['Data'][21]) )
             $responseSort['Data'][21] = [];
-
-
 
         $responseSort['CostLicenseWin'] = $response['CostLicenseWin'];
         $responseSort['EURRUR'] = $response['EURRUR'];
