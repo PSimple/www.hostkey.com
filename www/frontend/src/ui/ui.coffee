@@ -72,7 +72,7 @@ angular.module("ui").filter 'discount',  ->
     option - опция компонента: OS, Hdd, Ram и тд
     tabs - содержит все вкладки и зависимости опций, если они есть
 ###
-angular.module("ui").filter 'optPrice', ($dedicated) ->
+angular.module("ui").filter 'optPrice', ->
     (option, order, tabs) ->
         unless option?.ComponentType_ID
             return 0
