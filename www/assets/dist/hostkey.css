@@ -671,3 +671,6 @@ th.dedicated-extra-price__table-cell {
   padding: 6px; }
 .select2-container--classic.select2-container--open .select2-dropdown {
   border-color: #5897fb; }
+.calculatorIframe {
+  background: none;
+}
