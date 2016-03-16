@@ -45,8 +45,6 @@ angular.module("calculator").directive "calculator", ->
             defaultOrder.discount =
                 billingCycle: billingCycleDiscount[0]
 
-            console.log defaultOrder
-
             defaultOrder
 
         # формируем заказ на сервер
@@ -460,8 +458,6 @@ angular.module("calculator").directive "calculator", ->
         country: "@"
 
     controller: ($scope, $state, $stateParams, $timeout, $q, $api, notifications) ->
-        console.log $scope
-
         $q.all([
             $api.components()
             $api.getConfigCalculator($scope.currency, $scope.groups, $scope.currencyId, $scope.pid, $scope.type, $scope.country)
@@ -473,3 +469,18 @@ angular.module("calculator").directive "calculator", ->
 
             init($api, notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, components)
 
+angular.module("calculator").filter "currency", ->
+    (price, currency) ->
+        currency = window.currency or currency
+
+        space = ""
+
+        if currency is 'eur'
+            return "€#{space}#{price}"
+
+        if currency is 'rur'
+            # знак ₽ отдельным шрифтом
+            # return "#{price}#{space}<span class='rouble'>q</span>"
+
+            # рубль текстом
+            return "#{price}#{space}руб."
