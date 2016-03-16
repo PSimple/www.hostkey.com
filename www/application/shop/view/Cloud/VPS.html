@@ -191,7 +191,7 @@
                             <select class="table-select__item  vm" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
                                 {foreach ( $arr_VM_Template[key($arr_VM_Template)] as $key_arr_select => $val_arr_select )}
 
-                                {if ( ( $k == 4 || $k == 5 ) && ( 9923 == $val_arr_select['id'] || 10628 == $val_arr_select['id'] ) )}
+                                {if ( ( ( $k == 4 || $k == 5 ) && 9923 == $val_arr_select['id'] ) || ( ( $k == 15 || $k == 16 ) && 10628 == $val_arr_select['id'] ) )}
 
                                 {else}
 
