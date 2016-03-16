@@ -209,8 +209,7 @@ class Zero_Section extends Zero_Model
     /**
      * Dynamic factory method to create an object through the factory.
      */
-    protected function
-    Init()
+    protected function Init()
     {
         if ( $this->ID == 0 )
         {
@@ -226,10 +225,25 @@ class Zero_Section extends Zero_Model
     public function Init_Url($url)
     {
         $index = 'route' . $url . '/' . LANG . '/url';
-
         if ( false === $row = Zero_Cache::Get_Data($index) )
         {
-            if ( Zero_App::$Config->Site_UseDB )
+            // Поиск в программе
+            foreach (array_merge(Zero_App::$Config->Api, Zero_App::$Config->Web) as $route)
+            {
+                if ( isset($route->Route[ZERO_URL]) )
+                {
+                    $route = $route->Route[ZERO_URL];
+                    foreach ($route as $property => $value)
+                    {
+                        $this->$property = $value;
+                    }
+                    $this->ID = -1;
+                    Zero_Cache::Set_Data($index, $route);
+                    break;
+                }
+            }
+            // Поиск в БД
+            if ( !$this->ID && Zero_App::$Config->Site_UseDB )
             {
                 $sql = "SELECT * FROM {$this->Source} WHERE Url = " . Zero_DB::EscT($url);
                 $row = Zero_DB::Select_Row($sql);
@@ -261,7 +275,7 @@ class Zero_Section extends Zero_Model
             return $this->_Action_List;
 
         $this->_Action_List = [];
-        if ( 'yes' == $this->IsAuthorized && 1 < Zero_App::$Users->Groups_ID )
+        if ( Zero_App::$Config->Site_UseDB && 'yes' == $this->IsAuthorized && 1 < Zero_App::$Users->Groups_ID )
         {
             $Model = Zero_Model::Makes('Zero_Action');
             $Model->AR->Sql_Where('Section_ID', '=', $this->ID);
