@@ -89,7 +89,7 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
         $table_row_data['CPANEL COMPATIBLE'] = [0,0,1,1,1];
         $table_row_data ['Bandwidth Limit'] = $BWL;
         $table_row_data ['Backups Limit'] = $BKL;
-        $table_row_data ['VM Template'] = $VMT;
+        $table_row_data ['SOFTWARE'] = $VMT;
 
         if ( isset($this->Params['IsFeatures']) )
             $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;

@@ -113,9 +113,11 @@
 
             <div style="float: right; width: 800px; margin: 20px 0 0 0;" class="desc-container-vps">
                 Container VPS is your individual cloud server.<br>
-                You can make use of all the features of VPS via the intuitive interface.<br><br>
+                You get full root access and the ability to configure and manage the virtual private server with ease.<br><br>
 
-                You get full root access and the ability to configure and manage the virtual private server with ease. We offer cPanel instant installation as well as a large selection of popular CMS packages, e-commerce and blogging platforms, forums that could be pre-installed in seconds and out of the box.<br><br>
+                We offer cPanel instant installation as well as a large selection of popular CMS packages, e-commerce<br>
+                and blogging platforms that could be deployed out of the box.<br><br>
+
 
                 VPS will be ready in minutes from the moment the order is paid for. <br><br>
 
@@ -192,7 +194,7 @@
                         </div>
                         {else}
 
-                        {if ( 'VM Template' == $key )}
+                        {if ( 'SOFTWARE' == $key )}
                         <div class="b-vps-table__text">
                             <select class="table-select__item  vm" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
                                 {foreach ( $arr_VM_Template[key($arr_VM_Template)] as $key_arr_select => $val_arr_select )}
@@ -224,7 +226,7 @@
                         {else if ( $key == 'Bandwidth Limit' )}
                             <div class="b-vps-table__text"><span style="text-decoration: line-through;">250 GB</span> 1000 GB</div>
                         {else if ( $key == 'CPANEL COMPATIBLE' )}
-                            <div class="b-vps-table__text">{if ( $v )} 1 {else} 0 {/if}</div>
+                            <div class="b-vps-table__text">{if ( $v )} <img src="/assets/img/tick.png" alt=""> {else} — {/if}</div>
                         {else}
                             <div class="b-vps-table__text">{$v['name']}</div>
                         {/if}
@@ -456,7 +458,7 @@
         $('.preset-buy').each(function () {
             var preset_number = $( this ).attr( 'data_preset' );
             ZakazY[preset_number] = window.startZakaz ( 0, listOfProducts[preset_number][0] );
-            if( Table_Row['VM Template'][preset_number].id  != "NONE"){
+            if( Table_Row['SOFTWARE'][preset_number].id  != "NONE"){
             } else {
 
             }
