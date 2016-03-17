@@ -223,6 +223,8 @@
                         </div>
                         {else if ( $key == 'Bandwidth Limit' )}
                             <div class="b-vps-table__text"><span style="text-decoration: line-through;">250 GB</span> 1000 GB</div>
+                        {else if ( $key == 'CPANEL COMPATIBLE' )}
+                            <div class="b-vps-table__text">{if ( $v )} 1 {else} 0 {/if}</div>
                         {else}
                             <div class="b-vps-table__text">{$v['name']}</div>
                         {/if}

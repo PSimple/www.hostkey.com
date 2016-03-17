@@ -86,6 +86,7 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
         $VMT = $table_row_data['VM Template'];
         unset ($table_row_data['VM Template']);
 
+        $table_row_data['CPANEL COMPATIBLE'] = [0,0,1,1,1];
         $table_row_data ['Bandwidth Limit'] = $BWL;
         $table_row_data ['Backups Limit'] = $BKL;
         $table_row_data ['VM Template'] = $VMT;
