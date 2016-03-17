@@ -5893,7 +5893,7 @@ p {
 
 .vertical-track {
     width: 3px;
-    background-color: #���;
+    background-color: #e7e7e7;
 }
 
 .vertical-handle {
@@ -6182,7 +6182,7 @@ p {
 }
 
 .message_pole {
-    dispaly: none;
+    display: none;
 }
 
 .write_message_success {
@@ -6196,7 +6196,7 @@ p {
     color: #000;
     margin: 10px auto;
     width: 80%;
-    dispalay: block;
+    display: block;
 }
 
 .write_message_success a {
@@ -6214,7 +6214,7 @@ p {
     color: #000;
     margin: 10px auto;
     width: 80%;
-    dispalay: block;
+    display: block;
 }
 
 /*
@@ -6234,17 +6234,13 @@ p {
 }
 
 .White-header {
-    color: #fff;
-    ! impotant;
-    text-decoration: underline;
-    ! impotant
+    color: #fff !important;
+    text-decoration: underline !important;
 }
 
 .Black-header {
-    color: #000;
-    ! impotant;
-    text-decoration: underline;
-    ! impotant
+    color: #000 !important;
+    text-decoration: underline !important;
 }
 
 .select2-results__options li {
@@ -6337,4 +6333,8 @@ p {
 .main-page-best-offers-row {
     display: table-row;
     text-align: center;
+}
+
+.desc-container-vps-img {
+    padding: 20px 62px 0 0;
 }
