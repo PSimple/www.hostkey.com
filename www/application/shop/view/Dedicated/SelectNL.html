@@ -1,21 +1,21 @@
 <script>
-window.currency = '{$currency}';
-window.currencyId = {$currencyId};
-window.pid = 448;
-window.country = 'NL';
-window.type = 'dedicated';
+    window.currency = '{$currency}';
+    window.currencyId = {$currencyId};
+    window.pid = 448;
+    window.country = 'NL';
+    window.type = 'dedicated';
 </script>
 <div class="b-page" ng-app="dedicated.service" class="fade" ng-class="bodyClass()">
 
     <div class="b-page__promo b-page__promo_dedicated-select-service_yes">
-        <div class="b-icon b-page__scroll-icon"  onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
+        <div class="b-icon b-page__scroll-icon" onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
         <h1 class="b-page__promo-title">{$Head}</h1>
     </div>
 
     <div class="b-dedicated">
 
         <h3 class="b-dedicated__title">
-           DEDICATED<br>
+            DEDICATED<br>
             FEATURE
         </h3>
 
@@ -29,6 +29,49 @@ window.type = 'dedicated';
         <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
 
 
+        <div class="b-dedicated__services">
+            <a href="http://hostkey.com/about/datacenter" target="_blank" class="b-dedicated__services-block">
+                <div class="b-dedicated__services-block-image">
+                    <img src="/assets/img/block_data.png">
+                </div>
+                <div class="b-dedicated__services-block-description">
+                    <h3 class="b-dedicated__services-block-title">
+                        Data Centers
+                    </h3>
+                    <p class="b-dedicated__services-block-text">
+                        Get acquainted with our state of art TIER III data centers. <span>>></span>
+                    </p>
+                </div>
+            </a>
+            <a href="http://hostkey.com/support/speedtest" target="_blank" class="b-dedicated__services-block">
+                <div class="b-dedicated__services-block-image">
+                    <img src="/assets/img/block_speedtest.png">
+                </div>
+                <div class="b-dedicated__services-block-description">
+                    <h3 class="b-dedicated__services-block-title">
+                        Speedtest
+                    </h3>
+                    <p class="b-dedicated__services-block-text">
+                        Determine how our network performs: run speedtest! <span>>></span>
+                    </p>
+                </div>
+            </a>
+            <a href="http://hostkey.com/support/faq" target="_blank" class="b-dedicated__services-block">
+                <div class="b-dedicated__services-block-image">
+                    <img src="/assets/img/block_test.png">
+                </div>
+                <div class="b-dedicated__services-block-description">
+                    <h3 class="b-dedicated__services-block-title">
+                        Try before you buy
+                    </h3>
+                    <p class="b-dedicated__services-block-text">
+                        Be the judge. Take our servers for a test drive! <span>>></span>
+                    </p>
+                </div>
+            </a>
+            <div style="clear: both;"></div>
+        </div>
+
         <div class="b-dedicated__box">
             <h3 class="b-dedicated__title b-dedicated__title_upline_yes">
                 features
@@ -37,7 +80,6 @@ window.type = 'dedicated';
         </div>
 
         {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" IsFeatures="1"}
-
 
 
         <div class="b-dedicated__free">
@@ -51,7 +93,8 @@ window.type = 'dedicated';
 
         <div class="need-more-resousrses">
             <span class="b-vps__try-line-text need-more-resousrses-container-zag" data_id_need="need_more">need more information?</span>
-            <div class="need-more-resousrses-container-header-triangle-white" data_id_need_triangle="need_more"></div>
+            <div class="need-more-resousrses-container-header-triangle-white"
+                 data_id_need_triangle="need_more"></div>
         </div>
         <div class="need-more-resousrses-container">
             {plugin "Zero_Content_Plugin_Page" block="content_Left"}
@@ -71,34 +114,39 @@ window.type = 'dedicated';
     .need-more-resousrses {
         background-color: #945ae0;
         box-sizing: border-box;
-        padding:  20px;
+        padding: 20px;
         color: #fff;
         text-transform: uppercase;
         text-align: center;
         cursor: pointer;
         width: 100%;
     }
+
     .need-more-resousrses-container {
         display: none;
         background-color: #fff;
         width: 100%;
         padding: 0 0 20px 0;
     }
+
     .need-more-resousrses-container-messager {
         display: none;
         margin: 0 0 20px 20px;
     }
-    .need-more-resousrses-container-header{
+
+    .need-more-resousrses-container-header {
         padding: 20px;
         font-size: 20px;
         color: #945ae0;
         cursor: pointer;
         margin: 1px;
     }
+
     .need-more-resousrses-container-zag {
         display: inline-block;
         text-decoration: underline;
     }
+
     .need-more-resousrses-container-header-triangle {
         display: inline-block;
         border: 10px solid transparent;
@@ -107,6 +155,7 @@ window.type = 'dedicated';
         top: 8px;
         left: 0;
     }
+
     #configure_cloud_VDS {
         border: none;
         display: none;
@@ -115,6 +164,7 @@ window.type = 'dedicated';
         margin: 0 auto;
         background: #fff;
     }
+
     .need-more-resousrses {
         background-color: #945ae0;
         box-sizing: border-box;
@@ -127,6 +177,7 @@ window.type = 'dedicated';
         width: 100%;
         text-decoration: underline;
     }
+
     .need-more-resousrses-container-header-triangle-white {
         display: inline-block;
         border: 10px solid transparent; /* Прозрачные границы */
@@ -137,33 +188,33 @@ window.type = 'dedicated';
     }
 </style>
 <script>
-    $(document).ready(function (){
+    $(document).ready(function () {
 
         $("body").on("click", ".b-submit", function () {
-            $( 'body #selectedSolution').hide( 'slow');
-            $( '#configure_cloud_VDS').show( 'slow');
+            $('body #selectedSolution').hide('slow');
+            $('#configure_cloud_VDS').show('slow');
         });
 
-        $( '.need-more-resousrses').bind( 'click', function(){
-            $( ".need-more-resousrses-container" ).toggle();
+        $('.need-more-resousrses').bind('click', function () {
+            $(".need-more-resousrses-container").toggle();
         });
 
-        $( '.need-more-resousrses-container-zag' ).bind( 'click', function(){
-            var id = $( this).attr( 'data_id_need');
-            var d = $( '[data_id_need_content_position="' + id + '"]');
-            var t= $( '[data_id_need_triangle="' + id + '"]');
+        $('.need-more-resousrses-container-zag').bind('click', function () {
+            var id = $(this).attr('data_id_need');
+            var d = $('[data_id_need_content_position="' + id + '"]');
+            var t = $('[data_id_need_triangle="' + id + '"]');
             d.toggle();
-            t.css( 'border', '10px solid transparent' );
-            if ( d.css( 'display') == 'none' ){
+            t.css('border', '10px solid transparent');
+            if (d.css('display') == 'none') {
                 t.css({
                     "border-top": "10px solid",
                     "top": "8px"
                 });
             } else {
-                t.css( {
+                t.css({
                     "border-bottom": "10px solid",
                     "top": "0px"
-                } );
+                });
             }
 
         });
