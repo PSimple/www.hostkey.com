@@ -19,13 +19,10 @@ class Content_Section_403 extends Zero_Controller
     public function Action_Default()
     {
         $this->Chunk_Init();
-        $Section = Zero_Model::Makes('Zero_Section');
-        $Section->Init_Url("/403");
-        $section_data = $Section->Get_Props();
-        preg_match_all('#(<.+?>)(.+?)(<\/.+?>)#is', $section_data['Name'], $match);
-        $head = str_replace(' ', '<br>', $match[2][0]);
-        $this->View->Assign('NAME', $match[1][0] . $head . $match[3][0]);
-        $this->View->Assign('DESC', $section_data['Description']);
+        $Section = Zero_Section::Make();
+        $Section->Init_Url("/404");
+        $this->View->Assign('NAME', $Section->Name);
+        $this->View->Assign('DESC', $Section->Description);
         return $this->View;
     }
 
