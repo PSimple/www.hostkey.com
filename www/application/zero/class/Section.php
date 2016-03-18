@@ -239,6 +239,7 @@ class Zero_Section extends Zero_Model
                 if ( isset($route->Route[ZERO_URL]) )
                 {
                     $route = $route->Route[ZERO_URL];
+                    $route['ID'] = -1;
                     $route['Url'] = ZERO_URL;
                     if ( empty($route['IsEnable']) )
                         $route['IsEnable'] = 'yes';
@@ -254,11 +255,7 @@ class Zero_Section extends Zero_Model
                         $route['Layout'] = '';
                     if ( isset($route['View']) )
                         $route['Layout'] = $route['View'];
-                    foreach ($route as $property => $value)
-                    {
-                        $this->$property = $value;
-                    }
-                    $this->ID = -1;
+                    $this->Set_Props($route);
                     Zero_Cache::Set_Data($index, $route);
                     break;
                 }
@@ -274,7 +271,9 @@ class Zero_Section extends Zero_Model
             }
         }
         else
+        {
             $this->Set_Props($row);
+        }
     }
 
     /**
