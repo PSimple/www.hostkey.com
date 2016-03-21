@@ -18,8 +18,15 @@ class Content_Section_Page extends Zero_Controller
     {
         $this->Chunk_Init();
         preg_match_all('#(<.+?>)(.+?)(<\/.+?>)#is', Zero_App::$Section->Name, $match);
-        $head = str_replace(' ', '<br>', $match[2][0]);
-        $this->View->Assign('head', $match[1][0] . $head . $match[3][0]);
+        if ( isset($match[2][0]) )
+        {
+            $head = str_replace(' ', '<br>', $match[2][0]);
+            $this->View->Assign('head', $match[1][0] . $head . $match[3][0]);
+        }
+        else
+        {
+            $this->View->Assign('head', Zero_App::$Section->Name);
+        }
         $this->View->Assign('HEADER_CONTENT', Zero_App::$Section->NameSub);
         $this->View->Assign('content', Zero_App::$Section->Content);
 

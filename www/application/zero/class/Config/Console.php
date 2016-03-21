@@ -21,7 +21,7 @@ class Zero_Config_Console
          *
          * @see Zero_Console_Base_ApiGen::Action_Default()
          */
-        'Zero_Console_Base_ApiGen' => ['Minute' => '*/5', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
+        'Zero_Console_Base_ApiGen' => ['Minute' => '*/5', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => false],
         /**
          * Удаление старых бинарных данных загруженных через веб (ajax)
          *
@@ -33,7 +33,7 @@ class Zero_Config_Console
          *
          * @see Zero_Console_Section_SiteMap::Action_Default()
          */
-        'Zero_Console_Section_SiteMap' => ['Minute' => '0', 'Hour' => '0', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => false],
+        'Zero_Console_Section_SiteMap' => ['Minute' => '0', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
         /**
          * Оперделение не  активных пользователей.
          *
