@@ -376,7 +376,7 @@ angular.module("ui.serverCalculator").directive "saleServerCalculator", ->
                     else
                         short_name.push name
 
-                short_name.join("*")
+                short_name.join("; ")
 
             order.hardware.hdd =
                 ID: ids
