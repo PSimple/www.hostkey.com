@@ -21,7 +21,7 @@ class Zero_Config_Console
          *
          * @see Zero_Console_Base_ApiGen::Action_Default()
          */
-        'Zero_Console_Base_ApiGen' => ['Minute' => '*/5', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => false],
+        'Zero_Console_Base_ApiGen' => ['Minute' => '*/5', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
         /**
          * Удаление старых бинарных данных загруженных через веб (ajax)
          *
