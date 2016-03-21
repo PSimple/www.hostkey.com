@@ -209,8 +209,7 @@ class Zero_Section extends Zero_Model
     /**
      * Dynamic factory method to create an object through the factory.
      */
-    protected function
-    Init()
+    protected function Init()
     {
         if ( $this->ID == 0 )
         {
@@ -226,10 +225,43 @@ class Zero_Section extends Zero_Model
     public function Init_Url($url)
     {
         $index = 'route' . $url . '/' . LANG . '/url';
-
         if ( false === $row = Zero_Cache::Get_Data($index) )
         {
-            if ( Zero_App::$Config->Site_UseDB )
+            // Поиск в программе
+            $arr = [];
+            if ( Zero_App::MODE_API == Zero_App::Get_Mode()  )
+                $arr = Zero_App::$Config->Api;
+            if ( Zero_App::MODE_WEB == Zero_App::Get_Mode()  )
+                $arr = Zero_App::$Config->Web;
+
+            foreach ($arr as $route)
+            {
+                if ( isset($route->Route[ZERO_URL]) )
+                {
+                    $route = $route->Route[ZERO_URL];
+                    $route['ID'] = -1;
+                    $route['Url'] = ZERO_URL;
+                    if ( empty($route['IsEnable']) )
+                        $route['IsEnable'] = 'yes';
+                    if ( empty($route['UrlRedirect']) )
+                        $route['UrlRedirect'] = '';
+                    if ( empty($route['IsAuthorized']) )
+                        $route['IsAuthorized'] = 'no';
+                    if ( empty($route['Name']) )
+                        $route['Name'] = '';
+                    if ( empty($route['Content']) )
+                        $route['Content'] = '';
+                    if ( empty($route['Layout']) )
+                        $route['Layout'] = '';
+                    if ( isset($route['View']) )
+                        $route['Layout'] = $route['View'];
+                    $this->Set_Props($route);
+                    Zero_Cache::Set_Data($index, $route);
+                    break;
+                }
+            }
+            // Поиск в БД
+            if ( 0 == $this->ID && Zero_App::$Config->Site_UseDB )
             {
                 $sql = "SELECT * FROM {$this->Source} WHERE Url = " . Zero_DB::EscT($url);
                 $row = Zero_DB::Select_Row($sql);
@@ -239,7 +271,9 @@ class Zero_Section extends Zero_Model
             }
         }
         else
+        {
             $this->Set_Props($row);
+        }
     }
 
     /**
@@ -261,7 +295,7 @@ class Zero_Section extends Zero_Model
             return $this->_Action_List;
 
         $this->_Action_List = [];
-        if ( 'yes' == $this->IsAuthorized && 1 < Zero_App::$Users->Groups_ID )
+        if ( Zero_App::$Config->Site_UseDB && 'yes' == $this->IsAuthorized && 1 < Zero_App::$Users->Groups_ID )
         {
             $Model = Zero_Model::Makes('Zero_Action');
             $Model->AR->Sql_Where('Section_ID', '=', $this->ID);

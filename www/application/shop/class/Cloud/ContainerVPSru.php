@@ -58,21 +58,6 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
                 }
             }
         }
-//        foreach ($p as $key => $value)
-//        {
-//            foreach ($value as $k => $v)
-//            {
-//                if ( $v['hidden'] == 0 )
-//                {
-//                    foreach ($v as $kk => $vv)
-//                    {
-//                        $table_row_data[$vv['name']][$key]['name'] = $vv['data'][0]['name'];
-//                        $table_row_data[$vv['name']][$key]['id'] = $vv['data'][0]['id'];
-//                        $table_row_data[$vv['name']][$key]['monthly'] = $vv['data'][0]['monthly'];
-//                    }
-//                }
-//            }
-//        }
 
         foreach ($p as $key_add_default => $val_add_default)
         {
@@ -101,9 +86,10 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
         $VMT = $table_row_data['VM Template'];
         unset ($table_row_data['VM Template']);
 
+        $table_row_data['CPANEL COMPATIBLE'] = [0,0,1,1,1];
         $table_row_data ['Bandwidth Limit'] = $BWL;
         $table_row_data ['Backups Limit'] = $BKL;
-        $table_row_data ['VM Template'] = $VMT;
+        $table_row_data ['SOFTWARE'] = $VMT;
 
         if ( isset($this->Params['IsFeatures']) )
             $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;

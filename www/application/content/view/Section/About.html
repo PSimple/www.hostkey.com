@@ -1,7 +1,7 @@
 <div class="b-page">
 
     <div class="b-page__promo b-page__promo_text-page_yes">
-        <div class="b-icon b-page__scroll-icon"  onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
+        <div class="b-icon b-page__scroll-icon" onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
         <h1 class="b-page__promo-title">{Zero_App::$Section->Name}</h1>
     </div>
 
@@ -10,13 +10,13 @@
             <div class="b-col b-about__description">
                 <div class="b-col__item">
                     {plugin "Zero_Content_Plugin_Page" block="content_Left"}
-                </div><!--
-                        --><div class="b-col__item">
-                {plugin "Zero_Content_Plugin_Page" block="content_Center"}
-            </div><!--
-                        --><div class="b-col__item">
-                {plugin "Zero_Content_Plugin_Page" block="content_Right"}
-            </div>
+                </div>
+                <div class="b-col__item">
+                    {plugin "Zero_Content_Plugin_Page" block="content_Center"}
+                </div>
+                <div class="b-col__item">
+                    {plugin "Zero_Content_Plugin_Page" block="content_Right"}
+                </div>
             </div>
         </div>
         {if ( Zero_App::$Section->ID == 88 )}
