@@ -196,9 +196,9 @@
 
                         {if ( 'SOFTWARE' == $key )}
                         <div class="b-vps-table__text">
-                            <select class="table-select__item  vm" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
+                            <select class="table-select__item table-select__item-software  vm" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
 
-                                <option value="{$val_arr_select['id']}">select one</option>
+                                <option value="0">select one</option>
                                 {foreach ( $arr_VM_Template[key($arr_VM_Template)] as $key_arr_select => $val_arr_select )}
 
                                 {if ( ( ( $k == 4 || $k == 5 ) && 9923 == $val_arr_select['id'] ) || ( ( $k == 15 || $k == 16 ) && 10628 == $val_arr_select['id'] ) )}
@@ -535,36 +535,42 @@
             var name_kyki = $( this).attr( 'data_name' );
 
               var PRESET_ID = $( this).attr( 'data_preset' );
-              for( var prop in listOfProducts ) {
-                    if( prop == PRESET_ID ) {
+
+            if ($('.table-select__item-software[data_preset=' + PRESET_ID + ']').val() != 0) {
+                for (var prop in listOfProducts) {
+                    if (prop == PRESET_ID) {
                         Zakaz = ZakazY[prop];
                     }
-              }
+                }
 
-            CoocieObjZakazContainer.type = name_kyki;
-            CoocieObjZakazContainer.select = 'options';
-            CoocieObjZakazContainer.Zakaz = Zakaz;
+                CoocieObjZakazContainer.type = name_kyki;
+                CoocieObjZakazContainer.select = 'options';
+                CoocieObjZakazContainer.Zakaz = Zakaz;
 
-            if ( name_kyki !== 'undefined' ){
-                $.cookie( name_kyki, JSON.stringify( CoocieObjZakazContainer ) );
-            } else {
-                $.removeCookie( name_kyki );
-                $.cookie( name_kyki , JSON.stringify( CoocieObjZakazContainer ) );
+                if (name_kyki !== 'undefined') {
+                    $.cookie(name_kyki, JSON.stringify(CoocieObjZakazContainer));
+                } else {
+                    $.removeCookie(name_kyki);
+                    $.cookie(name_kyki, JSON.stringify(CoocieObjZakazContainer));
+                }
+                $('#calc').hide('slow');
+                $('.b-dedicated__back').show('slow');
+                $('.b-page__promo_vps_yes').hide('slow');
+                $('.b-vps__feature').hide('slow');
+                $('[data_id=Options]').show('slow');
+                $('[data_id=Service]').hide('slow');
+                $('.b-dedicated__summary-title').text('Your Solution');
+                $('.b-dedicated__title').hide('slow');
+                $('#scroll-anchor-01').hide('slow');
+                $('.b-text-page__title ').hide('slow');
+                $('.desc-container-vps').hide('slow');
+                $('.b-dedicated__summary-table-cel').text(Zakaz.payment.data[0].name);
+                $.scrollTo(0, 1000);
+                crFrame();
+            } else
+            {
+                humane.log('Please choose software package',{ addnCls: 'humane-flatty-error'});
             }
-            $( '#calc').hide( 'slow' );
-            $( '.b-dedicated__back').show( 'slow' );
-            $( '.b-page__promo_vps_yes').hide( 'slow' );
-            $( '.b-vps__feature').hide( 'slow');
-            $( '[data_id=Options]').show( 'slow');
-            $( '[data_id=Service]').hide( 'slow');
-            $( '.b-dedicated__summary-title').text( 'Your Solution');
-            $( '.b-dedicated__title').hide( 'slow');
-            $( '#scroll-anchor-01').hide( 'slow');
-            $( '.b-text-page__title ').hide( 'slow');
-            $( '.desc-container-vps').hide( 'slow');
-            $( '.b-dedicated__summary-table-cel').text( Zakaz.payment.data[0].name );
-            $.scrollTo(0, 1000);
-              crFrame( );
               return false;
         });
 
