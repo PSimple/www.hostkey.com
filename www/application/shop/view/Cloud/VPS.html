@@ -220,7 +220,7 @@
                         </div>
                         {else if ( $key == 'Bandwidth Limit' )}
                         <div class="b-vps-table__text">
-                            <select class="table-select__item vm" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
+                            <select class="table-select__item bwl" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
 
                                 {foreach ( $arr_Bandwidth_Limit[key($arr_Bandwidth_Limit)] as $key_arr_select => $val_arr_select )}
 {$val_arr_select}
