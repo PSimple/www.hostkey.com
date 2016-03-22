@@ -942,6 +942,7 @@ p {
     box-shadow: 0px 1px 12px #888888;
     -webkit-box-shadow: 0px 1px 12px #888888;
     -moz-box-shadow: 0px 1px 12px #888888;
+    overflow: hidden;
 }
 
 .b-page.is-black {
@@ -3618,6 +3619,10 @@ p {
 .table-select__item {
     width: 100%;
     text-transform: uppercase;
+}
+
+.b-vps__table .table-select__item {
+    width: 188px;
 }
 
 .table-select__item-label {
