@@ -385,7 +385,7 @@ angular.module("dedicated.service.selected").controller "SelectedCtrl", (notific
                 else
                     short_name.push name
 
-            short_name.join("*")
+            short_name.join("; ")
 
         order.hardware.hdd =
             ID: ids
@@ -427,6 +427,14 @@ angular.module("dedicated.service.selected").controller "SelectedCtrl", (notific
             enableWindowsOptions()
         else
             enableUnixOptions()
+
+        # Условие для sale-серверов
+        # Показывать Cpanel только когда Centos (Centos KVM - сPanel не нужна)
+        if /Centos (5|6|7|8)/.test(order.software.os.Name)
+            tabs.software.controlPanel.enable = true
+        else
+            tabs.software.controlPanel.enable = false
+            order.software.controlPanel = Name: "None"
 
         return
 
