@@ -1,14 +1,14 @@
 <script>
-window.currency = '{$currency}';
-window.currencyId = {$currencyId};
-window.pid = 448;
-window.country = 'RU';
-window.type = 'dedicated';
+    window.currency = '{$currency}';
+    window.currencyId = {$currencyId};
+    window.pid = 448;
+    window.country = 'RU';
+    window.type = 'dedicated';
 </script>
 <div class="b-page" ng-app="dedicated.service" class="fade" ng-class="bodyClass()">
 
     <div class="b-page__promo b-page__promo_dedicated-select-service_yes">
-        <div class="b-icon b-page__scroll-icon"  onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
+        <div class="b-icon b-page__scroll-icon" onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
         <h1 class="b-page__promo-title">dedicated</h1>
     </div>
 
@@ -81,9 +81,9 @@ window.type = 'dedicated';
             <div class="b-dedicated-try__line">
                 <span class="b-vps__try-line-text">Try before you buy</span>
             </div>
-            <a class="b-dedicated__free-title" href="#">Request<br>a free<br>test drive</a>
+            <a class="b-dedicated__free-title" href="#">Be the judge. Take our servers for a test drive!</a>
             <div class="b-dedicated__free-period"></div>
-            <a class="b-submit b-dedicated__free-submit" href="/about/contacts">contact us</a>
+            <a class="b-submit b-dedicated__free-submit" href="/support/faq">Apply for a Test Drive</a>
         </div>
 
         <div class="need-more-resousrses">
@@ -108,7 +108,7 @@ window.type = 'dedicated';
     .need-more-resousrses {
         background-color: #945ae0;
         box-sizing: border-box;
-        padding:  20px;
+        padding: 20px;
         color: #fff;
         text-transform: uppercase;
         text-align: center;
@@ -116,27 +116,32 @@ window.type = 'dedicated';
         width: 100%;
         text-decoration: none;
     }
+
     .need-more-resousrses-container {
         display: none;
         background-color: #fff;
         width: 100%;
         padding: 0 0 20px 0;
     }
+
     .need-more-resousrses-container-messager {
         display: none;
         margin: 0 75px 20px;
     }
-    .need-more-resousrses-container-header{
+
+    .need-more-resousrses-container-header {
         padding: 20px 75px;
         font-size: 20px;
         color: #945ae0;
         cursor: pointer;
         margin: 1px;
     }
+
     .need-more-resousrses-container-zag {
         display: inline-block;
         border-bottom: 1px dashed;
     }
+
     .need-more-resousrses-container-header-triangle {
         display: inline-block;
         border: 10px solid transparent; /* ���������� ������� */
@@ -145,6 +150,7 @@ window.type = 'dedicated';
         top: 8px;
         left: 0;
     }
+
     #configure_cloud_VDS {
         border: none;
         display: none;
@@ -153,6 +159,7 @@ window.type = 'dedicated';
         margin: 0 auto;
         background: #fff;
     }
+
     .need-more-resousrses {
         background-color: #945ae0;
         box-sizing: border-box;
@@ -164,6 +171,7 @@ window.type = 'dedicated';
         text-transform: uppercase;
         width: 100%;
     }
+
     .need-more-resousrses-container-header-triangle-white {
         display: inline-block;
         border: 10px solid transparent; /* Прозрачные границы */
@@ -174,33 +182,33 @@ window.type = 'dedicated';
     }
 </style>
 <script>
-    $(document).ready(function (){
+    $(document).ready(function () {
 
         $("body").on("click", ".b-submit", function () {
-            $( 'body #selectedSolution').hide( 'slow');
-            $( '#configure_cloud_VDS').show( 'slow');
+            $('body #selectedSolution').hide('slow');
+            $('#configure_cloud_VDS').show('slow');
         });
 
-        $( '.need-more-resousrses').bind( 'click', function(){
-            $( ".need-more-resousrses-container" ).toggle();
+        $('.need-more-resousrses').bind('click', function () {
+            $(".need-more-resousrses-container").toggle();
         });
 
-        $( '.need-more-resousrses-container-zag' ).bind( 'click', function(){
-            var id = $( this).attr( 'data_id_need');
-            var d = $( '[data_id_need_content_position="' + id + '"]');
-            var t= $( '[data_id_need_triangle="' + id + '"]');
+        $('.need-more-resousrses-container-zag').bind('click', function () {
+            var id = $(this).attr('data_id_need');
+            var d = $('[data_id_need_content_position="' + id + '"]');
+            var t = $('[data_id_need_triangle="' + id + '"]');
             d.toggle();
-            t.css( 'border', '10px solid transparent' );
-            if ( d.css( 'display') == 'none' ){
+            t.css('border', '10px solid transparent');
+            if (t.css('top') == '0px') {
                 t.css({
                     "border-top": "10px solid",
                     "top": "8px"
                 });
             } else {
-                t.css( {
+                t.css({
                     "border-bottom": "10px solid",
                     "top": "0px"
-                } );
+                });
             }
 
         });
