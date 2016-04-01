@@ -1,4 +1,3 @@
-
 <div class="b-page">
 
     <div class="b-page__promo b-page__promo_vps_yes">
@@ -223,16 +222,18 @@
                             <select class="table-select__item bwl" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
 
                                 {foreach ( $arr_Bandwidth_Limit[key($arr_Bandwidth_Limit)] as $key_arr_select => $val_arr_select )}
-                                {$val_arr_select}
 
                                 {if ( $val_arr_select['name'] == $v['name'] && false )}
                                 <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']} -</option>
+
                                 {else}
                                 <option value="{$val_arr_select['id']}">{$val_arr_select['name']}
+
                                 {if ( 0 < $val_arr_select['monthly'] )}
                                 ({$val_arr_select['monthly']})
                                 {/if}
                                 </option>
+
                                 {/if}
 
                                 {/foreach}
