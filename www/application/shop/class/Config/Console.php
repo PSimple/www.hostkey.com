@@ -21,24 +21,24 @@ class Shop_Config_Console
          *
          * @see Shop_Cloud_Console_Update
          */
-        'Shop_Cloud_Console_Update' => ['Minute' => '0', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
+        'Shop_Cloud_Console_Update' => ['Minute' => '*/5', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
         /**
          * Кеширование конфигураций компонентов по группам для формирования серверов dedicated
          *
          * @see Shop_Dedicated_Console_ConfigCustom
          */
-        'Shop_Dedicated_Console_ConfigCustom' => ['Minute' => '0', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
+        'Shop_Dedicated_Console_ConfigCustom' => ['Minute' => '*/10', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
         /**
          * Кеширование стока для доформирования серверов dedicated
          *
          * @see Shop_Dedicated_Console_ConfigStock
          */
-        'Shop_Dedicated_Console_ConfigStock' => ['Minute' => '0', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
+        'Shop_Dedicated_Console_ConfigStock' => ['Minute' => '*/10', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
         /**
          * Кеширование списка компоннетов по типам
          *
          * @see Shop_Dedicated_Console_ConfigList
          */
-        'Shop_Dedicated_Console_ConfigList' => ['Minute' => '0', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
+        'Shop_Dedicated_Console_ConfigList' => ['Minute' => '*/10', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
     ];
 }
