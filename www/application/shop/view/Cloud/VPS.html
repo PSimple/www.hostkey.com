@@ -157,8 +157,8 @@
 
             {foreach ( $table_row_data as $key => $value)}
                 <tr class="b-vps__table-row">
-                    <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                        <h3 class="b-vps__table-cell_main_yes">{$key}</h3>
+                    <td class="b-vps__table-cell b-vps__table-cell_border_yes" >
+                        <h3 class="b-vps__table-cell_main_yes" style="width: 140px;">{$key}</h3>
                     </td>
                     {foreach ( $value as $k => $v)}
                     <td class="b-vps__table-cell b-vps__table-cell_border_yes">
@@ -223,12 +223,16 @@
                             <select class="table-select__item bwl" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
 
                                 {foreach ( $arr_Bandwidth_Limit[key($arr_Bandwidth_Limit)] as $key_arr_select => $val_arr_select )}
-{$val_arr_select}
+                                {$val_arr_select}
 
                                 {if ( $val_arr_select['name'] == $v['name'] && false )}
-                                <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}</option>
+                                <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']} -</option>
                                 {else}
-                                <option value="{$val_arr_select['id']}">{$val_arr_select['name']}</option>
+                                <option value="{$val_arr_select['id']}">{$val_arr_select['name']}
+                                {if ( 0 < $val_arr_select['monthly'] )}
+                                ({$val_arr_select['monthly']})
+                                {/if}
+                                </option>
                                 {/if}
 
                                 {/foreach}
