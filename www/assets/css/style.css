@@ -738,6 +738,14 @@ p {
     opacity: .18;
 }
 
+.b-footer__logos-itemC {
+    text-decoration: none;
+}
+
+.b-footer__logos-itemCfirst {
+    padding-left: 28px;
+}
+
 .b-footer__wrapper {
     width: 100%;
     box-sizing: border-box;
@@ -2812,7 +2820,7 @@ p {
     border-top: 2px solid;
 }
 
-.b-dedicated__feature-item-text {
+.b-dedicated__feature-item-text, .b-dedicated__feature-item p {
     font-size: 18px;
     line-height: 22px;
 }
