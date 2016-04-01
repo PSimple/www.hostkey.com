@@ -3622,7 +3622,7 @@ p {
 }
 
 .b-vps__table .table-select__item {
-    width: 188px;
+    width: 182px;
 }
 
 .table-select__item-label {
@@ -4162,6 +4162,10 @@ p {
 
 .b-vps-table__title_red_yes {
     color: #ff692d;
+}
+
+.b-vps-table__title {
+    width: 140px;
 }
 
 .b-vps-table__subtitle {
