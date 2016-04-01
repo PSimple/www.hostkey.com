@@ -121,9 +121,6 @@
 
                 VPS will be ready in minutes from the moment the order is paid for. <br><br>
 
-                <b>PROMO: order before the end of March and get lifetime 1 TB of traffic included for the price of 250 GB.</b>
-
-
                 <img src="/assets/img/container_vps_new.jpg" alt="" align="right" class="desc-container-vps-img">
             </div>
 
@@ -161,11 +158,7 @@
             {foreach ( $table_row_data as $key => $value)}
                 <tr class="b-vps__table-row">
                     <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                        {if ( $key == 'Bandwidth Limit' )}
-                        <h3 class="b-vps__table-cell_main_yes" style="color: #ff692d;">{$key}</h3>
-                        {else}
                         <h3 class="b-vps__table-cell_main_yes">{$key}</h3>
-                        {/if}
                     </td>
                     {foreach ( $value as $k => $v)}
                     <td class="b-vps__table-cell b-vps__table-cell_border_yes">
@@ -226,7 +219,21 @@
                             </select>
                         </div>
                         {else if ( $key == 'Bandwidth Limit' )}
-                            <div class="b-vps-table__text"><span style="text-decoration: line-through;">250 GB</span> 1000 GB</div>
+                        <div class="b-vps-table__text">
+                            <select class="table-select__item bwl" name="tbl-selectVM-{$k}" id="vm_template{$k}" data_preset="{$k}">
+
+                                {foreach ( $arr_Bandwidth_Limit[key($arr_Bandwidth_Limit)] as $key_arr_select => $val_arr_select )}
+{$val_arr_select}
+
+                                {if ( $val_arr_select['name'] == $v['name'] && false )}
+                                <option value="{$val_arr_select['id']}" selected="selected">{$val_arr_select['name']}</option>
+                                {else}
+                                <option value="{$val_arr_select['id']}">{$val_arr_select['name']}</option>
+                                {/if}
+
+                                {/foreach}
+                            </select>
+                        </div>
                         {else if ( $key == 'CPANEL COMPATIBLE' )}
                             <div class="b-vps-table__text">{if ( $v )} <img src="/assets/img/tick.png" alt=""> {else} — {/if}</div>
                         {else}
