@@ -86,9 +86,9 @@
             <div class="b-dedicated-try__line">
                 <span class="b-vps__try-line-text">Try before you buy</span>
             </div>
-            <a class="b-dedicated__free-title" href="#">Request<br>a free<br>test drive</a>
+            <div class="b-dedicated__free-title" href="#">Take our servers<br/> for a<br/> test drive!</div>
             <div class="b-dedicated__free-period"></div>
-            <a class="b-submit b-dedicated__free-submit" href="/about/contacts">contact us</a>
+            <a id="Mainblock_contact" class="b-submit b-dedicated__free-submit" href="/support/faq">Be the judge</a>
         </div>
 
         <div class="need-more-resousrses">
@@ -120,6 +120,7 @@
         text-align: center;
         cursor: pointer;
         width: 100%;
+        text-decoration: none;
     }
 
     .need-more-resousrses-container {
@@ -131,11 +132,11 @@
 
     .need-more-resousrses-container-messager {
         display: none;
-        margin: 0 0 20px 20px;
+        margin: 0 75px 20px;
     }
 
     .need-more-resousrses-container-header {
-        padding: 20px;
+        padding: 20px 75px;
         font-size: 20px;
         color: #945ae0;
         cursor: pointer;
@@ -144,7 +145,7 @@
 
     .need-more-resousrses-container-zag {
         display: inline-block;
-        text-decoration: underline;
+        border-bottom: 1px dashed;
     }
 
     .need-more-resousrses-container-header-triangle {
@@ -175,7 +176,6 @@
         text-align: center;
         text-transform: uppercase;
         width: 100%;
-        text-decoration: underline;
     }
 
     .need-more-resousrses-container-header-triangle-white {
@@ -205,7 +205,7 @@
             var t = $('[data_id_need_triangle="' + id + '"]');
             d.toggle();
             t.css('border', '10px solid transparent');
-            if (d.css('display') == 'none') {
+            if (t.css('top') == '0px') {
                 t.css({
                     "border-top": "10px solid",
                     "top": "8px"

@@ -734,8 +734,16 @@ p {
 }
 
 .b-footer__logos-item {
-    margin-left: 50px;
+    margin-left: 25px;
     opacity: .18;
+}
+
+.b-footer__logos-itemC {
+    text-decoration: none;
+}
+
+.b-footer__logos-itemCfirst {
+    padding-left: 28px;
 }
 
 .b-footer__wrapper {
@@ -2813,7 +2821,7 @@ p {
     border-top: 2px solid;
 }
 
-.b-dedicated__feature-item-text {
+.b-dedicated__feature-item-text, .b-dedicated__feature-item p {
     font-size: 18px;
     line-height: 22px;
 }
@@ -2958,7 +2966,7 @@ p {
 }
 
 .b-dedicated__services-block {
-    width: 33%;
+    width: 382.5px;
     float: left;
     padding: 20px 10px;
     box-sizing: border-box;
@@ -3032,8 +3040,8 @@ p {
     font-size: 85px;
     line-height: 89px;
     color: #ffffff;
-    text-decoration: underline;
-    padding: 100px 0 0;
+    text-decoration: none;
+    padding: 130px 0 0;
     margin-bottom: 20px;
     font-family: 'FranklinGothicMediCondC';
     font-weight: normal;
@@ -3703,7 +3711,6 @@ p {
     margin: 10px 10px 10px 0;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
 }
 
 .b-dedicated-features__item-image {
@@ -3717,12 +3724,15 @@ p {
     display: inline-block;
     vertical-align: top;
     width: 400px;
+    font-size: 18px;
+    line-height: 22px;
 }
 
 .b-dedicated-features__item-title {
-    font-size: 28px;
-    line-height: 32px;
+    font-size: 21px;
+    line-height: 25px;
     font-family: 'FranklinGothicMediCondC';
+    text-transform: uppercase;
     font-weight: normal;
 }
 
@@ -4784,7 +4794,6 @@ p {
     line-height: 22px;
     font-family: 'FranklinGothicBookCondC';
     font-weight: normal;
-    opacity: .5;
     text-align: right;
 }
 
@@ -6430,4 +6439,8 @@ p {
 
 .desc-container-vps-img {
     padding: 20px 62px 0 0;
+}
+
+a {
+    color: #945ae0;
 }

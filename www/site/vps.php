@@ -61,7 +61,7 @@
                         </h3>
                         <p class="b-vps__feature-item-text">
                             You get an unlimited number
-                            or reinstalls and a huge number of OS presets
+                            of reinstalls and a huge number of OS presets
                         </p>
                     </div><!--
                         --><div class="b-vps__feature-item">

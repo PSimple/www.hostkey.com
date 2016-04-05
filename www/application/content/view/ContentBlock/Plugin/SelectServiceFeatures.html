@@ -4,6 +4,7 @@
         <table class="b-dedicated-features__table">
             <tr class="b-dedicated-features__row">
                 {set $i=0}
+                {set $gid2 = array("Feat_network","Feat_tech","Feat_soft","Feat_usb","Feat_bgp_ip","Feat_bgp_as","Feat_ip4","Feat_ip6","Feat_firewall","Feat_monit","Feat_vlan","Feat_bup","Feat_dns")}
                 {foreach ($DATA as $k => $val)}
                 {if ( $i%2 == 0 && 0 < $k )}
             </tr>
@@ -19,13 +20,13 @@
                             <p class="b-dedicated-features__item-text">{$val['Description']}</p>
                             {if ( $val['Link'] == '' )}
                             {if ( $val['Content'] !='')}
-                            <a class="b-dedicated-features__item-link open-popup-in-page arctic-modal-popup" href="#" data_more="{$val['ID']}">
+                            <a id="{$gid2[$k]}" class="b-dedicated-features__item-link open-popup-in-page arctic-modal-popup" href="#" data_more="{$val['ID']}">
                                 more
                                 <span class="b-icon b-dedicated-features__item-link-icon"></span>
                             </a>
                             {/if}
                             {else}
-                            <a class="b-dedicated-features__item-link" href="{$val['Link']}" target="_blank">
+                            <a id="{$gid2[$k]}" class="b-dedicated-features__item-link" href="{$val['Link']}" target="_blank">
                                 more
                                 <span class="b-icon b-dedicated-features__item-link-icon"></span>
                             </a>
