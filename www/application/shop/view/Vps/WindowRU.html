@@ -242,7 +242,7 @@
             <!-- Traffic TB (100MBPS) -->
             <tr class="b-vps__table-row">
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
-                    <h3 class="b-vps__table-cell_main_yes">Traffic</h3>
+                    <h3 class="b-vps__table-cell_main_yes" style="width: 140px;">PREPAID TRAFFIC <span>*</span></h3>
                 </td>
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
                     <div class="b-vps-table__text">1 TB</div>
@@ -328,7 +328,7 @@
             <!-- payment period -->
             <tr class="b-vps__table-row">
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes" nowrap>
-                    <h3 class="b-vps__table-cell_main_yes">payment period</h3>
+                    <h3 class="b-vps__table-cell_main_yes">payment TERM</h3>
                 </td>
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
                     <div class="b-vps-table__text">
@@ -432,6 +432,12 @@
                 </td>
                 <td class="b-vps__table-cell">
                     <a class="b-vps-table__buy" onclick="return saleBuy(6);" href="#">BUY</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    <div class="more-ref"><span>*</span> 1 TB of outgoing traffic is included in your monthly plan, excess traffic usage
+                        will be charged at rate of €5 per TB extra.</div>
                 </td>
             </tr>
         </table>
@@ -589,6 +595,9 @@
         position: relative;
         top: 8px;
         left: 0;
+    }
+    h3 span {
+        color: red;
     }
 </style>
 
