@@ -10,11 +10,10 @@ test.php
 config.php
 test
 cache
-ckeditor
-ckfinder
 www/upload
 www/zero
 www/exchange
+www/engine
 www/library
 www/application/mail
 www/application/document
