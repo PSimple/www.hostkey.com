@@ -605,8 +605,8 @@
 
         function crFrame( )
         {
-            document.getElementById('configure_cloud_VDS').src = 'https://bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
-                    + generate_post ( Zakaz ) ;
+            window.location.href = 'https://bill.hostkey.com/cart.php?systpl=classichostkey&a=add&pid={$PID}&carttpl=cart&currency=2&'
+                    + generate_post ( Zakaz );
         }
 
 
