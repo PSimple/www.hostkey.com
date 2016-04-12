@@ -3,7 +3,7 @@
 /**
  * ContentLittle.
  *
- * @package Content.ContentLittle.Model
+ * @package Content
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.10.26
  *
@@ -18,23 +18,6 @@ class Content_ContentLittle extends Zero_Model
      * @var string
      */
     protected $Source = 'ContentLittle';
-
-    /**
-     * Configuration links many to many
-     *
-     * - 'table_target' => ['table_link', 'prop_this', 'prop_target']
-     *
-     * @param ContentLittle $Model The exact working model
-     * @param string $scenario Сценарий свойств
-     * @return array
-     */
-    protected static function Config_Link($Model, $scenario = '')
-    {
-        return [
-            
-
-        ];
-    }
 
     /**
      * Базовая конфигурация свойств модели

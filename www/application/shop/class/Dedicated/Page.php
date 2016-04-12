@@ -5,7 +5,7 @@
  *
  * Step1
  *
- * @package Shop.Dedicated
+ * @package Shop.Controller.Dedicated
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */

@@ -5,7 +5,7 @@
  *
  * Часто задаваемы вопросы
  *
- * @package Content.Faq.Controller
+ * @package Content.Controller.Faq
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */

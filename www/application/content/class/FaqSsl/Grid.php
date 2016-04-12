@@ -3,7 +3,7 @@
 /**
  * ”правление FaqSsl список
  *
- * @package Content.FaqSsl.Controller
+ * @package Content.Controller.FaqSsl
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.11.19
  */

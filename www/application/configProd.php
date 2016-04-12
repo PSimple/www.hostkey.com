@@ -22,6 +22,8 @@ return [
         'TemplateParsing' => false,
         //  Language of the site by default
         'Language' => "en-en",
+        //  Protocol
+        'Protocol' => 'https',
         //  Domain of the site by default
         'Domain' => 'hostkey.com',
         //  Static Data Domain Site (css, js, img - design)

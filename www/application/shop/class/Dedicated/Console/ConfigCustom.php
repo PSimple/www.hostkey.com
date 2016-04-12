@@ -5,7 +5,7 @@
  *
  * Запршивает конфигурацию у инвентори.
  *
- * @package Shop.Dedicated.Console
+ * @package Shop.Console.Dedicated
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2016-02-04
  */

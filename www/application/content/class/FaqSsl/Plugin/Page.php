@@ -5,7 +5,7 @@
  *
  * @sample {plugin "Content_FaqSsl_Plugin_Page"}
  *
- * @package Content.FaqSsl.Controller
+ * @package Content.Plugin.FaqSsl
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */

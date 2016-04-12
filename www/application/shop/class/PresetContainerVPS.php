@@ -3,13 +3,9 @@
 /**
  * <Comment>.
  *
- * @package shop
- * @subpakage class
- * @author Den <avtorpc@gmail.com>
- * @date <Date>
- *
- * <BEG_CONFIG_PROPERTY>
- * <END_CONFIG_PROPERTY>
+ * @package Shop
+ * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
+ * @date 2015-02-04
  */
 class Shop_PresetContainerVPS extends Zero_Model
 {

@@ -4,7 +4,7 @@
  *
  * Управление контент-блоками на страницах.
  *
- * @package Content.ContentBlock.Controller
+ * @package Content.Controller.ContentBlock
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.09.01
  */

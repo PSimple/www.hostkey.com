@@ -2,7 +2,7 @@
 /**
  * Функции общего назначения конкретного проекта
  *
- * @package General.Function
+ * @package Function
  */
 function app_route()
 {

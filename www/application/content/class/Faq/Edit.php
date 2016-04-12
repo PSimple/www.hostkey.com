@@ -3,7 +3,7 @@
 /**
  * Управление Faq редактирование
  *
- * @package Content.Faq.Controller
+ * @package Content.Controller.Faq
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.11.19
  */

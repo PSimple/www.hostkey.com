@@ -3,7 +3,7 @@
 /**
  * Конфигурация запуска консольных задач
  *
- * @package Zero.Config
+ * @package ZeroProject.Config
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2016.02.17
  */
@@ -21,7 +21,7 @@ class Zero_Config_Console
          *
          * @see Zero_Console_Base_ApiGen::Action_Default()
          */
-        'Zero_Console_Base_ApiGen' => ['Minute' => '0', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => false],
+        'Zero_Console_Base_ApiGen' => ['Minute' => '*/5', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
         /**
          * Удаление старых бинарных данных загруженных через веб (ajax)
          *

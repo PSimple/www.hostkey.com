@@ -6,7 +6,7 @@
  * Сохранение конфигурации сервера в биллинге.
  * Для дальнейшего оформления заказа на него.
  *
- * @package Shop.Dedicated.Api
+ * @package Shop.Api.Dedicated
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015-11-28
  */

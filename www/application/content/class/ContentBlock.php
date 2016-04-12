@@ -3,7 +3,7 @@
 /**
  * ContentBlock.
  *
- * @package Content.ContentBlock.Model
+ * @package Content
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.09.01
  *

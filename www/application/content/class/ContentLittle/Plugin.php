@@ -5,7 +5,7 @@
  *
  * {plugin "Content_ContentLittle_Plugin" view="Page"}
  *
- * @package Content.ContentLittle.Plugin
+ * @package Content.Plugin.ContentLittle
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.11.19
  */

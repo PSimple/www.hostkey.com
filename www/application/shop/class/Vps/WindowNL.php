@@ -5,7 +5,7 @@
  *
  * VpsStep1
  *
- * @package Shop.Cloud
+ * @package Shop.Controller.Vps
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */

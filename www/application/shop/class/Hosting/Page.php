@@ -5,7 +5,7 @@
  *
  * Page
  *
- * @package Shop.Hosting
+ * @package Shop.Controller.Hosting
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */

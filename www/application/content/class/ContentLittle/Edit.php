@@ -4,7 +4,7 @@
  *
  * Управление текстовыми вставками.
  *
- * @package Content.ContentLittle.Controller
+ * @package Content.Controller.ContentLittle
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.11.19
  */

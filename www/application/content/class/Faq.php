@@ -3,7 +3,7 @@
 /**
  * Faq.
  *
- * @package Content.Faq
+ * @package Content
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.11.19
  *

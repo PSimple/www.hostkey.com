@@ -3,7 +3,7 @@
 /**
  * Вывод новостей на сайте
  *
- * @package Content.News.Controller
+ * @package Content.Controller.News
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.06.09
  */

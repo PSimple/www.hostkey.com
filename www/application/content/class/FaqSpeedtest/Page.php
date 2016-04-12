@@ -5,7 +5,7 @@
  *
  * Часто задаваемы вопросы
  *
- * @package Content.FaqSpeedtest.Controller
+ * @package Content.Controller.FaqSpeedtest
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */

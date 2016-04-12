@@ -6,7 +6,7 @@
  * Получение кеширонной конфигурации для кастомизатора по указанным параметрам
  * Загружает ранее закешированную конфигурцию
  *
- * @package Shop.Dedicated.Api
+ * @package Shop.Api.Dedicated
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2016-02-04
  */
