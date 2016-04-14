@@ -25,7 +25,7 @@ class Shop_Cloud_Console_Update extends Zero_Controller
 
         foreach ($this->pidList as $pid)
         {
-            $http = "https://bill.hostkey.com/api/v1.0/shop/proxmox/configcustom?pid={$pid}&currencyId={$config['currencyId']}";
+            $http = "https://bill.hostkey.com/api/v1/billing/proxmox/options?pid={$pid}&currencyId={$config['currencyId']}";
             $data = Zero_App::RequestJson("GET", $http);
             if ( false == $data['ErrorStatus'] && isset($data['Content']) )
             {

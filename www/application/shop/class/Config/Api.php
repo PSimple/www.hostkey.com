@@ -18,9 +18,9 @@ class Shop_Config_Api
         /**
          * Получение кеширонной конфигурации для калькулятора Cloud
          *
-         * @see Shop_Cloud_Api_GetConfig
+         * @see Shop_Cloud_Api_Options
          */
-        '/api/v1/cloud/config' => ['Controller' => 'Shop_Cloud_Api_GetConfig', 'View' => ''],
+        '/api/v1/cloud/options' => ['Controller' => 'Shop_Cloud_Api_Options', 'View' => ''],
         /**
          * Получение возможных конфигураций калькуляторов по указанным параметрам
          *
