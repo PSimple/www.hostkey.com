@@ -54,26 +54,27 @@ class Shop_Dedicated_Api_ConfigStock extends Zero_Controller
                 $row['Price']['Price'] = $row['Price']['PriceEUR'];
             else
                 $row['Price']['Price'] = $row['Price']['PriceRUR'];
-            // ditetime auction
+            // Аукцион
             if ( $row['Auction']['DateTime'] )
-            {   // если дата и время просрочены (кеш, консольное обновление)
+            {
                 $d1 = new DateTime();
                 $d2 = new DateTime($row['Auction']['DateTime']);
                 $flag = $d1->diff($d2);
+                // Завершение аукциона (дата и время просрочены - кеш, консольное обновление)
                 if ( 0 < $flag->invert )
                 {
-                    $discount = $row['Price']['Price'] * $row['Auction']['Discount'];
+                    $discount = $row['Price']['Price'] * ($row['Auction']['Discount'] / 100);
                     $row['Price']['Price'] = $row['Price']['Price'] + $discount;
                     foreach (Shop_Config_General::$CurrencyPrice as $priceIndex)
                     {
-                        $discount = $row['Price'][$priceIndex] * $row['Auction']['Discount'];
+                        $discount = $row['Price'][$priceIndex] * ($row['Auction']['Discount'] / 100);
                         $row['Price'][$priceIndex] = $row['Price'][$priceIndex] + $discount;
                     }
                     $row['Auction']['Discount'] = 0;
                     $row['Auction']['DateTime'] = '';
                 }
+                $row['Auction']['DateTime'] = app_datetimeGr($row['Auction']['DateTime']);
             }
-            $row['Auction']['DateTime'] = app_datetimeGr($row['Auction']['DateTime']);
             // RAID (Other)
             $flagRaid = false;
             if ( isset($row['Other']) )

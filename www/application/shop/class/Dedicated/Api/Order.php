@@ -39,19 +39,20 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
             $responseStock = $responseStock['Data'][$_REQUEST['CompId']];
 
             $_REQUEST['Hardware']['Label'] = $responseStock['Cpu']['Name'] . '/' . $responseStock['Ram'] . ' GB' . '/' . implode(' + ', $responseStock['Hdd']);
-            // Корректировка аукциона и цен.
+            // Аукцион
             if ( $responseStock['Auction']['DateTime'] )
-            {   // если дата и время просрочены (кеш, консольное обновление)
+            {
                 $d1 = new DateTime();
                 $d2 = new DateTime($responseStock['Auction']['DateTime']);
                 $flag = $d1->diff($d2);
+                // Завершение аукциона (дата и время просрочены - кеш, консольное обновление)
                 if ( 0 < $flag->invert )
                 {
-                    $discount = $responseStock['Price']['Price'] * $responseStock['Auction']['Discount'];
+                    $discount = $responseStock['Price']['Price'] * ($responseStock['Auction']['Discount'] / 100);
                     $responseStock['Price']['Price'] = $responseStock['Price']['Price'] + $discount;
                     foreach (Shop_Config_General::$CurrencyPrice as $priceIndex)
                     {
-                        $discount = $responseStock['Price'][$priceIndex] * $responseStock['Auction']['Discount'];
+                        $discount = $responseStock['Price'][$priceIndex] * ($responseStock['Auction']['Discount'] / 100);
                         $responseStock['Price'][$priceIndex] = $responseStock['Price'][$priceIndex] + $discount;
                     }
                     $responseStock['Auction']['Discount'] = 0;
