@@ -6,11 +6,11 @@
  * Сохранение конфигурации сервера в биллинге.
  * Для дальнейшего оформления заказа на него.
  *
- * @package Shop.Api.Dedicated.Order
+ * @package Shop.Type.Dedicated
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015-11-28
  */
-class Shop_Dedicated_Api_Order_Type
+class Shop_Type_Dedicated_Order
 {
     /**
      * Цена ежемесячного платежа
