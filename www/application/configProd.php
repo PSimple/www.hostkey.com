@@ -114,11 +114,11 @@ return [
     ],
     //  Ротуинг Api запросов
     'Api' => [
-        new Shop_Config_Api(),
+        new Shop_ZRouteApi(),
     ],
     //  Консольные задачи
     'Console' => [
-        new Zero_Config_Console(),
-        new Shop_Config_Console(),
+        new Zero_ZRouteConsole(),
+        new Shop_ZRouteConsole(),
     ],
 ];
