@@ -4305,7 +4305,7 @@ p {
 
 .b-vds-cloud__configurator {
     background-color: #ffffff;
-    padding-top: 60px;
+    margin-top: 40px;
 }
 
 .b-vds-cloud_step_2 .b-vds-cloud__configurator {
@@ -4332,7 +4332,6 @@ p {
 }
 
 .b-vds-cloud__box {
-    margin-bottom: 60px;
 }
 
 .b-vds-cloud__result-table {
