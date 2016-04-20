@@ -7,7 +7,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2016.02.17
  */
-class Shop_ZRouteApi
+class Shop_Route_Api
 {
     /**
      * 'url' => 'ClassName-MethodName'
