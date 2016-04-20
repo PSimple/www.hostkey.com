@@ -2933,6 +2933,18 @@ p {
     min-height: 100px;
 }
 
+.redBlock {
+    color: red !important;
+}
+
+.greenBlock {
+    color: green !important;
+}
+
+.blueBlock {
+    color: blue !important;
+}
+
 .b-dedicated__item-start {
     font-size: 26px;
     line-height: 30px;

@@ -144,11 +144,11 @@ class Shop_Dedicated_Api_Order extends Zero_Controller
      * @param array $Calculate
      * @param array $responseStock
      * @param string $currency
-     * @return Shop_Dedicated_Api_Order_Type
+     * @return Shop_Type_Dedicated_Order
      */
     private function calculate($Calculate, $responseStock, $currency)
     {
-        $order = new Shop_Dedicated_Api_Order_Type();
+        $order = new Shop_Type_Dedicated_Order();
 
         // Hardvare
         $costHardware = 0;

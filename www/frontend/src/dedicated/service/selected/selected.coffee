@@ -17,6 +17,7 @@ angular.module("dedicated.service.selected").config ($httpProvider, $stateProvid
 
     return
 
+
 angular.module("dedicated.service.selected").controller "SelectedCtrl", (notifications, $scope, $state, $stateParams, $timeout, configCalculator, billingCycleDiscount, $order, components, solution) ->
 
 #    unless configCalculator.Data

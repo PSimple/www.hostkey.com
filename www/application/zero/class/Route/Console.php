@@ -3,11 +3,11 @@
 /**
  * Конфигурация запуска консольных задач
  *
- * @package ZeroProject.Config
+ * @package ZeroProject.Route
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2016.02.17
  */
-class Zero_Config_Console
+class Zero_Route_Console
 {
     /**
      * 'ClassName-MethodName' => ['Minute' => 'exp.', 'Hour' => 'exp.', 'Day' => 'exp.', 'Month' => 'exp.', 'Week' => 'exp.', 'IsActive' => 'bool'],

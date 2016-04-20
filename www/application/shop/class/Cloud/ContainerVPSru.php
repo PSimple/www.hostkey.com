@@ -5,7 +5,7 @@
  *
  * VpsStep1
  *
- * @package Shop.Cloud
+ * @package Shop.Controller.Cloud
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */
@@ -25,7 +25,6 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
 
     /**
      * Вывод данных операции контроллера в шаблон
-     *
      *
      * @return bool
      */
@@ -86,10 +85,10 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
         $VMT = $table_row_data['VM Template'];
         unset ($table_row_data['VM Template']);
 
-        $table_row_data['CPANEL COMPATIBLE'] = [0,0,1,1,1];
-        $table_row_data ['Bandwidth Limit'] = $BWL;
-        $table_row_data ['Backups Limit'] = $BKL;
-        $table_row_data ['SOFTWARE'] = $VMT;
+        $table_row_data['CPANEL COMPATIBLE'] = [0, 0, 1, 1, 1];
+        $table_row_data['Bandwidth Limit'] = $BWL;
+        $table_row_data['Backups Limit'] = $BKL;
+        $table_row_data['SOFTWARE'] = $VMT;
 
         if ( isset($this->Params['IsFeatures']) )
             $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;

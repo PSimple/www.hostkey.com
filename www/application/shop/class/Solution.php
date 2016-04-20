@@ -27,23 +27,6 @@ class Shop_Solution extends Zero_Model
     protected $Source = 'Solution';
 
     /**
-     * Configuration links many to many
-     *
-     * - 'table_target' => ['table_link', 'prop_this', 'prop_target']
-     *
-     * @param ConfigSolution $Model The exact working model
-     * @param string $scenario Сценарий свойств
-     * @return array
-     */
-    protected static function Config_Link($Model, $scenario = '')
-    {
-        return [
-            
-
-        ];
-    }
-
-    /**
      * Базовая конфигурация свойств модели
      *
      * Настройки свойств наследуются остальными конфигурациоными методами
@@ -57,7 +40,7 @@ class Shop_Solution extends Zero_Model
      * @see Zero_Engine
      * - 'Comment' => string            - Комментарий свойства (пользуйтесь системой перевода i18n)
      *
-     * @param ConfigSolution $Model The exact working model
+     * @param Shop_Solution $Model The exact working model
      * @param string $scenario Сценарий свойств
      * @return array
      */
@@ -87,6 +70,13 @@ class Shop_Solution extends Zero_Model
 			],
 			'Title' => [
 				'AliasDB' => 'z.Title',
+				'DB' => 'T',
+				'IsNull' => 'YES',
+				'Default' => '',
+				'Form' => 'Text',
+			],
+			'TitleSub' => [
+				'AliasDB' => 'z.TitleSub',
 				'DB' => 'T',
 				'IsNull' => 'YES',
 				'Default' => '',
@@ -134,6 +124,13 @@ class Shop_Solution extends Zero_Model
 				'Default' => '',
 				'Form' => 'Select',
 			],
+			'Theme' => [
+				'AliasDB' => 'z.Theme',
+				'DB' => 'E',
+				'IsNull' => 'YES',
+				'Default' => '',
+				'Form' => 'Select',
+			],
         ];
     }
 
@@ -149,7 +146,7 @@ class Shop_Solution extends Zero_Model
      * - 'List'=> array                 - Варианты значений (пользуйтесь системой перевода i18n)
      * - 'Comment' => string            - Комментарий свойства (пользуйтесь системой перевода i18n)
      *
-     * @param ConfigSolution $Model The exact working model
+     * @param Shop_Solution $Model The exact working model
      * @param string $scenario Сценарий свойств
      * @return array
      */
@@ -157,7 +154,7 @@ class Shop_Solution extends Zero_Model
     {
         return [
             'ID' => ['Visible' => true, 'AR' => true],
-			'Typ' => ['Visible' => true, 'AR' => true],
+			'Typ' => ['Visible' => false, 'AR' => false],
 			'Image' => ['Visible' => true, 'AR' => true],
 			'Title' => ['Visible' => true, 'AR' => true],
 			'Description' => ['Visible' => true, 'AR' => true],
@@ -166,6 +163,7 @@ class Shop_Solution extends Zero_Model
 			'PriceEUR' => ['Visible' => true, 'AR' => true],
 			'Groups' => ['Visible' => true, 'AR' => true],
 			'Location' => ['Visible' => true, 'AR' => true],
+			'Theme' => ['Visible' => false, 'AR' => false],
         ];
     }
 
@@ -176,7 +174,7 @@ class Shop_Solution extends Zero_Model
      * - 'AliasDB'=> 'z.PropName'       - Реальное название свойства (поля) в БД
      * - 'Comment' => string            - Комментарий свойства (пользуйтесь системой перевода i18n)
      *
-     * @param ConfigSolution $Model The exact working model
+     * @param Shop_Solution $Model The exact working model
      * @param string $scenario Сценарий свойств
      * @return array
      */
@@ -199,7 +197,7 @@ class Shop_Solution extends Zero_Model
      * - 'Form'=> string                - Форма предстваления свйоства в виджетах и вьюхах (смотри Zero_Engine)
      * - 'Comment' => string            - Комментарий свойства (пользуйтесь системой перевода i18n)
      *
-     * @param ConfigSolution $Model The exact working model
+     * @param Shop_Solution $Model The exact working model
      * @param string $scenario Сценарий свойств
      * @return array
      */
@@ -208,6 +206,7 @@ class Shop_Solution extends Zero_Model
         return [
             'ID' => [],
 			'Title' => [],
+			'TitleSub' => [],
 			'Subtitle' => [],
 			'Description' => [],
 			'Image' => [],
@@ -216,6 +215,7 @@ class Shop_Solution extends Zero_Model
 			'Typ' => [],
 			'Groups' => [],
 			'Location' => [],
+			'Theme' => [],
         ];
     }
 
