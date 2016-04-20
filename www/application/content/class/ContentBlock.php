@@ -21,23 +21,6 @@ class Content_ContentBlock extends Zero_Model
     protected $Source = 'ContentBlock';
 
     /**
-     * Configuration links many to many
-     *
-     * - 'table_target' => ['table_link', 'prop_this', 'prop_target']
-     *
-     * @param ContentBlock $Model The exact working model
-     * @param string $scenario Сценарий свойств
-     * @return array
-     */
-    protected static function Config_Link($Model, $scenario = '')
-    {
-        return [
-            
-
-        ];
-    }
-
-    /**
      * Базовая конфигурация свойств модели
      *
      * Настройки свойств наследуются остальными конфигурациоными методами
@@ -51,7 +34,7 @@ class Content_ContentBlock extends Zero_Model
      * @see Zero_Engine
      * - 'Comment' => string            - Комментарий свойства (пользуйтесь системой перевода i18n)
      *
-     * @param ContentBlock $Model The exact working model
+     * @param Content_ContentBlock $Model The exact working model
      * @param string $scenario Сценарий свойств
      * @return array
      */
@@ -72,6 +55,13 @@ class Content_ContentBlock extends Zero_Model
 				'IsNull' => 'YES',
 				'Default' => '',
 				'Form' => 'Text',
+			],
+			'Target' => [
+				'AliasDB' => 'z.Target',
+				'DB' => 'E',
+				'IsNull' => 'YES',
+				'Default' => '',
+				'Form' => 'Select',
 			],
 			'IsEnable' => [
 				'AliasDB' => 'z.IsEnable',
@@ -144,7 +134,7 @@ class Content_ContentBlock extends Zero_Model
      * - 'List'=> array                 - Варианты значений (пользуйтесь системой перевода i18n)
      * - 'Comment' => string            - Комментарий свойства (пользуйтесь системой перевода i18n)
      *
-     * @param ContentBlock $Model The exact working model
+     * @param Content_ContentBlock $Model The exact working model
      * @param string $scenario Сценарий свойств
      * @return array
      */
@@ -153,6 +143,7 @@ class Content_ContentBlock extends Zero_Model
         return [
             'ID' => ['Visible' => true, 'AR' => true],
 			'Head' => ['Visible' => true, 'AR' => true],
+			'Target' => ['Visible' => true, 'AR' => true],
 			'IsEnable' => ['Visible' => true, 'AR' => true],
 			'IsFeatures' => ['Visible' => true, 'AR' => true],
 			'Img' => ['Visible' => true, 'AR' => true],
@@ -168,7 +159,7 @@ class Content_ContentBlock extends Zero_Model
      * - 'AliasDB'=> 'z.PropName'       - Реальное название свойства (поля) в БД
      * - 'Comment' => string            - Комментарий свойства (пользуйтесь системой перевода i18n)
      *
-     * @param ContentBlock $Model The exact working model
+     * @param Content_ContentBlock $Model The exact working model
      * @param string $scenario Сценарий свойств
      * @return array
      */
@@ -188,7 +179,7 @@ class Content_ContentBlock extends Zero_Model
      * - 'Form'=> string                - Форма предстваления свйоства в виджетах и вьюхах (смотри Zero_Engine)
      * - 'Comment' => string            - Комментарий свойства (пользуйтесь системой перевода i18n)
      *
-     * @param ContentBlock $Model The exact working model
+     * @param Content_ContentBlock $Model The exact working model
      * @param string $scenario Сценарий свойств
      * @return array
      */
@@ -197,6 +188,7 @@ class Content_ContentBlock extends Zero_Model
         return [
             'ID' => [],
 			'Head' => [],
+			'Target' => [],
 			'IsEnable' => [],
 			'IsFeatures' => [],
 			'Img' => [],
@@ -206,43 +198,6 @@ class Content_ContentBlock extends Zero_Model
 			'Description' => [],
 			'Content' => [],
         ];
-    }
-
-    /**
-     * Sample. The total initial validation properties
-     *
-     * @param array $data verifiable data array
-     * @param string $scenario scenario validation
-     * @return array
-     */
-    public function Validate_Before($data, $scenario)
-    {
-        return $data;
-    }
-
-    /**
-     * Sample. The validation property
-     * May be removed
-     *
-     * @param mixed $value value to check and set
-     * @param string $scenario scenario validation
-     * @return string
-     */
-    public function VL_PropertyName($value, $scenario)
-    {
-        $this->PropertyName = $value;
-        return '';
-    }
-
-    /**
-     * Sample. Filter for property.
-     * May be removed
-     *
-     * @return array
-     */
-    public function FL_PropertyName()
-    {
-        return [23 => 'Value'];
     }
 
     /**

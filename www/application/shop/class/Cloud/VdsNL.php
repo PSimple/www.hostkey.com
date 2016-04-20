@@ -5,7 +5,7 @@
  *
  * VdsStep1
  *
- * @package Shop.Cloud
+ * @package Shop.Controller.Cloud
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */
@@ -18,7 +18,6 @@ class Shop_Cloud_VdsNL extends Zero_Controller
      */
     public function Action_Default()
     {
-        //$this->Chunk_Init();
         $this->View = new Zero_View('Shop_Cloud_VDS');
         $this->Chunk_View();
         return $this->View;
@@ -45,9 +44,8 @@ class Shop_Cloud_VdsNL extends Zero_Controller
             $configuration = unserialize(file_get_contents($path));
         }
         $preset = Shop_PresetContainerVPS::Make();
-        $configuration = $preset -> getSortCloudVDS ( $configuration,$PID );
+        $configuration = $preset->getSortCloudVDS($configuration, $PID);
         $this->View->Assign('configuration', $configuration);
-
         return true;
     }
 
