@@ -99,7 +99,7 @@ List 0f varibles
 }
 .b-slider__legend-7-item_place_1 {
   left: 0;
-  margin-left: -20px;
+  margin-left: -33px;
   font-size: 14px;
   cursor: pointer;
 }
@@ -150,7 +150,7 @@ List 0f varibles
 }
 .b-slider__legend-7-item_place_7 {
   left: 100%;
-  margin-left: -55px;
+  margin-left: -40px;
   font-size: 14px;
   cursor: pointer;
 }
@@ -327,7 +327,7 @@ List 0f varibles
 }
 .b-slider__legend-4-item_place_1 {
   left: 0;
-  margin-left: -20px;
+  margin-left: -33px;
   font-size: 14px;
   cursor: pointer;
 }
@@ -351,12 +351,12 @@ List 0f varibles
 }
 .b-slider__legend-4-item_place_4 {
   left: 100%;
-  margin-left: -55px;
+  margin-left: -42px;
   font-size: 14px;
   cursor: pointer;
 }
 .b-slider__legend-4-item_place_4:after {
-  margin-left: -2px;
+  margin-left: 0px;
 }
 .b-slider__legend-6 {
   position: relative;
@@ -374,14 +374,14 @@ List 0f varibles
 .b-slider__legend-6-item:after {
   content: '|';
   position: absolute;
-  top: -11px;
+  top: -13px;
   left: 50%;
   font-size: 8px;
   line-height: 12px;
 }
 .b-slider__legend-6-item_place_1 {
   left: 0;
-  margin-left: -20px;
+  margin-left: -35px;
   font-size: 14px;
   cursor: pointer;
 }
@@ -423,12 +423,12 @@ List 0f varibles
 }
 .b-slider__legend-6-item_place_6 {
   left: 100%;
-  margin-left: -55px;
+  margin-left: -42px;
   font-size: 14px;
   cursor: pointer;
 }
 .b-slider__legend-6-item_place_6:after {
-  margin-left: -2px;
+  margin-left: -0px;
 }
 .b-slider__legend-8 {
   position: relative;
@@ -448,17 +448,21 @@ List 0f varibles
 .b-slider__legend-8-item:after {
   content: '|';
   position: absolute;
-  top: -11px;
+  top: -13px;
   left: 50%;
   font-size: 8px;
   line-height: 12px;
 }
 .b-slider__legend-8-item_place_1 {
   left: 0;
-  margin-left: -20px;
+  margin-left: -35px;
   font-size: 14px;
   cursor: pointer;
 }
+.b-slider__legend-8-item_place_1:after {
+  margin-left: -2px;
+}
+
 .b-slider__legend-8-item_place_2 {
   left: 14.3%;
   margin-left: -34px;
@@ -515,7 +519,7 @@ List 0f varibles
 }
 .b-slider__legend-8-item_place_8 {
   left: 100%;
-  margin-left: -55px;
+  margin-left: -40px;
   font-size: 14px;
   cursor: pointer;
 }

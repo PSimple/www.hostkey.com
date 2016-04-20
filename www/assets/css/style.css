@@ -3939,6 +3939,13 @@ p {
 }
 
 .b-slider {
+    height: 40px;
+    margin-top: -20px;
+    position: relative;
+    z-index: 5;
+}
+
+.b-slider-container {
     border: 1px solid #d4d6d9;
     background-color: #eaecef;
     height: 5px;
@@ -3951,7 +3958,7 @@ p {
 
 .b-slider .ui-slider-range {
     position: absolute;
-    top: 0;
+    top: 19px;
     border: 1px solid #945ae0;
     background-color: #945ae0;
     height: 5px;
@@ -3973,7 +3980,7 @@ p {
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
-    top: -8px;
+    top: 13px;
     outline: none;
     margin-left: -4px;
 }
@@ -4411,6 +4418,7 @@ p {
     -webkit-box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.2);
     letter-spacing: 0;
+    margin-top: 5px;
 }
 
 .b-vds-cloud_step_2 .b-vds-cloud__summary {
@@ -4465,14 +4473,13 @@ p {
     line-height: 20px;
     color: #272e38;
     padding-right: 10px;
-    text-transform: uppercase;
 }
 
 .b-vds-cloud__summary-table-cell:nth-child(2) {
     font-size: 16px;
     line-height: 20px;
     color: #945ae0;
-    width: 100px;
+    width: 75px;
 }
 
 .b-vds-cloud__summary-price {
@@ -4677,7 +4684,7 @@ p {
 }
 
 .b-dedicated-try__line {
-    background-color: #ff692d;
+    background-color: #945ae0;
     color: #ffffff;
     text-transform: uppercase;
     padding: 20px;
@@ -4698,7 +4705,6 @@ p {
     font-size: 85px;
     line-height: 89px;
     color: #ffffff;
-    text-decoration: underline;
     padding: 150px 0 0;
     margin-bottom: 30px;
     font-family: 'FranklinGothicMediCondC';

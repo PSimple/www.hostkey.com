@@ -218,7 +218,7 @@ jQuery(function($){
       //  var d = window.SumUpDiscountByMonthly( z );
         var d = window.SumUpDiscount( z );
         if ( d != 0 ){
-            place.html( z['payment']['data'][0].discount + "% discount, save " + curr + " " + d );
+            place.html( z['payment']['data'][0].discount + "% discount, save " + curr + " " + -d );
         } else {
             place.html('');
         }

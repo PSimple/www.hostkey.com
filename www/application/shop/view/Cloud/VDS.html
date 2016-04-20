@@ -130,7 +130,8 @@
                                     </div>
                                     {else}
 
-                                    <div class="b-slider js-slider" data-slides="{count($val['data'])}" data-position="1" data_preset="{$key}"></div>
+                                    <div class="b-slider-container"><div class="b-slider js-slider" data-slides="{count($val['data'])}" data-position="1" data_preset="{$key}"></div></div>
+
                                     <div class="b-slider__legend-{count($val['data'])}">
                                         {foreach ( $val['data'] as $k => $v )}
                                         <div class="b-slider__legend-{count($val['data'])}-item b-slider__legend-{count($val['data'])}-item_place_{$k+1} clik_slider_position"
@@ -149,7 +150,7 @@
                             <tr class="b-vds-cloud__table-row">
                                 <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">payment period:</td>
                                 <td class="b-vds-cloud__table-cell">
-                                    <div class="b-slider js-slider" data-slides="4" data-position="1" data_preset="payment"></div>
+                                    <div class="b-slider-container"><div class="b-slider js-slider" data-slides="4" data-position="1" data_preset="payment"></div></div>
                                     <div class="b-slider__legend-4">
                                         <div class="b-slider__legend-4-item b-slider__legend-4-item_place_1 payments clik_slider_position" data-number="1" data-slider="payment">monthly</div>
                                         <div class="b-slider__legend-4-item b-slider__legend-4-item_place_2 payments clik_slider_position" data-number="2" data-slider="payment">quarterly</div>
@@ -160,7 +161,6 @@
                             </tr>
                         </table>
                     </div>
-
                     <!-- блок с результатом подбора -->
                     <div class="b-vds-cloud__summary b-vds-cloud__summary_is-purpur" id="scroll-block">
                         <div class="b-vds-cloud__summary-title">Your VDS</div>
@@ -168,8 +168,11 @@
                         {if ( !$val['hidden'] )}
                         <table class="b-vds-cloud__summary-table">
                             <tr class="b-vds-cloud__summary-table-row">
-                                <td class="b-vds-cloud__summary-table-cell" data_preset_name="{$key}">{$val['name']}:</td>
-                                <td class="b-vds-cloud__summary-table-cell" data_preset_name_id="{$key}" data_pole_id="{$val['data'][0]['id']}">{$val['data'][0]['name']}</td>
+                                <td class="b-vds-cloud__summary-table-cell" data_preset_name="{$key}">
+                                    {$val['name']}:
+                                    <div data_preset_name_id="{$key}" data_pole_id="{$val['data'][0]['id']}">{$val['data'][0]['name']}</div>
+                                </td>
+                                <td class="b-vds-cloud__summary-table-cell">€ {$val['data'][0]['monthly']}</td>
                             </tr>
                         </table>
                         {/if}
@@ -194,10 +197,10 @@
             <div class="b-dedicated-try__line">
                 <span class="b-dedicated-try__line-text">need more resourses?</span>
             </div>
-            <h3 class="b-dedicated-try__title">Try our<br>vds plan</h3>
-
-            <p class="b-dedicated-try__text"><span class="b-dedicated-try__text_red_yes">starts from 300 eur / month</span><br>or configurate your own</p>
-            <a class="b-submit b-dedicated-try__submit" href="/dedicated/service/">see plans</a>
+            <h3 class="b-dedicated-try__title">USE ALL<br/> FEATURES OF OUR<br/> DEDICATED SERVERS</h3>
+<br/>
+<br/>
+            <a class="b-submit b-dedicated-try__submit" href="/dedicated/service/">More</a>
         </div>
     <div class="need-more-resousrses">
         <span class="b-vps__try-line-text need-more-resousrses-container-zag" data_id_need="need_more">need more information?</span>
@@ -353,6 +356,12 @@
             Zakaz[UIP]['data'][0] = new Object();
             Zakaz[UIP]['data'][0] = listOfProducts[UIP]['data'][ui.value - 1];
             $('[ data_preset_name_id = "' + UIP + '"]').html(Zakaz[UIP]['data'][0].name);
+            var cur_value = Zakaz[UIP]["data"][0][Zakaz['payment']['data'][0].name];
+//            if (UIP == 'payment') {
+//                $(".js-slider").change();
+//            }
+
+            $('[ data_preset_name_id = "' + UIP + '"]').parent().next().html(cur_value);
             window.write_summa( Zakaz, currency[currencyID], $('#Summa') );
             window.write_dis( Zakaz, currency[currencyID], $('.b-vds-cloud__summary-price-discount')  );
         };
@@ -488,7 +497,6 @@
          text-align: center;
          cursor: pointer;
          width: 100%;
-         margin: 20px 0 0 0;
          text-decoration: none;
      }
     .need-more-resousrses-container {
