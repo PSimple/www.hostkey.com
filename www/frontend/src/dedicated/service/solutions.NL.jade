@@ -10,8 +10,8 @@
 .b-dedicated__list.js-switch-box
     .b-dedicated__item(ng-repeat="s in solutions", ng-class="{active:$stateParams.type===s.type}", ui-sref=".selected({type:s.type})")
         img.b-dedicated__item-image(ng-src="{{s.image}}")
-        h3.b-dedicated__item-title {{s.title}}
-        h4.b-dedicated__item-subtitle {{s.subtitle}}
+        h3.b-dedicated__item-title(ng-bind-html="s.title")
+        h4.b-dedicated__item-subtitle(ng-bind-html="s.subtitle")
         .b-dedicated__item-start Starts from
         .b-dedicated__item-price
             span(ng-bind-html="s.price|verboseCurrency:false")

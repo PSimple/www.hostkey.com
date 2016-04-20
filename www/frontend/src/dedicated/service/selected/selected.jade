@@ -172,7 +172,7 @@
 .b-dedicated__item-content.dedicated-item-content
 
     .b-dedicated__box
-        h3.b-dedicated__title.b-dedicated__title_upline_yes configurator of {{solution.title}} SOLUTIONS
+        h3.b-dedicated__title.b-dedicated__title_upline_yes(ng-bind-html="solution.titlesub")
         .b-dedicated__description(ng-bind-html="solution.description")
 
     .b-container(style="padding-bottom: 30px;")
