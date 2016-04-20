@@ -34,9 +34,9 @@ class Shop_Solution_Api_General extends Zero_Controller
                 "id" => $row['ID'],
                 "type" => $row['Groups'],
                 "image" => $row['Image'],
-                "title" => '<span class="' . $row['Theme'] . '">' . $row['Title'] . '</span>',
-                "titleSub" => '<span class="' . $row['Theme'] . '">' . $row['Title'] . '</span>',
-                "description" => '<span class="' . $row['Theme'] . '">' . $row['Description'] . '</span>',
+                "title" => $row['Title'],
+                "titleSub" => $row['TitleSub'],
+                "description" => $row['Description'],
                 "subtitle" => '<span class="' . $row['Theme'] . '">' . $row['Subtitle'] . '</span>',
                 "price" => 'eur' == $_REQUEST['currency'] ? $row['PriceEUR'] : $row['PriceRUR'],
             ];

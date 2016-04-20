@@ -206,8 +206,8 @@ class Shop_Solution extends Zero_Model
         return [
             'ID' => [],
 			'Title' => [],
-			'TitleSub' => [],
 			'Subtitle' => [],
+			'TitleSub' => [],
 			'Description' => [],
 			'Image' => [],
 			'PriceRUR' => [],
