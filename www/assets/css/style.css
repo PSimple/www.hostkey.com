@@ -4460,8 +4460,7 @@ p {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 10px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #e6e9ec;
+    margin-bottom: 15px;
 }
 
 .b-vds-cloud__summary-table-cell {
@@ -4469,17 +4468,19 @@ p {
 }
 
 .b-vds-cloud__summary-table-cell:nth-child(1) {
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 25px;
     color: #272e38;
     padding-right: 10px;
 }
 
 .b-vds-cloud__summary-table-cell:nth-child(2) {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
     line-height: 20px;
-    color: #945ae0;
-    width: 75px;
+    color: #ff692d;
+    width: 80px;
+    text-align: right;
 }
 
 .b-vds-cloud__summary-price {

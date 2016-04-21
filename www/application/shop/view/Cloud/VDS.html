@@ -356,12 +356,13 @@
             Zakaz[UIP]['data'][0] = new Object();
             Zakaz[UIP]['data'][0] = listOfProducts[UIP]['data'][ui.value - 1];
             $('[ data_preset_name_id = "' + UIP + '"]').html(Zakaz[UIP]['data'][0].name);
-            var cur_value = Zakaz[UIP]["data"][0][Zakaz['payment']['data'][0].name];
-//            if (UIP == 'payment') {
-//                $(".js-slider").change();
-//            }
-
-            $('[ data_preset_name_id = "' + UIP + '"]').parent().next().html(cur_value);
+            $('.b-slider').each(
+                    function(){
+                        var b = $(this).attr('data_preset');
+                        var cur_value = Zakaz[b]["data"][0][Zakaz['payment']['data'][0].name];
+                        $('[ data_preset_name_id = "' + b + '"]').parent().next().html('€ ' + cur_value);
+                    }
+            )
             window.write_summa( Zakaz, currency[currencyID], $('#Summa') );
             window.write_dis( Zakaz, currency[currencyID], $('.b-vds-cloud__summary-price-discount')  );
         };
@@ -498,6 +499,7 @@
          cursor: pointer;
          width: 100%;
          text-decoration: none;
+         margin-top: 20px;
      }
     .need-more-resousrses-container {
         display: none;
@@ -535,5 +537,12 @@
         position: relative;
         top: 8px;
         left: 0;
+    }
+
+    .b-footer {
+        box-shadow: 0px 1px 12px #888888;
+        -webkit-box-shadow: 0px 1px 12px #888888;
+        -moz-box-shadow: 0px 1px 12px #888888;
+        background: url(/assets/img/bg_dots.png) #e9ebee;
     }
 </style>
