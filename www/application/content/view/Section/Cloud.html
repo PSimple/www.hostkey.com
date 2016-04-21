@@ -1,0 +1,54 @@
+<div class="b-page">
+
+<!--Test page template -->
+    <div class="b-page__promo b-page__promo_text-page_yes">
+        <div class="b-icon b-page__scroll-icon"  onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
+        <h1 class="b-page__promo-title b-page__promo-title_black_yes">{$Head}</h1>
+    </div>
+
+    <div class="b-text-page b-cloud-page" style="float: left; width: 100%;padding: 20px 0 0;">
+
+        <h3 class="b-main-page__title " id="scroll-anchor-01">
+            best offers
+        </h3>
+        {plugin "Content_ContentBlock_Plugin_MainPageBestOffers"}
+
+        {#
+        <div class="b-text-page__box" style="float: left; width: 75%; box-sizing: border-box; padding: 60px 20px 20px 20px;">
+            <div class="b-container editable-area" style="float: left; padding:0; width: 95%; box-sizing: border-box;">
+                {$content}
+            </div>
+
+        </div>
+        #}
+
+        <div class="b-dedicated-try">
+            <div class="b-dedicated-try__line">
+                <span class="b-dedicated-try__line-text">need more resourses?</span>
+            </div>
+            <h3 class="b-dedicated-try__title">USE ALL<br/> FEATURES OF OUR<br/> DEDICATED SERVERS</h3>
+            <br/>
+            <br/>
+            <a class="b-submit b-dedicated-try__submit" href="/dedicated/service/">More</a>
+        </div>
+    </div>
+
+    <div style="clear: both;"></div>
+    <div class="footer-push"></div>
+</div>
+
+<style>
+    .b-text-page__title_upline_yes {
+        float: left;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        border: none;
+    }
+    .scroll-anchor-01 {
+        width: 30%;
+        border-top: 4px solid #ff692d;
+        height: 10px;
+    }
+
+</style>

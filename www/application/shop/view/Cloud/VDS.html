@@ -163,7 +163,7 @@
                     </div>
                     <!-- блок с результатом подбора -->
                     <div class="b-vds-cloud__summary b-vds-cloud__summary_is-purpur" id="scroll-block">
-                        <div class="b-vds-cloud__summary-title">Your VDS</div>
+                        <div class="b-vds-cloud__summary-title">Your Cloud VDS</div>
                         {foreach ($configuration as $key => $val)}
                         {if ( !$val['hidden'] )}
                         <table class="b-vds-cloud__summary-table">
@@ -172,17 +172,11 @@
                                     {$val['name']}:
                                     <div data_preset_name_id="{$key}" data_pole_id="{$val['data'][0]['id']}">{$val['data'][0]['name']}</div>
                                 </td>
-                                <td class="b-vds-cloud__summary-table-cell">€ {$val['data'][0]['monthly']}</td>
+                                <td class="b-vds-cloud__summary-table-cell">€{$val['data'][0]['monthly']}</td>
                             </tr>
                         </table>
                         {/if}
                         {/foreach}
-                        <table class="b-vds-cloud__summary-table">
-                            <tr class="b-vds-cloud__summary-table-row">
-                                <td class="b-vds-cloud__summary-table-cell" data_preset_name="payment">Payment period:</td>
-                                <td class="b-vds-cloud__summary-table-cell" data_preset_name_id="payment">monthly</td>
-                            </tr>
-                        </table>
                         <div class="b-vds-cloud__summary-price">
                             <span class="b-vds-cloud__summary-price-value" id="Summa"></span>
                             <span class="b-vds-cloud__summary-price-discount" id="Discount"></span>
@@ -360,7 +354,7 @@
                     function(){
                         var b = $(this).attr('data_preset');
                         var cur_value = Zakaz[b]["data"][0][Zakaz['payment']['data'][0].name];
-                        $('[ data_preset_name_id = "' + b + '"]').parent().next().html('€ ' + cur_value);
+                        $('[ data_preset_name_id = "' + b + '"]').parent().next().html('€' + cur_value);
                     }
             )
             window.write_summa( Zakaz, currency[currencyID], $('#Summa') );

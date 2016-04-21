@@ -4479,8 +4479,9 @@ p {
     font-weight: bold;
     line-height: 20px;
     color: #ff692d;
-    width: 80px;
+    width: 65px;
     text-align: right;
+    vertical-align: top;
 }
 
 .b-vds-cloud__summary-price {
@@ -6461,4 +6462,28 @@ p {
 
 a {
     color: #945ae0;
+}
+
+.b-cloud-page .main-page-offers__item {
+    vertical-align: top;
+    display: inline-block;
+    float: none;
+}
+
+.b-cloud-page .main-page-offers {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    padding-bottom: 60px;
+    font-size: 0;
+}
+
+.b-cloud-page .b-news__more {
+    display: none;
+}
+
+.b-cloud-page {
+    background: url(/assets/img/bg_dots_dark.png) repeat #000000;
+    color: #ffffff;
+    border-top: 4px solid #ff692d;
 }

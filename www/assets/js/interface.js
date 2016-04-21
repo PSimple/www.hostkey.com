@@ -212,14 +212,14 @@ jQuery(function ($) {
 
 
     window.write_summa = function write_summa(z, curr, place) {
-        place.html(curr + " " + SumUpResultZakaz(z) + "/" + z['payment']['data'][0].period);
+        place.html(curr + SumUpResultZakaz(z) + "/" + z['payment']['data'][0].period);
     };
 
     window.write_dis = function write_dis(z, curr, place) {
         var s = window.SumUpDiscountByMonthly( z );
         // var d = window.SumUpDiscount(z);
         if (s != 0) {
-            place.html(z['payment']['data'][0].discount + "% discount, save " + curr + " " + s);
+            place.html(z['payment']['data'][0].discount + "% discount, save " + curr + s);
         } else {
             place.html('');
         }
