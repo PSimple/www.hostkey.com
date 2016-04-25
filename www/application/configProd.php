@@ -25,7 +25,7 @@ return [
         //  Protocol
         'Protocol' => 'https',
         //  Domain of the site by default
-        'Domain' => 'hostkey.com',
+        'Domain' => 'www.hostkey.com',
         //  Static Data Domain Site (css, js, img - design)
         'DomainAssets' => '',
         //  Domain binary data (uploaded by users)
