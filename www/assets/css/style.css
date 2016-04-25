@@ -3939,6 +3939,13 @@ p {
 }
 
 .b-slider {
+    height: 40px;
+    margin-top: -20px;
+    position: relative;
+    z-index: 5;
+}
+
+.b-slider-container {
     border: 1px solid #d4d6d9;
     background-color: #eaecef;
     height: 5px;
@@ -3951,7 +3958,7 @@ p {
 
 .b-slider .ui-slider-range {
     position: absolute;
-    top: 0;
+    top: 19px;
     border: 1px solid #945ae0;
     background-color: #945ae0;
     height: 5px;
@@ -3973,9 +3980,9 @@ p {
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
-    top: -8px;
+    top: 13px;
     outline: none;
-    margin-left: -4px;
+    margin-left: -9px;
 }
 
 .b-vps__title {
@@ -4077,7 +4084,7 @@ p {
     display: inline-block;
     vertical-align: top;
     width: 24%;
-    padding-right: 40px;
+    padding-right: 13px;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -4317,7 +4324,7 @@ p {
 
 .b-vds-cloud__configurator {
     background-color: #ffffff;
-    padding-top: 60px;
+    margin-top: 40px;
 }
 
 .b-vds-cloud_step_2 .b-vds-cloud__configurator {
@@ -4344,7 +4351,6 @@ p {
 }
 
 .b-vds-cloud__box {
-    margin-bottom: 60px;
 }
 
 .b-vds-cloud__result-table {
@@ -4412,6 +4418,7 @@ p {
     -webkit-box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.2);
     letter-spacing: 0;
+    margin-top: 5px;
 }
 
 .b-vds-cloud_step_2 .b-vds-cloud__summary {
@@ -4453,8 +4460,7 @@ p {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 10px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #e6e9ec;
+    margin-bottom: 15px;
 }
 
 .b-vds-cloud__summary-table-cell {
@@ -4462,18 +4468,20 @@ p {
 }
 
 .b-vds-cloud__summary-table-cell:nth-child(1) {
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 25px;
     color: #272e38;
     padding-right: 10px;
-    text-transform: uppercase;
 }
 
 .b-vds-cloud__summary-table-cell:nth-child(2) {
-    font-size: 16px;
+    font-size: 18px;
+    font-weight: bold;
     line-height: 20px;
-    color: #945ae0;
-    width: 100px;
+    color: #ff692d;
+    width: 65px;
+    text-align: right;
+    vertical-align: top;
 }
 
 .b-vds-cloud__summary-price {
@@ -4671,14 +4679,14 @@ p {
     width: 1260px;
     height: 594px;
     position: relative;
-    background: url(/assets/media/promo_vds_2.png) no-repeat;
+    background: url(/assets/media/promo_vds_new.png) no-repeat;
     text-transform: uppercase;
     text-align: center;
     letter-spacing: 2px;
 }
 
 .b-dedicated-try__line {
-    background-color: #ff692d;
+    background-color: #945ae0;
     color: #ffffff;
     text-transform: uppercase;
     padding: 20px;
@@ -4699,7 +4707,6 @@ p {
     font-size: 85px;
     line-height: 89px;
     color: #ffffff;
-    text-decoration: underline;
     padding: 150px 0 0;
     margin-bottom: 30px;
     font-family: 'FranklinGothicMediCondC';
@@ -6455,4 +6462,28 @@ p {
 
 a {
     color: #945ae0;
+}
+
+.b-cloud-page .main-page-offers__item {
+    vertical-align: top;
+    display: inline-block;
+    float: none;
+}
+
+.b-cloud-page .main-page-offers {
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    padding-bottom: 60px;
+    font-size: 0;
+}
+
+.b-cloud-page .b-news__more {
+    display: none;
+}
+
+.b-cloud-page {
+    background: url(/assets/img/bg_dots_dark.png) repeat #000000;
+    color: #ffffff;
+    border-top: 4px solid #ff692d;
 }

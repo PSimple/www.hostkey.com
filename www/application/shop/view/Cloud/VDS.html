@@ -11,20 +11,7 @@
     <div class="b-vds-cloud">
 
         <div class="b-vps__feature b-container">
-            <div class="b-vps__feature-item">
-                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-01.png" alt="иконка">
 
-                <h3 class="b-vps__feature-item-title">
-                    Always get
-                    enough power
-                </h3>
-
-                <p class="b-vps__feature-item-text">
-                    Rent the optimum server
-                    configuration, capable to
-                    sustain your infrastructure.
-                </p>
-            </div>
             <div class="b-vps__feature-item">
                 <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-02.png" alt="иконка">
 
@@ -46,7 +33,7 @@
                 </h3>
 
                 <p class="b-vps__feature-item-text">
-                    Full administrative access
+                    Full administrative access<br/>
                     to your pull of servers including
                     OS installation.
                     Unlimited reinstallation.
@@ -64,6 +51,20 @@
                     All your actions while
                     managing your pool of servers
                     are fully backed up and can be restored without contacting the support team
+                </p>
+            </div>
+            <div class="b-vps__feature-item">
+                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-01.png" alt="иконка">
+
+                <h3 class="b-vps__feature-item-title">
+                    Always get
+                    enough power
+                </h3>
+
+                <p class="b-vps__feature-item-text">
+                    Rent the optimum server
+                    configuration, capable to
+                    sustain your infrastructure.
                 </p>
             </div>
         </div>
@@ -103,8 +104,14 @@
                 </h3>
 
                 <div class="b-dedicated__description">
-                    You can collect the server on your taste, or choose a ready-made configuration that is customized by our specialists.<br><br>
-                    <b>The server will be prepared for You within a few hours of receipt of payment.</b>
+                    <p>By using Cloud VDS, you can:</p>
+                    <ul>
+                        <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">instantly create a powerful virtual server or split the resources between multiple servers;</span></li>
+                        <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">simultaneously deploy Windows VDS, Linux VDS, server with your own OS, etc. within the same pool or resources;</span></li>
+                        <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">scale the resources and re-allocate them between servers.</span></li></ul>
+                </div>
+                <div style="text-align: right;padding-bottom: 40px;padding-right: 38px;">
+                    <img src="/assets/img/vds_logo.png" alt="">
                 </div>
             </div>
 
@@ -130,10 +137,14 @@
                                     </div>
                                     {else}
 
-                                    <div class="b-slider js-slider" data-slides="{count($val['data'])}" data-position="1" data_preset="{$key}"></div>
+                                    <div class="b-slider-container"><div class="b-slider js-slider" data-slides="{count($val['data'])}" data-position="1" data_preset="{$key}"></div></div>
+
                                     <div class="b-slider__legend-{count($val['data'])}">
                                         {foreach ( $val['data'] as $k => $v )}
-                                        <div class="b-slider__legend-{count($val['data'])}-item b-slider__legend-{count($val['data'])}-item_place_{$k+1} clik_slider_position" data-number="{$k+1}" data-slider="{$key}">{$v['name']}</div>
+                                        <div class="b-slider__legend-{count($val['data'])}-item b-slider__legend-{count($val['data'])}-item_place_{$k+1} clik_slider_position"
+                                             data-number="{$k+1}" data-slider="{$key}">
+                                            {$v['name']}
+                                        </div>
                                         {/foreach}
                                     </div>
 
@@ -144,9 +155,9 @@
                             {/foreach}
 
                             <tr class="b-vds-cloud__table-row">
-                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">payment period:</td>
+                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">payment term:</td>
                                 <td class="b-vds-cloud__table-cell">
-                                    <div class="b-slider js-slider" data-slides="4" data-position="1" data_preset="payment"></div>
+                                    <div class="b-slider-container"><div class="b-slider js-slider" data-slides="4" data-position="1" data_preset="payment"></div></div>
                                     <div class="b-slider__legend-4">
                                         <div class="b-slider__legend-4-item b-slider__legend-4-item_place_1 payments clik_slider_position" data-number="1" data-slider="payment">monthly</div>
                                         <div class="b-slider__legend-4-item b-slider__legend-4-item_place_2 payments clik_slider_position" data-number="2" data-slider="payment">quarterly</div>
@@ -157,31 +168,27 @@
                             </tr>
                         </table>
                     </div>
-
                     <!-- блок с результатом подбора -->
                     <div class="b-vds-cloud__summary b-vds-cloud__summary_is-purpur" id="scroll-block">
-                        <div class="b-vds-cloud__summary-title">Your VDS</div>
+                        <div class="b-vds-cloud__summary-title">Your Cloud VDS</div>
                         {foreach ($configuration as $key => $val)}
                         {if ( !$val['hidden'] )}
                         <table class="b-vds-cloud__summary-table">
                             <tr class="b-vds-cloud__summary-table-row">
-                                <td class="b-vds-cloud__summary-table-cell" data_preset_name="{$key}">{$val['name']}:</td>
-                                <td class="b-vds-cloud__summary-table-cell" data_preset_name_id="{$key}" data_pole_id="{$val['data'][0]['id']}">{$val['data'][0]['name']}</td>
+                                <td class="b-vds-cloud__summary-table-cell" data_preset_name="{$key}">
+                                    {$val['name']}:
+                                    <div data_preset_name_id="{$key}" data_pole_id="{$val['data'][0]['id']}">{$val['data'][0]['name']}</div>
+                                </td>
+                                <td class="b-vds-cloud__summary-table-cell">€{$val['data'][0]['monthly']}</td>
                             </tr>
                         </table>
                         {/if}
                         {/foreach}
-                        <table class="b-vds-cloud__summary-table">
-                            <tr class="b-vds-cloud__summary-table-row">
-                                <td class="b-vds-cloud__summary-table-cell" data_preset_name="payment">Payment period:</td>
-                                <td class="b-vds-cloud__summary-table-cell" data_preset_name_id="payment">monthly</td>
-                            </tr>
-                        </table>
                         <div class="b-vds-cloud__summary-price">
                             <span class="b-vds-cloud__summary-price-value" id="Summa"></span>
                             <span class="b-vds-cloud__summary-price-discount" id="Discount"></span>
                         </div>
-                        <a class="b-submit b-vds-cloud__summary-submit" href="#" id="byu_cloud">continue</a>
+                        <a class="b-submit b-vds-cloud__summary-submit" href="#" id="byu_cloud">Buy</a>
                     </div>
                 </div>
             </div>
@@ -189,13 +196,28 @@
 
         <div class="b-dedicated-try">
             <div class="b-dedicated-try__line">
-                <span class="b-dedicated-try__line-text">need more resourses?</span>
+                <span class="b-dedicated-try__line-text">NEED MORE RESOURCES?S?</span>
             </div>
-            <h3 class="b-dedicated-try__title">Try our<br>vds plan</h3>
-
-            <p class="b-dedicated-try__text"><span class="b-dedicated-try__text_red_yes">starts from 300 eur / month</span><br>or configurate your own</p>
-            <a class="b-submit b-dedicated-try__submit" href="#">see plans</a>
+            <h3 class="b-dedicated-try__title">USE ALL<br/> FEATURES OF OUR<br/> DEDICATED SERVERS</h3>
+<br/>
+<br/>
+            <a class="b-submit b-dedicated-try__submit" href="/dedicated/service/">More</a>
         </div>
+    <div class="need-more-resousrses">
+        <span class="b-vps__try-line-text need-more-resousrses-container-zag" data_id_need="need_more">need more information?</span>
+        <div class="need-more-resousrses-container-header-triangle-white" data_id_need_triangle="need_more"></div>
+    </div>
+    <div class="need-more-resousrses-container">
+    {foreach ( $need_more as $keu => $val )}
+    <div class="need-more-resousrses-container-header">
+        <div class="need-more-resousrses-container-zag" data_id_need="{$val['ID']}">{$val['Head']}</div>
+        <div class="need-more-resousrses-container-header-triangle" data_id_need_triangle="{$val['ID']}"></div>
+    </div>
+
+    <div class="need-more-resousrses-container-messager" data_id_need_content_position="{$val['ID']}">{$val['Description']}</div>
+    {/foreach}
+</div>
+<div style="clear:both;"></div>
     </div>
 
     <div class="footer-push"></div>
@@ -203,7 +225,29 @@
 
 <script>
     $(document).ready(function () {
-        
+        $( '.need-more-resousrses').bind( 'click', function(){
+            $( ".need-more-resousrses-container" ).toggle();
+        });
+
+        $( '.need-more-resousrses-container-zag' ).bind( 'click', function(){
+            var id = $( this).attr( 'data_id_need');
+            var d = $( '[data_id_need_content_position="' + id + '"]');
+            var t= $( '[data_id_need_triangle="' + id + '"]');
+            d.toggle();
+            t.css( 'border', '10px solid transparent' );
+            if ( t.css( 'top') == '0px' ){
+                t.css({
+                    "border-top": "10px solid",
+                    "top": "8px"
+                });
+            } else {
+                t.css( {
+                    "border-bottom": "10px solid",
+                    "top": "0px"
+                } );
+            }
+
+        });
         if ($(".js-slider").length) {
             $(".js-slider").each(function (index, val) {
                 var slidesCount = $(val).data('slides');
@@ -245,8 +289,8 @@
                 $(this).css('border', '2px solid #d9dcdd');
             }
         });
-        
-        
+
+
         /*
          *   Закрываем окно
          */
@@ -313,6 +357,13 @@
             Zakaz[UIP]['data'][0] = new Object();
             Zakaz[UIP]['data'][0] = listOfProducts[UIP]['data'][ui.value - 1];
             $('[ data_preset_name_id = "' + UIP + '"]').html(Zakaz[UIP]['data'][0].name);
+            $('.b-slider').each(
+                    function(){
+                        var b = $(this).attr('data_preset');
+                        var cur_value = Zakaz[b]["data"][0].monthly;
+                        $('[ data_preset_name_id = "' + b + '"]').parent().next().html('€' + cur_value);
+                    }
+            )
             window.write_summa( Zakaz, currency[currencyID], $('#Summa') );
             window.write_dis( Zakaz, currency[currencyID], $('.b-vds-cloud__summary-price-discount')  );
         };
@@ -385,10 +436,10 @@
             $( '<img src="/assets/img/220-3.GIF" alt="">').appendTo( '#configure_cloud_VDS');
            document.getElementById('configure_cloud_VDS').src = "https:bill.hostkey.com/cart.php?systpl=siteF&a=confproduct&pid=530&carttpl=cartF&currency=2" ;
          */
-           document.getElementById('configure_cloud_VDS').src = 'https:bill.hostkey.com/cart.php?systpl=siteF&a=add&pid={$PID}&carttpl=cartF&currency=2&'
-                 + generate_post ( Zakaz ) ;
+            window.location.href = 'https://bill.hostkey.com/cart.php?systpl=classichostkey&a=add&pid={$PID}&carttpl=cartF&currency=2&'
+                    + generate_post ( Zakaz );
         }
-        
+
     });
 
 
@@ -406,7 +457,6 @@
 </div>
 
 <style>
-
     .b-vds-cloud__summary-table-cell {
         vertical-align: middle;
     }
@@ -415,11 +465,12 @@
         display: block;
     }
 
+
     #configure_cloud_VDS {
         border: none;
         display: block;
-        width: 570px;
-        height: 500px;
+        width: 100%;
+        height: 1000px;
         margin: 0 auto;
     }
 
@@ -429,14 +480,70 @@
 
     .popup h2{ width: 100%; display: block; font: bold 24px KievitOT,Arial; color: #171819; text-transform: uppercase; text-align: center; margin: 45px auto 60px auto; }
 
+
     .switch_country_for_container_VPS {
         display: block;
-        padding: 50px 0 0 435px;
-        background: #fff;
+        padding: 30px 0 0 435px;
+        background: none;
     }
     .switch_country_for_container_VPS a{
         color: #000;
         text-decoration: none;
     }
+     .need-more-resousrses {
+         background-color: #945ae0;
+         box-sizing: border-box;
+         padding:  20px;
+         color: #fff;
+         text-transform: uppercase;
+         text-align: center;
+         cursor: pointer;
+         width: 100%;
+         text-decoration: none;
+         margin-top: 20px;
+     }
+    .need-more-resousrses-container {
+        display: none;
+        background-color: #fff;
+        width: 100%;
+        padding: 0 0 20px 0;
+    }
+    .need-more-resousrses-container-messager {
+        display: none;
+        margin: 0 75px 20px;
+    }
+    .need-more-resousrses-container-header{
+        padding: 20px 75px;
+        font-size: 20px;
+        color: #945ae0;
+        cursor: pointer;
+        margin: 1px;
+    }
+    .need-more-resousrses-container-zag {
+        display: inline-block;
+        border-bottom: 1px dashed;
+    }
+    .need-more-resousrses-container-header-triangle {
+        display: inline-block;
+        border: 10px solid transparent; /* Прозрачные границы */
+        border-top: 10px solid #945ae0; /* Добавляем треугольник */
+        position: relative;
+        top: 8px;
+        left: 0;
+    }
+    .need-more-resousrses-container-header-triangle-white {
+        display: inline-block;
+        border: 10px solid transparent; /* Прозрачные границы */
+        border-top: 10px solid #fff; /* Добавляем треугольник */
+        position: relative;
+        top: 8px;
+        left: 0;
+    }
 
+    .b-footer {
+        box-shadow: 0px 1px 12px #888888;
+        -webkit-box-shadow: 0px 1px 12px #888888;
+        -moz-box-shadow: 0px 1px 12px #888888;
+        background: url(/assets/img/bg_dots.png) #e9ebee;
+    }
 </style>
