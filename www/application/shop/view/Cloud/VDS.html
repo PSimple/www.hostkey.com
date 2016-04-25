@@ -11,20 +11,7 @@
     <div class="b-vds-cloud">
 
         <div class="b-vps__feature b-container">
-            <div class="b-vps__feature-item">
-                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-01.png" alt="иконка">
 
-                <h3 class="b-vps__feature-item-title">
-                    Always get
-                    enough power
-                </h3>
-
-                <p class="b-vps__feature-item-text">
-                    Rent the optimum server
-                    configuration, capable to
-                    sustain your infrastructure.
-                </p>
-            </div>
             <div class="b-vps__feature-item">
                 <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-02.png" alt="иконка">
 
@@ -46,7 +33,7 @@
                 </h3>
 
                 <p class="b-vps__feature-item-text">
-                    Full administrative access
+                    Full administrative access<br/>
                     to your pull of servers including
                     OS installation.
                     Unlimited reinstallation.
@@ -64,6 +51,20 @@
                     All your actions while
                     managing your pool of servers
                     are fully backed up and can be restored without contacting the support team
+                </p>
+            </div>
+            <div class="b-vps__feature-item">
+                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-01.png" alt="иконка">
+
+                <h3 class="b-vps__feature-item-title">
+                    Always get
+                    enough power
+                </h3>
+
+                <p class="b-vps__feature-item-text">
+                    Rent the optimum server
+                    configuration, capable to
+                    sustain your infrastructure.
                 </p>
             </div>
         </div>
@@ -103,8 +104,14 @@
                 </h3>
 
                 <div class="b-dedicated__description">
-                    You can collect the server on your taste, or choose a ready-made configuration that is customized by our specialists.<br><br>
-                    <b>The server will be prepared for You within a few hours of receipt of payment.</b>
+                    <p>By using Cloud VDS, you can:</p>
+                    <ul>
+                        <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">instantly create a powerful virtual server or split the resources between multiple servers;</span></li>
+                        <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">simultaneously deploy Windows VDS, Linux VDS, server with your own OS, etc. within the same pool or resources;</span></li>
+                        <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">scale the resources and re-allocate them between servers.</span></li></ul>
+                </div>
+                <div style="text-align: right;padding-bottom: 40px;padding-right: 38px;">
+                    <img src="/assets/img/vds_logo.png" alt="">
                 </div>
             </div>
 
@@ -148,7 +155,7 @@
                             {/foreach}
 
                             <tr class="b-vds-cloud__table-row">
-                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">payment period:</td>
+                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">payment term:</td>
                                 <td class="b-vds-cloud__table-cell">
                                     <div class="b-slider-container"><div class="b-slider js-slider" data-slides="4" data-position="1" data_preset="payment"></div></div>
                                     <div class="b-slider__legend-4">
@@ -181,7 +188,7 @@
                             <span class="b-vds-cloud__summary-price-value" id="Summa"></span>
                             <span class="b-vds-cloud__summary-price-discount" id="Discount"></span>
                         </div>
-                        <a class="b-submit b-vds-cloud__summary-submit" href="#" id="byu_cloud">continue</a>
+                        <a class="b-submit b-vds-cloud__summary-submit" href="#" id="byu_cloud">Buy</a>
                     </div>
                 </div>
             </div>
@@ -189,7 +196,7 @@
 
         <div class="b-dedicated-try">
             <div class="b-dedicated-try__line">
-                <span class="b-dedicated-try__line-text">need more resourses?</span>
+                <span class="b-dedicated-try__line-text">NEED MORE RESOURCES??</span>
             </div>
             <h3 class="b-dedicated-try__title">USE ALL<br/> FEATURES OF OUR<br/> DEDICATED SERVERS</h3>
 <br/>
@@ -353,7 +360,7 @@
             $('.b-slider').each(
                     function(){
                         var b = $(this).attr('data_preset');
-                        var cur_value = Zakaz[b]["data"][0][Zakaz['payment']['data'][0].name];
+                        var cur_value = Zakaz[b]["data"][0].monthly;
                         $('[ data_preset_name_id = "' + b + '"]').parent().next().html('€' + cur_value);
                     }
             )
@@ -476,7 +483,7 @@
 
     .switch_country_for_container_VPS {
         display: block;
-        padding: 50px 0 20px 385px;
+        padding: 50px 0 0 435px;
         background: none;
     }
     .switch_country_for_container_VPS a{

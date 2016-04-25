@@ -3982,7 +3982,7 @@ p {
     -moz-border-radius: 50%;
     top: 13px;
     outline: none;
-    margin-left: -4px;
+    margin-left: -9px;
 }
 
 .b-vps__title {
@@ -4084,7 +4084,7 @@ p {
     display: inline-block;
     vertical-align: top;
     width: 24%;
-    padding-right: 40px;
+    padding-right: 13px;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -4679,7 +4679,7 @@ p {
     width: 1260px;
     height: 594px;
     position: relative;
-    background: url(/assets/media/promo_vds_2.png) no-repeat;
+    background: url(/assets/media/promo_vds_new.png) no-repeat;
     text-transform: uppercase;
     text-align: center;
     letter-spacing: 2px;
