@@ -44,7 +44,8 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
         $preset = Shop_PresetContainerVPS::Make();
         $payment_period = ['monthly' => 0, 'quarterly' => 3, 'semiannually' => 6, 'annually' => 12];
         $p = $preset->getPreset($configuration, $payment_period);
-        $table_row_data = array();
+        $table_row_data = [];
+        $table_row_data['CPU Cores'] = [];
         foreach ($p as $key => $value)
         {
             if ( $value['hidden'] == 0 )
@@ -78,6 +79,8 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
         $arr_Bandwidth_Limit[728] = $configuration[728]['data'];
         $arr_VM_Template[729] = $configuration[729]['data'];
 
+        $ttt = $table_row_data['The number of CPU sockets'];
+        unset ($table_row_data['The number of CPU sockets']);
         $BWL = $table_row_data['Bandwidth Limit'];
         unset ($table_row_data['Bandwidth Limit']);
         $BKL = $table_row_data['Backups Limit'];
@@ -85,6 +88,7 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
         $VMT = $table_row_data['VM Template'];
         unset ($table_row_data['VM Template']);
 
+        $table_row_data['CPU Cores'] = $ttt;
         $table_row_data['CPANEL COMPATIBLE'] = [0, 0, 1, 1, 1];
         $table_row_data['Bandwidth Limit'] = $BWL;
         $table_row_data['Backups Limit'] = $BKL;
