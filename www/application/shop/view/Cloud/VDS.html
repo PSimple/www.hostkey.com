@@ -70,157 +70,157 @@
         </div>
 
         <div class="switch_country_for_container_VPS" id="calc">
-                        {if ( $PID==531 )}
-                            <div  class="b-dedicated__switch-item active  flag_nl">
-                                    netherlands
-                                </div>
-                        {else}
-                             <div  class="b-dedicated__switch-item flag_nl">
-                                 <a href="/cloud/vds#nl" target="_self" title="ckoud VDS Russia>">
-                                            netherlands
-                                        </a>
-                                </div>
-                                {/if}
-                    <div class="b-dedicated__switch-item">/</div>
-                        {if ( $PID==539 )}
-                            <div class="b-dedicated__switch-item active flag_ru">
-                                    russia
-                            </div>
-                        {else}
-                            <div class="b-dedicated__switch-item flag_ru">
-                                <a href="/cloud/vds/russia#ru" target="_self" title="ckoud VDS Russia>">
-                                    russia
-                                </a>
-                             </div>
-                        {/if}
-        </div>
-
-        </div>
-        <div class="b-vds-cloud__configurator">
-            <div class="b-dedicated__box">
-                <h3 class="b-dedicated__title b-dedicated__title_upline_yes">
-                    cloud vds
-                    Configurator
-                </h3>
-
-                <div class="b-dedicated__description">
-                    <p>By using Cloud VDS, you can:</p>
-                    <ul>
-                        <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">instantly create a powerful virtual server or split the resources between multiple servers;</span></li>
-                        <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">simultaneously deploy Windows VDS, Linux VDS, server with your own OS, etc. within the same pool or resources;</span></li>
-                        <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">scale the resources and re-allocate them between servers.</span></li></ul>
-                </div>
-                <div style="text-align: right;padding-bottom: 40px;padding-right: 38px;">
-                    <img src="/assets/img/vds_logo.png" alt="">
-                </div>
+            {if ( $PID==531 )}
+            <div  class="b-dedicated__switch-item active  flag_nl">
+                netherlands
             </div>
+            {else}
+            <div  class="b-dedicated__switch-item flag_nl">
+                <a href="/cloud/vds#nl" target="_self" title="ckoud VDS Russia>">
+                    netherlands
+                </a>
+            </div>
+            {/if}
+            <div class="b-dedicated__switch-item">/</div>
+            {if ( $PID==539 )}
+            <div class="b-dedicated__switch-item active flag_ru">
+                russia
+            </div>
+            {else}
+            <div class="b-dedicated__switch-item flag_ru">
+                <a href="/cloud/vds/russia#ru" target="_self" title="ckoud VDS Russia>">
+                    russia
+                </a>
+            </div>
+            {/if}
+        </div>
 
-            <div class="b-container">
-                <div class="b-vds-cloud__box">
+    </div>
+    <div class="b-vds-cloud__configurator">
+        <div class="b-dedicated__box">
+            <h3 class="b-dedicated__title b-dedicated__title_upline_yes">
+                cloud vds
+                Configurator
+            </h3>
 
-                    <div class="b-vds-cloud__content" id="scroll-box">
+            <div class="b-dedicated__description">
+                <p>By using Cloud VDS, you can:</p>
+                <ul>
+                    <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">instantly create a powerful virtual server or split the resources between multiple servers;</span></li>
+                    <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);"><a href="#nmr">simultaneously deploy</a> Windows VDS, Linux VDS, server with your own OS, etc. within the same pool or resources;</span></li>
+                    <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">scale the resources and re-allocate them between servers.</span></li></ul>
+            </div>
+            <div style="text-align: right;padding-bottom: 40px;padding-right: 38px;">
+                <a href="#nmr"><img src="/assets/img/vds_logo.png" alt=""></a>
+            </div>
+        </div>
 
-                        <table class="b-vds-cloud__table">
-                                {foreach ($configuration as $key => $val)}
-                                {if ( !$val['hidden'] )}
-                            <tr class="b-vds-cloud__table-row">
-                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">{$val['name']}</td>
-                                <td class="b-vds-cloud__table-cell">
-                                    {if ( 696 == $key OR 700 == $key )}
-                                    <div class="b-slider__legend-5">
-                                        <select class="table-select__item js-select" name="tbl-select-1" id="vm_template" data_preset="{$key}">
-                                            {foreach ( $val['data'] as $k => $v )}
-                                            <option value="{$v['id']}"
-                                                    {if ( 0== $k )} selected="selected"{/if}>{$v['name']}</option>
-                                            {/foreach}
-                                        </select>
-                                    </div>
-                                    {else}
+        <div class="b-container">
+            <div class="b-vds-cloud__box">
 
-                                    <div class="b-slider-container"><div class="b-slider js-slider" data-slides="{count($val['data'])}" data-position="1" data_preset="{$key}"></div></div>
+                <div class="b-vds-cloud__content" id="scroll-box">
 
-                                    <div class="b-slider__legend-{count($val['data'])}">
-                                        {foreach ( $val['data'] as $k => $v )}
-                                        <div class="b-slider__legend-{count($val['data'])}-item b-slider__legend-{count($val['data'])}-item_place_{$k+1} clik_slider_position"
-                                             data-number="{$k+1}" data-slider="{$key}">
-                                            {$v['name']}
-                                        </div>
-                                        {/foreach}
-                                    </div>
-
-                                    {/if}
-                                </td>
-                            </tr>
-                            {/if}
-                            {/foreach}
-
-                            <tr class="b-vds-cloud__table-row">
-                                <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">payment term:</td>
-                                <td class="b-vds-cloud__table-cell">
-                                    <div class="b-slider-container"><div class="b-slider js-slider" data-slides="4" data-position="1" data_preset="payment"></div></div>
-                                    <div class="b-slider__legend-4">
-                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_1 payments clik_slider_position" data-number="1" data-slider="payment">monthly</div>
-                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_2 payments clik_slider_position" data-number="2" data-slider="payment">quarterly</div>
-                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_3 payments clik_slider_position" data-number="3" data-slider="payment">semiannually</div>
-                                        <div class="b-slider__legend-4-item b-slider__legend-4-item_place_4 payments clik_slider_position" data-number="4" data-slider="payment">annually</div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <!-- блок с результатом подбора -->
-                    <div class="b-vds-cloud__summary b-vds-cloud__summary_is-purpur" id="scroll-block">
-                        <div class="b-vds-cloud__summary-title">Your Cloud VDS</div>
+                    <table class="b-vds-cloud__table">
                         {foreach ($configuration as $key => $val)}
                         {if ( !$val['hidden'] )}
-                        <table class="b-vds-cloud__summary-table">
-                            <tr class="b-vds-cloud__summary-table-row">
-                                <td class="b-vds-cloud__summary-table-cell" data_preset_name="{$key}">
-                                    {$val['name']}:
-                                    <div data_preset_name_id="{$key}" data_pole_id="{$val['data'][0]['id']}">{$val['data'][0]['name']}</div>
-                                </td>
-                                <td class="b-vds-cloud__summary-table-cell">€{$val['data'][0]['monthly']}</td>
-                            </tr>
-                        </table>
+                        <tr class="b-vds-cloud__table-row">
+                            <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">{$val['name']}</td>
+                            <td class="b-vds-cloud__table-cell">
+                                {if ( 696 == $key OR 700 == $key )}
+                                <div class="b-slider__legend-5">
+                                    <select class="table-select__item js-select" name="tbl-select-1" id="vm_template" data_preset="{$key}">
+                                        {foreach ( $val['data'] as $k => $v )}
+                                        <option value="{$v['id']}"
+                                                {if ( 0== $k )} selected="selected"{/if}>{$v['name']}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                                {else}
+
+                                <div class="b-slider-container"><div class="b-slider js-slider" data-slides="{count($val['data'])}" data-position="1" data_preset="{$key}"></div></div>
+
+                                <div class="b-slider__legend-{count($val['data'])}">
+                                    {foreach ( $val['data'] as $k => $v )}
+                                    <div class="b-slider__legend-{count($val['data'])}-item b-slider__legend-{count($val['data'])}-item_place_{$k+1} clik_slider_position"
+                                         data-number="{$k+1}" data-slider="{$key}">
+                                        {$v['name']}
+                                    </div>
+                                    {/foreach}
+                                </div>
+
+                                {/if}
+                            </td>
+                        </tr>
                         {/if}
                         {/foreach}
-                        <div class="b-vds-cloud__summary-price">
-                            <span class="b-vds-cloud__summary-price-value" id="Summa"></span>
-                            <span class="b-vds-cloud__summary-price-discount" id="Discount"></span>
-                        </div>
-                        <a class="b-submit b-vds-cloud__summary-submit" href="#" id="byu_cloud">Buy</a>
+
+                        <tr class="b-vds-cloud__table-row">
+                            <td class="b-vds-cloud__table-cell b-vds-cloud__table-cell_title_yes b-vds-cloud__table-cell_top_yes">payment term:</td>
+                            <td class="b-vds-cloud__table-cell">
+                                <div class="b-slider-container"><div class="b-slider js-slider" data-slides="4" data-position="1" data_preset="payment"></div></div>
+                                <div class="b-slider__legend-4">
+                                    <div class="b-slider__legend-4-item b-slider__legend-4-item_place_1 payments clik_slider_position" data-number="1" data-slider="payment">monthly</div>
+                                    <div class="b-slider__legend-4-item b-slider__legend-4-item_place_2 payments clik_slider_position" data-number="2" data-slider="payment">quarterly</div>
+                                    <div class="b-slider__legend-4-item b-slider__legend-4-item_place_3 payments clik_slider_position" data-number="3" data-slider="payment">semiannually</div>
+                                    <div class="b-slider__legend-4-item b-slider__legend-4-item_place_4 payments clik_slider_position" data-number="4" data-slider="payment">annually</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- блок с результатом подбора -->
+                <div class="b-vds-cloud__summary b-vds-cloud__summary_is-purpur" id="scroll-block">
+                    <div class="b-vds-cloud__summary-title">Your Cloud VDS</div>
+                    {foreach ($configuration as $key => $val)}
+                    {if ( !$val['hidden'] )}
+                    <table class="b-vds-cloud__summary-table">
+                        <tr class="b-vds-cloud__summary-table-row">
+                            <td class="b-vds-cloud__summary-table-cell" data_preset_name="{$key}">
+                                {$val['name']}:
+                                <div data_preset_name_id="{$key}" data_pole_id="{$val['data'][0]['id']}">{$val['data'][0]['name']}</div>
+                            </td>
+                            <td class="b-vds-cloud__summary-table-cell">€{$val['data'][0]['monthly']}</td>
+                        </tr>
+                    </table>
+                    {/if}
+                    {/foreach}
+                    <div class="b-vds-cloud__summary-price">
+                        <span class="b-vds-cloud__summary-price-value" id="Summa"></span>
+                        <span class="b-vds-cloud__summary-price-discount" id="Discount"></span>
                     </div>
+                    <a class="b-submit b-vds-cloud__summary-submit" href="#" id="byu_cloud">Buy</a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="b-dedicated-try">
-            <div class="b-dedicated-try__line">
-                <span class="b-dedicated-try__line-text">NEED MORE RESOURCES?</span>
-            </div>
-            <h3 class="b-dedicated-try__title">USE ALL<br/> FEATURES OF OUR<br/> DEDICATED SERVERS</h3>
-<br/>
-<br/>
-            <a class="b-submit b-dedicated-try__submit" href="/dedicated/service/">More</a>
+    <div class="b-dedicated-try">
+        <div class="b-dedicated-try__line">
+            <span class="b-dedicated-try__line-text" id="nmr">NEED MORE RESOURCES?</span>
         </div>
+        <h3 class="b-dedicated-try__title">USE ALL<br/> FEATURES OF OUR<br/> DEDICATED SERVERS</h3>
+        <br/>
+        <br/>
+        <a class="b-submit b-dedicated-try__submit" href="/dedicated/service/">More</a>
+    </div>
     <div class="need-more-resousrses">
         <span class="b-vps__try-line-text need-more-resousrses-container-zag" data_id_need="need_more">need more information?</span>
         <div class="need-more-resousrses-container-header-triangle-white" data_id_need_triangle="need_more"></div>
     </div>
     <div class="need-more-resousrses-container">
-    {foreach ( $need_more as $keu => $val )}
-    <div class="need-more-resousrses-container-header">
-        <div class="need-more-resousrses-container-zag" data_id_need="{$val['ID']}">{$val['Head']}</div>
-        <div class="need-more-resousrses-container-header-triangle" data_id_need_triangle="{$val['ID']}"></div>
-    </div>
+        {foreach ( $need_more as $keu => $val )}
+        <div class="need-more-resousrses-container-header">
+            <div class="need-more-resousrses-container-zag" data_id_need="{$val['ID']}">{$val['Head']}</div>
+            <div class="need-more-resousrses-container-header-triangle" data_id_need_triangle="{$val['ID']}"></div>
+        </div>
 
-    <div class="need-more-resousrses-container-messager" data_id_need_content_position="{$val['ID']}">{$val['Description']}</div>
-    {/foreach}
+        <div class="need-more-resousrses-container-messager" data_id_need_content_position="{$val['ID']}">{$val['Description']}</div>
+        {/foreach}
+    </div>
+    <div style="clear:both;"></div>
 </div>
-<div style="clear:both;"></div>
-    </div>
 
-    <div class="footer-push"></div>
+<div class="footer-push"></div>
 </div>
 
 <script>
@@ -262,7 +262,7 @@
                             calculatePRoxMoxVDS_sliders(index, ui);
                         },
                         change: function (event, ui) {
-                              calculatePRoxMoxVDS_sliders ( index, ui );
+                            calculatePRoxMoxVDS_sliders ( index, ui );
                         }
                     });
 
@@ -297,7 +297,7 @@
         $('.close_window_information_manager_cloud').click(function () {
             $('.popup').hide();
             /*$('#callback_btn_manage_cloud').removeClass('disabled_href_button').css('color', '#ff6a39'); при закрытии окна очищаем кнопку отправки
-            messager_windows_operator("", $("#message_load_ajax"), 'clear+hide');*/
+             messager_windows_operator("", $("#message_load_ajax"), 'clear+hide');*/
             document.getElementById('configure_cloud_VDS').src = "/assets/clear/index.html";
             return false;
         });
@@ -400,19 +400,19 @@
             crFrame( );
 
             iframe.onload = function() {
-             //   console.log ( '1');
+                //   console.log ( '1');
                 //var iframeDoc2 = iframe.contentWindow.document;
                 //iframeDoc2.body.style.backgroundColor = 'orange';
 
                 win = window.frames.configure_cloud_VDS;
                 win.postMessage(
 
-               JSON.stringify( Zakaz ),
+                        JSON.stringify( Zakaz ),
 
-                "https:bill.hostkey.com"  //target domain
+                        "https:bill.hostkey.com"  //target domain
 
                 );
-             //  alert ( '2');
+                //  alert ( '2');
 
             }
 
@@ -424,18 +424,18 @@
 
         function crFrame( )
         {
-         /*   var iframe = document.createElement("iframe");
-            iframe.id = "configure_cloud_VDS";
-            iframe.frameborder = 0;
-            iframe.height = '100%';
-            iframe.width = '80%';
-            iframe.style.display = "block";
-            iframe.src = 'https:billing.hostkey.ru/cart.php?systpl=siteF&a=add&pid=512&carttpl=cartF&currency=2&'
-                       + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
-            document.getElementById('add_iframe_from_billing').appendChild(iframe);
-            $( '<img src="/assets/img/220-3.GIF" alt="">').appendTo( '#configure_cloud_VDS');
-           document.getElementById('configure_cloud_VDS').src = "https:bill.hostkey.com/cart.php?systpl=siteF&a=confproduct&pid=530&carttpl=cartF&currency=2" ;
-         */
+            /*   var iframe = document.createElement("iframe");
+             iframe.id = "configure_cloud_VDS";
+             iframe.frameborder = 0;
+             iframe.height = '100%';
+             iframe.width = '80%';
+             iframe.style.display = "block";
+             iframe.src = 'https:billing.hostkey.ru/cart.php?systpl=siteF&a=add&pid=512&carttpl=cartF&currency=2&'
+             + generate_post ( Zakaz ) + "rootpw=jdjfhdjfh&domain=sdsd&hostname=djsdhs&addons[60]=on" ;
+             document.getElementById('add_iframe_from_billing').appendChild(iframe);
+             $( '<img src="/assets/img/220-3.GIF" alt="">').appendTo( '#configure_cloud_VDS');
+             document.getElementById('configure_cloud_VDS').src = "https:bill.hostkey.com/cart.php?systpl=siteF&a=confproduct&pid=530&carttpl=cartF&currency=2" ;
+             */
             window.location.href = 'https://bill.hostkey.com/cart.php?systpl=classichostkey&a=add&pid={$PID}&carttpl=cartF&currency=2&'
                     + generate_post ( Zakaz );
         }
@@ -451,9 +451,9 @@
     <h2>INFORMATION for REQUEST</h2>
 
     <div class="message_pole" id="message_load_ajax"></div>
-        <div id="add_iframe_from_billing">
-                <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
-        </div>
+    <div id="add_iframe_from_billing">
+        <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
+    </div>
 </div>
 
 <style>
@@ -490,18 +490,18 @@
         color: #000;
         text-decoration: none;
     }
-     .need-more-resousrses {
-         background-color: #945ae0;
-         box-sizing: border-box;
-         padding:  20px;
-         color: #fff;
-         text-transform: uppercase;
-         text-align: center;
-         cursor: pointer;
-         width: 100%;
-         text-decoration: none;
-         margin-top: 20px;
-     }
+    .need-more-resousrses {
+        background-color: #945ae0;
+        box-sizing: border-box;
+        padding:  20px;
+        color: #fff;
+        text-transform: uppercase;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        text-decoration: none;
+        margin-top: 20px;
+    }
     .need-more-resousrses-container {
         display: none;
         background-color: #fff;
