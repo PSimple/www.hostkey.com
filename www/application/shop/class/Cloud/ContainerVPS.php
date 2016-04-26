@@ -26,7 +26,6 @@ class Shop_Cloud_ContainerVPS extends Zero_Controller
     /**
      * Вывод данных операции контроллера в шаблон
      *
-     *
      * @return bool
      */
     protected function Chunk_View()
