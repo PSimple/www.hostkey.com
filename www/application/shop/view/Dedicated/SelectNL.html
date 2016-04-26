@@ -14,7 +14,7 @@
 
     <div class="b-dedicated">
 
-        <h3 class="b-dedicated__title">
+        <h3 class="b-dedicated__title" id="scroll-anchor-01">
             DEDICATED<br>
             FEATURE
         </h3>
@@ -24,11 +24,9 @@
         <input type="hidden" name="currency" value="{$currency}">
         <input type="hidden" name="currencyId" value="{$currencyId}">
 
-        <div ui-view="solutions" id="scroll-anchor-01"></div>
+        <div ui-view="solutions"></div>
 
         <iframe id="configure_cloud_VDS" src="" name="configure_cloud_VDS"></iframe>
-
-
         <div class="b-dedicated__services">
             <a href="/about/datacenter" target="_blank" class="b-dedicated__services-block">
                 <div class="b-dedicated__services-block-image">
@@ -71,7 +69,6 @@
             </a>
             <div style="clear: both;"></div>
         </div>
-
         <div class="b-dedicated__box">
             <h3 class="b-dedicated__title b-dedicated__title_upline_yes">
                 features
@@ -80,7 +77,6 @@
         </div>
 
         {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" IsFeatures="1"}
-
 
         <div class="b-dedicated__free">
             <div class="b-dedicated-try__line">
@@ -93,8 +89,7 @@
 
         <div class="need-more-resousrses">
             <span class="b-vps__try-line-text need-more-resousrses-container-zag" data_id_need="need_more">need more information?</span>
-            <div class="need-more-resousrses-container-header-triangle-white"
-                 data_id_need_triangle="need_more"></div>
+            <div class="need-more-resousrses-container-header-triangle-white" data_id_need_triangle="need_more"></div>
         </div>
         <div class="need-more-resousrses-container">
             {plugin "Zero_Content_Plugin_Page" block="content_Left"}

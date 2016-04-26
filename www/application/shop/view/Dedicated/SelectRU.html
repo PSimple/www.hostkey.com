@@ -9,7 +9,7 @@
 
     <div class="b-page__promo b-page__promo_dedicated-select-service_yes">
         <div class="b-icon b-page__scroll-icon" onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
-        <h1 class="b-page__promo-title">dedicated</h1>
+        <h1 class="b-page__promo-title">{$Head}</h1>
     </div>
 
     <div class="b-dedicated">
@@ -20,6 +20,7 @@
         </h3>
 
         {plugin "Content_ContentBlock_Plugin" view="SelectService"}
+
         <input type="hidden" name="currency" value="{$currency}">
         <input type="hidden" name="currencyId" value="{$currencyId}">
 
@@ -96,7 +97,7 @@
         <div style="clear:both;"></div>
 
         <div class="black-sale">
-            <h2 class="black-sale__title">2014 SALE</h2>
+            <h2 class="black-sale__title">CHECK OUR SPECIAL OFFERS</h2>
             {include "Shop_Dedicated_include.black.sale.slider"}
         </div>
 
@@ -144,8 +145,8 @@
 
     .need-more-resousrses-container-header-triangle {
         display: inline-block;
-        border: 10px solid transparent; /* ���������� ������� */
-        border-top: 10px solid #945ae0; /* ��������� ����������� */
+        border: 10px solid transparent;
+        border-top: 10px solid #945ae0;
         position: relative;
         top: 8px;
         left: 0;

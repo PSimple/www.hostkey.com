@@ -7,7 +7,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2016.02.04
  */
-class Shop_Config_General extends Zero_Model
+class Shop_Config_General
 {
     /**
      * URL API К Инвентори
