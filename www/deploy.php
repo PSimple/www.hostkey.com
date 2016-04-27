@@ -32,8 +32,6 @@ $configKeys = [
     'deploy'
 ];
 
-Zero_Logs::File('deploy', $_SERVER);
-
 /**
  * »Õ»÷»¿À»«¿÷»ﬂ
  */
@@ -52,6 +50,10 @@ else
     Zero_Logs::Set_Message_Error('request invalid');
     Zero_App::ResponseConsole();
 }
+
+Zero_Logs::File('server', $_SERVER);
+Zero_Logs::File('request', $_REQUEST);
+
 // ¬ÂÚÍ‡
 if ( !isset($_REQUEST['ref']) )
 {
