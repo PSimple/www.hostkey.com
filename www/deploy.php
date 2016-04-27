@@ -99,4 +99,5 @@ Zero_Helper_File::Folder_Remove(ZERO_PATH_CACHE);
 Zero_Logs::Set_Message_Notice('deploy successFull');
 Zero_App::ResponseConsole();
 exit;
+
 die("!!!");
