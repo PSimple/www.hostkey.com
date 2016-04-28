@@ -14,23 +14,21 @@ Zero_App::Init();
  */
 // ip адреса с которых разрешен деплой
 $configIpAccess = [
-    '1.1.1.1',
+    '158.255.1.134' => 1,
 ];
 // ветка деплоя (репозитория инициатора)
 $configBranch = 'master';
 // папки репозиториев проекта для деплоя
 $configDeploy = [
-    __DIR__,
+    ZERO_PATH_SITE,
     ZERO_PATH_ZERO,
 ];
 //  пользователи которым разрешено производить деплой
 $configUsers = [
-    'kshamiev' => 1,
+    'konstantin@shamiev.ru' => 'Konstantin Shamiev',
 ];
 //  ключевое слово (комментарий) инициирующее деплой
-$configKeys = [
-    'deploy'
-];
+$configKeys = 'deploy';
 
 /**
  * ИНИЦИАЛИЗАЦИЯ
@@ -51,29 +49,34 @@ else
     Zero_App::ResponseConsole();
 }
 
-Zero_Logs::File('server', $_SERVER);
 Zero_Logs::File('request', $_REQUEST);
+
+// IP access
+if ( !isset($configIpAccess[$_SERVER['REMOTE_ADDR']]) )
+{
+    Zero_Logs::Set_Message_Error('access denied from IP: ' . $_SERVER['REMOTE_ADDR']);
+    Zero_App::ResponseConsole();
+}
 
 // Ветка
 if ( !isset($_REQUEST['ref']) )
 {
-    Zero_Logs::Set_Message_Error('request invalid');
+    Zero_Logs::Set_Message_Error('ref invalid');
     Zero_App::ResponseConsole();
 }
 $branch = explode('/', $_REQUEST['ref'])[2];
 if ( $configBranch != $branch )
 {
-    Zero_Logs::Set_Message_Error($branch . ' not valid');
     Zero_App::ResponseConsole();
 }
 //  Автор
-if ( !isset($configUsers[$_REQUEST['pusher']['name']]) )
+if ( !isset($configUsers[$_REQUEST['commits'][0]['author']['email']]) )
 {
-    Zero_Logs::Set_Message_Error('deploy user access denied');
+    Zero_Logs::Set_Message_Error('deploy user access denied from: ' . $_REQUEST['commits'][0]['author']['email']);
     Zero_App::ResponseConsole();
 }
 //  Ключевое слово
-if ( !in_array($_REQUEST['head_commit']['message'], $configKeys) )
+if ( $_REQUEST['commits'][0]['message'] != $configKeys )
 {
     Zero_Logs::Set_Message_Error('deploy key commit access denied');
     Zero_App::ResponseConsole();
@@ -82,6 +85,11 @@ if ( !in_array($_REQUEST['head_commit']['message'], $configKeys) )
 /**
  * РАБОТА
  */
+
+Zero_App::ResponseConsole();
+exit;
+
+
 //  Выкладываем проект
 foreach ($configDeploy as $path)
 {
@@ -99,5 +107,3 @@ Zero_Helper_File::Folder_Remove(ZERO_PATH_CACHE);
 Zero_Logs::Set_Message_Notice('deploy successFull');
 Zero_App::ResponseConsole();
 exit;
-
-die("!!!");
