@@ -21,6 +21,5 @@ if ( Zero_App::$Config->Site_AccessLogin )
     }
 }
 
-
 Zero_App::Execute();
 exit;
