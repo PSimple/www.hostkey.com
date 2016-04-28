@@ -10,8 +10,8 @@ nginx.conf_good
 nginx.conf_ssl
 nginx.conf_ssl_good
 nginx.conf_super_good
-#test.php
-#config.php
+test.php
+config.php
 test
 cache
 config
