@@ -19,7 +19,7 @@
             FEATURE
         </h3>
 
-        {plugin "Content_ContentBlock_Plugin" view="SelectService"}
+        {plugin "Content_ContentBlock_Plugin" view="SelectService" target="top"}
 
         <input type="hidden" name="currency" value="{$currency}">
         <input type="hidden" name="currencyId" value="{$currencyId}">
@@ -76,7 +76,7 @@
 
         </div>
 
-        {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" IsFeatures="1"}
+        {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" target="feature"}
 
         <div class="b-dedicated__free">
             <div class="b-dedicated-try__line">
@@ -87,17 +87,11 @@
             <a id="Mainblock_contact" class="b-submit b-dedicated__free-submit" href="/support/faq">Be the judge</a>
         </div>
 
-        <div class="need-more-resousrses">
-            <span class="b-vps__try-line-text need-more-resousrses-container-zag" data_id_need="need_more">need more information?</span>
-            <div class="need-more-resousrses-container-header-triangle-white" data_id_need_triangle="need_more"></div>
-        </div>
-        <div class="need-more-resousrses-container">
-            {plugin "Zero_Content_Plugin_Page" block="content_Left"}
-        </div>
+        {plugin "Content_ContentBlock_Plugin" view="NeedMore" target="information"}
         <div style="clear:both;"></div>
 
         <div class="black-sale">
-            <h2 class="black-sale__title">CHECK OUR SPECIAL OFFERS</h2>
+            <h2 class="black-sale__title">CHECK OUR SPECIAL OFFERS!</h2>
             {include "Shop_Dedicated_include.black.sale.slider"}
         </div>
 
@@ -106,52 +100,6 @@
     <div class="footer-push"></div>
 </div>
 <style>
-    .need-more-resousrses {
-        background-color: #945ae0;
-        box-sizing: border-box;
-        padding: 20px;
-        color: #fff;
-        text-transform: uppercase;
-        text-align: center;
-        cursor: pointer;
-        width: 100%;
-        text-decoration: none;
-    }
-
-    .need-more-resousrses-container {
-        display: none;
-        background-color: #fff;
-        width: 100%;
-        padding: 0 0 20px 0;
-    }
-
-    .need-more-resousrses-container-messager {
-        display: none;
-        margin: 0 75px 20px;
-    }
-
-    .need-more-resousrses-container-header {
-        padding: 20px 75px;
-        font-size: 20px;
-        color: #945ae0;
-        cursor: pointer;
-        margin: 1px;
-    }
-
-    .need-more-resousrses-container-zag {
-        display: inline-block;
-        border-bottom: 1px dashed;
-    }
-
-    .need-more-resousrses-container-header-triangle {
-        display: inline-block;
-        border: 10px solid transparent;
-        border-top: 10px solid #945ae0;
-        position: relative;
-        top: 8px;
-        left: 0;
-    }
-
     #configure_cloud_VDS {
         border: none;
         display: none;
@@ -160,27 +108,6 @@
         margin: 0 auto;
         background: #fff;
     }
-
-    .need-more-resousrses {
-        background-color: #945ae0;
-        box-sizing: border-box;
-        color: #fff;
-        cursor: pointer;
-        margin: 20px 0 0;
-        padding: 20px;
-        text-align: center;
-        text-transform: uppercase;
-        width: 100%;
-    }
-
-    .need-more-resousrses-container-header-triangle-white {
-        display: inline-block;
-        border: 10px solid transparent; /* Прозрачные границы */
-        border-top: 10px solid #fff; /* Добавляем треугольник */
-        position: relative;
-        top: 8px;
-        left: 0;
-    }
 </style>
 <script>
     $(document).ready(function () {
@@ -188,30 +115,6 @@
         $("body").on("click", ".b-submit", function () {
             $('body #selectedSolution').hide('slow');
             $('#configure_cloud_VDS').show('slow');
-        });
-
-        $('.need-more-resousrses').bind('click', function () {
-            $(".need-more-resousrses-container").toggle();
-        });
-
-        $('.need-more-resousrses-container-zag').bind('click', function () {
-            var id = $(this).attr('data_id_need');
-            var d = $('[data_id_need_content_position="' + id + '"]');
-            var t = $('[data_id_need_triangle="' + id + '"]');
-            d.toggle();
-            t.css('border', '10px solid transparent');
-            if (t.css('top') == '0px') {
-                t.css({
-                    "border-top": "10px solid",
-                    "top": "8px"
-                });
-            } else {
-                t.css({
-                    "border-bottom": "10px solid",
-                    "top": "0px"
-                });
-            }
-
         });
 
     });

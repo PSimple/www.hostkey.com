@@ -94,13 +94,6 @@ class Shop_Cloud_ContainerVPSru extends Zero_Controller
         $table_row_data['Backups Limit'] = $BKL;
         $table_row_data['SOFTWARE'] = $VMT;
 
-        if ( isset($this->Params['IsFeatures']) )
-            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;
-        else
-            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 0 AND Section_ID = " . Zero_App::$Section->ID;
-        $need = Zero_DB::Select_Array($sql);
-        $this->View->Assign('need_more', $need);
-
         $this->View->Assign('table_row_data', $table_row_data);
         $this->View->Assign('payment_period', $payment_period);
         $this->View->Assign('configuration', $p);

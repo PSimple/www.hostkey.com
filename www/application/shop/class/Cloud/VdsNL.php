@@ -47,13 +47,6 @@ class Shop_Cloud_VdsNL extends Zero_Controller
         $configuration = $preset->getSortCloudVDS($configuration, $PID);
         $this->View->Assign('configuration', $configuration);
 
-        if ( isset($this->Params['IsFeatures']) )
-            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 1 AND Section_ID = " . Zero_App::$Section->ID;
-        else
-            $sql = "SELECT * FROM ContentBlock WHERE IsFeatures = 0 AND Section_ID = " . Zero_App::$Section->ID;
-        $need = Zero_DB::Select_Array($sql);
-        $this->View->Assign('need_more', $need);
-
         return true;
     }
 
