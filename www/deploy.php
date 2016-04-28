@@ -85,11 +85,6 @@ if ( $_REQUEST['commits'][0]['message'] != $configKeys )
 /**
  * РАБОТА
  */
-
-Zero_App::ResponseConsole();
-exit;
-
-
 //  Выкладываем проект
 foreach ($configDeploy as $path)
 {
