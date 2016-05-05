@@ -1023,14 +1023,14 @@ p {
 .b-page__promo_vds-cloud_yes {
     background: url(/assets/media/promo_vds.png) no-repeat;
     height: 630px;
-}
+} 
 
 .b-page__promo_hosting_yes {
     background: url(/assets/media/promo_hosting.png) no-repeat;
     height: 630px;
 }
 
-.b-page__promo_domains_yes {
+.b-page__promo_domains_yes { 
     background: url(/assets/media/promo_domains.png) no-repeat;
     height: 640px;
 }
