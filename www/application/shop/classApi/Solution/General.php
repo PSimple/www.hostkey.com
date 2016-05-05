@@ -7,7 +7,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015-02-04
  */
-class Shop_Solution_Api_General extends Zero_Controller
+class Shop_Api_Solution_General extends Zero_Controller
 {
     /**
      * Получение возможных конфигураций калькуляторов по указанным параметрам

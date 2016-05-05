@@ -11,9 +11,6 @@
  */
 class Shop_Cloud_ManagerRU extends Zero_Controller
 {
-
-
-
     /**
      *
      * @return Zero_View
@@ -26,7 +23,6 @@ class Shop_Cloud_ManagerRU extends Zero_Controller
         return $this->View;
     }
 
-
     /**
      * Вывод данных операции контроллера в шаблон
      *
@@ -35,11 +31,10 @@ class Shop_Cloud_ManagerRU extends Zero_Controller
      */
     protected function Chunk_View()
     {
-        $config = Zero_Config::Get_Config('shop');
-        $this->View->Assign("currency", $config['currency']);
-        $this->View->Assign("currencyId", $config['currencyId']);
+        $this->View->Assign("currency", $currencyId = Zero_App::$Config->Modules['shop']['currency']);
+        $this->View->Assign("currencyId", $currencyId = Zero_App::$Config->Modules['shop']['currencyId']);
         $this->View->Assign("PID", 539);
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudCustom/' . md5($config['currencyId'] . 539) . '.data';
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudCustom/' . md5($currencyId = Zero_App::$Config->Modules['shop']['currencyId'] . 539) . '.data';
         $configuration = [];
         if ( file_exists($path) )
         {
@@ -47,14 +42,13 @@ class Shop_Cloud_ManagerRU extends Zero_Controller
         }
         $preset = Shop_PresetContainerVPS::Make();
         $payment_period = 'monthly';
-        $p = $preset->getPreset( $configuration, $payment_period);
-        sort( $p );
-        $this->View->Assign('table_row_data', $table_row_data );
-        $this->View->Assign('payment_period', $payment_period );
-        $this->View->Assign('configuration', $p );
+        $p = $preset->getPreset($configuration, $payment_period);
+        sort($p);
+//        $this->View->Assign('table_row_data', $table_row_data);
+        $this->View->Assign('payment_period', $payment_period);
+        $this->View->Assign('configuration', $p);
         return true;
     }
-
 
     /**
      * Фабричный метод по созданию контроллера.

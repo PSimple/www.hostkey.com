@@ -10,7 +10,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015-11-28
  */
-class Shop_Vps_Api_Order extends Zero_Controller
+class Shop_Api_Vps_Order extends Zero_Controller
 {
     /**
      * Формирование заказа.

@@ -48,14 +48,13 @@ class Content_News_Page extends Zero_Controller
             $news->AR->Sql_Order('DateCreate', 'DESC');
             $news->AR->Sql_Limit(1, 12);
             $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
-           // $NewsDetailPath = Zero_Config::Get_Config('content', 'config');
-            $this->View->Assign('NEWS_DETAIL_PATH', Zero_Config::Get_Config('content')['NewsDetailPath']);
+            // $NewsDetailPath = Zero_Config::Get_Config('content', 'config');
+            $this->View->Assign('NEWS_DETAIL_PATH', Zero_App::$Config->Modules['content']['NewsDetailPath']);
             $this->View->Assign('newsList', $newsList);
-//            pre($newsList);
+            //            pre($newsList);
         }
         return $this->View;
     }
-
 
     /**
      * Инициализация контроллера
@@ -71,9 +70,8 @@ class Content_News_Page extends Zero_Controller
             $this->View = new Zero_View(get_class($this) . '_' . $this->Params['view']);
         else
             $this->View = new Zero_View(get_class($this));
-        return $this->View ;
+        return $this->View;
     }
-
 
     /**
      * Фабричный метод по созданию контроллера.

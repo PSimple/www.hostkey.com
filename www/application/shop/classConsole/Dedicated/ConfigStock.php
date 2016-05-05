@@ -9,7 +9,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2016-02-04
  */
-class Shop_Dedicated_Console_ConfigStock extends Zero_Controller
+class Shop_Console_Dedicated_ConfigStock extends Zero_Controller
 {
     /**
      * Контроллер по умолчанию
@@ -78,7 +78,7 @@ class Shop_Dedicated_Console_ConfigStock extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Dedicated_Console_ConfigStock
+     * @return Shop_Console_Dedicated_ConfigStock
      */
     public static function Make($properties = [])
     {

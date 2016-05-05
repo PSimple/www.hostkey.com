@@ -9,7 +9,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2016-02-04
  */
-class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
+class Shop_Console_Dedicated_ConfigCustom extends Zero_Controller
 {
     /**
      * Кеширование конфигураций компонентов по группам для формирования серверов dedicated
@@ -73,7 +73,7 @@ class Shop_Dedicated_Console_ConfigCustom extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Dedicated_Console_ConfigCustom
+     * @return Shop_Console_Dedicated_ConfigCustom
      */
     public static function Make($properties = [])
     {

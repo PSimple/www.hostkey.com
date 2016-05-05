@@ -35,11 +35,10 @@ class Shop_Cloud_Manager extends Zero_Controller
      */
     protected function Chunk_View()
     {
-        $config = Zero_Config::Get_Config('shop');
-        $this->View->Assign("currency", $config['currency']);
-        $this->View->Assign("currencyId", $config['currencyId']);
+        $this->View->Assign("currency", $currencyId = Zero_App::$Config->Modules['shop']['currency']);
+        $this->View->Assign("currencyId", $currencyId = Zero_App::$Config->Modules['shop']['currencyId']);
         $this->View->Assign("PID", 531);
-        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudCustom/' . md5($config['currencyId'] . 531) . '.data';
+        $path = ZERO_PATH_EXCHANGE . '/ConfigCalculatorCloudCustom/' . md5($currencyId = Zero_App::$Config->Modules['shop']['currencyId'] . 531) . '.data';
         $configuration = [];
         if ( file_exists($path) )
         {

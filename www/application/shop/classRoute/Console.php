@@ -19,26 +19,26 @@ class Shop_Route_Console
         /**
          * Кеширование конфигураций калькулятора (Cloud)
          *
-         * @see Shop_Cloud_Console_Update
+         * @see Shop_Console_Cloud_Update
          */
-        'Shop_Cloud_Console_Update' => ['Minute' => '*/30', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
+        'Shop_Console_Cloud_Update' => ['Minute' => '*/30', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
         /**
          * Кеширование конфигураций компонентов по группам для формирования серверов dedicated
          *
-         * @see Shop_Dedicated_Console_ConfigCustom
+         * @see Shop_Console_Dedicated_ConfigCustom
          */
-        'Shop_Dedicated_Console_ConfigCustom' => ['Minute' => '*/30', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
+        'Shop_Console_Dedicated_ConfigCustom' => ['Minute' => '*/30', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
         /**
          * Кеширование стока для доформирования серверов dedicated
          *
-         * @see Shop_Dedicated_Console_ConfigStock
+         * @see Shop_Console_Dedicated_ConfigStock
          */
-        'Shop_Dedicated_Console_ConfigStock' => ['Minute' => '*/30', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
+        'Shop_Console_Dedicated_ConfigStock' => ['Minute' => '*/30', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
         /**
          * Кеширование списка компоннетов по типам
          *
-         * @see Shop_Dedicated_Console_ConfigList
+         * @see Shop_Console_Dedicated_ConfigList
          */
-        'Shop_Dedicated_Console_ConfigList' => ['Minute' => '*/30', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
+        'Shop_Console_Dedicated_ConfigList' => ['Minute' => '*/30', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
     ];
 }

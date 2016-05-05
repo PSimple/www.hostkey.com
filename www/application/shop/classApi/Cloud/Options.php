@@ -8,11 +8,11 @@
  *
  * В данный момент не используется
  *
- * @package Shop.Cloud.Api
+ * @package Shop.Api.Cloud
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015-11-28
  */
-class Shop_Cloud_Api_Options extends Zero_Controller
+class Shop_Api_Cloud_Options extends Zero_Controller
 {
     /**
      * Получение кеширонной конфигурации для кастомизатора указанного раздела
@@ -50,7 +50,7 @@ class Shop_Cloud_Api_Options extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Cloud_Api_Options
+     * @return Shop_Api_Cloud_Options
      */
     public static function Make($properties = [])
     {

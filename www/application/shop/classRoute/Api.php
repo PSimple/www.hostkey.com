@@ -18,44 +18,44 @@ class Shop_Route_Api
         /**
          * Получение кеширонной конфигурации для калькулятора Cloud
          *
-         * @see Shop_Cloud_Api_Options
+         * @see Shop_Api_Cloud_Options
          */
-        '/api/v1/cloud/options' => ['Controller' => 'Shop_Cloud_Api_Options', 'View' => ''],
+        '/api/v1/cloud/options' => ['Controller' => 'Shop_Api_Cloud_Options', 'View' => ''],
         /**
          * Получение возможных конфигураций калькуляторов по указанным параметрам
          *
-         * @see Shop_Solution_Api_General
+         * @see Shop_Api_Solution_General
          */
-        '/api/v1/solutions' => ['Controller' => 'Shop_Solution_Api_General', 'View' => ''],
+        '/api/v1/solutions' => ['Controller' => 'Shop_Api_Solution_General', 'View' => ''],
         /**
          * Получение кеширонной конфигурации для калькулятора (по группам)
          *
-         * @see Shop_Dedicated_Api_Custom
+         * @see Shop_Api_Dedicated_Custom
          */
-        '/api/v1/dedicated/config' => ['Controller' => 'Shop_Dedicated_Api_Custom', 'View' => ''],
+        '/api/v1/dedicated/config' => ['Controller' => 'Shop_Api_Dedicated_Custom', 'View' => ''],
         /**
          * Получение кеширонной информации по стоковым серверам.
          *
-         * @see Shop_Dedicated_Api_ConfigStock
+         * @see Shop_Api_Dedicated_ConfigStock
          */
-        '/api/v1/dedicated/config-stock' => ['Controller' => 'Shop_Dedicated_Api_ConfigStock', 'View' => ''],
+        '/api/v1/dedicated/config-stock' => ['Controller' => 'Shop_Api_Dedicated_ConfigStock', 'View' => ''],
         /**
          * Формирование заказа Dedicated
          *
-         * @see Shop_Dedicated_Api_Order
+         * @see Shop_Api_Dedicated_Order
          */
-        '/api/v1/dedicated/order' => ['Controller' => 'Shop_Dedicated_Api_Order', 'View' => ''],
+        '/api/v1/dedicated/order' => ['Controller' => 'Shop_Api_Dedicated_Order', 'View' => ''],
         /**
          * Формирование заказа на стоковым серверам (временной решение)
          *
-         * @see Shop_Dedicated_Api_OrderStockFake
+         * @see Shop_Api_Dedicated_OrderStockFake
          */
-        '/api/v1/dedicated/order-stock-fake' => ['Controller' => 'Shop_Dedicated_Api_OrderStockFake', 'View' => ''],
+        '/api/v1/dedicated/order-stock-fake' => ['Controller' => 'Shop_Api_Dedicated_OrderStockFake', 'View' => ''],
         /**
          * Формирование заказа на VPS
          *
-         * @see Shop_Vps_Api_Order
+         * @see Shop_Api_Vps_Order
          */
-        '/api/v1/vps/order' => ['Controller' => 'Shop_Vps_Api_Order', 'View' => ''],
+        '/api/v1/vps/order' => ['Controller' => 'Shop_Api_Vps_Order', 'View' => ''],
     ];
 }

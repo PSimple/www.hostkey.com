@@ -10,7 +10,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2016-02-04
  */
-class Shop_Dedicated_Api_Custom extends Zero_Controller
+class Shop_Api_Dedicated_Custom extends Zero_Controller
 {
     /**
      * Получение кеширонной конфигурации для калькулятора (по группам)
@@ -97,7 +97,7 @@ class Shop_Dedicated_Api_Custom extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Dedicated_Api_Custom
+     * @return Shop_Api_Dedicated_Custom
      */
     public static function Make($properties = [])
     {
