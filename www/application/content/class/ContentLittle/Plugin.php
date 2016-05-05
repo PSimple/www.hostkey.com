@@ -19,47 +19,27 @@ class Content_ContentLittle_Plugin extends Zero_Controller
     public function Action_Default()
     {
         // Шаблон
-        if ( !isset($this->Params['view']) )
-        {
-            Zero_Logs::Set_Message_Error('Шаблон для Content_ContentLittle_Plugin не указан');
-            return '';
-        }
+        $this->Chunk_Init();
         if ( 'Header' == $this->Params['view'] )
         {
-            $this->View = new Zero_View(__CLASS__ . '_' . $this->Params['view']);
             $sql = "SELECT ID, Value FROM ContentLittle WHERE ID = 1";
             $data = Zero_DB::Select_List_Index($sql);
             $this->View->Assign('data', $data);
             $this->View->Assign('SECTION_ID', Zero_App::$Section->Section_ID);
-
-            return $this->View;
         }
         else if ( 'Footer' == $this->Params['view'] )
         {
-            $this->View = new Zero_View(__CLASS__ . '_' . $this->Params['view']);
-
             $sql = "SELECT ID, Value FROM ContentLittle WHERE ID IN (2,3,4)";
             $data = Zero_DB::Select_List_Index($sql);
             $this->View->Assign('data', $data);
-
-            return $this->View;
         }
         else if ( 'FooterMain' == $this->Params['view'] )
         {
-            $this->View = new Zero_View(__CLASS__ . '_' . $this->Params['view']);
-
             $sql = "SELECT ID, Value FROM ContentLittle WHERE ID IN (2,3,4)";
             $data = Zero_DB::Select_List_Index($sql);
             $this->View->Assign('data', $data);
-
-            return $this->View;
         }
-        else
-        {
-            $this->View = new Zero_View(__CLASS__ . '_' . $this->Params['view']);
-
-            return $this->View;
-        }
+        return $this->View;
     }
 
     /**

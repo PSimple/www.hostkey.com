@@ -33,7 +33,7 @@ class Content_ContentLittle extends Zero_Model
      * @see Zero_Engine
      * - 'Comment' => string            - Комментарий свойства (пользуйтесь системой перевода i18n)
      *
-     * @param ContentLittle $Model The exact working model
+     * @param Content_ContentLittle $Model The exact working model
      * @param string $scenario Сценарий свойств
      * @return array
      */
@@ -76,7 +76,7 @@ class Content_ContentLittle extends Zero_Model
      * - 'List'=> array                 - Варианты значений (пользуйтесь системой перевода i18n)
      * - 'Comment' => string            - Комментарий свойства (пользуйтесь системой перевода i18n)
      *
-     * @param ContentLittle $Model The exact working model
+     * @param Content_ContentLittle $Model The exact working model
      * @param string $scenario Сценарий свойств
      * @return array
      */
@@ -96,7 +96,7 @@ class Content_ContentLittle extends Zero_Model
      * - 'AliasDB'=> 'z.PropName'       - Реальное название свойства (поля) в БД
      * - 'Comment' => string            - Комментарий свойства (пользуйтесь системой перевода i18n)
      *
-     * @param ContentLittle $Model The exact working model
+     * @param Content_ContentLittle $Model The exact working model
      * @param string $scenario Сценарий свойств
      * @return array
      */
@@ -117,7 +117,7 @@ class Content_ContentLittle extends Zero_Model
      * - 'Form'=> string                - Форма предстваления свйоства в виджетах и вьюхах (смотри Zero_Engine)
      * - 'Comment' => string            - Комментарий свойства (пользуйтесь системой перевода i18n)
      *
-     * @param ContentLittle $Model The exact working model
+     * @param Content_ContentLittle $Model The exact working model
      * @param string $scenario Сценарий свойств
      * @return array
      */
@@ -142,7 +142,7 @@ class Content_ContentLittle extends Zero_Model
      *
      * @param integer $id идентификатор объекта
      * @param bool $flagLoad флаг полной загрузки объекта
-     * @return ContentLittle
+     * @return Content_ContentLittle
      */
     public static function Make($id = 0, $flagLoad = false)
     {
@@ -156,7 +156,7 @@ class Content_ContentLittle extends Zero_Model
      *
      * @param integer $id идентификатор объекта
      * @param bool $flagLoad флаг полной загрузки объекта
-     * @return ContentLittle
+     * @return Content_ContentLittle
      */
     public static function Instance($id = 0, $flagLoad = false)
     {

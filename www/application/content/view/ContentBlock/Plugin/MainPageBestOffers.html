@@ -1,76 +1,67 @@
 {if (count($DATA)==0)}
-    <div class="Empty-Block">
+<div class="Empty-Block">
 
-    </div>
+</div>
 {else}
 <div class="main-page-offers">
-{set $gid = array("Banner_dedic_main", "Banner_cvps_main", "Banner_wvps_main", "Banner_saleserv_main")}
-{foreach ($DATA as $key => $value)}
-<a id="{$gid[$key]}" class="main-page-offers__item" href="{$value['Link']}" style="{if ($key>3)}display: none{/if}">
-    <h3 class="main-page-offers__item-title">{$value['Head']}</h3>
-    <div class="main-page-offers__item-text">
-        {$value['Description']}
-    </div>
-    <div class="main-page-offers__item-price">
-        <div class="main-page-offers__item-price-before">
-            From
+    {set $gid = array("Banner_dedic_main", "Banner_cvps_main", "Banner_wvps_main", "Banner_saleserv_main")}
+    {foreach ($DATA as $key => $value)}
+    <a id="{$gid[$key]}" class="main-page-offers__item" href="{$value['Link']}" style="{if ($key>3)}display: none{/if}">
+        <h3 class="main-page-offers__item-title">{$value['Head']}</h3>
+
+        <div class="main-page-offers__item-text">
+            {$value['Description']}
         </div>
-        <div class="main-page-offers__item-price-new">
-            &euro;{$value['PriceEUR']}
+        <div class="main-page-offers__item-price">
+            <div class="main-page-offers__item-price-before">
+                From
+            </div>
+            <div class="main-page-offers__item-price-new">
+                &euro;{$value['PriceEUR']}
+            </div>
         </div>
-    </div>
-    <div class="main-page-offers__item-register">
-        Configure
-    </div>
-    <div class="main-page-offers__item-order">
-        order
-    </div>
-</a>
-{/foreach}
+        <div class="main-page-offers__item-register">
+            Configure
+        </div>
+        <div class="main-page-offers__item-order">
+            order
+        </div>
+    </a>
+    {/foreach}
     {if (count($DATA)>4)}
-            <a class="b-news__more" href="#">
-                <div class="b-news__more-plus">
-                    <span class="b-icon b-news__more-plus-icon"></span>
-                </div>
-                <div class="b-news__more-text">more<br>offers</div>
-            </a>
+    <a class="b-news__more" href="#">
+        <div class="b-news__more-plus">
+            <span class="b-icon b-news__more-plus-icon"></span>
+        </div>
+        <div class="b-news__more-text">more<br>offers</div>
+    </a>
     {else}
-            <a class="b-news__more" href="#" style="cursor: pointer;"></a>
+    <a class="b-news__more" href="#" style="cursor: pointer;"></a>
     {/if}
-    </div>
+</div>
 <div style="clear: both"></div>
 {/if}
 <script>
-    $( document ).ready(function() {
-
-var c = 4;
-var l = $( ".main-page-offers a.main-page-offers__item" ).length;
-
-        $( '.b-news__more').bind( 'click', function(){
-
-            if( 4 >= l) {
+    $(document).ready(function () {
+        var c = 4;
+        var l = $(".main-page-offers a.main-page-offers__item").length;
+        $('.b-news__more').bind('click', function () {
+            if (4 >= l) {
                 c = c + 4;
                 l = l - 4;
             } else {
-                c = c +l;
+                c = c + l;
                 l = 0;
             }
-
-            $(' .main-page-offers a.main-page-offers__item').each(function( index  ){
-                if ( index < c) {
-                    $( this).show('slow');
-                };
+            $(' .main-page-offers a.main-page-offers__item').each(function (index) {
+                if (index < c) {
+                    $(this).show('slow');
+                }
             });
-
-            if( l == 0 ) {
-               $( ".b-news__more div" ).hide('slow');
-            };
+            if (l == 0) {
+                $(".b-news__more div").hide('slow');
+            }
             return false;
         })
-
-
     });
-
-
-
 </script>

@@ -3,13 +3,13 @@
 /**
  * Часто задаваемы вопросы по Ssl
  *
- * @sample {plugin "Content_FaqSsl_Plugin_Page"}
+ * @sample {plugin "Content_FaqSsl_Plugin" view="Page"}
  *
  * @package Content.Plugin.FaqSsl
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */
-class Content_FaqSsl_Plugin_Page extends Zero_Controller
+class Content_FaqSsl_Plugin extends Zero_Controller
 {
     /**
      * Контроллер по умолчанию.
@@ -31,7 +31,7 @@ class Content_FaqSsl_Plugin_Page extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Content_FaqSsl_Plugin_Page
+     * @return Content_FaqSsl_Plugin
      */
     public static function Make($properties = [])
     {

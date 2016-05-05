@@ -7,9 +7,17 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.09.01
  *
+ * @property integer $Section_ID
  * @property string $Head
+ * @property string $Target
+ * @property integer $IsEnable
  * @property string $Img
+ * @property string $Link
+ * @property string $PriceRUR
+ * @property string $PriceEUR
+ * @property string $Description
  * @property string $Conten
+ * @property integer $Sort
  */
 class Content_ContentBlock extends Zero_Model
 {
@@ -70,13 +78,6 @@ class Content_ContentBlock extends Zero_Model
 				'Default' => '1',
 				'Form' => 'Check',
 			],
-			'IsFeatures' => [
-				'AliasDB' => 'z.IsFeatures',
-				'DB' => 'I',
-				'IsNull' => 'YES',
-				'Default' => '0',
-				'Form' => 'Check',
-			],
 			'Img' => [
 				'AliasDB' => 'z.Img',
 				'DB' => 'T',
@@ -119,6 +120,7 @@ class Content_ContentBlock extends Zero_Model
 				'Default' => '',
 				'Form' => 'Content',
 			],
+            'Sort' => ['AliasDB' => 'z.Sort', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Number'],
         ];
     }
 
@@ -149,6 +151,7 @@ class Content_ContentBlock extends Zero_Model
 			'Img' => ['Visible' => true, 'AR' => true],
 			'Description' => ['Visible' => true, 'AR' => true],
 			'Content' => ['Visible' => true, 'AR' => true],
+            'Sort' => ['Visible' => true, 'AR' => true],
         ];
     }
 
@@ -168,6 +171,7 @@ class Content_ContentBlock extends Zero_Model
         return [
             'ID' => [],
 			'Head' => [],
+			'Sort' => [],
         ];
     }
 
@@ -197,6 +201,7 @@ class Content_ContentBlock extends Zero_Model
             'PriceEUR' => [],
 			'Description' => [],
 			'Content' => [],
+			'Sort' => [],
         ];
     }
 

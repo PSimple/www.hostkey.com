@@ -33,23 +33,6 @@ class Content_ContentBlock_Plugin extends Zero_Controller
     }
 
     /**
-     * Инициализация контроллера
-     *
-     * Может быть переопределен конкретным контроллером
-     *
-     * @return bool
-     */
-    protected function Chunk_Init()
-    {
-        // Шаблон
-        if ( isset($this->Params['view']) )
-            $this->View = new Zero_View(get_class($this) . '_' . $this->Params['view']);
-        else
-            $this->View = new Zero_View(get_class($this));
-        return true;
-    }
-
-    /**
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина

@@ -4,13 +4,13 @@
  * A two-level navigation through the main sections of the site.
  *
  * - 2 и 3 уровень.
- * Sample: {plugin "Zero_Section_Plugin_NavigationAccordion" view="" section_id="0"}
+ * Sample: {plugin "Zero_Section_PluginAccordion" view="Page" section_id="0"}
  *
  * @package Content.Plugin.Section
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.01.01
  */
-class Content_Section_Plugin_NavigationAccordion extends Zero_Controller
+class Content_Section_PluginAccordion extends Zero_Controller
 {
     /**
      * Vy`polnenie dei`stvii`

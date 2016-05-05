@@ -8,7 +8,8 @@
  * @date 2015.11.19
  *
  * @property string $Question
- * @property string $Answe
+ * @property string $Answer
+ * @property integer $Sort
  */
 class Content_FaqSsl extends Zero_Model
 {
@@ -18,23 +19,6 @@ class Content_FaqSsl extends Zero_Model
      * @var string
      */
     protected $Source = 'FaqSsl';
-
-    /**
-     * Configuration links many to many
-     *
-     * - 'table_target' => ['table_link', 'prop_this', 'prop_target']
-     *
-     * @param Content_Faq $Model The exact working model
-     * @param string $scenario Сценарий свойств
-     * @return array
-     */
-    protected static function Config_Link($Model, $scenario = '')
-    {
-        return [
-            
-
-        ];
-    }
 
     /**
      * Базовая конфигурация свойств модели
@@ -58,26 +42,27 @@ class Content_FaqSsl extends Zero_Model
     {
         return [
             'ID' => [
-				'AliasDB' => 'z.ID',
-				'DB' => 'ID',
-				'IsNull' => 'NO',
-				'Default' => '',
-				'Form' => '',
-			],
-			'Question' => [
-				'AliasDB' => 'z.Question',
-				'DB' => 'T',
-				'IsNull' => 'YES',
-				'Default' => '',
-				'Form' => 'Text',
-			],
-			'Answer' => [
-				'AliasDB' => 'z.Answer',
-				'DB' => 'T',
-				'IsNull' => 'YES',
-				'Default' => '',
-				'Form' => 'Content',
-			],
+                'AliasDB' => 'z.ID',
+                'DB' => 'ID',
+                'IsNull' => 'NO',
+                'Default' => '',
+                'Form' => '',
+            ],
+            'Question' => [
+                'AliasDB' => 'z.Question',
+                'DB' => 'T',
+                'IsNull' => 'YES',
+                'Default' => '',
+                'Form' => 'Text',
+            ],
+            'Answer' => [
+                'AliasDB' => 'z.Answer',
+                'DB' => 'T',
+                'IsNull' => 'YES',
+                'Default' => '',
+                'Form' => 'Content',
+            ],
+            'Sort' => ['AliasDB' => 'z.Sort', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Number'],
         ];
     }
 
@@ -101,8 +86,9 @@ class Content_FaqSsl extends Zero_Model
     {
         return [
             'ID' => ['Visible' => true, 'AR' => true],
-			'Question' => ['Visible' => true, 'AR' => true],
-			'Answer' => ['Visible' => true, 'AR' => true],
+            'Question' => ['Visible' => true, 'AR' => true],
+            'Answer' => ['Visible' => true, 'AR' => true],
+            'Sort' => ['Visible' => true, 'AR' => true],
         ];
     }
 
@@ -121,7 +107,8 @@ class Content_FaqSsl extends Zero_Model
     {
         return [
             'ID' => [],
-			'Question' => [],
+            'Question' => [],
+            'Sort' => [],
         ];
     }
 
@@ -141,9 +128,22 @@ class Content_FaqSsl extends Zero_Model
     {
         return [
             'ID' => [],
-			'Question' => [],
-			'Answer' => [],
+            'Question' => [],
+            'Answer' => [],
+            'Sort' => [],
         ];
+    }
+
+    /**
+     * Формирование from части запроса к БД
+     * May be removed
+     *
+     * @param array $params параметры контроллера
+     * @return string
+     */
+    public function AR_From($params)
+    {
+        $this->AR->Sql_From("FROM {$this->Source} as z");
     }
 
     /**
