@@ -7,47 +7,15 @@
     <div class="b-vps">
 
         <div class="b-vps__feature b-container">
-            <div class="b-vps__feature-item">
-                <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-01.png" alt="иконка">
-                <h3 class="b-vps__feature-item-title">
-                    Ready in minutes
-                </h3>
-                <p class="b-vps__feature-item-text">
-                    We start preparing your server while you order. Pay and play.
-                </p>
-            </div><!--
-                        --><div class="b-vps__feature-item">
-            <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-02.png" alt="иконка">
-            <h3 class="b-vps__feature-item-title">
-                Nothing gets lost
-            </h3>
-            <p class="b-vps__feature-item-text">
-                All your actions while managing your server are fully backed up and can be instantly restored without contacting the support team
-            </p>
-        </div><!--
-                        --><div class="b-vps__feature-item">
-            <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-03.png" alt="иконка">
-            <h3 class="b-vps__feature-item-title">
-                Perfection achievable
-            </h3>
-            <p class="b-vps__feature-item-text">
-                You get an unlimited number of reinstalls and a huge number of OS presets
-            </p>
-        </div><!--
-                        --><div class="b-vps__feature-item">
-            <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-04.png" alt="иконка">
-            <h3 class="b-vps__feature-item-title">
-                You’re the boss!
-            </h3>
-            <p class="b-vps__feature-item-text">
-                Full administrative access to your server. No catch.
-            </p>
-        </div>
+
+            {plugin "Content_ContentBlock_Plugin" view="VpsWindow" target="top"}
+
             <br>
             <br>
             <br>
             <br>
             <a name="country-nl"></a>
+
             <div class="switch_country_for_container_VPS" id="calc" style="position: relative; left: 350px;">
                 <div class="b-dedicated__switch-item active  flag_nl">
                     netherlands
@@ -63,18 +31,13 @@
         </div>
 
         <div id="scroll-anchor-01" class="scroll-anchor-01"></div>
-        <div style="float: left; width: 100%; box-sizing: border-box; padding: 0px; background: #fff;"
-             class="b-text-page__box">
+        <div style="float: left; width: 100%; box-sizing: border-box; padding: 0px; background: #fff;" class="b-text-page__box">
             <h3 style="overflow: hidden;" class="b-text-page__title b-text-page__title_upline_yes">
-                WINDOWS VPS
+                {Zero_App::$Section->NameSub}
             </h3>
+
             <div style="float: right; width: 800px; margin: 20px 0 0 0;" class="desc-container-vps">
-                <img src="/assets/img/win.jpg" align="left">
-                Windows VPS is a copy of your private Windows Server that is running on the cloud.<br>
-                You can connect to your Windows Remote Desktop via RDP connection any time.<br>
-                Use your Windows VPS to browse anonymously, run specific software like Media Encoding,<br>
-                24x7 Forex trading, Game Server or simply host websites that require IIS/ASP support.<br><br>
-                It’s like having another computer that is constantly on to fulfill your needs!
+                {Zero_App::$Section->Content}
             </div>
         </div>
 
@@ -332,8 +295,7 @@
                 </td>
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
                     <div class="b-vps-table__text">
-                        <select class="table-select__item  bal" name="tbl-period-1" id="vm_template1"
-                                onchange="changeSum(1, this.value);">
+                        <select class="table-select__item  bal" name="tbl-period-1" id="vm_template1" onchange="changeSum(1, this.value);">
                             <option value="monthly" selected="selected">monthly</option>
                             <option value="quarterly">quarterly - 3%</option>
                             <option value="semiannually">semiannually - 6%</option>
@@ -343,8 +305,7 @@
                 </td>
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
                     <div class="b-vps-table__text">
-                        <select class="table-select__item  bal" name="tbl-period-2" id="vm_template2"
-                                onchange="changeSum(2, this.value);">
+                        <select class="table-select__item  bal" name="tbl-period-2" id="vm_template2" onchange="changeSum(2, this.value);">
                             <option value="monthly" selected="selected">monthly</option>
                             <option value="quarterly">quarterly - 3%</option>
                             <option value="semiannually">semiannually - 6%</option>
@@ -354,8 +315,7 @@
                 </td>
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
                     <div class="b-vps-table__text">
-                        <select class="table-select__item  bal" name="tbl-period-3" id="vm_template3"
-                                onchange="changeSum(3, this.value);">
+                        <select class="table-select__item  bal" name="tbl-period-3" id="vm_template3" onchange="changeSum(3, this.value);">
                             <option value="monthly" selected="selected">monthly</option>
                             <option value="quarterly">quarterly - 3%</option>
                             <option value="semiannually">semiannually - 6%</option>
@@ -365,8 +325,7 @@
                 </td>
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
                     <div class="b-vps-table__text">
-                        <select class="table-select__item  bal" name="tbl-period-4" id="vm_template4"
-                                onchange="changeSum(4, this.value);">
+                        <select class="table-select__item  bal" name="tbl-period-4" id="vm_template4" onchange="changeSum(4, this.value);">
                             <option value="monthly" selected="selected">monthly</option>
                             <option value="quarterly">quarterly - 3%</option>
                             <option value="semiannually">semiannually - 6%</option>
@@ -376,8 +335,7 @@
                 </td>
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
                     <div class="b-vps-table__text">
-                        <select class="table-select__item  bal" name="tbl-period-5" id="vm_template5"
-                                onchange="changeSum(5, this.value);">
+                        <select class="table-select__item  bal" name="tbl-period-5" id="vm_template5" onchange="changeSum(5, this.value);">
                             <option value="monthly" selected="selected">monthly</option>
                             <option value="quarterly">quarterly - 3%</option>
                             <option value="semiannually">semiannually - 6%</option>
@@ -387,8 +345,7 @@
                 </td>
                 <td class="b-vps__table-cell b-vps__table-cell_border_yes">
                     <div class="b-vps-table__text">
-                        <select class="table-select__item  bal" name="tbl-period-6" id="vm_template6"
-                                onchange="changeSum(6, this.value);">
+                        <select class="table-select__item  bal" name="tbl-period-6" id="vm_template6" onchange="changeSum(6, this.value);">
                             <option value="monthly" selected="selected">monthly</option>
                             <option value="quarterly">quarterly - 3%</option>
                             <option value="semiannually">semiannually - 6%</option>
@@ -443,11 +400,11 @@
             <tr>
                 <td colspan="7">
                     <div class="more-ref"><span>*</span> 1 TB of outgoing traffic is included in your monthly plan, excess traffic usage
-                        will be charged at rate of €5 per TB extra.</div>
+                        will be charged at rate of €5 per TB extra.
+                    </div>
                 </td>
             </tr>
         </table>
-
         <div class="b-dedicated__free">
             <div class="b-dedicated-try__line">
                 <span class="b-vps__try-line-text">Try before you buy</span>

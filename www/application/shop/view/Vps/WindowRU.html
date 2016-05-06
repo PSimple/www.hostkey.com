@@ -1,4 +1,3 @@
-
 <div class="b-page">
 
     <div class="b-page__promo b-page__promo_vps_yes">
@@ -8,49 +7,17 @@
     <div class="b-vps">
 
         <div class="b-vps__feature b-container">
-            <div class="b-vps__feature-item">
-                <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-01.png" alt="иконка">
-                <h3 class="b-vps__feature-item-title">
-                    Ready in minutes
-                </h3>
-                <p class="b-vps__feature-item-text">
-                    We start preparing your server while you order. Pay and play.
-                </p>
-            </div><!--
-                        --><div class="b-vps__feature-item">
-            <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-02.png" alt="иконка">
-            <h3 class="b-vps__feature-item-title">
-                Nothing gets lost
-            </h3>
-            <p class="b-vps__feature-item-text">
-                All your actions while managing your server are fully backed up and can be instantly restored without contacting the support team
-            </p>
-        </div><!--
-                        --><div class="b-vps__feature-item">
-            <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-03.png" alt="иконка">
-            <h3 class="b-vps__feature-item-title">
-                Perfection achievable
-            </h3>
-            <p class="b-vps__feature-item-text">
-                You get an unlimited number of reinstalls and a huge number of OS presets
-            </p>
-        </div><!--
-                        --><div class="b-vps__feature-item">
-            <img class="b-vps__feature-item-icon" src="/assets/img/vps-icons-04.png" alt="иконка">
-            <h3 class="b-vps__feature-item-title">
-                You’re the boss!
-            </h3>
-            <p class="b-vps__feature-item-text">
-                Full administrative access to your server. No catch.
-            </p>
-        </div>
+
+            {plugin "Content_ContentBlock_Plugin" view="VpsWindow" target="top"}
+
             <br>
             <br>
             <br>
             <br>
             <a name="country-ru"></a>
+
             <div class="switch_country_for_container_VPS" id="calc" style="position: relative; left: 350px;">
-                <div  class="b-dedicated__switch-item  flag_nl">
+                <div class="b-dedicated__switch-item  flag_nl">
                     <a id="Change_nl_winvps" href="/cloud/winvps/netherlands#country-nl" target="_self" title="ckoud VDS Russia" style="text-decoration: none; color: black;">
                         netherlands
                     </a>
@@ -66,15 +33,11 @@
         <div id="scroll-anchor-01" class="scroll-anchor-01"></div>
         <div style="float: left; width: 100%; box-sizing: border-box; padding: 0px; background: #fff;" class="b-text-page__box">
             <h3 style="overflow: hidden;" class="b-text-page__title b-text-page__title_upline_yes">
-                WINDOWS VPS
+                {Zero_App::$Section->NameSub}
             </h3>
+
             <div style="float: right; width: 800px; margin: 20px 0 0 0;" class="desc-container-vps">
-                <img src="/assets/img/win.jpg" align="left">
-                Windows VPS is a copy of your private Windows Server that is running on the cloud.<br>
-                You can connect to your Windows Remote Desktop via RDP connection any time.<br>
-                Use your Windows VPS to browse anonymously, run specific software like Media Encoding,<br>
-                24x7 Forex trading, Game Server or simply host websites that require IIS/ASP support.<br><br>
-                It’s like having another computer that is constantly on to fulfill your needs!
+                {Zero_App::$Section->Content}
             </div>
         </div>
 
@@ -437,7 +400,8 @@
             <tr>
                 <td colspan="7">
                     <div class="more-ref"><span>*</span> 1 TB of outgoing traffic is included in your monthly plan, excess traffic usage
-                        will be charged at rate of €5 per TB extra.</div>
+                        will be charged at rate of €5 per TB extra.
+                    </div>
                 </td>
             </tr>
         </table>
@@ -484,26 +448,23 @@
         semiannually: 6,
         annually: 12
     };
-    function changeSum(id, period)
-    {
-        var price = document.getElementById("win"+id);
+    function changeSum(id, period) {
+        var price = document.getElementById("win" + id);
         var sum = price.value;
-        if ( 0 < periodDiscountArr[period] )
-        {
+        if (0 < periodDiscountArr[period]) {
             sum = price.value - ( price.value * periodDiscountArr[period] );
         }
 
         sum = Math.round(sum * periodArr[period] * 100) / 100;
 
-        var obj = document.getElementById("winh"+id);
+        var obj = document.getElementById("winh" + id);
         obj.innerHTML = '€' + sum + '/' + periodMonth[period];
-        obj = document.getElementById("winf"+id);
+        obj = document.getElementById("winf" + id);
         obj.innerHTML = '€' + sum + '/' + periodMonth[period];
     }
-    function saleBuy(id)
-    {
-        var period = document.getElementById("vm_template"+id).value;
-        var os = document.getElementById("os"+id).value;
+    function saleBuy(id) {
+        var period = document.getElementById("vm_template" + id).value;
+        var os = document.getElementById("os" + id).value;
 
         var order = {};
         order['groups'] = 'RU';
@@ -514,13 +475,13 @@
         jQuery.post("/api/v1/vps/order", order,
                 function (data) {
                     if (data) {
-                        if (data['ErrorStatus'] == true ) {
+                        if (data['ErrorStatus'] == true) {
                             alert(data['Message']);
                             return;
                         }
                         var str = "https://bill.hostkey.com/cart.php?a=add&currency=" + data['Content']['currencyId'] + "&pid=555";
                         str += "&configoption[800]=" + data['Content']['OptionID'];
-                        str += "&billingcycle="+period+"&customfield[310]=" + data['Content']['Configuration'];
+                        str += "&billingcycle=" + period + "&customfield[310]=" + data['Content']['Configuration'];
                         window.console.log(str);
                         document.location = str;
                     } else {

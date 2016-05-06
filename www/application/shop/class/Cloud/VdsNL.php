@@ -46,6 +46,9 @@ class Shop_Cloud_VdsNL extends Zero_Controller
         $configuration = $preset->getSortCloudVDS($configuration, $PID);
         $this->View->Assign('configuration', $configuration);
 
+//        Zero_App::$Section->NameSub
+//        Zero_App::$Section->Content
+
         return true;
     }
 

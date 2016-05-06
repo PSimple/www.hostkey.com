@@ -50,41 +50,41 @@ class Content_ContentBlock extends Zero_Model
     {
         return [
             'ID' => [
-				'AliasDB' => 'z.ID',
-				'DB' => 'I',
-				'IsNull' => 'NO',
-				'Default' => '',
-				'Form' => '',
-			],
+                'AliasDB' => 'z.ID',
+                'DB' => 'I',
+                'IsNull' => 'NO',
+                'Default' => '',
+                'Form' => '',
+            ],
             'Section_ID' => ['AliasDB' => 'z.Section_ID', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Link'],
-			'Head' => [
-				'AliasDB' => 'z.Head',
-				'DB' => 'T',
-				'IsNull' => 'YES',
-				'Default' => '',
-				'Form' => 'Text',
-			],
-			'Target' => [
-				'AliasDB' => 'z.Target',
-				'DB' => 'E',
-				'IsNull' => 'YES',
-				'Default' => '',
-				'Form' => 'Select',
-			],
-			'IsEnable' => [
-				'AliasDB' => 'z.IsEnable',
-				'DB' => 'I',
-				'IsNull' => 'YES',
-				'Default' => '1',
-				'Form' => 'Check',
-			],
-			'Img' => [
-				'AliasDB' => 'z.Img',
-				'DB' => 'T',
-				'IsNull' => 'YES',
-				'Default' => '',
-				'Form' => 'Img',
-			],
+            'Head' => [
+                'AliasDB' => 'z.Head',
+                'DB' => 'T',
+                'IsNull' => 'YES',
+                'Default' => '',
+                'Form' => 'Text',
+            ],
+            'Target' => [
+                'AliasDB' => 'z.Target',
+                'DB' => 'E',
+                'IsNull' => 'YES',
+                'Default' => '',
+                'Form' => 'Select',
+            ],
+            'IsEnable' => [
+                'AliasDB' => 'z.IsEnable',
+                'DB' => 'I',
+                'IsNull' => 'YES',
+                'Default' => '1',
+                'Form' => 'Check',
+            ],
+            'Img' => [
+                'AliasDB' => 'z.Img',
+                'DB' => 'T',
+                'IsNull' => 'YES',
+                'Default' => '',
+                'Form' => 'Img',
+            ],
             'Link' => [
                 'AliasDB' => 'z.Link',
                 'DB' => 'T',
@@ -106,20 +106,20 @@ class Content_ContentBlock extends Zero_Model
                 'Default' => '',
                 'Form' => 'Number',
             ],
-			'Description' => [
-				'AliasDB' => 'z.Description',
-				'DB' => 'T',
-				'IsNull' => 'YES',
-				'Default' => '',
-				'Form' => 'Textarea',
-			],
-			'Content' => [
-				'AliasDB' => 'z.Content',
-				'DB' => 'T',
-				'IsNull' => 'YES',
-				'Default' => '',
-				'Form' => 'Content',
-			],
+            'Description' => [
+                'AliasDB' => 'z.Description',
+                'DB' => 'T',
+                'IsNull' => 'YES',
+                'Default' => '',
+                'Form' => 'Textarea',
+            ],
+            'Content' => [
+                'AliasDB' => 'z.Content',
+                'DB' => 'T',
+                'IsNull' => 'YES',
+                'Default' => '',
+                'Form' => 'Content',
+            ],
             'Sort' => ['AliasDB' => 'z.Sort', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Number'],
         ];
     }
@@ -144,13 +144,13 @@ class Content_ContentBlock extends Zero_Model
     {
         return [
             'ID' => ['Visible' => true, 'AR' => true],
-			'Head' => ['Visible' => true, 'AR' => true],
-			'Target' => ['Visible' => true, 'AR' => true],
-			'IsEnable' => ['Visible' => true, 'AR' => true],
-			'IsFeatures' => ['Visible' => true, 'AR' => true],
-			'Img' => ['Visible' => true, 'AR' => true],
-			'Description' => ['Visible' => true, 'AR' => true],
-			'Content' => ['Visible' => true, 'AR' => true],
+            'Head' => ['Visible' => true, 'AR' => true],
+            'Target' => ['Visible' => true, 'AR' => true],
+            'IsEnable' => ['Visible' => true, 'AR' => true],
+            'IsFeatures' => ['Visible' => true, 'AR' => true],
+            'Img' => ['Visible' => true, 'AR' => true],
+            'Description' => ['Visible' => true, 'AR' => true],
+            'Content' => ['Visible' => true, 'AR' => true],
             'Sort' => ['Visible' => true, 'AR' => true],
         ];
     }
@@ -170,8 +170,8 @@ class Content_ContentBlock extends Zero_Model
     {
         return [
             'ID' => [],
-			'Head' => [],
-			'Sort' => [],
+            'Head' => [],
+            'Sort' => [],
         ];
     }
 
@@ -191,17 +191,17 @@ class Content_ContentBlock extends Zero_Model
     {
         return [
             'ID' => [],
-			'Head' => [],
-			'Target' => [],
-			'IsEnable' => [],
-			'IsFeatures' => [],
-			'Img' => [],
-			'Link' => [],
+            'Head' => [],
+            'Target' => [],
+            'IsEnable' => [],
+            'IsFeatures' => [],
+            'Img' => [],
+            'Link' => [],
             'PriceRUR' => [],
             'PriceEUR' => [],
-			'Description' => [],
-			'Content' => [],
-			'Sort' => [],
+            'Description' => [],
+            'Content' => [],
+            'Sort' => [],
         ];
     }
 

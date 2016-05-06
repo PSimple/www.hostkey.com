@@ -1,0 +1,61 @@
+{if ( 0 < count($DATA) )}
+<div class="b-vps__feature b-container">
+    {foreach ($DATA as $k => $val)}
+    <div class="b-vps__feature-item">
+        <img class="b-vps__feature-item-icon" src="{HTTPD}/{$val['Img']}" alt="иконка">
+
+        <h3 class="b-vps__feature-item-title">
+            {$val['Head']}
+        </h3>
+
+        <p class="b-vps__feature-item-text">
+            {$val['Content']}
+        </p>
+    </div>
+    {/foreach}
+    <!--
+    <div class="b-vps__feature-item">
+        <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-03.png" alt="иконка">
+
+        <h3 class="b-vps__feature-item-title">
+            Rule your pool
+        </h3>
+
+        <p class="b-vps__feature-item-text">
+            Full administrative access<br/>
+            to your pull of servers including
+            OS installation.
+            Unlimited reinstallation.
+        </p>
+    </div>
+
+    <div class="b-vps__feature-item">
+        <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-04.png" alt="иконка">
+
+        <h3 class="b-vps__feature-item-title">
+            Sure thing!
+        </h3>
+
+        <p class="b-vps__feature-item-text">
+            All your actions while
+            managing your pool of servers
+            are fully backed up and can be restored without contacting the support team
+        </p>
+    </div>
+    <div class="b-vps__feature-item">
+        <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-01.png" alt="иконка">
+
+        <h3 class="b-vps__feature-item-title">
+            Always get
+            enough power
+        </h3>
+
+        <p class="b-vps__feature-item-text">
+            Rent the optimum server
+            configuration, capable to
+            sustain your infrastructure.
+        </p>
+    </div>
+    -->
+</div>
+{/if}

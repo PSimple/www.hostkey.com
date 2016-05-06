@@ -25,7 +25,7 @@ class Content_ContentBlock_Plugin extends Zero_Controller
             $target = "= '{$this->Params['target']}'";
         $sql = "SELECT * FROM ContentBlock WHERE Target {$target} AND IsEnable = 1 AND Section_ID = " . Zero_App::$Section->ID;
 
-        pre($this->Params['view'], $sql);
+//        pre($this->Params['view'], $sql);
 
         $data = Zero_DB::Select_Array($sql);
         $this->View->Assign('DATA', $data);

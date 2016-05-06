@@ -18,9 +18,10 @@ class Content_Section_Page extends Zero_Controller
     {
         $this->Chunk_Init();
         preg_match_all('#(<.+?>)(.+?)(<\/.+?>)#is', Zero_App::$Section->Name, $match);
-        if ( isset($match[2][0]) )
+        if ( false && isset($match[2][0]) )
         {
             $head = str_replace(' ', '<br>', $match[2][0]);
+            pre($match[1][0] . $head . $match[3][0]);
             $this->View->Assign('head', $match[1][0] . $head . $match[3][0]);
         }
         else

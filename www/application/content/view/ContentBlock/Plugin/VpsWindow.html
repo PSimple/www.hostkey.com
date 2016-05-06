@@ -1,0 +1,15 @@
+{if ( 0 < count($DATA) )}
+{foreach ($DATA as $k => $val)}
+<div class="b-vps__feature-item">
+    <img class="b-vps__feature-item-icon" src="{HTTPD}/{$val['Img']}" alt="иконка">
+
+    <h3 class="b-vps__feature-item-title">
+        {$val['Head']}
+    </h3>
+
+    <p class="b-vps__feature-item-text">
+        {$val['Content']}
+    </p>
+</div>
+{/foreach}
+{/if}

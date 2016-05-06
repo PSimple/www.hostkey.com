@@ -1,0 +1,10 @@
+{if ( 0 < count($DATA) )}
+<div class="b-dedicated__free">
+    <div class="b-dedicated-try__line">
+        <span class="b-vps__try-line-text">{$DATA[0]['Head']}</span>
+    </div>
+    <div class="b-dedicated__free-title" href="#">{$DATA[0]['Content']}</div>
+    <div class="b-dedicated__free-period"></div>
+    <a id="Mainblock_contact" class="b-submit b-dedicated__free-submit" href="{$DATA[0]['Link']}">{$DATA[0]['Description']}</a>
+</div>
+{/if}

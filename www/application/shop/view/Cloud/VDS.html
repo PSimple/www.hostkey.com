@@ -2,72 +2,13 @@
     <!--CLOUD VDS-->
     <link href="/assets/css/slider_item.css" rel="stylesheet" type="text/css" media="all">
     <div class="b-page__promo b-page__promo_vds-cloud_yes">
-        <h1 class="b-page__promo-title">
-            cloud vds
-        </h1>
+        <h1 class="b-page__promo-title">{$Head}</h1>
         <div onclick="$.scrollTo('#calc', 1000, { offset:-90 })" class="b-icon b-page__scroll-icon"></div>
     </div>
 
     <div class="b-vds-cloud">
 
-        <div class="b-vps__feature b-container">
-
-            <div class="b-vps__feature-item">
-                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-02.png" alt="иконка">
-
-                <h3 class="b-vps__feature-item-title">
-                    Fluid power
-                </h3>
-
-                <p class="b-vps__feature-item-text">
-                    Computation is flexibly
-                    distributed over your pool
-                    of servers.
-                </p>
-            </div>
-            <div class="b-vps__feature-item">
-                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-03.png" alt="иконка">
-
-                <h3 class="b-vps__feature-item-title">
-                    Rule your pool
-                </h3>
-
-                <p class="b-vps__feature-item-text">
-                    Full administrative access<br/>
-                    to your pull of servers including
-                    OS installation.
-                    Unlimited reinstallation.
-                </p>
-            </div>
-
-            <div class="b-vps__feature-item">
-                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-04.png" alt="иконка">
-
-                <h3 class="b-vps__feature-item-title">
-                    Sure thing!
-                </h3>
-
-                <p class="b-vps__feature-item-text">
-                    All your actions while
-                    managing your pool of servers
-                    are fully backed up and can be restored without contacting the support team
-                </p>
-            </div>
-            <div class="b-vps__feature-item">
-                <img class="b-vps__feature-item-icon" src="/assets/img/vds-icons-01.png" alt="иконка">
-
-                <h3 class="b-vps__feature-item-title">
-                    Always get
-                    enough power
-                </h3>
-
-                <p class="b-vps__feature-item-text">
-                    Rent the optimum server
-                    configuration, capable to
-                    sustain your infrastructure.
-                </p>
-            </div>
-        </div>
+        {plugin "Content_ContentBlock_Plugin" view="SelectService" target="top"}
 
         <div class="switch_country_for_container_VPS" id="calc">
             {if ( $PID==531 )}
@@ -99,16 +40,11 @@
     <div class="b-vds-cloud__configurator">
         <div class="b-dedicated__box">
             <h3 class="b-dedicated__title b-dedicated__title_upline_yes">
-                cloud vds
-                Configurator
+                {Zero_App::$Section->NameSub}
             </h3>
 
             <div class="b-dedicated__description">
-                <p>By using Cloud VDS, you can:</p>
-                <ul>
-                    <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">instantly create a powerful virtual server or split the resources between multiple servers;</span></li>
-                    <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);"><a href="#nmr">simultaneously deploy</a> Windows VDS, Linux VDS, server with your own OS, etc. within the same pool or resources;</span></li>
-                    <li style="color:#FF692d;"><span style="color:rgb(39, 46,56);">scale the resources and re-allocate them between servers.</span></li></ul>
+                {Zero_App::$Section->Content}
             </div>
             <div style="text-align: right;padding-bottom: 40px;padding-right: 38px;">
                 <a href="#nmr"><img src="/assets/img/vds_logo.png" alt=""></a>
