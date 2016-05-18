@@ -8,7 +8,7 @@
 
     <div class="b-vds-cloud">
 
-        {plugin "Content_ContentBlock_Plugin" view="SelectService" target="top"}
+        {plugin "Content_ContentBlock_Plugin" view="VdsTop" target="top"}
 
         <div class="switch_country_for_container_VPS" id="calc">
             {if ( $PID==531 )}
@@ -38,6 +38,15 @@
 
     </div>
     <div class="b-vds-cloud__configurator">
+        <div class="b-text-page-ref">
+            <ul class="refPlugin">
+                <li><a href="/about/datacenter" target="_blank">Data centers</a></li>
+                <li>&nbsp;|&nbsp;</li>
+                <li><a href="/support/speedtest" target="_blank">Speedtest</a></li>
+                <li>&nbsp;|&nbsp;</li>
+                <li><a href="/about/contacts" target="_blank">Test</a></li>
+            </ul>
+        </div>
         <div class="b-dedicated__box">
             <h3 class="b-dedicated__title b-dedicated__title_upline_yes">
                 {Zero_App::$Section->NameSub}
@@ -130,17 +139,7 @@
         </div>
     </div>
     {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" target="feature"}
-
-    <div class="b-dedicated-try">
-        <div class="b-dedicated-try__line">
-            <span class="b-dedicated-try__line-text" id="nmr">NEED MORE RESOURCES?</span>
-        </div>
-        <h3 class="b-dedicated-try__title">USE ALL<br/> FEATURES OF OUR<br/> DEDICATED SERVERS</h3>
-        <br/>
-        <br/>
-        <a class="b-submit b-dedicated-try__submit" href="/dedicated/service/">More</a>
-    </div>
-
+    {plugin "Content_ContentBlock_Plugin" view="Voucher" target="voucher"}
     {plugin "Content_ContentBlock_Plugin" view="NeedMore" target="information"}
 
     <div style="clear:both;"></div>

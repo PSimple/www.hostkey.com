@@ -1023,14 +1023,14 @@ p {
 .b-page__promo_vds-cloud_yes {
     background: url(/assets/media/promo_vds.png) no-repeat;
     height: 630px;
-} 
+}
 
 .b-page__promo_hosting_yes {
     background: url(/assets/media/promo_hosting.png) no-repeat;
     height: 630px;
 }
 
-.b-page__promo_domains_yes { 
+.b-page__promo_domains_yes {
     background: url(/assets/media/promo_domains.png) no-repeat;
     height: 640px;
 }
@@ -1061,7 +1061,7 @@ p {
 
 .b-page__promo_faq_yes > .b-page__promo-title {
     color: #272e38;
-    top: 0;   
+    top: 0;
     padding-top: 55px;
 }
 
@@ -3121,6 +3121,7 @@ p {
 }
 
 .b-dedicated__item-content {
+    padding-top: 60px;
     margin-bottom: 60px;
 }
 
@@ -4748,12 +4749,43 @@ p {
 }
 
 .b-text-page {
-    padding: 60px 0 40px;
+    padding: 0 0 40px;
     background-color: #ffffff;
+}
+
+.b-text-page-ref {
+    padding: 20px 0 40px;
+    background-color: #ffffff;
+}
+
+.refPlugin {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    float: right;
+    margin-right: 30px;
+}
+
+.refPlugin:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.refPlugin li {
+    display: inline-block;
+}
+
+.refPlugin li a {
+    text-decoration: none;
 }
 
 .b-text-page__box {
     position: relative;
+}
+
+.b-vps .b-text-page__box {
+    padding-top: 60px !important;
 }
 
 .b-text-page__title {

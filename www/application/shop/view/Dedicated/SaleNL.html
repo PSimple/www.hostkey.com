@@ -33,8 +33,19 @@
         </div>
     </div>
     <br>
+    <div class="b-text-page-ref">
+        <ul class="refPlugin">
+            <li><a href="">Data centers</a></li>
+            <li>&nbsp;|&nbsp;</li>
+            <li><a href="">Speedtest</a></li>
+            <li>&nbsp;|&nbsp;</li>
+            <li><a href="">Test</a></li>
+        </ul>
+    </div>
 
     <div class="b-text-page" ui-view="" id="scroll-anchor-01"></div>
 
+    {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" target="feature"}
+    {plugin "Content_ContentBlock_Plugin" view="NeedMore" target="information"}
     <div class="footer-push"></div>
 </div>
