@@ -79,6 +79,8 @@ return [
     'ContentBlock Head' => 'Заголовок',
     'ContentBlock Target' => 'Место и вид вывода',
     'ContentBlock Target options' => ['top' => 'top', 'information' => 'information', 'feature' => 'feature', 'voucher' => 'voucher'],
+    'ContentBlock Color' => 'Цвет плашки',
+    'ContentBlock Color options' => ['orange' => 'оранжевый', 'purple' => 'фиолетовый'],
     'ContentBlock IsEnable' => 'Включен',
     'ContentBlock IsFeatures' => 'Особенности',
     'ContentBlock ID' => 'Идентификатор',

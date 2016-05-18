@@ -18,6 +18,7 @@
  * @property string $Description
  * @property string $Conten
  * @property integer $Sort
+ * @property string $Color
  */
 class Content_ContentBlock extends Zero_Model
 {
@@ -121,6 +122,7 @@ class Content_ContentBlock extends Zero_Model
                 'Form' => 'Content',
             ],
             'Sort' => ['AliasDB' => 'z.Sort', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Number'],
+            'Color' => ['AliasDB' => 'z.Color', 'DB' => 'E', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Select'],
         ];
     }
 
@@ -152,6 +154,7 @@ class Content_ContentBlock extends Zero_Model
             'Description' => ['Visible' => true, 'AR' => true],
             'Content' => ['Visible' => true, 'AR' => true],
             'Sort' => ['Visible' => true, 'AR' => true],
+            'Color' => ['Visible' => false, 'AR' => false],
         ];
     }
 
@@ -191,16 +194,17 @@ class Content_ContentBlock extends Zero_Model
     {
         return [
             'ID' => [],
-            'Head' => [],
             'Target' => [],
-            'IsEnable' => [],
+            'Head' => [],
+            'Description' => [],
+            'Color' => [],
             'IsFeatures' => [],
             'Img' => [],
             'Link' => [],
             'PriceRUR' => [],
             'PriceEUR' => [],
-            'Description' => [],
             'Content' => [],
+            'IsEnable' => [],
             'Sort' => [],
         ];
     }
