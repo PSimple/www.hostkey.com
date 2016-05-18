@@ -1,6 +1,6 @@
 {if ( 0 < count($DATA) )}
-<div class="b-dedicated__free">
-    <div class="b-dedicated-try__line">
+<div class="b-dedicated__free" style="background-image: url({$DATA[0]['Content']});">
+    <div class="b-dedicated-try__line {$DATA[0]['Color']}">
         <span class="b-vps__try-line-text">{$DATA[0]['Head']}</span>
     </div>
     <div class="b-dedicated__free-title" href="#">{$DATA[0]['Content']}</div>

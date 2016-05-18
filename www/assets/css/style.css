@@ -6487,3 +6487,13 @@ a {
     color: #ffffff;
     border-top: 4px solid #ff692d;
 }
+
+.titleLine-purple {
+    background-color: #945ae0;
+}
+
+.titleLine-orange {
+    background-color: #ff692d;
+}
+
+
