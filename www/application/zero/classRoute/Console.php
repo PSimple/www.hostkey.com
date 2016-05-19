@@ -33,7 +33,7 @@ class Zero_Route_Console
          *
          * @see Zero_Console_Section_SiteMap::Action_Default()
          */
-        'Zero_Console_Section_SiteMap' => ['Minute' => '0', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
+        'Zero_Console_Section_SiteMap' => ['Minute' => '*', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
         /**
          * Оперделение не  активных пользователей.
          *
