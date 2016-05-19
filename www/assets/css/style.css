@@ -1109,6 +1109,7 @@ p {
     height: 30px;
     cursor: pointer;
     z-index: 4;
+    display: none;
 }
 
 .online-chat__icon {
@@ -2674,8 +2675,9 @@ p {
 }
 
 .black-sale__slider-item-timer {
-    height: 80px !important;
+    height: 75px !important;
     margin-bottom: 25px;
+    background-color: #fff;
 }
 
 .black-sale__link {
@@ -4784,10 +4786,6 @@ p {
     position: relative;
 }
 
-.b-vps .b-text-page__box {
-    padding-top: 60px !important;
-}
-
 .b-text-page__title {
     width: 290px;
     font-size: 28px;
@@ -6528,4 +6526,16 @@ a {
     background-color: #ff692d;
 }
 
-
+td.dedicated-extra-price__table-cell:last-child:after {
+    content: 'fixed price';
+    text-align: left;
+    text-transform: uppercase;
+    display: block;
+    border: none;
+    color: #ff692d;
+    line-height: 46px;
+    margin: 0 10px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    font-weight: bold;
+}
