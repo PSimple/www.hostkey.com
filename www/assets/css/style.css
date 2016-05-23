@@ -3055,7 +3055,7 @@ p {
     line-height: 89px;
     color: #ffffff;
     text-decoration: none;
-    padding: 130px 0 0;
+    padding: 150px 0 0;
     margin-bottom: 20px;
     font-family: 'FranklinGothicMediCondC';
     font-weight: normal;
@@ -4327,7 +4327,11 @@ p {
 
 .b-vds-cloud__configurator {
     background-color: #ffffff;
-    margin-top: 40px;
+    margin: 40px 0;
+}
+
+.b-sale-page {
+    margin: 0 0 40px 0;
 }
 
 .b-vds-cloud_step_2 .b-vds-cloud__configurator {
