@@ -1109,6 +1109,7 @@ p {
     height: 30px;
     cursor: pointer;
     z-index: 4;
+    display: none;
 }
 
 .online-chat__icon {
@@ -2674,8 +2675,9 @@ p {
 }
 
 .black-sale__slider-item-timer {
-    height: 80px !important;
+    height: 75px !important;
     margin-bottom: 25px;
+    background-color: #fff;
 }
 
 .black-sale__link {
@@ -3053,7 +3055,7 @@ p {
     line-height: 89px;
     color: #ffffff;
     text-decoration: none;
-    padding: 130px 0 0;
+    padding: 150px 0 0;
     margin-bottom: 20px;
     font-family: 'FranklinGothicMediCondC';
     font-weight: normal;
@@ -4325,7 +4327,11 @@ p {
 
 .b-vds-cloud__configurator {
     background-color: #ffffff;
-    margin-top: 40px;
+    margin: 40px 0;
+}
+
+.b-sale-page {
+    margin: 0 0 40px 0;
 }
 
 .b-vds-cloud_step_2 .b-vds-cloud__configurator {
@@ -4707,7 +4713,7 @@ p {
 .b-dedicated-try__title {
     font-size: 85px;
     line-height: 89px;
-    color: #ffffff;
+    color: #ffffff;     
     padding: 150px 0 0;
     margin-bottom: 30px;
     font-family: 'FranklinGothicMediCondC';
@@ -4782,10 +4788,6 @@ p {
 
 .b-text-page__box {
     position: relative;
-}
-
-.b-vps .b-text-page__box {
-    padding-top: 60px !important;
 }
 
 .b-text-page__title {
@@ -6528,4 +6530,16 @@ a {
     background-color: #ff692d;
 }
 
-
+td.dedicated-extra-price__table-cell:last-child:after {
+    content: 'fixed price';
+    text-align: left;
+    text-transform: uppercase;
+    display: block;
+    border: none;
+    color: #ff692d;
+    line-height: 46px;
+    margin: 0 10px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    font-weight: bold;
+}
