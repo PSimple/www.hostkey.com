@@ -1,0 +1,39 @@
+<div class="b-page">
+
+    <!--Test page template -->
+    <div class="b-page__promo b-page__promo_text-page_yes">
+        <div class="b-icon b-page__scroll-icon" onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
+        <h1 class="b-page__promo-title b-page__promo-title_black_yes">{$Head}</h1>
+    </div>
+
+    <div class="b-text-page" style="float: left; width: 100%;">
+        <div class="b-container editable-area" style="float: left; padding:0 35px 0 75px; width: 95%; box-sizing: border-box;">
+            {$content}
+        </div>
+
+
+    </div>
+    <div style="clear: both;"></div>
+
+    {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" target="feature"}
+    {plugin "Content_ContentBlock_Plugin" view="NeedMore" target="information"}
+
+    <div class="footer-push"></div>
+</div>
+
+<style>
+    .b-text-page__title_upline_yes {
+        float: left;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        border: none;
+    }
+
+    .scroll-anchor-01 {
+        width: 30%;
+        border-top: 4px solid #ff692d;
+        height: 10px;
+    }
+
+</style>

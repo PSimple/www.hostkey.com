@@ -590,6 +590,30 @@ p {
     position: relative;
 }
 
+.b-col__item3 {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 2%;
+    width: 30%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
+}
+
+.b-col__item2 {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 4%;
+    width: 45%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
+}
+
+
+
 .b-col__item_x4 {
     width: 21%;
 }
@@ -3062,6 +3086,10 @@ p {
     display: inline-block;
 }
 
+.b-dedicated__free-title p {
+
+}
+
 .b-dedicated__free-period {
     color: #ff692d;
     font-size: 26px;
@@ -4018,6 +4046,7 @@ p {
     background-color: #ffffff;
     padding: 20px 35px 40px 75px;
     position: relative;
+    margin-bottom: 50px;
 }
 
 .b-vps__table:after {
@@ -4713,7 +4742,7 @@ p {
 .b-dedicated-try__title {
     font-size: 85px;
     line-height: 89px;
-    color: #ffffff;     
+    color: #ffffff;
     padding: 150px 0 0;
     margin-bottom: 30px;
     font-family: 'FranklinGothicMediCondC';
