@@ -6572,3 +6572,9 @@ td.dedicated-extra-price__table-cell:last-child:after {
     -webkit-border-radius: 3px;
     font-weight: bold;
 }
+
+.colocation-line {
+    padding-top: 0;
+    margin-bottom: -30px;
+    position: relative;
+}
