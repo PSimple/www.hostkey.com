@@ -2376,7 +2376,6 @@ p {
 .domains-check {
     width: 100%;
     display: inline-table;
-    margin-bottom: 80px;
 }
 
 .domains-check__item {
@@ -2395,7 +2394,7 @@ p {
 
 .domains-check__item:hover {
     background-color: #ffffff;
-    color: #945ae0;
+    color: #ff692d;
     transition: 0.3s all;
     -webkit-transition: 0.3s all;
     -moz-transition: 0.3s all;
@@ -2418,7 +2417,7 @@ p {
     float: none;
     width: 33px;
     height: 33px;
-    background: url(/assets/img/checkbox_purp.png) no-repeat;
+    background: url(/assets/img/checkbox_orange.png) no-repeat;
     position: absolute;
     bottom: 200px;
     left: 50%;
@@ -2430,12 +2429,12 @@ p {
 }
 
 .domains-check__item.is-check {
-    background-color: #945ae0;
-    color: #ffffff;
+    color: #ff692d;
+    background: #fff;
 }
 
 .domains-check__item.is-check:after {
-    border-left: 1px solid #945ae0;
+    /*border-left: 1px solid #ff692d;*/
     transition: 0.3s all;
     -webkit-transition: 0.3s all;
     -moz-transition: 0.3s all;
