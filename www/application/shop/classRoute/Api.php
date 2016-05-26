@@ -16,6 +16,12 @@ class Shop_Route_Api
      */
     public $Route = [
         /**
+         * Получение списка зон доменов по группам
+         *
+         * @see Shop_Api_Domains_ZoneList
+         */
+        '/api/v1/shop/domains/zone/list' => ['Controller' => 'Shop_Api_Domains_ZoneList', 'View' => ''],
+        /**
          * Получение кеширонной конфигурации для калькулятора Cloud
          *
          * @see Shop_Api_Cloud_Options

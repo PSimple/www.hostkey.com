@@ -17,6 +17,12 @@ class Shop_Route_Console
      */
     public $Task = [
         /**
+         * Обновление доменных зон
+         *
+         * @see Shop_Console_Domains_ZoneList
+         */
+        'Shop_Console_Domains_ZoneList' => ['Minute' => '*/2', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
+        /**
          * Кеширование конфигураций калькулятора (Cloud)
          *
          * @see Shop_Console_Cloud_Update

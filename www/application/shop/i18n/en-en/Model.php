@@ -110,4 +110,11 @@ return [
     'Solution Typ' => 'Тип конфигурации',
     'Solution Typ options' => ['dedicated' => 'dedicated'],
     'Link' => 'Ссылка',
+    'Domains Groups' => 'Группы',
+    'Domains Groups options' => ['Top20' => 'Top20','Top100' => 'Top100','Promo' => 'Promo'],
+    'Domains ID' => 'Идентификатор',
+    'Domains Name' => 'Домен',
+    'Domains Order' => 'Порядок',
+    'Domains PriceOld' => 'Цена старая',
+    'Domains PricePurchase' => 'Цена биллинга',
 ];
