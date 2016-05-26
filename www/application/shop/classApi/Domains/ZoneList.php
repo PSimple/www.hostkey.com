@@ -20,13 +20,20 @@ class Shop_Api_Domains_ZoneList extends Zero_Controller
         if ( !isset($_REQUEST['groups']) || !$_REQUEST['groups'] )
             Zero_App::ResponseJson500(-1, ["параметр групп не задан"]);
 
+        $sql_where = [];
+        foreach (explode(',', $_REQUEST['groups']) as $group)
+        {
+            $sql_where[] = "`Groups` LIKE '%{$group}%'";
+        }
+        $sql_where = implode(' OR ', $sql_where);
+
         // Получаем список
         $sql = "
         SELECT
           *
         FROM DomainsZone
         WHERE
-          `Groups` = '{$_REQUEST['groups']}'
+          {$sql_where}
         ";
         $result = Zero_DB::Select_Array($sql);
         Zero_App::ResponseJson200($result);
