@@ -16,6 +16,12 @@ class Shop_Route_Api
      */
     public $Route = [
         /**
+         * Проверка домена
+         *
+         * @see Shop_Api_Domains_Check
+         */
+        '/api/v1/shop/domains/check' => ['Controller' => 'Shop_Api_Domains_Check', 'View' => ''],
+        /**
          * Получение списка зон доменов по группам
          *
          * @see Shop_Api_Domains_ZoneList
