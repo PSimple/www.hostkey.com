@@ -21,7 +21,7 @@ class Shop_Route_Console
          *
          * @see Shop_Console_Domains_ZoneList
          */
-        'Shop_Console_Domains_ZoneList' => ['Minute' => '*/2', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
+        'Shop_Console_Domains_ZoneList' => ['Minute' => '*/30', 'Hour' => '*', 'Day' => '*', 'Month' => '*', 'Week' => '*', 'IsActive' => true],
         /**
          * Кеширование конфигураций калькулятора (Cloud)
          *

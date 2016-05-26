@@ -93,6 +93,13 @@ class Shop_DomainsZone extends Zero_Model
 				'Default' => '',
 				'Form' => 'Checkbox',
 			],
+            'DateAction' => [
+                'AliasDB' => 'z.DateAction',
+                'DB' => 'D',
+                'IsNull' => 'YES',
+                'Default' => '',
+                'Form' => 'Datetime',
+            ],
             'Img' => [
                 'AliasDB' => 'z.Img',
                 'DB' => 'T',
@@ -129,6 +136,7 @@ class Shop_DomainsZone extends Zero_Model
 			'PriceRegister' => ['Visible' => true, 'AR' => true],
 			'PriceOld' => ['Visible' => true, 'AR' => true],
 			'Groups' => ['Visible' => true, 'AR' => true],
+			'DateAction' => ['Visible' => true, 'AR' => true],
         ];
     }
 
@@ -175,6 +183,7 @@ class Shop_DomainsZone extends Zero_Model
 			'PriceRegister' => [],
 			'PriceOld' => [],
 			'Groups' => [],
+			'DateAction' => [],
 			'Img' => [],
         ];
     }
