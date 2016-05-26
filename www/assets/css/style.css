@@ -612,8 +612,6 @@ p {
     position: relative;
 }
 
-
-
 .b-col__item_x4 {
     width: 21%;
 }
@@ -2239,7 +2237,6 @@ p {
 .domains-offers {
     width: 100%;
     display: inline-table;
-    margin-bottom: 80px;
 }
 
 .domains-offers__item {
@@ -2444,6 +2441,58 @@ p {
     -moz-transition: 0.3s all;
 }
 
+.domains-check__item:hover .domains-check__item-order,
+.domains-check__item.is-check .domains-check__item-order {
+    opacity: 1;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+}
+
+.domains-check__item:after {
+    content: '';
+    height: 80%;
+    border-left: 1px solid #e6e9ec;
+    width: 1px;
+    position: absolute;
+    left: 0;
+    top: 10%;
+}
+
+.domains-check__item-order {
+    font-size: 22px;
+    line-height: 26px;
+    position: absolute;
+    z-index: 9;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: uppercase;
+    text-align: center;
+    color: #ffffff;
+    background-color: #ff692d;
+    opacity: 0;
+    font-family: 'FranklinGothicMediCondOSC';
+    font-weight: normal;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+}
+
+.domains-check__item-order:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    border: 10px solid transparent;
+    border-bottom: 10px solid #ff692d;
+    left: 50%;
+    margin-left: -10px;
+}
+
 .domains-check__item-register {
     font-size: 22px;
     line-height: 26px;
@@ -2506,6 +2555,13 @@ p {
     font-size: 38px;
     line-height: 42px;
     margin: 20px 0;
+}
+
+.domains-check__item-price-old {
+    font-size: 20px;
+    line-height: 24px;
+    text-decoration: line-through;
+    color: #272e38;
 }
 
 .domains-options {
@@ -3087,7 +3143,8 @@ p {
 }
 
 .b-dedicated__free-title p {
-
+    margin: 0;
+    padding: 0;
 }
 
 .b-dedicated__free-period {
@@ -6577,4 +6634,8 @@ td.dedicated-extra-price__table-cell:last-child:after {
     padding-top: 0;
     margin-bottom: -30px;
     position: relative;
+}
+
+div.clear {
+    clear: both;
 }
