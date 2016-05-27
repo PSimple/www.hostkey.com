@@ -34,6 +34,8 @@ class Shop_Console_Domains_ZoneList extends Zero_Controller
                 $sql = "
                 UPDATE DomainsZone SET
                   PriceRegister = {$row['domainregister_msetupfee']},
+                  PriceTransfer = {$row['domaintransfer_msetupfee']},
+                  PriceRenew = {$row['domainrenew_msetupfee']},
                   `Order` = {$row['order']},
                   IsExist = 1
                 WHERE

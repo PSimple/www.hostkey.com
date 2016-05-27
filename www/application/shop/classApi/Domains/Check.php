@@ -65,16 +65,29 @@ class Shop_Api_Domains_Check extends Zero_Controller
             $ip->Check($d, $zoneListPromo);
         }
 
+        // Цена зон
+        $sql = "
+        SELECT
+          `Name`, PriceRegister, PriceTransfer, PriceRenew, PriceOld
+        FROM DomainsZone
+        ";
+        $zoneListPrice = Zero_DB::Select_Array_Index($sql);
+
         // Result
         $response = [];
         $cntFlag = 0;
         while ( $result = $ip->Result() )
         {
+            $arr = explode('.', $result['domain']);
+            $zone = '.' . array_pop($arr);
+
+
             $cntFlag++;
             $response[$result['domain']]['status'] = $result['result'];
-            $response[$result['domain']]['priceRegistration'] = 2.5;
-            $response[$result['domain']]['priceDelivery'] = 2.5;
-            $response[$result['domain']]['priceOld'] = 2.5;
+            $response[$result['domain']]['priceRegister'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister'] : 0.00 ;
+            $response[$result['domain']]['priceTransfer'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceTransfer'] : 0.00 ;
+            $response[$result['domain']]['priceRenew'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRenew'] : 0.00 ;
+            $response[$result['domain']]['priceOld'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceOld'] : 0.00 ;
             if ( $cntFlag == $cntRequestAll )
             {
                 $ip->Logout();

@@ -128,5 +128,7 @@ return [
     'DomainsZone Comment' => 'Комментарий',
     'DomainsZone DateAction' => 'Дата акции',
     'DomainsZone PriceOld' => 'Цена старая',
-    'DomainsZone PricePurchase' => 'Цена биллинга',
+    'DomainsZone PriceRegister' => 'Цена регистрации',
+    'DomainsZone PriceTransfer' => 'Цена перевода',
+    'DomainsZone PriceRenew' => 'Цена продления',
 ];
