@@ -99,58 +99,6 @@
                             <!-- JSON content -->
                             </tbody>
                         </table>
-                        <!--
-                        <p class="tab-list__content-text">
-                            Protect your domain name using the following domains.
-                        </p>
-                        <table class="tab-list__content-table">
-                            <tr>
-                                <th width="250" class="tab-list__content-table-cell">Domain</th>
-                                <th width="260" class="tab-list__content-table-cell">Results</th>
-                                <th width="240" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
-                                        <i class="b-icon"></i>Register all free
-                                    </a>
-                                </th>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__registred">
-                                <td class="tab-list__content-table-cell">hk.es</td>
-                                <td class="tab-list__content-table-cell">registred</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__available">
-                                <td class="tab-list__content-table-cell">hk.ru</td>
-                                <td class="tab-list__content-table-cell">free</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__invalid">
-                                <td class="tab-list__content-table-cell">hk--.ru</td>
-                                <td class="tab-list__content-table-cell">invalid</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                        </table>
-                        -->
                     </div>
                     <div class="tab-list__content js-tab-content" data-tab="2">
                         <p>
@@ -514,25 +462,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="domains-step2__summary-section">
-                    <div class="domains-step2__summary-subtitle">Transfer</div>
-                    <table class="domains-step2__summary-table" id="domains-transfer-table">
-                        <tbody>
-                        <tr class="domains-step2__summary-table-row">
-                            <td class="domains-step2__summary-table-cell">
-                                hkey.ru
-                            </td>
-                            <td class="domains-step2__summary-table-cell">€0</td>
-                        </tr>
-                        <tr class="domains-step2__summary-table-row">
-                            <td class="domains-step2__summary-table-cell">
-                                hkey.club
-                            </td>
-                            <td class="domains-step2__summary-table-cell">€0</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
                 <div class="domains-step2__summary-price">
                     <span class="domains-step2__summary-price-value" id="Summa">€30.5</span>
                     <span class="domains-step2__summary-price-discount" id="Discount"></span>
@@ -691,7 +620,12 @@
                 var readyTable = '';
                 var classAv;
                 for (key in items) {
-                    switch (items[key]) {
+                    var status = items[key]['status'];
+                    var priceReg = items[key]['priceRegister'];
+                    var priceTrans = items[key]['priceTransfer'];
+                    var priceRenew = items[key]['priceRenew'];
+                    var priceOld = items[key]['priceOld'];
+                    switch (status) {
                         case 'error':
                             classAv = 'invalid';
                             break;
@@ -708,21 +642,41 @@
                     }
                     readyTable += '<tr class="tab-list__content-table-row tab-list__content-table-row__' + classAv + '">' +
                             '<td class="tab-list__content-table-cell">' + key + '</td>' +
-                            '<td class="tab-list__content-table-cell">' + items[key] + '</td>' +
+                            '<td class="tab-list__content-table-cell">' + status + '</td>' +
                             '<td class="tab-list__content-table-cell">' +
-                            '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="10">' +
-                            '<i class="b-icon"></i>Register | <span>€10</span>' +
+                            '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="' + priceReg + '">' +
+                            '<i class="b-icon"></i>Register | <span>€' + priceReg + '</span>' +
                             '</a>' +
-                            '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-price="0">' +
+                            '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans + '"  data-priceRenew="' + priceRenew + '" >' +
                             '<i class="b-icon"></i>It\'s my domain</a>' +
                             '</td></tr>';
 
                 }
 
                 AddData('#result-table tbody', readyTable);
+                $('.tab-list__content-table-row__available').on('click', 'a.tab-list__content-reg-this', function () {
+                    var domain = $(this).attr('data-domain');
+                    var price = $(this).attr('data-price');
+                    var searchThis = reg.indexOf(domain);
+                    if (searchThis !== undefined && searchThis != null) {
+                        if (searchThis < 0) {
+                            reg.push(domain);
+                            $('#domains-register-table tbody').append(
+                                    '<tr class="domains-step2__summary-table-row">' +
+                                    '<td class="domains-step2__summary-table-cell">' + domain + '</td>' +
+                                    '<td class="domains-step2__summary-table-cell">€' + price + '</td>' +
+                                    '</tr>');
+                        }
+                    }
+                    return false;
+                });
                 $('.domains-step').hide();
                 $('#step2').show();
+                $('html, body').animate({
+                    scrollTop: $("#step2").offset().top
+                }, 2000);
             });
+            return false;
         });
 
 
