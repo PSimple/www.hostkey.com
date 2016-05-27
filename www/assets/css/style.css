@@ -6372,6 +6372,9 @@ div.clear {
     border: 0px solid #f3f5f8;
     width: 952px;
     margin-left: 6px;
+    height: 60px;
+    overflow: hidden;
+    resize: none;
 }
 
 .search-bar__submit {
@@ -6639,6 +6642,7 @@ div.clear {
     display: none;
     font-size: 0;
     padding: 0 35px 0 75px;
+    margin-bottom: 30px;
 }
 
 .domains-step:after {
