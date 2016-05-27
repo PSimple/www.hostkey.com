@@ -3,19 +3,31 @@
 /**
  * Domains
  *
- * Step2
+ * Step1
  *
  * @package Shop.Controller.Domains
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */
-class Shop_Domains_Page2 extends Zero_Controller
+class Shop_Web_Domains extends Zero_Controller
 {
+    /**
+     * Контроллер по умолчанию.
+     *
+     * @return Zero_View
+     */
+    public function Action_Default()
+    {
+        $this->Chunk_Init();
+        $this->Chunk_View();
+        return $this->View;
+    }
+
     /**
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Domains_Page2
+     * @return Shop_Web_Domains
      */
     public static function Make($properties = [])
     {
