@@ -20,6 +20,11 @@ class Shop_Api_Domains_Check extends Zero_Controller
         if ( !isset($_REQUEST['domainList']) || !$_REQUEST['domainList'] )
             Zero_App::ResponseJson500(-1, ["параметр доменов не задан"]);
 
+        // Домены
+        $domainList = explode(",", $_REQUEST['domainList']);
+        // Зоны указанные
+        $zoneListTarget = isset($_REQUEST['zoneList']) ? explode(',', $_REQUEST['zoneList']) : [];
+        // Зоны Top20
         $sql = "
         SELECT
           `Name`
@@ -27,7 +32,8 @@ class Shop_Api_Domains_Check extends Zero_Controller
         WHERE
           `Groups` LIKE '%Top20%'
         ";
-        $zoneListTop = Zero_DB::Select_List($sql);
+        $zoneListTop20 = Zero_DB::Select_List($sql);
+        // Зоны Promo
         $sql = "
         SELECT
           `Name`
@@ -36,7 +42,48 @@ class Shop_Api_Domains_Check extends Zero_Controller
           `Groups` LIKE '%Promo%'
         ";
         $zoneListPromo = Zero_DB::Select_List($sql);
+        // Общее количество общих запросов
+        $cntRequestAll = (count($zoneListTarget) + count($zoneListTop20) + count($zoneListPromo)) * count($domainList);
 
+        // Поиск
+        $ip = new Shop_Helper_RealtimeRegisterTelnet('hostkey-ote/admin', '50ftWoman');
+        foreach ($domainList as $d)
+        {
+            // zone Personal
+            $arr = explode('.', $d);
+            if ( 1 < count($arr) )
+            {
+                $d = $arr[0];
+                $ip->Check($d, [$arr[1]]);
+                $cntRequestAll++;
+            }
+            // zone Target
+            $ip->Check($d, $zoneListTarget);
+            // zone Top20
+            $ip->Check($d, $zoneListTop20);
+            // zone Promo
+            $ip->Check($d, $zoneListPromo);
+        }
+
+        // Result
+        $response = [];
+        $cntFlag = 0;
+        while ( $result = $ip->Result() )
+        {
+            $cntFlag++;
+            $response[$result['domain']] = $result['result'];
+            if ( $cntFlag == $cntRequestAll )
+            {
+                $ip->Logout();
+                break;
+            }
+        }
+        ksort($response);
+
+        Zero_App::ResponseJson200($response);
+        return true;
+
+        /*
         $obj = new Shop_Helper_RealtimeRegister;
 
         $result = [];
@@ -75,6 +122,7 @@ class Shop_Api_Domains_Check extends Zero_Controller
         }
         Zero_App::ResponseJson200($result);
         return true;
+        */
     }
 
     /**

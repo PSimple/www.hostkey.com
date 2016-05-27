@@ -119,7 +119,8 @@ return [
         'Popular' => 'Популярные',
         'New'=> 'Новые',
         'National'=> 'Национальные',
-        'Thematic'=> 'Тематические'
+        'Thematic'=> 'Тематические',
+        'Null'=> 'Не назначено'
     ],
     'DomainsZone ID' => 'Идентификатор',
     'DomainsZone Name' => 'Домен',
