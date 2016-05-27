@@ -45,7 +45,16 @@ class Shop_Api_Domains_Check extends Zero_Controller
         // Общее количество общих запросов
         $cntRequestAll = (count($zoneListTarget) + count($zoneListTop20) + count($zoneListPromo)) * count($domainList);
 
+        // Цена зон
+        $sql = "
+        SELECT
+          `Name`, PriceRegister, PriceTransfer, PriceRenew, PriceOld
+        FROM DomainsZone
+        ";
+        $zoneListPrice = Zero_DB::Select_Array_Index($sql);
+
         // Поиск
+        Zero_Logs::Start('realtimeregister');
         $ip = new Shop_Helper_RealtimeRegisterTelnet('hostkey-ote/admin', '50ftWoman');
         foreach ($domainList as $d)
         {
@@ -64,14 +73,6 @@ class Shop_Api_Domains_Check extends Zero_Controller
             // zone Promo
             $ip->Check($d, $zoneListPromo);
         }
-
-        // Цена зон
-        $sql = "
-        SELECT
-          `Name`, PriceRegister, PriceTransfer, PriceRenew, PriceOld
-        FROM DomainsZone
-        ";
-        $zoneListPrice = Zero_DB::Select_Array_Index($sql);
 
         // Result
         $response = [];
@@ -94,6 +95,7 @@ class Shop_Api_Domains_Check extends Zero_Controller
                 break;
             }
         }
+        Zero_Logs::Stop('realtimeregister');
         ksort($response);
 
         Zero_App::ResponseJson200($response);
