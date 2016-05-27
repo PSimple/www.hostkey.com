@@ -79,6 +79,20 @@ class Shop_DomainsZone extends Zero_Model
 				'Default' => '0.00',
 				'Form' => 'Readonly',
 			],
+			'PriceTransfer' => [
+				'AliasDB' => 'z.PriceTransfer',
+				'DB' => 'F',
+				'IsNull' => 'NO',
+				'Default' => '0.00',
+				'Form' => 'Readonly',
+			],
+			'PriceRenew' => [
+				'AliasDB' => 'z.PriceRenew',
+				'DB' => 'F',
+				'IsNull' => 'NO',
+				'Default' => '0.00',
+				'Form' => 'Readonly',
+			],
 			'PriceOld' => [
 				'AliasDB' => 'z.PriceOld',
 				'DB' => 'F',
@@ -134,6 +148,8 @@ class Shop_DomainsZone extends Zero_Model
 			'Comment' => ['Visible' => true, 'AR' => true],
 			'Order' => ['Visible' => true, 'AR' => true],
 			'PriceRegister' => ['Visible' => true, 'AR' => true],
+			'PriceTransfer' => ['Visible' => true, 'AR' => true],
+			'PriceRenew' => ['Visible' => true, 'AR' => true],
 			'PriceOld' => ['Visible' => true, 'AR' => true],
 			'Groups' => ['Visible' => true, 'AR' => true],
 			'DateAction' => ['Visible' => true, 'AR' => true],
@@ -157,8 +173,6 @@ class Shop_DomainsZone extends Zero_Model
             'ID' => [],
 			'Name' => [],
 			'Comment' => [],
-			'PriceRegister' => [],
-			'PriceOld' => [],
         ];
     }
 
@@ -181,6 +195,8 @@ class Shop_DomainsZone extends Zero_Model
 			'Comment' => [],
 			'Order' => [],
 			'PriceRegister' => [],
+			'PriceTransfer' => [],
+			'PriceRenew' => [],
 			'PriceOld' => [],
 			'Groups' => [],
 			'DateAction' => [],
