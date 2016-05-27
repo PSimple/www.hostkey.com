@@ -25,17 +25,34 @@ class Shop_Console_Domains_ZoneList extends Zero_Controller
             Zero_Logs::Set_Message_Error('Ошибка получение информации о зонах');
             return false;
         }
+        Zero_DB::Update("UPDATE DomainsZone SET IsExist = 0");
         foreach ($data['Content'] as $row)
         {
-            $sql = "
-            UPDATE DomainsZone SET
-              PriceRegister = {$row['domainregister_msetupfee']},
-              `Order` = {$row['order']}
-            WHERE
-              `Name` = '{$row['extension']}'
-            ";
-            Zero_DB::Update($sql);
+            $sql = "SELECT COUNT(*) FROM DomainsZone WHERE `Name` = '{$row['extension']}'";
+            if ( 0 < Zero_DB::Select_Field($sql) )
+            {
+                $sql = "
+                UPDATE DomainsZone SET
+                  PriceRegister = {$row['domainregister_msetupfee']},
+                  `Order` = {$row['order']},
+                  IsExist = 1
+                WHERE
+                  `Name` = '{$row['extension']}'
+                ";
+                Zero_DB::Update($sql);
+            }
+            else
+            {
+                $sql = "INSERT INTO DomainsZone SET
+                  `Name` = '{$row['extension']}',
+                  `Order` = {$row['order']},
+                  `PriceRegister` = {$row['domainregister_msetupfee']},
+                  IsExist = 1
+                ";
+                Zero_DB::Insert($sql);
+            }
         }
+        Zero_DB::Update("DELETE FROM DomainsZone WHERE IsExist = 0");
         return true;
     }
 
