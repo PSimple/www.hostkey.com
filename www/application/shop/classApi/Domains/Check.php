@@ -71,7 +71,10 @@ class Shop_Api_Domains_Check extends Zero_Controller
         while ( $result = $ip->Result() )
         {
             $cntFlag++;
-            $response[$result['domain']] = $result['result'];
+            $response[$result['domain']]['status'] = $result['result'];
+            $response[$result['domain']]['priceRegistration'] = 2.5;
+            $response[$result['domain']]['priceDelivery'] = 2.5;
+            $response[$result['domain']]['priceOld'] = 2.5;
             if ( $cntFlag == $cntRequestAll )
             {
                 $ip->Logout();
