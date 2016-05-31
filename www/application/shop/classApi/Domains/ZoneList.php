@@ -34,6 +34,8 @@ class Shop_Api_Domains_ZoneList extends Zero_Controller
         FROM DomainsZone
         WHERE
           {$sql_where}
+        ORDER BY
+          Sort ASC
         ";
         $result = Zero_DB::Select_Array($sql);
         Zero_App::ResponseJson200($result);

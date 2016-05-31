@@ -121,6 +121,7 @@ class Shop_DomainsZone extends Zero_Model
                 'Default' => '',
                 'Form' => 'Img',
             ],
+            'Sort' => ['AliasDB' => 'z.Sort', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Number'],
         ];
     }
 
@@ -153,6 +154,7 @@ class Shop_DomainsZone extends Zero_Model
 			'PriceOld' => ['Visible' => true, 'AR' => true],
 			'Groups' => ['Visible' => true, 'AR' => true],
 			'DateAction' => ['Visible' => true, 'AR' => true],
+            'Sort' => ['Visible' => true, 'AR' => true],
         ];
     }
 
@@ -173,6 +175,7 @@ class Shop_DomainsZone extends Zero_Model
             'ID' => [],
 			'Name' => [],
 			'Comment' => [],
+			'Sort' => [],
         ];
     }
 
@@ -201,6 +204,7 @@ class Shop_DomainsZone extends Zero_Model
 			'Groups' => [],
 			'DateAction' => [],
 			'Img' => [],
+			'Sort' => [],
         ];
     }
 

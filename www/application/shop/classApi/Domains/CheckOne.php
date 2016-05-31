@@ -7,7 +7,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2016.05.26
  */
-class Shop_Api_Domains_Check extends Zero_Controller
+class Shop_Api_Domains_CheckOne extends Zero_Controller
 {
     /**
      * Получение списка зон доменов по группам
@@ -17,11 +17,11 @@ class Shop_Api_Domains_Check extends Zero_Controller
     public function Action_GET()
     {
         // Проверки
-        if ( !isset($_REQUEST['domainList']) || !$_REQUEST['domainList'] )
-            Zero_App::ResponseJson500(-1, ["параметр доменов не задан"]);
+        if ( !isset($_REQUEST['domain']) || !$_REQUEST['domain'] )
+            Zero_App::ResponseJson500(-1, ["домен не задан"]);
 
         // Домены
-        $domainList = explode(",", $_REQUEST['domainList']);
+        $domainList = explode(",", $_REQUEST['domain']);
 
         // Зоны в доменах
         $zoneListDomain = [];
@@ -160,7 +160,7 @@ class Shop_Api_Domains_Check extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Api_Domains_Check
+     * @return Shop_Api_Domains_CheckOne
      */
     public static function Make($properties = [])
     {
