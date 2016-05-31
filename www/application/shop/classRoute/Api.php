@@ -18,6 +18,12 @@ class Shop_Route_Api
         /**
          * Проверка домена
          *
+         * @see Shop_Api_Domains_CheckOne
+         */
+        '/api/v1/shop/domains/check/one' => ['Controller' => 'Shop_Api_Domains_CheckOne', 'View' => ''],
+        /**
+         * Проверка домена
+         *
          * @see Shop_Api_Domains_Check
          */
         '/api/v1/shop/domains/check' => ['Controller' => 'Shop_Api_Domains_Check', 'View' => ''],
