@@ -6377,6 +6377,11 @@ div.clear {
     resize: none;
 }
 
+.search-bar__input-pad {
+    padding: 0 20px !important;
+    line-height: 20px;
+}
+
 .search-bar__submit {
     width: 185px;
     margin-left: 6px;
@@ -6817,6 +6822,7 @@ div.clear {
     font-size: 58px;
     line-height: 62px;
     margin-bottom: 20px;
+    height: 60px;
 }
 
 .domains-check__item-text {
