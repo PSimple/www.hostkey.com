@@ -6378,6 +6378,10 @@ div.clear {
     resize: none;
 }
 
+textarea.search-bar__input {
+    height: 180px;
+}
+
 .search-bar__input-pad {
     padding: 0 20px !important;
     line-height: 20px;
@@ -6954,4 +6958,39 @@ div.clear {
 
 #domains-check__more {
     display: none;
+}
+
+.search-bar__button-bulk {
+    position: absolute;
+    background-color: #e6e9ec;
+    border: none;
+    color: #ff692d;
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 1px;
+    font-family: 'FranklinGothicMediCondC';
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+    padding: 17px 15px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    right: 195px;
+    top: 3px;
+}
+
+.search-bar__button-bulk:hover {
+    background-color: #ff692d;
+    color: #ffffff;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
 }

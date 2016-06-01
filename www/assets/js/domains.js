@@ -156,6 +156,10 @@ $('.search-bar__input:visible').on('keyup', function (e) {
         $(this).addClass('search-bar__input-pad');
 });
 
+$('.search-bar__button-bulk').on('click', '', function (e) {
+    $('.search-bar__input').toggleClass('search-bar__input-hidden');
+});
+
 $('.search-bar .b-submit').on('click', '', function (e) {
     var $checkedInput = $('.hidden-input:checked');
     searchZones = '';
