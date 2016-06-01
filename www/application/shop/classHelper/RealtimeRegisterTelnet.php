@@ -160,7 +160,7 @@ class Shop_Helper_RealtimeRegisterTelnet
     /**
      * Write
      *
-     * @param   string  message
+     * @param   string  $message
      * @return  bool    Writing successfull?
      */
     private function write($message)

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Проверка домена
+ * Проверка нескольких доменов
  *
  * @package Shop.Api.Domains
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
@@ -10,7 +10,7 @@
 class Shop_Api_Domains_Check extends Zero_Controller
 {
     /**
-     * Получение списка зон доменов по группам
+     * Проверка нескольких доменов
      *
      * @return boolean flag статус выполнения
      */
@@ -31,19 +31,6 @@ class Shop_Api_Domains_Check extends Zero_Controller
         $zoneListTop20 = Zero_DB::Select_List("SELECT `Name` FROM DomainsZone WHERE `Groups` LIKE '%Top20%'");
         // Зоны Promo
         $zoneListPromo = Zero_DB::Select_List("SELECT `Name` FROM DomainsZone WHERE `Groups` LIKE '%Promo%'");
-
-        // чистка дублирующихся зон
-        //        $zoneListTargetKeys = array_flip($zoneListTarget);
-        //        foreach ($zoneListPromo as $k => $d)
-        //        {
-        //            if ( isset($zoneListTargetKeys[$d]) )
-        //                unset($zoneListPromo[$k]);
-        //        }
-        //        foreach ($zoneListTop20 as $k => $d)
-        //        {
-        //            if ( isset($zoneListTargetKeys[$d]) )
-        //                unset($zoneListTop20[$k]);
-        //        }
 
         // Общее количество общих запросов
         $cntRequestAll = (count($zoneListTarget) + count($zoneListTop20) + count($zoneListPromo)) * count($domainList);
@@ -87,6 +74,10 @@ class Shop_Api_Domains_Check extends Zero_Controller
             $response[$result['domain']]['priceTransfer'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceTransfer'] : 0.00;
             $response[$result['domain']]['priceRenew'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRenew'] : 0.00;
             $response[$result['domain']]['priceOld'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceOld'] : 0.00;
+            // помечаем промо
+            if ( in_array($zone, $zoneListPromo) )
+                $response[$result['domain']]['promo'] = 1;
+            //
             if ( $cntFlag == $cntRequestAll )
             {
                 $ip->Logout();
