@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Получение списка зон доменов по группам
+ * Получение списка зон по указанной группе
  *
  * @package Shop.Api.Domains
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
@@ -10,7 +10,7 @@
 class Shop_Api_Domains_ZoneList extends Zero_Controller
 {
     /**
-     * Получение списка зон доменов по группам
+     * Получение списка зон по указанной группе
      *
      * @return boolean flag статус выполнения
      */

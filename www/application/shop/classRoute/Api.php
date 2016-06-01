@@ -16,19 +16,31 @@ class Shop_Route_Api
      */
     public $Route = [
         /**
-         * Проверка домена
+         * Получение групп зон
+         *
+         * @see Shop_Api_Domains_ZoneGroupsList
+         */
+        '/api/v1/shop/domains/zone/groups/list' => ['Controller' => 'Shop_Api_Domains_ZoneGroupsList', 'View' => ''],
+        /**
+         * Проверка нескольких доменов по указзанной группе зон
+         *
+         * @see Shop_Api_Domains_CheckGroups
+         */
+        '/api/v1/shop/domains/check/groups' => ['Controller' => 'Shop_Api_Domains_CheckGroups', 'View' => ''],
+        /**
+         * Проверка одного домена
          *
          * @see Shop_Api_Domains_CheckOne
          */
         '/api/v1/shop/domains/check/one' => ['Controller' => 'Shop_Api_Domains_CheckOne', 'View' => ''],
         /**
-         * Проверка домена
+         * Проверка нескольких доменов
          *
          * @see Shop_Api_Domains_Check
          */
         '/api/v1/shop/domains/check' => ['Controller' => 'Shop_Api_Domains_Check', 'View' => ''],
         /**
-         * Получение списка зон доменов по группам
+         * Получение списка зон по указанной группе
          *
          * @see Shop_Api_Domains_ZoneList
          */
