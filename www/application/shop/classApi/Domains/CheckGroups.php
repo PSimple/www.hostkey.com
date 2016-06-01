@@ -21,13 +21,28 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
             Zero_App::ResponseJson500(-1, ["параметр доменов не задан"]);
         if ( !isset($_REQUEST['group']) || !$_REQUEST['group'] )
             Zero_App::ResponseJson500(-1, ["группа не задана"]);
+        if ( !isset($_REQUEST['pg']) || !$_REQUEST['pg'] )
+            $sql_limit = '';
+        else
+            $sql_limit = 'LIMIT ' . (( $_REQUEST['pg'] - 1) * 10) . ', 10';
+
 
         // Домены
         $domainList = explode(",", $_REQUEST['domainList']);
 
         // Зоны группы
         $sqlGroup = Zero_DB::EscT('%' . $_REQUEST['group'] . '%');
-        $zoneList = Zero_DB::Select_List("SELECT `Name` FROM DomainsZone WHERE `Groups` LIKE {$sqlGroup}");
+        $sql = "
+        SELECT
+          `Name`
+        FROM DomainsZone
+        WHERE
+          `Groups` LIKE {$sqlGroup}
+        ORDER BY
+          Sort ASC
+        {$sql_limit}
+        ";
+        $zoneList = Zero_DB::Select_List($sql);
 
         // Общее количество общих запросов
         $cntRequestAll = count($zoneList) * count($domainList);
