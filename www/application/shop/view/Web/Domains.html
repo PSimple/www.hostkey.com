@@ -14,7 +14,8 @@
 
         <div class="b-container">
             <div class="search-bar">
-                <textarea class="b-input search-bar__input" name="" id="" cols="30" rows="10"></textarea><!--
+                <input type="text" class="b-input search-bar__input" name=""/><!--
+                        --><textarea class="b-input search-bar__input search-bar__input-hidden" name="" cols="30" rows="10"></textarea><!--
                         --><a class="b-submit search-bar__submit" href="#"> search</a>
             </div>
         </div>
@@ -84,6 +85,27 @@
                             Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
                         </p>
                         <table class="tab-list__content-table" id="result-table">
+                            <thead>
+                            <tr>
+                                <th width="250" class="tab-list__content-table-cell">Domain</th>
+                                <th width="260" class="tab-list__content-table-cell">Results</th>
+                                <th width="240" class="tab-list__content-table-cell">
+                                    <a href="#" class="tab-list__content-reg-all">
+                                        <i class="b-icon"></i>Register all free
+                                    </a>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- JSON content -->
+                            </tbody>
+                        </table>
+                        <br>
+                        <br>
+                        <p>
+                            Также Вы можете выбрать доменные имена среди наиболее популярных доменных зон.
+                        </p>
+                        <table class="tab-list__content-table" id="result-table2">
                             <thead>
                             <tr>
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>

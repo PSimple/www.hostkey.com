@@ -6359,6 +6359,7 @@ div.clear {
     -moz-box-sizing: border-box;
     margin-left: -6px;
     margin-bottom: 30px;
+    position: relative;
 }
 
 .search-bar__input,
@@ -6380,6 +6381,10 @@ div.clear {
 .search-bar__input-pad {
     padding: 0 20px !important;
     line-height: 20px;
+}
+
+.search-bar__input-hidden {
+    display: none !important;
 }
 
 .search-bar__submit {
@@ -6945,4 +6950,8 @@ div.clear {
 
 .domains-options__item-price_free_yes {
     color: #ff692d;
+}
+
+#domains-check__more {
+    display: none;
 }
