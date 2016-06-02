@@ -122,6 +122,20 @@ class Shop_DomainsZone extends Zero_Model
                 'Form' => 'Img',
             ],
             'Sort' => ['AliasDB' => 'z.Sort', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '', 'Form' => 'Number'],
+			'Dnsmanagement' => [
+				'AliasDB' => 'z.Dnsmanagement',
+				'DB' => 'I',
+				'IsNull' => 'YES',
+				'Default' => '0',
+				'Form' => 'Check',
+			],
+			'Idprotection' => [
+				'AliasDB' => 'z.Idprotection',
+				'DB' => 'I',
+				'IsNull' => 'YES',
+				'Default' => '0',
+				'Form' => 'Check',
+			],
         ];
     }
 
@@ -154,6 +168,8 @@ class Shop_DomainsZone extends Zero_Model
 			'PriceOld' => ['Visible' => true, 'AR' => true],
 			'Groups' => ['Visible' => true, 'AR' => true],
 			'DateAction' => ['Visible' => true, 'AR' => true],
+			'Dnsmanagement' => ['Visible' => true, 'AR' => true],
+			'Idprotection' => ['Visible' => true, 'AR' => true],
             'Sort' => ['Visible' => true, 'AR' => true],
         ];
     }
@@ -204,6 +220,8 @@ class Shop_DomainsZone extends Zero_Model
 			'Groups' => [],
 			'DateAction' => [],
 			'Img' => [],
+			'Dnsmanagement' => ['Form' => 'Readonly'],
+			'Idprotection' => ['Form' => 'Readonly'],
 			'Sort' => [],
         ];
     }

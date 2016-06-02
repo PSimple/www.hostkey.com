@@ -24,7 +24,7 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
         if ( !isset($_REQUEST['pg']) || !$_REQUEST['pg'] )
             $sql_limit = '';
         else
-            $sql_limit = 'LIMIT ' . (( $_REQUEST['pg'] - 1) * 10) . ', 10';
+            $sql_limit = 'LIMIT ' . (( $_REQUEST['pg'] - 1) * 20) . ', 20';
 
 
         // Домены

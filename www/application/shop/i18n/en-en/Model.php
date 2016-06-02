@@ -131,4 +131,6 @@ return [
     'DomainsZone PriceRegister' => 'Цена регистрации',
     'DomainsZone PriceTransfer' => 'Цена перевода',
     'DomainsZone PriceRenew' => 'Цена продления',
+    'DomainsZone Dnsmanagement' => 'DNS хостинг',
+    'DomainsZone Idprotection' => 'WHOIS защита',
 ];
