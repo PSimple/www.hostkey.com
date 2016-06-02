@@ -93,6 +93,11 @@ class Shop_Api_Domains_Check extends Zero_Controller
         foreach ($response as $d => $row)
         {
             $arr = explode('.', $d);
+            if ( count($arr) !=  2 )
+            {
+                Zero_Logs::Set_Message_Error('Домен в результате не корректный' . $d);
+                continue;
+            }
             if ( in_array($arr[1], $zoneListTarget) || isset($zoneListDomain[$d]) )
                 $responseGroup1[$d] = $row;
             else if ( in_array('.' . $arr[1], $zoneListTop20) )

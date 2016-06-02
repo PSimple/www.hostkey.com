@@ -28,11 +28,16 @@ class Shop_Console_Domains_ZoneList extends Zero_Controller
         Zero_DB::Update("UPDATE DomainsZone SET IsExist = 0");
         foreach ($data['Content'] as $row)
         {
+            $Dnsmanagement = 'on' == $row['dnsmanagement'] ? 1 : 0;
+            $Idprotection = 'on' == $row['idprotection'] ? 1 : 0;
+
             $sql = "SELECT COUNT(*) FROM DomainsZone WHERE `Name` = '{$row['extension']}'";
             if ( 0 < Zero_DB::Select_Field($sql) )
             {
                 $sql = "
                 UPDATE DomainsZone SET
+                  Dnsmanagement = {$Dnsmanagement},
+                  Idprotection = {$Idprotection},
                   PriceRegister = {$row['domainregister_msetupfee']},
                   PriceTransfer = {$row['domaintransfer_msetupfee']},
                   PriceRenew = {$row['domainrenew_msetupfee']},
@@ -46,9 +51,13 @@ class Shop_Console_Domains_ZoneList extends Zero_Controller
             else
             {
                 $sql = "INSERT INTO DomainsZone SET
+                  Dnsmanagement = {$Dnsmanagement},
+                  Idprotection = {$Idprotection},
+                  PriceRegister = {$row['domainregister_msetupfee']},
+                  PriceTransfer = {$row['domaintransfer_msetupfee']},
+                  PriceRenew = {$row['domainrenew_msetupfee']},
                   `Name` = '{$row['extension']}',
                   `Order` = {$row['order']},
-                  `PriceRegister` = {$row['domainregister_msetupfee']},
                   IsExist = 1
                 ";
                 Zero_DB::Insert($sql);
