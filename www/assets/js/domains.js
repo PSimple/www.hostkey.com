@@ -148,12 +148,14 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
     AddData('.domains-check__row', readyPromo);
 });
 
-$('.search-bar__input:visible').on('keyup', function (e) {
-    var svalue = $(this).val().replace(/[^a-zA-Z0-9-^.\n]/gim, '');
+$('.search-bar__input').on('keyup', function (e) {
+    var svalue = $(this).val().replace(/[^a-zA-Zа-яА-Я0-9-^.,;\n]/gim, '');
+    var nvalue = $(this).val().replace(/[,;]/gim, '\n');
     $(this).val(svalue);
+    $(this).val(nvalue);
 
     if (e.keyCode == 13)
-        $(this).addClass('search-bar__input-pad');
+        $(this).is(':visible').addClass('search-bar__input-pad');
 });
 
 $('.search-bar__button-bulk').on('click', '', function (e) {
@@ -165,11 +167,13 @@ $('.search-bar .b-submit').on('click', '', function (e) {
     searchZones = '';
     var readyTable = '';
     var readyTable2 = '';
+    var popularTable = '';
     $.each($checkedInput, function () {
         searchZones += $(this).data('name').replace('.', '') + ',';
     });
     searchZones = searchZones.slice(0, -1);
-    var searchDomains = ($('.search-bar__input:visible').val()).replace(/\n/g, ',');
+    var searchDomains = '';
+    searchDomains = ($('.search-bar__input:visible').val()).replace(/\n/g, ',');
     if (searchDomains.substr(-1, 1) == ',') {
         searchDomains = searchDomains.substr(0, -1);
     }
@@ -253,6 +257,51 @@ $('.search-bar .b-submit').on('click', '', function (e) {
             bindTableClick();
         });
     }
+    $('.tab-list__item').on('click', '', function () {
+        var thisid = $(this).attr('data-id');
+        if (!$('#' + thisid).hasClass('notEmpty')) {
+            $.getJSON('/api/v1/shop/domains/check/groups?domainList=' + searchDomains + '&group=' + thisid + '&pg=1', function (data) {
+                var items = data['Content'];
+                var classAv;
+                for (key in items) {
+                    var status = items[key]['status'];
+                    var priceReg = items[key]['priceRegister'];
+                    var priceTrans = items[key]['priceTransfer'];
+                    var priceRenew = items[key]['priceRenew'];
+                    var priceOld = items[key]['priceOld'];
+                    switch (status) {
+                        case 'error':
+                        case 'invalid domain':
+                            classAv = 'invalid';
+                            break;
+                        case 'available':
+                            classAv = 'available';
+                            break;
+                        case 'not available':
+                        default:
+                            classAv = 'registred';
+                            break;
+                    }
+                    popularTable += '<tr class="tab-list__content-table-row tab-list__content-table-row__' + classAv + '">' +
+                        '<td class="tab-list__content-table-cell">' + key + '</td>' +
+                        '<td class="tab-list__content-table-cell">' + status + '</td>' +
+                        '<td class="tab-list__content-table-cell">' +
+                        '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="' + priceReg + '">' +
+                        '<i class="b-icon"></i>Register | <span>€' + priceReg + '</span>' +
+                        '</a>' +
+                        '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans + '"  data-priceRenew="' + priceRenew + '" >' +
+                        '<i class="b-icon"></i>It\'s my domain</a>' +
+                        '</td></tr>';
+
+                }
+                $('#' + thisid).addClass('notEmpty');
+                AddData('#' + thisid + 'Table tbody', popularTable);
+
+
+                bindTableClick();
+            });
+        }
+    });
 
     $('.domains-step').hide();
     $('#step2').show();
@@ -260,4 +309,5 @@ $('.search-bar .b-submit').on('click', '', function (e) {
         scrollTop: $("#step2").offset().top
     }, 2000);
     return false;
-});
+})
+;

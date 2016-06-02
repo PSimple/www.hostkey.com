@@ -6371,7 +6371,7 @@ div.clear {
 
 .search-bar__input {
     border: 0px solid #f3f5f8;
-    width: 952px;
+    width: 945px;
     margin-left: 6px;
     height: 60px;
     overflow: hidden;
@@ -6983,7 +6983,7 @@ textarea.search-bar__input {
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    right: 195px;
+    right: 202px;
     top: 3px;
 }
 

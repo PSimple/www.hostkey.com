@@ -16,7 +16,8 @@
             <div class="search-bar">
                 <input type="text" class="b-input search-bar__input" name=""/><!--
                         --><textarea class="b-input search-bar__input search-bar__input-hidden" name="" cols="30" rows="10"></textarea><!--
-                        --><button class="search-bar__button-bulk">Bulk search</button><!--
+                        -->
+                <button class="search-bar__button-bulk">Bulk search</button><!--
                         --><a class="b-submit search-bar__submit" href="#"> search</a>
             </div>
         </div>
@@ -64,19 +65,16 @@
                     <div class="tab-list__item current js-tab" data-tab="1">
                         <div class="tab-list__item-name">Result</div>
                     </div>
-                    <div class="tab-list__item js-tab" data-tab="2">
+                    <div class="tab-list__item js-tab" data-tab="2" data-id="popular">
                         <div class="tab-list__item-name">Popular</div>
                     </div>
-                    <div class="tab-list__item js-tab" data-tab="3">
-                        <div class="tab-list__item-name">New</div>
+                    <div class="tab-list__item js-tab" data-tab="3" data-id="promo">
+                        <div class="tab-list__item-name">Promo</div>
                     </div>
-                    <div class="tab-list__item js-tab" data-tab="4">
+                    <div class="tab-list__item js-tab" data-tab="4" data-id="international">
                         <div class="tab-list__item-name">International</div>
                     </div>
-                    <div class="tab-list__item js-tab" data-tab="5">
-                        <div class="tab-list__item-name">International</div>
-                    </div>
-                    <div class="tab-list__item js-tab" data-tab="6">
+                    <div class="tab-list__item js-tab" data-tab="5" data-id="thematic">
                         <div class="tab-list__item-name">Thematic</div>
                     </div>
                 </div>
@@ -127,7 +125,8 @@
                         <p>
                             Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
                         </p>
-                        <table class="tab-list__content-table">
+                        <table class="tab-list__content-table" id="popularTable">
+                            <thead>
                             <tr>
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
                                 <th width="260" class="tab-list__content-table-cell">Results</th>
@@ -137,42 +136,10 @@
                                     </a>
                                 </th>
                             </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__registred">
-                                <td class="tab-list__content-table-cell">hk.es</td>
-                                <td class="tab-list__content-table-cell">registred</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__available">
-                                <td class="tab-list__content-table-cell">hk.ru</td>
-                                <td class="tab-list__content-table-cell">free</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__invalid">
-                                <td class="tab-list__content-table-cell">hk--.ru</td>
-                                <td class="tab-list__content-table-cell">invalid</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- -->
+                            </tbody>
                         </table>
                     </div>
                     <div class="tab-list__content js-tab-content" data-tab="3">
@@ -180,7 +147,7 @@
                         <p>
                             Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
                         </p>
-                        <table class="tab-list__content-table">
+                        <table class="tab-list__content-table" id="promoTable">
                             <tr>
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
                                 <th width="260" class="tab-list__content-table-cell">Results</th>
@@ -190,42 +157,7 @@
                                     </a>
                                 </th>
                             </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__registred">
-                                <td class="tab-list__content-table-cell">hk.es</td>
-                                <td class="tab-list__content-table-cell">registred</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__available">
-                                <td class="tab-list__content-table-cell">hk.ru</td>
-                                <td class="tab-list__content-table-cell">free</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__invalid">
-                                <td class="tab-list__content-table-cell">hk--.ru</td>
-                                <td class="tab-list__content-table-cell">invalid</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
+                            <tbody></tbody>
                         </table>
                     </div>
                     <div class="tab-list__content js-tab-content" data-tab="4">
@@ -234,7 +166,8 @@
                         <p>
                             Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
                         </p>
-                        <table class="tab-list__content-table">
+                        <table class="tab-list__content-table" id="internationalTable">
+                            <thead>
                             <tr>
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
                                 <th width="260" class="tab-list__content-table-cell">Results</th>
@@ -244,66 +177,10 @@
                                     </a>
                                 </th>
                             </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__registred">
-                                <td class="tab-list__content-table-cell">hk.es</td>
-                                <td class="tab-list__content-table-cell">registred</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__available">
-                                <td class="tab-list__content-table-cell">hk.ru</td>
-                                <td class="tab-list__content-table-cell">free</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__invalid">
-                                <td class="tab-list__content-table-cell">hk--.ru</td>
-                                <td class="tab-list__content-table-cell">invalid</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__available">
-                                <td class="tab-list__content-table-cell">hk.ru</td>
-                                <td class="tab-list__content-table-cell">free</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__registred">
-                                <td class="tab-list__content-table-cell">hk.ru</td>
-                                <td class="tab-list__content-table-cell">free</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
                         </table>
                     </div>
                     <div class="tab-list__content js-tab-content" data-tab="5">
@@ -312,7 +189,7 @@
                         <p>
                             Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
                         </p>
-                        <table class="tab-list__content-table">
+                        <table class="tab-list__content-table" id="thematicTable">
                             <tr>
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
                                 <th width="260" class="tab-list__content-table-cell">Results</th>
@@ -322,144 +199,9 @@
                                     </a>
                                 </th>
                             </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__registred">
-                                <td class="tab-list__content-table-cell">hk.es</td>
-                                <td class="tab-list__content-table-cell">registred</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__available">
-                                <td class="tab-list__content-table-cell">hk.ru</td>
-                                <td class="tab-list__content-table-cell">free</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__invalid">
-                                <td class="tab-list__content-table-cell">hk--.ru</td>
-                                <td class="tab-list__content-table-cell">invalid</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__available">
-                                <td class="tab-list__content-table-cell">hk.ru</td>
-                                <td class="tab-list__content-table-cell">free</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__registred">
-                                <td class="tab-list__content-table-cell">hk.ru</td>
-                                <td class="tab-list__content-table-cell">free</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="tab-list__content js-tab-content" data-tab="6">
+                            <tbody>
 
-                        <h3>Content area 6</h3>
-                        <p>
-                            Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
-                        </p>
-                        <table class="tab-list__content-table">
-                            <tr>
-                                <th width="250" class="tab-list__content-table-cell">Domain</th>
-                                <th width="260" class="tab-list__content-table-cell">Results</th>
-                                <th width="240" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
-                                        <i class="b-icon"></i>Register all free
-                                    </a>
-                                </th>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__registred">
-                                <td class="tab-list__content-table-cell">hk.es</td>
-                                <td class="tab-list__content-table-cell">registred</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__available">
-                                <td class="tab-list__content-table-cell">hk.ru</td>
-                                <td class="tab-list__content-table-cell">free</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__invalid">
-                                <td class="tab-list__content-table-cell">hk--.ru</td>
-                                <td class="tab-list__content-table-cell">invalid</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__available">
-                                <td class="tab-list__content-table-cell">hk.ru</td>
-                                <td class="tab-list__content-table-cell">free</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr class="tab-list__content-table-row tab-list__content-table-row__registred">
-                                <td class="tab-list__content-table-cell">hk.ru</td>
-                                <td class="tab-list__content-table-cell">free</td>
-                                <td class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-this" data-domain="hk.ru" data-price="13">
-                                        <i class="b-icon"></i>Register | <span>€13</span>
-                                    </a>
-                                    <a href="#" class="tab-list__content-its-my" data-domain="hk.ru" data-price="0">
-                                        <i class="b-icon"></i>It's my domain
-                                    </a>
-                                </td>
-                            </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
