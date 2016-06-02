@@ -48,7 +48,7 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
         $cntRequestAll = count($zoneList) * count($domainList);
 
         // Цена зон
-        $sql = "SELECT `Name`, PriceRegister, PriceTransfer, PriceRenew, PriceOld FROM DomainsZone WHERE `Groups` LIKE {$sqlGroup}";
+        $sql = "SELECT `Name`, PriceRegister, PriceTransfer, PriceRenew, PriceOld, Idprotection FROM DomainsZone WHERE `Groups` LIKE {$sqlGroup}";
         $zoneListPrice = Zero_DB::Select_Array_Index($sql);
 
         // Поиск
@@ -68,6 +68,7 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
 
             $cntFlag++;
             $response[$result['domain']]['status'] = $result['result'];
+            $response[$result['domain']]['idprotection'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['Idprotection'] : 0;
             $response[$result['domain']]['priceRegister'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister'] : 0.00;
             $response[$result['domain']]['priceTransfer'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceTransfer'] : 0.00;
             $response[$result['domain']]['priceRenew'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRenew'] : 0.00;
