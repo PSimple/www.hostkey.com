@@ -54,11 +54,14 @@ class Shop_Api_Domains_CheckOne extends Zero_Controller
                 $cntRequestAll++;
             }
             // zone Target
-            $ip->Check($d, $zoneListTarget);
+            if ( 0 < count($zoneListTarget) )
+                $ip->Check($d, $zoneListTarget);
             // zone Top20
-            $ip->Check($d, $zoneListTop20);
+            if ( 0 < count($zoneListTop20) )
+                $ip->Check($d, $zoneListTop20);
             // zone Promo
-            $ip->Check($d, $zoneListPromo);
+            if ( 0 < count($zoneListPromo) )
+                $ip->Check($d, $zoneListPromo);
         }
         // Result
         $response = [];

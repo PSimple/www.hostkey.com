@@ -120,7 +120,8 @@ return [
         'New'=> 'Новые',
         'National'=> 'Национальные',
         'Thematic'=> 'Тематические',
-        'Null'=> 'Не назначено'
+        'NULL'=> 'Не назначено',
+        'NOT NULL'=> 'Назначено'
     ],
     'DomainsZone ID' => 'Идентификатор',
     'DomainsZone Name' => 'Домен',
