@@ -18,14 +18,13 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
     {
         // Проверки
         if ( !isset($_REQUEST['domainList']) || !$_REQUEST['domainList'] )
-            Zero_App::ResponseJson500(-1, ["параметр доменов не задан"]);
+            Zero_App::ResponseJson500(-1, ["домены не заданы"]);
         if ( !isset($_REQUEST['group']) || !$_REQUEST['group'] )
             Zero_App::ResponseJson500(-1, ["группа не задана"]);
         if ( !isset($_REQUEST['pg']) || !$_REQUEST['pg'] )
             $sql_limit = '';
         else
-            $sql_limit = 'LIMIT ' . (( $_REQUEST['pg'] - 1) * 20) . ', 20';
-
+            $sql_limit = 'LIMIT ' . (($_REQUEST['pg'] - 1) * 20) . ', 20';
 
         // Домены
         $domainList = explode(",", $_REQUEST['domainList']);
@@ -43,12 +42,14 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
         {$sql_limit}
         ";
         $zoneList = Zero_DB::Select_List($sql);
+        if ( 0 == count($zoneList) )
+            Zero_App::ResponseJson500(-1, ["не ни одной привязанной зоны"]);
 
         // Общее количество общих запросов
         $cntRequestAll = count($zoneList) * count($domainList);
 
         // Цена зон
-        $sql = "SELECT `Name`, PriceRegister, PriceTransfer, PriceRenew, PriceOld FROM DomainsZone WHERE `Groups` LIKE {$sqlGroup}";
+        $sql = "SELECT `Name`, PriceRegister, PriceTransfer, PriceRenew, PriceOld, Idprotection FROM DomainsZone WHERE `Groups` LIKE {$sqlGroup}";
         $zoneListPrice = Zero_DB::Select_Array_Index($sql);
 
         // Поиск
@@ -56,6 +57,7 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
         $ip = new Shop_Helper_RealtimeRegisterTelnet('hostkey-ote/admin', '50ftWoman');
         foreach ($domainList as $d)
         {
+
             $ip->Check($d, $zoneList);
         }
         // Result
@@ -68,6 +70,7 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
 
             $cntFlag++;
             $response[$result['domain']]['status'] = $result['result'];
+            $response[$result['domain']]['idprotection'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['Idprotection'] : 0;
             $response[$result['domain']]['priceRegister'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister'] : 0.00;
             $response[$result['domain']]['priceTransfer'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceTransfer'] : 0.00;
             $response[$result['domain']]['priceRenew'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRenew'] : 0.00;

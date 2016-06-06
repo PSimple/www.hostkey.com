@@ -16,6 +16,12 @@ class Shop_Route_Api
      */
     public $Route = [
         /**
+         * Получение годовой цены на DNS
+         *
+         * @see Shop_Api_Domains_DnsPrice
+         */
+        '/api/v1/shop/domains/dns/price' => ['Controller' => 'Shop_Api_Domains_DnsPrice', 'View' => ''],
+        /**
          * Получение групп зон
          *
          * @see Shop_Api_Domains_ZoneGroupsList
