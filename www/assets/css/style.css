@@ -1032,7 +1032,12 @@ p {
     display: none;
 }
 
-.tab-list__content-reg-all:after {
+.tab-list__content-reg-help {
+    display: inline-block;
+    position: relative;
+}
+
+.tab-list__content-reg-help:after {
     position: absolute;
     right: -14px;
     top: -9px;
@@ -6159,7 +6164,7 @@ div.clear {
     clear: both;
 }
 
-.domains-step2__summary {
+.domains-step__summary {
     width: 260px;
     display: inline-block;
     vertical-align: top;
@@ -6176,26 +6181,26 @@ div.clear {
     margin-top: 5px;
 }
 
-.domains-step2__summary.is-fixed {
+.domains-step__summary.is-fixed {
     position: fixed;
     top: 80px;
     z-index: 9;
     margin-left: 45px;
 }
 
-.domains-step2__summary.is-bottom {
+.domains-step__summary.is-bottom {
     position: absolute !important;
     bottom: 50px;
     top: auto;
 }
 
-.domains-step2__summary-section {
+.domains-step__summary-section {
     padding-top: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #e6e9ec;
 }
 
-.domains-step2__summary-title {
+.domains-step__summary-title {
     font-size: 28px;
     line-height: 32px;
     font-family: 'FranklinGothicMediCondC';
@@ -6204,7 +6209,7 @@ div.clear {
     border-bottom: 1px solid #e6e9ec;
 }
 
-.domains-step2__summary-subtitle {
+.domains-step__summary-subtitle {
     font-size: 24px;
     line-height: 28px;
     font-family: 'FranklinGothicMediCondC';
@@ -6212,24 +6217,24 @@ div.clear {
     margin-bottom: 10px;
 }
 
-.domains-step2__summary-table {
+.domains-step__summary-table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 10px;
 }
 
-.domains-step2__summary-table-cell {
+.domains-step__summary-table-cell {
     vertical-align: top;
 }
 
-.domains-step2__summary-table-cell:nth-child(1) {
+.domains-step__summary-table-cell:nth-child(1) {
     font-size: 16px;
     line-height: 25px;
     color: #272e38;
     padding-right: 10px;
 }
 
-.domains-step2__summary-table-cell:nth-child(2) {
+.domains-step__summary-table-cell:nth-child(2) {
     font-size: 18px;
     line-height: 20px;
     color: #ff692d;
@@ -6238,13 +6243,13 @@ div.clear {
     vertical-align: top;
 }
 
-.domains-step2__summary-price {
+.domains-step__summary-price {
     color: #ff692d;
     padding-top: 15px;
     margin-bottom: 20px;
 }
 
-.domains-step2__summary-price-value {
+.domains-step__summary-price-value {
     font-size: 26px;
     line-height: 30px;
     font-family: 'FranklinGothicMediCondC';
@@ -6252,18 +6257,20 @@ div.clear {
     display: block;
 }
 
-.domains-step2__summary-price-discount {
+.domains-step__summary-price-discount {
     font-size: 18px;
     line-height: 22px;
 }
 
-.domains-step2__summary-submit {
+.domains-step__summary-submit {
     width: 100%;
     display: block;
 }
 
-.domains-step2__tab {
+.domains-step2__tab,
+.domains-step3__tab {
     display: inline-block;
+    /*display: none;*/
     width: 830px;
     background-color: #fff;
 }
@@ -6653,7 +6660,7 @@ textarea.search-bar__input {
 }
 
 .domains-step {
-    display: none;
+    /*display: none;*/
     font-size: 0;
     padding: 0 35px 0 75px;
     margin-bottom: 30px;

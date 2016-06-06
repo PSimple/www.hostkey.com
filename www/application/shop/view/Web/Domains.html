@@ -1,17 +1,17 @@
 <div class="b-page">
-
+    
     <div class="b-page__promo b-page__promo_domains_yes">
         <div class="b-icon b-page__scroll-icon" onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
         <h1 class="b-page__promo-title">{$Head}</h1>
     </div>
-
+    
     <div class="b-domains" id="scroll-anchor-01">
-
+        
         <h3 class="b-domains__title">
             START YOUR<br>
             DOMAIN SEARCH
         </h3>
-
+        
         <div class="b-container">
             <div class="search-bar">
                 <input type="text" class="b-input search-bar__input" name=""/><!--
@@ -21,7 +21,7 @@
                         --><a class="b-submit search-bar__submit" href="#"> search</a>
             </div>
         </div>
-
+        
         <div class="domains-step" id="step1">
             <div class="b-container">
                 <div class="domain-zone">
@@ -34,17 +34,17 @@
                     <div class="b-news__more-text">show all<br>prices</div>
                 </a>
             </div>
-
+            
             <h3 class="b-domains__title b-domains__title_upline_yes">
                 special offers
             </h3>
-
-
+            
+            
             <div class="domains-offers">
                 <div class="domains-check">
-
+                    
                     <div class="domains-check__row">
-                        <!-- json result 2 -->
+                        <!-- json result  -->
                     </div>
                     <div>
                         <a class="b-news__more" href="#" id="domains-check__more">
@@ -55,12 +55,11 @@
                         </a>
                     </div>
                 </div>
-
+            
             </div>
         </div>
-
-        <div class="domains-step" id="step2">
-            <div class="domains-step2__tab tab-list b-modal__tabs js-tab-wrapper">
+        <div class="domains-step domains-step2n3">
+            <div class="domains-step2__tab tab-list b-modal__tabs js-tab-wrapper" id="step2">
                 <div class="tab-list__container tab-list__items tab-list__items-grid6">
                     <div class="tab-list__item current js-tab" data-tab="1">
                         <div class="tab-list__item-name">Result</div>
@@ -71,7 +70,7 @@
                     <div class="tab-list__item js-tab" data-tab="3" data-id="promo">
                         <div class="tab-list__item-name">Promo</div>
                     </div>
-                    <div class="tab-list__item js-tab" data-tab="4" data-id="international">
+                    <div class="tab-list__item js-tab" data-tab="4" data-id="national">
                         <div class="tab-list__item-name">International</div>
                     </div>
                     <div class="tab-list__item js-tab" data-tab="5" data-id="thematic">
@@ -89,7 +88,7 @@
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
                                 <th width="260" class="tab-list__content-table-cell">Results</th>
                                 <th width="240" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
+                                    <a href="#" class="tab-list__content-reg-all tab-list__content-reg-help">
                                         <i class="b-icon"></i>Register all free
                                     </a>
                                 </th>
@@ -110,7 +109,7 @@
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
                                 <th width="260" class="tab-list__content-table-cell">Results</th>
                                 <th width="240" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
+                                    <a href="#" class="tab-list__content-reg-all tab-list__content-reg-help">
                                         <i class="b-icon"></i>Register all free
                                     </a>
                                 </th>
@@ -131,7 +130,7 @@
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
                                 <th width="260" class="tab-list__content-table-cell">Results</th>
                                 <th width="240" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
+                                    <a href="#" class="tab-list__content-reg-all tab-list__content-reg-help">
                                         <i class="b-icon"></i>Register all free
                                     </a>
                                 </th>
@@ -148,20 +147,24 @@
                             Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
                         </p>
                         <table class="tab-list__content-table" id="promoTable">
+                            <thead>
                             <tr>
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
                                 <th width="260" class="tab-list__content-table-cell">Results</th>
                                 <th width="240" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
+                                    <a href="#" class="tab-list__content-reg-all tab-list__content-reg-help">
                                         <i class="b-icon"></i>Register all free
                                     </a>
                                 </th>
                             </tr>
-                            <tbody></tbody>
+                            </thead>
+                            <tbody>
+                            <!-- json result -->
+                            </tbody>
                         </table>
                     </div>
                     <div class="tab-list__content js-tab-content" data-tab="4">
-
+                        
                         <h3>Content area 443</h3>
                         <p>
                             Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
@@ -172,61 +175,91 @@
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
                                 <th width="260" class="tab-list__content-table-cell">Results</th>
                                 <th width="240" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
+                                    <a href="#" class="tab-list__content-reg-all tab-list__content-reg-help">
                                         <i class="b-icon"></i>Register all free
                                     </a>
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-
+                            
                             </tbody>
                         </table>
                     </div>
                     <div class="tab-list__content js-tab-content" data-tab="5">
-
+                        
                         <h3>Content area 5</h3>
                         <p>
                             Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
                         </p>
                         <table class="tab-list__content-table" id="thematicTable">
+                            <thead>
                             <tr>
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
                                 <th width="260" class="tab-list__content-table-cell">Results</th>
                                 <th width="240" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
+                                    <a href="#" class="tab-list__content-reg-all tab-list__content-reg-help">
                                         <i class="b-icon"></i>Register all free
                                     </a>
                                 </th>
                             </tr>
+                            </thead>
                             <tbody>
-
+                            <!-- json result -->
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="domains-step2__summary domains-step2__summary_is-purpur" id="scroll-block">
-                <div class="domains-step2__summary-title">Your Domains</div>
-                <div class="domains-step2__summary-section">
-                    <div class="domains-step2__summary-subtitle">Register</div>
-                    <table class="domains-step2__summary-table" id="domains-register-table">
+            
+            <div class="domains-step3__tab" id="step3">
+                <div class="tab-list__content-block">
+                    <h3>Зарегистрировать домены</h3>
+                    <table class="tab-list__content-table">
+                        <thead>
+                        <tr>
+                            <th width="250" class="tab-list__content-table-cell">Domain</th>
+                            <th width="260" class="tab-list__content-table-cell"><span class="tab-list__content-reg-help">Period</span></th>
+                            <th width="260" class="tab-list__content-table-cell"><span class="tab-list__content-reg-help">DNS-hosting</span></th>
+                            <th width="240" class="tab-list__content-table-cell"><span class="tab-list__content-reg-help" title="Lorem ipsum...">Extra safety</span></th>
+                        </tr>
+                        </thead>
                         <tbody>
+                        <tr class="tab-list__content-table-row">
+                            <td class="tab-list__content-table-cell">domain.dom</td>
+                            <td class="tab-list__content-table-cell">
+                                <select class="table-select__item js-select" name="tbl-select-1" id="domains-register-period-select1" data_preset="0">
+                                    <option value="0">1 year / €7</option>
+                                    <option value="1">2 year / €12</option>
+                                    <option value="2">3 year / €20</option>
+                                </select>
+                            </td>
+                            <td class="tab-list__content-table-cell">
+                                <div class="bullit-item"></div>
+                            </td>
+                            <td class="tab-list__content-table-cell"></td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="domains-step2__summary-price">
-                    <span class="domains-step2__summary-price-value" id="Summa"></span>
-                    <span class="domains-step2__summary-price-discount" id="Discount"></span>
+            </div>
+            <div class="domains-step__summary domains-step__summary_is-purpur" id="scroll-block">
+                <div class="domains-step__summary-title">Your Domains</div>
+                <div class="domains-step__summary-section">
+                    <div class="domains-step__summary-subtitle">Register</div>
+                    <table class="domains-step__summary-table" id="domains-register-table">
+                        <tbody>
+                        <!-- json content -->
+                        </tbody>
+                    </table>
                 </div>
-                <a class="b-submit domains-step2__summary-submit" href="#" id="byu_cloud">Buy</a>
+                <div class="domains-step__summary-price">
+                    <span class="domains-step__summary-price-value" id="Summa"></span>
+                    <span class="domains-step__summary-price-discount" id="Discount"></span>
+                </div>
+                <a class="b-submit domains-step__summary-submit" href="#" id="byu_cloud">Buy</a>
             </div>
         </div>
-
-        <div class="domains-step" id="step3">
-
-        </div>
-
         {plugin "Content_ContentBlock_Plugin" view="Voucher" target="voucher"}
         {plugin "Content_ContentBlock_Plugin" view="NeedMore" target="information"}
         <div class="footer-push"></div>
@@ -234,11 +267,3 @@
 </div>
 
 <script type="application/javascript" src="/assets/js/domains.js"></script>
-<script>
-    $(document).ready(function () {
-
-
-    });
-
-
-</script>

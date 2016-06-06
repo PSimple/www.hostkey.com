@@ -25,11 +25,10 @@ function bindTableClick() {
             if (searchThis < 0) {
                 reg.push(domain);
                 $('#domains-register-table tbody').append(
-                    '<tr class="domains-step2__summary-table-row">' +
-                    '<td class="domains-step2__summary-table-cell">' + domain + '</td>' +
-                    '<td class="domains-step2__summary-table-cell">€' + price + '</td>' +
+                    '<tr class="domains-step__summary-table-row">' +
+                    '<td class="domains-step__summary-table-cell">' + domain + '</td>' +
+                    '<td class="domains-step__summary-table-cell">€' + price + '</td>' +
                     '</tr>');
-
                 summaryPrice += parseInt(price);
                 $('#Summa').html('€' + summaryPrice);
             }
@@ -92,6 +91,7 @@ $('#domains-check__more').on('click', function () {
     $(this).hide();
     return false;
 });
+
 $.getJSON('/api/v1/shop/domains/zone/list?groups=top100', function (data) {
     var items = data['Content'];
     var ready = '';
@@ -111,6 +111,7 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=top100', function (data) {
     }
     AddData('.domain-zone', ready);
 });
+
 $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
     var items = data['Content'];
     var readyPromo = '';
@@ -158,11 +159,11 @@ $('.search-bar__input').on('keyup', function (e) {
         $(this).is(':visible').addClass('search-bar__input-pad');
 });
 
-$('.search-bar__button-bulk').on('click', '', function (e) {
+$('.search-bar__button-bulk').on('click', '', function () {
     $('.search-bar__input').toggleClass('search-bar__input-hidden');
 });
 
-$('.search-bar .b-submit').on('click', '', function (e) {
+$('.search-bar .b-submit').on('click', '', function () {
     var $checkedInput = $('.hidden-input:checked');
     searchZones = '';
     var readyTable = '';
@@ -257,12 +258,14 @@ $('.search-bar .b-submit').on('click', '', function (e) {
             bindTableClick();
         });
     }
+
     $('.tab-list__item').on('click', '', function () {
+        popularTable = '';
         var thisid = $(this).attr('data-id');
-        if (!$('#' + thisid).hasClass('notEmpty')) {
+        if (!$('#' + thisid + 'Table').hasClass('notEmpty') && $(this).attr('data-tab') != 1) {
             $.getJSON('/api/v1/shop/domains/check/groups?domainList=' + searchDomains + '&group=' + thisid + '&pg=1', function (data) {
                 var items = data['Content'];
-                var classAv;
+                var classAv = '';
                 for (key in items) {
                     var status = items[key]['status'];
                     var priceReg = items[key]['priceRegister'];
@@ -294,7 +297,7 @@ $('.search-bar .b-submit').on('click', '', function (e) {
                         '</td></tr>';
 
                 }
-                $('#' + thisid).addClass('notEmpty');
+                $('#' + thisid + 'Table').addClass('notEmpty');
                 AddData('#' + thisid + 'Table tbody', popularTable);
 
 
@@ -304,10 +307,10 @@ $('.search-bar .b-submit').on('click', '', function (e) {
     });
 
     $('.domains-step').hide();
-    $('#step2').show();
+    $('.domains-step2n3, #step2').css('display', 'inline-block');
     $('html, body').animate({
         scrollTop: $("#step2").offset().top
     }, 2000);
+    $(document).tooltip();
     return false;
-})
-;
+});
