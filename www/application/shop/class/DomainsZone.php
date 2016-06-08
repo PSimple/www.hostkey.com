@@ -65,6 +65,13 @@ class Shop_DomainsZone extends Zero_Model
 				'Default' => '',
 				'Form' => 'Text',
 			],
+			'Description' => [
+				'AliasDB' => 'z.Description',
+				'DB' => 'T',
+				'IsNull' => 'YES',
+				'Default' => '',
+				'Form' => 'Textarea'
+			],
 			'Order' => [
 				'AliasDB' => 'z.Order',
 				'DB' => 'I',
@@ -161,6 +168,7 @@ class Shop_DomainsZone extends Zero_Model
             'ID' => ['Visible' => true, 'AR' => true],
 			'Name' => ['Visible' => true, 'AR' => true],
 			'Comment' => ['Visible' => true, 'AR' => true],
+			'Description' => ['Visible' => true, 'AR' => true],
 			'Order' => ['Visible' => true, 'AR' => true],
 			'PriceRegister' => ['Visible' => true, 'AR' => true],
 			'PriceTransfer' => ['Visible' => true, 'AR' => true],
@@ -212,6 +220,7 @@ class Shop_DomainsZone extends Zero_Model
         return [
 			'Name' => [],
 			'Comment' => [],
+			'Description' => [],
 			'Order' => [],
 			'PriceRegister' => [],
 			'PriceTransfer' => [],

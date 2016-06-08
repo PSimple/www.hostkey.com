@@ -1,19 +1,40 @@
 <div class="b-page">
 
-    <div class="b-page__promo b-page__promo_faq_yes">
-        <h1 class="b-page__promo-title">{$NAME}</h1>
-    </div>
-    <div class="b-faq">
+    <!--Test page template -->
+    <div class="b-text-page" style="float: left; width: 100%;">
+        <div class="scroll-anchor-01" id="scroll-anchor-01"></div>
+        <div class="b-text-page__box" style="float: left; width: 25%; box-sizing: border-box; padding: 20px 20px 20px 70px;">
+            <h3 class="b-text-page__title b-text-page__title_upline_yes" style="overflow: hidden;">
+                Ошибка работы приложения
+            </h3>
+        </div>
 
-            <div class="b-faq__list-head">
-                <div class="b-container"></div>
-            </div>
-            <div class="b-faq__list-content">
-              <div style="margin: 40px 55px 0 75px;">{$DESC}</div>
+        <div class="b-text-page__box" style="float: left; width: 75%; box-sizing: border-box; padding: 60px 20px 20px 20px;">
+            <div class="b-container editable-area" style="float: left; padding:0; width: 95%; box-sizing: border-box;">
+                {$message}
             </div>
 
+        </div>
+
     </div>
+    <div style="clear: both;"></div>
+
 
     <div class="footer-push"></div>
-
 </div>
+
+<style>
+    .b-text-page__title_upline_yes {
+        float: left;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        border: none;
+    }
+    .scroll-anchor-01 {
+        width: 30%;
+        border-top: 4px solid #ff692d;
+        height: 10px;
+    }
+
+</style>

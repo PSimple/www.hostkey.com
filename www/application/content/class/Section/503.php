@@ -19,36 +19,23 @@ class Content_Section_503 extends Zero_Controller
     public function Action_Default()
     {
         $this->Chunk_Init();
-        $Section = Zero_Section::Make();
-        $Section->Init_Url("/404");
-        $this->View->Assign('NAME', $Section->Name);
-        $this->View->Assign('DESC', $Section->Description);
+        $this->Chunk_View();
         return $this->View;
     }
 
     /**
-     * Инициализация контроллера
+     * Вывод данных операции контроллера в шаблон
      *
      * Может быть переопределен конкретным контроллером
      *
      * @return bool
      */
-    protected function Chunk_Init()
+    protected function Chunk_View()
     {
-        // Шаблон
-        if ( isset($this->Params['view']) )
-            $this->View = new Zero_View($this->Params['view']);
-        else if ( isset($this->Params['tpl']) )
-            $this->View = new Zero_View($this->Params['tpl']);
-        else if ( isset($this->Params['template']) )
-            $this->View = new Zero_View($this->Params['template']);
-        else
-            $this->View = new Zero_View(get_class($this));
-        // Модель (пример)
-        // $this->Model = Zero_Model::Makes('Zero_Users');
+        $this->View->Assign('message', $this->Params['message']);
         return true;
     }
-
+    
     /**
      * Фабричный метод по созданию контроллера.
      *
