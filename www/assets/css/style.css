@@ -1035,6 +1035,7 @@ p {
 .tab-list__content-reg-help {
     display: inline-block;
     position: relative;
+    pointer-events: none;
 }
 
 .tab-list__content-reg-help:after {
@@ -1046,6 +1047,7 @@ p {
     cursor: pointer;
     content: '';
     display: block;
+    pointer-events: all;
     background: url(/assets/img/help_12x12.png) no-repeat center;
 }
 
@@ -1061,6 +1063,16 @@ p {
     background-position: -171px -110px;
     margin-right: 10px;
     position: relative;
+}
+
+.uhgiusgioh {
+    i: dont see jgiost lkfyfor a moment mgd;
+    height: 200px;
+    margin: 0 0 0 0;
+    text-blink: 1;
+    display: flex;
+    flex: auto;
+    list-style-position: outside;
 }
 
 .b-page {
@@ -7000,4 +7012,9 @@ textarea.search-bar__input {
     transition: 0.3s all;
     -webkit-transition: 0.3s all;
     -moz-transition: 0.3s all;
+}
+
+.ui-tooltip-content {
+    font-size: 14px !important;
+    font-family: 'FranklinGothicBookCondC', Verdana, Arial, Helvetica, sans-serif;
 }

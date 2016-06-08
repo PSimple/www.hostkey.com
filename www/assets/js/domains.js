@@ -165,20 +165,24 @@ $('.search-bar__button-bulk').on('click', '', function () {
 
 $('.search-bar .b-submit').on('click', '', function () {
     var $checkedInput = $('.hidden-input:checked');
-    searchZones = '';
+
     var readyTable = '';
     var readyTable2 = '';
     var popularTable = '';
+
+    searchZones = '';
     $.each($checkedInput, function () {
         searchZones += $(this).data('name').replace('.', '') + ',';
     });
     searchZones = searchZones.slice(0, -1);
+
     var searchDomains = '';
     searchDomains = ($('.search-bar__input:visible').val()).replace(/\n/g, ',');
     if (searchDomains.substr(-1, 1) == ',') {
         searchDomains = searchDomains.substr(0, -1);
     }
     var searchDomainsArr = searchDomains.split(',');
+
     for (key in searchDomainsArr) {
         var onedomainname = searchDomainsArr[key];
         $.getJSON('/api/v1/shop/domains/check?domainList=' + onedomainname + '&zoneList=' + searchZones, function (data) {
@@ -217,6 +221,7 @@ $('.search-bar .b-submit').on('click', '', function () {
                     '</td></tr>';
 
             }
+
             for (key in itemsTop) {
                 var status2 = itemsTop[key]['status'];
                 var priceReg2 = itemsTop[key]['priceRegister'];
@@ -253,7 +258,6 @@ $('.search-bar .b-submit').on('click', '', function () {
             }
             AddData('#result-table tbody', readyTable);
             AddData('#result-table2 tbody', readyTable2);
-
 
             bindTableClick();
         });
@@ -295,12 +299,9 @@ $('.search-bar .b-submit').on('click', '', function () {
                         '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans + '"  data-priceRenew="' + priceRenew + '" >' +
                         '<i class="b-icon"></i>It\'s my domain</a>' +
                         '</td></tr>';
-
                 }
                 $('#' + thisid + 'Table').addClass('notEmpty');
                 AddData('#' + thisid + 'Table tbody', popularTable);
-
-
                 bindTableClick();
             });
         }
@@ -311,6 +312,7 @@ $('.search-bar .b-submit').on('click', '', function () {
     $('html, body').animate({
         scrollTop: $("#step2").offset().top
     }, 2000);
-    $(document).tooltip();
     return false;
 });
+
+$('.tab-list__content-reg-help:after, .tab-list__content-table-cell').tooltip();
