@@ -1014,6 +1014,64 @@ p {
 
 .tab-list__content-its-my {
     display: none;
+    position: relative;
+}
+
+.transferPopup {
+    display: block;
+    width: 200px;
+    height: 60px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+    text-transform: none;
+    box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 2px 1px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 5px 0;
+    position: absolute;
+    top: -80px;
+}
+
+.transferPopup:after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+
+    background: #FFF;
+    background: rgba(255, 255, 255, 0.95);
+
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.3);
+    -o-box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.3);
+    box-shadow: -1px 1px 3px -1px rgba(0, 0, 0, 0.3);
+}
+
+.transferPopup a {
+    color: #945ae0;
+    text-transform: uppercase;
+    padding: 0 20px;
+    line-height: 26px;
+    text-decoration: none;
+}
+
+.transferPopup span {
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+    color: #272e38;
+    line-height: 18px;
 }
 
 .tab-list__content-table-row__registred .tab-list__content-its-my {
@@ -6210,6 +6268,11 @@ div.clear {
     padding-top: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #e6e9ec;
+    display: none;
+}
+
+.visible_section {
+    display: block;
 }
 
 .domains-step__summary-title {
@@ -6282,7 +6345,7 @@ div.clear {
 .domains-step2__tab,
 .domains-step3__tab {
     display: inline-block;
-    /*display: none;*/
+    display: none;
     width: 830px;
     background-color: #fff;
 }
@@ -6672,7 +6735,7 @@ textarea.search-bar__input {
 }
 
 .domains-step {
-    /*display: none;*/
+    display: none;
     font-size: 0;
     padding: 0 35px 0 75px;
     margin-bottom: 30px;
@@ -7017,4 +7080,21 @@ textarea.search-bar__input {
 .ui-tooltip-content {
     font-size: 14px !important;
     font-family: 'FranklinGothicBookCondC', Verdana, Arial, Helvetica, sans-serif;
+}
+
+.bullit-item label {
+    background: url(/assets/img/bullit.png) top no-repeat;
+    width: 55px;
+    height: 22px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.bullit-item input[type="checkbox"] {
+    width: 0;
+    height: 0;
+}
+
+.bullit-item input[type="checkbox"]:checked + label {
+    background-position: center;
 }

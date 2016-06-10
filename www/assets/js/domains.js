@@ -3,6 +3,27 @@ var reg = [],
     trans = [];
 var summaryPrice = 0;
 var searchZones = '';
+window.location.hash = '#domains_1';
+
+window.addEventListener('hashchange', function () {
+    switch (location.hash) {
+        case '#domains_2':
+            $('.domains-step2n3, #step2').css('display', 'inline-block');
+            $('#step1, #step3').hide();
+            break;
+        case '#domains_3':
+            if (reg.length || trans.length) {
+                $('.domains-step2n3, #step3').css('display', 'inline-block');
+                $('#step1, #step2').hide();
+            }
+            break;
+        case '#domains_1':
+        default:
+            $('#step1').show();
+            $('.domains-step2n3, #step2, #step3').hide();
+            break;
+    }
+});
 
 function AddData(target, data) {
     $(target).html(data);
@@ -16,6 +37,23 @@ String.prototype.stripTags = function () {
     return this.replace(/<\/?[^>]+>/g, '');
 };
 
+String.prototype.cutDomain = function () {
+    var splitName = this.split('.');
+    var cutName = this;
+    if (splitName[0].length > 10)
+        cutName = splitName[0].substring(0, 10) + '...' + splitName[1];
+    return cutName;
+};
+
+
+function AddTransferPopup(container) {
+    $(container).append('<div class="transferPopup">' +
+        '<span>Перенести и продлить<br/> на 1 год?</span>' +
+        '<a href="#" class="transferPopup-yes">Yes</a>' +
+        '<a href="#" class="transferPopup-yes">No</a>' +
+        '</div>');
+}
+
 function bindTableClick() {
     $('.tab-list__content-table-row__available').on('click', 'a.tab-list__content-reg-this', function () {
         var domain = $(this).attr('data-domain');
@@ -23,13 +61,36 @@ function bindTableClick() {
         var searchThis = reg.indexOf(domain);
         if (searchThis !== undefined && searchThis != null) {
             if (searchThis < 0) {
+                if (!$('#registerSection').is(':visible'))
+                    $('#registerSection').addClass('visible_section');
                 reg.push(domain);
                 $('#domains-register-table tbody').append(
                     '<tr class="domains-step__summary-table-row">' +
                     '<td class="domains-step__summary-table-cell">' + domain + '</td>' +
                     '<td class="domains-step__summary-table-cell">€' + price + '</td>' +
                     '</tr>');
-                summaryPrice += parseInt(price);
+                summaryPrice = parseFloat(summaryPrice) + parseFloat(price);
+                $('#Summa').html('€' + summaryPrice);
+            }
+        }
+        return false;
+    });
+    $('.tab-list__content-table-row__registred').on('click', 'a.tab-list__content-its-my', function () {
+        var domain = $(this).attr('data-domain');
+        var priceTrans = $(this).attr('data-pricetrans');
+        var searchThis = reg.indexOf(domain);
+        if (searchThis !== undefined && searchThis != null) {
+            if (searchThis < 0) {
+                AddTransferPopup(this);
+                if (!$('#transferSection').is(':visible'))
+                    $('#transferSection').addClass('visible_section');
+                reg.push(domain);
+                $('#domains-transfer-table tbody').append(
+                    '<tr class="domains-step__summary-table-row">' +
+                    '<td class="domains-step__summary-table-cell">' + domain + '</td>' +
+                    '<td class="domains-step__summary-table-cell">€' + priceTrans + '</td>' +
+                    '</tr>');
+                summaryPrice = parseFloat(summaryPrice) + parseFloat(priceTrans);
                 $('#Summa').html('€' + summaryPrice);
             }
         }
@@ -150,17 +211,23 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
 });
 
 $('.search-bar__input').on('keyup', function (e) {
-    var svalue = $(this).val().replace(/[^a-zA-Zа-яА-Я0-9-^.,;\n]/gim, '');
-    var nvalue = $(this).val().replace(/[,;]/gim, '\n');
+    var svalue = $(this).val().replace(/[^a-zA-Zа-яА-Я0-9-^.]/g, '');
+    var nvalue = $(this).val().replace(/[,;!@#$%^&*()_=+/\\'"\[\]\{\}№:?]/g, '\n');
     $(this).val(svalue);
     $(this).val(nvalue);
 
-    if (e.keyCode == 13)
-        $(this).is(':visible').addClass('search-bar__input-pad');
+    if (e.keyCode == 13 && $('input.search-bar__input').is(':visible')) {
+        $('.search-bar__button-bulk').click();
+        $('.search-bar__input:visible').focus().val($('input.search-bar__input').val());
+        $('input.search-bar__input').val('');
+    }
+
 });
 
 $('.search-bar__button-bulk').on('click', '', function () {
     $('.search-bar__input').toggleClass('search-bar__input-hidden');
+    $('.search-bar__input:visible').val($('.search-bar__input').not(':visible').val());
+    $(this).hide();
 });
 
 $('.search-bar .b-submit').on('click', '', function () {
@@ -244,7 +311,7 @@ $('.search-bar .b-submit').on('click', '', function () {
                         classAv2 = 'registred';
                         break;
                 }
-                readyTable2 += '<tr class="tab-list__content-table-row tab-list__content-table-row__' + classAv2 + promo + '">' +
+                readyTable2 += '<tr class="tab-list__content-table-row tab-list__content-table-row__' + classAv2 + ' ' + promo + '">' +
                     '<td class="tab-list__content-table-cell">' + key + '</td>' +
                     '<td class="tab-list__content-table-cell">' + status2 + '</td>' +
                     '<td class="tab-list__content-table-cell">' +
@@ -307,11 +374,40 @@ $('.search-bar .b-submit').on('click', '', function () {
         }
     });
 
-    $('.domains-step').hide();
-    $('.domains-step2n3, #step2').css('display', 'inline-block');
+    window.location.hash = '#domains_2';
     $('html, body').animate({
         scrollTop: $("#step2").offset().top
     }, 2000);
+    return false;
+});
+
+$('#buy').on('click', '', function () {
+    if (reg.length) {
+        var summaryRegData = '';
+        for (key in reg) {
+            summaryRegData += '<tr class="tab-list__content-table-row">' +
+                '<td class="tab-list__content-table-cell" title="' + reg[key] + '">' + reg[key].cutDomain() + '</td>' +
+                '<td class="tab-list__content-table-cell"><select class="table-select__item js-select" name="tbl-select-' + key + '" id="domains-register-period-select' + key + '" data_preset="' + key + '"><option value="0">1 year / €7</option><option value="1">2 year / €12</option><option value="2">3 year / €20</option></select></td>' +
+                '<td class="tab-list__content-table-cell"><div class="bullit-item"><input type="checkbox" class="bullit-item-checkbox" id="bullit-item' + key + '"/><label for="bullit-item' + key + '"></label></div></td>' +
+                '<td class="tab-list__content-table-cell"><div class="bullit-item"><input type="checkbox" class="bullit-item-checkbox" id="bullit-item' + key + '1"/><label for="bullit-item' + key + '1"></label></div></td>' +
+                '</tr>';
+        }
+        window.location.hash = '#domains_3';
+        AddData('#summaryRegTable tbody', summaryRegData);
+        $('.js-select').select2();
+    } else if (trans.length) {
+        var summaryTransData = '';
+        for (key in trans) {
+            summaryTransData += '<tr class="tab-list__content-table-row">' +
+                '<td class="tab-list__content-table-cell" title="' + trans[key] + '">' + trans[key].cutDomain() + '</td>' +
+                '<td class="tab-list__content-table-cell"><select class="table-select__item js-select" name="tbl-select-' + key + '" id="domains-register-period-select' + key + '1" data_preset="' + key + '1"><option value="0">1 year / €7</option><option value="1">2 year / €12</option><option value="2">3 year / €20</option></select></td>' +
+                '<td class="tab-list__content-table-cell"><div class="bullit-item"><input type="checkbox" class="bullit-item-checkbox" id="bullit-item' + key + '2"/><label for="bullit-item' + key + '2"></label></div></td>' +
+                '<td class="tab-list__content-table-cell"><div class="bullit-item"><input type="checkbox" class="bullit-item-checkbox" id="bullit-item' + key + '3"/><label for="bullit-item' + key + '3"></label></div></td>' +
+                '</tr>';
+        }
+        window.location.hash = '#domains_3';
+        AddData('#summaryRegTable tbody', summaryTransData);
+    }
     return false;
 });
 

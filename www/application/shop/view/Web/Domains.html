@@ -219,7 +219,7 @@
             <div class="domains-step3__tab" id="step3">
                 <div class="tab-list__content-block">
                     <h3>Зарегистрировать домены</h3>
-                    <table class="tab-list__content-table">
+                    <table class="tab-list__content-table" id="summaryRegTable">
                         <thead>
                         <tr>
                             <th width="250" class="tab-list__content-table-cell">Domain</th>
@@ -229,29 +229,24 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="tab-list__content-table-row">
-                            <td class="tab-list__content-table-cell" title="domainmainmainamian.dom">dom..ain.dom</td>
-                            <td class="tab-list__content-table-cell">
-                                <select class="table-select__item js-select" name="tbl-select-1" id="domains-register-period-select1" data_preset="0">
-                                    <option value="0">1 year / €7</option>
-                                    <option value="1">2 year / €12</option>
-                                    <option value="2">3 year / €20</option>
-                                </select>
-                            </td>
-                            <td class="tab-list__content-table-cell">
-                                <div class="bullit-item"></div>
-                            </td>
-                            <td class="tab-list__content-table-cell"></td>
-                        </tr>
+                        <!-- -->
                         </tbody>
                     </table>
                 </div>
             </div>
             <div class="domains-step__summary domains-step__summary_is-purpur" id="scroll-block">
                 <div class="domains-step__summary-title">Your Domains</div>
-                <div class="domains-step__summary-section">
+                <div class="domains-step__summary-section" id="registerSection">
                     <div class="domains-step__summary-subtitle">Register</div>
                     <table class="domains-step__summary-table" id="domains-register-table">
+                        <tbody>
+                        <!-- json content -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="domains-step__summary-section" id="transferSection">
+                    <div class="domains-step__summary-subtitle">Transfer</div>
+                    <table class="domains-step__summary-table" id="domains-transfer-table">
                         <tbody>
                         <!-- json content -->
                         </tbody>
@@ -261,7 +256,7 @@
                     <span class="domains-step__summary-price-value" id="Summa"></span>
                     <span class="domains-step__summary-price-discount" id="Discount"></span>
                 </div>
-                <a class="b-submit domains-step__summary-submit" href="#" id="byu_cloud">Buy</a>
+                <a class="b-submit domains-step__summary-submit" href="#" id="buy">Buy</a>
             </div>
         </div>
         {plugin "Content_ContentBlock_Plugin" view="Voucher" target="voucher"}
