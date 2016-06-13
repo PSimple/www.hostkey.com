@@ -991,6 +991,17 @@ p {
 
 .tab-list__content-table-cell {
     border-bottom: 1px solid #e6e9ec;
+    position: relative;
+}
+
+.tab-list__content-table-cell-img {
+    display: inline-block;
+    width: 40px;
+    padding-right: 10px;
+}
+.tab-list__content-table-cell-img img {
+    max-width: 40px;
+    max-height: 40px;
 }
 
 .tab-list__content-reg-all,
@@ -1032,7 +1043,7 @@ p {
     text-align: center;
     padding: 5px 0;
     position: absolute;
-    top: -80px;
+    top: -60px;
 }
 
 .transferPopup:after {

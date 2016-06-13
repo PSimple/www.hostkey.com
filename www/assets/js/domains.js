@@ -47,11 +47,13 @@ String.prototype.cutDomain = function () {
 
 
 function AddTransferPopup(container) {
-    $(container).append('<div class="transferPopup">' +
-        '<span>Перенести и продлить<br/> на 1 год?</span>' +
-        '<a href="#" class="transferPopup-yes">Yes</a>' +
-        '<a href="#" class="transferPopup-yes">No</a>' +
-        '</div>');
+    if (!$('.transferPopup').length) {
+        $(container).after('<div class="transferPopup">' +
+            '<span>Перенести и продлить<br/> на 1 год?</span>' +
+            '<a href="#" class="transferPopup-yes">Yes</a>' +
+            '<a href="#" class="transferPopup-no">No</a>' +
+            '</div>');
+    }
 }
 
 function bindTableClick() {
@@ -70,33 +72,49 @@ function bindTableClick() {
                     '<td class="domains-step__summary-table-cell">€' + price + '</td>' +
                     '</tr>');
                 summaryPrice = parseFloat(summaryPrice) + parseFloat(price);
-                $('#Summa').html('€' + summaryPrice);
+                $('#Summa').html('€' + summaryPrice.toFixed(2));
             }
         }
         return false;
     });
-    $('.tab-list__content-table-row__registred').on('click', 'a.tab-list__content-its-my', function () {
+    $('.tab-list__content-table-row__registred').on('click', 'a.tab-list__content-its-my', function (e) {
         var domain = $(this).attr('data-domain');
         var priceTrans = $(this).attr('data-pricetrans');
         var searchThis = reg.indexOf(domain);
         if (searchThis !== undefined && searchThis != null) {
             if (searchThis < 0) {
                 AddTransferPopup(this);
-                if (!$('#transferSection').is(':visible'))
-                    $('#transferSection').addClass('visible_section');
-                reg.push(domain);
-                $('#domains-transfer-table tbody').append(
-                    '<tr class="domains-step__summary-table-row">' +
-                    '<td class="domains-step__summary-table-cell">' + domain + '</td>' +
-                    '<td class="domains-step__summary-table-cell">€' + priceTrans + '</td>' +
-                    '</tr>');
-                summaryPrice = parseFloat(summaryPrice) + parseFloat(priceTrans);
-                $('#Summa').html('€' + summaryPrice);
+                var div = $('.transferPopup');
+                div.on('click', 'a', function () {
+                    if (!$(this).hasClass('transferPopup-no')) {
+                        if (!$('#transferSection').is(':visible'))
+                            $('#transferSection').addClass('visible_section');
+                        reg.push(domain);
+                        $('#domains-transfer-table tbody').append(
+                            '<tr class="domains-step__summary-table-row">' +
+                            '<td class="domains-step__summary-table-cell">' + domain + '</td>' +
+                            '<td class="domains-step__summary-table-cell">€' + priceTrans + '</td>' +
+                            '</tr>');
+                        summaryPrice = parseFloat(summaryPrice) + parseFloat(priceTrans);
+                        $('#Summa').html('€' + summaryPrice.toFixed(2));
+                    }
+                    div.remove();
+                    return false;
+                });
+
             }
         }
         return false;
     });
 }
+
+$(document).mouseup(function (e) {
+    var div = $(".transferPopup");
+    if (!div.is(e.target)
+        && div.has(e.target).length === 0) {
+        div.remove();
+    }
+});
 
 $('#domain-zone__more').on('click', function () {
     $.getJSON('/api/v1/shop/domains/zone/list?groups=top100', function (data) {
@@ -211,7 +229,7 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
 });
 
 $('.search-bar__input').on('keyup', function (e) {
-    var svalue = $(this).val().replace(/[^a-zA-Zа-яА-Я0-9-^.]/g, '');
+    var svalue = $(this).val().replace(/[^a-zA-Zа-яА-Я0-9-^.\n]/g, '');
     var nvalue = $(this).val().replace(/[,;!@#$%^&*()_=+/\\'"\[\]\{\}№:?]/g, '\n');
     $(this).val(svalue);
     $(this).val(nvalue);
@@ -263,6 +281,9 @@ $('.search-bar .b-submit').on('click', '', function () {
                 var priceTrans = items[key]['priceTransfer'];
                 var priceRenew = items[key]['priceRenew'];
                 var priceOld = items[key]['priceOld'];
+                var priceOldString = '';
+                if (priceOld != 0)
+                    priceOldString = '<strike>€' + priceOld2 + '</strike> ';
                 switch (status) {
                     case 'error':
                     case 'invalid domain':
@@ -277,11 +298,14 @@ $('.search-bar .b-submit').on('click', '', function () {
                         break;
                 }
                 readyTable += '<tr class="tab-list__content-table-row tab-list__content-table-row__' + classAv + '">' +
-                    '<td class="tab-list__content-table-cell">' + key + '</td>' +
+                    '<td class="tab-list__content-table-cell">' +
+                    '<span class="tab-list__content-table-cell-img"><img src="http://ptkachenko.hostke.ru/upload/data/domainszone/100/100/100/100/100/100/100/100/100/103/359/name.png" title=".name"/></span>' + key + '' +
+                    '</td>' +
                     '<td class="tab-list__content-table-cell">' + status + '</td>' +
+                    '<td class="tab-list__content-table-cell">' + priceOldString + '<span>€' + priceReg + '</span></td>' +
                     '<td class="tab-list__content-table-cell">' +
                     '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="' + priceReg + '">' +
-                    '<i class="b-icon"></i>Register | <span>€' + priceReg + '</span>' +
+                    '<i class="b-icon"></i>Register' +
                     '</a>' +
                     '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans + '"  data-priceRenew="' + priceRenew + '" >' +
                     '<i class="b-icon"></i>It\'s my domain</a>' +
@@ -296,6 +320,9 @@ $('.search-bar .b-submit').on('click', '', function () {
                 var priceRenew2 = itemsTop[key]['priceRenew'];
                 var priceOld2 = itemsTop[key]['priceOld'];
                 var promo = '';
+                var priceOldString2 = '';
+                if (priceOld != 0)
+                    priceOldString2 = '<strike>€' + priceOld2 + '</strike> ';
                 if ('promo' in itemsTop[key])
                     promo = 'promoRow';
                 switch (status2) {
@@ -312,11 +339,12 @@ $('.search-bar .b-submit').on('click', '', function () {
                         break;
                 }
                 readyTable2 += '<tr class="tab-list__content-table-row tab-list__content-table-row__' + classAv2 + ' ' + promo + '">' +
-                    '<td class="tab-list__content-table-cell">' + key + '</td>' +
+                    '<td class="tab-list__content-table-cell"><span class="tab-list__content-table-cell-img"><img src="http://ptkachenko.hostke.ru/upload/data/domainszone/100/100/100/100/100/100/100/100/100/103/359/name.png" title=".name"/></span>' + key + '</td>' +
                     '<td class="tab-list__content-table-cell">' + status2 + '</td>' +
+                    '<td class="tab-list__content-table-cell">' + priceOldString2 + ' <span>€' + priceReg2 + '</span></td>' +
                     '<td class="tab-list__content-table-cell">' +
-                    '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="' + priceReg2 + '">' +
-                    '<i class="b-icon"></i>Register | <span>€' + priceReg2 + '</span>' +
+                    '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="' + priceReg2 + '" data-priceOld="' + priceOld2 + '">' +
+                    '<i class="b-icon"></i>Register' +
                     '</a>' +
                     '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans2 + '"  data-priceRenew="' + priceRenew2 + '" >' +
                     '<i class="b-icon"></i>It\'s my domain</a>' +
@@ -343,6 +371,10 @@ $('.search-bar .b-submit').on('click', '', function () {
                     var priceTrans = items[key]['priceTransfer'];
                     var priceRenew = items[key]['priceRenew'];
                     var priceOld = items[key]['priceOld'];
+                    var priceOldString = '';
+                    if (priceOld != 0)
+                        priceOldString = '<strike>€' + priceOld + '</strike> ';
+
                     switch (status) {
                         case 'error':
                         case 'invalid domain':
@@ -359,9 +391,10 @@ $('.search-bar .b-submit').on('click', '', function () {
                     popularTable += '<tr class="tab-list__content-table-row tab-list__content-table-row__' + classAv + '">' +
                         '<td class="tab-list__content-table-cell">' + key + '</td>' +
                         '<td class="tab-list__content-table-cell">' + status + '</td>' +
+                        '<td class="tab-list__content-table-cell">' + priceOldString + ' <span>€' + priceReg + '</span></td>' +
                         '<td class="tab-list__content-table-cell">' +
-                        '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="' + priceReg + '">' +
-                        '<i class="b-icon"></i>Register | <span>€' + priceReg + '</span>' +
+                        '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="' + priceReg + '" data-priceOld="' + priceOld + '">' +
+                        '<i class="b-icon"></i>Register' +
                         '</a>' +
                         '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans + '"  data-priceRenew="' + priceRenew + '" >' +
                         '<i class="b-icon"></i>It\'s my domain</a>' +
