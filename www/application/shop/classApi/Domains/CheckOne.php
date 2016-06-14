@@ -37,6 +37,12 @@ class Shop_Api_Domains_CheckOne extends Zero_Controller
 
         // Цена зон
         $sql = "SELECT `Name`, PriceRegister, PriceTransfer, PriceRenew, PriceOld, Idprotection FROM DomainsZone";
+        $sql = "
+        SELECT `Name`, PriceOld, Idprotection, Img, `PriceRegister01`,
+          `PriceRegister02`, `PriceRegister03`, `PriceRegister04`, `PriceRegister05`, `PriceRegister06`,
+          `PriceRegister07`, `PriceRegister08`, `PriceRegister09`, `PriceRegister10`, `PriceTransfer01`
+          FROM DomainsZone
+        ";
         $zoneListPrice = Zero_DB::Select_Array_Index($sql);
 
         // Поиск
@@ -74,10 +80,19 @@ class Shop_Api_Domains_CheckOne extends Zero_Controller
             $cntFlag++;
             $response[$result['domain']]['status'] = $result['result'];
             $response[$result['domain']]['idprotection'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['Idprotection'] : 0;
-            $response[$result['domain']]['priceRegister'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister'] : 0.00;
-            $response[$result['domain']]['priceTransfer'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceTransfer'] : 0.00;
-            $response[$result['domain']]['priceRenew'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRenew'] : 0.00;
             $response[$result['domain']]['priceOld'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceOld'] : 0.00;
+            $response[$result['domain']]['img'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['Img'] : '';
+            $response[$result['domain']]['PriceRegister01'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister01'] : 0.00;
+            $response[$result['domain']]['PriceRegister02'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister02'] : 0.00;
+            $response[$result['domain']]['PriceRegister03'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister03'] : 0.00;
+            $response[$result['domain']]['PriceRegister04'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister04'] : 0.00;
+            $response[$result['domain']]['PriceRegister05'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister05'] : 0.00;
+            $response[$result['domain']]['PriceRegister06'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister06'] : 0.00;
+            $response[$result['domain']]['PriceRegister07'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister07'] : 0.00;
+            $response[$result['domain']]['PriceRegister08'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister08'] : 0.00;
+            $response[$result['domain']]['PriceRegister09'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister09'] : 0.00;
+            $response[$result['domain']]['PriceRegister10'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister10'] : 0.00;
+            $response[$result['domain']]['PriceTransfer01'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceTransfer01'] : 0.00;
             // помечаем промо
             if ( in_array($zone, $zoneListPromo) )
                 $response[$result['domain']]['promo'] = 1;
