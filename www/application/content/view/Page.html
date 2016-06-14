@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-<!-- Layout Second Page -->
+    <!-- Layout Second Page -->
     <meta name="viewport" content="width=1280"/>
 
     <LINK REL="SHORTCUT ICON" href="/assets/img/favicon.ico">
@@ -38,6 +38,7 @@
     <!-- arcticModal theme -->
     <link rel="stylesheet" href="/assets/vendors/arcticmodal/themes/simple.css">
 
+
     <style>
         .b-page__promo_text-page_yes {
             background: url({HTTPD}/{Zero_App::$Section->Img}) no-repeat;
@@ -54,56 +55,56 @@
 
 <style type="text/css">
     .table_stan {
-    border-spacing: 0;
-    /*border: 1px solid red;*/
-    border-bottom: 1px solid #945ae0;
-    background: #fffff;
-    border-collapse: separate;
-    text-align: left;
-    border-radius: 10px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+        border-spacing: 0;
+        /*border: 1px solid red;*/
+        border-bottom: 1px solid #945ae0;
+        background: #fffff;
+        border-collapse: separate;
+        text-align: left;
+        border-radius: 10px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
     }
 
-.table_stan th {
-    background: #945ae0;
-    color: white;
-    padding: 15px 15px;
-    text-align: center;
-   /* border-left: 1px solid #945ae0; */
-    border-left: none;
-    border-top: 1px solid #945ae0;
-    /*border-top: none;*/
-}
+    .table_stan th {
+        background: #945ae0;
+        color: white;
+        padding: 15px 15px;
+        text-align: center;
+        /* border-left: 1px solid #945ae0; */
+        border-left: none;
+        border-top: 1px solid #945ae0;
+        /*border-top: none;*/
+    }
 
-.table_stan tr:nth-child(odd) {
-    background: #e9ebee;
-}
+    .table_stan tr:nth-child(odd) {
+        background: #e9ebee;
+    }
 
-.table_stan td {
-    padding: 15px 15px;
-    transition: all 0.5s ease;
-    /*border-left: 1px solid #fff;*/
-    border-left: none;
-    border-top: 1px solid #945ae0;
-}
+    .table_stan td {
+        padding: 15px 15px;
+        transition: all 0.5s ease;
+        /*border-left: 1px solid #fff;*/
+        border-left: none;
+        border-top: 1px solid #945ae0;
+    }
 
+    .table_stan td:first-child, .table_stan th:first-child {
+        border-left: none;
+    }
 
-.table_stan td:first-child, .table_stan th:first-child {
-    border-left: none;
-}
+    .table_stan th:first-child {
+        border-top-left-radius: 10px;
+    }
 
-.table_stan th:first-child {
-    border-top-left-radius: 10px;
-}
+    .table_stan th:last-child {
+        border-top-right-radius: 10px;
+    }
 
-.table_stan th:last-child {
-    border-top-right-radius: 10px;
-}
-/*
-.table_stan tr:last-child {
-        border-bottom: 1px solid #945ae0;
-    }*/
+    /*
+    .table_stan tr:last-child {
+            border-bottom: 1px solid #945ae0;
+        }*/
 </style>
 
 
@@ -127,29 +128,30 @@
     $(document).ready(function () {
 
 
-        $('.arctic-modal-popup').click(function() {
+        $('.arctic-modal-popup').click(function () {
             /* установка ширины контейнер для отображения контента в модальном окне */
-            var atr = $( this ).attr( 'data_more');
-            var c = $( "[data_id=" + atr + "]" );
-            var w = c.find( '[data-width]').attr( 'data-width' );
-            if ( typeof w === 'undefined' ){
+            var atr = $(this).attr('data_more');
+            var c = $("[data_id=" + atr + "]");
+            var w = c.find('[data-width]').attr('data-width');
+            if (typeof w === 'undefined') {
                 w = "auto";
-            };
+            }
+            ;
 
-            if( atr == 'Service_In_Russia') {
-                var tabid = $( this ).attr( 'data_table' );
+            if (atr == 'Service_In_Russia') {
+                var tabid = $(this).attr('data_table');
 
-                    $( '.tabs a' ).removeClass( 'tab_sel' );
-                    $('.html_tab').hide();
-                    $( '.'+tabid ).addClass( 'tab_sel' );
-                    $( '.html_'+tabid ).show();
+                $('.tabs a').removeClass('tab_sel');
+                $('.html_tab').hide();
+                $('.' + tabid).addClass('tab_sel');
+                $('.html_' + tabid).show();
             }
             /* --------------------------------------------------------------------*/
 
-            $( '.ArcticBoxModalContent').html( c.html() );
-            $( '#ArcticBoxModal' ).arcticmodal({
-                beforeOpen: function(data, el) {
-                    $( '.box-modal').css( 'width', w);
+            $('.ArcticBoxModalContent').html(c.html());
+            $('#ArcticBoxModal').arcticmodal({
+                beforeOpen: function (data, el) {
+                    $('.box-modal').css('width', w);
                 },
                 overlay: {
                     css: {

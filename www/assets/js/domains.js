@@ -421,8 +421,8 @@ $('#buy').on('click', '', function () {
             summaryRegData += '<tr class="tab-list__content-table-row">' +
                 '<td class="tab-list__content-table-cell" title="' + reg[key] + '">' + reg[key].cutDomain() + '</td>' +
                 '<td class="tab-list__content-table-cell"><select class="table-select__item js-select" name="tbl-select-' + key + '" id="domains-register-period-select' + key + '" data_preset="' + key + '"><option value="0">1 year / €7</option><option value="1">2 year / €12</option><option value="2">3 year / €20</option></select></td>' +
-                '<td class="tab-list__content-table-cell"><div class="bullit-item"><input type="checkbox" class="bullit-item-checkbox" id="bullit-item' + key + '"/><label for="bullit-item' + key + '"></label></div></td>' +
-                '<td class="tab-list__content-table-cell"><div class="bullit-item"><input type="checkbox" class="bullit-item-checkbox" id="bullit-item' + key + '1"/><label for="bullit-item' + key + '1"></label></div></td>' +
+                '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
+                '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
                 '</tr>';
         }
         window.location.hash = '#domains_3';
@@ -434,14 +434,22 @@ $('#buy').on('click', '', function () {
             summaryTransData += '<tr class="tab-list__content-table-row">' +
                 '<td class="tab-list__content-table-cell" title="' + trans[key] + '">' + trans[key].cutDomain() + '</td>' +
                 '<td class="tab-list__content-table-cell"><select class="table-select__item js-select" name="tbl-select-' + key + '" id="domains-register-period-select' + key + '1" data_preset="' + key + '1"><option value="0">1 year / €7</option><option value="1">2 year / €12</option><option value="2">3 year / €20</option></select></td>' +
-                '<td class="tab-list__content-table-cell"><div class="bullit-item"><input type="checkbox" class="bullit-item-checkbox" id="bullit-item' + key + '2"/><label for="bullit-item' + key + '2"></label></div></td>' +
-                '<td class="tab-list__content-table-cell"><div class="bullit-item"><input type="checkbox" class="bullit-item-checkbox" id="bullit-item' + key + '3"/><label for="bullit-item' + key + '3"></label></div></td>' +
+                '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
+                '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
                 '</tr>';
         }
         window.location.hash = '#domains_3';
         AddData('#summaryRegTable tbody', summaryTransData);
     }
+
+    if (Array.prototype.forEach) {
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        elems.forEach(function (html) {
+            var switchery = new Switchery(html, {color: '#945ae0'});
+        });
+    }
     return false;
 });
 
 $('.tab-list__content-reg-help:after, .tab-list__content-table-cell').tooltip();
+
