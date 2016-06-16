@@ -1,0 +1,66 @@
+
+
+
+{}
+
+
+{pre($_)}
+
+
+
+
+<p align="center">sadfisdhfudsfugdfhgdhfgh</p>
+<font color="blue">{$Price}</font>
+<h1>{$Header}</h1>
+<h1>{$H1}</h1>
+
+<!-- это цикл -->
+{if ( $flag )}
+<table cellpadding="4" cellspacing="4" border="1">
+{foreach ($itemList as $key => $table)}
+<tr>
+    <td>{$key}</td>
+    <td>{$table}</td>
+</tr>
+{/foreach}
+</table>
+{/if}
+
+
+<table cellpadding="4" cellspacing="4" border="1">
+    {foreach ($itemList2 as $key => $row)}
+    <tr>
+        <td>{$key}</td>
+        <td>{$row['Name']}</td>
+        <td>{$row['Price']}</td>
+        <td>{$row['Description']}</td>
+    </tr>
+    {/foreach}
+</table>
+
+
+
+
+{HTTP}<br>
+{HTTPA}<br>
+{HTTPD}<br>
+{HTTPH}<br>
+
+
+{URL}<br>
+
+{plugin "Zero_Crud_Plugin_Toolbar" Model=$Object Action=$Action}
+
+{include "Zero_Header_Main"}
+{inc "Zero_Header_Main"}
+
+
+
+{translation "Zero" "Project"}
+{lang "Zero" "Project"}
+
+
+
+
+
+
