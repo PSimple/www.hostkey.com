@@ -1,5 +1,7 @@
 var i, a;
 var reg = [],
+    reg_prot = [],
+    trans_prot = [],
     trans = [];
 var summaryPrice = 0;
 var searchZones = '';
@@ -277,13 +279,15 @@ $('.search-bar .b-submit').on('click', '', function () {
             var classAv2;
             for (key in items) {
                 var status = items[key]['status'];
-                var priceReg = items[key]['priceRegister'];
-                var priceTrans = items[key]['priceTransfer'];
-                var priceRenew = items[key]['priceRenew'];
+                var priceReg = items[key]['PriceRegister01'];
+                var priceTrans = items[key]['PriceTransfer01'];
                 var priceOld = items[key]['priceOld'];
+                var img = '';
+                if (items[key]['img'] != null)
+                    img = '<img src="http://ptkachenko.hostke.ru/upload/data/' + items[key]['img'] + '" />';
                 var priceOldString = '';
                 if (priceOld != 0)
-                    priceOldString = '<strike>€' + priceOld2 + '</strike> ';
+                    priceOldString = '<strike>€' + priceOld + '</strike> ';
                 switch (status) {
                     case 'error':
                     case 'invalid domain':
@@ -299,7 +303,7 @@ $('.search-bar .b-submit').on('click', '', function () {
                 }
                 readyTable += '<tr class="tab-list__content-table-row tab-list__content-table-row__' + classAv + '">' +
                     '<td class="tab-list__content-table-cell">' +
-                    '<span class="tab-list__content-table-cell-img"><img src="http://ptkachenko.hostke.ru/upload/data/domainszone/100/100/100/100/100/100/100/100/100/103/359/name.png" title=".name"/></span>' + key + '' +
+                    '<span class="tab-list__content-table-cell-img">' + img + '</span>' + key + '' +
                     '</td>' +
                     '<td class="tab-list__content-table-cell">' + status + '</td>' +
                     '<td class="tab-list__content-table-cell">' + priceOldString + '<span>€' + priceReg + '</span></td>' +
@@ -307,7 +311,7 @@ $('.search-bar .b-submit').on('click', '', function () {
                     '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="' + priceReg + '">' +
                     '<i class="b-icon"></i>Register' +
                     '</a>' +
-                    '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans + '"  data-priceRenew="' + priceRenew + '" >' +
+                    '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans + '">' +
                     '<i class="b-icon"></i>It\'s my domain</a>' +
                     '</td></tr>';
 
@@ -315,13 +319,15 @@ $('.search-bar .b-submit').on('click', '', function () {
 
             for (key in itemsTop) {
                 var status2 = itemsTop[key]['status'];
-                var priceReg2 = itemsTop[key]['priceRegister'];
-                var priceTrans2 = itemsTop[key]['priceTransfer'];
-                var priceRenew2 = itemsTop[key]['priceRenew'];
+                var priceReg2 = itemsTop[key]['PriceRegister01'];
+                var priceTrans2 = itemsTop[key]['PriceTransfer01'];
                 var priceOld2 = itemsTop[key]['priceOld'];
+                var img2 = '';
+                if (itemsTop[key]['img'] != null)
+                    img2 = '<img src="http://ptkachenko.hostke.ru/upload/data/' + itemsTop[key]['img'] + '" />';
                 var promo = '';
                 var priceOldString2 = '';
-                if (priceOld != 0)
+                if (priceOld2 != 0)
                     priceOldString2 = '<strike>€' + priceOld2 + '</strike> ';
                 if ('promo' in itemsTop[key])
                     promo = 'promoRow';
@@ -339,14 +345,14 @@ $('.search-bar .b-submit').on('click', '', function () {
                         break;
                 }
                 readyTable2 += '<tr class="tab-list__content-table-row tab-list__content-table-row__' + classAv2 + ' ' + promo + '">' +
-                    '<td class="tab-list__content-table-cell"><span class="tab-list__content-table-cell-img"><img src="http://ptkachenko.hostke.ru/upload/data/domainszone/100/100/100/100/100/100/100/100/100/103/359/name.png" title=".name"/></span>' + key + '</td>' +
+                    '<td class="tab-list__content-table-cell"><span class="tab-list__content-table-cell-img">' + img2 + '</span>' + key + '</td>' +
                     '<td class="tab-list__content-table-cell">' + status2 + '</td>' +
                     '<td class="tab-list__content-table-cell">' + priceOldString2 + ' <span>€' + priceReg2 + '</span></td>' +
                     '<td class="tab-list__content-table-cell">' +
                     '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="' + priceReg2 + '" data-priceOld="' + priceOld2 + '">' +
                     '<i class="b-icon"></i>Register' +
                     '</a>' +
-                    '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans2 + '"  data-priceRenew="' + priceRenew2 + '" >' +
+                    '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans2 + '" >' +
                     '<i class="b-icon"></i>It\'s my domain</a>' +
                     '</td></tr>';
 
@@ -367,9 +373,8 @@ $('.search-bar .b-submit').on('click', '', function () {
                 var classAv = '';
                 for (key in items) {
                     var status = items[key]['status'];
-                    var priceReg = items[key]['priceRegister'];
-                    var priceTrans = items[key]['priceTransfer'];
-                    var priceRenew = items[key]['priceRenew'];
+                    var priceReg = items[key]['PriceRegister01'];
+                    var priceTrans = items[key]['PriceTransfer01'];
                     var priceOld = items[key]['priceOld'];
                     var priceOldString = '';
                     if (priceOld != 0)
@@ -396,7 +401,7 @@ $('.search-bar .b-submit').on('click', '', function () {
                         '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="' + priceReg + '" data-priceOld="' + priceOld + '">' +
                         '<i class="b-icon"></i>Register' +
                         '</a>' +
-                        '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans + '"  data-priceRenew="' + priceRenew + '" >' +
+                        '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans + '" >' +
                         '<i class="b-icon"></i>It\'s my domain</a>' +
                         '</td></tr>';
                 }
@@ -421,7 +426,7 @@ $('#buy').on('click', '', function () {
             summaryRegData += '<tr class="tab-list__content-table-row">' +
                 '<td class="tab-list__content-table-cell" title="' + reg[key] + '">' + reg[key].cutDomain() + '</td>' +
                 '<td class="tab-list__content-table-cell"><select class="table-select__item js-select" name="tbl-select-' + key + '" id="domains-register-period-select' + key + '" data_preset="' + key + '"><option value="0">1 year / €7</option><option value="1">2 year / €12</option><option value="2">3 year / €20</option></select></td>' +
-                '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
+                '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" disabled="disabled"></td>' +
                 '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
                 '</tr>';
         }
@@ -445,7 +450,10 @@ $('#buy').on('click', '', function () {
     if (Array.prototype.forEach) {
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
         elems.forEach(function (html) {
-            var switchery = new Switchery(html, {color: '#945ae0'});
+            if ($(this).attr('disabled') != 'disabled')
+                var switchery = new Switchery(html, {color: '#945ae0'});
+            else
+                var switchery = new Switchery(html, {color: '#945ae0', disabled: true });
         });
     }
     return false;

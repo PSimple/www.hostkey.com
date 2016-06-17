@@ -982,7 +982,7 @@ p {
 .tab-list__content-table th,
 .tab-list__content-table td {
     text-align: left;
-    padding: 20px 25px;
+    padding: 20px 15px;
 }
 
 .tab-list__content-table-row__invalid td {
