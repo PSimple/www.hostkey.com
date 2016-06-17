@@ -61,6 +61,7 @@ function AddTransferPopup(container) {
 function bindTableClick() {
     $('.tab-list__content-table-row__available').on('click', 'a.tab-list__content-reg-this', function () {
         var domain = $(this).attr('data-domain');
+        var prot = $(this).attr('data-prot');
         var price = $(this).attr('data-price');
         var searchThis = reg.indexOf(domain);
         if (searchThis !== undefined && searchThis != null) {
@@ -68,6 +69,7 @@ function bindTableClick() {
                 if (!$('#registerSection').is(':visible'))
                     $('#registerSection').addClass('visible_section');
                 reg.push(domain);
+                reg_prot.push(prot);
                 $('#domains-register-table tbody').append(
                     '<tr class="domains-step__summary-table-row">' +
                     '<td class="domains-step__summary-table-cell">' + domain + '</td>' +
@@ -81,6 +83,7 @@ function bindTableClick() {
     });
     $('.tab-list__content-table-row__registred').on('click', 'a.tab-list__content-its-my', function (e) {
         var domain = $(this).attr('data-domain');
+        var prot = $(this).attr('data-prot');
         var priceTrans = $(this).attr('data-pricetrans');
         var searchThis = reg.indexOf(domain);
         if (searchThis !== undefined && searchThis != null) {
@@ -91,7 +94,8 @@ function bindTableClick() {
                     if (!$(this).hasClass('transferPopup-no')) {
                         if (!$('#transferSection').is(':visible'))
                             $('#transferSection').addClass('visible_section');
-                        reg.push(domain);
+                        trans.push(domain);
+                        trans_prot.push(prot);
                         $('#domains-transfer-table tbody').append(
                             '<tr class="domains-step__summary-table-row">' +
                             '<td class="domains-step__summary-table-cell">' + domain + '</td>' +
@@ -282,6 +286,7 @@ $('.search-bar .b-submit').on('click', '', function () {
                 var priceReg = items[key]['PriceRegister01'];
                 var priceTrans = items[key]['PriceTransfer01'];
                 var priceOld = items[key]['priceOld'];
+                var prot = items[key]['idprotection'];
                 var img = '';
                 if (items[key]['img'] != null)
                     img = '<img src="http://ptkachenko.hostke.ru/upload/data/' + items[key]['img'] + '" />';
@@ -308,10 +313,10 @@ $('.search-bar .b-submit').on('click', '', function () {
                     '<td class="tab-list__content-table-cell">' + status + '</td>' +
                     '<td class="tab-list__content-table-cell">' + priceOldString + '<span>€' + priceReg + '</span></td>' +
                     '<td class="tab-list__content-table-cell">' +
-                    '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="' + priceReg + '">' +
+                    '<a href="#" class="tab-list__content-reg-this" data-prot="' + prot + '" data-domain="' + key + '" data-price="' + priceReg + '">' +
                     '<i class="b-icon"></i>Register' +
                     '</a>' +
-                    '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans + '">' +
+                    '<a href="#" class="tab-list__content-its-my" data-prot="' + prot + '" data-domain="' + key + '" data-priceTrans="' + priceTrans + '">' +
                     '<i class="b-icon"></i>It\'s my domain</a>' +
                     '</td></tr>';
 
@@ -322,6 +327,7 @@ $('.search-bar .b-submit').on('click', '', function () {
                 var priceReg2 = itemsTop[key]['PriceRegister01'];
                 var priceTrans2 = itemsTop[key]['PriceTransfer01'];
                 var priceOld2 = itemsTop[key]['priceOld'];
+                var prot2 = itemsTop[key]['idprotection'];
                 var img2 = '';
                 if (itemsTop[key]['img'] != null)
                     img2 = '<img src="http://ptkachenko.hostke.ru/upload/data/' + itemsTop[key]['img'] + '" />';
@@ -349,10 +355,10 @@ $('.search-bar .b-submit').on('click', '', function () {
                     '<td class="tab-list__content-table-cell">' + status2 + '</td>' +
                     '<td class="tab-list__content-table-cell">' + priceOldString2 + ' <span>€' + priceReg2 + '</span></td>' +
                     '<td class="tab-list__content-table-cell">' +
-                    '<a href="#" class="tab-list__content-reg-this" data-domain="' + key + '" data-price="' + priceReg2 + '" data-priceOld="' + priceOld2 + '">' +
+                    '<a href="#" class="tab-list__content-reg-this" data-prot="' + prot2 + '" data-domain="' + key + '" data-price="' + priceReg2 + '" data-priceOld="' + priceOld2 + '">' +
                     '<i class="b-icon"></i>Register' +
                     '</a>' +
-                    '<a href="#" class="tab-list__content-its-my" data-domain="' + key + '" data-priceTrans="' + priceTrans2 + '" >' +
+                    '<a href="#" class="tab-list__content-its-my" data-prot="' + prot2 + '" data-domain="' + key + '" data-priceTrans="' + priceTrans2 + '" >' +
                     '<i class="b-icon"></i>It\'s my domain</a>' +
                     '</td></tr>';
 
@@ -422,12 +428,19 @@ $('.search-bar .b-submit').on('click', '', function () {
 $('#buy').on('click', '', function () {
     if (reg.length) {
         var summaryRegData = '';
+        var reg_disabled = 'disabled="disabled"';
         for (key in reg) {
+            console.log(reg_prot[key]);
+            if (!reg_prot[key]) {
+                reg_disabled = 'disabled="disabled"';
+            } else {
+                reg_disabled = '';
+            }
             summaryRegData += '<tr class="tab-list__content-table-row">' +
                 '<td class="tab-list__content-table-cell" title="' + reg[key] + '">' + reg[key].cutDomain() + '</td>' +
                 '<td class="tab-list__content-table-cell"><select class="table-select__item js-select" name="tbl-select-' + key + '" id="domains-register-period-select' + key + '" data_preset="' + key + '"><option value="0">1 year / €7</option><option value="1">2 year / €12</option><option value="2">3 year / €20</option></select></td>' +
-                '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" disabled="disabled"></td>' +
                 '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
+                '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" ' + reg_disabled + '></td>' +
                 '</tr>';
         }
         window.location.hash = '#domains_3';
@@ -453,7 +466,7 @@ $('#buy').on('click', '', function () {
             if ($(this).attr('disabled') != 'disabled')
                 var switchery = new Switchery(html, {color: '#945ae0'});
             else
-                var switchery = new Switchery(html, {color: '#945ae0', disabled: true });
+                var switchery = new Switchery(html, {color: '#945ae0', disabled: true});
         });
     }
     return false;
