@@ -422,6 +422,15 @@ $('.search-bar .b-submit').on('click', '', function () {
     $('html, body').animate({
         scrollTop: $("#step2").offset().top
     }, 2000);
+
+    return false;
+});
+
+$('.tab-list__content-reg-all').on('click', '', function () {
+    var $regAll = $(this).parents('.tab-list__content-table').find('.tab-list__content-reg-this:visible');
+    $.each($regAll, function () {
+        $(this).click();
+    });
     return false;
 });
 
@@ -431,7 +440,7 @@ $('#buy').on('click', '', function () {
         var reg_disabled = 'disabled="disabled"';
         for (key in reg) {
             console.log(reg_prot[key]);
-            if (!reg_prot[key]) {
+            if (reg_prot[key] == 0) {
                 reg_disabled = 'disabled="disabled"';
             } else {
                 reg_disabled = '';
