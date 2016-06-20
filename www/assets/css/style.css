@@ -989,6 +989,10 @@ p {
     background-color: #f4f6f9;
 }
 
+.tab-list__content-table-row__invalid td.tab-list__content-table-cell-price {
+    font-size: 0;
+}
+
 .tab-list__content-table-cell {
     border-bottom: 1px solid #e6e9ec;
     position: relative;
@@ -999,6 +1003,7 @@ p {
     width: 40px;
     padding-right: 10px;
 }
+
 .tab-list__content-table-cell-img img {
     max-width: 40px;
     max-height: 40px;
@@ -1120,6 +1125,27 @@ p {
     background: url(/assets/img/help_12x12.png) no-repeat center;
 }
 
+.status-content-tt {
+    display: inline-block;
+    position: relative;
+    pointer-events: none;
+}
+
+.tab-list__content-table-row__available .status-content-tt:after {
+    position: absolute;
+    right: -14px;
+    top: -9px;
+    height: 12px;
+    width: 12px;
+    -webkit-background-size: contain;
+    background-size: contain;
+    cursor: pointer;
+    content: '';
+    display: block;
+    pointer-events: all;
+    background: url(/assets/img/warning_12x12.png) no-repeat center;
+}
+
 .tab-list__content-reg-all i,
 .tab-list__content-reg-this i {
     background-position: -90px -100px;
@@ -1132,16 +1158,6 @@ p {
     background-position: -171px -110px;
     margin-right: 10px;
     position: relative;
-}
-
-.uhgiusgioh {
-    i: dont see jgiost lkfyfor a moment mgd;
-    height: 200px;
-    margin: 0 0 0 0;
-    text-blink: 1;
-    display: flex;
-    flex: auto;
-    list-style-position: outside;
 }
 
 .b-page {
@@ -6413,6 +6429,36 @@ div.clear {
     margin: 0 0 40px;
 }
 
+.b-domains__container {
+    position: relative;
+    z-index: 2;
+}
+
+.b-domains__container.loader-view:after {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    background: url('/assets/img/ring-alt.svg') center center no-repeat;
+    content: '';
+}
+
+.b-domains__container.loader-view:before {
+    position: absolute;
+    z-index: 11;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    opacity: .3;
+    background-color: #fff;
+    content: '';
+}
+
 .b-domains__title {
     width: 230px;
     font-size: 28px;
@@ -6490,6 +6536,23 @@ textarea.search-bar__input {
     border-radius: 2px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
+    position: relative;
+}
+
+.search-bar__submit__disabled {
+    pointer-events: none;
+}
+
+.search-bar__submit__disabled:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    opacity: .3;
+    background-color: #fff;
+    content: '';
 }
 
 .domain-zone {

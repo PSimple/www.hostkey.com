@@ -7,7 +7,7 @@
     </div>
     
     <div class="b-domains" id="scroll-anchor-01">
-        
+        <div class="b-domains__container">
         <h3 class="b-domains__title">
             START YOUR<br>
             DOMAIN SEARCH
@@ -19,7 +19,7 @@
                         --><textarea class="b-input search-bar__input search-bar__input-hidden" name="" cols="30" rows="10"></textarea><!--
                         -->
                 <button class="search-bar__button-bulk">Bulk search</button><!--
-                        --><a class="b-submit search-bar__submit" href="#"> search</a>
+                        --><button class="b-submit search-bar__submit search-bar__submit__disabled" href="#">search</button>
             </div>
         </div>
         
@@ -259,12 +259,14 @@
                     </table>
                 </div>
                 <div class="domains-step__summary-price">
-                    <span class="domains-step__summary-price-value" id="Summa"></span>
+                    <span class="domains-step__summary-price-value" id="Summa">Empty cart</span>
                     <span class="domains-step__summary-price-discount" id="Discount"></span>
                 </div>
-                <a class="b-submit domains-step__summary-submit" href="#" id="buy">Buy</a>
+                <button class="b-submit domains-step__summary-submit" href="#" id="buy">Buy</button>
             </div>
         </div>
+        </div>
+        {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" target="feature"}
         {plugin "Content_ContentBlock_Plugin" view="Voucher" target="voucher"}
         {plugin "Content_ContentBlock_Plugin" view="NeedMore" target="information"}
         <div class="footer-push"></div>
