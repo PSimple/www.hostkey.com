@@ -77,8 +77,6 @@ return [
     'ContentBlock Description' => 'Описание',
     'ContentBlock Content' => 'Контент',
     'ContentBlock Head' => 'Заголовок',
-    'ContentBlock Target' => 'Место и вид вывода',
-    'ContentBlock Target options' => ['top' => 'top', 'information' => 'information', 'feature' => 'feature', 'voucher' => 'voucher'],
     'ContentBlock Color' => 'Цвет плашки',
     'ContentBlock Color options' => ['orange' => 'оранжевый', 'purple' => 'фиолетовый'],
     'ContentBlock IsEnable' => 'Включен',
@@ -94,4 +92,8 @@ return [
     'Faq Answer' => 'Ответ',
     'Faq ID' => 'Идентификатор',
     'Faq Question' => 'Вопрос',
+    'Content_News IsDetails' => 'Показывать подробно',
+    'Value' => 'Значение',
+    'Question' => 'Вопрос',
+    'Answer' => 'Ответ',
 ];
