@@ -1,3 +1,26 @@
+var m,
+    methods = [
+        'join', 'reverse', 'sort', 'push', 'pop', 'shift', 'unshift',
+        'splice', 'concat', 'slice', 'indexOf', 'lastIndexOf',
+        'forEach', 'map', 'reduce', 'reduceRight', 'filter',
+        'some', 'every'
+    ],
+    methodCount = methods.length,
+    assignArrayGeneric = function (methodName) {
+        if (!Array[methodName]) {
+            var method = Array.prototype[methodName];
+            if (typeof method === 'function') {
+                Array[methodName] = function () {
+                    return method.call.apply(method, arguments);
+                };
+            }
+        }
+    };
+
+for (m = 0; m < methodCount; m++) {
+    assignArrayGeneric(methods[m]);
+}
+
 var i, a;
 var reg = [],
     reg_prot = [],
@@ -5,6 +28,10 @@ var reg = [],
     trans = [];
 var summaryPrice = 0;
 var searchZones = '';
+var group1main = [];
+var group2main = [];
+var contentMain = [];
+var pricesSumArr = [];
 window.location.hash = '#domains_1';
 
 window.addEventListener('hashchange', function () {
@@ -60,10 +87,14 @@ function AddTransferPopup(container) {
 
 function bindTableClick() {
     $('.tab-list__content-table-row__available').on('click', 'a.tab-list__content-reg-this', function () {
-        var domain = $(this).attr('data-domain');
-        var prot = $(this).attr('data-prot');
-        var price = $(this).attr('data-price');
-        var searchThis = reg.indexOf(domain);
+        var domain = $(this).attr('data-domain'),
+            prot = $(this).attr('data-prot'),
+            price = $(this).attr('data-price'),
+            searchThis = reg.indexOf(domain);
+        if (domain in group1main)
+            pricesSumArr.push(group1main[domain]);
+        else
+            pricesSumArr.push(group2main[domain]);
         if (searchThis !== undefined && searchThis != null) {
             if (searchThis < 0) {
                 if (!$('#registerSection').is(':visible'))
@@ -77,6 +108,7 @@ function bindTableClick() {
                     '</tr>');
                 summaryPrice = parseFloat(summaryPrice) + parseFloat(price);
                 $('#Summa').html('€' + summaryPrice.toFixed(2));
+
             }
         }
         return false;
@@ -277,19 +309,20 @@ $('.search-bar .b-submit').on('click', '', function () {
     for (key in searchDomainsArr) {
         var onedomainname = searchDomainsArr[key];
         $.getJSON('/api/v1/shop/domains/check?domainList=' + onedomainname + '&zoneList=' + searchZones, function (data) {
-            var items = data['Content']['group1'];
-            var itemsTop = data['Content']['group2'];
+            contentMain = data['Content'];
+            group1main = data['Content']['group1'];
+            group2main = data['Content']['group2'];
             var classAv;
             var classAv2;
-            for (key in items) {
-                var status = items[key]['status'];
-                var priceReg = items[key]['PriceRegister01'];
-                var priceTrans = items[key]['PriceTransfer01'];
-                var priceOld = items[key]['priceOld'];
-                var prot = items[key]['idprotection'];
+            for (key in group1main) {
+                var status = group1main[key]['status'];
+                var priceReg = group1main[key]['PriceRegister01'];
+                var priceTrans = group1main[key]['PriceTransfer01'];
+                var priceOld = group1main[key]['priceOld'];
+                var prot = group1main[key]['idprotection'];
                 var img = '';
-                if (items[key]['img'] != null)
-                    img = '<img src="http://ptkachenko.hostke.ru/upload/data/' + items[key]['img'] + '" />';
+                if (group1main[key]['img'] != null)
+                    img = '<img src="http://ptkachenko.hostke.ru/upload/data/' + group1main[key]['img'] + '" />';
                 var priceOldString = '';
                 if (priceOld != 0)
                     priceOldString = '<strike>€' + priceOld + '</strike> ';
@@ -322,20 +355,20 @@ $('.search-bar .b-submit').on('click', '', function () {
 
             }
 
-            for (key in itemsTop) {
-                var status2 = itemsTop[key]['status'];
-                var priceReg2 = itemsTop[key]['PriceRegister01'];
-                var priceTrans2 = itemsTop[key]['PriceTransfer01'];
-                var priceOld2 = itemsTop[key]['priceOld'];
-                var prot2 = itemsTop[key]['idprotection'];
+            for (key in group2main) {
+                var status2 = group2main[key]['status'];
+                var priceReg2 = group2main[key]['PriceRegister01'];
+                var priceTrans2 = group2main[key]['PriceTransfer01'];
+                var priceOld2 = group2main[key]['priceOld'];
+                var prot2 = group2main[key]['idprotection'];
                 var img2 = '';
-                if (itemsTop[key]['img'] != null)
-                    img2 = '<img src="http://ptkachenko.hostke.ru/upload/data/' + itemsTop[key]['img'] + '" />';
+                if (group2main[key]['img'] != null)
+                    img2 = '<img src="http://ptkachenko.hostke.ru/upload/data/' + group2main[key]['img'] + '" />';
                 var promo = '';
                 var priceOldString2 = '';
                 if (priceOld2 != 0)
                     priceOldString2 = '<strike>€' + priceOld2 + '</strike> ';
-                if ('promo' in itemsTop[key])
+                if ('promo' in group2main[key])
                     promo = 'promoRow';
                 switch (status2) {
                     case 'error':
@@ -438,16 +471,57 @@ $('#buy').on('click', '', function () {
     if (reg.length) {
         var summaryRegData = '';
         var reg_disabled = 'disabled="disabled"';
-        for (key in reg) {
-            console.log(reg_prot[key]);
+        for (var key in reg) {
+            var periodOptions = '';
             if (reg_prot[key] == 0) {
                 reg_disabled = 'disabled="disabled"';
             } else {
                 reg_disabled = '';
             }
+            var pricesArr = pricesSumArr[key];
+            for (var keyp in pricesArr) {
+                var prNum = keyp.slice(-2),
+                    prPeriod = '';
+                if (keyp.slice(0, -2) == 'PriceRegister') {
+                    switch (prNum) {
+                        case '01':
+                        default:
+                            prPeriod = '1 year';
+                            break;
+                        case '02':
+                            prPeriod = '2 years';
+                            break;
+                        case '03':
+                            prPeriod = '3 years';
+                            break;
+                        case '04':
+                            prPeriod = '4 years';
+                            break;
+                        case '05':
+                            prPeriod = '5 years';
+                            break;
+                        case '06':
+                            prPeriod = '6 years';
+                            break;
+                        case '07':
+                            prPeriod = '18 years';
+                            break;
+                        case '08':
+                            prPeriod = '36 years';
+                            break;
+                        case '09':
+                            prPeriod = '72 years';
+                            break;
+                        case '10':
+                            prPeriod = '144 years';
+                            break;
+                    }
+                    periodOptions += '<option value="' + prNum + '">' + prPeriod + ' / €' + pricesArr[keyp] + '</option>';
+                }
+            }
             summaryRegData += '<tr class="tab-list__content-table-row">' +
                 '<td class="tab-list__content-table-cell" title="' + reg[key] + '">' + reg[key].cutDomain() + '</td>' +
-                '<td class="tab-list__content-table-cell"><select class="table-select__item js-select" name="tbl-select-' + key + '" id="domains-register-period-select' + key + '" data_preset="' + key + '"><option value="0">1 year / €7</option><option value="1">2 year / €12</option><option value="2">3 year / €20</option></select></td>' +
+                '<td class="tab-list__content-table-cell"><select class="table-select__item js-select" name="tbl-select-' + key + '" id="domains-register-period-select' + key + '" data_preset="' + key + '">' + periodOptions + '</select></td>' +
                 '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
                 '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" ' + reg_disabled + '></td>' +
                 '</tr>';
@@ -469,15 +543,13 @@ $('#buy').on('click', '', function () {
         AddData('#summaryRegTable tbody', summaryTransData);
     }
 
-    if (Array.prototype.forEach) {
-        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-        elems.forEach(function (html) {
-            if ($(this).attr('disabled') != 'disabled')
-                var switchery = new Switchery(html, {color: '#945ae0'});
-            else
-                var switchery = new Switchery(html, {color: '#945ae0', disabled: true});
-        });
-    }
+    var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+    elems.forEach(function (html) {
+        if ($(this).attr('disabled') != 'disabled')
+            var switchery = new Switchery(html, {color: '#945ae0'});
+        else
+            var switchery = new Switchery(html, {color: '#945ae0', disabled: true});
+    });
     return false;
 });
 
