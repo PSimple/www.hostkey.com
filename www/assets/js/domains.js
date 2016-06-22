@@ -328,10 +328,7 @@ $('.search-bar__button-bulk').on('click', '', function () {
 $('.search-bar .b-submit').on('click', '', function () {
     var $checkedInput = $('.hidden-input:checked');
 
-    var readyTable = '',
-        readyTable2 = '';
-
-    $('.b-domains__container').addClass('loader-view');
+    loaderView();
 
     searchZones = '';
     $.each($checkedInput, function () {
@@ -351,16 +348,20 @@ $('.search-bar .b-submit').on('click', '', function () {
         $('input.search-bar__input').val('');
     }
     for (var key in searchDomainsArr) {
-        var onedomainname = searchDomainsArr[key].split('.')[0],
+        var onedomainname = searchDomainsArr[key],
             searchdomzone = searchDomainsArr[key].split('.')[1];
-        searchZones += (searchdomzone != undefined && searchdomzone != null) ? ',' + searchdomzone : '';
-        if (domName.indexOf(onedomainname) < 0) {
-            domName.push(onedomainname);
-        } else {
-            loaderView();
-            continue;
-        }
+        // searchZones += (searchdomzone != undefined && searchdomzone != null) ? ',' + searchdomzone : '';
+        // if (domName.indexOf(onedomainname) < 0) {
+        //     domName.push(onedomainname);
+        // } else {
+        //     loaderView();
+        //     continue;
+        // }
+
         $.getJSON('/api/v1/shop/domains/check?domainList=' + onedomainname + '&zoneList=' + searchZones, function (data) {
+
+            var readyTable = '',
+                readyTable2 = '';
             var classAv,
                 classAv2;
             group1main = data['Content']['group1'];
@@ -472,12 +473,10 @@ $('.search-bar .b-submit').on('click', '', function () {
             }
 
             PrependData('#result-table2 tbody', readyTable2);
-
-
-            bindTableClick();
         });
     }
 
+    bindTableClick();
     window.location.hash = '#domains_2';
     $('html, body').animate({
         scrollTop: $("#step2").offset().top
@@ -499,8 +498,9 @@ $('.tab-list__content-reg-all').on('click', '', function () {
 $('.tab-list__item').on('click', '', function () {
     var popularTable = '',
         thisid = $(this).attr('data-id');
-
     if (!$('#' + thisid + 'Table').hasClass('notEmpty') && $(this).attr('data-tab') != 1) {
+
+        loaderView();
         $.getJSON('/api/v1/shop/domains/check/groups?domainList=' + searchDomains + '&group=' + thisid + '&pg=1', function (data) {
             var classAv = '',
                 activeTabContent = data['Content'];
