@@ -484,33 +484,17 @@ $('.tab-list__item').on('click', '', function () {
 
 // Переход на третий шаг
 $('#buy').on('click', '', function () {
-    var summaryData = {};
-
+    var summaryData = {},
+        domains = Object.keys(pricesSumArr).join(', ');
     if (Object.keys(pricesSumArr).length) {
-        summaryData = {};
-        summaryData['a'] = 'add';
-        summaryData['ajax'] = 1;
-        summaryData['domainoption'] = 'register';
-        summaryData['domainselect'] = 1;
+        summaryData = '';
         for (var key in pricesSumArr) {
             if (pricesSumArr[key]['action'] == 'reg' && pricesSumArr[key]['status'] == 'available') {
-                summaryData['domains'] = [];
-                summaryData['domains'].push(key);
+
+                summaryData += 'domains[]:' + key + ', domainsregperiod[' + key + ']: 1';
             }
         }
-        $.post("https://bill.hostkey.com/cart.php", { json_string:JSON.stringify(pricesSumArr)});
-
-        var xhr = new XMLHttpRequest();
-
-        var body = 'name=' + encodeURIComponent(name) +
-            '&surname=' + encodeURIComponent(surname);
-
-        xhr.open("POST", '/submit', true)
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-
-        xhr.onreadystatechange = ...;
-
-        xhr.send(body);
+        $.redirect('https://bill.hostkey.com/cart.php?a=add&domain=register', summaryData);
     }
 });
 
