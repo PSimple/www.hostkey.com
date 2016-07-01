@@ -1,145 +1,169 @@
 <link rel="stylesheet" href="/assets/css/jquery/jquery-ui.min.css"/>
 <div class="b-page">
-    
+
     <div class="b-page__promo b-page__promo_domains_yes">
         <div class="b-icon b-page__scroll-icon" onclick="$.scrollTo('#scroll-anchor-01', 1500, { offset:-90 })"></div>
         <h1 class="b-page__promo-title">{$Head}</h1>
     </div>
-    
+
     <div class="b-domains" id="scroll-anchor-01">
         <div class="b-domains__container">
-        <h3 class="b-domains__title">
-            START YOUR<br>
-            DOMAIN SEARCH
-        </h3>
-        
-        <div class="b-container">
-            <div class="search-bar">
-                <input type="text" class="b-input search-bar__input" name=""/><!--
-                        --><textarea class="b-input search-bar__input search-bar__input-hidden" name="" cols="30" rows="10"></textarea><!--
-                        -->
-                <button class="search-bar__button-bulk">Bulk search</button><!--
-                        --><button class="b-submit search-bar__submit search-bar__submit__disabled" href="#">search</button>
-            </div>
-        </div>
-        
-        <div class="domains-step" id="step1">
-            <div class="b-container">
-                <div class="domain-zone">
-                    <!-- json result -->
-                </div>
-                <a class="b-news__more" href="#" id="domain-zone__more">
-                    <div class="b-news__more-plus">
-                        <span class="b-icon b-news__more-plus-icon"></span>
-                    </div>
-                    <div class="b-news__more-text">
-                        show all<br>
-                        prices
-                    </div>
-                </a>
-            </div>
-            
-            <h3 class="b-domains__title b-domains__title_upline_yes">
-                special offers
+            <div class="loader-view"></div>
+            <h3 class="b-domains__title">
+                START YOUR<br>
+                DOMAIN SEARCH
             </h3>
-            
-            
-            <div class="domains-offers">
-                <div class="domains-check">
-                    
-                    <div class="domains-check__row">
-                        <!-- json result  -->
-                    </div>
-                    <div>
-                        <a class="b-news__more" href="#" id="domains-check__more">
-                            <div class="b-news__more-plus">
-                                <span class="b-icon b-news__more-plus-icon"></span>
-                            </div>
-                            <div class="b-news__more-text">show all<br>prices</div>
-                        </a>
-                    </div>
+
+            <div class="b-container">
+                <div class="search-bar">
+                    <input type="text" class="b-input search-bar__input" name=""/><!--
+                        --><textarea class="b-input search-bar__input search-bar__input-hidden" name="" cols="30"
+                                     rows="10"></textarea><!--
+                        -->
+                    <button class="search-bar__button-bulk">Bulk search</button><!--
+                        -->
+                    <button class="b-submit search-bar__submit search-bar__submit__disabled" href="#">search</button>
                 </div>
-            
             </div>
-        </div>
-        <div class="domains-step domains-step2n3">
-            <div class="domains-step2__tab tab-list b-modal__tabs js-tab-wrapper" id="step2">
-                <div class="tab-list__container tab-list__items tab-list__items-grid6">
-                    <div class="tab-list__item current js-tab" data-tab="1">
-                        <div class="tab-list__item-name">Result</div>
+
+            <div class="domains-step" id="step1">
+                <div class="b-container">
+                    <div class="domain-zone">
+                        <!-- json result -->
                     </div>
-                    <div class="tab-list__item js-tab" data-tab="2" data-id="popular">
-                        <div class="tab-list__item-name">Popular</div>
+                    <a class="b-news__more" href="#" id="domain-zone__more">
+                        <div class="b-news__more-plus">
+                            <span class="b-icon b-news__more-plus-icon"></span>
+                        </div>
+                        <div class="b-news__more-text">
+                            show all<br>
+                            prices
+                        </div>
+                    </a>
+                </div>
+
+                <h3 class="b-domains__title b-domains__title_upline_yes">
+                    special offers
+                </h3>
+
+
+                <div class="domains-offers">
+                    <div class="domains-check">
+
+                        <div class="domains-check__row">
+                            <!-- json result  -->
+                        </div>
+                        <div>
+                            <a class="b-news__more" href="#" id="domains-check__more">
+                                <div class="b-news__more-plus">
+                                    <span class="b-icon b-news__more-plus-icon"></span>
+                                </div>
+                                <div class="b-news__more-text">show all<br>prices</div>
+                            </a>
+                        </div>
                     </div>
-                    <div class="tab-list__item js-tab" data-tab="3" data-id="promo">
-                        <div class="tab-list__item-name">Promo</div>
+
+                </div>
+            </div>
+            <div class="domains-step domains-step2n3">
+                <div class="domains-step2__tab tab-list b-modal__tabs js-tab-wrapper" id="step2">
+                    <div class="tab-list__container tab-list__items tab-list__items-grid6">
+                        <div class="tab-list__item current js-tab" data-tab="1">
+                            <div class="tab-list__item-name">Result</div>
+                        </div>
+                        <div class="tab-list__item js-tab" data-tab="2" data-id="Popular">
+                            <div class="tab-list__item-name">Popular</div>
+                        </div>
+                        <div class="tab-list__item js-tab" data-tab="3" data-id="Promo">
+                            <div class="tab-list__item-name">Promo</div>
+                        </div>
+                        <div class="tab-list__item js-tab" data-tab="4" data-id="National">
+                            <div class="tab-list__item-name">National</div>
+                        </div>
+                        <div class="tab-list__item js-tab" data-tab="5" data-id="Thematic">
+                            <div class="tab-list__item-name">Thematic</div>
+                        </div>
                     </div>
-                    <div class="tab-list__item js-tab" data-tab="4" data-id="national">
-                        <div class="tab-list__item-name">International</div>
-                    </div>
-                    <div class="tab-list__item js-tab" data-tab="5" data-id="thematic">
-                        <div class="tab-list__item-name">Thematic</div>
+                    <div class="tab-list__container tab-list__content-block">
+                        <div class="tab-list__content current js-tab-content" data-tab="1">
+                            <p>
+                                Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
+                            </p>
+                            <table class="tab-list__content-table" id="result-table"></table>
+                            <br>
+                            <br>
+                            <p>
+                                Также Вы можете выбрать доменные имена среди наиболее популярных доменных зон.
+                            </p>
+                            <table class="tab-list__content-table" id="result-table2"></table>
+                        </div>
+                        <div class="tab-list__content js-tab-content" data-tab="2">
+                            <p>
+                                Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
+                            </p>
+                            <table class="tab-list__content-table" id="PopularTable"></table>
+                        </div>
+                        <div class="tab-list__content js-tab-content" data-tab="3">
+                            <h3>Content area 3</h3>
+                            <p>
+                                Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
+                            </p>
+                            <table class="tab-list__content-table" id="PromoTable"></table>
+                        </div>
+                        <div class="tab-list__content js-tab-content" data-tab="4">
+
+                            <h3>Content area 443</h3>
+                            <p>
+                                Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
+                            </p>
+                            <table class="tab-list__content-table" id="InternationalTable"></table>
+                        </div>
+                        <div class="tab-list__content js-tab-content" data-tab="5">
+
+                            <h3>Content area 5</h3>
+                            <p>
+                                Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
+                            </p>
+                            <table class="tab-list__content-table" id="ThematicTable"></table>
+                        </div>
                     </div>
                 </div>
-                <div class="tab-list__container tab-list__content-block">
-                    <div class="tab-list__content current js-tab-content" data-tab="1">
-                        <p>
-                            Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
-                        </p>
-                        <table class="tab-list__content-table" id="result-table">
+
+                <div class="domains-step3__tab" id="step3">
+                    <div class="tab-list__content-block">
+                        <h3>Зарегистрировать домены</h3>
+                        <table class="tab-list__content-table" id="summaryRegTable">
                             <thead>
                             <tr>
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
-                                <th width="150" class="tab-list__content-table-cell">Results</th>
-                                <th width="180" class="tab-list__content-table-cell">Price</th>
-                                <th width="300" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
-                                        <span class="tab-list__content-reg-help" title="Lorem ipsum..."><i class="b-icon"></i>Register all free</span>
-                                    </a>
+                                <th width="260" class="tab-list__content-table-cell"><span
+                                        class="tab-list__content-reg-help js-tooltip"
+                                        title="Lorem ipsum...">Period</span></th>
+                                <th width="260" class="tab-list__content-table-cell"><span
+                                        class="tab-list__content-reg-help js-tooltip"
+                                        title="Lorem ipsum...">DNS-hosting</span></th>
+                                <th width="300" class="tab-list__content-table-cell"><span
+                                        class="tab-list__content-reg-help js-tooltip" title="Lorem ipsum...">ID Protection</span>
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <!-- JSON content -->
+                            <!-- -->
                             </tbody>
                         </table>
-                        <br>
-                        <br>
-                        <p>
-                            Также Вы можете выбрать доменные имена среди наиболее популярных доменных зон.
-                        </p>
-                        <table class="tab-list__content-table" id="result-table2">
+                        <h3>Перенести домены</h3>
+                        <table class="tab-list__content-table" id="summaryTransTable">
                             <thead>
                             <tr>
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
-                                <th width="150" class="tab-list__content-table-cell">Results</th>
-                                <th width="180" class="tab-list__content-table-cell">Price</th>
-                                <th width="300" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
-                                        <span class="tab-list__content-reg-help" title="Lorem ipsum..."><i class="b-icon"></i>Register all free</span>
-                                    </a>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <!-- JSON content -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="tab-list__content js-tab-content" data-tab="2">
-                        <p>
-                            Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
-                        </p>
-                        <table class="tab-list__content-table" id="popularTable">
-                            <thead>
-                            <tr>
-                                <th width="250" class="tab-list__content-table-cell">Domain</th>
-                                <th width="150" class="tab-list__content-table-cell">Results</th>
-                                <th width="180" class="tab-list__content-table-cell">Price</th>
-                                <th width="300" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
-                                        <span class="tab-list__content-reg-help" title="Lorem ipsum..."><i class="b-icon"></i>Register all free</span>
-                                    </a>
+                                <th width="260" class="tab-list__content-table-cell"><span
+                                        class="tab-list__content-reg-help js-tooltip"
+                                        title="Lorem ipsum...">Password</span></th>
+                                <th width="260" class="tab-list__content-table-cell"><span
+                                        class="tab-list__content-reg-help js-tooltip"
+                                        title="Lorem ipsum...">DNS-hosting</span></th>
+                                <th width="300" class="tab-list__content-table-cell"><span
+                                        class="tab-list__content-reg-help js-tooltip" title="Lorem ipsum...">ID Protection</span>
                                 </th>
                             </tr>
                             </thead>
@@ -148,123 +172,32 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-list__content js-tab-content" data-tab="3">
-                        <h3>Content area 3</h3>
-                        <p>
-                            Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
-                        </p>
-                        <table class="tab-list__content-table" id="promoTable">
-                            <thead>
-                            <tr>
-                                <th width="250" class="tab-list__content-table-cell">Domain</th>
-                                <th width="150" class="tab-list__content-table-cell">Results</th>
-                                <th width="180" class="tab-list__content-table-cell">Price</th>
-                                <th width="300" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
-                                        <span class="tab-list__content-reg-help" title="Lorem ipsum..."><i class="b-icon"></i>Register all free</span>
-                                    </a>
-                                </th>
-                            </tr>
-                            </thead>
+                </div>
+                <div class="domains-step__summary domains-step__summary_is-purpur" id="scroll-block">
+                    <div class="domains-step__summary-title">Your Domains</div>
+                    <div class="domains-step__summary-section" id="registerSection">
+                        <div class="domains-step__summary-subtitle">Register</div>
+                        <table class="domains-step__summary-table" id="domains-register-table">
                             <tbody>
-                            <!-- json result -->
+                            <!-- json content -->
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-list__content js-tab-content" data-tab="4">
-
-                        <h3>Content area 443</h3>
-                        <p>
-                            Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
-                        </p>
-                        <table class="tab-list__content-table" id="internationalTable">
-                            <thead>
-                            <tr>
-                                <th width="250" class="tab-list__content-table-cell">Domain</th>
-                                <th width="150" class="tab-list__content-table-cell">Results</th>
-                                <th width="180" class="tab-list__content-table-cell">Price</th>
-                                <th width="300" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
-                                        <span class="tab-list__content-reg-help" title="Lorem ipsum..."><i class="b-icon"></i>Register all free</span>
-                                    </a>
-                                </th>
-                            </tr>
-                            </thead>
+                    <div class="domains-step__summary-section" id="transferSection">
+                        <div class="domains-step__summary-subtitle">Transfer</div>
+                        <table class="domains-step__summary-table" id="domains-transfer-table">
                             <tbody>
-
+                            <!-- json content -->
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-list__content js-tab-content" data-tab="5">
-
-                        <h3>Content area 5</h3>
-                        <p>
-                            Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
-                        </p>
-                        <table class="tab-list__content-table" id="thematicTable">
-                            <thead>
-                            <tr>
-                                <th width="250" class="tab-list__content-table-cell">Domain</th>
-                                <th width="150" class="tab-list__content-table-cell">Results</th>
-                                <th width="180" class="tab-list__content-table-cell">Price</th>
-                                <th width="300" class="tab-list__content-table-cell">
-                                    <a href="#" class="tab-list__content-reg-all">
-                                        <span class="tab-list__content-reg-help" title="Lorem ipsum..."><i class="b-icon"></i>Register all free</span>
-                                    </a>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <!-- json result -->
-                            </tbody>
-                        </table>
+                    <div class="domains-step__summary-price">
+                        <span class="domains-step__summary-price-value" id="Summa">Empty cart</span>
+                        <span class="domains-step__summary-price-discount" id="Discount"></span>
                     </div>
+                    <button class="b-submit domains-step__summary-submit" href="#" id="buy">Buy</button>
                 </div>
             </div>
-
-            <div class="domains-step3__tab" id="step3">
-                <div class="tab-list__content-block">
-                    <h3>Зарегистрировать домены</h3>
-                    <table class="tab-list__content-table" id="summaryRegTable">
-                        <thead>
-                        <tr>
-                            <th width="250" class="tab-list__content-table-cell">Domain</th>
-                            <th width="260" class="tab-list__content-table-cell"><span class="tab-list__content-reg-help" title="Lorem ipsum...">Period</span></th>
-                            <th width="260" class="tab-list__content-table-cell"><span class="tab-list__content-reg-help" title="Lorem ipsum...">DNS-hosting</span></th>
-                            <th width="300" class="tab-list__content-table-cell"><span class="tab-list__content-reg-help" title="Lorem ipsum...">ID Protection</span></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!-- -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="domains-step__summary domains-step__summary_is-purpur" id="scroll-block">
-                <div class="domains-step__summary-title">Your Domains</div>
-                <div class="domains-step__summary-section" id="registerSection">
-                    <div class="domains-step__summary-subtitle">Register</div>
-                    <table class="domains-step__summary-table" id="domains-register-table">
-                        <tbody>
-                        <!-- json content -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="domains-step__summary-section" id="transferSection">
-                    <div class="domains-step__summary-subtitle">Transfer</div>
-                    <table class="domains-step__summary-table" id="domains-transfer-table">
-                        <tbody>
-                        <!-- json content -->
-                        </tbody>
-                    </table>
-                </div>
-                <div class="domains-step__summary-price">
-                    <span class="domains-step__summary-price-value" id="Summa">Empty cart</span>
-                    <span class="domains-step__summary-price-discount" id="Discount"></span>
-                </div>
-                <button class="b-submit domains-step__summary-submit" href="#" id="buy">Buy</button>
-            </div>
-        </div>
         </div>
         {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" target="feature"}
         {plugin "Content_ContentBlock_Plugin" view="Voucher" target="voucher"}

@@ -971,18 +971,23 @@ p {
     font-size: 16px;
     width: 100%;
     color: #272e38;
-    font-weight: bold;
 }
 
 .tab-list__content-table th {
     background-color: #efe4f7;
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 .tab-list__content-table th,
 .tab-list__content-table td {
     text-align: left;
     padding: 20px 15px;
+}
+
+.tab-list__content-table td.buttonCell {
+    text-align: center;
+    font-weight: bold;
 }
 
 .tab-list__content-table-row__invalid td {
@@ -1098,6 +1103,22 @@ p {
     display: none;
 }
 
+.tab-list__content-table-row__available .status-content-tt {
+    height: 14px;
+    width: 20px;
+    -webkit-background-size: contain;
+    background-size: contain;
+    cursor: pointer;
+    content: '';
+    display: inline-block;
+    pointer-events: all;
+    background: url(/assets/img/warning_20x14.png) no-repeat center;
+}
+
+.tab-list__content-table-row__available.selected_row {
+    background-color: #ffe9e0;
+}
+
 .tab-list__content-table-row__invalid {
     opacity: .7;
 }
@@ -1109,7 +1130,7 @@ p {
 .tab-list__content-reg-help {
     display: inline-block;
     position: relative;
-    pointer-events: none;
+    height: 16px;
 }
 
 .tab-list__content-reg-help:after {
@@ -1125,28 +1146,18 @@ p {
     background: url(/assets/img/help_12x12.png) no-repeat center;
 }
 
+.domains-step .table-select__item {
+    width: 180px;
+}
+
 .status-content-tt {
     display: inline-block;
     position: relative;
     pointer-events: none;
 }
 
-.tab-list__content-table-row__available .status-content-tt:after {
-    position: absolute;
-    right: -14px;
-    top: -9px;
-    height: 12px;
-    width: 12px;
-    -webkit-background-size: contain;
-    background-size: contain;
-    cursor: pointer;
-    content: '';
-    display: block;
-    pointer-events: all;
-    background: url(/assets/img/warning_12x12.png) no-repeat center;
-}
-
 .tab-list__content-reg-all i,
+.regAllButton i,
 .tab-list__content-reg-this i {
     background-position: -90px -100px;
     margin-right: 10px;
@@ -6329,6 +6340,21 @@ div.clear {
     vertical-align: top;
 }
 
+.domains-step__summary-table-row:hover .domains-step__summary-table-cell:nth-child(2):after {
+    cursor: pointer;
+    background-color: #f4f6f9;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    content: '';
+    display: block;
+    background-image: url('/assets/img/cross_12x12.png');
+    background-repeat: no-repeat;
+    background-position: center right;
+}
+
 .domains-step__summary-table-cell:nth-child(1) {
     font-size: 16px;
     line-height: 25px;
@@ -6343,6 +6369,7 @@ div.clear {
     width: 65px;
     text-align: right;
     vertical-align: top;
+    position: relative;
 }
 
 .domains-step__summary-price {
@@ -6411,6 +6438,10 @@ div.clear {
     padding: 0 3%;
 }
 
+.tab-list__items-grid6 .tab-list__item[data-tab='1'] {
+    padding: 0 5%;
+}
+
 .tab-list__item.current {
     background-color: #ffffff;
     box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.2);
@@ -6434,19 +6465,20 @@ div.clear {
     z-index: 2;
 }
 
-.b-domains__container.loader-view:after {
+.b-domains__container .loader-view {
     position: absolute;
-    z-index: 10;
+    z-index: 12;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    display: block;
+    height: 100%;
+    width: 100%;
+    display: none;
     background: url('/assets/img/ring-alt.svg') center center no-repeat;
-    content: '';
 }
 
-.b-domains__container.loader-view:before {
+.b-domains__container.overlay-view:after {
     position: absolute;
     z-index: 11;
     top: 0;
@@ -6454,9 +6486,12 @@ div.clear {
     right: 0;
     bottom: 0;
     display: block;
-    opacity: .3;
+    opacity: .5;
+    height: 100%;
+    width: 100%;
     background-color: #fff;
     content: '';
+    transition: all 0.5s ease;
 }
 
 .b-domains__title {
@@ -7171,4 +7206,54 @@ textarea.search-bar__input {
 
 .bullit-item input[type="checkbox"]:checked + label {
     background-position: center;
+}
+
+#summaryTransTable,
+#summaryRegTable {
+    display: none;
+}
+
+.regAllContainer {
+    font-size: 0;
+    border: 2px solid #ff692d;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 7px 15px;
+    vertical-align: middle;
+    display: inline-block;
+    width: 100%;
+    line-height: 60px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+.regAllContent {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 14px;
+    width: 540px;
+    padding-right: 25px;
+    vertical-align: middle;
+}
+
+.regAllTitle {
+    font-size: 17px;
+    color: #945ae0;
+    text-decoration: none;
+    line-height: 20px;
+    padding-bottom: 10px;
+}
+
+.regAllButton {
+    font-size: 17px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #945ae0;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 20px;
+    display: inline-block;
+    vertical-align: middle;
 }

@@ -23,20 +23,16 @@ for (m = 0; m < methodCount; m++) {
 }
 /* /Приведение методов */
 
-var i, a;
-var reg = [],
-    reg_prot = [],
-    trans_prot = [],
-    trans = [],
-    group1main = {},
-    group2main = {},
+var i,
+    a,
     contentMain = {},
-    domName = [],
-    pricesSumArr = {};
-var summaryPrice = 0,
+    pricesSumArr = {},
+    summaryPrice = 0,
+    k = 0,
     searchZones = '',
     searchDomains = '',
-    searchDomainsArr = '';
+    searchDomainsArr = '',
+    isCut = false;
 
 window.location.hash = '#domains_1';
 
@@ -47,12 +43,12 @@ window.addEventListener('hashchange', function () {
             $('.domains-step2n3, #step2').css('display', 'inline-block');
             $('#step1, #step3').hide();
             break;
-        case '#domains_3':
-            if (reg.length || trans.length) {
-                $('.domains-step2n3, #step3').css('display', 'inline-block');
-                $('#step1, #step2').hide();
-            }
-            break;
+        /*case '#domains_3':
+         if (Object.keys(pricesSumArr).length) {
+         $('.domains-step2n3, #step3').css('display', 'inline-block');
+         $('#step1, #step2').hide();
+         }
+         break;*/
         case '#domains_1':
         default:
             $('#step1').show();
@@ -61,19 +57,17 @@ window.addEventListener('hashchange', function () {
     }
 });
 
-/* Функция добавления данных поверх уже существующих */
-function AddData(target, data) {
-    $(target).html(data);
-}
-
-/* Функция добавления данных после уже существующих */
-function AppendData(target, data) {
-    $(target).append(data);
-}
-
-/* Функция добавления данных перед уже существующими */
-function PrependData(target, data) {
-    $(target).prepend(data);
+/* Функция добавления данных */
+function AddData(target, data, action) {
+    var $targetCont = $(target);
+    if (action == 'add' || action == 'append') {
+        if (action == 'add')
+            $targetCont.empty();
+        $targetCont.append(data);
+    } else {
+        $targetCont.prepend(data);
+    }
+    loaderView('hide');
 }
 
 /* Функция очистки от html-тегов */
@@ -81,145 +75,216 @@ String.prototype.stripTags = function () {
     return this.replace(/<\/?[^>]+>/g, '');
 };
 
-/* Функция укорачивания длинных доменных имен */
+// Функция укорачивания длинных доменных имен
 String.prototype.cutDomain = function () {
-    var splitName = this.split('.');
-    var cutName = this;
-    if (splitName[0].length > 10)
+    var splitName = this.split('.'),
+        cutName = this;
+    isCut = false;
+    if (splitName[0].length > 10) {
+        isCut = true;
         cutName = splitName[0].substring(0, 10) + '...' + splitName[1];
+    }
     return cutName;
 };
 
-/* Функция запуска попапа для трансфера */
-function AddTransferPopup(container) {
-    if (!$('.transferPopup').length) {
-        $(container).after('<div class="transferPopup">' +
-            '<span>Перенести и продлить<br/> на 1 год?</span>' +
-            '<a href="#" class="transferPopup-yes">Yes</a>' +
-            '<a href="#" class="transferPopup-no">No</a>' +
-            '</div>');
-    }
-}
+/* Функция запуска попапа для трансфера
+ function AddTransferPopup(container) {
+ if (!$('.transferPopup').length) {
+ $(container).after('<div class="transferPopup">' +
+ '<span>Перенести и продлить<br/> на 1 год?</span>' +
+ '<a href="#" class="transferPopup-yes">Yes</a>' +
+ '<a href="#" class="transferPopup-no">No</a>' +
+ '</div>');
+ }
+ }*/
 
 // Show/hide loader
-function loaderView() {
-    $('.b-domains__container').toggleClass('loader-view');
-}
-
-/* Функция очистки от html-тегов */
-function bindTableClick() {
-    $('.tab-list__content-table-row__available').on('click', 'a.tab-list__content-reg-this', function () {
-        var domain = $(this).attr('data-domain'),
-            prot = $(this).attr('data-prot'),
-            price = $(this).attr('data-price'),
-            searchThis = reg.indexOf(domain);
-
-        if (domain in contentMain)
-            if (!(domain in pricesSumArr))
-                pricesSumArr[domain] = contentMain[domain];
-        if (searchThis !== undefined && searchThis != null) {
-            if (searchThis < 0) {
-                if (!$('#registerSection').is(':visible'))
-                    $('#registerSection').addClass('visible_section');
-                reg.push(domain);
-                reg_prot.push(prot);
-                $('#domains-register-table tbody').append(
-                    '<tr class="domains-step__summary-table-row">' +
-                    '<td class="domains-step__summary-table-cell domain-title-show" title="' + domain + '">' + domain.cutDomain() + '</td>' +
-                    '<td class="domains-step__summary-table-cell">€' + price + '</td>' +
-                    '</tr>');
-                summaryPrice = parseFloat(summaryPrice) + parseFloat(price);
-                $('#Summa').html('€' + summaryPrice.toFixed(2));
-
-            }
-        }
-        return false;
-    });
-    $('.tab-list__content-table-row__registred').on('click', 'a.tab-list__content-its-my', function (e) {
-        var domain = $(this).attr('data-domain'),
-            prot = $(this).attr('data-prot'),
-            priceTrans = $(this).attr('data-pricetrans'),
-            searchThis = reg.indexOf(domain);
-
-        if (searchThis !== undefined && searchThis != null) {
-            if (searchThis < 0) {
-                AddTransferPopup(this);
-                var div = $('.transferPopup');
-                div.on('click', 'a', function () {
-                    if (!$(this).hasClass('transferPopup-no')) {
-                        if (!$('#transferSection').is(':visible'))
-                            $('#transferSection').addClass('visible_section');
-                        trans.push(domain);
-                        trans_prot.push(prot);
-                        $('#domains-transfer-table tbody').append(
-                            '<tr class="domains-step__summary-table-row">' +
-                            '<td class="domains-step__summary-table-cell domain-title-show" title="' + domain + '">' + domain.cutDomain() + '</td>' +
-                            '<td class="domains-step__summary-table-cell">€' + priceTrans + '</td>' +
-                            '</tr>');
-                        summaryPrice = parseFloat(summaryPrice) + parseFloat(priceTrans);
-                        $('#Summa').html('€' + summaryPrice.toFixed(2));
-                    }
-                    div.remove();
-                    return false;
-                });
-
-            }
-        }
-        return false;
-    });
-
-    /* Бинд библиотеки tooltip для всплывающих подсказок */
-    $('.tab-list__content-reg-help:after, .tab-list__content-table-cell, .domain-title-show, .tab-list__content-table-row__available .status-content-tt').tooltip();
-    loaderView();
-}
-
-/* Хайд попапа при клике вне его области */
-$(document).mouseup(function (e) {
-    var div = $(".transferPopup");
-    if (!div.is(e.target)
-        && div.has(e.target).length === 0) {
-        div.remove();
+function loaderView(action) {
+    if (action == 'hide') {
+        $('.loader-view').hide();
+        $('.b-domains__container').removeClass('overlay-view');
+    } else {
+        $('.loader-view').show();
+        $('.b-domains__container').addClass('overlay-view');
     }
+}
+
+// Generate table for target domains
+function genDomainsTable(target, data) {
+    var readyTable = '',
+        domainsList = [],
+        domainsPrice = 0,
+        readyTableHeader = '<thead><tr>' +
+            '<th width="250" class="tab-list__content-table-cell">Domain</th>' +
+            '<th width="150" class="tab-list__content-table-cell">Results</th>' +
+            '<th width="220" class="tab-list__content-table-cell">Price</th>' +
+            '<th width="250" class="tab-list__content-table-cell"><a href="#" data-tname="' + target + '" class="tab-list__content-reg-all"><i class="b-icon"></i>Register all<span class="tab-list__content-reg-help js-tooltip" title="Lorem ipsum..."></span></a></th>' +
+            '</tr></thead><tbody>',
+        readyTableFooter = '</tbody>';
+    for (var key in data) {
+        k++;
+        if (key.substring(-1) == '.' || key == '-')
+            continue;
+
+        var name = key,
+            groupDomain = data[name],
+            statusClass = (groupDomain['status'] == 'available') ? 'available' : 'invalid',
+            statusComment = ((groupDomain['comment'] != null && groupDomain['comment'] != undefined) ? groupDomain['comment'] : ''),
+            status = groupDomain['status'],
+            img = (groupDomain['img'] != null && groupDomain['img'] != undefined && groupDomain['img'] != '') ? '<img src="/upload/data/' + groupDomain['img'] + '" />' : '',
+            promo = ('promo' in data[name]) ? 'promoRow' : '',
+            periodOptions = '',
+            cutName = name.cutDomain();
+
+        if (groupDomain['status'] == 'available') {
+            domainsList.push(name);
+            domainsPrice = domainsPrice + groupDomain['PriceRegister01'];
+        }
+        for (var keypr in groupDomain) {
+            if (keypr.slice(0, -2) == 'PriceRegister') {
+                var prNum = parseInt(keypr.slice(-2)),
+                    prPeriod = (prNum == 1 ? prNum + ' year' : prNum + ' years');
+                periodOptions += '<option value="' + prNum + '">' + prPeriod + ' / €' + groupDomain[keypr] + '</option>';
+            }
+        }
+
+        if (!(name in contentMain)) {
+            contentMain[name] = groupDomain;
+            contentMain[name]['cutName'] = cutName;
+        }
+
+        readyTable += '<tr class="tab-list__content-table-row rowN' + k + ' tab-list__content-table-row__' + statusClass + ((name in pricesSumArr) ? ' selected_row' : '') + '">' +
+            '<td class="tab-list__content-table-cell' + (!isCut ? '' : ' js-tooltip" title="' + name) + '">' +
+            '<span class="tab-list__content-table-cell-img">' + img + '</span>' + (!isCut ? name : cutName) + '' +
+            '</td>' +
+            '<td class="tab-list__content-table-cell">' +
+            status + (statusComment == '' ? '' : '<span class="status-content-tt js-tooltip" title="' + statusComment + '"></span>') +
+            '</td>' +
+            '<td class="tab-list__content-table-cell">' +
+            ((statusClass == "available") ? '<select class="table-select__item js-select" name="tbl-select-' + k + '" id="regPeriod' + k + '" data_preset="Register_Domains">' + periodOptions + '</select>' : '') +
+            '</td>' +
+            '<td class="tab-list__content-table-cell buttonCell">' +
+            '<a href="#" class="tab-list__content-reg-this" data-domain="' + name + '" data-rowN="' + k + '"><i class="b-icon"></i>Register</a>' +
+            '</td>' +
+            '</tr>';
+    }
+
+    if (readyTable == '') {
+        readyTable = '<tr><td colspan="4" align="center">Wrong request. Try again.</td></tr>';
+        $(target).addClass('emptyResp');
+    } else if ($(target).is(':empty')) {
+        readyTable = readyTableHeader + readyTable + readyTableFooter;
+    }
+
+    if (!$(target).hasClass('emptyResp')) {
+        AddData(target, readyTable, 'prepend');
+        $(target).addClass('notEmpty');
+    }
+    // else {
+    //     AddData(target, readyTable, 'add');
+    // }
+    var qDom = domainsList.length,
+        numVariation = ' доменов';
+
+    switch (qDom) {
+        case 1:
+            numVariation = ' домен';
+            break;
+        case 2:
+        case 3:
+        case 4:
+            numVariation = ' домена';
+            break;
+        default:
+            numVariation = ' доменов';
+            break;
+
+    }
+
+    $(target).after('<div class="regAllContainer"><div class="regAllContent">' +
+        '<div class="regAllTitle">Зарегистрировать на 1 год ' + qDom + numVariation + ' за €' + domainsPrice.toFixed(2) + ':</div>' +
+        domainsList.join(', ') + '</div>' +
+        '<a href="#" data-tname="' + target + '" class="regAllButton"><i class="b-icon"></i>Register all</a>' +
+        '</div>');
+
+    $('.js-select').select2();
+}
+
+$(document).on('click', 'a.tab-list__content-reg-this', function () {
+    var $domain = $(this).attr('data-domain'),
+        cutName = $domain.cutDomain(),
+        $rowN = $(this).attr('data-rown'),
+        $row = $('.rowN' + $rowN),
+        $priceNper = $('#regPeriod' + $rowN + ' option:selected').html(),
+        $priceSplit = ($('#regPeriod' + $rowN + ' option:selected').html()).split('€'),
+        $price = $priceSplit[1],
+        $section = $('#registerSection');
+
+    if ($domain in contentMain) {
+        if (!($domain in pricesSumArr)) {
+            $row.addClass('selected_row');
+            pricesSumArr[$domain] = contentMain[$domain];
+            pricesSumArr[$domain]['action'] = 'reg';
+            pricesSumArr[$domain]['period'] = $priceNper;
+
+            if (!$section.is(':visible'))
+                $section.addClass('visible_section');
+
+            $('#domains-register-table').find('tbody').append(
+                '<tr class="domains-step__summary-table-row">' +
+                '<td class="domains-step__summary-table-cell domain-title-show' + (!isCut ? '' : ' js-tooltip" title="' + $domain) + '">' +
+                (!isCut ? $domain : cutName) + '</td>' +
+                '<td class="domains-step__summary-table-cell remove-row" data-rowN="' + $rowN + '" data-domain="' + $domain + '">€' + $price + '</td>' +
+                '</tr>');
+            summaryPrice = parseFloat(summaryPrice) + parseFloat($price);
+            $('#Summa').html('€' + summaryPrice.toFixed(2));
+        }
+    }
+    return false;
 });
 
-/* Начальная загрузка области под поиском */
+// Начальная загрузка области под поиском
 $.getJSON('/api/v1/shop/domains/zone/list?groups=top100', function (data) {
-    var items = data['Content'];
-    var ready = '';
-    var sum = items.length;
+    var items = data['Content'],
+        ready = '',
+        sum = items.length;
+
     if (sum > 6) {
         sum = 6;
         $('#domain-zone__more').css("display", "block");
     }
+
     for (i = 0; i < sum; i++) {
-        var name = items[i].Name;
-        var price = items[i].PriceRegister;
+        var name = items[i].Name,
+            price = items[i].PriceRegister;
+
         ready += '<label class="domain-zone__item" for="regular_check-' + i + '">' +
             '<span class="domain-zone__item-title">' + name + '</span><br>' +
             '<input data-name="' + name + '" class="hidden-input" name="check-' + i + '" type="checkbox" id="regular_check-' + i + '"/>' +
             '<span class="domain-zone__item-price">€' + price + '</span>' +
             '</label>';
     }
-    AddData('.domain-zone', ready);
+    AddData('.domain-zone', ready, 'add');
 });
 
 /* Начальная загрузка области Special offers */
 $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
-    var items = data['Content'];
-    var readyPromo = '';
-    var sum = items.length;
+    var items = data['Content'],
+        readyPromo = '',
+        sum = items.length;
 
     if (sum > 4) {
         sum = 4;
         $('#domains-check__more').css("display", "block");
     }
     for (a = 0; a < sum; a++) {
-        var name = items[a].Name;
-        var img = '<img src="/upload/data/' + items[a].Img + '" title="' + name + '"/>';
-        var imgFlag = items[a].Img;
-        var price = items[a].PriceRegister;
-        var comment = (!!items[a].Comment) ? ((items[a].Comment).stripTags()) : '';
-        var slicedComment = comment.slice(0, 90);
+        var name = items[a].Name,
+            img = '<img src="/upload/data/' + items[a].Img + '" title="' + name + '"/>',
+            imgFlag = items[a].Img,
+            price = items[a].PriceRegister,
+            comment = (!!items[a].Comment) ? ((items[a].Comment).stripTags()) : '',
+            slicedComment = comment.slice(0, 90);
+
         if (slicedComment.length < comment.length) {
             slicedComment += '...';
             comment = slicedComment;
@@ -238,7 +303,7 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
             '</label>';
 
     }
-    AddData('.domains-check__row', readyPromo);
+    AddData('.domains-check__row', readyPromo, 'add');
 });
 
 /* Вывод полного списка доменных зон в область под поиском */
@@ -256,7 +321,7 @@ $('#domain-zone__more').on('click', '', function () {
                 '<span class="domain-zone__item-price">€' + price + '</span>' +
                 '</label>';
         }
-        AppendData('.domain-zone', ready);
+        AddData('.domain-zone', ready, 'append');
     });
     $(this).hide();
     return false;
@@ -292,7 +357,7 @@ $('#domains-check__more').on('click', '', function () {
                 '</label>';
 
         }
-        AppendData('.domains-check__row', readyPromo);
+        AddData('.domains-check__row', readyPromo, 'append');
     });
     $(this).hide();
     return false;
@@ -326,9 +391,15 @@ $('.search-bar__button-bulk').on('click', '', function () {
 
 /* Запуск поиска и переход на второй шаг */
 $('.search-bar .b-submit').on('click', '', function () {
-    var $checkedInput = $('.hidden-input:checked');
+    var $checkedInput = $('.hidden-input:checked'),
+        $firstTab = $('.domains-step2__tab .tab-list__item[data-tab="1"]');
 
-    loaderView();
+    loaderView('show');
+
+    $('.tab-list__content-table').removeClass('notEmpty');
+
+    if (!$firstTab.hasClass('current'))
+        $firstTab.trigger('click');
 
     searchZones = '';
     $.each($checkedInput, function () {
@@ -342,142 +413,35 @@ $('.search-bar .b-submit').on('click', '', function () {
     }
     searchDomainsArr = searchDomains.split(',');
 
-    // Возвращаем инпут и чистим его
+    // Возвращаем строчный вид поиска на 2 шаге
     if (!$('input.search-bar__input').is(':visible')) {
-        $('.search-bar__button-bulk').click();
-        $('input.search-bar__input').val('');
+        $('.search-bar__button-bulk').trigger('click');
     }
+
+    // Чистим поля поиска
+    $('input.search-bar__input, textarea.search-bar__input').val('');
+
     for (var key in searchDomainsArr) {
         var onedomainname = searchDomainsArr[key],
-            searchdomzone = searchDomainsArr[key].split('.')[1];
-        // searchZones += (searchdomzone != undefined && searchdomzone != null) ? ',' + searchdomzone : '';
-        // if (domName.indexOf(onedomainname) < 0) {
-        //     domName.push(onedomainname);
-        // } else {
-        //     loaderView();
-        //     continue;
-        // }
+            group1domains = {},
+            group2domains = {};
 
         $.getJSON('/api/v1/shop/domains/check?domainList=' + onedomainname + '&zoneList=' + searchZones, function (data) {
 
-            var readyTable = '',
-                readyTable2 = '';
-            var classAv,
-                classAv2;
-            group1main = data['Content']['group1'];
-            group2main = data['Content']['group2'];
-            for (var key in group1main) {
-                var status = group1main[key]['status'],
-                    priceReg = group1main[key]['PriceRegister01'],
-                    priceTrans = group1main[key]['PriceTransfer01'],
-                    priceOld = group1main[key]['priceOld'],
-                    prot = group1main[key]['idprotection'],
-                    img = '',
-                    priceOldString = '';
-                if (key.slice(-1) == '.') {
-                    continue;
-                }
-                if (!(key in contentMain)) {
-                    contentMain[key] = group1main[key];
-                }
+            group1domains = data['Content']['group1'];
+            group2domains = data['Content']['group2'];
 
-                if (group1main[key]['img'] != null && group1main[key]['img'] != undefined)
-                    img = '<img src="/upload/data/' + group1main[key]['img'] + '" />';
-
-                if (priceOld != 0)
-                    priceOldString = '<strike>€' + priceOld + '</strike> ';
-
-                switch (status) {
-                    case 'error':
-                    case 'invalid domain':
-                        classAv = 'invalid';
-                        break;
-                    case 'available':
-                        classAv = 'available';
-                        break;
-                    case 'not available':
-                    default:
-                        classAv = 'registred';
-                        break;
-                }
-                readyTable += '<tr class="tab-list__content-table-row tab-list__content-table-row__' + classAv + '">' +
-                    '<td class="tab-list__content-table-cell" title="' + key + '">' +
-                    '<span class="tab-list__content-table-cell-img">' + img + '</span>' + key.cutDomain() + '' +
-                    '</td>' +
-                    '<td class="tab-list__content-table-cell"><span class="status-content-tt" title="Status info">' + status + '</span></td>' +
-                    '<td class="tab-list__content-table-cell tab-list__content-table-cell-price">' + priceOldString + '<span>€' + priceReg + '</span></td>' +
-                    '<td class="tab-list__content-table-cell">' +
-                    '<a href="#" class="tab-list__content-reg-this" data-prot="' + prot + '" data-domain="' + key + '" data-price="' + priceReg + '">' +
-                    '<i class="b-icon"></i>Register' +
-                    '</a>' +
-                    '<a href="#" class="tab-list__content-its-my" data-prot="' + prot + '" data-domain="' + key + '" data-priceTrans="' + priceTrans + '">' +
-                    '<i class="b-icon"></i>It\'s my domain</a>' +
-                    '</td></tr>';
-            }
-
-            for (var key in group2main) {
-                var status2 = group2main[key]['status'],
-                    priceReg2 = group2main[key]['PriceRegister01'],
-                    priceTrans2 = group2main[key]['PriceTransfer01'],
-                    priceOld2 = group2main[key]['priceOld'],
-                    prot2 = group2main[key]['idprotection'],
-                    img2 = '';
-                if (group2main[key]['img'] != null)
-                    img2 = '<img src="/upload/data/' + group2main[key]['img'] + '" />';
-                var promo = '';
-                var priceOldString2 = '';
-                if (priceOld2 != 0)
-                    priceOldString2 = '<strike>€' + priceOld2 + '</strike> ';
-
-                if (!(key in contentMain)) {
-                    contentMain[key] = group2main[key];
-                }
-                if ('promo' in group2main[key])
-                    promo = 'promoRow';
-                switch (status2) {
-                    case 'error':
-                    case 'invalid domain':
-                        classAv2 = 'invalid';
-                        break;
-                    case 'available':
-                        classAv2 = 'available';
-                        break;
-                    case 'not available':
-                    default:
-                        classAv2 = 'registred';
-                        break;
-                }
-                readyTable2 += '<tr class="tab-list__content-table-row tab-list__content-table-row__' + classAv2 + ' ' + promo + '">' +
-                    '<td class="tab-list__content-table-cell" title="' + key + '"><span class="tab-list__content-table-cell-img">' + img2 + '</span>' + key.cutDomain() + '</td>' +
-                    '<td class="tab-list__content-table-cell"><span class="status-content-tt" title="Status info">' + status2 + '</span></td>' +
-                    '<td class="tab-list__content-table-cell tab-list__content-table-cell-price">' + priceOldString2 + ' <span>€' + priceReg2 + '</span></td>' +
-                    '<td class="tab-list__content-table-cell">' +
-                    '<a href="#" class="tab-list__content-reg-this" data-prot="' + prot2 + '" data-domain="' + key + '" data-price="' + priceReg2 + '" data-priceOld="' + priceOld2 + '">' +
-                    '<i class="b-icon"></i>Register' +
-                    '</a>' +
-                    '<a href="#" class="tab-list__content-its-my" data-prot="' + prot2 + '" data-domain="' + key + '" data-priceTrans="' + priceTrans2 + '" >' +
-                    '<i class="b-icon"></i>It\'s my domain</a>' +
-                    '</td></tr>';
-
-            }
+            genDomainsTable('#result-table', group1domains);
+            genDomainsTable('#result-table2', group2domains);
 
 
-            if (readyTable == '') {
-                readyTable = '<tr><td colspan="4" align="center">The response is empty.</td></tr>';
-                $('#result-table').addClass('emptyResp');
-            }
-            if (!$('#result-table').hasClass('emptyResp')) {
-                PrependData('#result-table tbody', readyTable);
-            } else {
-                AddData('#result-table tbody', readyTable);
-            }
-
-            PrependData('#result-table2 tbody', readyTable2);
+            /* Бинд библиотеки tooltip для всплывающих подсказок */
+            $('.js-tooltip').tooltip();
         });
-    }
 
-    bindTableClick();
+    }
     window.location.hash = '#domains_2';
+
     $('html, body').animate({
         scrollTop: $("#step2").offset().top
     }, 2000);
@@ -485,11 +449,14 @@ $('.search-bar .b-submit').on('click', '', function () {
     return false;
 });
 
-/* Обработка кнопки "Register All" */
-$('.tab-list__content-reg-all').on('click', '', function () {
-    var $regAll = $(this).parents('.tab-list__content-table').find('.tab-list__content-reg-this:visible');
-    $.each($regAll, function () {
-        $(this).click();
+/* Обработка кнопки "Register All" в шапке таблиц */
+$(document).on('click', '.tab-list__content-reg-all, .regAllButton', function () {
+    var $table = $($(this).attr('data-tname')),
+        $row = $table.find('.tab-list__content-table-row__available'),
+        $select = $table.find('.table-select__item');
+    $.each($row, function () {
+        $(this).find('.table-select__item').val("1").trigger("change");
+        $(this).find('.tab-list__content-reg-this:visible').trigger('click');
     });
     return false;
 });
@@ -497,139 +464,154 @@ $('.tab-list__content-reg-all').on('click', '', function () {
 /* Обработка переключения табов и подгрузки контента на втором шаге */
 $('.tab-list__item').on('click', '', function () {
     var popularTable = '',
-        thisid = $(this).attr('data-id');
-    if (!$('#' + thisid + 'Table').hasClass('notEmpty') && $(this).attr('data-tab') != 1) {
+        thisid = $(this).attr('data-id'),
+        target = '#' + thisid + 'Table';
+    if (!$(target).hasClass('notEmpty') && $(this).attr('data-tab') != 1) {
 
-        loaderView();
+        loaderView('show');
         $.getJSON('/api/v1/shop/domains/check/groups?domainList=' + searchDomains + '&group=' + thisid + '&pg=1', function (data) {
-            var classAv = '',
-                activeTabContent = data['Content'];
+            var activeTabContent = data['Content'];
+            genDomainsTable(target, activeTabContent);
+            $(target).addClass('notEmpty');
 
-            for (var key in activeTabContent) {
-                var status = activeTabContent[key]['status'],
-                    priceReg = activeTabContent[key]['PriceRegister01'],
-                    priceTrans = activeTabContent[key]['PriceTransfer01'],
-                    priceOld = activeTabContent[key]['priceOld'],
-                    prot = activeTabContent[key]['idprotection'],
-                    img = '',
-                    priceOldString = '';
+            // AddData(target, popularTable, 'add');
+            // bindTableClick();
 
 
-                if (!(key in contentMain)) {
-                    contentMain[key] = activeTabContent[key];
-                }
-
-                if (activeTabContent[key]['img'] != null)
-                    img = '<img src="http://ptkachenko.hostke.ru/upload/data/' + activeTabContent[key]['img'] + '" />';
-
-                if (priceOld != 0)
-                    priceOldString = '<strike>€' + priceOld + '</strike> ';
-
-                switch (status) {
-                    case 'error':
-                    case 'invalid domain':
-                        classAv = 'invalid';
-                        break;
-                    case 'available':
-                        classAv = 'available';
-                        break;
-                    case 'not available':
-                    default:
-                        classAv = 'registred';
-                        break;
-                }
-                popularTable += '<tr class="tab-list__content-table-row tab-list__content-table-row__' + classAv + '">' +
-                    '<td class="tab-list__content-table-cell" title="' + key + '">' +
-                    '<span class="tab-list__content-table-cell-img">' + img + '</span>' + key.cutDomain() + '' +
-                    '</td>' +
-                    '<td class="tab-list__content-table-cell"><span class="status-content-tt" title="Status info">' + status + '</span></td>' +
-                    '<td class="tab-list__content-table-cell tab-list__content-table-cell-price">' + priceOldString + '<span>€' + priceReg + '</span></td>' +
-                    '<td class="tab-list__content-table-cell">' +
-                    '<a href="#" class="tab-list__content-reg-this" data-prot="' + prot + '" data-domain="' + key + '" data-price="' + priceReg + '">' +
-                    '<i class="b-icon"></i>Register' +
-                    '</a>' +
-                    '<a href="#" class="tab-list__content-its-my" data-prot="' + prot + '" data-domain="' + key + '" data-priceTrans="' + priceTrans + '">' +
-                    '<i class="b-icon"></i>It\'s my domain</a>' +
-                    '</td></tr>';
-            }
-            $('#' + thisid + 'Table').addClass('notEmpty');
-            AddData('#' + thisid + 'Table tbody', popularTable);
-            bindTableClick();
         });
     }
 });
 
-/* Обработка совершения покупки на втором шаге, формирование третьего шага */
+// Переход на третий шаг
 $('#buy').on('click', '', function () {
-    if (reg.length) {
-        var summaryRegData = '',
-            reg_disabled = '';
+    var summaryData = {};
 
-        for (var key in reg) {
-            var periodOptions = '';
-            if (reg_prot[key] == 0) {
-                reg_disabled = 'disabled="disabled"';
-            } else {
-                reg_disabled = '';
+    if (Object.keys(pricesSumArr).length) {
+        summaryData = {};
+        summaryData['a'] = 'add';
+        summaryData['ajax'] = 1;
+        summaryData['domainoption'] = 'register';
+        summaryData['domainselect'] = 1;
+        for (var key in pricesSumArr) {
+            if (pricesSumArr[key]['action'] == 'reg' && pricesSumArr[key]['status'] == 'available') {
+                summaryData['domains'] = [];
+                summaryData['domains'].push(key);
             }
-            var pricesArr = pricesSumArr[reg[key]];
-            for (var keyp in pricesArr) {
-                var prNum = keyp.slice(-2),
-                    prPeriod = '';
-                if (keyp.slice(0, -2) == 'PriceRegister') {
-                    switch (prNum) {
-                        case '01':
-                        default:
-                            prPeriod = prNum + ' year';
-                            break;
-                        case '02':
-                        case '03':
-                        case '04':
-                        case '05':
-                        case '06':
-                        case '07':
-                        case '08':
-                        case '09':
-                        case '10':
-                            prPeriod = prNum + ' years';
-                            break;
-                    }
-                    periodOptions += '<option value="' + prNum + '">' + prPeriod + ' / €' + pricesArr[keyp] + '</option>';
-                }
-            }
-            summaryRegData += '<tr class="tab-list__content-table-row">' +
-                '<td class="tab-list__content-table-cell" title="' + reg[key] + '">' + reg[key].cutDomain() + '</td>' +
-                '<td class="tab-list__content-table-cell"><select class="table-select__item js-select" name="tbl-select-' + key + '" id="domains-register-period-select' + key + '" data_preset="' + key + '">' + periodOptions + '</select></td>' +
-                '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
-                '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" ' + reg_disabled + '></td>' +
-                '</tr>';
         }
-        window.location.hash = '#domains_3';
-        AddData('#summaryRegTable tbody', summaryRegData);
-        $('.js-select').select2();
-    } else if (trans.length) {
-        var summaryTransData = '';
-        for (var key in trans) {
-            summaryTransData += '<tr class="tab-list__content-table-row">' +
-                '<td class="tab-list__content-table-cell" title="' + trans[key] + '">' + trans[key].cutDomain() + '</td>' +
-                '<td class="tab-list__content-table-cell"><select class="table-select__item js-select" name="tbl-select-' + key + '" id="domains-register-period-select' + key + '1" data_preset="' + key + '1"><option value="0">1 year / €7</option><option value="1">2 year / €12</option><option value="2">3 year / €20</option></select></td>' +
-                '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
-                '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
-                '</tr>';
-        }
-        window.location.hash = '#domains_3';
-        AddData('#summaryRegTable tbody', summaryTransData);
+        $.post("https://bill.hostkey.com/cart.php", { json_string:JSON.stringify(pricesSumArr)});
+
+        var xhr = new XMLHttpRequest();
+
+        var body = 'name=' + encodeURIComponent(name) +
+            '&surname=' + encodeURIComponent(surname);
+
+        xhr.open("POST", '/submit', true)
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+        xhr.onreadystatechange = ...;
+
+        xhr.send(body);
     }
+});
 
-    /* Бинд библиотеки Switchery для переключателей на третьем шаге */
-    var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch')),
-        switchery = {};
-    elems.forEach(function (html) {
-        if ($(this).attr('disabled') != 'disabled')
-            switchery = new Switchery(html, {color: '#945ae0'});
-        else
-            switchery = new Switchery(html, {color: '#945ae0', disabled: true});
-    });
+/* Обработка совершения покупки на втором шаге, формирование третьего шага (old)
+ $('#buy').on('click', '', function () {
+ var summaryRegData = '',
+ summaryTransData = '',
+ reg_disabled = '',
+ k = 0;
 
-    return false;
+ for (var key in pricesSumArr) {
+ var pricesArr = pricesSumArr[key];
+ if (pricesSumArr[key]['action'] == 'reg') {
+ var periodOptions = '';
+ if (pricesSumArr[key]['idprotection'] == 0) {
+ reg_disabled = 'disabled="disabled"';
+ } else {
+ reg_disabled = '';
+ }
+ for (var keyp in pricesArr) {
+ var prNum = keyp.slice(-2),
+ prPeriod = '';
+ if (keyp.slice(0, -2) == 'PriceRegister') {
+ switch (prNum) {
+ case '01':
+ default:
+ prPeriod = prNum + ' year';
+ break;
+ case '02':
+ case '03':
+ case '04':
+ case '05':
+ case '06':
+ case '07':
+ case '08':
+ case '09':
+ case '10':
+ prPeriod = prNum + ' years';
+ break;
+ }
+ periodOptions += '<option value="' + prNum + '">' + prPeriod + ' / €' + pricesArr[keyp] + '</option>';
+ }
+ }
+ summaryRegData += '<tr class="tab-list__content-table-row">' +
+ '<td class="tab-list__content-table-cell" title="' + key + '">' + key.cutDomain() + '</td>' +
+ '<td class="tab-list__content-table-cell"><select class="table-select__item js-select" name="tbl-select-' + k + '" id="domains-register-period-select' + k + '" data_preset="' + k + '">' + periodOptions + '</select></td>' +
+ '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
+ '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" ' + reg_disabled + '></td>' +
+ '</tr>';
+
+ } else if (pricesSumArr[key]['action'] == 'trans') {
+
+ if (pricesSumArr[key]['idprotection'] == 0) {
+ reg_disabled = 'disabled="disabled"';
+ } else {
+ reg_disabled = '';
+ }
+ summaryTransData += '<tr class="tab-list__content-table-row">' +
+ '<td class="tab-list__content-table-cell" title="' + key + '">' + key.cutDomain() + '</td>' +
+ '<td class="tab-list__content-table-cell"><input type="text" id="transferTablePass-' + k + '"></td>' +
+ '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
+ '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" ' + reg_disabled + '></td>' +
+ '</tr>';
+
+ }
+ k++;
+ $('.js-select').select2();
+ }
+ AddData('#summaryRegTable', summaryRegData);
+ AddData('#summaryTransTable', summaryTransData);
+ window.location.hash = '#domains_3';
+
+ // Бинд библиотеки Switchery для переключателей на третьем шаге
+ var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch')),
+ switchery = {};
+ elems.forEach(function (html) {
+ if ($(this).attr('disabled') != 'disabled')
+ switchery = new Switchery(html, {color: '#945ae0'});
+ else
+ switchery = new Switchery(html, {color: '#945ae0', disabled: true});
+ });
+
+ return false;
+ });
+ */
+
+/* Удаление выбранного домена из корзины на 2 шаге */
+$(document).on('click', '.domains-step__summary-table .remove-row', function () {
+    var $rowCart = $(this).parents('.domains-step__summary-table-row'),
+        $domain = $(this).attr('data-domain'),
+        $section = $(this).parents('.domains-step__summary-section'),
+        $price = parseFloat($(this).html().slice(1)),
+        $rowN = $(this).attr('data-rown');
+
+    delete pricesSumArr[$domain];
+    $rowCart.remove();
+    $('.rowN' + $rowN).removeClass('selected_row');
+    if ($section.find('td').length == 0)
+        $section.removeClass('visible_section');
+    summaryPrice = parseFloat(summaryPrice) - parseFloat($price);
+    $('#Summa').html('€' + summaryPrice.toFixed(2));
+    if (summaryPrice == 0)
+        $('#Summa').html('Empty Cart');
 });
