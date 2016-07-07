@@ -215,7 +215,7 @@ $(document).on('click', 'a.tab-list__content-reg-this', function () {
         cutName = $domain.cutDomain(),
         $rowN = $(this).attr('data-rown'),
         $row = $('.rowN' + $rowN),
-        $priceNper = $('#regPeriod' + $rowN + ' option:selected').html(),
+        $period = $('#regPeriod' + $rowN).val(),
         $priceSplit = ($('#regPeriod' + $rowN + ' option:selected').html()).split('€'),
         $price = $priceSplit[1],
         $section = $('#registerSection');
@@ -225,7 +225,8 @@ $(document).on('click', 'a.tab-list__content-reg-this', function () {
             $row.addClass('selected_row');
             pricesSumArr[$domain] = contentMain[$domain];
             pricesSumArr[$domain]['action'] = 'reg';
-            pricesSumArr[$domain]['period'] = $priceNper;
+            pricesSumArr[$domain]['period'] = $period;
+            pricesSumArr[$domain]['price'] = $price;
 
             if (!$section.is(':visible'))
                 $section.addClass('visible_section');
@@ -487,14 +488,15 @@ $('#buy').on('click', '', function () {
     var summaryData = {},
         domains = Object.keys(pricesSumArr).join(', ');
     if (Object.keys(pricesSumArr).length) {
-        summaryData = '';
+        summaryData = {};
         for (var key in pricesSumArr) {
             if (pricesSumArr[key]['action'] == 'reg' && pricesSumArr[key]['status'] == 'available') {
-
-                summaryData += 'domains[]:' + key + ', domainsregperiod[' + key + ']: 1';
+                summaryData['domains[' + key + ']'] = key;
+                summaryData['domainsregperiod[' + key + ']'] = pricesSumArr[key]['period'];
+                summaryData['domainsregprice[' + key + ']'] = pricesSumArr[key]['price'];
             }
         }
-        $.redirect('https://bill.hostkey.com/cart.php?a=add&domain=register', summaryData);
+        $.redirect('https://bill.hostkey.com/cart.php?a=add&domain=register&currency=2', summaryData, 'POST', '_blank');
     }
 });
 
