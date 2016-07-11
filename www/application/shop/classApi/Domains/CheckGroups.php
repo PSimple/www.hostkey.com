@@ -63,7 +63,6 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
         $ip = new Shop_Helper_RealtimeRegisterTelnet('hostkey-ote/admin', '50ftWoman');
         foreach ($domainList as $d)
         {
-
             $ip->Check($d, $zoneList);
         }
         // Result
