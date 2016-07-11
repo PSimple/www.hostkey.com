@@ -489,6 +489,7 @@ $('#buy').on('click', '', function () {
         domains = Object.keys(pricesSumArr).join(', ');
     if (Object.keys(pricesSumArr).length) {
         summaryData = {};
+        summaryData['domainreg'] = true;
         for (var key in pricesSumArr) {
             if (pricesSumArr[key]['action'] == 'reg' && pricesSumArr[key]['status'] == 'available') {
                 summaryData['domains[' + key + ']'] = key;
