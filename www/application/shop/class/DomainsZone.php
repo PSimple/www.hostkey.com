@@ -16,6 +16,12 @@
  */
 class Shop_DomainsZone extends Zero_Model
 {
+	/**
+	 * Доступ к api регистратора
+	 */
+	const RealTimeRegisterHostLogin = 'hostkey-ote/admin';
+	const RealTimeRegisterPassword = '50ftWoman';
+
     /**
      * The table stores the objects this model
      *
