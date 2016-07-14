@@ -185,28 +185,28 @@ function genDomainsTable(target, data) {
     // }
     var qDom = domainsList.length,
         numVariation = ' доменов';
+    if (qDom > 0) {
+        switch (qDom) {
+            case 1:
+                numVariation = ' домен';
+                break;
+            case 2:
+            case 3:
+            case 4:
+                numVariation = ' домена';
+                break;
+            default:
+                numVariation = ' доменов';
+                break;
 
-    switch (qDom) {
-        case 1:
-            numVariation = ' домен';
-            break;
-        case 2:
-        case 3:
-        case 4:
-            numVariation = ' домена';
-            break;
-        default:
-            numVariation = ' доменов';
-            break;
+        }
 
+        $(target).after('<div class="regAllContainer"><div class="regAllContent">' +
+            '<div class="regAllTitle">Зарегистрировать на 1 год ' + qDom + numVariation + ' за €' + domainsPrice.toFixed(2) + ':</div>' +
+            domainsList.join(', ') + '</div>' +
+            '<a href="#" data-tname="' + target + '" class="regAllButton"><i class="b-icon"></i>Register all</a>' +
+            '</div>');
     }
-
-    $(target).after('<div class="regAllContainer"><div class="regAllContent">' +
-        '<div class="regAllTitle">Зарегистрировать на 1 год ' + qDom + numVariation + ' за €' + domainsPrice.toFixed(2) + ':</div>' +
-        domainsList.join(', ') + '</div>' +
-        '<a href="#" data-tname="' + target + '" class="regAllButton"><i class="b-icon"></i>Register all</a>' +
-        '</div>');
-
     $('.js-select').select2();
 }
 
@@ -215,6 +215,7 @@ $(document).on('click', 'a.tab-list__content-reg-this', function () {
         cutName = $domain.cutDomain(),
         $rowN = $(this).attr('data-rown'),
         $row = $('.rowN' + $rowN),
+        $cartRowN = $('#domains-register-table').find('td[data-rown=' + $rowN + ']'),
         $period = $('#regPeriod' + $rowN).val(),
         $priceSplit = ($('#regPeriod' + $rowN + ' option:selected').html()).split('€'),
         $price = $priceSplit[1],
@@ -238,6 +239,12 @@ $(document).on('click', 'a.tab-list__content-reg-this', function () {
                 '<td class="domains-step__summary-table-cell remove-row" data-rowN="' + $rowN + '" data-domain="' + $domain + '">€' + $price + '</td>' +
                 '</tr>');
             summaryPrice = parseFloat(summaryPrice) + parseFloat($price);
+            $('#Summa').html('€' + summaryPrice.toFixed(2));
+        } else {
+            pricesSumArr[$domain]['period'] = $period;
+            summaryPrice = (parseFloat(summaryPrice) - parseFloat(pricesSumArr[$domain]['price'])) + parseFloat($price);
+            pricesSumArr[$domain]['price'] = $price;
+            $cartRowN.html('€' + $price);
             $('#Summa').html('€' + summaryPrice.toFixed(2));
         }
     }
@@ -386,7 +393,15 @@ $('.search-bar__input').on('keyup', function (e) {
 /* Переключение поисковой области в многострочный режим */
 $('.search-bar__button-bulk').on('click', '', function () {
     $('.search-bar__input').toggleClass('search-bar__input-hidden');
+    $('.search-bar__button-hide').show();
     $('.search-bar__input:visible').val($('.search-bar__input').not(':visible').val());
+    $(this).hide();
+});
+
+$('.search-bar__button-hide').on('click', '', function () {
+    $('.search-bar__input').toggleClass('search-bar__input-hidden');
+    $('.search-bar__button-bulk').show();
+    $('.search-bar__input:visible').val('');
     $(this).hide();
 });
 
@@ -441,11 +456,8 @@ $('.search-bar .b-submit').on('click', '', function () {
         });
 
     }
-    window.location.hash = '#domains_2';
 
-    $('html, body').animate({
-        scrollTop: $("#step2").offset().top
-    }, 2000);
+    window.location.hash = '#domains_2';
 
     return false;
 });

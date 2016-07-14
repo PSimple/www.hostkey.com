@@ -7151,6 +7151,29 @@ textarea.search-bar__input {
     display: none;
 }
 
+.search-bar__button-hide {
+    position: absolute;
+    right: 202px;
+    top: 3px;
+    background-image: url('/assets/img/cross_12x12.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 12px;
+    width: 12px;
+    padding: 0;
+    display: none;
+    background-color: #fff;
+    border: none;
+    color: #ff692d;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+    text-decoration: none;
+}
+
 .search-bar__button-bulk {
     position: absolute;
     background-color: #e6e9ec;
