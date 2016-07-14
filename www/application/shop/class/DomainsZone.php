@@ -19,10 +19,10 @@ class Shop_DomainsZone extends Zero_Model
     /**
      * Доступ по telnet регистратора
      */
-    const TelnetHost = 'is.yoursrs-ote.com';
+    const TelnetHost = 'is.yoursrs.com';
     const TelnetPort = 2001;
-    const TelnetLogin = 'hostkey-ote/admin';
-    const TelnetPassword = '50ftWoman'; // sOd73hAps51^
+    const TelnetLogin = 'hostkey/admin';
+    const TelnetPassword = 'sOd73hAps51^'; // 50ftWoman
     /**
      * Доступ к api регистратора
      */
