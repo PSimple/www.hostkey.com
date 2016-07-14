@@ -23,13 +23,13 @@
  */
 class Shop_Helper_RealtimeRegisterTelnet
 {
-    protected $username;
+    private $username;
 
-    protected $password;
+    private $password;
 
-    protected $host;
+    private $host;
 
-    protected $port;
+    private $port;
 
     /**
      * Connection
@@ -41,13 +41,12 @@ class Shop_Helper_RealtimeRegisterTelnet
     /**
      * Construct
      *
-     * @param   string  The username in the form "customer/user"
-     * @param   string  The password
-     * @param   string  The IsProxy host, defaults to "is.yoursrs.com"
-     * @param   int     The IsProxy port, defaults to 2001
-     * @return  void
+     * @param string $host
+     * @param int $port
+     * @param string $username
+     * @param string $password
      */
-    function __construct($username, $password, $host = "is.yoursrs-ote.com", $port = 2001)
+    function __construct($host = Shop_DomainsZone::TelnetHost, $port = Shop_DomainsZone::TelnetPort, $username = Shop_DomainsZone::TelnetLogin, $password = Shop_DomainsZone::TelnetPassword)
     {
         $this->username = $username;
         $this->password = $password;
@@ -160,7 +159,7 @@ class Shop_Helper_RealtimeRegisterTelnet
     /**
      * Write
      *
-     * @param   string  $message
+     * @param   string $message
      * @return  bool    Writing successfull?
      */
     private function write($message)

@@ -60,7 +60,7 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
 
         // Поиск
         Zero_Logs::Start('realtimeregister');
-        $ip = new Shop_Helper_RealtimeRegisterTelnet(Shop_DomainsZone::RealTimeRegisterHostLogin, Shop_DomainsZone::RealTimeRegisterPassword);
+        $ip = new Shop_Helper_RealtimeRegisterTelnet();
         foreach ($domainList as $d)
         {
             $ip->Check($d, $zoneList);
