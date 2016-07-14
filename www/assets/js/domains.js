@@ -32,6 +32,7 @@ var i,
     searchZones = '',
     searchDomains = '',
     searchDomainsArr = '',
+    emptyResult = true,
     isCut = false;
 
 window.location.hash = '#domains_1';
@@ -82,7 +83,7 @@ String.prototype.cutDomain = function () {
     isCut = false;
     if (splitName[0].length > 10) {
         isCut = true;
-        cutName = splitName[0].substring(0, 10) + '...' + splitName[1];
+        cutName = splitName[0].substr(0, 10) + '...' + splitName[1];
     }
     return cutName;
 };
@@ -123,7 +124,7 @@ function genDomainsTable(target, data) {
         readyTableFooter = '</tbody>';
     for (var key in data) {
         k++;
-        if (key.substring(-1) == '.' || key == '-')
+        if (key.substr(-1) == '.' || key == '-')
             continue;
 
         var name = key,
@@ -173,6 +174,7 @@ function genDomainsTable(target, data) {
         readyTable = '<tr><td colspan="4" align="center">Wrong request. Try again.</td></tr>';
         $(target).addClass('emptyResp');
     } else if ($(target).is(':empty')) {
+        emptyResult = false;
         readyTable = readyTableHeader + readyTable + readyTableFooter;
     }
 
@@ -180,6 +182,21 @@ function genDomainsTable(target, data) {
         AddData(target, readyTable, 'prepend');
         $(target).addClass('notEmpty');
     }
+
+    if ($('#result-table').hasClass('emptyResp') && $('#result-table2').hasClass('emptyResp')) {
+        $('.resultCont').hide();
+        $('.resultCont').after('<div class="resultContWrong">Wrong request. Try again.</div>');
+        loaderView('hide');
+        setTimeout(function(){
+            $('#result-table').slideUp('slow').fadeOut(function() {
+                window.location.reload();
+            });
+        }, 1000);
+    } else {
+        $('.resultCont').show();
+        $('.resultContWrong').remove();
+    }
+
     // else {
     //     AddData(target, readyTable, 'add');
     // }
@@ -609,7 +626,7 @@ $(document).on('click', '.domains-step__summary-table .remove-row', function () 
     $('.rowN' + $rowN).removeClass('selected_row');
     if ($section.find('td').length == 0)
         $section.removeClass('visible_section');
-    summaryPrice = parseFloat(summaryPrice) - parseFloat($price);
+    summaryPrice = parseFloat(summaryPrice.toFixed(2)) - parseFloat($price.toFixed(2));
     $('#Summa').html('€' + summaryPrice.toFixed(2));
     if (summaryPrice == 0)
         $('#Summa').html('Empty Cart');
