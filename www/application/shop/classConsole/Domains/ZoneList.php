@@ -31,6 +31,13 @@ class Shop_Console_Domains_ZoneList extends Zero_Controller
             $Dnsmanagement = 'on' == $row['dnsmanagement'] ? 1 : 0;
             $Idprotection = 'on' == $row['idprotection'] ? 1 : 0;
 
+            // заплатка для цен (поскольку при импорте зон в биллинге есть отсутсвующие цены)
+            foreach ($row as $k => $v)
+            {
+                if ( is_null($v) )
+                    $row[$k] = 0;
+            }
+
             $sql = "SELECT COUNT(*) FROM DomainsZone WHERE `Name` = '{$row['extension']}'";
             if ( 0 < Zero_DB::Select_Field($sql) )
             {
