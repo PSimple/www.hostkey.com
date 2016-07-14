@@ -4,7 +4,8 @@
 </div>
 {else}
 <div class="main-page-offers">
-    {set $gid = array("Banner_dedic_main", "Banner_cvps_main", "Banner_wvps_main", "Banner_saleserv_main")}
+    <!--было:{set $gid = array("Banner_dedic_main", "Banner_cvps_main", "Banner_wvps_main", "Banner_saleserv_main")}-->
+    {set $gid = array("Banner_cvps_cloud", "Banner_vds_cloud", "Banner_wvps_cloud")}
     {foreach ($DATA as $key => $value)}
     <a id="{$gid[$key]}" class="main-page-offers__item" href="{$value['Link']}" style="{if ($key>3)}display: none{/if}">
         <h3 class="main-page-offers__item-title">{$value['Head']}</h3>
@@ -65,3 +66,4 @@
         })
     });
 </script>
+
