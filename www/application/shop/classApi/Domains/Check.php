@@ -37,7 +37,7 @@ class Shop_Api_Domains_Check extends Zero_Controller
 
         // Цена зон
         $sql = "
-        SELECT `Name`, PriceOld, Idprotection, Img, `PriceRegister01`,
+        SELECT `Name`, PriceOld, Idprotection, Img, `PriceRegister01`, Description,
           `PriceRegister02`, `PriceRegister03`, `PriceRegister04`, `PriceRegister05`, `PriceRegister06`,
           `PriceRegister07`, `PriceRegister08`, `PriceRegister09`, `PriceRegister10`, `PriceTransfer01`
           FROM DomainsZone
@@ -77,6 +77,7 @@ class Shop_Api_Domains_Check extends Zero_Controller
             $zone = '.' . array_pop($arr);
 
             $cntFlag++;
+            $response[$result['domain']]['description'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['Description'] : '';
             $response[$result['domain']]['status'] = $result['result'];
             $response[$result['domain']]['idprotection'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['Idprotection'] : 0;
             $response[$result['domain']]['priceOld'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceOld'] : 0.00;
