@@ -6466,14 +6466,13 @@ div.clear {
 }
 
 .b-domains__container .loader-view {
-    position: absolute;
+    position: fixed;
     z-index: 12;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 100%;
-    width: 100%;
+    top: 50%;
+    left: 50%;
+    margin: -60px 0 0 -60px;
+    height: 120px;
+    width: 120px;
     display: none;
     background: url('/assets/img/ring-alt.gif') center center no-repeat;
 }
@@ -6892,6 +6891,8 @@ textarea.search-bar__input {
     transition: 0.3s all;
     -webkit-transition: 0.3s all;
     -moz-transition: 0.3s all;
+    vertical-align: top;
+    overflow: hidden;
 }
 
 .domains-check__item:hover {

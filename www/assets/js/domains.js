@@ -1,4 +1,4 @@
-/* Приведение методов к более удобному формату */
+// Приведение методов к более удобному формату
 var m,
     methods = [
         'join', 'reverse', 'sort', 'push', 'pop', 'shift', 'unshift',
@@ -21,7 +21,6 @@ var m,
 for (m = 0; m < methodCount; m++) {
     assignArrayGeneric(methods[m]);
 }
-/* /Приведение методов */
 
 var i,
     a,
@@ -29,6 +28,7 @@ var i,
     pricesSumArr = {},
     summaryPrice = 0,
     k = 0,
+    pageDomCount = 20, // кол-во элементов подгружаемых в группах постранично
     searchZones = '',
     searchDomains = '',
     searchDomainsArr = '',
@@ -37,30 +37,24 @@ var i,
 
 window.location.hash = '#domains_1';
 
-/* Функция, отслеживающая переход по шагам */
+// Функция, отслеживающая переход по шагам
 window.addEventListener('hashchange', function () {
     switch (location.hash) {
         case '#domains_2':
             $('.domains-step2n3, #step2').css('display', 'inline-block');
             $('#step1, #step3').hide();
-            $('.b-domains__title').html('REGISTER DOMAINS<br/>OR CONTINUE SEARCH');
+            $('.b-domains__title-main').html('REGISTER DOMAINS<br/>OR CONTINUE SEARCH');
             break;
-        /*case '#domains_3':
-         if (Object.keys(pricesSumArr).length) {
-         $('.domains-step2n3, #step3').css('display', 'inline-block');
-         $('#step1, #step2').hide();
-         }
-         break;*/
         case '#domains_1':
         default:
             $('#step1').show();
             $('.domains-step2n3, #step2, #step3').hide();
-            $('.b-domains__title').html('GET A PERFECT<br/>DOMAIN FOR YOUR PROJECT');
+            $('.b-domains__title-main').html('GET A PERFECT<br/>DOMAIN FOR YOUR PROJECT');
             break;
     }
 });
 
-/* Функция добавления данных */
+// Функция добавления данных
 function AddData(target, data, action) {
     var $targetCont = $(target);
     if (action == 'add' || action == 'append') {
@@ -73,7 +67,7 @@ function AddData(target, data, action) {
     loaderView('hide');
 }
 
-/* Функция очистки от html-тегов */
+// Функция очистки от html-тегов
 String.prototype.stripTags = function () {
     return this.replace(/<\/?[^>]+>/g, '');
 };
@@ -90,18 +84,7 @@ String.prototype.cutDomain = function () {
     return cutName;
 };
 
-/* Функция запуска попапа для трансфера
- function AddTransferPopup(container) {
- if (!$('.transferPopup').length) {
- $(container).after('<div class="transferPopup">' +
- '<span>Перенести и продлить<br/> на 1 год?</span>' +
- '<a href="#" class="transferPopup-yes">Yes</a>' +
- '<a href="#" class="transferPopup-no">No</a>' +
- '</div>');
- }
- }*/
-
-// Show/hide loader
+// Обработчик лоадера
 function loaderView(action) {
     if (action == 'hide') {
         $('.loader-view').hide();
@@ -112,7 +95,7 @@ function loaderView(action) {
     }
 }
 
-// Generate table for target domains
+// Обработчик полученных данных для 2 шага
 function genDomainsTable(target, data) {
     var readyTable = '',
         domainsList = [],
@@ -121,7 +104,7 @@ function genDomainsTable(target, data) {
             '<th width="250" class="tab-list__content-table-cell">Domain</th>' +
             '<th width="150" class="tab-list__content-table-cell">Results</th>' +
             '<th width="220" class="tab-list__content-table-cell">Price</th>' +
-            '<th width="250" class="tab-list__content-table-cell"><a href="#" data-tname="' + target + '" class="tab-list__content-reg-all"><i class="b-icon"></i>Register all<span class="tab-list__content-reg-help js-tooltip" title="All available domains will be added to the shopping cart. To transfer existing domains, specify them manually"></span></a></th>' +
+            '<th width="250" class="tab-list__content-table-cell"><a href="#" data-tname="' + target + '" class="tab-list__content-reg-all"><i class="b-icon"></i>Register all<span class="tab-list__content-reg-help js-tooltip" title="All available domains will be added to the shopping cart."></span></a></th>' +
             '</tr></thead><tbody>',
         readyTableFooter = '</tbody>';
     for (var key in data) {
@@ -132,9 +115,9 @@ function genDomainsTable(target, data) {
         var name = key,
             groupDomain = data[name],
             statusClass = (groupDomain['status'] == 'available') ? 'available' : 'invalid',
-            statusDesc = ((groupDomain['Description'] != null && groupDomain['Description'] != undefined) ? groupDomain['Description'] : ''),
+            statusDesc = groupDomain['description'],
             status = groupDomain['status'],
-            img = (groupDomain['img'] != null && groupDomain['img'] != undefined && groupDomain['img'] != '') ? '<img src="/upload/data/' + groupDomain['img'] + '" />' : '',
+            img = (groupDomain['img'] != null && groupDomain['img'] != 'undefined' && groupDomain['img'] != '') ? '<img src="/upload/data/' + groupDomain['img'] + '" />' : '',
             promo = ('promo' in data[name]) ? 'promoRow' : '',
             periodOptions = '',
             cutName = name.cutDomain();
@@ -161,7 +144,7 @@ function genDomainsTable(target, data) {
             '<span class="tab-list__content-table-cell-img">' + img + '</span>' + (!isCut ? name : cutName) + '' +
             '</td>' +
             '<td class="tab-list__content-table-cell">' +
-            status + (statusDesc == '' ? '' : '<span class="status-content-tt js-tooltip" title="' + statusDesc + '"></span>') +
+            status + (( statusDesc != null && statusDesc !== 'undefined') ? '<span class="status-content-tt js-tooltip" title="' + statusDesc + '"></span>' : '') +
             '</td>' +
             '<td class="tab-list__content-table-cell">' +
             ((statusClass == "available") ? '<select class="table-select__item js-select" name="tbl-select-' + k + '" id="regPeriod' + k + '" data_preset="Register_Domains">' + periodOptions + '</select>' : '') +
@@ -200,9 +183,6 @@ function genDomainsTable(target, data) {
         $('.resultContWrong').remove();
     }
 
-    // else {
-    //     AddData(target, readyTable, 'add');
-    // }
     var qDom = domainsList.length,
         numVariation = ' domains';
     if (qDom > 0) {
@@ -216,7 +196,7 @@ function genDomainsTable(target, data) {
 
         }
 
-        $(target).after('<div class="regAllContainer"><div class="regAllContent">' +
+        $(target).next('.nextPg').after('<div class="regAllContainer"><div class="regAllContent">' +
             '<div class="regAllTitle">Register ' + qDom + numVariation + '  for one year for €' + domainsPrice.toFixed(2) + ':</div>' +
             domainsList.join(', ') + '</div>' +
             '<a href="#" data-tname="' + target + '" class="regAllButton"><i class="b-icon"></i>Register all</a>' +
@@ -227,11 +207,11 @@ function genDomainsTable(target, data) {
     });
 }
 
+// Обработчик добавления в корзину
 $(document).on('click', 'a.tab-list__content-reg-this', function () {
     var $domain = $(this).attr('data-domain'),
         cutName = $domain.cutDomain(),
         $rowN = $(this).attr('data-rown'),
-        $row = $('.rowN' + $rowN),
         $cartRowN = $('#domains-register-table').find('td[data-rown=' + $rowN + ']'),
         $period = $('#regPeriod' + $rowN).val(),
         $priceSplit = ($('#regPeriod' + $rowN + ' option:selected').html()).split('€'),
@@ -240,7 +220,7 @@ $(document).on('click', 'a.tab-list__content-reg-this', function () {
 
     if ($domain in contentMain) {
         if (!($domain in pricesSumArr)) {
-            $row.addClass('selected_row');
+            $('.tab-list__content-reg-this[data-domain="' + $domain + '"]').parents('.tab-list__content-table-row__available').addClass('selected_row');
             pricesSumArr[$domain] = contentMain[$domain];
             pricesSumArr[$domain]['action'] = 'reg';
             pricesSumArr[$domain]['period'] = $period;
@@ -261,7 +241,7 @@ $(document).on('click', 'a.tab-list__content-reg-this', function () {
             pricesSumArr[$domain]['period'] = $period;
             summaryPrice = (parseFloat(summaryPrice) - parseFloat(pricesSumArr[$domain]['price'])) + parseFloat($price);
             pricesSumArr[$domain]['price'] = $price;
-            $cartRowN.html('€' + $price);
+            $cartRowN.html('€' + $price.toFixed(2));
             $('#Summa').html('€' + summaryPrice.toFixed(2));
         }
     }
@@ -292,7 +272,7 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=top100', function (data) {
     AddData('.domain-zone', ready, 'add');
 });
 
-/* Начальная загрузка области Special offers */
+// Начальная загрузка области Special offers
 $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
     var items = data['Content'],
         readyPromo = '',
@@ -331,7 +311,7 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
     AddData('.domains-check__row', readyPromo, 'add');
 });
 
-/* Вывод полного списка доменных зон в область под поиском */
+// Вывод полного списка доменных зон в область под поиском
 $('#domain-zone__more').on('click', '', function () {
     var self = $(this);
     $.getJSON('/api/v1/shop/domains/zone/list?groups=top100', function (data) {
@@ -356,7 +336,7 @@ $('#domain-zone__more').on('click', '', function () {
     return false;
 });
 
-/* Вывод полного списка доменных зон в Special Offers */
+// Вывод полного списка доменных зон в Special Offers
 $('#domains-check__more').on('click', '', function () {
     var self = $(this);
     $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
@@ -396,10 +376,11 @@ $('#domains-check__more').on('click', '', function () {
     return false;
 });
 
-/* Чистка области поиска от лишних символов на лету */
+// Чистка области поиска от лишних символов на лету
 $('.search-bar__input').on('keyup', function (e) {
-    var svalue = $(this).val().replace(/[^a-zA-Zа-яА-Я0-9-^.\n]/g, '');
-    var nvalue = $(this).val().replace(/[,;!@#$%^&*()_=+<>/\\'"\[\]\{\}№:? ]/g, '\n');
+    var svalue = $(this).val().replace(/[^a-zA-Z0-9-^.\n]/g, '');
+    // var svalue = $(this).val().replace(/[^a-zA-Zа-яА-Я0-9-^.\n]/g, ''); // буквы всех алфавитов
+    var nvalue = $(this).val().replace(/[а-яА-Я,;!@#$%^&*()_=+<>/\\'"\[\]\{\}№:? ]/g, '\n');
     $(this).val(svalue);
     $(this).val(nvalue);
 
@@ -415,7 +396,7 @@ $('.search-bar__input').on('keyup', function (e) {
 
 });
 
-/* Переключение поисковой области в многострочный режим */
+// Переключение поисковой области в многострочный режим
 $('.search-bar__button-bulk').on('click', '', function () {
     $('.search-bar__input').toggleClass('search-bar__input-hidden');
     $('.search-bar__button-hide').show();
@@ -423,6 +404,7 @@ $('.search-bar__button-bulk').on('click', '', function () {
     $(this).hide();
 });
 
+// Переключение поисковой области в однострочный режим
 $('.search-bar__button-hide').on('click', '', function () {
     $('.search-bar__input').toggleClass('search-bar__input-hidden');
     $('.search-bar .b-submit').addClass('search-bar__submit__disabled');
@@ -431,7 +413,7 @@ $('.search-bar__button-hide').on('click', '', function () {
     $(this).hide();
 });
 
-/* Запуск поиска и переход на второй шаг */
+// Запуск поиска и переход на второй шаг
 $('.search-bar .b-submit').on('click', '', function () {
     var $checkedInput = $('.hidden-input:checked'),
         $firstTab = $('.domains-step2__tab .tab-list__item[data-tab="1"]');
@@ -485,7 +467,7 @@ $('.search-bar .b-submit').on('click', '', function () {
     return false;
 });
 
-/* Обработка кнопки "Register All" в шапке таблиц */
+// Обработка кнопки "Register All"
 $(document).on('click', '.tab-list__content-reg-all, .regAllButton', function () {
     var $table = $($(this).attr('data-tname')),
         $row = $table.find('.tab-list__content-table-row__available'),
@@ -497,7 +479,7 @@ $(document).on('click', '.tab-list__content-reg-all, .regAllButton', function ()
     return false;
 });
 
-/* Обработка переключения табов и подгрузки контента на втором шаге */
+// Обработка переключения табов и подгрузки контента на втором шаге
 $('.tab-list__item').on('click', '', function () {
     var popularTable = '',
         self = $(this),
@@ -505,27 +487,37 @@ $('.tab-list__item').on('click', '', function () {
         target = '#' + thisid + 'Table';
     if (!$(target).hasClass('notEmpty') && $(this).attr('data-tab') != 1) {
 
+        var clearDomainsArr = [],
+            clearDomains = '';
         loaderView('show');
-        $.getJSON('/api/v1/shop/domains/check/groups?domainList=' + searchDomains + '&group=' + thisid + '&pg=1', function (data) {
+        searchDomainsArr.forEach(function (item) {
+            var clearName = item.split('.');
+            clearDomainsArr.push(clearName[0]);
+        });
+
+        clearDomains = clearDomainsArr.join(',');
+
+        $.getJSON('/api/v1/shop/domains/check/groups?domainList=' + clearDomains + '&group=' + thisid + '&pg=1', function (data) {
             var activeTabContent = data['Content'];
             genDomainsTable(target, activeTabContent);
             $(target).addClass('notEmpty');
             if (Object.keys(data['Content']).length % 20 == 0)
-                $('.nextPg').show();
+                $('.tab-list__content.current .nextPg').show();
             else
-                $('.nextPg').hide();
+                $('.tab-list__content.current .nextPg').hide();
         });
+        // Обработка постраничника в группах
         $('.nextPg').on('click', '', function () {
             var pg = parseInt(self.attr('data-pg')) + 1;
             self.attr('data-pg', pg);
             loaderView('show');
-            $.getJSON('/api/v1/shop/domains/check/groups?domainList=' + searchDomains + '&group=' + thisid + '&pg=' + pg, function (data) {
+            $.getJSON('/api/v1/shop/domains/check/groups?domainList=' + clearDomains + '&group=' + thisid + '&pg=' + pg, function (data) {
                 var activeTabContent = data['Content'];
                 genDomainsTable(target, activeTabContent);
-                if (Object.keys(data['Content']).length % 20 == 0)
-                    $('.nextPg').show();
+                if (Object.keys(data['Content']).length % pageDomCount == 0)
+                    $('.tab-list__content.current .nextPg').show();
                 else
-                    $('.nextPg').hide();
+                    $('.tab-list__content.current .nextPg').hide();
             });
         })
 
@@ -551,90 +543,7 @@ $('#buy').on('click', '', function () {
     }
 });
 
-/* Обработка совершения покупки на втором шаге, формирование третьего шага (old)
- $('#buy').on('click', '', function () {
- var summaryRegData = '',
- summaryTransData = '',
- reg_disabled = '',
- k = 0;
-
- for (var key in pricesSumArr) {
- var pricesArr = pricesSumArr[key];
- if (pricesSumArr[key]['action'] == 'reg') {
- var periodOptions = '';
- if (pricesSumArr[key]['idprotection'] == 0) {
- reg_disabled = 'disabled="disabled"';
- } else {
- reg_disabled = '';
- }
- for (var keyp in pricesArr) {
- var prNum = keyp.slice(-2),
- prPeriod = '';
- if (keyp.slice(0, -2) == 'PriceRegister') {
- switch (prNum) {
- case '01':
- default:
- prPeriod = prNum + ' year';
- break;
- case '02':
- case '03':
- case '04':
- case '05':
- case '06':
- case '07':
- case '08':
- case '09':
- case '10':
- prPeriod = prNum + ' years';
- break;
- }
- periodOptions += '<option value="' + prNum + '">' + prPeriod + ' / €' + pricesArr[keyp] + '</option>';
- }
- }
- summaryRegData += '<tr class="tab-list__content-table-row">' +
- '<td class="tab-list__content-table-cell" title="' + key + '">' + key.cutDomain() + '</td>' +
- '<td class="tab-list__content-table-cell"><select class="table-select__item js-select" name="tbl-select-' + k + '" id="domains-register-period-select' + k + '" data_preset="' + k + '">' + periodOptions + '</select></td>' +
- '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
- '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" ' + reg_disabled + '></td>' +
- '</tr>';
-
- } else if (pricesSumArr[key]['action'] == 'trans') {
-
- if (pricesSumArr[key]['idprotection'] == 0) {
- reg_disabled = 'disabled="disabled"';
- } else {
- reg_disabled = '';
- }
- summaryTransData += '<tr class="tab-list__content-table-row">' +
- '<td class="tab-list__content-table-cell" title="' + key + '">' + key.cutDomain() + '</td>' +
- '<td class="tab-list__content-table-cell"><input type="text" id="transferTablePass-' + k + '"></td>' +
- '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch"></td>' +
- '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" ' + reg_disabled + '></td>' +
- '</tr>';
-
- }
- k++;
- $('.js-select').select2();
- }
- AddData('#summaryRegTable', summaryRegData);
- AddData('#summaryTransTable', summaryTransData);
- window.location.hash = '#domains_3';
-
- // Бинд библиотеки Switchery для переключателей на третьем шаге
- var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch')),
- switchery = {};
- elems.forEach(function (html) {
- if ($(this).attr('disabled') != 'disabled')
- switchery = new Switchery(html, {color: '#945ae0'});
- else
- switchery = new Switchery(html, {color: '#945ae0', disabled: true});
- });
-
- return false;
- });
- */
-
-/* Удаление выбранного домена из корзины на 2 шаге */
+// Удаление выбранного домена из корзины на 2 шаге
 $(document).on('click', '.domains-step__summary-table .remove-row', function () {
     var $rowCart = $(this).parents('.domains-step__summary-table-row'),
         $domain = $(this).attr('data-domain'),
@@ -644,7 +553,7 @@ $(document).on('click', '.domains-step__summary-table .remove-row', function () 
 
     delete pricesSumArr[$domain];
     $rowCart.remove();
-    $('.rowN' + $rowN).removeClass('selected_row');
+    $('.tab-list__content-reg-this[data-domain="' + $domain + '"]').parents('.selected_row').removeClass('selected_row');
     if ($section.find('td').length == 0)
         $section.removeClass('visible_section');
     summaryPrice = parseFloat(summaryPrice.toFixed(2)) - parseFloat($price.toFixed(2));
@@ -653,8 +562,7 @@ $(document).on('click', '.domains-step__summary-table .remove-row', function () 
         $('#Summa').html('Empty Cart');
 });
 
-
-/* Бинд библиотеки tooltip для всплывающих подсказок */
+// Бинд библиотеки tooltip для всплывающих подсказок
 $('body').tooltip({
     selector: '.js-tooltip'
 });
