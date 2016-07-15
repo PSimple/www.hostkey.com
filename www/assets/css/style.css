@@ -6475,7 +6475,7 @@ div.clear {
     height: 100%;
     width: 100%;
     display: none;
-    background: url('/assets/img/ring-alt.svg') center center no-repeat;
+    background: url('/assets/img/ring-alt.gif') center center no-repeat;
 }
 
 .b-domains__container.overlay-view:after {
@@ -7248,7 +7248,7 @@ textarea.search-bar__input {
     width: 100%;
     line-height: 60px;
     box-sizing: border-box;
-    margin-top: 5px;
+    margin-top: 20px;
 }
 
 .regAllContent {
@@ -7279,4 +7279,8 @@ textarea.search-bar__input {
     line-height: 20px;
     display: inline-block;
     vertical-align: middle;
+}
+
+.hiddenp {
+    display: none;
 }

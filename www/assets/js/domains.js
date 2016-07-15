@@ -130,7 +130,7 @@ function genDomainsTable(target, data) {
         var name = key,
             groupDomain = data[name],
             statusClass = (groupDomain['status'] == 'available') ? 'available' : 'invalid',
-            statusComment = ((groupDomain['comment'] != null && groupDomain['comment'] != undefined) ? groupDomain['comment'] : ''),
+            statusDesc = ((groupDomain['Description'] != null && groupDomain['Description'] != undefined) ? groupDomain['Description'] : ''),
             status = groupDomain['status'],
             img = (groupDomain['img'] != null && groupDomain['img'] != undefined && groupDomain['img'] != '') ? '<img src="/upload/data/' + groupDomain['img'] + '" />' : '',
             promo = ('promo' in data[name]) ? 'promoRow' : '',
@@ -159,7 +159,7 @@ function genDomainsTable(target, data) {
             '<span class="tab-list__content-table-cell-img">' + img + '</span>' + (!isCut ? name : cutName) + '' +
             '</td>' +
             '<td class="tab-list__content-table-cell">' +
-            status + (statusComment == '' ? '' : '<span class="status-content-tt js-tooltip" title="' + statusComment + '"></span>') +
+            status + (statusDesc == '' ? '' : '<span class="status-content-tt js-tooltip" title="' + statusDesc + '"></span>') +
             '</td>' +
             '<td class="tab-list__content-table-cell">' +
             ((statusClass == "available") ? '<select class="table-select__item js-select" name="tbl-select-' + k + '" id="regPeriod' + k + '" data_preset="Register_Domains">' + periodOptions + '</select>' : '') +
@@ -172,10 +172,11 @@ function genDomainsTable(target, data) {
 
     if (readyTable == '') {
         readyTable = '<tr><td colspan="4" align="center">Wrong request. Try again.</td></tr>';
-        $(target).addClass('emptyResp');
+        $(target).addClass('emptyResp').prev('p').addClass('hiddenp');
     } else if ($(target).is(':empty')) {
         emptyResult = false;
         readyTable = readyTableHeader + readyTable + readyTableFooter;
+        $(target).removeClass('emptyResp').prev('p').removeClass('hiddenp');
     }
 
     if (!$(target).hasClass('emptyResp')) {
@@ -187,8 +188,8 @@ function genDomainsTable(target, data) {
         $('.resultCont').hide();
         $('.resultCont').after('<div class="resultContWrong">Wrong request. Try again.</div>');
         loaderView('hide');
-        setTimeout(function(){
-            $('#result-table').slideUp('slow').fadeOut(function() {
+        setTimeout(function () {
+            $('#result-table').slideUp('slow').fadeOut(function () {
                 window.location.reload();
             });
         }, 1000);
@@ -224,7 +225,9 @@ function genDomainsTable(target, data) {
             '<a href="#" data-tname="' + target + '" class="regAllButton"><i class="b-icon"></i>Register all</a>' +
             '</div>');
     }
-    $('.js-select').select2();
+    $('.js-select').select2({
+        minimumResultsForSearch: -1
+    });
 }
 
 $(document).on('click', 'a.tab-list__content-reg-this', function () {
@@ -333,10 +336,15 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
 
 /* Вывод полного списка доменных зон в область под поиском */
 $('#domain-zone__more').on('click', '', function () {
+    var self = $(this);
     $.getJSON('/api/v1/shop/domains/zone/list?groups=top100', function (data) {
         var items = data['Content'];
         var ready = '';
-        var iter = items.length;
+        var iter = i + 6;
+        if (items.length <= iter) {
+            iter = items.length;
+            self.hide();
+        }
         for (i; i < iter; i++) {
             var name = items[i].Name;
             var price = items[i].PriceRegister;
@@ -348,16 +356,20 @@ $('#domain-zone__more').on('click', '', function () {
         }
         AddData('.domain-zone', ready, 'append');
     });
-    $(this).hide();
     return false;
 });
 
 /* Вывод полного списка доменных зон в Special Offers */
 $('#domains-check__more').on('click', '', function () {
+    var self = $(this);
     $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
         var items = data['Content'];
         var readyPromo = '';
-        var iter = items.length;
+        var iter = a + 4;
+        if (items.length <= iter) {
+            iter = items.length;
+            self.hide();
+        }
         for (a; a < iter; a++) {
             var name = items[a].Name;
             var img = '<img src="/upload/data/' + items[a].Img + '" title="' + name + '"/>';
@@ -384,7 +396,6 @@ $('#domains-check__more').on('click', '', function () {
         }
         AddData('.domains-check__row', readyPromo, 'append');
     });
-    $(this).hide();
     return false;
 });
 
