@@ -43,6 +43,7 @@ window.addEventListener('hashchange', function () {
         case '#domains_2':
             $('.domains-step2n3, #step2').css('display', 'inline-block');
             $('#step1, #step3').hide();
+            $('.b-domains__title').html('REGISTER DOMAINS<br/>OR CONTINUE SEARCH');
             break;
         /*case '#domains_3':
          if (Object.keys(pricesSumArr).length) {
@@ -54,6 +55,7 @@ window.addEventListener('hashchange', function () {
         default:
             $('#step1').show();
             $('.domains-step2n3, #step2, #step3').hide();
+            $('.b-domains__title').html('GET A PERFECT<br/>DOMAIN FOR YOUR PROJECT');
             break;
     }
 });
@@ -119,7 +121,7 @@ function genDomainsTable(target, data) {
             '<th width="250" class="tab-list__content-table-cell">Domain</th>' +
             '<th width="150" class="tab-list__content-table-cell">Results</th>' +
             '<th width="220" class="tab-list__content-table-cell">Price</th>' +
-            '<th width="250" class="tab-list__content-table-cell"><a href="#" data-tname="' + target + '" class="tab-list__content-reg-all"><i class="b-icon"></i>Register all<span class="tab-list__content-reg-help js-tooltip" title="Lorem ipsum..."></span></a></th>' +
+            '<th width="250" class="tab-list__content-table-cell"><a href="#" data-tname="' + target + '" class="tab-list__content-reg-all"><i class="b-icon"></i>Register all<span class="tab-list__content-reg-help js-tooltip" title="All available domains will be added to the shopping cart. To transfer existing domains, specify them manually"></span></a></th>' +
             '</tr></thead><tbody>',
         readyTableFooter = '</tbody>';
     for (var key in data) {
@@ -180,7 +182,7 @@ function genDomainsTable(target, data) {
     }
 
     if (!$(target).hasClass('emptyResp')) {
-        AddData(target, readyTable, 'prepend');
+        AddData(target, readyTable, 'append');
         $(target).addClass('notEmpty');
     }
 
@@ -202,25 +204,20 @@ function genDomainsTable(target, data) {
     //     AddData(target, readyTable, 'add');
     // }
     var qDom = domainsList.length,
-        numVariation = ' доменов';
+        numVariation = ' domains';
     if (qDom > 0) {
         switch (qDom) {
             case 1:
-                numVariation = ' домен';
-                break;
-            case 2:
-            case 3:
-            case 4:
-                numVariation = ' домена';
+                numVariation = ' domain';
                 break;
             default:
-                numVariation = ' доменов';
+                numVariation = ' domains';
                 break;
 
         }
 
         $(target).after('<div class="regAllContainer"><div class="regAllContent">' +
-            '<div class="regAllTitle">Зарегистрировать на 1 год ' + qDom + numVariation + ' за €' + domainsPrice.toFixed(2) + ':</div>' +
+            '<div class="regAllTitle">Register ' + qDom + numVariation + '  for one year for €' + domainsPrice.toFixed(2) + ':</div>' +
             domainsList.join(', ') + '</div>' +
             '<a href="#" data-tname="' + target + '" class="regAllButton"><i class="b-icon"></i>Register all</a>' +
             '</div>');
@@ -428,6 +425,7 @@ $('.search-bar__button-bulk').on('click', '', function () {
 
 $('.search-bar__button-hide').on('click', '', function () {
     $('.search-bar__input').toggleClass('search-bar__input-hidden');
+    $('.search-bar .b-submit').addClass('search-bar__submit__disabled');
     $('.search-bar__button-bulk').show();
     $('.search-bar__input:visible').val('');
     $(this).hide();
@@ -459,7 +457,7 @@ $('.search-bar .b-submit').on('click', '', function () {
 
     // Возвращаем строчный вид поиска на 2 шаге
     if (!$('input.search-bar__input').is(':visible')) {
-        $('.search-bar__button-bulk').trigger('click');
+        $('.search-bar__button-hide').trigger('click');
     }
 
     // Чистим поля поиска
@@ -478,9 +476,6 @@ $('.search-bar .b-submit').on('click', '', function () {
             genDomainsTable('#result-table', group1domains);
             genDomainsTable('#result-table2', group2domains);
 
-
-            /* Бинд библиотеки tooltip для всплывающих подсказок */
-            $('.js-tooltip').tooltip();
         });
 
     }
@@ -505,7 +500,8 @@ $(document).on('click', '.tab-list__content-reg-all, .regAllButton', function ()
 /* Обработка переключения табов и подгрузки контента на втором шаге */
 $('.tab-list__item').on('click', '', function () {
     var popularTable = '',
-        thisid = $(this).attr('data-id'),
+        self = $(this),
+        thisid = self.attr('data-id'),
         target = '#' + thisid + 'Table';
     if (!$(target).hasClass('notEmpty') && $(this).attr('data-tab') != 1) {
 
@@ -514,13 +510,27 @@ $('.tab-list__item').on('click', '', function () {
             var activeTabContent = data['Content'];
             genDomainsTable(target, activeTabContent);
             $(target).addClass('notEmpty');
-
-            // AddData(target, popularTable, 'add');
-            // bindTableClick();
-
-
+            if (Object.keys(data['Content']).length % 20 == 0)
+                $('.nextPg').show();
+            else
+                $('.nextPg').hide();
         });
+        $('.nextPg').on('click', '', function () {
+            var pg = parseInt(self.attr('data-pg')) + 1;
+            self.attr('data-pg', pg);
+            loaderView('show');
+            $.getJSON('/api/v1/shop/domains/check/groups?domainList=' + searchDomains + '&group=' + thisid + '&pg=' + pg, function (data) {
+                var activeTabContent = data['Content'];
+                genDomainsTable(target, activeTabContent);
+                if (Object.keys(data['Content']).length % 20 == 0)
+                    $('.nextPg').show();
+                else
+                    $('.nextPg').hide();
+            });
+        })
+
     }
+
 });
 
 // Переход на третий шаг
@@ -641,4 +651,10 @@ $(document).on('click', '.domains-step__summary-table .remove-row', function () 
     $('#Summa').html('€' + summaryPrice.toFixed(2));
     if (summaryPrice == 0)
         $('#Summa').html('Empty Cart');
+});
+
+
+/* Бинд библиотеки tooltip для всплывающих подсказок */
+$('body').tooltip({
+    selector: '.js-tooltip'
 });

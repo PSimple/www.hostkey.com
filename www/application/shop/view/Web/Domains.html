@@ -9,9 +9,9 @@
     <div class="b-domains" id="scroll-anchor-01">
         <div class="b-domains__container">
             <div class="loader-view"></div>
-            <h3 class="b-domains__title">
-                START YOUR<br>
-                DOMAIN SEARCH
+            <h3 class="b-domains__title b-domains__title-main">
+                GET A PERFECT<br/>
+                DOMAIN FOR YOUR PROJECT
             </h3>
 
             <div class="b-container">
@@ -20,7 +20,7 @@
                         --><textarea class="b-input search-bar__input search-bar__input-hidden" name="" cols="30"
                                      rows="10"></textarea><!--
                         -->
-                    <button class="search-bar__button-bulk">Bulk search</button><!--
+                    <button class="search-bar__button-bulk js-tooltip" title="You can do a search for up to 50 domains. Each name must be entered on a separate line (without specifying the domain extension).">Bulk search</button><!--
                         -->
                     <button class="search-bar__button-hide"></button><!--
                         -->
@@ -38,8 +38,8 @@
                             <span class="b-icon b-news__more-plus-icon"></span>
                         </div>
                         <div class="b-news__more-text">
-                            show all<br>
-                            prices
+                            SHOW<br/>
+                            MORE TLDs
                         </div>
                     </a>
                 </div>
@@ -60,7 +60,10 @@
                                 <div class="b-news__more-plus">
                                     <span class="b-icon b-news__more-plus-icon"></span>
                                 </div>
-                                <div class="b-news__more-text">show all<br>prices</div>
+                                <div class="b-news__more-text">
+                                    SHOW<br/>
+                                    MORE TLDs
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -73,16 +76,16 @@
                         <div class="tab-list__item current js-tab" data-tab="1">
                             <div class="tab-list__item-name">Result</div>
                         </div>
-                        <div class="tab-list__item js-tab" data-tab="2" data-id="Popular">
+                        <div class="tab-list__item js-tab" data-tab="2" data-id="Popular" data-pg="1">
                             <div class="tab-list__item-name">Popular</div>
                         </div>
-                        <div class="tab-list__item js-tab" data-tab="3" data-id="Promo">
+                        <div class="tab-list__item js-tab" data-tab="3" data-id="Promo" data-pg="1">
                             <div class="tab-list__item-name">Promo</div>
                         </div>
-                        <div class="tab-list__item js-tab" data-tab="4" data-id="National">
+                        <div class="tab-list__item js-tab" data-tab="4" data-id="National" data-pg="1">
                             <div class="tab-list__item-name">National</div>
                         </div>
-                        <div class="tab-list__item js-tab" data-tab="5" data-id="Thematic">
+                        <div class="tab-list__item js-tab" data-tab="5" data-id="Thematic" data-pg="1">
                             <div class="tab-list__item-name">Thematic</div>
                         </div>
                     </div>
@@ -90,45 +93,49 @@
                         <div class="tab-list__content current js-tab-content" data-tab="1">
                             <div class="resultCont">
                                 <p>
-                                    Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
+                                    Congratulations! You can register the domains of your choice.
                                 </p>
                                 <table class="tab-list__content-table" id="result-table"></table>
                                 <br>
                                 <br>
                                 <p>
-                                    Также Вы можете выбрать доменные имена среди наиболее популярных доменных зон.
+                                    Make a search for your website effortless and protect your domain by getting additional TLDs
                                 </p>
                                 <table class="tab-list__content-table" id="result-table2"></table>
                             </div>
                         </div>
                         <div class="tab-list__content js-tab-content" data-tab="2">
                             <p>
-                                Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
+                                Congratulations! You can register the domains of your choice.
                             </p>
                             <table class="tab-list__content-table" id="PopularTable"></table>
+                            <div class="nextPg">Show more results</div>
                         </div>
                         <div class="tab-list__content js-tab-content" data-tab="3">
                             <h3>Content area 3</h3>
                             <p>
-                                Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
+                                Congratulations! You can register the domains of your choice.
                             </p>
                             <table class="tab-list__content-table" id="PromoTable"></table>
+                            <div class="nextPg">Show more results</div>
                         </div>
                         <div class="tab-list__content js-tab-content" data-tab="4">
 
                             <h3>Content area 443</h3>
                             <p>
-                                Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
+                                Congratulations! You can register the domains of your choice.
                             </p>
                             <table class="tab-list__content-table" id="NationalTable"></table>
+                            <div class="nextPg">Show more results</div>
                         </div>
                         <div class="tab-list__content js-tab-content" data-tab="5">
 
                             <h3>Content area 5</h3>
                             <p>
-                                Поздравляем! Вы можете зарегистрировать понравившиеся доменные имена.
+                                Congratulations! You can register the domains of your choice.
                             </p>
                             <table class="tab-list__content-table" id="ThematicTable"></table>
+                            <div class="nextPg">Show more results</div>
                         </div>
                     </div>
                 </div>
@@ -199,7 +206,7 @@
                         <span class="domains-step__summary-price-value" id="Summa">Empty cart</span>
                         <span class="domains-step__summary-price-discount" id="Discount"></span>
                     </div>
-                    <button class="b-submit domains-step__summary-submit" href="#" id="buy">Buy</button>
+                    <button class="b-submit domains-step__summary-submit" href="#" id="buy">Next</button>
                 </div>
             </div>
         </div>
@@ -213,6 +220,3 @@
 <script type="application/javascript" src="/assets/js/jquery/jquery-ui.js"></script>
 <script type="application/javascript" src="/assets/js/jquery.redirect.js"></script>
 <script type="application/javascript" src="/assets/js/domains.js"></script>
-<!-- switchery -->
-<link rel="stylesheet" href="/assets/css/switchery.css"/>
-<script src="/assets/js/switchery.js"></script>

@@ -6508,6 +6508,10 @@ div.clear {
     position: relative;
 }
 
+.b-domains__title-main {
+    width: 400px;
+}
+
 .b-domains__title-descripton {
     position: absolute;
     top: 35px;
@@ -7283,4 +7287,39 @@ textarea.search-bar__input {
 
 .hiddenp {
     display: none;
+}
+
+.nextPg {
+    display: none;
+    background-color: #e6e9ec;
+    border: none;
+    color: #ff692d;
+    font-size: 17px;
+    line-height: 21px;
+    letter-spacing: 1px;
+    font-family: 'FranklinGothicMediCondC';
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+    padding: 13px 15px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.nextPg:hover {
+    background-color: #ff692d;
+    color: #ffffff;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
 }
