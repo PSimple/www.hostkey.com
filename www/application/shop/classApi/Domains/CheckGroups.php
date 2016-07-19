@@ -49,9 +49,8 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
         $cntRequestAll = count($zoneList) * count($domainList);
 
         // Цена зон
-        $sql = "SELECT `Name`, PriceRegister, PriceTransfer, PriceRenew, PriceOld, Idprotection FROM DomainsZone WHERE `Groups` LIKE {$sqlGroup}";
         $sql = "
-        SELECT `Name`, PriceOld, Idprotection, Img, `PriceRegister01`,
+        SELECT `Name`, PriceOld, Idprotection, Img, `PriceRegister01`, Description,
           `PriceRegister02`, `PriceRegister03`, `PriceRegister04`, `PriceRegister05`, `PriceRegister06`,
           `PriceRegister07`, `PriceRegister08`, `PriceRegister09`, `PriceRegister10`, `PriceTransfer01`
           FROM DomainsZone
@@ -60,10 +59,9 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
 
         // Поиск
         Zero_Logs::Start('realtimeregister');
-        $ip = new Shop_Helper_RealtimeRegisterTelnet('hostkey-ote/admin', '50ftWoman');
+        $ip = new Shop_Helper_RealtimeRegisterTelnet();
         foreach ($domainList as $d)
         {
-
             $ip->Check($d, $zoneList);
         }
         // Result
@@ -75,6 +73,7 @@ class Shop_Api_Domains_CheckGroups extends Zero_Controller
             $zone = '.' . array_pop($arr);
 
             $cntFlag++;
+            $response[$result['domain']]['description'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['Description'] : '';
             $response[$result['domain']]['status'] = $result['result'];
             $response[$result['domain']]['idprotection'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['Idprotection'] : 0;
             $response[$result['domain']]['priceOld'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceOld'] : 0.00;

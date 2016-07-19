@@ -9,13 +9,30 @@
  */
 class Shop_Helper_RealtimeRegister
 {
-    private $url = 'https://api.yoursrs-ote.com';
+    private $url;
 
-    private $handle = 'hostkey-ote';
+    private $handle;
 
-    private $login = 'admin';
+    private $login;
 
-    private $password = '50ftWoman';
+    private $password;
+
+    /**
+     * Construct
+     *
+     * @param string $host
+     * @param string $handle
+     * @param string $username
+     * @param string $password
+     */
+    function __construct($host = Shop_DomainsZone::HTTPHost, $handle = Shop_DomainsZone::HTTPHandle, $username = Shop_DomainsZone::HTTPLogin, $password = Shop_DomainsZone::HTTPPassword)
+    {
+        $this->url = $host;
+        $this->handle = $handle;
+        $this->login = $username;
+        $this->password = $password;
+    }
+
 
     /**
      * API Запрос к стороннему сервису (серверу)

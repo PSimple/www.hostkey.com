@@ -24,11 +24,24 @@ function setupLabel() {
             $(this).siblings('.js-check').addClass('checked');
         });
     }
+
+    //checkbox
+    if ($('.domain-zone__item input').length) {
+
+        $('.domain-zone__item input').each(function() {
+            $(this).parent('.domain-zone__item').removeClass('is-check');
+        });
+
+        $('.domain-zone__item input:checked').each(function() {
+            $(this).parent('label').addClass('is-check');
+        });
+    }
+
 }
 
 $('input.hidden-input').css({'position':'absolute', 'left':'-9999px'});
 
-$(document).on('click', '.fake-checkbox-label, .fake-radio-label', function() {
+$(document).on('click', '.fake-checkbox-label, .fake-radio-label, .domain-zone__item', function() {
     setupLabel();
 });
 

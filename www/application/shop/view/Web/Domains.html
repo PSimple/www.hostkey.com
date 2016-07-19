@@ -1,0 +1,225 @@
+<link rel="stylesheet" href="/assets/css/jquery/jquery-ui.min.css"/>
+<div class="b-page">
+
+    <div class="b-page__promo b-page__promo_domains_yes">
+        <div class="b-icon b-page__scroll-icon" onclick="$.scrollTo('#scroll-anchor-01', 1500, { offset:-90 })"></div>
+        <h1 class="b-page__promo-title">{$Head}</h1>
+    </div>
+
+    <div class="b-domains" id="scroll-anchor-01">
+        <div class="b-domains__container">
+            <div class="loader-view"></div>
+            <h3 class="b-domains__title b-domains__title-main">
+                GET A PERFECT<br/>
+                DOMAIN FOR YOUR PROJECT
+            </h3>
+
+            <div class="b-container">
+                <div class="search-bar">
+                    <input type="text" class="b-input search-bar__input" name=""/><!--
+                        --><textarea class="b-input search-bar__input search-bar__input-hidden" name="" cols="30"
+                                     rows="10"></textarea><!--
+                        -->
+                    <button class="search-bar__button-bulk js-tooltip" title="You can do a search for up to 50 domains. Each name must be entered on a separate line (without specifying the domain extension).">Bulk search</button><!--
+                        -->
+                    <button class="search-bar__button-hide"></button><!--
+                        -->
+                    <button class="b-submit search-bar__submit search-bar__submit__disabled" href="#">search</button>
+                </div>
+            </div>
+
+            <div class="domains-step" id="step1">
+                <div class="b-container">
+                    <div class="domain-zone">
+                        <!-- json result -->
+                    </div>
+                    <a class="b-news__more" href="#" id="domain-zone__more">
+                        <div class="b-news__more-plus">
+                            <span class="b-icon b-news__more-plus-icon"></span>
+                        </div>
+                        <div class="b-news__more-text">
+                            SHOW<br/>
+                            MORE TLDs
+                        </div>
+                    </a>
+                </div>
+
+                <h3 class="b-domains__title b-domains__title_upline_yes">
+                    special offers
+                </h3>
+
+
+                <div class="domains-offers">
+                    <div class="domains-check">
+
+                        <div class="domains-check__row">
+                            <!-- json result  -->
+                        </div>
+                        <div>
+                            <a class="b-news__more" href="#" id="domains-check__more">
+                                <div class="b-news__more-plus">
+                                    <span class="b-icon b-news__more-plus-icon"></span>
+                                </div>
+                                <div class="b-news__more-text">
+                                    SHOW<br/>
+                                    MORE TLDs
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="domains-step domains-step2n3">
+                <div class="domains-step2__tab tab-list b-modal__tabs js-tab-wrapper" id="step2">
+                    <div class="tab-list__container tab-list__items tab-list__items-grid6">
+                        <div class="tab-list__item current js-tab" data-tab="1">
+                            <div class="tab-list__item-name">Result</div>
+                        </div>
+                        <div class="tab-list__item js-tab" data-tab="2" data-id="Popular" data-pg="1">
+                            <div class="tab-list__item-name">Popular</div>
+                        </div>
+                        <div class="tab-list__item js-tab" data-tab="3" data-id="Promo" data-pg="1">
+                            <div class="tab-list__item-name">Promo</div>
+                        </div>
+                        <div class="tab-list__item js-tab" data-tab="4" data-id="National" data-pg="1">
+                            <div class="tab-list__item-name">National</div>
+                        </div>
+                        <div class="tab-list__item js-tab" data-tab="5" data-id="Thematic" data-pg="1">
+                            <div class="tab-list__item-name">Thematic</div>
+                        </div>
+                    </div>
+                    <div class="tab-list__container tab-list__content-block">
+                        <div class="tab-list__content current js-tab-content" data-tab="1">
+                            <div class="resultCont">
+                                <p>
+                                    Congratulations! You can register the domains of your choice.
+                                </p>
+                                <table class="tab-list__content-table" id="result-table"></table>
+                                <div class="nextPg">Show more results</div>
+                                <br>
+                                <br>
+                                <p>
+                                    Make a search for your website effortless and protect your domain by getting additional TLDs
+                                </p>
+                                <table class="tab-list__content-table" id="result-table2"></table>
+                                <div class="nextPg">Show more results</div>
+                            </div>
+                        </div>
+                        <div class="tab-list__content js-tab-content" data-tab="2">
+                            <h3>Popular</h3>
+                            <p>
+                                Congratulations! You can register the domains of your choice.
+                            </p>
+                            <table class="tab-list__content-table" id="PopularTable"></table>
+                            <div class="nextPg">Show more results</div>
+                        </div>
+                        <div class="tab-list__content js-tab-content" data-tab="3">
+                            <h3>Promo</h3>
+                            <p>
+                                Congratulations! You can register the domains of your choice.
+                            </p>
+                            <table class="tab-list__content-table" id="PromoTable"></table>
+                            <div class="nextPg">Show more results</div>
+                        </div>
+                        <div class="tab-list__content js-tab-content" data-tab="4">
+
+                            <h3>National</h3>
+                            <p>
+                                Congratulations! You can register the domains of your choice.
+                            </p>
+                            <table class="tab-list__content-table" id="NationalTable"></table>
+                            <div class="nextPg">Show more results</div>
+                        </div>
+                        <div class="tab-list__content js-tab-content" data-tab="5">
+
+                            <h3>Thematic</h3>
+                            <p>
+                                Congratulations! You can register the domains of your choice.
+                            </p>
+                            <table class="tab-list__content-table" id="ThematicTable"></table>
+                            <div class="nextPg">Show more results</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="domains-step3__tab" id="step3">
+                    <div class="tab-list__content-block">
+                        <h3>Зарегистрировать домены</h3>
+                        <table class="tab-list__content-table" id="summaryRegTable">
+                            <thead>
+                            <tr>
+                                <th width="250" class="tab-list__content-table-cell">Domain</th>
+                                <th width="260" class="tab-list__content-table-cell"><span
+                                        class="tab-list__content-reg-help js-tooltip"
+                                        title="Lorem ipsum...">Period</span></th>
+                                <th width="260" class="tab-list__content-table-cell"><span
+                                        class="tab-list__content-reg-help js-tooltip"
+                                        title="Lorem ipsum...">DNS-hosting</span></th>
+                                <th width="300" class="tab-list__content-table-cell"><span
+                                        class="tab-list__content-reg-help js-tooltip" title="Lorem ipsum...">ID Protection</span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- -->
+                            </tbody>
+                        </table>
+                        <h3>Перенести домены</h3>
+                        <table class="tab-list__content-table" id="summaryTransTable">
+                            <thead>
+                            <tr>
+                                <th width="250" class="tab-list__content-table-cell">Domain</th>
+                                <th width="260" class="tab-list__content-table-cell"><span
+                                        class="tab-list__content-reg-help js-tooltip"
+                                        title="Lorem ipsum...">Password</span></th>
+                                <th width="260" class="tab-list__content-table-cell"><span
+                                        class="tab-list__content-reg-help js-tooltip"
+                                        title="Lorem ipsum...">DNS-hosting</span></th>
+                                <th width="300" class="tab-list__content-table-cell"><span
+                                        class="tab-list__content-reg-help js-tooltip" title="Lorem ipsum...">ID Protection</span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!-- -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="domains-step__summary domains-step__summary_is-purpur" id="scroll-block">
+                    <div class="domains-step__summary-title">Your Domains</div>
+                    <div class="domains-step__summary-section" id="registerSection">
+                        <div class="domains-step__summary-subtitle">Register</div>
+                        <table class="domains-step__summary-table" id="domains-register-table">
+                            <tbody>
+                            <!-- json content -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="domains-step__summary-section" id="transferSection">
+                        <div class="domains-step__summary-subtitle">Transfer</div>
+                        <table class="domains-step__summary-table" id="domains-transfer-table">
+                            <tbody>
+                            <!-- json content -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="domains-step__summary-price">
+                        <span class="domains-step__summary-price-value" id="Summa">Empty cart</span>
+                        <span class="domains-step__summary-price-discount" id="Discount"></span>
+                    </div>
+                    <button class="b-submit domains-step__summary-submit" href="#" id="buy">Next</button>
+                </div>
+            </div>
+        </div>
+        {plugin "Content_ContentBlock_Plugin" view="SelectServiceFeatures" target="feature"}
+        {plugin "Content_ContentBlock_Plugin" view="Voucher" target="voucher"}
+        {plugin "Content_ContentBlock_Plugin" view="NeedMore" target="information"}
+        <div class="footer-push"></div>
+    </div>
+</div>
+
+<script type="application/javascript" src="/assets/js/jquery/jquery-ui.js"></script>
+<script type="application/javascript" src="/assets/js/jquery.redirect.js"></script>
+<script type="application/javascript" src="/assets/js/domains.js"></script>
