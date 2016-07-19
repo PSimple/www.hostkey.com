@@ -1,4 +1,43 @@
+<!--ПРОСТОЙ МАССИВ-------------->
+<p>1. Удалите из массива <i>country</i> страны и сохраните результат в массив continent (используйте метод <b>splice()</b>). </p>
+<p>2. Удалите из массива <i>animal</i> животных не являющихся птицами и сохраните результат в массив <i>bird</i> (используйте метод <b>splice()</b>). </p>
+<p>3. Соедините полученные массивы в массив contibird и выведите результат на экран (используйте метод <b>concat()</b>). </p>
+<p>4. Добавьте в начало полученного массива элемент 'Северная Америка', а в конец массива элемент 'Попугай' и выведите результат на экран (используйте методы <b>push()</b> и <b>unshift()</b>). </p>
+<p>5. Отсортируйте массив contibird и выведите результат на экран (используйте метод <b>sort()</b>). </p>
+<script type='text/javascript'>
+    var country=['Пакистан', 'Германия', 'Италия', 'Россия', 'Австралия', 'Южная Америка', 'Евразия', 'Африка','Антарктида'];
+    var animal=['Лев', 'Тигр', 'Орел', 'Воробей', 'Снегирь', 'Голубь', 'Рысь', 'Медведь'];
 
+    var continent=country.slice(4,8);
+    document.write(continent + "<br />");
+
+    var bird=animal.slice(2,6);
+    document.write(bird + "<br />");
+
+    contibird=continent.concat(bird);
+    var i;
+    for (i in contibird) {
+        document.write(i + " элемент массива: " + contibird[i] + "<br />");
+    }
+
+    var unshifted=contibird.unshift("Северная Америка");
+    var pushed=contibird.push("Попугай");
+    document.write(contibird + "<br />");
+
+    contibird.sort();
+    var i;
+    for (i in contibird) {
+        document.write(i + ' элемент массива: ' + contibird[i] + '<br />');
+    }
+
+    var person = {}
+    person.name = 'Juliya';
+    person.fierstname = 'Abramenko';
+    person.age = 39;
+    alert( person.name + person.fierstname + ': ' + person.age );
+
+
+</script>
 
 
 {}
