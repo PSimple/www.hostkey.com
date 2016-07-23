@@ -1,29 +1,34 @@
-<nav class="b-menu__item b-menu__item_nav_yes nav">
+<ul class="b-menu__item b-menu__item_nav_yes nav">
     {foreach ($NAVIGATION as $KEY => $VALUE )}
       {if (isset($VALUE['child']) AND count( $VALUE['child']) >0)}
-        <div class="nav__item nav__item_drop_yes">
-            <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['NameMenu']}</a>
+        <li class="nav__item nav__item_drop_yes">
+            <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['NameMenu']}</a><!--пункты меню, кроме domains-->
 
-                    <div class="b-sub-menu">
-                        <div class="b-menu__item b-menu__item_nav_yes nav">
+                    <nav class="b-sub-menu">
+                        <ul class="b-menu__item b-menu__item_nav_yes nav">
                             {foreach ($VALUE['child'] as $K => $V)}
-                                <div class="nav__item">
-                                    <a class="nav__link {if ($V['action'])} nav__link_active{/if}" href="{$V['Url']}">{$V['NameMenu']}</a>
-                                </div>
+                                <li class="nav__item">
+                                    <a class="nav__link {if ($V['action'])} nav__link_active{/if}" href="{$V['Url']}">{$V['NameMenu']}</a><!--субменю-->
+                                </li>
                             {/foreach}
-                        </div>
-                    </div>
-        </div>
+                        </ul>
+                    </nav>
+        </li>
       {else}
             <div class="nav__item">
-                <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['NameMenu']}</a>
+                <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['NameMenu']}</a><!--пункт меню domains-->
             </div>
     {/if}
     {/foreach}
+</ul>
 
+<div class="header_phone">+31 20 820 3777</div>
 
-    <div class="nav__item">
-        <a class="nav__link" href="https://bill.hostkey.com">CLIENT AREA</a>
-    </div>
+<div class="header_client_area">
+    <a class="header_client_area" href="https://bill.hostkey.com">CLIENT AREA</a>
+</div>
 
-</nav>
+<form class="header_form_search">
+    <input type="text" placeholder="Search...">
+    <input type="submit" value="Поиск">
+</form>
