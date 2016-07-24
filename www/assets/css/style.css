@@ -940,7 +940,8 @@ p {
     visibility: visible;
 }
 
-.nav__link /*.header_client_area*/ {
+.nav__link /*.header_client_area*/
+{
     color: #ffffff;
     text-decoration: none;
     position: relative;
@@ -957,6 +958,7 @@ p {
 .nav__link_active:hover {
     color: #ff692d;
 }
+
 .header_phone {
     font-size: 1.05em;
     margin-left: 40px;
@@ -966,13 +968,15 @@ p {
 
     /*border: 1px solid red;*/
 }
+
 .header_client_area {
     margin-top: 23px;
     font-size: 1.05em;
-  color: #9454E2;
+    color: #9454E2;
     margin-left: 40px;
     text-decoration: none;
 }
+
 .header_client_area:hover {
     color: #fff;
     text-decoration: none;
@@ -986,7 +990,8 @@ p {
     margin: 15px 0 0 0;
 
 }
-input {
+
+.form_search input {
     border: none;
     outline: none;
     cursor: pointer;
@@ -994,7 +999,8 @@ input {
     margin: 0;
     /*border: 1px solid yellow;*/
 }
-input[type="text"] {
+
+.form_search input[type="text"] {
     height: 39px;
     width: 0;
     display: inline-block;
@@ -1011,16 +1017,20 @@ input[type="text"] {
     overflow: hidden;
     /*border: 1px solid green;*/
 }
-input::-webkit-input-placeholder {
+
+.form_search input::-webkit-input-placeholder {
     color: #000;
 }
-input:-moz-placeholder {
+
+.form_search input:-moz-placeholder {
     color: #000;
 }
-input:-ms-input-placeholder {
+
+.form_search input:-ms-input-placeholder {
     color: #000;
 }
-input[type="text"]:focus {
+
+.form_search input[type="text"]:focus {
     width: 337px;
     z-index: 1;
     border-bottom: 1px solid #fff;
@@ -1028,7 +1038,8 @@ input[type="text"]:focus {
     cursor: text;
     padding-left: 5px;
 }
-input[type="submit"] {
+
+.form_search input[type="submit"] {
     height: 40px;
     width: 40px;
     display: inline-block;
@@ -1042,6 +1053,7 @@ input[type="submit"] {
     z-index: 2;
     /*border: 1px solid blue;*/
 }
+
 .tab-list__content {
     display: none;
 }
@@ -3827,7 +3839,6 @@ input[type="submit"] {
     margin-bottom: 50px;
 }
 
-
 .b-vps__table:after {
     content: '';
     background: url(/assets/img/table_shadow.png) no-repeat;
@@ -4683,7 +4694,6 @@ input[type="submit"] {
     /*border: 1px solid red;*/
 }
 
-
 .b-main-page__offer-item:before {
     content: '';
     width: 16px;
@@ -4694,7 +4704,6 @@ input[type="submit"] {
     left: 0;
 }
 
-
 .b-main-page__offer-item-title {
     font-size: 21px;
     line-height: 25px;
@@ -4704,12 +4713,10 @@ input[type="submit"] {
     letter-spacing: 3px;
 }
 
-
 .b-main-page__offer-item-text {
     font-size: 18px;
     line-height: 22px;
 }
-
 
 .b-main-page__offer-image {
     display: none;
@@ -4721,7 +4728,6 @@ input[type="submit"] {
 .b-main-page__offer-item:hover > .b-main-page__offer-item-text {
     opacity: 0;
 }
-
 
 .b-main-page__offer-item:hover > .b-main-page__offer-image {
     display: inline-block;
@@ -4859,6 +4865,7 @@ input[type="submit"] {
     padding: 0 30px;
     /*border: 1px solid red;*/
 }
+
 .b-main-page__slider-item-rewiews {
     background-color: #272e38;
     width: 1000px;
@@ -4866,12 +4873,14 @@ input[type="submit"] {
     margin: 0 100px;
     /*border: 1px solid red;*/
 }
+
 .b-main-page__slider-item-rewiews-logo {
     width: 300px;
     height: 250px;
     float: left;
     /*border: 1px solid blue;*/
 }
+
 .b-main-page__slider-item-image-rewiews {
     width: 240px;
     margin: 70px auto;
@@ -4879,6 +4888,7 @@ input[type="submit"] {
     /*filter: grayscale(100%) invert(100%);*/
     /*border: 1px solid red;*/
 }
+
 .b-main-page__slider-item-rewiews-text {
     width: 700px;
     height: 240px;
@@ -4886,6 +4896,7 @@ input[type="submit"] {
     /*float: left;*/
     /*border: 1px solid green;*/
 }
+
 .b-main-page__slider-item-rewiews-text-rewiews {
     height: 120px;
     font-size: 1.3em;
@@ -4895,6 +4906,7 @@ input[type="submit"] {
     text-align: left;
     /*border: 1px solid red;*/
 }
+
 .b-main-page__slider-item-hint-description-rewiews-text-fio {
     height: 90px;
     margin-top: 30px;
@@ -4902,11 +4914,13 @@ input[type="submit"] {
     text-align: left;
     /*border: 1px solid red;*/
 }
+
 .b-main-page__slider-item-hint-description-rewiews-text-fio-person {
     font-size: 1.3em;
     margin: 0px;
     padding: 0px;
 }
+
 .b-main-page__slider .slick-prev,
 .b-main-page__slider .slick-next {
     width: 36px;
@@ -4961,6 +4975,7 @@ input[type="submit"] {
     opacity: 0.4;
     /*filter: grayscale(100%) invert(100%);*/
 }
+
 .b-main-page__slider-item-image:hover {
     /*filter: none;*/
     opacity: 1;
