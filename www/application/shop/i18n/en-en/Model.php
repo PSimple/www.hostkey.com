@@ -112,6 +112,7 @@ return [
     'Shop_Solution Typ options' => ['dedicated' => 'dedicated'],
     'Link' => 'Ссылка',
     'Shop_DomainsZone Groups' => 'Группы',
+    'Shop_DomainsZone GroupsCheck' => 'Группы назначены',
     'Shop_DomainsZone Groups options' => [
         'Top20' => 'Top20',
         'Top50' => 'Top50',
@@ -121,8 +122,7 @@ return [
         'New'=> 'Новые',
         'National'=> 'Национальные',
         'Thematic'=> 'Тематические',
-        'NULL'=> 'Не назначено',
-        'NOT NULL'=> 'Назначено'
+        'Trouble'=> 'Проблемные',
     ],
     'Shop_DomainsZone ID' => 'Идентификатор',
     'Shop_DomainsZone Name' => 'Домен',
@@ -165,4 +165,12 @@ return [
     'Shop_DomainsZone PriceRenew08' => 'Цена продления 8',
     'Shop_DomainsZone PriceRenew09' => 'Цена продления 9',
     'Shop_DomainsZone PriceRenew10' => 'Цена продления 10',
+    'Shop_DomainsZone RegisterPeriod' => 'Периуды регистрации',
+    'Shop_DomainsZone RegisterPeriod options' => ['12' => '12', '24' => '24', '36' => '36', '48' => '48', '60' => '60', '72' => '72', '84' => '84', '96' => '96', '108' => '108', '120' => '120'],
+    'Shop_DomainsZone TransferPeriod' => 'Периуды переноса',
+    'Shop_DomainsZone TransferPeriod options' => ['12' => '12', '24' => '24', '36' => '36', '48' => '48', '60' => '60', '72' => '72', '84' => '84', '96' => '96', '108' => '108', '120' => '120'],
+    'Shop_DomainsZone RenewPeriod' => 'Периуды продления ',
+    'Shop_DomainsZone RenewPeriod options' => ['12' => '12', '24' => '24', '36' => '36', '48' => '48', '60' => '60', '72' => '72', '84' => '84', '96' => '96', '108' => '108', '120' => '120'],
+    'Shop_DomainsZone RenewPeriodAuto' => 'Периуды авто продления ',
+    'Shop_DomainsZone RenewPeriodAuto options' => ['12' => '12', '24' => '24', '36' => '36', '48' => '48', '60' => '60', '72' => '72', '84' => '84', '96' => '96', '108' => '108', '120' => '120'],
 ];

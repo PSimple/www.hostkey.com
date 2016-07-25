@@ -38,6 +38,7 @@ class Shop_Api_Domains_Check extends Zero_Controller
         // Цена зон
         $sql = "
         SELECT `Name`, PriceOld, Idprotection, Img, `PriceRegister01`, Description,
+          RegisterPeriod, TransferPeriod, RenewPeriod, RenewPeriodAuto,
           `PriceRegister02`, `PriceRegister03`, `PriceRegister04`, `PriceRegister05`, `PriceRegister06`,
           `PriceRegister07`, `PriceRegister08`, `PriceRegister09`, `PriceRegister10`, `PriceTransfer01`
           FROM DomainsZone
@@ -93,6 +94,11 @@ class Shop_Api_Domains_Check extends Zero_Controller
             $response[$result['domain']]['PriceRegister09'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister09'] : 0.00;
             $response[$result['domain']]['PriceRegister10'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceRegister10'] : 0.00;
             $response[$result['domain']]['PriceTransfer01'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['PriceTransfer01'] : 0.00;
+
+            $response[$result['domain']]['RegisterPeriod'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['RegisterPeriod'] : '';
+            $response[$result['domain']]['TransferPeriod'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['TransferPeriod'] : '';
+            $response[$result['domain']]['RenewPeriod'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['RenewPeriod'] : '';
+            $response[$result['domain']]['RenewPeriodAuto'] = isset($zoneListPrice[$zone]) ? $zoneListPrice[$zone]['RenewPeriodAuto'] : '';
             // помечаем промо
             if ( in_array($zone, $zoneListPromo) )
                 $response[$result['domain']]['promo'] = 1;
