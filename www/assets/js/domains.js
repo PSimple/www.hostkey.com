@@ -102,7 +102,7 @@ function genDomainsTable(target, data) {
         domainsPrice = 0,
         readyTableHeader = '<thead><tr>' +
             '<th width="250" class="tab-list__content-table-cell">Domain</th>' +
-            '<th width="150" class="tab-list__content-table-cell">Results</th>' +
+            '<th width="150" class="tab-list__content-table-cell">Status</th>' +
             '<th width="220" class="tab-list__content-table-cell">Price</th>' +
             '<th width="250" class="tab-list__content-table-cell"><a href="#" data-tname="' + target + '" class="tab-list__content-reg-all"><i class="b-icon"></i>Register all<span class="tab-list__content-reg-help js-tooltip" title="All available domains will be added to the shopping cart."></span></a></th>' +
             '</tr></thead><tbody>',
@@ -169,6 +169,7 @@ function genDomainsTable(target, data) {
         $(target).addClass('notEmpty');
     }
 
+
     if ($('#result-table').hasClass('emptyResp') && $('#result-table2').hasClass('emptyResp')) {
         $('.resultCont').hide();
         $('.resultCont').after('<div class="resultContWrong">Wrong request. Try again.</div>');
@@ -178,6 +179,10 @@ function genDomainsTable(target, data) {
                 window.location.reload();
             });
         }, 1000);
+    } else if ($('.tab-list__content-table:visible').find('.tab-list__content-table-row__available').length) {
+        $('.resultCont').hide();
+        $('.resultCont').after('<div class="resultContWrong">Sorry! This name is already taken.</div>');
+        loaderView('hide');
     } else {
         $('.resultCont').show();
         $('.resultContWrong').remove();
@@ -241,8 +246,8 @@ $(document).on('click', 'a.tab-list__content-reg-this', function () {
             pricesSumArr[$domain]['period'] = $period;
             summaryPrice = (parseFloat(summaryPrice) - parseFloat(pricesSumArr[$domain]['price'])) + parseFloat($price);
             pricesSumArr[$domain]['price'] = $price;
-            $cartRowN.html('€' + $price.toFixed(2));
-            $('#Summa').html('€' + summaryPrice.toFixed(2));
+            $cartRowN.html('€' + $price);
+            $('#Summa').html('€' + summaryPrice);
         }
     }
     return false;
