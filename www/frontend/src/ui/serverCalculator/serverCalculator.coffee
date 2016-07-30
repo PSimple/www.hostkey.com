@@ -127,7 +127,6 @@ angular.module("ui.serverCalculator").directive "saleServerCalculator", ->
                 IPv6:
                     name: "IPv6 block"
 
-
             sla:
                 name: "SLA"
                 serviceLevel:

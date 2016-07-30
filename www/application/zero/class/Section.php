@@ -228,7 +228,10 @@ class Zero_Section extends Zero_Model
     {
         if ( $this->ID != 0 )
             return;
-        $index = 'route' . $url . '/' . LANG . '/url';
+        if ( '/' == $url )
+            $index = 'route/' . LANG . '/url';
+        else
+            $index = 'route' . $url . '/' . LANG . '/url';
         if ( false === $row = Zero_Cache::Get_Data($index) )
         {
             // Поиск в программе
@@ -265,7 +268,7 @@ class Zero_Section extends Zero_Model
             // Поиск в БД
             if ( 0 == $this->ID && Zero_App::$Config->Site_UseDB )
             {
-                $row = Zero_DB::Select_Row("SELECT * FROM Section WHERE Url = " . Zero_DB::EscT(ZERO_URL));
+                $row = Zero_DB::Select_Row("SELECT * FROM Section WHERE Url = " . Zero_DB::EscT($url));
                 if ( 0 == count($row) )
                     return;
                 if ( 0 < $row['Controllers_ID'] )

@@ -38,6 +38,12 @@ class Shop_Api_Domains_ZoneList extends Zero_Controller
           Sort ASC
         ";
         $result = Zero_DB::Select_Array($sql);
+        foreach ($result as $k => $v)
+        {
+            unset($result[$k]['PriceRegister']);
+            unset($result[$k]['PriceTransfer']);
+            unset($result[$k]['PriceRenew']);
+        }
         Zero_App::ResponseJson200($result);
         return true;
     }

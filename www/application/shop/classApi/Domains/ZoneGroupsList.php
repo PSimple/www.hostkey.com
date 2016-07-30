@@ -16,8 +16,16 @@ class Shop_Api_Domains_ZoneGroupsList extends Zero_Controller
      */
     public function Action_GET()
     {
-        $response = Zero_I18n::Model('Shop', 'Zero_DomainsZone Groups options');
-        unset($response['Null']);
+        $response = Zero_I18n::Model('Shop', 'Shop_DomainsZone Groups options');
+        if ( is_array($response) )
+        {
+            unset($response['Null']);
+            unset($response['Trouble']);
+        }
+        else
+        {
+            $response = [];
+        }
         Zero_App::ResponseJson200($response);
         return true;
     }

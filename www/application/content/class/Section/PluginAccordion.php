@@ -20,12 +20,12 @@ class Content_Section_PluginAccordion extends Zero_Controller
     public function Action_Default()
     {
         $Section = Zero_Section::Make();
-        if ( isset($this->Params['section_id']) && 0 < $this->Params['section_id'] )
-            $Section = Zero_Section::Make($this->Params['section_id']);
+        if ( isset($_REQUEST['section_id']) && 0 < $_REQUEST['section_id'] )
+            $Section = Zero_Section::Make($_REQUEST['section_id']);
         else
             $Section->Init_Url('/');
-        $index = __CLASS__ . '_' . Zero_App::$Users->Groups_ID . '_' . $Section->ID;
 
+        $index = __CLASS__ . '_' . Zero_App::$Users->Groups_ID . '_' . $Section->ID;
         if ( false === $navigation = $Section->Cache->Get($index) )
         {
             $navigation = Zero_Section::DB_Navigation_Child($Section->ID);

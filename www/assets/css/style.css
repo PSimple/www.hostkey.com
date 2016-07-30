@@ -940,7 +940,8 @@ p {
     visibility: visible;
 }
 
-.nav__link /*.header_client_area*/ {
+.nav__link /*.header_client_area*/
+{
     color: #ffffff;
     text-decoration: none;
     position: relative;
@@ -957,6 +958,7 @@ p {
 .nav__link_active:hover {
     color: #ff692d;
 }
+
 .header_phone {
     font-size: 1.05em;
     margin-left: 40px;
@@ -965,6 +967,7 @@ p {
     margin-top: 23px;
     /*border: 1px solid red;*/
 }
+
 .header_client_area {
     margin-top: 23px;
     font-size: 1.05em;
@@ -972,6 +975,7 @@ p {
     margin-left: 40px;
     text-decoration: none;
 }
+
 .header_client_area:hover {
     color: #fff;
     text-decoration: none;
@@ -985,9 +989,18 @@ p {
     float: right;
     margin-top: -29px;
 }
-.header_input_text {
+
+.form_search input {
     border: none;
-    height: 32px;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    /*border: 1px solid yellow;*/
+}
+
+.form_search input[type="text"] {
+    height: 39px;
     width: 0;
     display: inline-block;
     padding-right: 40px;
@@ -1004,27 +1017,31 @@ p {
     color: #000;
     overflow: hidden;
 }
-input::-webkit-input-placeholder {
+
+.form_search input::-webkit-input-placeholder {
     color: #000;
 }
-input:-moz-placeholder {
+
+.form_search input:-moz-placeholder {
     color: #000;
 }
-input:-ms-input-placeholder {
+
+.form_search input:-ms-input-placeholder {
     color: #000;
 }
-.header_input_text:focus {
-    width: 305px;
+
+.form_search input[type="text"]:focus {
+    width: 337px;
     z-index: 1;
     border-bottom: 1px solid #fff;
     background-color: #fff;
     cursor: text;
     padding-left: 5px;
 }
-.header_input_submit {
-    border: none;
-    height: 35px;
-    width: 35px;
+
+.form_search input[type="submit"] {
+    height: 40px;
+    width: 40px;
     display: inline-block;
     background-image: url(/assets/img/search_lupa_white.png);
     background-repeat: no-repeat;
@@ -1036,6 +1053,7 @@ input:-ms-input-placeholder {
     right: 0;
     z-index: 2;
 }
+
 .tab-list__content {
     display: none;
 }
@@ -3821,7 +3839,6 @@ input:-ms-input-placeholder {
     margin-bottom: 50px;
 }
 
-
 .b-vps__table:after {
     content: '';
     background: url(/assets/img/table_shadow.png) no-repeat;
@@ -4677,7 +4694,6 @@ input:-ms-input-placeholder {
 
 }
 
-
 .b-main-page__offer-item:before {
     content: '';
     width: 16px;
@@ -4688,7 +4704,6 @@ input:-ms-input-placeholder {
     left: 0;
 }
 
-
 .b-main-page__offer-item-title {
     font-size: 21px;
     line-height: 25px;
@@ -4698,12 +4713,10 @@ input:-ms-input-placeholder {
     letter-spacing: 3px;
 }
 
-
 .b-main-page__offer-item-text {
     font-size: 18px;
     line-height: 22px;
 }
-
 
 .b-main-page__offer-image {
     display: none;
@@ -4715,7 +4728,6 @@ input:-ms-input-placeholder {
 .b-main-page__offer-item:hover > .b-main-page__offer-item-text {
     opacity: 0;
 }
-
 
 .b-main-page__offer-item:hover > .b-main-page__offer-image {
     display: inline-block;
@@ -4853,6 +4865,7 @@ input:-ms-input-placeholder {
     padding: 0 30px;
     /*border: 1px solid red;*/
 }
+
 .b-main-page__slider-item-rewiews {
     background-color: #272e38;
     width: 1000px;
@@ -4860,12 +4873,14 @@ input:-ms-input-placeholder {
     margin: 0 100px;
     /*border: 1px solid red;*/
 }
+
 .b-main-page__slider-item-rewiews-logo {
     width: 300px;
     height: 250px;
     float: left;
     /*border: 1px solid blue;*/
 }
+
 .b-main-page__slider-item-image-rewiews {
     width: 240px;
     margin: 70px auto;
@@ -4873,6 +4888,7 @@ input:-ms-input-placeholder {
     /*filter: grayscale(100%) invert(100%);*/
     /*border: 1px solid red;*/
 }
+
 .b-main-page__slider-item-rewiews-text {
     width: 700px;
     height: 240px;
@@ -4880,6 +4896,7 @@ input:-ms-input-placeholder {
     /*float: left;*/
     /*border: 1px solid green;*/
 }
+
 .b-main-page__slider-item-rewiews-text-rewiews {
     height: 120px;
     font-size: 1.3em;
@@ -4889,6 +4906,7 @@ input:-ms-input-placeholder {
     text-align: left;
     /*border: 1px solid red;*/
 }
+
 .b-main-page__slider-item-hint-description-rewiews-text-fio {
     height: 90px;
     margin-top: 30px;
@@ -4896,11 +4914,13 @@ input:-ms-input-placeholder {
     text-align: left;
     /*border: 1px solid red;*/
 }
+
 .b-main-page__slider-item-hint-description-rewiews-text-fio-person {
     font-size: 1.3em;
     margin: 0px;
     padding: 0px;
 }
+
 .b-main-page__slider .slick-prev,
 .b-main-page__slider .slick-next {
     width: 36px;
@@ -4955,6 +4975,7 @@ input:-ms-input-placeholder {
     opacity: 0.4;
     /*filter: grayscale(100%) invert(100%);*/
 }
+
 .b-main-page__slider-item-image:hover {
     /*filter: none;*/
     opacity: 1;
