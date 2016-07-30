@@ -87,7 +87,7 @@ return [
     'Content_ContentBlock PriceEUR' => 'Цена в евро',
     'Content_ContentBlock PriceRUR' => 'Цена в рублях',
     'Content_ContentBlock Target' => 'Зона вывода',
-    'Content_ContentBlock Target options' => ['top' => 'вверху', 'information' => 'информация', 'feature' => 'особенность', 'voucher' => 'ваучер', 'ssl' => 'ssl'],
+    'Content_ContentBlock Target options' => ['top' => 'вверху', 'information' => 'информация', 'feature' => 'особенность', 'voucher' => 'ваучер', 'ssl1' => 'ssl1', 'ssl2' => 'ssl2', 'ssl3' => 'ssl3'],
     'ContentLittle Content' => 'Значение',
     'ContentLittle ID' => 'Идентификатор',
     'ContentLittle Name' => 'Название',
