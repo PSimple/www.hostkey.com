@@ -179,9 +179,8 @@ function genDomainsTable(target, data) {
                 window.location.reload();
             });
         }, 1000);
-    } else if ($('.tab-list__content-table:visible').find('.tab-list__content-table-row__available').length) {
-        $('.resultCont').hide();
-        $('.resultCont').after('<div class="resultContWrong">Sorry! This name is already taken.</div>');
+    } else if (!($('#result-table').find('.tab-list__content-table-row__available').length && $('#result-table2').find('.tab-list__content-table-row__available').length) || !$('.resultContWrong').length) {
+        $('.resultCont').hide().after('<div class="resultContWrong">Sorry! This name is already taken.</div>');
         loaderView('hide');
     } else {
         $('.resultCont').show();
