@@ -1,3 +1,6 @@
+{pre($DATA)}
+
+
 <link rel="stylesheet" href="/assets/css/jquery/jquery-ui.min.css"/>
 <link rel="stylesheet" href="/assets/css/style.css"/>
 
@@ -8,7 +11,8 @@
                 <h1 class="b-page__promo-title">{$Head}</h1>
             </div>
 
-            <div class="b-ssl" id="scroll-anchor-01">
+
+    <div class="b-ssl" id="scroll-anchor-01">
                 <!--ЭТАПЫ СЕРТИФИКАЦИИ----------------------------------->
                 <div class="ssl-tab">
                     <div class="ssl__tab tab-list b-modal__tabs js-tab-wrapper" id="ssl-tab-wrapper">
@@ -75,14 +79,20 @@
                     </div>
                 </div>
 <!--СЕРТИФИКАТЫ-------------------------------->
-                <div class="ssl-page-offers">
+
+
+            <div class="ssl-page-offers">
                     <h3>Сертификаты</h3>
-                <a id="Banner_cvps_ssl" class="ssl-page-offers__item active" href="" style="">
+
+
+                {foreach ($DATA as $row)}
+
+                <a id="Banner_cvps_ssl" class="ssl-page-offers__item" href="" style="">
                     <img class="img_www_block_ssl" src="/assets/img/www_block_ssl.png"/>
-                    <h3 class="ssl-page-offers__item-title">Dedicated servers</h3>
+                    <h3 class="ssl-page-offers__item-title">{$row['Head']}</h3>
 
                     <div class="ssl-page-offers__item-text">
-                        Dedicated servers are the best solution for heavy projects or ones that use unique software.
+                        {$row['Description']}
                     </div>
                     <div class="ssl-page-offers__item-price">
                         <div class="ssl-page-offers__item-price-before">
@@ -103,7 +113,7 @@
                         <img class="img_sh_secur1" src="/assets/img/sh_secur1.png"/>
                     </div>
                 </a>
-
+                {/foreach}<!--
 
                     <a id="Banner_vds_ssl" class="ssl-page-offers__item" href="" style="">
                     <img class="img_www_block_ssl" src="/assets/img/www_block_ssl.png"/>
@@ -158,8 +168,11 @@
                     </div>
                 </a>
 
+                -->
+
             </div>
-<!--ФИЛЬТРЫ------------------->
+
+<!--ФИЛЬТР ВЕРИФИКАЦИИ------------------->
                 <div class="ssl-page-filter-verification">
                     <h3>Степень верификации</h3>
                     <a id="Ssl_verification_domain" class="ssl-page-filter__item_verification active" href="" style="" data-text="Всплывающая подсказка">
@@ -173,8 +186,9 @@
                     <a id="Ssl_verification_escalation" class="ssl-page-filter__item_verification" href="" style="" data-text="Всплывающая подсказка">
                         <h4 class="ssl-page-filter__item-title">Расширенная</h4>
                     </a>
-                </div>
 
+                </div>
+<!--ФИЛЬТР МАСШТАБНОСТИ------------------->
                 <div class="ssl-page-filter-scale">
                     <h3>Масштабность</h3>
                     <a id="Ssl_scale_onedomain" class="ssl-page-filter__item_scale active" href="" style="" data-text="Всплывающая подсказка">
