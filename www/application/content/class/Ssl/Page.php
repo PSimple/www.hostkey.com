@@ -23,9 +23,17 @@ class Content_Ssl_Page extends Zero_Controller
 //        $target = 'IS NULL';
 //        if ( isset($this->Params['target']) )
 //            $target = "= '{$this->Params['target']}'";
-        $sql = "SELECT * FROM ContentBlock WHERE Target = 'ssl' AND IsEnable = 1 AND Section_ID = " . Zero_App::$Section->ID . " ORDER BY Sort ASC";
+        $sql = "SELECT * FROM ContentBlock WHERE Target = 'ssl1' AND IsEnable = 1 AND Section_ID = " . Zero_App::$Section->ID . " ORDER BY Sort ASC";
         $data = Zero_DB::Select_Array($sql);
-        $this->View->Assign('DATA', $data);
+        $this->View->Assign('arrSsl1', $data);
+
+        $sql = "SELECT * FROM ContentBlock WHERE Target = 'ssl2' AND IsEnable = 1 AND Section_ID = " . Zero_App::$Section->ID . " ORDER BY Sort ASC";
+        $data = Zero_DB::Select_Array($sql);
+        $this->View->Assign('arrSsl2', $data);
+
+        $sql = "SELECT * FROM ContentBlock WHERE Target = 'ssl3' AND IsEnable = 1 AND Section_ID = " . Zero_App::$Section->ID . " ORDER BY Sort ASC";
+        $data = Zero_DB::Select_Array($sql);
+        $this->View->Assign('arrSsl3', $data);
 
         return $this->View;
     }
