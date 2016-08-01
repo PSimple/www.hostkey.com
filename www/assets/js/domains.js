@@ -265,8 +265,10 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=top100', function (data) {
 
     for (i = 0; i < sum; i++) {
         var name = items[i].Name,
-            price = items[i].PriceRegister;
+            price = items[i].PriceRegister01;
 
+
+        console.log(1);
         ready += '<label class="domain-zone__item" for="regular_check-' + i + '">' +
             '<span class="domain-zone__item-title">' + name + '</span><br>' +
             '<input data-name="' + name + '" class="hidden-input" name="check-' + i + '" type="checkbox" id="regular_check-' + i + '"/>' +
@@ -290,7 +292,7 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
         var name = items[a].Name,
             img = '<img src="/upload/data/' + items[a].Img + '" title="' + name + '"/>',
             imgFlag = items[a].Img,
-            price = items[a].PriceRegister,
+            price = items[a].PriceRegister01,
             comment = (!!items[a].Comment) ? ((items[a].Comment).stripTags()) : '',
             slicedComment = comment.slice(0, 90);
 
@@ -328,7 +330,7 @@ $('#domain-zone__more').on('click', '', function () {
         }
         for (i; i < iter; i++) {
             var name = items[i].Name;
-            var price = items[i].PriceRegister;
+            var price = items[i].PriceRegister01;
             ready += '<label class="domain-zone__item" for="regular_check-' + i + '">' +
                 '<span class="domain-zone__item-title">' + name + '</span><br>' +
                 '<input data-name="' + name + '" class="hidden-input" name="check-' + i + '" type="checkbox" id="regular_check-' + i + '"/>' +
@@ -355,7 +357,7 @@ $('#domains-check__more').on('click', '', function () {
             var name = items[a].Name;
             var img = '<img src="/upload/data/' + items[a].Img + '" title="' + name + '"/>';
             var imgFlag = items[a].Img;
-            var price = items[a].PriceRegister;
+            var price = items[a].PriceRegister01;
             var comment = (!!items[a].Comment) ? ((items[a].Comment).stripTags()) : '';
             var slicedComment = comment.slice(0, 90);
             if (slicedComment.length < comment.length) {
