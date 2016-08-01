@@ -133,8 +133,8 @@ function genDomainsTable(target, data) {
         if (regPeriod != '') {
             if (regPeriod.toString().indexOf(',') >= 0) {
                 var rpArray = regPeriod.split(',');
-                for (var k in rpArray) {
-                    var prNum = rpArray[k] / 12,
+                for (var rpkey in rpArray) {
+                    var prNum = rpArray[rpkey] / 12,
                         prPeriod = (prNum == 1 ? prNum + ' year' : prNum + ' years'),
                         prPrice = groupDomain['PriceRegister'.concat((prNum <= 9) ? '0'.concat(prNum) : prNum)];
                     periodOptions += '<option value="' + prNum + '">' + prPeriod + ' / €' + prPrice + '</option>';
@@ -198,6 +198,10 @@ function genDomainsTable(target, data) {
             loaderView('hide');
         }
     } else {
+        if (!$('#result-table').find('.tab-list__content-table-row__available').length)
+            $('#result-table-message').html('Sorry! This name is already taken.');
+        else
+            $('#result-table-message').html('Congratulations! You can register the domains of your choice.');
         $('.resultCont').show();
         $('.resultContWrong').remove();
     }
@@ -254,11 +258,11 @@ $(document).on('click', 'a.tab-list__content-reg-this', function () {
                 (!isCut ? $domain : cutName) + '</td>' +
                 '<td class="domains-step__summary-table-cell remove-row" data-rowN="' + $rowN + '" data-domain="' + $domain + '">€' + $price + '</td>' +
                 '</tr>');
-            summaryPrice = parseFloat(summaryPrice) + parseFloat($price);
-            $('#Summa').html('€' + summaryPrice.toFixed(2));
+            summaryPrice = (parseFloat(summaryPrice) + parseFloat($price)).toFixed(2);
+            $('#Summa').html('€' + summaryPrice);
         } else {
             pricesSumArr[$domain]['period'] = $period;
-            summaryPrice = (parseFloat(summaryPrice) - parseFloat(pricesSumArr[$domain]['price'])) + parseFloat($price);
+            summaryPrice = ((parseFloat(summaryPrice) - parseFloat(pricesSumArr[$domain]['price'])) + parseFloat($price)).toFixed(2);
             pricesSumArr[$domain]['price'] = $price;
             $cartRowN.html('€' + $price);
             $('#Summa').html('€' + summaryPrice);
@@ -332,7 +336,7 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
     AddData('.domains-check__row', readyPromo, 'add');
 });
 
-// Вывод полного списка доменных зон в область под поиском
+// Вывод еще одной строки доменных зон в область под поиском
 $('#domain-zone__more').on('click', '', function () {
     var self = $(this);
     $.getJSON('/api/v1/shop/domains/zone/list?groups=top100', function (data) {
@@ -357,7 +361,7 @@ $('#domain-zone__more').on('click', '', function () {
     return false;
 });
 
-// Вывод полного списка доменных зон в Special Offers
+// Вывод еще одной строки доменных зон в Special Offers
 $('#domains-check__more').on('click', '', function () {
     var self = $(this);
     $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
@@ -437,7 +441,8 @@ $('.search-bar__button-hide').on('click', '', function () {
 // Запуск поиска и переход на второй шаг
 $('.search-bar .b-submit').on('click', '', function () {
     var $checkedInput = $('.hidden-input:checked'),
-        $firstTab = $('.domains-step2__tab .tab-list__item[data-tab="1"]');
+        $firstTab = $('.domains-step2__tab .tab-list__item[data-tab="1"]'),
+        inputZone = {};
 
     loaderView('show');
 
@@ -446,17 +451,22 @@ $('.search-bar .b-submit').on('click', '', function () {
     if (!$firstTab.hasClass('current'))
         $firstTab.trigger('click');
 
-    searchZones = '';
-    $.each($checkedInput, function () {
-        searchZones += $(this).data('name').replace('.', '') + ',';
-    });
-    searchZones = searchZones.slice(0, -1);
-
     searchDomains = ($('.search-bar__input:visible').val()).replace(/\n/g, ',');
     if (searchDomains.substr(-1, 1) == ',') {
         searchDomains = searchDomains.substr(0, -1);
     }
     searchDomainsArr = searchDomains.split(',');
+
+    searchZones = '';
+    $.each($checkedInput, function () {
+        searchZones += $(this).data('name').replace('.', '') + ',';
+    });
+    if (searchDomainsArr.valueOf().indexOf('.') >= 0) {
+        inputZone = searchDomainsArr.split('.');
+        searchZones += inputZone[1];
+    }
+
+    searchZones = searchZones.slice(0, -1);
 
     // Возвращаем строчный вид поиска на 2 шаге
     if (!$('input.search-bar__input').is(':visible')) {
