@@ -24,11 +24,9 @@ class Content_ContentBlock_Plugin extends Zero_Controller
         if ( isset($this->Params['target']) )
             $target = "= '{$this->Params['target']}'";
         $sql = "SELECT * FROM ContentBlock WHERE Target {$target} AND IsEnable = 1 AND Section_ID = " . Zero_App::$Section->ID . " ORDER BY Sort ASC";
-
-        //        pre($this->Params['view'], $sql);
-
         $data = Zero_DB::Select_Array($sql);
         $this->View->Assign('DATA', $data);
+
         return $this->View;
     }
 
