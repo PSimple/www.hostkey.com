@@ -1,4 +1,4 @@
-{pre($DATA)}
+<!--{pre($DATA)}*/-->
 
 
 <link rel="stylesheet" href="/assets/css/jquery/jquery-ui.min.css"/>
@@ -81,11 +81,11 @@
 <!--СЕРТИФИКАТЫ-------------------------------->
 
 
-            <div class="ssl-page-offers">
+            <!--<div class="ssl-page-offers">
                     <h3>Сертификаты</h3>
 
 
-                {foreach ($DATA as $row)}
+                {foreach ($arrSsl1 as $k => $row)}
 
                 <a id="Banner_cvps_ssl" class="ssl-page-offers__item" href="" style="">
                     <img class="img_www_block_ssl" src="/assets/img/www_block_ssl.png"/>
@@ -168,40 +168,48 @@
                     </div>
                 </a>
 
-                -->
 
-            </div>
 
-<!--ФИЛЬТР ВЕРИФИКАЦИИ------------------->
+            </div>-->
+
+<!--ФИЛЬТР ВЕРИФИКАЦИИ-->
                 <div class="ssl-page-filter-verification">
                     <h3>Степень верификации</h3>
-                    <a id="Ssl_verification_domain" class="ssl-page-filter__item_verification active" href="" style="" data-text="Всплывающая подсказка">
-                        <h4 class="ssl-page-filter__item-title">По домену</h4>
+                    {foreach ($arrSsl2 as $k => $row)}
+                    <a id="Ssl_verification_domain" class="ssl-page-filter__item_verification" href="" style="" data-text="Всплывающая подсказка">
+                        <h4 class="ssl-page-filter__item-title">{$row['Head']}</h4>
+                        <div class="ssl-page-filter__item-text">
+                            {$row['Description']}
+                        </div>
                     </a>
-
-                    <a id="Ssl_verification_standard" class="ssl-page-filter__item_verification" href="" style="" data-text="Всплывающая подсказка">
+                    {/foreach}
+                    <!--<a id="Ssl_verification_standard" class="ssl-page-filter__item_verification" href="" style="" data-text="Всплывающая подсказка">
                         <h4 class="ssl-page-filter__item-title">Стандартная</h4>
                     </a>
 
                     <a id="Ssl_verification_escalation" class="ssl-page-filter__item_verification" href="" style="" data-text="Всплывающая подсказка">
                         <h4 class="ssl-page-filter__item-title">Расширенная</h4>
-                    </a>
+                    </a>-->
 
                 </div>
 <!--ФИЛЬТР МАСШТАБНОСТИ------------------->
                 <div class="ssl-page-filter-scale">
                     <h3>Масштабность</h3>
-                    <a id="Ssl_scale_onedomain" class="ssl-page-filter__item_scale active" href="" style="" data-text="Всплывающая подсказка">
-                        <h4 class="ssl-page-filter__item-title">Один домен</h4>
+                    {foreach ($arrSsl3 as $k => $row)}
+                    <a id="Ssl_scale_onedomain" class="ssl-page-filter__item_scale" href="" style="" data-text="Всплывающая подсказка">
+                        <h4 class="ssl-page-filter__item-title">{$row['Head']}</h4>
+                        <div class="ssl-page-filter__item-text">
+                            {$row['Description']}
+                        </div>
                     </a>
-
-                    <a id="Ssl-scale_poddomen" class="ssl-page-filter__item_scale" href="" style="" data-text="Всплывающая подсказка">
+                    {/foreach}
+                    <!--<a id="Ssl-scale_poddomen" class="ssl-page-filter__item_scale" href="" style="" data-text="Всплывающая подсказка">
                         <h4 class="ssl-page-filter__item-title">Несколько доменов/поддоменов</h4>
                     </a>
 
                     <a id="Ssl_scale_subdomain" class="ssl-page-filter__item_scale" href="" style="" data-text="Всплывающая подсказка">
                         <h4 class="ssl-page-filter__item-title">Домен/субдомены</h4>
-                    </a>
+                    </a>-->
                 </div>
 
 <!--ВЫВОД РЕЗУЛЬТАТОВ----------------------------------->
@@ -363,6 +371,13 @@ $(".ssl-page-filter__item_scale").click(function(e) {
     }, 1100);
     return false;
 })
+
+    /*if(k==0){
+        k.style.backgroundColor === 'red'
+    else {
+            k.style.backgroundColor ==='green';
+        }
+    }*/
 </script>
 
 
