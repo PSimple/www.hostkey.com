@@ -33,6 +33,7 @@ var i,
     searchDomains = '',
     searchDomainsArr = '',
     emptyResult = true,
+    domainsShow = false,
     isCut = false;
 
 window.location.hash = '#domains_1';
@@ -117,6 +118,7 @@ function genDomainsTable(target, data) {
             statusClass = (groupDomain['status'] == 'available') ? 'available' : 'invalid',
             statusDesc = groupDomain['description'],
             status = groupDomain['status'],
+            regPeriod = groupDomain.hasOwnProperty('RegisterPeriod') ? groupDomain['RegisterPeriod'] : '',
             img = (groupDomain['img'] != null && groupDomain['img'] != 'undefined' && groupDomain['img'] != '') ? '<img src="/upload/data/' + groupDomain['img'] + '" />' : '',
             promo = ('promo' in data[name]) ? 'promoRow' : '',
             periodOptions = '',
@@ -125,12 +127,23 @@ function genDomainsTable(target, data) {
         if (groupDomain['status'] == 'available') {
             domainsList.push(name);
             domainsPrice = domainsPrice + groupDomain['PriceRegister01'];
+            domainsShow = true;
         }
-        for (var keypr in groupDomain) {
-            if (keypr.slice(0, -2) == 'PriceRegister') {
-                var prNum = parseInt(keypr.slice(-2)),
-                    prPeriod = (prNum == 1 ? prNum + ' year' : prNum + ' years');
-                periodOptions += '<option value="' + prNum + '">' + prPeriod + ' / €' + groupDomain[keypr] + '</option>';
+
+        if (regPeriod != '') {
+            if (regPeriod.toString().indexOf(',') >= 0) {
+                var rpArray = regPeriod.split(',');
+                for (var k in rpArray) {
+                    var prNum = rpArray[k] / 12,
+                        prPeriod = (prNum == 1 ? prNum + ' year' : prNum + ' years'),
+                        prPrice = groupDomain['PriceRegister'.concat((prNum <= 9) ? '0'.concat(prNum) : prNum)];
+                    periodOptions += '<option value="' + prNum + '">' + prPeriod + ' / €' + prPrice + '</option>';
+                }
+            } else {
+                var prNum = regPeriod / 12,
+                    prPeriod = (prNum == 1 ? prNum + ' year' : prNum + ' years'),
+                    prPrice = groupDomain['PriceRegister'.concat((prNum <= 9) ? '0'.concat(prNum) : prNum)];
+                periodOptions += '<option value="' + prNum + '">' + prPeriod + ' / €' + prPrice + '</option>';
             }
         }
 
@@ -179,9 +192,11 @@ function genDomainsTable(target, data) {
                 window.location.reload();
             });
         }, 1000);
-    } else if (!($('#result-table').find('.tab-list__content-table-row__available').length && $('#result-table2').find('.tab-list__content-table-row__available').length) || !$('.resultContWrong').length) {
-        $('.resultCont').hide().after('<div class="resultContWrong">Sorry! This name is already taken.</div>');
-        loaderView('hide');
+    } else if (!domainsShow) {
+        if (!$('.resultContWrong').length) {
+            $('.resultCont').hide().after('<div class="resultContWrong">Sorry! This name is already taken.</div>');
+            loaderView('hide');
+        }
     } else {
         $('.resultCont').show();
         $('.resultContWrong').remove();
