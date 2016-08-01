@@ -193,6 +193,14 @@ class Shop_DomainsZone extends Zero_Model
             'PriceRenew08' => ['AliasDB' => 'z.PriceRenew08', 'DB' => 'F', 'IsNull' => 'NO', 'Default' => '0.00', 'Form' => 'Readonly'],
             'PriceRenew09' => ['AliasDB' => 'z.PriceRenew09', 'DB' => 'F', 'IsNull' => 'NO', 'Default' => '0.00', 'Form' => 'Readonly'],
             'PriceRenew10' => ['AliasDB' => 'z.PriceRenew10', 'DB' => 'F', 'IsNull' => 'NO', 'Default' => '0.00', 'Form' => 'Readonly'],
+            'SortTop20' => ['AliasDB' => 'z.SortTop20', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '0', 'Form' => 'Number'],
+            'SortTop50' => ['AliasDB' => 'z.SortTop50', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '0', 'Form' => 'Number'],
+            'SortTop100' => ['AliasDB' => 'z.SortTop100', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '0', 'Form' => 'Number'],
+            'SortPromo' => ['AliasDB' => 'z.SortPromo', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '0', 'Form' => 'Number'],
+            'SortPopular' => ['AliasDB' => 'z.SortPopular', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '0', 'Form' => 'Number'],
+            'SortNew' => ['AliasDB' => 'z.SortNew', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '0', 'Form' => 'Number'],
+            'SortNational' => ['AliasDB' => 'z.SortNational', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '0', 'Form' => 'Number'],
+            'SortThematic' => ['AliasDB' => 'z.SortThematic', 'DB' => 'I', 'IsNull' => 'YES', 'Default' => '0', 'Form' => 'Number'],
         ];
     }
 
@@ -321,6 +329,14 @@ class Shop_DomainsZone extends Zero_Model
             'PriceRenew08' => [],
             'PriceRenew09' => [],
             'PriceRenew10' => [],
+            'SortTop20' => [],
+            'SortTop50' => [],
+            'SortTop100' => [],
+            'SortPromo' => [],
+            'SortPopular' => [],
+            'SortNew' => [],
+            'SortNational' => [],
+            'SortThematic' => [],
         ];
     }
 
