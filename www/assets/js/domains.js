@@ -587,8 +587,8 @@ $(document).on('click', '.domains-step__summary-table .remove-row', function () 
     $('.tab-list__content-reg-this[data-domain="' + $domain + '"]').parents('.selected_row').removeClass('selected_row');
     if ($section.find('td').length == 0)
         $section.removeClass('visible_section');
-    summaryPrice = parseFloat(summaryPrice.toFixed(2)) - parseFloat($price.toFixed(2));
-    $('#Summa').html('€' + summaryPrice.toFixed(2));
+    summaryPrice = (parseFloat(summaryPrice) - parseFloat($price)).toFixed(2);
+    $('#Summa').html('€' + summaryPrice);
     if (summaryPrice == 0)
         $('#Summa').html('Empty Cart');
 });
