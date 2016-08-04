@@ -55,8 +55,8 @@ class Shop_Console_Domains_ZonePeriod extends Zero_Controller
             'Reply' => ['Name' => 'hostkey.com', 'Email' => 'no-reply@hostkey.ru'],
             'From' => ['Name' => 'hostkey.com', 'Email' => 'no-reply@hostkey.ru'],
             'To' => [
-                ['Name' => 'domains', 'Email' => 'domains@hostkey.com'],
                 ['Name' => 'kshamiev', 'Email' => 'kshamiev@hostkey.ru'],
+                ['Name' => 'domains', 'Email' => 'domains@hostkey.com'],
             ],
             'Subject' => 'Ошибки обновления периодов зон',
             'Message' => $trubleList,
