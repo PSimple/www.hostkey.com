@@ -16,18 +16,7 @@ class Shop_Api_Domains_Order extends Zero_Controller
      */
     public function Action_POST()
     {
-        // http://site-f.hostke.ru/api/v1/domains/order
-//        $_REQUEST['domains'] = [
-//            'funtik.nl' => [
-//                'period' => 12,
-//                'dns' => 1,
-//            ],
-//            'funtik.com' => [
-//                'period' => 12,
-//                'dns' => 1,
-//            ],
-//        ];
-//        Zero_App::ResponseJson200($_REQUEST);
+        // https://bill.hostkey.com/cart.php?a=add&currency=2&pid=564&billingcycle=monthly&configoption[858]=15006&customfield[348]=описание-заказа
 
         // Проверки
         if ( !isset($_REQUEST['domains']) )
@@ -37,8 +26,8 @@ class Shop_Api_Domains_Order extends Zero_Controller
         foreach($_REQUEST['domains'] as $domain => $row)
         {
             $zone = explode('.', $domain)[1];
-            $orderList[$zone][] = [
-                'period' => $row['period'] / 12,
+            $orderList[$zone][$domain] = [
+                'periodReg' => $row['periodReg'] / 12,
                 'dns' => $row['dns'],
             ];
         }
