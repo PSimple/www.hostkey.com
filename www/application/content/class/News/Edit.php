@@ -7,7 +7,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.06.09
  */
-class Content_News_Edit extends Zero_Crud_Edit
+class Content_News_Edit extends Zero_Web_Crud_Edit
 {
     /**
      * The table stores the objects handled by this controller.
@@ -21,5 +21,5 @@ class Content_News_Edit extends Zero_Crud_Edit
      *
      * @var string
      */
-    protected $ViewName = 'Zero_Crud_Edit';
+    protected $ViewName = 'Zero_Web_Crud_Edit';
 }

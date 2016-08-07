@@ -7,7 +7,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2016.05.25
  */
-class Shop_DomainsZone_Grid extends Zero_Crud_Grid
+class Shop_DomainsZone_Grid extends Zero_Web_Crud_Grid
 {
     /**
      * The table stores the objects handled by this controller.
@@ -21,5 +21,5 @@ class Shop_DomainsZone_Grid extends Zero_Crud_Grid
      *
      * @var string
      */
-    protected $ViewName = 'Zero_Crud_Grid';
+    protected $ViewName = 'Zero_Web_Crud_Grid';
 }
