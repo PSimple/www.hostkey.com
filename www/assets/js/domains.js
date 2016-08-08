@@ -122,6 +122,7 @@ function genDomainsTable(target, data) {
             img = (groupDomain['img'] != null && groupDomain['img'] != 'undefined' && groupDomain['img'] != '') ? '<img src="/upload/data/' + groupDomain['img'] + '" />' : '',
             promo = ('promo' in data[name]) ? 'promoRow' : '',
             periodOptions = '',
+            dnsFlag = (groupDomain['dnsmanagement'] != null && groupDomain['dnsmanagement'] != 'undefined' && groupDomain['dnsmanagement'] != '') ? 1 : 0,
             cutName = name.cutDomain();
 
         if (groupDomain['status'] == 'available') {
@@ -163,7 +164,7 @@ function genDomainsTable(target, data) {
             ((statusClass == "available") ? '<select class="table-select__item js-select" name="tbl-select-' + k + '" id="regPeriod' + k + '" data_preset="Register_Domains">' + periodOptions + '</select>' : '') +
             '</td>' +
             '<td class="tab-list__content-table-cell buttonCell">' +
-            '<a href="#" class="tab-list__content-reg-this" data-domain="' + name + '" data-rowN="' + k + '"><i class="b-icon"></i>Register</a>' +
+            '<a href="#" class="tab-list__content-reg-this" data-dns="' + dnsFlag + '" data-domain="' + name + '" data-rowN="' + k + '"><i class="b-icon"></i>Register</a>' +
             '</td>' +
             '</tr>';
     }
@@ -218,7 +219,7 @@ function genDomainsTable(target, data) {
                 break;
 
         }
-
+if ($('.regAllContainer').is(':visible').length)
         $(target).next('.nextPg').after('<div class="regAllContainer"><div class="regAllContent">' +
             '<div class="regAllTitle">Register ' + qDom + numVariation + '  for one year for €' + domainsPrice.toFixed(2) + ':</div>' +
             domainsList.join(', ') + '</div>' +
@@ -239,6 +240,7 @@ $(document).on('click', 'a.tab-list__content-reg-this', function () {
         $period = $('#regPeriod' + $rowN).val(),
         $priceSplit = ($('#regPeriod' + $rowN + ' option:selected').html()).split('€'),
         $price = $priceSplit[1],
+        $dns = $(this).attr('data-dns'),
         $section = $('#registerSection');
 
     if ($domain in contentMain) {
@@ -248,6 +250,7 @@ $(document).on('click', 'a.tab-list__content-reg-this', function () {
             pricesSumArr[$domain]['action'] = 'reg';
             pricesSumArr[$domain]['period'] = $period;
             pricesSumArr[$domain]['price'] = $price;
+            pricesSumArr[$domain]['dnsmanagement'] = $dns;
 
             if (!$section.is(':visible'))
                 $section.addClass('visible_section');
@@ -559,18 +562,42 @@ $('.tab-list__item').on('click', '', function () {
 // Переход на третий шаг
 $('#buy').on('click', '', function () {
     var summaryData = {},
-        domains = Object.keys(pricesSumArr).join(', ');
+        domains = Object.keys(pricesSumArr).join(', '),
+        orderGenArr = {'domains': {}},
+        optionId = 0,
+        summaryConfig = '',
+        successLink = 'https://bill.hostkey.com/cart.php?a=add&currency=2&pid=564&billingcycle=monthly';
     if (Object.keys(pricesSumArr).length) {
+        var regPeriod = 0,
+            dnsPeriod = 0;
         summaryData = {};
         summaryData['domainreg'] = true;
         for (var key in pricesSumArr) {
             if (pricesSumArr[key]['action'] == 'reg' && pricesSumArr[key]['status'] == 'available') {
+                regPeriod = pricesSumArr[key]['period'];
+                dnsPeriod = (!pricesSumArr[key]['dnsmanagement'] ? 0 : regPeriod);
                 summaryData['domains[' + key + ']'] = key;
-                summaryData['domainsregperiod[' + key + ']'] = pricesSumArr[key]['period'];
+                summaryData['domainsregperiod[' + key + ']'] = regPeriod;
                 summaryData['domainsregprice[' + key + ']'] = pricesSumArr[key]['price'];
+                orderGenArr['domains'][key] = {'periodReg': parseInt(regPeriod * 12), 'dns': dnsPeriod};
+                summaryConfig += 'Register domain: ' + key + '<br/>' + (dnsPeriod > 0 ? '+ DNS-hosting<br/>' : '') + '<b>Period: ' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + ' </b><br/>';
             }
         }
-        $.redirect('https://bill.hostkey.com/cart.php?a=add&domain=register&currency=2', summaryData, 'POST', '_blank');
+        $.ajax({
+            url: '/api/v1/domains/order',
+            type: 'POST',
+            data: orderGenArr,
+            dataType: 'JSON',
+            success: function (data) {
+                if (data['ErrorStatus'] == false) {
+                    optionId = data['Content']['OptionID'];
+                    $.redirect(successLink + '&configoption[858]=' + optionId + '&customfield[348]=' + summaryConfig, '', 'POST', '_self');
+                } else {
+                }
+
+            }
+        });
+
     }
 });
 
