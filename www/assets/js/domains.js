@@ -34,7 +34,23 @@ var i,
     searchDomainsArr = '',
     emptyResult = true,
     domainsShow = false,
-    isCut = false;
+    isCut = false,
+    fullAvDomList = {
+        'result-table': '',
+        'result-table2': '',
+        'PopularTable': '',
+        'PromoTable': '',
+        'NationalTable': '',
+        'ThematicTable': ''
+    },
+    fullAvDomPrices = {
+        'result-table': 0,
+        'result-table2': 0,
+        'PopularTable': 0,
+        'PromoTable': 0,
+        'NationalTable': 0,
+        'ThematicTable': 0
+    };
 
 window.location.hash = '#domains_1';
 
@@ -164,7 +180,7 @@ function genDomainsTable(target, data) {
             ((statusClass == "available") ? '<select class="table-select__item js-select" name="tbl-select-' + k + '" id="regPeriod' + k + '" data_preset="Register_Domains">' + periodOptions + '</select>' : '') +
             '</td>' +
             '<td class="tab-list__content-table-cell buttonCell">' +
-            '<a href="#" class="tab-list__content-reg-this" data-dns="' + dnsFlag + '" data-domain="' + name + '" data-rowN="' + k + '"><i class="b-icon"></i>Register</a>' +
+            '<a href="#" class="tab-list__content-reg-this" data-dns="' + dnsFlag + '" data-domain="' + name + '" data-rowN="' + k + '"><i class="b-icon"></i>Add to cart</a>' +
             '</td>' +
             '</tr>';
     }
@@ -207,7 +223,14 @@ function genDomainsTable(target, data) {
         $('.resultContWrong').remove();
     }
 
-    var qDom = domainsList.length,
+    if (target != '#result-table2')
+        $('.regAllContainer').remove();
+
+    fullAvDomList[target.slice(1)] += domainsList.join(', ');
+    fullAvDomPrices[target.slice(1)] += domainsPrice;
+    var tableDomList = fullAvDomList[target.slice(1)],
+        tableDomPrices = fullAvDomPrices[target.slice(1)],
+        qDom = ((!tableDomList.length) ? 0 : (tableDomList.indexOf(',') >= 0) ? (tableDomList.split(',')).length : 1),
         numVariation = ' domains';
     if (qDom > 0) {
         switch (qDom) {
@@ -219,10 +242,9 @@ function genDomainsTable(target, data) {
                 break;
 
         }
-if ($('.regAllContainer').is(':visible').length)
-        $(target).next('.nextPg').after('<div class="regAllContainer"><div class="regAllContent">' +
-            '<div class="regAllTitle">Register ' + qDom + numVariation + '  for one year for €' + domainsPrice.toFixed(2) + ':</div>' +
-            domainsList.join(', ') + '</div>' +
+        $(target).next('.nextPg').after('<div class="regAllContainer for' + target.slice(1) + '"><div class="regAllContent">' +
+            '<div class="regAllTitle">Register ' + qDom + numVariation + '  for one year for €' + tableDomPrices.toFixed(2) + ':</div>' +
+            tableDomList + '</div>' +
             '<a href="#" data-tname="' + target + '" class="regAllButton"><i class="b-icon"></i>Register all</a>' +
             '</div>');
     }
@@ -479,6 +501,8 @@ $('.search-bar .b-submit').on('click', '', function () {
     // Чистим поля поиска
     $('input.search-bar__input, textarea.search-bar__input').val('');
 
+    $('.search-bar .b-submit').addClass('search-bar__submit__disabled');
+
     for (var key in searchDomainsArr) {
         var onedomainname = searchDomainsArr[key],
             group1domains = {},
@@ -621,6 +645,6 @@ $(document).on('click', '.domains-step__summary-table .remove-row', function () 
 });
 
 // Бинд библиотеки tooltip для всплывающих подсказок
-$('body').tooltip({
-    selector: '.js-tooltip'
+$('table').tooltip({
+    items: '.js-tooltip'
 });
