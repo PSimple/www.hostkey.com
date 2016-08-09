@@ -175,7 +175,7 @@
 <!--ФИЛЬТР ВЕРИФИКАЦИИ-->
                 <div class="ssl-page-filter-verification">
                     <h3>Степень верификации</h3>
-                    {foreach ($arrSsl2 as $k => $row)}
+                    {foreach ($arrSsl2 as $k => $row)} <!--{if ( 0 == $k )} style="background: #fff;" {/if}-->
                     <a id="Ssl_verification_domain" class="ssl-page-filter__item_verification" href="" style="" data-text="Всплывающая подсказка">
                         <h4 class="ssl-page-filter__item-title">{$row['Head']}</h4>
                         <div class="ssl-page-filter__item-text">
@@ -297,7 +297,7 @@
                 </table>
 
 
-
+       
 
 
                 {plugin "Content_ContentBlock_Plugin" view="Voucher" target="voucher"}
@@ -371,13 +371,7 @@ $(".ssl-page-filter__item_scale").click(function(e) {
     }, 1100);
     return false;
 })
-
-    /*if(k==0){
-        k.style.backgroundColor === 'red'
-    else {
-            k.style.backgroundColor ==='green';
-        }
-    }*/
+{if ( 0 == $key )} style="background: #fff;" {/if}
 </script>
 
 

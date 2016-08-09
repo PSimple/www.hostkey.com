@@ -6503,7 +6503,7 @@ div.clear {
     clear: both;
 }
 
-.domains-step__summary {
+.domains-step__summary, .ssl-step__summary {
     width: 260px;
     display: inline-block;
     vertical-align: top;
@@ -7829,14 +7829,16 @@ width: 1100px;
     width: 720px;
     height: 1000px;
     background-color: #fff;
-    border: 1px solid red;
+    padding-left: 30px;
+    border-right: 1px solid lightgrey;
+    /*border: 1px solid red;*/
 }
 .sertification-block-right {
     display: inline-block;
-    width: 360px;
+    width: 300px;
     height: 1000px;
     background-color: #fff;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     float: right;
 }
 .logo-sertification, .name-sertification,
@@ -7846,9 +7848,45 @@ width: 1100px;
 .CSR-domain-right {
     display: inline-block;
 }
+.CSR-sertification, .CSR-domain {
+    margin-top: 70px;
+}
+.request-sertification {
+    margin-top: 10px;
+}
+.CSR-text, .CSR-instructions-text, .CSR-textarea-domain, .CSR-slug-information {
+    margin-top: 40px;
+}
+.CSR-enter-text {
+    margin-top: 40px;
+}
+.logo-sertification {
+    width: 150px;
+    height: 50px;
+    /*border: 1px solid yellow;*/
+}
+.name-sertification {
+    width: 370px;
+    height: 50px;
+    /*border: 1px solid yellow;*/
+}
+.tooltip-sertification {
+    width: 30px;
+    height: 30px;
+    /*border: 1px solid maroon;*/
+}
+.CSR-textarea input {
+    width: 500px;
+}
 .SSL-your {
     width: 300px;
     height: 500px;
     margin: auto;
-    border: 1px solid green;
+    /*border: 1px solid green;*/
+}
+.ssl-step__summary {
+    margin-left: 0;
+}
+.ssl-table-select__item {
+    width: 180px;
 }
