@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Управление Faq список
+ * пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Faq пїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @package Content.Controller.Faq
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.11.19
  */
-class Content_Faq_Grid extends Zero_Crud_Grid
+class Content_Faq_Grid extends Zero_Web_Crud_Grid
 {
     /**
      * The table stores the objects handled by this controller.
@@ -21,5 +21,5 @@ class Content_Faq_Grid extends Zero_Crud_Grid
      *
      * @var string
      */
-    protected $ViewName = 'Zero_Crud_Grid';
+    protected $ViewName = 'Zero_Web_Crud_Grid';
 }

@@ -9,7 +9,7 @@
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015.07.20
  */
-class Shop_Web_Domains extends Zero_Controller
+class Shop_Domains_Web extends Zero_Controller
 {
     /**
      * Контроллер по умолчанию.
@@ -27,7 +27,7 @@ class Shop_Web_Domains extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Shop_Web_Domains
+     * @return Shop_Domains_Web
      */
     public static function Make($properties = [])
     {

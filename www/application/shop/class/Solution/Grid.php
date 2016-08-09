@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Список решений
+ * пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
  *
  * @package Shop.Controller.Solution
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
  * @date 2015-02-04
  */
-class Shop_Solution_Grid extends Zero_Crud_Grid
+class Shop_Solution_Grid extends Zero_Web_Crud_Grid
 {
     /**
      * The table stores the objects handled by this controller.
@@ -21,5 +21,5 @@ class Shop_Solution_Grid extends Zero_Crud_Grid
      *
      * @var string
      */
-    protected $ViewName = 'Zero_Crud_Grid';
+    protected $ViewName = 'Zero_Web_Crud_Grid';
 }
