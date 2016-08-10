@@ -41,6 +41,7 @@ class Shop_Api_Domains_Order extends Zero_Controller
                 'periodReg' => $row['periodReg'] / 12,
                 'periodTrans' => $row['periodTrans'] / 12,
                 'periodRenew' => $row['periodRenew'] / 12,
+                'idprotection' => $row['idprotection'],
                 'dns' => $row['dns'],
             ];
         }
