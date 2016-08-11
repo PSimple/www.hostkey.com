@@ -16,7 +16,8 @@ class Shop_Api_Domains_Order extends Zero_Controller
      */
     public function Action_POST()
     {
-        // https://bill.hostkey.com/cart.php?a=add&currency=2&pid=564&billingcycle=monthly&configoption[858]=15006&customfield[348]=описание-заказа
+        // https://bill.hostkey.com/cart.php?a=add&currency=2&pid=564&billingcycle=monthly&configoption[858]=15215&customfield[348]=описание-заказа
+        // €133.21 Monthly
 
         // Проверки
         if (empty($_REQUEST['domains']) || empty($_REQUEST['dns']))
@@ -25,6 +26,8 @@ class Shop_Api_Domains_Order extends Zero_Controller
         // проверка dns
         $checkNs = [];
         foreach ($_REQUEST['dns'] as $ns) {
+            if (!$ns = trim($ns))
+                continue;
             $arr = explode('.', $ns);
             array_shift($arr);
             $ns = implode('.', $arr);
