@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/assets/css/jquery/jquery-ui.min.css"/>
+<link rel="stylesheet" href="/assets/css/switchery.css"/>
 <div class="b-page">
 
     <div class="b-page__promo b-page__promo_domains_yes">
@@ -14,7 +15,7 @@
                 DOMAIN FOR YOUR PROJECT
             </h3>
 
-            <div class="b-container">
+            <div class="b-container" id="searchBarContainer" style="display: block;">
                 <div class="search-bar">
                     <input type="text" class="b-input search-bar__input" name=""/><!--
                         --><textarea class="b-input search-bar__input search-bar__input-hidden" name="" cols="30"
@@ -145,46 +146,71 @@
 
                 <div class="domains-step3__tab" id="step3">
                     <div class="tab-list__content-block">
-                        <h3>Зарегистрировать домены</h3>
-                        <table class="tab-list__content-table" id="summaryRegTable">
+                        <div class="domains-infoBlock">
+                            <p class="domains-infoBlockTitle">
+                                WHOIS privacy
+                            </p>
+                            <div class="domains-infoBlockDescription">
+                                <p>Upon domain registration, your name, address and phone as a registered domain holder will be published in a publicly available directory.</p>
+                                <p>WHOIS PRIVACY service replaces your personal information with an anonymous proxy identity your data will be not invisible to spammers and scammers.</p>
+                                <p>Annual price: €4 per domain.</p>
+                            </div>
+                            <div class="domains-infoBlockTable">
+                                <div class="domains-infoBlockTableCell">
+                                    <span>Your info <b>without</b> WHOIS PRIVACY</span>
+                                    <b>John Smith</b><br>
+                                    401 Main Street<br>
+                                    Los Angeles 90001<br>
+                                    USA<br>
+                                    +1 555 3451135<br>
+                                    john.smith@icloud.com
+                                </div>
+                                <div class="domains-infoBlockTableCell">
+                                    <span>Your info <b>with</b> WHOIS PRIVACY</span>
+                                    <b>My Domain Provider</b><br>
+                                    Ceintuurbaan 32A<br>
+                                    Zwolle 8024 AA<br>
+                                    The Netherlands<br>
+                                    +31.382305013<br>
+                                    mydomain.com@mydomainprovider.com
+                                </div>
+                            </div>
+                        </div>
+                        <div class="domains-infoBlock">
+                            <p class="domains-infoBlockTitle">
+                                DNS hosting
+                            </p>
+                            <div class="domains-infoBlockDescription">
+                                <p>Make use of our secure geographically dispersed DNS servers with a powerful management console for handy DNS settings and domain management.</p>
+                                <p>Annual price: €10.56 per domain.</p>
+                            </div>
+                        </div>
+                        <table class="tab-list__content-table" id="additServTable">
                             <thead>
                             <tr>
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
-                                <th width="260" class="tab-list__content-table-cell"><span
-                                        class="tab-list__content-reg-help js-tooltip"
-                                        title="Lorem ipsum...">Period</span></th>
-                                <th width="260" class="tab-list__content-table-cell"><span
-                                        class="tab-list__content-reg-help js-tooltip"
-                                        title="Lorem ipsum...">DNS-hosting</span></th>
-                                <th width="300" class="tab-list__content-table-cell"><span
-                                        class="tab-list__content-reg-help js-tooltip" title="Lorem ipsum...">ID Protection</span>
-                                </th>
+                                <th width="260" class="tab-list__content-table-cell">Registration period</th>
+                                <th width="260" class="tab-list__content-table-cell">WHOIS privacy</th>
+                                <th width="300" class="tab-list__content-table-cell">DNS hosting</th>
                             </tr>
                             </thead>
                             <tbody>
                             <!-- -->
                             </tbody>
                         </table>
-                        <h3>Перенести домены</h3>
-                        <table class="tab-list__content-table" id="summaryTransTable">
-                            <thead>
-                            <tr>
-                                <th width="250" class="tab-list__content-table-cell">Domain</th>
-                                <th width="260" class="tab-list__content-table-cell"><span
-                                        class="tab-list__content-reg-help js-tooltip"
-                                        title="Lorem ipsum...">Password</span></th>
-                                <th width="260" class="tab-list__content-table-cell"><span
-                                        class="tab-list__content-reg-help js-tooltip"
-                                        title="Lorem ipsum...">DNS-hosting</span></th>
-                                <th width="300" class="tab-list__content-table-cell"><span
-                                        class="tab-list__content-reg-help js-tooltip" title="Lorem ipsum...">ID Protection</span>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <!-- -->
-                            </tbody>
-                        </table>
+                        <div class="domains-infoBlock domains-infoBlockExt">
+                            <h3>Additional information</h3>
+                            <p class="domains-infoBlockSubtitle">
+                                To proceed with the domain names registration we'll need some additional information. Please fill-in the respective information below.
+                            </p>
+                            <div class="domains-infoExtFormat">
+                                <div class="domains-infoExtItem">
+                                    <p class="domains-infoExtItemTitle">domain.zone</p>
+                                    <label for="ext_taxid_1">Tax ID: </label>
+                                    <input name="ext_taxid_1" id="ext_taxid_1" type="text"> *
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="domains-step__summary domains-step__summary_is-purpur" id="scroll-block">
@@ -222,4 +248,5 @@
 
 <script type="application/javascript" src="/assets/js/jquery/jquery-ui.js"></script>
 <script type="application/javascript" src="/assets/js/jquery.redirect.js"></script>
+<script type="application/javascript" src="/assets/js/switchery.js"></script>
 <script type="application/javascript" src="/assets/js/domains.js"></script>

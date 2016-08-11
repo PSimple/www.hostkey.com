@@ -62,6 +62,13 @@ window.addEventListener('hashchange', function () {
             $('#step1, #step3').hide();
             $('.b-domains__title-main').html('REGISTER DOMAINS<br/>OR CONTINUE SEARCH');
             break;
+        case '#domains_3':
+            if (Object.keys(pricesSumArr).length) {
+                $('.domains-step2n3, #step3').css('display', 'inline-block');
+                $('#step1, #step2').hide();
+                $('.b-domains__title-main').html('Choose additional services').css('width', '500px');
+            }
+            break;
         case '#domains_1':
         default:
             $('#step1').show();
@@ -70,6 +77,11 @@ window.addEventListener('hashchange', function () {
             break;
     }
 });
+
+function toggleBlock(target) {
+    var e = document.getElementById(target);
+    e.style.display = (e.style.display == "block") ? "none" : "block";
+}
 
 // Функция добавления данных
 function AddData(target, data, action) {
@@ -586,6 +598,7 @@ $('.tab-list__item').on('click', '', function () {
 // Переход на третий шаг
 $('#buy').on('click', '', function () {
     var summaryData = {},
+        additServContent = '',
         domains = Object.keys(pricesSumArr).join(', '),
         orderGenArr = {'domains': {}},
         optionId = 0,
@@ -593,35 +606,67 @@ $('#buy').on('click', '', function () {
         successLink = 'https://bill.hostkey.com/cart.php?a=add&currency=2&pid=564&billingcycle=monthly';
     if (Object.keys(pricesSumArr).length) {
         var regPeriod = 0,
-            dnsPeriod = 0;
+            dnsPeriod = 0,
+            dnsDisabled = '',
+            idProtDisabled = '';
         summaryData = {};
         summaryData['domainreg'] = true;
+
+        toggleBlock('searchBarContainer');
+        window.location.hash = '#domains_3';
+
         for (var key in pricesSumArr) {
             if (pricesSumArr[key]['action'] == 'reg' && pricesSumArr[key]['status'] == 'available') {
                 regPeriod = pricesSumArr[key]['period'];
                 dnsPeriod = (!pricesSumArr[key]['dnsmanagement'] ? 0 : regPeriod);
+
                 summaryData['domains[' + key + ']'] = key;
                 summaryData['domainsregperiod[' + key + ']'] = regPeriod;
                 summaryData['domainsregprice[' + key + ']'] = pricesSumArr[key]['price'];
+
                 orderGenArr['domains'][key] = {'periodReg': parseInt(regPeriod * 12), 'dns': dnsPeriod};
                 summaryConfig += 'Register domain: ' + key + '<br/>' + (dnsPeriod > 0 ? '+ DNS-hosting<br/>' : '') + '<b>Period: ' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + ' </b><br/>';
+
+                dnsDisabled = (!pricesSumArr[key]['dnsmanagement']) ? '' : 'disabled="disabled"';
+                idProtDisabled = (!pricesSumArr[key]['idprotection']) ? '' : 'disabled="disabled"';
+
+                // Отрисовка таблицы доп. сервисов
+                additServContent += '<tr class="tab-list__content-table-row">' +
+                    '<td class="tab-list__content-table-cell js-tooltip" title="' + key + '">' + key.cutDomain() + '</td>' +
+                    '<td class="tab-list__content-table-cell">' + dnsPeriod + ' year' + (regPeriod > 1 ? 's' : '') + '</td>' +
+                    '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" ' + dnsDisabled + '></td>' +
+                    '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" ' + idProtDisabled + '></td>' +
+                    '</tr>';
+
             }
         }
-        $.ajax({
-            url: '/api/v1/domains/order',
-            type: 'POST',
-            data: orderGenArr,
-            dataType: 'JSON',
-            success: function (data) {
-                if (data['ErrorStatus'] == false) {
-                    optionId = data['Content']['OptionID'];
-                    $.redirect(successLink + '&configoption[858]=' + optionId + '&customfield[348]=' + summaryConfig, '', 'POST', '_self');
-                } else {
-                }
 
-            }
+        AddData('#additServTable', additServContent, 'append');
+
+        // Бинд библиотеки Switchery для переключателей на третьем шаге
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch')),
+            switchery = {};
+        elems.forEach(function (html) {
+            if ($(this).attr('disabled') != 'disabled')
+                switchery = new Switchery(html, {color: '#945ae0'});
+            else
+                switchery = new Switchery(html, {color: '#c4a8ec', disabled: true});
         });
-
+        /*
+         $.ajax({
+         url: '/api/v1/domains/order',
+         type: 'POST',
+         data: orderGenArr,
+         dataType: 'JSON',
+         success: function (data) {
+         if (data['ErrorStatus'] == false) {
+         optionId = data['Content']['OptionID'];
+         $.redirect(successLink + '&configoption[858]=' + optionId + '&customfield[348]=' + summaryConfig, '', 'POST', '_self');
+         } else {
+         }
+         }
+         });
+         */
     }
 });
 
