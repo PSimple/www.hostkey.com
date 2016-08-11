@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Получение групп зон
+ * Получение списка зон по указанной группе
  *
  * @package Shop.Api.Domains
  * @author Konstantin Shamiev aka ilosa <konstantin@shamiev.ru>
@@ -10,23 +10,41 @@
 class Shop_Api_Domains_ZoneGroupsList extends Zero_Controller
 {
     /**
-     * Получение групп зон
+     * Получение списка зон по указанной группе
      *
      * @return boolean flag статус выполнения
      */
     public function Action_GET()
     {
-        $response = Zero_I18n::Model('Shop', 'Shop_DomainsZone Groups options');
-        if ( is_array($response) )
+        // Проверки
+        if ( !isset($_REQUEST['groups']) || !$_REQUEST['groups'] )
+            Zero_App::ResponseJson500(-1, ["параметр групп не задан"]);
+
+        $sql_where = [];
+        foreach (explode(',', $_REQUEST['groups']) as $group)
         {
-            unset($response['Null']);
-            unset($response['Trouble']);
+            $sql_where[] = "`Groups` LIKE '%{$group}%'";
         }
-        else
+        $sql_where = implode(' OR ', $sql_where);
+
+        // Получаем список
+        $sql = "
+        SELECT
+          *
+        FROM DomainsZone
+        WHERE
+          {$sql_where}
+        ORDER BY
+          Sort ASC
+        ";
+        $result = Zero_DB::Select_Array($sql);
+        foreach ($result as $k => $v)
         {
-            $response = [];
+            unset($result[$k]['PriceRegister']);
+            unset($result[$k]['PriceTransfer']);
+            unset($result[$k]['PriceRenew']);
         }
-        Zero_App::ResponseJson200($response);
+        Zero_App::ResponseJson200($result);
         return true;
     }
 
