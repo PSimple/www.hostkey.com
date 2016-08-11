@@ -1,0 +1,248 @@
+<!--{pre($DATA)}-->
+
+
+<link rel="stylesheet" href="/assets/css/jquery/jquery-ui.min.css"/>
+<link rel="stylesheet" href="/assets/css/style.css"/>
+
+<div class="b-page">
+
+            <div class="b-page__promo b-page__promo_ssl_yes">
+                <div class="b-icon b-page__scroll-icon"  onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
+                <h1 class="b-page__promo-title">{$Head}</h1>
+            </div>
+
+
+    <div class="b-ssl" id="scroll-anchor-01">
+        <div class="sertification-block">
+            <h3>Оформить сертификат</h3>
+
+            <div class="sertification-block-left">
+
+                <div class="request-sertification">
+                    <div class="logo-sertification">
+                        Лого издателя
+                    </div>
+                    <div class="name-sertification">
+                        <div class="name-sertification-text">
+                            Название сертификата
+                        </div>
+                        <!--<div class="tooltip-sertification">
+                            вп
+                        </div>-->
+                    </div>
+                    <select aria-hidden="true" tabindex="-1" class="ssl-table-select__item js-select select2-hidden-accessible" name="tbl-select-36" id="regPeriod36" data_preset="Register_Domains">
+                        <option value="1">1 year / €2.51</option>
+                        <option value="2">2 years / €5.01</option>
+                        <option value="3">3 years / €7.52</option>
+                        <option value="4">4 years / €10.03</option>
+                        <option value="5">5 years / €12.53</option>
+                        <option value="6">6 years / €15.04</option>
+                        <option value="7">7 years / €17.55</option>
+                        <option value="8">8 years / €20.06</option>
+                        <option value="9">9 years / €22.56</option>
+                        <option value="10">10 years / €25.07</option>
+                    </select>
+                </div>
+
+                <div class="CSR-sertification">
+                    <div class="CSR-text">
+                        <h4>CSR</h4>
+                        <!--<div class="tooltip-sertification">вп</div>-->
+                        <p>Здесь небольшой текст на две строчки</p>
+                    </div>
+
+                    <div class="CSR-instructions-text">
+                        <h4>Инструкции по получению CSR</h4>
+                        <p>Ссылка 1</p>
+                        <p>Ссылка 2</p>
+                        <p>Ссылка 3</p>
+                    </div>
+
+                    <div class="CSR-enter-text">
+                        <h5>Ввести CSR</h5>
+                        <form class="CSR-textarea">
+                        <input type="textarea" placeholder="Обязательное поле" required="required"/>
+                        </form>
+                    </div>
+
+                    <div class="CSR-slug-information">
+                        <p>Компания:</p>
+                        <p>Домен:</p>
+                    </div>
+                </div>
+
+
+                <div class="CSR-domain">
+                    <div class="CSR-domain-text">
+                        Домены
+                    </div>
+                    <div class="CSR-domain-left">
+                        <form class="CSR-textarea-domain_form">
+                            <input type="textarea"/>
+                        </form>
+                        <form class="CSR-textarea-domain-form">
+                            <input type="textarea"/>
+                        </form>
+                    </div>
+                    <div class="CSR-domain-right">
+                        <button class="CSR-domain-button-close">X</button><br>
+                        <button class="CSR-domain-button-add">Добавить домен</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="sertification-block-right">
+                <div class="SSL-your"><!--взято со второго шага регистрации доменов, стр.Shop - Domains.html-->
+                    <div class="ssl-step__summary domains-step__summary_is-purpur" id="scroll-block">
+                        <div class="domains-step__summary-title">Your SSL</div>
+                        <div class="domains-step__summary-section" id="registerSection">
+                            <div class="domains-step__summary-subtitle">Register</div>
+                            <table class="domains-step__summary-table" id="domains-register-table">
+                                <tbody>
+                                <!-- json content -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="domains-step__summary-section" id="transferSection">
+                            <div class="domains-step__summary-subtitle">Transfer</div>
+                            <table class="domains-step__summary-table" id="domains-transfer-table">
+                                <tbody>
+                                <!-- json content -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="domains-step__summary-price">
+                            <span class="domains-step__summary-price-value" id="Summa">Empty cart</span>
+                            <span class="domains-step__summary-price-discount" id="Discount"></span>
+                        </div>
+                        <button class="b-submit domains-step__summary-submit" href="#" id="buy">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+                {plugin "Content_ContentBlock_Plugin" view="Voucher" target="voucher"}
+                {plugin "Content_ContentBlock_Plugin" view="NeedMore" target="information"}
+
+            </div>
+
+            <div class="footer-push"></div>
+        </div>
+
+<script type="application/javascript" src="/assets/js/jquery/jquery-ui.js"></script>
+<script type="application/javascript" src="/assets/js/jquery.redirect.js"></script>
+<script type="application/javascript" src="/assets/js/domains.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var c = 4;
+        var l = $(".ssl-page-offers a.ssl-page-offers__item").length;
+        $('.b-news__more').bind('click', function () {
+            if (4 >= l) {
+                c = c + 4;
+                l = l - 4;
+            } else {
+                c = c + l;
+                l = 0;
+            }
+            $(' .ssl-page-offers a.ssl-page-offers__item').each(function (index) {
+                if (index < c) {
+                    $(this).show('slow');
+                }
+            });
+            if (l == 0) {
+                $(".b-news__more div").hide('slow');
+            }
+            return false;
+        })
+    });
+</script>
+
+<!--скролл к верификации-->
+<script>
+$(".ssl-page-offers__item").click(function(e) {
+e.preventDefault();
+$(".ssl-page-offers__item").removeClass('active');
+$(this).addClass('active');
+    destination = $('.ssl-page-filter-verification').offset().top - 80;
+    $("html,body").animate({
+        scrollTop: destination
+    }, 1100);
+    return false;
+})
+
+$(".ssl-page-filter__item_verification").click(function(e) {
+    e.preventDefault();
+    $(".ssl-page-filter__item_verification").removeClass('active');
+    $(this).addClass('active');
+    destination = $('.ssl-page-filter-scale').offset().top - 80;
+    $("html,body").animate({
+        scrollTop: destination
+    }, 1100);
+    return false;
+})
+
+$(".ssl-page-filter__item_scale").click(function(e) {
+    e.preventDefault();
+    $(".ssl-page-filter__item_scale").removeClass('active');
+    $(this).addClass('active');
+    destination = $('.ssl_table_result').offset().top - 80;
+    $("html,body").animate({
+        scrollTop: destination
+    }, 1100);
+    return false;
+})
+
+
+</script>
+
+
+
+
+<!--<script>
+$('.ssl-page-offers__item').on('click', function () {
+$(this).toggleClass('ssl-page-offers__item_active');
+    return false;
+});
+</script>-->
+
+<!--<script>
+$('.ssl-page-offers__item, .ssl-page-filter__item').click(function () {
+$(this).css('backgroundColor', 'green');
+    return false;
+
+});
+</script>-->
+
+
+<!--<script>
+//всплывающая подсказка
+$.jQuery(document).ready(function() {
+
+$("[data-tooltip]").mousemove(function (eventObject) {
+
+$data_tooltip = $(this).attr("data-tooltip");
+
+$("#tooltip").text($data_tooltip)
+.css({
+"top" : eventObject.pageY + 5,
+"left" : eventObject.pageX + 5
+})
+.show();
+
+}).mouseout(function () {
+
+$("#tooltip").hide()
+.text("")
+.css({
+"top" : 0,
+"left" : 0
+});
+});
+});
+    </script>-->
