@@ -46,7 +46,7 @@ class Content_News_Page extends Zero_Controller
             $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
             $this->View->Assign('newsList4', $newsList);
             $news->AR->Sql_Order('DateCreate', 'DESC');
-            $news->AR->Sql_Limit(1, 12);
+            $news->AR->Sql_Limit(1, 4);
             $newsList = $news->AR->Select_Array("ID, Name, Description, DATE_FORMAT(`DateCreate`, '%d.%m.%Y') Date, IsDetails");
             // $NewsDetailPath = Zero_Config::Get_Config('content', 'config');
             $this->View->Assign('NEWS_DETAIL_PATH', Zero_App::$Config->Modules['content']['NewsDetailPath']);
