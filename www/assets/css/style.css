@@ -983,15 +983,15 @@ p {
 }
 
 /*ФОРМА ПОИСКА*/
-.form_search {
-    position: relative;
-    /*border: 1px solid #fff;*/
-    float: right;
+.header_form_search {
+    position: absolute;
     margin: 15px 0 0 0;
+    right: 0;
+    top: 0;
 
 }
 
-.form_search input {
+.header_form_search input {
     border: none;
     outline: none;
     cursor: pointer;
@@ -1000,7 +1000,7 @@ p {
     /*border: 1px solid yellow;*/
 }
 
-.form_search input[type="text"] {
+.header_form_search input[type="text"] {
     height: 39px;
     width: 0;
     display: inline-block;
@@ -1018,20 +1018,20 @@ p {
     /*border: 1px solid green;*/
 }
 
-.form_search input::-webkit-input-placeholder {
+.header_form_search input::-webkit-input-placeholder {
     color: #000;
 }
 
-.form_search input:-moz-placeholder {
+.header_form_search input:-moz-placeholder {
     color: #000;
 }
 
-.form_search input:-ms-input-placeholder {
+.header_form_search input:-ms-input-placeholder {
     color: #000;
 }
 
-.form_search input[type="text"]:focus {
-    width: 337px;
+.header_form_search input[type="text"]:focus {
+    width: 300px;
     z-index: 1;
     border-bottom: 1px solid #fff;
     background-color: #fff;
@@ -1039,7 +1039,7 @@ p {
     padding-left: 5px;
 }
 
-.form_search input[type="submit"] {
+.header_form_search input[type="submit"] {
     height: 40px;
     width: 40px;
     display: inline-block;
@@ -6631,6 +6631,75 @@ div.clear {
     display: none;
     width: 830px;
     background-color: #fff;
+}
+
+.domains-infoBlock {
+    margin: 0 0 30px;
+    font-size: 16px;
+    line-height: 22px;
+}
+
+.domains-infoBlockExt {
+    margin: 0;
+}
+
+.domains-infoExtItem {
+    border-top: 1px solid #e6e9ec;
+    padding: 15px 0;
+}
+
+.domains-infoExtItemTitle {
+    font-weight: bold;
+}
+
+.domains-infoBlock h3 {
+    margin: 35px 0 15px;
+    padding: 0;
+    font-size: 26px;
+    line-height: 30px;
+}
+
+.domains-infoBlockSubtitle {
+    font-weight: 600;
+}
+
+.domains-infoBlockTitle {
+    margin: 0 0 10px;
+    padding: 0;
+    font-size: 22px;
+    line-height: 26px;
+    color: #ff692d;
+}
+
+.domains-infoBlockDescription {
+    margin: 0 0 15px;
+    font-weight: 600;
+}
+
+.domains-infoBlockTable {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #6d31a3;
+    display: table;
+    width: 100%;
+}
+
+.domains-infoBlockTableCell {
+    padding: 10px 15px;
+    display: table-cell;
+    width: 50%;
+    font-size: 14px;
+}
+
+.domains-infoBlockTableCell:last-child {
+    border-left: 1px solid #955cdf;
+}
+
+.domains-infoBlockTableCell span {
+    display: block;
+    text-align: center;
+    padding-bottom: 10px;
 }
 
 .tab-list__content-block {
