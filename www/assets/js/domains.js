@@ -78,6 +78,7 @@ window.addEventListener('hashchange', function () {
             $('.domains-step2n3, #step2').css('display', 'inline-block');
             $('#step1, #step3').hide();
             $('.b-domains__title-main').html('REGISTER DOMAINS<br/>OR CONTINUE SEARCH');
+            $('.search-bar__input:visible').focus();
             break;
         case '#domains_3':
             if (Object.keys(pricesSumArr).length) {
@@ -89,6 +90,7 @@ window.addEventListener('hashchange', function () {
         case '#domains_1':
         default:
             $('#step1').show();
+            $('.search-bar__input:visible').focus();
             $('.domains-step2n3, #step2, #step3').hide();
             $('.b-domains__title-main').html('GET A PERFECT<br/>DOMAIN FOR YOUR PROJECT');
             break;
@@ -411,7 +413,7 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
             '<div class="domains-check__item-price-old"> €' + priceold + '</div>' +
             '</div>' +
             '<span class="fake-checkbox-label__box js-check"></span><input data-name="' + name + '" class="hidden-input" name="check-1" type="checkbox"/>' +
-            '<div class="domains-check__item-register">register</div><div class="domains-check__item-order">order</div>' +
+            '<div class="domains-check__item-register">register</div><div class="domains-check__item-order">CHOOSE MORE OR SEARCH</div>' +
             '</label>';
 
     }
@@ -507,7 +509,7 @@ $('.search-bar__input').on('keyup', function (e) {
 $('.search-bar__button-bulk').on('click', '', function () {
     $('.search-bar__input').toggleClass('search-bar__input-hidden');
     $('.search-bar__button-hide').show();
-    $('.search-bar__input:visible').val($('.search-bar__input').not(':visible').val());
+    $('.search-bar__input:visible').val($('.search-bar__input').not(':visible').val()).focus();
     $(this).hide();
 });
 
@@ -516,7 +518,7 @@ $('.search-bar__button-hide').on('click', '', function () {
     $('.search-bar__input').toggleClass('search-bar__input-hidden');
     $('.search-bar .b-submit').addClass('search-bar__submit__disabled');
     $('.search-bar__button-bulk').show();
-    $('.search-bar__input:visible').val('');
+    $('.search-bar__input:visible').val('').focus();
     $(this).hide();
 });
 
@@ -656,7 +658,7 @@ $(document).on('click', 'a.tab-list__content-reg-this', function () {
                 '<td class="domains-step__summary-table-cell domain-title-show' + (!isCut ? '' : ' js-tooltip" title="' + $domain) + '">' +
                 (!isCut ? $domain : cutName) + '</td>' +
                 '<td class="domains-step__summary-table-cell remove-row" data-rowN="' + $rowN + '" data-domain="' + $domain + '">€' + $price + '</td>' +
-                '</tr>');
+                '</tr><tr><td class="domains-step__summary-table-border" colspan="2"><div> </div></td></tr>');
             summaryPriceCalc($price, '+');
         } else {
             pricesSumArr[$domain]['period'] = $period;
@@ -702,6 +704,7 @@ $(document).on('click', '.domains-step__summary-table .remove-row', function () 
     }
 
     $rowCart.remove();
+    $rowCart.next().remove();
     if ($section.find('td').length == 0)
         $section.removeClass('visible_section');
 
@@ -716,6 +719,26 @@ $(document).on('click', '.tab-list__content-reg-all, .regAllButton', function ()
     $.each($row, function () {
         $(this).find('.table-select__item').val("1").trigger("change");
         $(this).find('.tab-list__content-reg-this:visible').trigger('click');
+    });
+    return false;
+});
+
+// Обработка кнопки "WHOIS PRIVACY"
+$(document).on('click', '.tab-list__content-reg-idprotAll', function () {
+    var $item = $('#additServTable').find('.idprot-cell');
+    $.each($item, function () {
+        if (!$(this).find('input').is(':checked'))
+            $(this).find('.switchery').trigger("click");
+    });
+    return false;
+});
+
+// Обработка кнопки "WHOIS PRIVACY"
+$(document).on('click', '.tab-list__content-reg-dnsAll', function () {
+    var $item = $('#additServTable').find('.dns-cell');
+    $.each($item, function () {
+        if (!$(this).find('input').is(':checked'))
+            $(this).find('.switchery').trigger("click");
     });
     return false;
 });
@@ -771,14 +794,14 @@ $('#buy').on('click', '', function () {
                     additServContent += '<tr class="tab-list__content-table-row" data-domain="' + key + '">' +
                         '<td class="tab-list__content-table-cell' + (!isCut ? '' : ' js-tooltip" title="' + key) + '">' + key.cutDomain() + '</td>' +
                         '<td class="tab-list__content-table-cell">' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + '</td>' +
-                        '<td class="tab-list__content-table-cell"><input type="checkbox" data-linkDom="idprot_' + key + '" data-price="' + idProtPrice + '" class="js-switch" ' + idProtDisabled + '></td>' +
-                        '<td class="tab-list__content-table-cell"><input type="checkbox" data-linkDom="dns_' + key + '" data-price="' + dnsPrice + '" class="js-switch" ' + dnsDisabled + '></td>' +
+                        '<td class="tab-list__content-table-cell idprot-cell"><input type="checkbox" data-linkDom="idprot_' + key + '" data-price="' + idProtPrice + '" class="js-switch" ' + idProtDisabled + '></td>' +
+                        '<td class="tab-list__content-table-cell dns-cell"><input type="checkbox" data-linkDom="dns_' + key + '" data-price="' + dnsPrice + '" class="js-switch" ' + dnsDisabled + '></td>' +
                         '</tr>';
 
                 }
             }
 
-            addData('#additServTable', additServContent, 'add');
+            addData('#additServTable tbody', additServContent, 'add');
             if (!$.isEmptyObject(extFieldsArr)) {
                 for (var key in extFieldsArr) {
                     extFieldsStr += '<div class="domains-infoExtItem" data-domain="' + key + '">' +
@@ -806,7 +829,7 @@ $('#buy').on('click', '', function () {
             for (var key in pricesSumArr) {
                 if (pricesSumArr[key]['action'] == 'reg' && pricesSumArr[key]['status'] == 'available') {
                     regPeriod = pricesSumArr[key]['period'];
-                    dnsPeriod = (!pricesSumArr[key]['dnsmanagement'] || !pricesSumArr[key]['dnsflag'] ? 0 : regPeriod);
+                    dnsPeriod = (!pricesSumArr[key]['dnsflag'] ? 0 : regPeriod);
                     idProt = (!pricesSumArr[key]['idprotflag'] ? 0 : pricesSumArr[key]['idprotection']);
 
                     orderGenArr['domains'][key] = {
@@ -823,11 +846,12 @@ $('#buy').on('click', '', function () {
                     summaryConfig += 'Register domain: ' + key + '<br/>' + (dnsPeriod > 0 ? '+ DNS hosting<br/>' : '') + (idProt > 0 ? '+ WHOIS privacy<br/>' : '') + '<b>Period: ' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + ' </b><br/>';
                 }
             }
-            if (!$('.domains-infoExtItem').find('input:required').val() != '' && !$('.domains-infoExtItem').find('input:required').val() != undefined) {
+            if (!$("input:invalid").length) {
+                $('.errorFieldsList').remove();
                 $.ajax({
                     url: '/api/v1/domains/order',
                     type: 'POST',
-                    data: JSON.stringify(orderGenArr),
+                    data: orderGenArr,
                     dataType: 'JSON',
                     success: function (data) {
                         if (data['ErrorStatus'] == false) {
@@ -838,14 +862,8 @@ $('#buy').on('click', '', function () {
                     }
                 });
             } else {
-                var errorField = '';
-                $.each($('.domains-infoExtItem').find('input:required'), function () {
-                    if ($(this).val() == '') {
-                        $(this).addClass('errorInput');
-                        errorField += $(this).attr('name') + ' is required / ';
-                    }
-                });
-                $('.domains-infoBlockSubtitle').after('<div class="errorFieldsList">' + errorField.slice(0, -3) + '</div>');
+                $('.errorFieldsList').remove();
+                $('.domains-infoBlockSubtitle').after('<div class="errorFieldsList">Please fill in all of the required fields.</div>');
             }
         }
     }
@@ -856,10 +874,10 @@ $(document).on('change', '.js-switch', function () {
     var linkDom = $(this).attr('data-linkDom').split('_'),
         type = linkDom[0],
         domain = linkDom[1],
-        price = $(this).attr('data-price'),
+        price = parseInt($(this).attr('data-price')),
         cartRow = '<tr class="domains-step__summary-table-row" data-linkDom="' + type + '_' + domain + '">' +
-            '<td class="domains-step__summary-table-cell domain-title-show">' + ((type == "dns") ? 'DNS hosting' : 'WHOIS privacy') + '</td>' +
-            '<td class="domains-step__summary-table-cell remove-row">€' + price + '</td>' +
+            '<td class="domains-step__summary-table-cell domain-title-show domain-title-padding">' + ((type == "dns") ? 'DNS hosting' : 'WHOIS privacy') + '</td>' +
+            '<td class="domains-step__summary-table-cell remove-row">€' + price.toFixed(2) + '</td>' +
             '</tr>';
     if ($(this).is(':checked')) {
         pricesSumArr[domain][type + 'Flag'] = 1;

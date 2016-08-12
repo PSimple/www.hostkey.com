@@ -6534,7 +6534,6 @@ div.clear {
 .domains-step__summary-section {
     padding-top: 10px;
     margin-bottom: 10px;
-    border-bottom: 1px solid #e6e9ec;
     display: none;
 }
 
@@ -6569,6 +6568,27 @@ div.clear {
     vertical-align: top;
 }
 
+.domains-step__summary-table-border {
+    text-align: center;
+    padding: 5px 0;
+}
+
+.domains-step__summary-table-border div {
+    width: 50%;
+    display: inline-block;
+    height: 1px;
+    vertical-align: middle;
+    background-color: #e6e9ec;
+}
+
+#domains-register-table tr:last-child .domains-step__summary-table-border div {
+    width: 100%;
+}
+
+.domain-title-padding {
+    padding-left: 15px;
+}
+
 .domains-step__summary-table-row:hover .domains-step__summary-table-cell:nth-child(2):after {
     cursor: pointer;
     background-color: #f4f6f9;
@@ -6593,7 +6613,7 @@ div.clear {
 
 .domains-step__summary-table-cell:nth-child(2) {
     font-size: 18px;
-    line-height: 20px;
+    line-height: 25px;
     color: #ff692d;
     width: 65px;
     text-align: right;
@@ -6855,7 +6875,7 @@ div.clear {
 }
 
 .domains-infoExtItem input[type="text"] {
-    border: 1px solid #f3f5f8;
+    border: 1px solid #e6e9ec;
     height: 28px;
     line-height: 28px;
     resize: none;
@@ -6864,7 +6884,6 @@ div.clear {
 }
 
 .domains-infoExtItem input[type="checkbox"] {
-    border: 1px solid #f3f5f8;
     height: 24px;
     width: 24px;
     line-height: 24px;
@@ -6889,6 +6908,11 @@ div.clear {
 
 .domains-infoExtItem .extFieldReq {
     color: red;
+}
+
+.tab-list__content-reg-idprotAll,
+.tab-list__content-reg-dnsAll {
+    text-decoration: none;
 }
 
 .errorFieldsList {
