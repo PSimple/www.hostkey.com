@@ -182,7 +182,7 @@ function genDomainsTable(target, data) {
             img = (groupDomain['img'] != null && groupDomain['img'] != 'undefined' && groupDomain['img'] != '') ? '<img src="/upload/data/' + groupDomain['img'] + '" />' : '',
             promo = ('promo' in data[name]) ? 'promoRow' : '',
             periodOptions = '',
-            dnsFlag = (groupDomain['dnsmanagement'] != null && groupDomain['dnsmanagement'] != 'undefined' && groupDomain['dnsmanagement'] != '') ? 1 : 0,
+            dnsFlag = 1,
             cutName = name.cutDomain();
 
         if (groupDomain['status'] == 'available') {
@@ -732,6 +732,7 @@ $('#buy').on('click', '', function () {
         var regPeriod = 0,
             dnsPeriod = 0,
             dnsPrice = 0,
+            idProtPrice = 0,
             idProt = 0,
             dnsDisabled = '',
             idProtDisabled = '',
@@ -750,8 +751,9 @@ $('#buy').on('click', '', function () {
             for (var key in pricesSumArr) {
                 if (pricesSumArr[key]['action'] == 'reg' && pricesSumArr[key]['status'] == 'available') {
                     regPeriod = pricesSumArr[key]['period'];
-                    dnsPeriod = (!pricesSumArr[key]['dnsmanagement'] ? 0 : regPeriod);
+                    dnsPeriod = regPeriod;
                     dnsPrice = dnsPeriod * dnsRate;
+                    idProtPrice = dnsPeriod * 4;
                     domainSplit = key.split('.');
                     currentZone = '.' + domainSplit[1];
                     if (currentZone in zoneExtFields) {
@@ -769,7 +771,7 @@ $('#buy').on('click', '', function () {
                     additServContent += '<tr class="tab-list__content-table-row" data-domain="' + key + '">' +
                         '<td class="tab-list__content-table-cell' + (!isCut ? '' : ' js-tooltip" title="' + key) + '">' + key.cutDomain() + '</td>' +
                         '<td class="tab-list__content-table-cell">' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + '</td>' +
-                        '<td class="tab-list__content-table-cell"><input type="checkbox" data-linkDom="idprot_' + key + '" data-price="4" class="js-switch" ' + idProtDisabled + '></td>' +
+                        '<td class="tab-list__content-table-cell"><input type="checkbox" data-linkDom="idprot_' + key + '" data-price="' + idProtPrice + '" class="js-switch" ' + idProtDisabled + '></td>' +
                         '<td class="tab-list__content-table-cell"><input type="checkbox" data-linkDom="dns_' + key + '" data-price="' + dnsPrice + '" class="js-switch" ' + dnsDisabled + '></td>' +
                         '</tr>';
 
@@ -808,15 +810,15 @@ $('#buy').on('click', '', function () {
                     idProt = (!pricesSumArr[key]['idprotflag'] ? 0 : pricesSumArr[key]['idprotection']);
 
                     orderGenArr['domains'][key] = {
-                        "advanced": {
+                        'advanced': {
                             'Name1': '',
                             'Name2': ''
                         },
-                        "periodReg": parseInt(regPeriod * 12),
-                        "periodTrans": 0,
-                        "periodRenew": 0,
-                        "idprotection": idProt,
-                        "dns": dnsPeriod
+                        'periodReg': parseInt(regPeriod * 12),
+                        'periodTrans': 0,
+                        'periodRenew': 0,
+                        'idprotection': idProt,
+                        'dns': dnsPeriod
                     };
                     summaryConfig += 'Register domain: ' + key + '<br/>' + (dnsPeriod > 0 ? '+ DNS hosting<br/>' : '') + (idProt > 0 ? '+ WHOIS privacy<br/>' : '') + '<b>Period: ' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + ' </b><br/>';
                 }
