@@ -778,7 +778,7 @@ $('#buy').on('click', '', function () {
                 }
             }
 
-            addData('#additServTable', additServContent, 'append');
+            addData('#additServTable', additServContent, 'add');
             if (!$.isEmptyObject(extFieldsArr)) {
                 for (var key in extFieldsArr) {
                     extFieldsStr += '<div class="domains-infoExtItem" data-domain="' + key + '">' +
@@ -823,7 +823,7 @@ $('#buy').on('click', '', function () {
                     summaryConfig += 'Register domain: ' + key + '<br/>' + (dnsPeriod > 0 ? '+ DNS hosting<br/>' : '') + (idProt > 0 ? '+ WHOIS privacy<br/>' : '') + '<b>Period: ' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + ' </b><br/>';
                 }
             }
-            if (!$('.domains-infoExtItem').find('input:required').val() == '') {
+            if (!$('.domains-infoExtItem').find('input:required').val() != '' && !$('.domains-infoExtItem').find('input:required').val() != undefined) {
                 $.ajax({
                     url: '/api/v1/domains/order',
                     type: 'POST',
