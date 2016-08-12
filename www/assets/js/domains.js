@@ -27,6 +27,18 @@ var i,
     contentMain = {},
     pricesSumArr = {},
     summaryPrice = 0,
+    dnsRate = 10.56,
+    orderGenArr = {
+        'dns': {
+            'ns1': '',
+            'ns2': '',
+            'ns3': '',
+            'ns4': ''
+
+        },
+        'domains': {}
+    },
+    zoneExtFields = {},
     k = 0,
     pageDomCount = 20, // кол-во элементов подгружаемых в группах постранично
     searchZones = '',
@@ -54,7 +66,12 @@ var i,
 
 window.location.hash = '#domains_1';
 
-// Функция, отслеживающая переход по шагам
+// Проверка наличия атрибута
+$.fn.hasAttr = function (name) {
+    return this.attr(name) !== undefined;
+};
+
+// Роутинг
 window.addEventListener('hashchange', function () {
     switch (location.hash) {
         case '#domains_2':
@@ -78,30 +95,12 @@ window.addEventListener('hashchange', function () {
     }
 });
 
-function toggleBlock(target) {
-    var e = document.getElementById(target);
-    e.style.display = (e.style.display == "block") ? "none" : "block";
-}
-
-// Функция добавления данных
-function AddData(target, data, action) {
-    var $targetCont = $(target);
-    if (action == 'add' || action == 'append') {
-        if (action == 'add')
-            $targetCont.empty();
-        $targetCont.append(data);
-    } else {
-        $targetCont.prepend(data);
-    }
-    loaderView('hide');
-}
-
-// Функция очистки от html-тегов
+// Очистка от html-тегов
 String.prototype.stripTags = function () {
     return this.replace(/<\/?[^>]+>/g, '');
 };
 
-// Функция укорачивания длинных доменных имен
+// Укорачивание длинных доменных имен
 String.prototype.cutDomain = function () {
     var splitName = this.split('.'),
         cutName = this;
@@ -121,6 +120,39 @@ function loaderView(action) {
     } else {
         $('.loader-view').show();
         $('.b-domains__container').addClass('overlay-view');
+    }
+}
+
+// Скрыть/показать блок
+function toggleBlock(target) {
+    var e = document.getElementById(target);
+    e.style.display = (e.style.display == "block") ? "none" : "block";
+}
+
+// Добавление данных
+function addData(target, data, action) {
+    var $targetCont = $(target);
+    if (action == 'add' || action == 'append') {
+        if (action == 'add')
+            $targetCont.empty();
+        $targetCont.append(data);
+    } else {
+        $targetCont.prepend(data);
+    }
+    loaderView('hide');
+}
+
+// Операции с итоговой суммой в корзине
+function summaryPriceCalc(num, operation) {
+    if (operation == '+') {
+        summaryPrice = (parseFloat(summaryPrice) + parseFloat(num)).toFixed(2);
+    } else {
+        summaryPrice = (parseFloat(summaryPrice) - parseFloat(num)).toFixed(2);
+    }
+    if (summaryPrice == 0) {
+        $('#Summa').html('Empty Cart');
+    } else {
+        $('#Summa').html('€' + summaryPrice);
     }
 }
 
@@ -207,7 +239,7 @@ function genDomainsTable(target, data) {
     }
 
     if (!$(target).hasClass('emptyResp')) {
-        AddData(target, readyTable, 'append');
+        addData(target, readyTable, 'append');
         $(target).addClass('notEmpty');
     }
 
@@ -265,47 +297,60 @@ function genDomainsTable(target, data) {
     });
 }
 
-// Обработчик добавления в корзину
-$(document).on('click', 'a.tab-list__content-reg-this', function () {
-    var $domain = $(this).attr('data-domain'),
-        cutName = $domain.cutDomain(),
-        $rowN = $(this).attr('data-rown'),
-        $cartRowN = $('#domains-register-table').find('td[data-rown=' + $rowN + ']'),
-        $period = $('#regPeriod' + $rowN).val(),
-        $priceSplit = ($('#regPeriod' + $rowN + ' option:selected').html()).split('€'),
-        $price = $priceSplit[1],
-        $dns = $(this).attr('data-dns'),
-        $section = $('#registerSection');
-
-    if ($domain in contentMain) {
-        if (!($domain in pricesSumArr)) {
-            $('.tab-list__content-reg-this[data-domain="' + $domain + '"]').parents('.tab-list__content-table-row__available').addClass('selected_row');
-            pricesSumArr[$domain] = contentMain[$domain];
-            pricesSumArr[$domain]['action'] = 'reg';
-            pricesSumArr[$domain]['period'] = $period;
-            pricesSumArr[$domain]['price'] = $price;
-            pricesSumArr[$domain]['dnsmanagement'] = $dns;
-
-            if (!$section.is(':visible'))
-                $section.addClass('visible_section');
-
-            $('#domains-register-table').find('tbody').append(
-                '<tr class="domains-step__summary-table-row">' +
-                '<td class="domains-step__summary-table-cell domain-title-show' + (!isCut ? '' : ' js-tooltip" title="' + $domain) + '">' +
-                (!isCut ? $domain : cutName) + '</td>' +
-                '<td class="domains-step__summary-table-cell remove-row" data-rowN="' + $rowN + '" data-domain="' + $domain + '">€' + $price + '</td>' +
-                '</tr>');
-            summaryPrice = (parseFloat(summaryPrice) + parseFloat($price)).toFixed(2);
-            $('#Summa').html('€' + summaryPrice);
-        } else {
-            pricesSumArr[$domain]['period'] = $period;
-            summaryPrice = ((parseFloat(summaryPrice) - parseFloat(pricesSumArr[$domain]['price'])) + parseFloat($price)).toFixed(2);
-            pricesSumArr[$domain]['price'] = $price;
-            $cartRowN.html('€' + $price);
-            $('#Summa').html('€' + summaryPrice);
+// Справочник шаблонов для доп. полей
+function createFields(json) {
+    var htmlResult = '';
+    for (var key in json) {
+        var item = json[key],
+            optionsArr = {};
+        switch (item['Type']) {
+            case 'text':
+                htmlResult += '<div class="extFieldRow">';
+                htmlResult += '<label>' + item['Name'] + '</label><input type="text" name="' + item['Name'] + '" size="' + item['Size'] + '" placeholder="' + item['Default'] + '" ' + (item['Required'] ? 'required /> <span class="extFieldReq">*</span>' : ' />');
+                htmlResult += '</div>';
+                break;
+            case 'tickbox':
+                htmlResult += '<div class="extFieldRow">';
+                htmlResult += '<label>' + item['Name'] + '</label><input type="checkbox" name="' + item['Name'] + '"  />' + ((item['Description'] != undefined && item['Description'] != null) ? ' <span>' + item['Description'] + '</span>' : '');
+                htmlResult += '</div>';
+                break;
+            case 'radio':
+                optionsArr = item['Options'].split(',');
+                htmlResult += '<div class="extFieldRow"><label>' + item['Name'] + '</label>';
+                for (var key in optionsArr) {
+                    htmlResult += '<input type="radio" name="' + item['Name'] + '" value="' + optionsArr[key] + '" /><label>' + optionsArr[key] + '</label>';
+                }
+                htmlResult += '</div>';
+                break;
+            case 'dropdown':
+                optionsArr = item['Options'].split(',');
+                htmlResult += '<div class="extFieldRow"><label style="padding-right: 10px;">' + item['Name'] + '</label><select class="js-select" name="' + item['Name'] + '">';
+                for (var key in optionsArr) {
+                    htmlResult += '<option value="' + optionsArr[key] + '" >' + optionsArr[key] + '</option>';
+                }
+                htmlResult += '</select></div>';
+                break;
+            case 'display':
+            default:
+                htmlResult += '<div class="extFieldInfo">' + item['Name'] + ': ' + item['Default'] + '</div>';
+                break;
         }
     }
-    return false;
+    return htmlResult;
+}
+
+// Подгрузка цены на dns-хостинг
+$.getJSON('/api/v1/shop/domains/dns/price', function (data) {
+    if (!data['ErrorStatus'])
+        dnsRate = data['Content'];
+});
+
+// Подгрузка инфы для доп полей
+$.getJSON('/api/v1/domains/advanced/field', function (data) {
+    var zones = data['Content'];
+    for (var key in zones) {
+        zoneExtFields[key] = createFields(zones[key]);
+    }
 });
 
 // Начальная загрузка области под поиском
@@ -331,7 +376,7 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=top100', function (data) {
             '<span class="domain-zone__item-price">€' + price + '</span>' +
             '</label>';
     }
-    AddData('.domain-zone', ready, 'add');
+    addData('.domain-zone', ready, 'add');
 });
 
 // Начальная загрузка области Special offers
@@ -370,7 +415,7 @@ $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
             '</label>';
 
     }
-    AddData('.domains-check__row', readyPromo, 'add');
+    addData('.domains-check__row', readyPromo, 'add');
 });
 
 // Вывод еще одной строки доменных зон в область под поиском
@@ -393,7 +438,7 @@ $('#domain-zone__more').on('click', '', function () {
                 '<span class="domain-zone__item-price">€' + price + '</span>' +
                 '</label>';
         }
-        AddData('.domain-zone', ready, 'append');
+        addData('.domain-zone', ready, 'append');
     });
     return false;
 });
@@ -433,7 +478,7 @@ $('#domains-check__more').on('click', '', function () {
                 '</label>';
 
         }
-        AddData('.domains-check__row', readyPromo, 'append');
+        addData('.domains-check__row', readyPromo, 'append');
     });
     return false;
 });
@@ -498,11 +543,10 @@ $('.search-bar .b-submit').on('click', '', function () {
     $.each($checkedInput, function () {
         searchZones += $(this).data('name').replace('.', '') + ',';
     });
-    if (searchDomainsArr.valueOf().indexOf('.') >= 0) {
+    if (searchDomainsArr.indexOf('.') >= 0) {
         inputZone = searchDomainsArr.split('.');
         searchZones += inputZone[1];
     }
-
     searchZones = searchZones.slice(0, -1);
 
     // Возвращаем строчный вид поиска на 2 шаге
@@ -534,18 +578,6 @@ $('.search-bar .b-submit').on('click', '', function () {
 
     window.location.hash = '#domains_2';
 
-    return false;
-});
-
-// Обработка кнопки "Register All"
-$(document).on('click', '.tab-list__content-reg-all, .regAllButton', function () {
-    var $table = $($(this).attr('data-tname')),
-        $row = $table.find('.tab-list__content-table-row__available'),
-        $select = $table.find('.table-select__item');
-    $.each($row, function () {
-        $(this).find('.table-select__item').val("1").trigger("change");
-        $(this).find('.tab-list__content-reg-this:visible').trigger('click');
-    });
     return false;
 });
 
@@ -595,98 +627,246 @@ $('.tab-list__item').on('click', '', function () {
 
 });
 
-// Переход на третий шаг
+// Добавление в корзину
+$(document).on('click', 'a.tab-list__content-reg-this', function () {
+    var $domain = $(this).attr('data-domain'),
+        cutName = $domain.cutDomain(),
+        $rowN = $(this).attr('data-rown'),
+        $cartRowN = $('#domains-register-table').find('td[data-rown=' + $rowN + ']'),
+        $period = $('#regPeriod' + $rowN).val(),
+        $priceSplit = ($('#regPeriod' + $rowN + ' option:selected').html()).split('€'),
+        $price = $priceSplit[1],
+        $dns = parseInt($(this).attr('data-dns')),
+        $section = $('#registerSection');
+
+    if ($domain in contentMain) {
+        if (!($domain in pricesSumArr)) {
+            $('.tab-list__content-reg-this[data-domain="' + $domain + '"]').parents('.tab-list__content-table-row__available').addClass('selected_row');
+            pricesSumArr[$domain] = contentMain[$domain];
+            pricesSumArr[$domain]['action'] = 'reg';
+            pricesSumArr[$domain]['period'] = $period;
+            pricesSumArr[$domain]['price'] = $price;
+            pricesSumArr[$domain]['dnsmanagement'] = $dns;
+
+            if (!$section.is(':visible'))
+                $section.addClass('visible_section');
+
+            $('#domains-register-table').find('tbody').append(
+                '<tr class="domains-step__summary-table-row">' +
+                '<td class="domains-step__summary-table-cell domain-title-show' + (!isCut ? '' : ' js-tooltip" title="' + $domain) + '">' +
+                (!isCut ? $domain : cutName) + '</td>' +
+                '<td class="domains-step__summary-table-cell remove-row" data-rowN="' + $rowN + '" data-domain="' + $domain + '">€' + $price + '</td>' +
+                '</tr>');
+            summaryPriceCalc($price, '+');
+        } else {
+            pricesSumArr[$domain]['period'] = $period;
+            summaryPrice = (parseFloat(summaryPrice) - parseFloat(pricesSumArr[$domain]['price']) + parseFloat($price)).toFixed(2);
+            pricesSumArr[$domain]['price'] = $price;
+            $cartRowN.html('€' + $price);
+            $('#Summa').html('€' + summaryPrice);
+        }
+    }
+    return false;
+});
+
+// Удаление из корзины
+$(document).on('click', '.domains-step__summary-table .remove-row', function () {
+    var $rowCart = $(this).parents('.domains-step__summary-table-row'),
+        $section = $(this).parents('.domains-step__summary-section'),
+        $price = parseFloat($(this).html().slice(1)),
+        $rowN = $(this).attr('data-rown');
+    if ($(this).hasAttr('data-domain')) {
+        var $domain = $(this).attr('data-domain');
+
+        delete pricesSumArr[$domain];
+        if ($(this).hasAttr('data-dns'))
+            $('.domains-step__summary-table-row[data-linkDom="dns_' + $domain + '"]').find('.remove-row').trigger('click');
+        if ($(this).hasAttr('data-idprot'))
+            $('.domains-step__summary-table-row[data-linkDom="idprot_' + $domain + '"]').find('.remove-row').trigger('click');
+
+        $('#additServTable').find('.tab-list__content-table-row[data-domain="' + $domain + '"]').remove();
+        $('#domains-infoExtItem').find('.domains-infoExtItem[data-domain="' + $domain + '"]').remove();
+        $('.tab-list__content-reg-this[data-domain="' + $domain + '"]').parents('.selected_row').removeClass('selected_row');
+
+    } else {
+        var linkDom = $(this).parents('.domains-step__summary-table-row').attr('data-linkDom'),
+            linkDomS = linkDom.split('_'),
+            type = linkDomS[0],
+            domain = linkDomS[1],
+            $input = $('input[data-linkDom="' + linkDom + '"]'),
+            $fakeInput = $input.next();
+        $('#domains-register-table').find('.remove-row[data-domain="' + domain + '"]').removeAttr('data-' + type);
+        if ($input.is(':checked')) {
+            $fakeInput.trigger('click');
+        }
+    }
+
+    $rowCart.remove();
+    if ($section.find('td').length == 0)
+        $section.removeClass('visible_section');
+
+    summaryPriceCalc($price, '-');
+});
+
+// Обработка кнопки "Register All"
+$(document).on('click', '.tab-list__content-reg-all, .regAllButton', function () {
+    var $table = $($(this).attr('data-tname')),
+        $row = $table.find('.tab-list__content-table-row__available'),
+        $select = $table.find('.table-select__item');
+    $.each($row, function () {
+        $(this).find('.table-select__item').val("1").trigger("change");
+        $(this).find('.tab-list__content-reg-this:visible').trigger('click');
+    });
+    return false;
+});
+
+// Переход на третий шаг и отправка данных в биллинг
 $('#buy').on('click', '', function () {
     var summaryData = {},
         additServContent = '',
         domains = Object.keys(pricesSumArr).join(', '),
-        orderGenArr = {'domains': {}},
         optionId = 0,
         summaryConfig = '',
         successLink = 'https://bill.hostkey.com/cart.php?a=add&currency=2&pid=564&billingcycle=monthly';
     if (Object.keys(pricesSumArr).length) {
         var regPeriod = 0,
             dnsPeriod = 0,
+            dnsPrice = 0,
+            idProt = 0,
             dnsDisabled = '',
-            idProtDisabled = '';
-        summaryData = {};
-        summaryData['domainreg'] = true;
+            idProtDisabled = '',
+            domainSplit = {},
+            currentZone = '',
+            extFieldsArr = {},
+            extFieldsStr = '';
 
-        toggleBlock('searchBarContainer');
-        window.location.hash = '#domains_3';
+        if (window.location.hash != '#domains_3') {
+            summaryData = {};
+            summaryData['domainreg'] = true;
 
-        for (var key in pricesSumArr) {
-            if (pricesSumArr[key]['action'] == 'reg' && pricesSumArr[key]['status'] == 'available') {
-                regPeriod = pricesSumArr[key]['period'];
-                dnsPeriod = (!pricesSumArr[key]['dnsmanagement'] ? 0 : regPeriod);
+            toggleBlock('searchBarContainer');
+            window.location.hash = '#domains_3';
 
-                summaryData['domains[' + key + ']'] = key;
-                summaryData['domainsregperiod[' + key + ']'] = regPeriod;
-                summaryData['domainsregprice[' + key + ']'] = pricesSumArr[key]['price'];
+            for (var key in pricesSumArr) {
+                if (pricesSumArr[key]['action'] == 'reg' && pricesSumArr[key]['status'] == 'available') {
+                    regPeriod = pricesSumArr[key]['period'];
+                    dnsPeriod = (!pricesSumArr[key]['dnsmanagement'] ? 0 : regPeriod);
+                    dnsPrice = dnsPeriod * dnsRate;
+                    domainSplit = key.split('.');
+                    currentZone = '.' + domainSplit[1];
+                    if (currentZone in zoneExtFields) {
+                        extFieldsArr[key] = zoneExtFields[currentZone];
+                    }
 
-                orderGenArr['domains'][key] = {'periodReg': parseInt(regPeriod * 12), 'dns': dnsPeriod};
-                summaryConfig += 'Register domain: ' + key + '<br/>' + (dnsPeriod > 0 ? '+ DNS-hosting<br/>' : '') + '<b>Period: ' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + ' </b><br/>';
+                    summaryData['domains[' + key + ']'] = key;
+                    summaryData['domainsregperiod[' + key + ']'] = regPeriod;
+                    summaryData['domainsregprice[' + key + ']'] = pricesSumArr[key]['price'];
 
-                dnsDisabled = (!pricesSumArr[key]['dnsmanagement']) ? '' : 'disabled="disabled"';
-                idProtDisabled = (!pricesSumArr[key]['idprotection']) ? '' : 'disabled="disabled"';
+                    dnsDisabled = (pricesSumArr[key]['dnsmanagement']) ? '' : 'disabled="disabled"';
+                    idProtDisabled = (pricesSumArr[key]['idprotection']) ? '' : 'disabled="disabled"';
 
-                // Отрисовка таблицы доп. сервисов
-                additServContent += '<tr class="tab-list__content-table-row">' +
-                    '<td class="tab-list__content-table-cell js-tooltip" title="' + key + '">' + key.cutDomain() + '</td>' +
-                    '<td class="tab-list__content-table-cell">' + dnsPeriod + ' year' + (regPeriod > 1 ? 's' : '') + '</td>' +
-                    '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" ' + dnsDisabled + '></td>' +
-                    '<td class="tab-list__content-table-cell"><input type="checkbox" class="js-switch" ' + idProtDisabled + '></td>' +
-                    '</tr>';
+                    // Отрисовка таблицы доп. сервисов
+                    additServContent += '<tr class="tab-list__content-table-row" data-domain="' + key + '">' +
+                        '<td class="tab-list__content-table-cell' + (!isCut ? '' : ' js-tooltip" title="' + key) + '">' + key.cutDomain() + '</td>' +
+                        '<td class="tab-list__content-table-cell">' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + '</td>' +
+                        '<td class="tab-list__content-table-cell"><input type="checkbox" data-linkDom="idprot_' + key + '" data-price="4" class="js-switch" ' + idProtDisabled + '></td>' +
+                        '<td class="tab-list__content-table-cell"><input type="checkbox" data-linkDom="dns_' + key + '" data-price="' + dnsPrice + '" class="js-switch" ' + dnsDisabled + '></td>' +
+                        '</tr>';
 
+                }
+            }
+
+            addData('#additServTable', additServContent, 'append');
+            if (!$.isEmptyObject(extFieldsArr)) {
+                for (var key in extFieldsArr) {
+                    extFieldsStr += '<div class="domains-infoExtItem" data-domain="' + key + '">' +
+                        '<p class="domains-infoExtItemTitle">' + key + '</p>' +
+                        extFieldsArr[key] +
+                        '</div>';
+                }
+                addData('.domains-infoExtFormat', extFieldsStr, 'append');
+                $('#infoBlockExtFields').show();
+            }
+
+            $('.js-select').select2({
+                minimumResultsForSearch: -1
+            });
+            // Бинд библиотеки Switchery для переключателей на третьем шаге
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch')),
+                switchery = {};
+            elems.forEach(function (html) {
+                if ($(this).attr('disabled') != 'disabled')
+                    switchery = new Switchery(html, {color: '#945ae0'});
+                else
+                    switchery = new Switchery(html, {color: '#c4a8ec', disabled: true});
+            });
+        } else {
+            for (var key in pricesSumArr) {
+                if (pricesSumArr[key]['action'] == 'reg' && pricesSumArr[key]['status'] == 'available') {
+                    regPeriod = pricesSumArr[key]['period'];
+                    dnsPeriod = (!pricesSumArr[key]['dnsmanagement'] || !pricesSumArr[key]['dnsflag'] ? 0 : regPeriod);
+                    idProt = (!pricesSumArr[key]['idprotflag'] ? 0 : pricesSumArr[key]['idprotection']);
+
+                    orderGenArr['domains'][key] = {
+                        "advanced": {
+                            'Name1': '',
+                            'Name2': ''
+                        },
+                        "periodReg": parseInt(regPeriod * 12),
+                        "periodTrans": 0,
+                        "periodRenew": 0,
+                        "idprotection": idProt,
+                        "dns": dnsPeriod
+                    };
+                    summaryConfig += 'Register domain: ' + key + '<br/>' + (dnsPeriod > 0 ? '+ DNS hosting<br/>' : '') + (idProt > 0 ? '+ WHOIS privacy<br/>' : '') + '<b>Period: ' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + ' </b><br/>';
+                }
+            }
+            if (!$('.domains-infoExtItem').find('input:required').val() == '') {
+                $.ajax({
+                    url: '/api/v1/domains/order',
+                    type: 'POST',
+                    data: JSON.stringify(orderGenArr),
+                    dataType: 'JSON',
+                    success: function (data) {
+                        if (data['ErrorStatus'] == false) {
+                            optionId = data['Content']['OptionID'];
+                            $.redirect(successLink + '&configoption[858]=' + optionId + '&customfield[348]=' + summaryConfig, '', 'POST', '_self');
+                        } else {
+                        }
+                    }
+                });
+            } else {
+                var errorField = '';
+                $.each($('.domains-infoExtItem').find('input:required'), function () {
+                    if ($(this).val() == '') {
+                        $(this).addClass('errorInput');
+                        errorField += $(this).attr('name') + ' is required / ';
+                    }
+                });
+                $('.domains-infoBlockSubtitle').after('<div class="errorFieldsList">' + errorField.slice(0, -3) + '</div>');
             }
         }
-
-        AddData('#additServTable', additServContent, 'append');
-
-        // Бинд библиотеки Switchery для переключателей на третьем шаге
-        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch')),
-            switchery = {};
-        elems.forEach(function (html) {
-            if ($(this).attr('disabled') != 'disabled')
-                switchery = new Switchery(html, {color: '#945ae0'});
-            else
-                switchery = new Switchery(html, {color: '#c4a8ec', disabled: true});
-        });
-        /*
-         $.ajax({
-         url: '/api/v1/domains/order',
-         type: 'POST',
-         data: orderGenArr,
-         dataType: 'JSON',
-         success: function (data) {
-         if (data['ErrorStatus'] == false) {
-         optionId = data['Content']['OptionID'];
-         $.redirect(successLink + '&configoption[858]=' + optionId + '&customfield[348]=' + summaryConfig, '', 'POST', '_self');
-         } else {
-         }
-         }
-         });
-         */
     }
 });
 
-// Удаление выбранного домена из корзины на 2 шаге
-$(document).on('click', '.domains-step__summary-table .remove-row', function () {
-    var $rowCart = $(this).parents('.domains-step__summary-table-row'),
-        $domain = $(this).attr('data-domain'),
-        $section = $(this).parents('.domains-step__summary-section'),
-        $price = parseFloat($(this).html().slice(1)),
-        $rowN = $(this).attr('data-rown');
-
-    delete pricesSumArr[$domain];
-    $rowCart.remove();
-    $('.tab-list__content-reg-this[data-domain="' + $domain + '"]').parents('.selected_row').removeClass('selected_row');
-    if ($section.find('td').length == 0)
-        $section.removeClass('visible_section');
-    summaryPrice = (parseFloat(summaryPrice) - parseFloat($price)).toFixed(2);
-    $('#Summa').html('€' + summaryPrice);
-    if (summaryPrice == 0)
-        $('#Summa').html('Empty Cart');
+// Добавление доп. опций в корзину на третьем шаге
+$(document).on('change', '.js-switch', function () {
+    var linkDom = $(this).attr('data-linkDom').split('_'),
+        type = linkDom[0],
+        domain = linkDom[1],
+        price = $(this).attr('data-price'),
+        cartRow = '<tr class="domains-step__summary-table-row" data-linkDom="' + type + '_' + domain + '">' +
+            '<td class="domains-step__summary-table-cell domain-title-show">' + ((type == "dns") ? 'DNS hosting' : 'WHOIS privacy') + '</td>' +
+            '<td class="domains-step__summary-table-cell remove-row">€' + price + '</td>' +
+            '</tr>';
+    if ($(this).is(':checked')) {
+        pricesSumArr[domain][type + 'Flag'] = 1;
+        $('#domains-register-table').find('.remove-row[data-domain="' + domain + '"]').attr('data-' + type, type).parent().after(cartRow);
+        summaryPriceCalc(price, '+');
+    } else {
+        pricesSumArr[domain][type + 'Flag'] = 0;
+        $('#domains-register-table').find('.domains-step__summary-table-row[data-linkDom="' + type + '_' + domain + '"] .remove-row').trigger('click');
+    }
 });
 
 // Бинд библиотеки tooltip для всплывающих подсказок

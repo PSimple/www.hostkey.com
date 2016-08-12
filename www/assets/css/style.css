@@ -6641,6 +6641,7 @@ div.clear {
 
 .domains-infoBlockExt {
     margin: 0;
+    display: none;
 }
 
 .domains-infoExtItem {
@@ -6851,6 +6852,48 @@ div.clear {
     height: 60px;
     overflow: hidden;
     resize: none;
+}
+
+.domains-infoExtItem input[type="text"] {
+    border: 1px solid #f3f5f8;
+    height: 28px;
+    line-height: 28px;
+    resize: none;
+    margin: 0 10px;
+    padding: 0 5px;
+}
+
+.domains-infoExtItem input[type="checkbox"] {
+    border: 1px solid #f3f5f8;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    resize: none;
+    margin: 0 10px;
+    vertical-align: middle;
+    color: red;
+}
+
+.domains-infoExtItem .extFieldRow {
+    padding: 5px 0;
+    line-height: 28px;
+}
+
+.domains-infoExtItem .extFieldRow select {
+    width: 150px;
+}
+
+.domains-infoExtItem input[type="checkbox"].errorInput {
+    border-color: red !important;
+}
+
+.domains-infoExtItem .extFieldReq {
+    color: red;
+}
+
+.errorFieldsList {
+    border: 2px solid red;
+    padding: 15px 10px;
 }
 
 textarea.search-bar__input {
