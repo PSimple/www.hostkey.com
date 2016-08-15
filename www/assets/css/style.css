@@ -756,7 +756,7 @@ p {
 }
 
 .b-footer__logos-item {
-    margin-left: 25px;
+    margin-left: 20px;
     opacity: .18;
 }
 
@@ -965,7 +965,6 @@ p {
     color: #FF692D;
     float: left;
     margin-top: 23px;
-
     /*border: 1px solid red;*/
 }
 
@@ -982,13 +981,14 @@ p {
     text-decoration: none;
 }
 
-/*ФОРМА ПОИСКА*/
-.header_form_search {
-    position: absolute;
-    margin: 15px 0 0 0;
-    right: 0;
-    top: 0;
+/*ФОРМА ПОИСКА В ШАПКЕ*/
 
+.header_form_search {
+    height: 35px;
+    position: relative;
+    float: right;
+    margin-top: -29px;
+    /*border: 1px solid red;*/
 }
 
 .header_form_search input {
@@ -1001,7 +1001,7 @@ p {
 }
 
 .header_form_search input[type="text"] {
-    height: 39px;
+    height: 34px;
     width: 0;
     display: inline-block;
     padding-right: 40px;
@@ -1011,11 +1011,12 @@ p {
     z-index: 3;
     background: none;
     -webkit-transition: width .4s cubic-bezier(0, 0.8, 0, 1);
+    -o-transition: width .4s cubic-bezier(0, 0.8, 0, 1);
+    -moz-transition: width .4s cubic-bezier(0, 0.8, 0, 1);
     transition: width .4s cubic-bezier(0, 0.8, 0, 1);
     cursor: pointer;
     color: #000;
     overflow: hidden;
-    /*border: 1px solid green;*/
 }
 
 .header_form_search input::-webkit-input-placeholder {
@@ -1031,7 +1032,7 @@ p {
 }
 
 .header_form_search input[type="text"]:focus {
-    width: 300px;
+    width: 305px;
     z-index: 1;
     border-bottom: 1px solid #fff;
     background-color: #fff;
@@ -1040,18 +1041,19 @@ p {
 }
 
 .header_form_search input[type="submit"] {
-    height: 40px;
-    width: 40px;
+    height: 35px;
+    width: 35px;
     display: inline-block;
-    background-image: url(/assets/img/icon_search_100.png);
+    background-image: url(/assets/img/search_lupa_white.png);
     background-repeat: no-repeat;
-    background-size: 40px 40px;
+    background-size: 35px 35px;
     text-indent: -9999px;
     position: absolute;
+    opacity: 0.5;
     top: 0;
     right: 0;
     z-index: 2;
-    /*border: 1px solid blue;*/
+    /*border: 1px solid red;*/
 }
 
 .tab-list__content {
@@ -4691,7 +4693,7 @@ p {
     position: relative;
     padding-top: 30px;
     margin-top: 30px;
-    /*border: 1px solid red;*/
+
 }
 
 .b-main-page__offer-item:before {
@@ -4721,7 +4723,7 @@ p {
 .b-main-page__offer-image {
     display: none;
     position: absolute;
-    /*border: 1px solid blue;*/
+
 }
 
 .b-main-page__offer-item:hover > .b-main-page__offer-item-title,
@@ -6501,7 +6503,7 @@ div.clear {
     clear: both;
 }
 
-.domains-step__summary {
+.domains-step__summary, .ssl-step__summary {
     width: 260px;
     display: inline-block;
     vertical-align: top;
@@ -7688,4 +7690,339 @@ textarea.search-bar__input {
     transition: 0.3s all;
     -webkit-transition: 0.3s all;
     -moz-transition: 0.3s all;
+}
+
+/*СТРАНИЦА SSL*/
+
+.ssl-tab {
+    width: 100%;
+}
+.ssl-page-offers, .ssl-page-filter-verification, .ssl-page-filter-scale {
+    width: 100%;
+    margin-top: 50px;
+    border: 1px solid red;
+    text-align: center;
+}
+.ssl-page-filter {
+    position: relative;
+    margin: auto;
+}
+.img_www_block_ssl {
+    margin-left: -12px;
+    margin-top: -50px;
+}
+.img_sh_secur1, .img_sh_secur2, .img_sh_secur3  {
+    padding: 0;
+}
+.sh-secur {
+    width: 315px;
+    height: 100px;
+    margin-left: -32px;
+    margin-top: 100px;
+    /*border: 1px solid red;*/
+}
+.text-secur {
+    color: #000;
+}
+.ssl-page-offers__item,
+.ssl-page-filter__item_verification,
+.ssl-page-filter__item_scale,
+.ssl-page-offers__item.active,
+.ssl-page-filter__item_verification.active
+.ssl-page-filter__item_scale.active {
+    background-color: #272e38;
+    /*background-color: #f3f5f8;*/
+    border: 1px solid #333;
+    box-sizing: border-box;
+    color: #fff;
+    height: 450px;
+    padding: 20px 30px 190px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease 0s;
+    width: 315px;
+    display: inline-block;
+    /*opacity: 0.6;*/
+}
+.ssl-page-offers__item.active,
+.ssl-page-filter__item_verification.active,
+.ssl-page-filter__item_scale.active {
+    background-color: red;
+}
+/*.ssl-page-filter__item,
+.ssl-page-filter__item_active {
+    height: 200px;
+}*/
+/*.ssl-page-offers__item:hover,
+.ssl-page-offers__item_active:hover,
+.ssl-page-filter__item:hover,
+.ssl-page-filter__item_active:hover {
+    background-color: #313842;
+    color: #ff692d;
+    opacity: 1;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+}
+
+.ssl-page-offers__item:hover .ssl-page-offers__item-order,
+.ssl-page-offers__item-order {
+    opacity: 1;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+}
+
+.ssl-page-offers__item:hover .ssl-page-offers__item-text,
+.ssl-page-offers__item-text {
+    opacity: 1;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+}
+
+.ssl-page-offers__item:hover .ssl-page-offers__item-price::before {
+    opacity: 1;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+}
+
+/*
+.main-page-offers__item:after {
+  content: '';
+  height: 80%;
+  width: 1px;
+  position: absolute;
+  left: 0;
+  top: 10%;
+}
+*/
+.ssl-page-offers__item-order {
+    font-size: 22px;
+    line-height: 26px;
+    position: absolute;
+    z-index: 9;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: uppercase;
+    text-align: center;
+    color: #ffffff;
+    background-color: #ff692d;
+    opacity: 0;
+    font-family: 'FranklinGothicMediCondOSC';
+    font-weight: normal;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+}
+
+.ssl-page-offers__item-order:before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    border: 10px solid transparent;
+    border-bottom: 10px solid #ff692d;
+    left: 50%;
+    margin-left: -10px;
+}
+
+.ssl-page-offers__item-register {
+    font-size: 22px;
+    line-height: 26px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: uppercase;
+    text-align: center;
+    color: #9454e2;
+    font-family: 'FranklinGothicMediCondOSC';
+    font-weight: normal;
+}
+
+.ssl-page-offers__item-title {
+    font-size: 58px;
+    line-height: 62px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    max-height: 124px;
+    overflow: hidden;
+}
+
+.ssl-page-offers__item-text {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 10px;
+    color: #ffffff;
+    opacity: .5;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+    max-height: 70px;
+    overflow: hidden;
+}
+
+.ssl-page-offers__item-price {
+    /*position: absolute;*/
+    left: 0;
+    bottom: 80px;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    font-family: 'FranklinGothicMediCondC';
+    font-weight: normal;
+}
+
+
+/*.ssl-page-offers__item-price:before {
+  content: 'From';
+  position: absolute;
+  top: -15px;
+  font-size: 25px;
+  line-height: 29px;
+  width: 60px;
+  left: 50%;
+  margin-left: -30px;
+  opacity: .5;
+  transition: 0.3s all;
+  -webkit-transition: 0.3s all;
+  -moz-transition: 0.3s all;
+}*/
+
+
+.ssl-page-offers__item-price-before {
+    font-size: 25px;
+    color: #fff;
+    opacity: 0.5;
+}
+
+.ssl-page-offers__item-price-new {
+    font-size: 48px;
+    line-height: 52px;
+    margin: 15px 0;
+}
+
+.ssl-page-offers__item-price-old {
+    font-size: 20px;
+    line-height: 24px;
+    text-decoration: line-through;
+    color: #272e38;
+}
+.ssl-page-filter__item_verification:hover::after,
+.ssl-page-filter__item_verification.active:hover::after,
+.ssl-page-filter__item_scale:hover::after,
+.ssl-page-filter__item_scale.active:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    width: 293px;
+    height: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.6);
+    color: #000;
+    text-align: center;
+    font-family: 'FranklinGothicMediCondC';
+    font-size: 14px;
+    padding: 5px 10px;
+    /*border: 1px solid #333;*/
+    transition: 30s all;
+}
+.ssl_table_result {
+margin-top: 50px;
+    width: 100%;
+    /*height: 800px;*/
+    margin-bottom: 100px;
+    border: 1px solid red;
+}
+.ssl_table_result_tr, .ssl_table_result_td {
+   width: 70px;
+    height: 50px;
+    text-align: center;
+    border: 1px solid red;
+}
+
+/*СТРАНИЦА СЕРТИФИКАТА*/
+.sertification-block {
+width: 1100px;
+    background-color: #fff;
+    margin: auto;
+}
+.sertification-block-left {
+    display: inline-block;
+    width: 720px;
+    height: 1000px;
+    background-color: #fff;
+    padding-left: 30px;
+    border-right: 1px solid lightgrey;
+    /*border: 1px solid red;*/
+}
+.sertification-block-right {
+    display: inline-block;
+    width: 300px;
+    height: 1000px;
+    background-color: #fff;
+    /*border: 1px solid red;*/
+    float: right;
+}
+.logo-sertification, .name-sertification,
+.name-sertification-text, .tooltip-sertification, .drop-down-list-sertification,
+.CSR-name-text, .CSR-name-tooltip,
+.CSR-domain-left,
+.CSR-domain-right {
+    display: inline-block;
+}
+.CSR-sertification, .CSR-domain {
+    margin-top: 70px;
+}
+.request-sertification {
+    margin-top: 10px;
+}
+.CSR-text, .CSR-instructions-text, .CSR-textarea-domain, .CSR-slug-information {
+    margin-top: 40px;
+}
+.CSR-enter-text {
+    margin-top: 40px;
+}
+.logo-sertification {
+    width: 150px;
+    height: 50px;
+    /*border: 1px solid yellow;*/
+}
+.name-sertification {
+    width: 370px;
+    height: 50px;
+    /*border: 1px solid yellow;*/
+}
+.tooltip-sertification {
+    width: 30px;
+    height: 30px;
+    /*border: 1px solid maroon;*/
+}
+.CSR-textarea input {
+    width: 500px;
+}
+.SSL-your {
+    width: 300px;
+    height: 500px;
+    margin: auto;
+    /*border: 1px solid green;*/
+}
+.ssl-step__summary {
+    margin-left: 0;
+}
+.ssl-table-select__item {
+    width: 180px;
 }

@@ -1,0 +1,37 @@
+v. 13.07.15
+
++++++Modified++++++
+
+1.
+/js
+-interface.js
+-slick-run.js
+
+2.
+/stylesheets
+-style.css
+-style.less
+
+3. dedicated.php
+4. managed.cloud.php
+
++++++New+++++++
+
+1.
+/partials
+include.footer.main.php
+
+2.
+/vendors/background-video
+jquery.backgroundvideo.min.js
+
+3.
+/video
+wave.mp4
+
+4. dedicated.php
+5. main.page.php
+6. text.page.1.php
+7. vds.cloud.php
+8. vds.step.2.php
+

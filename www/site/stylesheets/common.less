@@ -1,0 +1,85 @@
+// Colors
+// Colors for text
+@red: #ff692d;//#eb4e17;
+@blue: #44aed6;
+@green: #00983a;
+@white: #fff;
+@black: #000;
+@main-text: #272e38;
+@menu-bg: #272e38;
+@sub-menu-bg: #313842;
+@menu-active: #ff692d;
+@all-bg: #e9ebee;
+@footer-link: #9454e2;
+@faq-bg: #f3f5f8;
+@faq-item: #313842;
+@nav-hover: #7f8182;
+@border-color: #e6e9ec;
+@grey-button: #eaecef;
+@purpur: #945ae0;
+@light-purpur: #c4a8ec;
+@select-color: #f4f6f9;
+
+
+// Font size
+.font(@a : 16px) {
+  font-size: @a;
+  line-height: @a + 4;
+}
+// Font size
+.font-em(@a : 1em) {
+  font-size: @a;
+  line-height: 1em;
+}
+// Rounding corners for blocks
+.rounded-corners (@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+// Algorithm for calculating the width and height for blocks (
+.box-sizing (@type: border-box) {
+  box-sizing: @type;
+  -webkit-box-sizing: @type;
+  -moz-box-sizing: @type;
+}
+// Shadow mixin
+.box-shadow (@shadow: 0px 1px 2px 1px rgba(0,0,0,.2)) {
+  box-shadow: @shadow;
+  -webkit-box-shadow: @shadow;
+  -moz-box-shadow: @shadow;
+}
+// Text shadow mixin
+.text-shadow (@shadow: 4px 5px 0px rgba(0,0,0,.2)) {
+  text-shadow: @shadow;
+  -webkit-text-shadow: @shadow;
+  -moz-text-shadow: @shadow;
+}
+// User select (default - none)
+.user-select (@select: none) {
+  user-select: @select;
+  -webkit-user-select: @select;
+  -moz-user-select: @select;
+}
+// Transition
+.transition (@type: 0.3s all) {
+  transition: @type;
+  -webkit-transition: @type;
+  -moz-transition: @type;
+}
+// Rotate
+.rotate (@type: 45deg) {
+  transform: rotate(@type);
+  -webkit-transform: rotate(@type);
+  -moz-transform: rotate(@type);
+  -ms-transform: rotate(@type);
+  -o-transform: rotate(@type);
+}
+// Overlay
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

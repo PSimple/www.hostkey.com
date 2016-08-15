@@ -1,0 +1,12 @@
+label.error {
+    color: red;
+    display: block;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 11px;
+    position: absolute;
+    top: 40px;
+    line-height: 10px;
+    left: 0;
+    text-align: left;
+}

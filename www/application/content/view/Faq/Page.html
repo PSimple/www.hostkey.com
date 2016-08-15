@@ -6,6 +6,7 @@
 
     <div class="b-faq">
         <div class="b-faq__list">
+            <a name="qqqqqqqqq"></a>
             <div class="b-faq__list-head">
                 <div class="b-container">
                     <a class="b-faq__list-select" href="#">All questions<span class="b-icon b-faq__list-select-icon"></span></a>
@@ -22,13 +23,14 @@
                                 </span>
                         <script>
                             function faqControl(newId) {
-                                $(".b-faq__answer-content").css("display", "none");
-                                $(".b-faq__answer-content[data-id='" + newId + "']").css("display", "block");
+//                                $(".b-faq__answer-content").css("display", "none");
+//                                $(".b-faq__answer-content[data-id='" + newId + "']").css("display", "block");
                                 $(".b-faq__questions-item").removeClass('active');
                                 $("#faq" + newId).addClass('active');
                                 $( '#go_to_technical_description' ).after( $( "#faq" + newId ) );
 
-                                   var destination = $(".b-faq__list-head").offset().top;
+//                                   var destination = $(".b-faq__list-head").offset().top;
+                                   var destination = $("#position-answer"+newId).offset().top;
 
                                       $("html,body").animate( { scrollTop: destination }, 1000);
                                 return false;
@@ -47,8 +49,13 @@
                 <div class="b-faq__answer">
 
                     {foreach ($rows as $key => $row)}
-                    <div class="b-faq__answer-content" data-id="{$row['ID']}" style="{if (0==$key)}display: block{else}display: none{/if}">
-                        <h2 class="b-faq__answer-content-title">{$row['Question']}</h2>
+                    <div class="b-faq__answer-content" id="position-answer{$row['ID']}">
+                        <h2 class="b-faq__answer-content-title">
+                            {$row['Question']}
+                            <a href="#qqqqqqqqq" style="text-decoration: none;">
+                            up
+                            </a>
+                        </h2>
                         {$row['Answer']}
                     </div>
                     {/foreach}
