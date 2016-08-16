@@ -58,6 +58,7 @@ class Content_News_Page extends Zero_Controller
             $this->View->Assign('NEWS_DETAIL_PATH', Zero_App::$Config->Modules['content']['NewsDetailPath']);
 //            $this->View->Assign('newsList', $newsList);
             //            pre($newsList);
+            $this->View->Assign('H1', Zero_App::$Section->Name);
         }
         return $this->View;
     }

@@ -28,6 +28,7 @@ var i,
     pricesSumArr = {},
     summaryPrice = 0,
     dnsRate = 10.56,
+    idProtectionRate = 4,
     orderGenArr = {
         'dns': {
             'ns1': '',
@@ -346,6 +347,12 @@ $.getJSON('/api/v1/shop/domains/dns/price', function (data) {
     if (!data['ErrorStatus'])
         dnsRate = data['Content'];
 });
+// Подгрузка цены на id protection
+$.getJSON('/api/v1/shop/domains/idprotection/price', function (data) {
+    if (!data['ErrorStatus'])
+        idProtectionRate = data['Content'];
+});
+
 
 // Подгрузка инфы для доп полей
 $.getJSON('/api/v1/domains/advanced/field', function (data) {
@@ -776,7 +783,7 @@ $('#buy').on('click', '', function () {
                     regPeriod = pricesSumArr[key]['period'];
                     dnsPeriod = regPeriod;
                     dnsPrice = dnsPeriod * dnsRate;
-                    idProtPrice = dnsPeriod * 4;
+                    idProtPrice = dnsPeriod * idProtectionRate;
                     domainSplit = key.split('.');
                     currentZone = '.' + domainSplit[1];
                     if (currentZone in zoneExtFields) {
@@ -804,11 +811,12 @@ $('#buy').on('click', '', function () {
             addData('#additServTable tbody', additServContent, 'add');
             if (!$.isEmptyObject(extFieldsArr)) {
                 for (var key in extFieldsArr) {
-                    extFieldsStr += '<div class="domains-infoExtItem" data-domain="' + key + '">' +
+                    extFieldsStr += '<div id="dom-' + key + '" class="domains-infoExtItem" data-domain="' + key + '">' +
                         '<p class="domains-infoExtItemTitle">' + key + '</p>' +
                         extFieldsArr[key] +
                         '</div>';
                 }
+                window.console.log(extFieldsStr);
                 addData('.domains-infoExtFormat', extFieldsStr, 'append');
                 $('#infoBlockExtFields').show();
             }
@@ -829,14 +837,18 @@ $('#buy').on('click', '', function () {
             for (var key in pricesSumArr) {
                 if (pricesSumArr[key]['action'] == 'reg' && pricesSumArr[key]['status'] == 'available') {
                     regPeriod = pricesSumArr[key]['period'];
-                    dnsPeriod = (!pricesSumArr[key]['dnsflag'] ? 0 : regPeriod);
-                    idProt = (!pricesSumArr[key]['idprotflag'] ? 0 : pricesSumArr[key]['idprotection']);
+                    dnsPeriod = (!pricesSumArr[key]['dnsFlag'] ? 0 : regPeriod);
+                    idProt = (!pricesSumArr[key]['idprotFlag'] ? 0 : pricesSumArr[key]['idprotection']);
+
+                    advanced = {};
+                    window.console.log('dom-' + key);
+                    var elem = document.getElementById('dom-' + key);
+                    if (elem !== null) {
+                        advanced = advancedField(elem);
+                    }
 
                     orderGenArr['domains'][key] = {
-                        'advanced': {
-                            'Name1': '',
-                            'Name2': ''
-                        },
+                        'advanced': advanced,
                         'periodReg': parseInt(regPeriod * 12),
                         'periodTrans': 0,
                         'periodRenew': 0,
@@ -844,6 +856,9 @@ $('#buy').on('click', '', function () {
                         'dns': dnsPeriod
                     };
                     summaryConfig += 'Register domain: ' + key + '<br/>' + (dnsPeriod > 0 ? '+ DNS hosting<br/>' : '') + (idProt > 0 ? '+ WHOIS privacy<br/>' : '') + '<b>Period: ' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + ' </b><br/>';
+                    // for (var k in advanced) {
+                    //     summaryConfig += ' - ' + k + ': ' + advanced[k] + '<br/>';
+                    // }
                 }
             }
             if (!$("input:invalid").length) {
@@ -869,12 +884,41 @@ $('#buy').on('click', '', function () {
     }
 });
 
+
+function advancedField(elem) {
+    advanced = {};
+    tags = elem.getElementsByTagName("input");
+    for (var k in tags) {
+        if ('text' == tags[k].type)
+            advanced[tags[k].name] = tags[k].value;
+        if ('checkbox' == tags[k].type) {
+            if (tags[k].checked)
+                advanced[tags[k].name] = 'on';
+            else
+                advanced[tags[k].name] = 'off';
+        }
+    }
+    tags = elem.getElementsByTagName("select");
+    for (var k in tags) {
+        if ('select-one' == tags[k].type)
+            advanced[tags[k].name] = tags[k].value;
+    }
+    tags = elem.getElementsByTagName("radio");
+    for (var k in tags) {
+        if ('radio-one' == tags[k].type || 'radio' == tags[k].type)
+            advanced[tags[k].name] = tags[k].value;
+    }
+    return advanced;
+    // window.console.log(key);
+}
+
 // Добавление доп. опций в корзину на третьем шаге
 $(document).on('change', '.js-switch', function () {
     var linkDom = $(this).attr('data-linkDom').split('_'),
         type = linkDom[0],
         domain = linkDom[1],
-        price = parseInt($(this).attr('data-price')),
+        // price = parseInt($(this).attr('data-price')),
+        price = parseFloat($(this).attr('data-price')),
         cartRow = '<tr class="domains-step__summary-table-row" data-linkDom="' + type + '_' + domain + '">' +
             '<td class="domains-step__summary-table-cell domain-title-show domain-title-padding">' + ((type == "dns") ? 'DNS hosting' : 'WHOIS privacy') + '</td>' +
             '<td class="domains-step__summary-table-cell remove-row">€' + price.toFixed(2) + '</td>' +

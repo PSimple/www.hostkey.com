@@ -39,6 +39,7 @@ class Shop_Api_Domains_Order extends Zero_Controller
         $orderList = [];
         foreach ($_REQUEST['domains'] as $domain => $row) {
             $zone = explode('.', $domain)[1];
+            settype($row['advanced'], 'array');
             $orderList[$zone][$domain] = [
                 'advanced' => $row['advanced'],
                 'periodReg' => $row['periodReg'] / 12,
