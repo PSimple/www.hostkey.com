@@ -1,4 +1,134 @@
-        <div class="b-page">
+<div class="b-page">
+
+    <div class="b-page__promo b-page__promo_news_yes">
+        <div class="b-icon b-page__scroll-icon"  onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
+        <h1 class="b-page__promo-title">{$H1}</h1>
+    </div>
+
+
+    <div class="b-news">
+        <div class="b-news__list" id="scroll-anchor-01">
+
+            {foreach ($newsList1 as $key => $row)}
+            <div class="b-news__item"
+                 {if ( $row['IsDetails'] )} onClick="javascript: document.location.href='{URL}_{$row['ID']}';" {/if}  {if ( 0 == $key )} style="background: #fff;" {/if}>
+            <div class="b-news__item-date b-news__item-date_first_yes">{$row['Date']}</div>
+            {if ( $row['Name'] )}
+            <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
+            <p class="b-news__item-text b-news__item-text_red_yes news-height-title-block">
+                {else}
+            <div class="b-news__item-separate"></div>
+            <p class="b-news__item-text news-height-anons-block">
+                {/if}
+                {$row['Name']}
+            </p>
+            <p class="b-news__item-text news-height-anons-block">
+                {$row['Description']}
+            </p>
+            {if ( $row['IsDetails'] )}
+            <a class="b-news__item-detail" href="{URL}_{$row['ID']}">Details</a>
+            {/if}
+        </div>
+        {/foreach}
+    </div>
+
+
+
+
+    <div class="b-news">
+        <div class="b-news__list" id="scroll-anchor-01">
+
+            {foreach ($newsList2 as $key => $row)}
+            <div class="b-news__item"
+                 {if ( $row['IsDetails'] )} onClick="javascript: document.location.href='{URL}_{$row['ID']}';" {/if}  {if ( 0 == $key )} style="background: #fff;" {/if}>
+            <div class="b-news__item-date b-news__item-date_first_yes">{$row['Date']}</div>
+            {if ( $row['Name'] )}
+            <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
+            <p class="b-news__item-text b-news__item-text_red_yes news-height-title-block">
+                {else}
+            <div class="b-news__item-separate"></div>
+            <p class="b-news__item-text news-height-anons-block">
+                {/if}
+                {$row['Name']}
+            </p>
+            <p class="b-news__item-text news-height-anons-block">
+                {$row['Description']}
+            </p>
+            {if ( $row['IsDetails'] )}
+            <a class="b-news__item-detail" href="{URL}_{$row['ID']}">Details</a>
+            {/if}
+        </div>
+        {/foreach}
+    </div>
+
+
+    <div class="b-news">
+        <div class="b-news__list" id="scroll-anchor-01">
+
+            {foreach ($newsList3 as $key => $row)}
+            <div class="b-news__item"
+                 {if ( $row['IsDetails'] )} onClick="javascript: document.location.href='{URL}_{$row['ID']}';" {/if}  {if ( 0 == $key )} style="background: #fff;" {/if}>
+            <div class="b-news__item-date b-news__item-date_first_yes">{$row['Date']}</div>
+            {if ( $row['Name'] )}
+            <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
+            <p class="b-news__item-text b-news__item-text_red_yes news-height-title-block">
+                {else}
+            <div class="b-news__item-separate"></div>
+            <p class="b-news__item-text news-height-anons-block">
+                {/if}
+                {$row['Name']}
+            </p>
+            <p class="b-news__item-text news-height-anons-block">
+                {$row['Description']}
+            </p>
+            {if ( $row['IsDetails'] )}
+            <a class="b-news__item-detail" href="{URL}_{$row['ID']}">Details</a>
+            {/if}
+        </div>
+        {/foreach}
+    </div>
+
+    <div class="b-news">
+        <div class="b-news__list" id="scroll-anchor-01">
+
+            {foreach ($newsList4 as $key => $row)}
+            <div class="b-news__item"
+                 {if ( $row['IsDetails'] )} onClick="javascript: document.location.href='{URL}_{$row['ID']}';" {/if}  {if ( 0 == $key )} style="background: #fff;" {/if}>
+            <div class="b-news__item-date b-news__item-date_first_yes">{$row['Date']}</div>
+            {if ( $row['Name'] )}
+            <div class="b-news__item-separate b-news__item-separate_red_yes"></div>
+            <p class="b-news__item-text b-news__item-text_red_yes news-height-title-block">
+                {else}
+            <div class="b-news__item-separate"></div>
+            <p class="b-news__item-text news-height-anons-block">
+                {/if}
+                {$row['Name']}
+            </p>
+            <p class="b-news__item-text news-height-anons-block">
+                {$row['Description']}
+            </p>
+            {if ( $row['IsDetails'] )}
+            <a class="b-news__item-detail" href="{URL}_{$row['ID']}">Details</a>
+            {/if}
+        </div>
+        {/foreach}
+    </div>
+
+
+
+    <a class="b-news__more" href="#">
+        <div class="b-news__more-plus">
+            <span class="b-icon b-news__more-plus-icon"></span>
+        </div>
+        <div class="b-news__more-text">more<br>news</div>
+    </a>
+
+
+<div class="footer-push"></div>
+</div>
+
+
+<!--<div class="b-page">
 
             <div class="b-page__promo b-page__promo_news_yes">
                 <div class="b-icon b-page__scroll-icon"  onclick="$.scrollTo('#scroll-anchor-01', 1000, { offset:-90 })"></div>
@@ -8,7 +138,7 @@
             <div class="b-news">
                 <div class="b-news__list" id="scroll-anchor-01">
 
-                        {foreach ($newsList as $key => $row)}
+                        {foreach ($newsList1 as $key => $row)}
                         <div class="b-news__item"
                              {if ( $row['IsDetails'] )} onClick="javascript: document.location.href='{URL}_{$row['ID']}';" {/if}  {if ( 0 == $key )} style="background: #fff;" {/if}>
                                 <div class="b-news__item-date b-news__item-date_first_yes">{$row['Date']}</div>
@@ -40,44 +170,23 @@
             </div>
 
             <div class="footer-push"></div>
-        </div>
-<script>
-        // Начальная загрузка области Special offers
-        $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
-        var items = data['Content'],
-        readyPromo = '',
-        sum = items.length;
+        </div>-->
+<!--<script>
+    $(document).ready(function(){
+        $('a.b-news__more').click(function(){
+            $block_div = $(this).parent().children('.b-news-hidden').css("display");
 
-        if (sum > 4) {
-        sum = 4;
-        $('.b-news__item').css("display", "block");
-        }
-        for (a = 0; a < sum; a++) {
-        var name = items[a].Name,
-        img = '<img src="/upload/data/' + items[a].Img + '" title="' + name + '"/>',
-        imgFlag = items[a].Img,
-        price = items[a].PriceRegister01,
-        comment = (!!items[a].Comment) ? ((items[a].Comment).stripTags()) : '',
-        slicedComment = comment.slice(0, 90);
+            if ($block_div == "block") {
+                $(this).text("more news");
+            }
+            else
+            {
+                $(this).text("hide news");
+            }
+            $(this).parent().children('.b-news-hidden').slideToggle('normal');
+            return false;
 
-        if (slicedComment.length < comment.length) {
-        slicedComment += '...';
-        comment = slicedComment;
-        }
-
-        var priceold = items[a].PriceOld;
-        readyPromo += '<label class="fake-checkbox-label domains-check__item">' +
-            '<h3 class="domains-check__item-title">' + (imgFlag != null ? img : name) + '</h3>' +
-            '<div class="domains-check__item-text">' + comment + '</div>' +
-            '<div class="domains-check__item-price">' +
-                '<div class="domains-check__item-price-new"> €' + price + '</div>' +
-                '<div class="domains-check__item-price-old"> €' + priceold + '</div>' +
-                '</div>' +
-            '<span class="fake-checkbox-label__box js-check"></span><input data-name="' + name + '" class="hidden-input" name="check-1" type="checkbox"/>' +
-            '<div class="domains-check__item-register">register</div><div class="domains-check__item-order">order</div>' +
-            '</label>';
-
-        }
-        AddData('.domains-check__row', readyPromo, 'add');
         });
-    </script>
+    });
+
+    </script>-->

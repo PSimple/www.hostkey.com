@@ -20,7 +20,7 @@
                                     For technical questions use our
                                     knowledge base
                                 </span>
-                        <script>
+                        <!--<script>
                             function faqControl(newId) {
                                 $(".b-faq__answer-content").css("display", "none");
                                 $(".b-faq__answer-content[data-id='" + newId + "']").css("display", "block");
@@ -33,7 +33,7 @@
                                       $("html,body").animate( { scrollTop: destination }, 1000);
                                 return false;
                             }
-                        </script>
+                        </script>-->
                         <span class="b-icon b-faq__questions-item-icon b-faq__questions-item-icon_purpur"></span></a>
                     {foreach ($rows as $key => $row)}
                     {if ( 0 == $key )}
@@ -47,7 +47,7 @@
                 <div class="b-faq__answer">
 
                     {foreach ($rows as $key => $row)}
-                    <div class="b-faq__answer-content" data-id="{$row['ID']}" style="{if (0==$key)}display: block{else}display: none{/if}">
+                    <div class="b-faq__answer-content" data-id="{$row['ID']}"><!--style="{if (0==$key)}display: block{else}display: none{/if}"-->
                         <h2 class="b-faq__answer-content-title">{$row['Question']}</h2>
                         {$row['Answer']}
                     </div>

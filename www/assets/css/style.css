@@ -1630,7 +1630,9 @@ p {
     opacity: 0;
     z-index: -1;
 }
-
+.b-news-hidden {
+    display: none;
+}
 .b-news__column {
     display: inline-block;
     vertical-align: top;
@@ -1766,6 +1768,7 @@ p {
     margin: 40px 0;
     text-decoration: none;
     display: inline-block;
+
 }
 
 .b-news__more-plus {
@@ -4736,7 +4739,7 @@ p {
     vertical-align: top;
 }
 
-/* //вариант наоборот с появляющимся текстом
+/* //ВАРИАНТ НАОБОРОТ С ПОЯВЛЯЮЩИМСЯ ТЕКСТОМ
 .b-main-page__offer-item {
     height: 250px;
     position: relative;
@@ -4868,7 +4871,7 @@ p {
     /*border: 1px solid red;*/
 }
 
-.b-main-page__slider-item-rewiews {
+.b-main-page__slider-item-reviews {
     background-color: #272e38;
     width: 1000px;
     height: 250px;
@@ -4876,14 +4879,14 @@ p {
     /*border: 1px solid red;*/
 }
 
-.b-main-page__slider-item-rewiews-logo {
+.b-main-page__slider-item-reviews-logo {
     width: 300px;
     height: 250px;
     float: left;
     /*border: 1px solid blue;*/
 }
 
-.b-main-page__slider-item-image-rewiews {
+.b-main-page__slider-item-image-reviews {
     width: 240px;
     margin: 70px auto;
     opacity: 0.9;
@@ -4891,7 +4894,7 @@ p {
     /*border: 1px solid red;*/
 }
 
-.b-main-page__slider-item-rewiews-text {
+.b-main-page__slider-item-reviews-text {
     width: 700px;
     height: 240px;
     margin-left: 300px;
@@ -4899,7 +4902,7 @@ p {
     /*border: 1px solid green;*/
 }
 
-.b-main-page__slider-item-rewiews-text-rewiews {
+.b-main-page__slider-item-reviews-text-reviews {
     height: 120px;
     font-size: 1.3em;
     margin-left: 30px;
@@ -4909,7 +4912,7 @@ p {
     /*border: 1px solid red;*/
 }
 
-.b-main-page__slider-item-hint-description-rewiews-text-fio {
+.b-main-page__slider-item-hint-description-reviews-text-fio {
     height: 90px;
     margin-top: 30px;
     margin-left: 30px;
@@ -4917,7 +4920,7 @@ p {
     /*border: 1px solid red;*/
 }
 
-.b-main-page__slider-item-hint-description-rewiews-text-fio-person {
+.b-main-page__slider-item-hint-description-reviews-text-fio-person {
     font-size: 1.3em;
     margin: 0px;
     padding: 0px;
@@ -5054,7 +5057,11 @@ p {
     width: 30px;
     height: 30px;
 }
-
+.slider-logo {
+    width: 300px;
+    display: inline;
+    border: 1px solid red;
+}
 .main-page-offers {
     width: 100%;
     display: inline-table;
