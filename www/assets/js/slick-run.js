@@ -1,4 +1,4 @@
-if ($('.js-carousel').length) {
+/*if ($('.js-carousel').length) {
     $('.js-carousel').slick({
         dots: true,
         centerMode: false,
@@ -7,7 +7,7 @@ if ($('.js-carousel').length) {
         slidesToScroll: 3,
         centerPadding: '40px'
     });
-}
+}*/
 
 if ($('.js-carousel-4').length) {
     $('.js-carousel-4').slick({
@@ -16,6 +16,17 @@ if ($('.js-carousel-4').length) {
         arrows: true,
         slidesToShow: 4,
         slidesToScroll: 4,
+        centerPadding: '40px'
+    });
+}
+
+if ($('.js-carousel-5').length) {
+    $('.js-carousel-5').slick({
+        dots: false,
+        centerMode: false,
+        arrows: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
         centerPadding: '40px'
     });
 }

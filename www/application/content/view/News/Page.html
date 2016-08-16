@@ -112,7 +112,7 @@
         }
         return false;
     }
-    // РќР°С‡Р°Р»СЊРЅР°СЏ Р·Р°РіСЂСѓР·РєР° РѕР±Р»Р°СЃС‚Рё Special offers
+    // Начальная загрузка области Special offers
     $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
         var items = data['Content'],
                 readyPromo = '',
@@ -140,8 +140,8 @@
                     '<h3 class="domains-check__item-title">' + (imgFlag != null ? img : name) + '</h3>' +
                     '<div class="domains-check__item-text">' + comment + '</div>' +
                     '<div class="domains-check__item-price">' +
-                    '<div class="domains-check__item-price-new"> в‚¬' + price + '</div>' +
-                    '<div class="domains-check__item-price-old"> в‚¬' + priceold + '</div>' +
+                    '<div class="domains-check__item-price-new"> €' + price + '</div>' +
+                    '<div class="domains-check__item-price-old"> €' + priceold + '</div>' +
                     '</div>' +
                     '<span class="fake-checkbox-label__box js-check"></span><input data-name="' + name + '" class="hidden-input" name="check-1" type="checkbox"/>' +
                     '<div class="domains-check__item-register">register</div><div class="domains-check__item-order">order</div>' +

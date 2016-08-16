@@ -959,36 +959,21 @@ p {
     color: #ff692d;
 }
 
-.header_phone {
+.b-menu__item_phone_yes {
     font-size: 1.05em;
-    margin-left: 40px;
-    color: #FF692D;
-    float: left;
-    margin-top: 23px;
-    /*border: 1px solid red;*/
-}
-
-.header_client_area {
-    margin-top: 23px;
-    font-size: 1.05em;
-    color: #9454E2;
-    margin-left: 40px;
-    text-decoration: none;
-}
-
-.header_client_area:hover {
+    margin-left: 50px;
     color: #fff;
-    text-decoration: none;
+    margin-top: 23px;
 }
 
 /*ФОРМА ПОИСКА В ШАПКЕ*/
-
+/*
 .header_form_search {
     height: 35px;
     position: relative;
     float: right;
     margin-top: -29px;
-    /*border: 1px solid red;*/
+
 }
 
 .header_form_search input {
@@ -997,7 +982,7 @@ p {
     cursor: pointer;
     padding: 0;
     margin: 0;
-    /*border: 1px solid yellow;*/
+
 }
 
 .header_form_search input[type="text"] {
@@ -1017,7 +1002,22 @@ p {
     cursor: pointer;
     color: #000;
     overflow: hidden;
-}
+
+    .header_form_search input[type="submit"] {
+    height: 35px;
+    width: 35px;
+    display: inline-block;
+    background-image: url(/assets/img/search_lupa_white.png);
+    background-repeat: no-repeat;
+    background-size: 35px 35px;
+    text-indent: -9999px;
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    right: 0;
+    z-index: 2;
+}*/
+
 
 .header_form_search input::-webkit-input-placeholder {
     color: #000;
@@ -1039,23 +1039,6 @@ p {
     cursor: text;
     padding-left: 5px;
 }
-
-.header_form_search input[type="submit"] {
-    height: 35px;
-    width: 35px;
-    display: inline-block;
-    background-image: url(/assets/img/search_lupa_white.png);
-    background-repeat: no-repeat;
-    background-size: 35px 35px;
-    text-indent: -9999px;
-    position: absolute;
-    opacity: 0.5;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    /*border: 1px solid red;*/
-}
-
 .tab-list__content {
     display: none;
 }
@@ -1630,7 +1613,9 @@ p {
     opacity: 0;
     z-index: -1;
 }
-
+.b-news-hidden {
+    display: none;
+}
 .b-news__column {
     display: inline-block;
     vertical-align: top;
@@ -1766,6 +1751,7 @@ p {
     margin: 40px 0;
     text-decoration: none;
     display: inline-block;
+
 }
 
 .b-news__more-plus {
@@ -4736,7 +4722,7 @@ p {
     vertical-align: top;
 }
 
-/* //вариант наоборот с появляющимся текстом
+/* //ВАРИАНТ НАОБОРОТ С ПОЯВЛЯЮЩИМСЯ ТЕКСТОМ
 .b-main-page__offer-item {
     height: 250px;
     position: relative;
@@ -4868,7 +4854,7 @@ p {
     /*border: 1px solid red;*/
 }
 
-.b-main-page__slider-item-rewiews {
+.b-main-page__slider-item-reviews {
     background-color: #272e38;
     width: 1000px;
     height: 250px;
@@ -4876,14 +4862,14 @@ p {
     /*border: 1px solid red;*/
 }
 
-.b-main-page__slider-item-rewiews-logo {
+.b-main-page__slider-item-reviews-logo {
     width: 300px;
     height: 250px;
     float: left;
     /*border: 1px solid blue;*/
 }
 
-.b-main-page__slider-item-image-rewiews {
+.b-main-page__slider-item-image-reviews {
     width: 240px;
     margin: 70px auto;
     opacity: 0.9;
@@ -4891,7 +4877,7 @@ p {
     /*border: 1px solid red;*/
 }
 
-.b-main-page__slider-item-rewiews-text {
+.b-main-page__slider-item-reviews-text {
     width: 700px;
     height: 240px;
     margin-left: 300px;
@@ -4899,7 +4885,7 @@ p {
     /*border: 1px solid green;*/
 }
 
-.b-main-page__slider-item-rewiews-text-rewiews {
+.b-main-page__slider-item-reviews-text-reviews {
     height: 120px;
     font-size: 1.3em;
     margin-left: 30px;
@@ -4909,7 +4895,7 @@ p {
     /*border: 1px solid red;*/
 }
 
-.b-main-page__slider-item-hint-description-rewiews-text-fio {
+.b-main-page__slider-item-hint-description-reviews-text-fio {
     height: 90px;
     margin-top: 30px;
     margin-left: 30px;
@@ -4917,7 +4903,7 @@ p {
     /*border: 1px solid red;*/
 }
 
-.b-main-page__slider-item-hint-description-rewiews-text-fio-person {
+.b-main-page__slider-item-hint-description-reviews-text-fio-person {
     font-size: 1.3em;
     margin: 0px;
     padding: 0px;
@@ -5054,7 +5040,11 @@ p {
     width: 30px;
     height: 30px;
 }
-
+.slider-logo {
+    width: 300px;
+    display: inline;
+    border: 1px solid red;
+}
 .main-page-offers {
     width: 100%;
     display: inline-table;
