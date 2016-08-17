@@ -98,7 +98,41 @@
     <div class="footer-push"></div>
 </div>
 <script>
+
     var lineNews = 1;
+    function clickNews(id, flag) {
+        if (flag) {
+            document.location.href = '{URL}_'.id;
+        }
+    }
+    function lineNewsNext() {
+        lineNews++;
+        f = document.getElementById('scroll-anchor-0' + lineNews);
+
+            if (lineNews >= 4) {
+                $('.b-news__more-text').text("hide news");
+
+
+                for (i = lineNews; i > 0; i--) {
+                    f = document.getElementById('scroll-anchor-0' + i);
+                    if (f !== null) {
+                        f.style.display = "none";
+                    }
+                   
+                }
+                lineNews = 1;
+                $('.b-news__more-text').text("more news");
+            }
+
+
+        if (f !== null) {
+            f.style.display = "block";
+        }
+        return false;
+    }
+
+
+    /*var lineNews = 1;
     function clickNews(id, flag) {
         if (flag) {
             document.location.href = '{URL}_'.id;
@@ -111,43 +145,7 @@
             f.style.display = "block";
         }
         return false;
-    }
-    // Ќачальна€ загрузка области Special offers
-    $.getJSON('/api/v1/shop/domains/zone/list?groups=promo', function (data) {
-        var items = data['Content'],
-                readyPromo = '',
-                sum = items.length;
+    }*/
 
-        if (sum > 4) {
-            sum = 4;
-            $('.b-news__item').css("display", "block");
-        }
-        for (a = 0; a < sum; a++) {
-            var name = items[a].Name,
-                    img = '<img src="/upload/data/' + items[a].Img + '" title="' + name + '"/>',
-                    imgFlag = items[a].Img,
-                    price = items[a].PriceRegister01,
-                    comment = (!!items[a].Comment) ? ((items[a].Comment).stripTags()) : '',
-                    slicedComment = comment.slice(0, 90);
 
-            if (slicedComment.length < comment.length) {
-                slicedComment += '...';
-                comment = slicedComment;
-            }
-
-            var priceold = items[a].PriceOld;
-            readyPromo += '<label class="fake-checkbox-label domains-check__item">' +
-                    '<h3 class="domains-check__item-title">' + (imgFlag != null ? img : name) + '</h3>' +
-                    '<div class="domains-check__item-text">' + comment + '</div>' +
-                    '<div class="domains-check__item-price">' +
-                    '<div class="domains-check__item-price-new"> И' + price + '</div>' +
-                    '<div class="domains-check__item-price-old"> И' + priceold + '</div>' +
-                    '</div>' +
-                    '<span class="fake-checkbox-label__box js-check"></span><input data-name="' + name + '" class="hidden-input" name="check-1" type="checkbox"/>' +
-                    '<div class="domains-check__item-register">register</div><div class="domains-check__item-order">order</div>' +
-                    '</label>';
-
-        }
-        AddData('.domains-check__row', readyPromo, 'add');
-    });
 </script>
