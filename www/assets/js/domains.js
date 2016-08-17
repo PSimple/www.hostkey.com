@@ -816,7 +816,7 @@ $('#buy').on('click', '', function () {
                         extFieldsArr[key] +
                         '</div>';
                 }
-                window.console.log(extFieldsStr);
+                // window.console.log(extFieldsStr);
                 addData('.domains-infoExtFormat', extFieldsStr, 'append');
                 $('#infoBlockExtFields').show();
             }
@@ -855,7 +855,7 @@ $('#buy').on('click', '', function () {
                         'idprotection': idProt,
                         'dns': dnsPeriod
                     };
-                    summaryConfig += 'Register domain: ' + key + '<br/>' + (dnsPeriod > 0 ? '+ DNS hosting<br/>' : '') + (idProt > 0 ? '+ WHOIS privacy<br/>' : '') + '<b>Period: ' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + ' </b><br/>';
+                    summaryConfig += '</br>Register domain: <b>' + key + '</b><br/>' + (dnsPeriod > 0 ? '+ DNS hosting<br/>' : '') + (idProt > 0 ? '+ WHOIS privacy<br/>' : '') + '<b>Period: ' + regPeriod + ' year' + (regPeriod > 1 ? 's' : '') + ' </b><br/>';
                     // for (var k in advanced) {
                     //     summaryConfig += ' - ' + k + ': ' + advanced[k] + '<br/>';
                     // }
@@ -879,6 +879,9 @@ $('#buy').on('click', '', function () {
             } else {
                 $('.errorFieldsList').remove();
                 $('.domains-infoBlockSubtitle').after('<div class="errorFieldsList">Please fill in all of the required fields.</div>');
+                // document.location.href="#errorValidate";
+                var destination = $("#errorValidate").offset().top;
+                $("html,body").animate( { scrollTop: destination }, 1000);
             }
         }
     }
