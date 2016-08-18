@@ -37,7 +37,7 @@ class Content_Section_Cloud extends Zero_Controller
      * Фабричный метод по созданию контроллера.
      *
      * @param array $properties входные параметры плагина
-     * @return Content_Section_Page
+     * @return Content_Section_Cloud
      */
     public static function Make($properties = [])
     {

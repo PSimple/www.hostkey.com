@@ -87,7 +87,7 @@
             {/foreach}
         </div>
 
-        <span class="b-news__more" onclick="lineNewsNext();">
+        <span id="newsNextButton" class="b-news__more" onclick="lineNewsNext();">
             <div class="b-news__more-plus" style="cursor: pointer;">
                 <span class="b-icon b-news__more-plus-icon"></span>
             </div>
@@ -98,39 +98,27 @@
     <div class="footer-push"></div>
 </div>
 <script>
-
-    var lineNews = 1;
     function clickNews(id, flag) {
         if (flag) {
             document.location.href = '{URL}_'.id;
         }
     }
+    var lineNews = 1;
     function lineNewsNext() {
         lineNews++;
         f = document.getElementById('scroll-anchor-0' + lineNews);
-
-            if (lineNews >= 4) {
-                $('.b-news__more-text').text("hide news");
-
-
-                for (i = lineNews; i > 0; i--) {
-                    f = document.getElementById('scroll-anchor-0' + i);
-                    if (f !== null) {
-                        f.style.display = "none";
-                    }
-                   
-                }
-                lineNews = 1;
-                $('.b-news__more-text').text("more news");
-            }
-
-
         if (f !== null) {
             f.style.display = "block";
         }
+        flag = lineNews + 1;
+        f = document.getElementById('scroll-anchor-0' + flag);
+        if (f == null) {
+            f = document.getElementById('newsNextButton');
+            f.innerHTML = '';
+//            f.outerHTML = '';
+        }
         return false;
     }
-
 
     /*var lineNews = 1;
     function clickNews(id, flag) {
