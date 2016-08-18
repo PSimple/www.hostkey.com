@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- Layout Second Page -->
+    <meta name="viewport" content="width=1280"/>
+
+    <LINK REL="SHORTCUT ICON" href="/assets/img/favicon.ico">
+
+    <meta name="format-detection" content="telephone=no">
+
+    {plugin "Zero_Plugin_Section_SeoTag"}
+
+    <link href="/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/dist/hostkey.css" rel="stylesheet" type="text/css" media="all">
+
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5.js"></script>
+    <script src="/assets/js/css3-mediaqueries.js"></script>
+    <![endif]-->
+
+    <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/assets/vendors/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+    <script src="/assets/js/interface.js"></script>
+    <script src="/assets/vendors/checkbox/fake-checkbox.js"></script>
+    <script src="/assets/js/scroll-block.js"></script>
+    <script src="/assets/js/humaine.min.js"></script>
+
+    <!-- TimerJS -->
+    <link href="/assets/vendors/timer/timeTo.css" rel="stylesheet">
+    <script src="/assets/vendors/timer/jquery.timeTo.min.js"></script>
+    <!--<script src="/assets/js/timeTo-run.js"></script>-->
+
+    <!-- arcticModal -->
+    <script src="/assets/vendors/arcticmodal/jquery.arcticmodal-0.3.min.js"></script>
+    <link rel="stylesheet" href="/assets/vendors/arcticmodal/jquery.arcticmodal-0.3.css">
+
+    <!-- arcticModal theme -->
+    <link rel="stylesheet" href="/assets/vendors/arcticmodal/themes/simple.css">
+
+
+    <style>
+        .b-page__promo_text-page_yes {
+            background: url({HTTPD}/{Zero_App::$Section->Img}) no-repeat;
+            height: 600px;
+        }
+    </style>
+
+</head>
+<body>
+
+{plugin "Content_ContentLittle_Plugin" view="Header"}
+
+{$Content}
+
+<style type="text/css">
+    .table_stan {
+        border-spacing: 0;
+        /*border: 1px solid red;*/
+        border-bottom: 1px solid #945ae0;
+        background: #fffff;
+        border-collapse: separate;
+        text-align: left;
+        border-radius: 10px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .table_stan th {
+        background: #945ae0;
+        color: white;
+        padding: 15px 15px;
+        text-align: center;
+        /* border-left: 1px solid #945ae0; */
+        border-left: none;
+        border-top: 1px solid #945ae0;
+        /*border-top: none;*/
+    }
+
+    .table_stan tr:nth-child(odd) {
+        background: #e9ebee;
+    }
+
+    .table_stan td {
+        padding: 15px 15px;
+        transition: all 0.5s ease;
+        /*border-left: 1px solid #fff;*/
+        border-left: none;
+        border-top: 1px solid #945ae0;
+    }
+
+    .table_stan td:first-child, .table_stan th:first-child {
+        border-left: none;
+    }
+
+    .table_stan th:first-child {
+        border-top-left-radius: 10px;
+    }
+
+    .table_stan th:last-child {
+        border-top-right-radius: 10px;
+    }
+
+    /*
+    .table_stan tr:last-child {
+            border-bottom: 1px solid #945ae0;
+        }*/
+</style>
+
+
+{plugin "Content_ContentLittle_Plugin" view="Footer"}
+
+<!-- SlickJS -->
+<link href="/assets/vendors/slick/slick.css" rel="stylesheet">
+<script src="/assets/vendors/slick/slick.min.js"></script>
+<script src="/assets/js/slick-run.js"></script>
+<script src="/assets/dist/hostkey.js"></script>
+<script src="/assets/js/jquery.cookie.js"></script>
+{include "Content_Include_include.all.script"}
+
+<div style="display: none;">
+    <div class="ArcticBoxModal box-modal" id="ArcticBoxModal">
+        <div class="box-modal_close arcticmodal-close"><img src="/assets/img/close.png"></div>
+        <div class="ArcticBoxModalContent"></div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+
+        $('.arctic-modal-popup').click(function () {
+            /* установка ширины контейнер для отображения контента в модальном окне */
+            var atr = $(this).attr('data_more');
+            var c = $("[data_id=" + atr + "]");
+            var w = c.find('[data-width]').attr('data-width');
+            if (typeof w === 'undefined') {
+                w = "auto";
+            }
+            ;
+
+            if (atr == 'Service_In_Russia') {
+                var tabid = $(this).attr('data_table');
+
+                $('.tabs a').removeClass('tab_sel');
+                $('.html_tab').hide();
+                $('.' + tabid).addClass('tab_sel');
+                $('.html_' + tabid).show();
+            }
+            /* --------------------------------------------------------------------*/
+
+            $('.ArcticBoxModalContent').html(c.html());
+            $('#ArcticBoxModal').arcticmodal({
+                beforeOpen: function (data, el) {
+                    $('.box-modal').css('width', w);
+                },
+                overlay: {
+                    css: {
+                        backgroundColor: '#000',
+                        /*backgroundImage: 'url(/assets/img/logo.png)',*/
+                        backgroundRepeat: 'repeat',
+                        backgroundPosition: '50% 0',
+                        opacity: .25
+                    }
+                }
+            });
+            return false;
+        });
+    });
+
+</script>
+
+</body>
+</html>
