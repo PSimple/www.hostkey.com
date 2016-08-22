@@ -38,23 +38,12 @@ class Shop_Api_Domains_ZoneAdvancedField extends Zero_Controller
 // .US
 
         $additionaldomainfields[".us"][] = array("Name" => "Nexus Category", "LangVar" => "ustldnexuscat", "Type" => "dropdown", "Options" => "C11,C12,C21,C31,C32", "Default" => "C11",);
-        $additionaldomainfields[".us"][] = array("Name" => "Info", "LangVar" => "us_info", "Type" => "display", "Default" =>
-            "Nexus information is required for the registrants to ensure that only those individuals or organizations that have a substantive lawful connection to the US are permitted to register for usTLD domain names.<br><br>
-			Possible values:
-        <ul>
-            <li><strong>C12</strong>: A permanent resident of the U.S. (a natural person).</li>
-            <li><strong>C11</strong>: A U.S. citizen (a natural person).</li>
-            <li><strong>C21</strong>: An organization entitled to register.</li>
-			<li><strong>C31</strong>: A foreign organization entitled to register.</li>
-            <li><strong>C32</strong>: An organization with office or facility in the U.S.</li>
-        </ul>",);
-        $additionaldomainfields[".us"][] = array("Name" => "Nexus Country", "LangVar" => "ustldnexuscountry", "Type" => "text", "Size" => "22", "Default" => "Two-digit country code", "Required" => true,);
+        $additionaldomainfields[".us"][] = array("Name" => "Nexus Country", "LangVar" => "ustldnexuscountry", "Type" => "text", "Size" => "20", "Default" => "", "Required" => true,);
         $additionaldomainfields[".us"][] = array("Name" => "Application Purpose", "LangVar" => "ustldapppurpose", "Type" => "dropdown", "Options" => "Business use for profit,Non-profit business,Club,Association,Religious Organization,Personal Use,Educational purposes,Government purposes", "Default" => "Business use for profit",);
 
 // .UK
 
-        $additionaldomainfields[".co.uk"][] = array("Name" => "Legal Type", "DisplayName" => "Legal Form", "LangVar" => "uktldlegaltype", "Type" => "dropdown", "Options" => "Natural Person,UK Limited Company,UK Public Limited Company,UK Partnership,UK Limited Liability Partnership,Sole Trader,UK Registered Charity,UK Entity (other),Foreign Organization,Other foreign organizations,UK Industrial/Provident Registered Company,UK School,UK Government Body,UK Corporation by Royal Charter,UK Statutory Body,Non-UK Natural Person", "Default" => "Natural Person",);
-
+        $additionaldomainfields[".co.uk"][] = array("Name" => "Legal Type", "LangVar" => "uktldlegaltype", "Type" => "dropdown", "Options" => "Individual,UK Limited Company,UK Public Limited Company,UK Partnership,UK Limited Liability Partnership,Sole Trader,UK Registered Charity,UK Entity (other),Foreign Organization,Other foreign organizations,UK Industrial/Provident Registered Company,UK School,UK Government Body,UK Corporation by Royal Charter,UK Statutory Body,Non-UK Individual", "Default" => "Individual",);
         $additionaldomainfields[".co.uk"][] = array("Name" => "Company ID Number", "LangVar" => "uktldcompanyid", "Type" => "text", "Size" => "30", "Default" => "", "Required" => false,);
         $additionaldomainfields[".co.uk"][] = array("Name" => "Registrant Name", "LangVar" => "uktldregname", "Type" => "text", "Size" => "30", "Default" => "", "Required" => true,);
         $additionaldomainfields[".net.uk"] = $additionaldomainfields[".co.uk"];
@@ -63,20 +52,18 @@ class Shop_Api_Domains_ZoneAdvancedField extends Zero_Controller
         $additionaldomainfields[".plc.uk"] = $additionaldomainfields[".co.uk"];
         $additionaldomainfields[".ltd.uk"] = $additionaldomainfields[".co.uk"];
         $additionaldomainfields[".co.uk"][] = array("Name" => "WHOIS Opt-out", "LangVar" => "uktldwhoisoptout", "Type" => "tickbox",);
-        $additionaldomainfields[".co.uk"][] = array("Name" => "Info", "LangVar" => "co.uk_info", "Type" => "display", "Default" =>
-            "You have the right to opt out from having you address, and where applicable the address for service, published on the WHOIS. This option is only available if the registrant type is set as \"UK Natural Person\". Furthermore to qualify the domain name must not be used for any commercial activity and be unconnected with any business, trade or profession. This includes the display of any pay per click advertising on the site.",);
         $additionaldomainfields[".uk"] = $additionaldomainfields[".co.uk"];
 
 // .CA
 
-        $additionaldomainfields[".ca"][] = array("Name" => "Legal Type", "DisplayName" => "Legal Form", "LangVar" => "catldlegaltype", "Type" => "dropdown", "Options" => "Corporation,Canadian Citizen,Permanent Resident of Canada,Government,Canadian Educational Institution,Canadian Unincorporated Association,Canadian Hospital,Partnership Registered in Canada,Trade-mark registered in Canada,Canadian Trade Union,Canadian Political Party,Canadian Library Archive or Museum,Trust established in Canada,Aboriginal Peoples,Legal Representative of a Canadian Citizen,Official mark registered in Canada", "Default" => "Corporation", "Description" => "Legal type of registrant contact",);
-        $additionaldomainfields[".ca"][] = array("Name" => "CIRA Agreement", "LangVar" => "catldciraagreement", "Type" => "tickbox", "Description" => "Tick to confirm you agree to the CIRA Registration Agreement shown below.<br />You have read, understood and agree to the terms and conditions of the Registrant Agreement, and that CIRA may, from time to time and at its discretion, amend any or all of the terms and conditions of the Registrant Agreement, as CIRA deems appropriate, by posting a notice of the changes on the CIRA website and by sending a notice of any material changes to Registrant. You meet all the requirements of the Registrant Agreement to be a Registrant, to apply for the registration of a Domain Name Registration, and to hold and maintain a Domain Name Registration, including without limitation CIRA's Canadian Presence Requirements for Registrants, at: <a href=\"http://www.cira.ca/assets/Documents/Legal/Registrants/CPR.pdf\" target=\"_blank\"> www.cira.ca/assets/Documents/Legal/Registrants/CPR.pdf</a>. CIRA will collect, use and disclose your personal information, as set out in CIRA's Privacy Policy, at: <a href=\"http://www.cira.ca/assets/Documents/Legal/Registrants/privacy.pdf\" target=\"_blank\">www.cira.ca/assets/Documents/Legal/Registrants/privacy.pdf.</a>",);
-        $additionaldomainfields[".ca"][] = array("Name" => "WHOIS Opt-out", "LangVar" => "catldwhoisoptout", "Type" => "tickbox", "Description" => "Tick to hide your contact information in CIRA WHOIS (only available to individuals).",);
+        $additionaldomainfields[".ca"][] = array("Name" => "Legal Type", "LangVar" => "catldlegaltype", "Type" => "dropdown", "Options" => "Corporation,Canadian Citizen,Permanent Resident of Canada,Government,Canadian Educational Institution,Canadian Unincorporated Association,Canadian Hospital,Partnership Registered in Canada,Trade-mark registered in Canada,Canadian Trade Union,Canadian Political Party,Canadian Library Archive or Museum,Trust established in Canada,Aboriginal Peoples,Legal Representative of a Canadian Citizen,Official mark registered in Canada", "Default" => "Corporation", "Description" => "Legal type of registrant contact",);
+        $additionaldomainfields[".ca"][] = array("Name" => "CIRA Agreement", "LangVar" => "catldciraagreement", "Type" => "tickbox", "Description" => "Tick to confirm you agree to the CIRA Registration Agreement shown below<br /><blockquote>You have read, understood and agree to the terms and conditions of the Registrant Agreement, and that CIRA may, from time to time and at its discretion, amend any or all of the terms and conditions of the Registrant Agreement, as CIRA deems appropriate, by posting a notice of the changes on the CIRA website and by sending a notice of any material changes to Registrant. You meet all the requirements of the Registrant Agreement to be a Registrant, to apply for the registration of a Domain Name Registration, and to hold and maintain a Domain Name Registration, including without limitation CIRA's Canadian Presence Requirements for Registrants, at: www.cira.ca/assets/Documents/Legal/Registrants/CPR.pdf. CIRA will collect, use and disclose your personal information, as set out in CIRA's Privacy Policy, at: www.cira.ca/assets/Documents/Legal/Registrants/privacy.pdf</blockquote>",);
+        $additionaldomainfields[".ca"][] = array("Name" => "WHOIS Opt-out", "LangVar" => "catldwhoisoptout", "Type" => "tickbox", "Description" => "Tick to hide your contact information in CIRA WHOIS (only available to individuals)",);
 
 // .ES
 
-        $additionaldomainfields[".es"][] = array("Name" => "ID Form Type", "DisplayName" => "ID Type", "LangVar" => "estldidformtype", "Type" => "dropdown", "Options" => "Other Identification,Tax Identification Number,Tax Identification Code,Foreigner Identification Number", "Default" => "Other Identification",);
-        $additionaldomainfields[".es"][] = array("Name" => "ID Form Number", "DisplayName" => "ID Number", "LangVar" => "estldidformnum", "Type" => "text", "Size" => "30", "Default" => "", "Required" => true,);
+        $additionaldomainfields[".es"][] = array("Name" => "ID Form Type", "LangVar" => "estldidformtype", "Type" => "dropdown", "Options" => "Other Identification,Tax Identification Number,Tax Identification Code,Foreigner Identification Number", "Default" => "Other Identification",);
+        $additionaldomainfields[".es"][] = array("Name" => "ID Form Number", "LangVar" => "estldidformnum", "Type" => "text", "Size" => "30", "Default" => "", "Required" => true,);
         $additionaldomainfields[".es"][] = array(
             "Name" => "Legal Form",
             "LangVar" => "estldlegalform",
@@ -125,18 +112,11 @@ class Shop_Api_Domains_ZoneAdvancedField extends Zero_Controller
             ),
             "Default" => "1|Individual",
         );
-        $additionaldomainfields[".es"][] = array("Name" => "Info", "LangVar" => "es_info", "Type" => "display", "Default" =>
-            "
-        <ul>
-            <li><strong>Tax Identification Number (NIF)</strong>: Select this option if you can provide us with either your Spanish National Personal ID.</li>
-            <li><strong>Tax Identification Code (CIF)</strong>: Select this option if you can provide us with either your Spanish company VAT ID number.</li>
-            <li><strong>Foreigner Identification Number (NIE)</strong>: Select this option if you can provide us with your Spanish resident alien ID number.</li>
-			        </ul>",);
 
 // .SG
 
-        $additionaldomainfields[".sg"][] = array("Name" => "RCB Singapore ID", "DisplayName" => "RCB (Registry of Companies & Businesses) Singapore ID", "LangVar" => "sgtldrcbid", "Type" => "text", "Size" => "30", "Default" => "", "Required" => true,);
-        $additionaldomainfields[".sg"][] = array("Name" => "Registrant Type", "LangVar" => "sgtldregtype", "Type" => "dropdown", "Options" => "Natural Person,Organisation", "Default" => "Natural Person",);
+        $additionaldomainfields[".sg"][] = array("Name" => "RCB Singapore ID", "DisplayName" => "RCB/Singapore ID", "LangVar" => "sgtldrcbid", "Type" => "text", "Size" => "30", "Default" => "", "Required" => true,);
+        $additionaldomainfields[".sg"][] = array("Name" => "Registrant Type", "LangVar" => "sgtldregtype", "Type" => "dropdown", "Options" => "Individual,Organisation", "Default" => "Individual",);
         $additionaldomainfields[".com.sg"] = $additionaldomainfields[".sg"];
         $additionaldomainfields[".edu.sg"] = $additionaldomainfields[".sg"];
         $additionaldomainfields[".net.sg"] = $additionaldomainfields[".sg"];
@@ -145,16 +125,14 @@ class Shop_Api_Domains_ZoneAdvancedField extends Zero_Controller
 
 // .TEL
 
-        $additionaldomainfields[".tel"][] = array("Name" => "Legal Type", "DisplayName" => "Legal Form", "LangVar" => "teltldlegaltype", "Type" => "dropdown", "Options" => "Natural Person,Legal Person", "Default" => "Natural Person",);
-        $additionaldomainfields[".tel"][] = array("Name" => "WHOIS Opt-out", "LangVar" => "teltldwhoisoptout", "Type" => "tickbox", "Description" => "Tick to hide your contact information in WHOIS (only available to natural person).",);
+        $additionaldomainfields[".tel"][] = array("Name" => "Legal Type", "LangVar" => "teltldlegaltype", "Type" => "dropdown", "Options" => "Natural Person,Legal Person", "Default" => "Natural Person",);
+        $additionaldomainfields[".tel"][] = array("Name" => "WHOIS Opt-out", "LangVar" => "teltldwhoisoptout", "Type" => "tickbox",);
 
 // .IT
 
-        $additionaldomainfields[".it"][] = array("Name" => "Legal Type", "DisplayName" => "Legal Form", "LangVar" => "ittldlegaltype", "Type" => "dropdown", "Options" => "Italian and foreign natural persons,Companies/one man companies,Freelance workers/professionals,Non-profit organizations,Public organizations,Other subjects,Non natural foreigners", "Default" => "Italian and foreign natural persons", "Description" => "Legal type of registrant",);
+        $additionaldomainfields[".it"][] = array("Name" => "Legal Type", "LangVar" => "ittldlegaltype", "Type" => "dropdown", "Options" => "Italian and foreign natural persons,Companies/one man companies,Freelance workers/professionals,non-profit organizations,public organizations,other subjects,non natural foreigners", "Default" => "Italian and foreign natural persons", "Description" => "Legal type of registrant",);
         $additionaldomainfields[".it"][] = array("Name" => "Tax ID", "LangVar" => "ittldtaxid", "Type" => "text", "Size" => "20", "Default" => "", "Required" => true,);
-        $additionaldomainfields[".it"][] = array("Name" => "Info", "LangVar" => "it_info", "Type" => "display", "Default" =>
-            "In order to register a domain, you have to agree with the conditions of the <a href=\"http://www.nic.it/sites/default/files/docs/Registrar_Contract%202016-2019.pdf\" target=\"_blank\">Registrar Contract</a> and with the publication of your personal data.",);
-        $additionaldomainfields[".it"][] = array("Name" => "Publish Personal Data", "LangVar" => "ittlddata", "Type" => "tickbox", "Description" => "You agree to the publication of your personal data.",);
+        $additionaldomainfields[".it"][] = array("Name" => "Publish Personal Data", "LangVar" => "ittlddata", "Type" => "tickbox",);
         $additionaldomainfields[".it"][] = array("Name" => "Accept Section 3 of .IT registrar contract", "LangVar" => "ittldsec3", "Type" => "tickbox",);
         $additionaldomainfields[".it"][] = array("Name" => "Accept Section 5 of .IT registrar contract", "LangVar" => "ittldsec5", "Type" => "tickbox",);
         $additionaldomainfields[".it"][] = array("Name" => "Accept Section 6 of .IT registrar contract", "LangVar" => "ittldsec6", "Type" => "tickbox",);
@@ -183,16 +161,16 @@ class Shop_Api_Domains_ZoneAdvancedField extends Zero_Controller
 
 // .ASIA
 
-        $additionaldomainfields[".asia"][] = array("Name" => "Legal Type", "DisplayName" => "Legal Form", "LangVar" => "asialegaltype", "Type" => "dropdown", "Options" => "Natural Person,Corporation,Cooperative,Partnership,Government,Political Party,Society,Institution", "Default" => "Natural Person",);
-        $additionaldomainfields[".asia"][] = array("Name" => "Identity Form", "DisplayName" => "ID Form", "LangVar" => "asiaidentityform", "Type" => "dropdown", "Options" => "Passport,Certificate,Legislation,Society Registry,Political Party Registry", "Default" => "Passport",);
-        $additionaldomainfields[".asia"][] = array("Name" => "Identity Number", "DisplayName" => "ID Number", "LangVar" => "asiaidentitynumber", "Type" => "text", "Size" => "20", "Default" => "", "Required" => true,);
+        $additionaldomainfields[".asia"][] = array("Name" => "Legal Type", "LangVar" => "asialegaltype", "Type" => "dropdown", "Options" => "naturalPerson,corporation,cooperative,partnership,government,politicalParty,society,institution", "Default" => "naturalPerson",);
+        $additionaldomainfields[".asia"][] = array("Name" => "Identity Form", "LangVar" => "asiaidentityform", "Type" => "dropdown", "Options" => "passport,certificate,legislation,societyRegistry,politicalPartyRegistry", "Default" => "passport",);
+        $additionaldomainfields[".asia"][] = array("Name" => "Identity Number", "LangVar" => "asiaidentitynumber", "Type" => "text", "Size" => "20", "Default" => "", "Required" => true,);
 
 // .PRO
 
         $additionaldomainfields[".pro"][] = array("Name" => "Profession", "LangVar" => "proprofession", "Type" => "text", "Size" => "20", "Default" => "", "Required" => true, "Description" => "Indicated professional association recognized by government body",);
         $additionaldomainfields[".pro"][] = array("Name" => "License Number", "LangVar" => "prolicensenumber", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, "Description" => "The license number of the registrant's credentials, if applicable.",);
-        $additionaldomainfields[".pro"][] = array("Name" => "Authority", "DisplayName" => "Issuing Authority", "LangVar" => "proauthority", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, "Description" => "The name of the authority from which the registrant receives their professional credentials.",);
-        $additionaldomainfields[".pro"][] = array("Name" => "Authority Website", "DisplayName" => "Issuing Authority Website", "LangVar" => "proauthoritywebsite", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, "Description" => "The URL to an online resource for the authority, preferably, a member search directory.",);
+        $additionaldomainfields[".pro"][] = array("Name" => "Authority", "LangVar" => "proauthority", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, "Description" => "The name of the authority from which the registrant receives their professional credentials.",);
+        $additionaldomainfields[".pro"][] = array("Name" => "Authority Website", "LangVar" => "proauthoritywebsite", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, "Description" => "The URL to an online resource for the authority, preferably, a member search directory.",);
 
 // .COOP
 
@@ -213,25 +191,22 @@ class Shop_Api_Domains_ZoneAdvancedField extends Zero_Controller
         $additionaldomainfields[".cn"][] = array("Name" => "cnhregisterclause", "DisplayName" => "Agree to the .CN <a href=\"http://www1.cnnic.cn/PublicS/fwzxxgzcfg/201208/t20120830_35735.htm\" target=\"_blank\">Register Agreement</a>", "LangVar" => "ittldsec3", "Type" => "tickbox", "Required" => true,);
 
 // .FR
-
-        $additionaldomainfields[".fr"][] = array("Name" => "Legal Type", "DisplayName" => "Legal Form", "LangVar" => "fr_legaltype", "Type" => "dropdown", "Options" => "Natural Person,Company", "Default" => "Natural Person",);
+        $additionaldomainfields[".fr"][] = array("Name" => "Birthplace Country", "Type" => "text", "Size" => "2", "Default" => "FR", "Required" => false, "Description" => 'Please, enter your birth country code (use <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha 2</a>)');
+        $additionaldomainfields[".fr"][] = array("Name" => "Legal Type", "LangVar" => "fr_legaltype", "Type" => "dropdown", "Options" => "Individual,Company", "Default" => "Individual",);
         $additionaldomainfields[".fr"][] = array("Name" => "Info", "LangVar" => "fr_info", "Type" => "display", "Default" =>
             ".fr domains have different required values depending on your nationality and type of registration: 
         <ul>
-            <li><strong>French Natural Persons</strong>: Please provide your \"Birthdate\", \"Birthplace City\", \"Birthplace Country\", and \"Birthplace Postcode\".</li>
-            <li><strong>EU Non-French Natural Persons</strong>: Please provide your \"Birthdate\".</li>
-            <li><strong>French Companies</strong>: Please provide the \"Birthdate\", \"Birthplace City\", \"Birthplace Country\", and \"Birthplace Postcode\" for the owner contact, along with your SIRET number.</li>
+            <li><strong>French Individuals</strong>: Please provide your \"Birthdate\", \"Birthplace City\", and \"Birthplace Postcode\".</li>
+            <li><strong>EU Non-French Individuals</strong>: Please provide your \"Birthdate\".</li>
+            <li><strong>French Companies</strong>: Please provide the \"Birthdate\", \"Birthplace City\", and \"Birthplace Postcode\" for the owner contact, along with your SIRET number.</li>
             <li><strong>EU Non-French Companies</strong>: Please provide the company \"DUNS Number\", and the \"Birthdate\" of the Owner Contact.</li>
         </ul>
         <em>Client contact information must be within the EU or else registration will fail.</em>",);
-        $additionaldomainfields[".fr"][] = array("Name" => "Birthdate", 'LangVar' => 'fr_indbirthdate', "Type" => "text", "Size" => "16", "Default" => "1969-10-29", "Required" => false);
+        $additionaldomainfields[".fr"][] = array("Name" => "Birthdate", 'LangVar' => 'fr_indbirthdate', "Type" => "text", "Size" => "16", "Default" => "1900-01-01", "Required" => false);
         $additionaldomainfields[".fr"][] = array("Name" => "Birthplace City", 'LangVar' => 'fr_indbirthcity', "Type" => "text", "Size" => "25", "Default" => "", "Required" => false);
-        $additionaldomainfields[".fr"][] = array("Name" => "Birthplace Country", "Type" => "text", "Size" => "2", "Default" => "FR", "Required" => false, "Description" => 'Please, enter your birth country code (use <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha 2</a>)');
         $additionaldomainfields[".fr"][] = array("Name" => "Birthplace Postcode", 'LangVar' => 'fr_indbirthpostcode', "Type" => "text", "Size" => "6", "Default" => "", "Required" => false);
         $additionaldomainfields[".fr"][] = array("Name" => "SIRET Number", 'LangVar' => 'fr_cosiret', "Type" => "text", "Size" => "50", "Default" => "", "Required" => false);
         $additionaldomainfields[".fr"][] = array("Name" => "DUNS Number", 'LangVar' => 'fr_coduns', "Type" => "text", "Size" => "50", "Default" => "", "Required" => false);
-        $additionaldomainfields[".fr"][] = array("Name" => "Info", "LangVar" => "fr_duns_info", "Type" => "display", "Default" =>
-            "The <a href=\"https://www.dandb.com/product/companyupdate/companyupdateLogin?execution=e2s1\" target=\"_blank\">DUNS</a> number is a nine-digit number, issued by Dun Bradstreet. DUNS is the abbreviation of Data Universal Numbering System. Companies with a valid DUNS number are still obliged having their head office in the territory of the European Union. The DUNS number can be provided using this extension.",);
         $additionaldomainfields[".fr"][] = array("Name" => "VAT Number", 'LangVar' => 'fr_vat', "Type" => "text", "Size" => "50", "Default" => "", "Required" => false);
         $additionaldomainfields[".fr"][] = array("Name" => "Trademark Number", 'LangVar' => 'fr_trademarknumber', "Type" => "text", "Size" => "50", "Default" => "", "Required" => false);
 
@@ -256,16 +231,12 @@ class Shop_Api_Domains_ZoneAdvancedField extends Zero_Controller
 
 
 // .SE
-        $additionaldomainfields[".se"][] = array("Name" => "Personal or organisation number", "DisplayName" => "Personal or organization number", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, 'Description' => 'Corporate identity number or personal identification number (for non Swedish, any other unique identification number can be used instead)');
-        $additionaldomainfields[".se"][] = array("Name" => "Info", "LangVar" => "se_info", "Type" => "display", "Default" =>
-            "Corporate identity number or personal identification number (for non Swedish, any other unique identification number can be used instead).",);
-        $additionaldomainfields[".se"][] = array("Name" => "Vat number", "DisplayName" => "VAT Number", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, 'Description' => 'VAT registration number (only for foreign legal entities within the EU who are registered to pay VAT)');
+        $additionaldomainfields[".se"][] = array("Name" => "Personal or organisation number", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, 'Description' => 'Corporate identity number or personal identification number (for non Swedish, any other unique identification number can be used instead)');
+        $additionaldomainfields[".se"][] = array("Name" => "Vat number", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, 'Description' => 'VAT registration number (only for foreign legal entities within the EU who are registered to pay VAT)');
 
 // .NU
-        $additionaldomainfields[".nu"][] = array("Name" => "Personal or organisation number", "DisplayName" => "Personal or organization number", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, 'Description' => 'Corporate identity number or personal identification number (for non Swedish, any other unique identification number can be used instead)');
-        $additionaldomainfields[".nu"][] = array("Name" => "Info", "LangVar" => "nu_info", "Type" => "display", "Default" =>
-            "Corporate identity number or personal identification number (for non Swedish, any other unique identification number can be used instead).",);
-        $additionaldomainfields[".nu"][] = array("Name" => "Vat number", "DisplayName" => "VAT Number", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, 'Description' => 'VAT registration number (only for foreign legal entities within the EU who are registered to pay VAT)');
+        $additionaldomainfields[".nu"][] = array("Name" => "Personal or organisation number", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, 'Description' => 'Corporate identity number or personal identification number (for non Swedish, any other unique identification number can be used instead)');
+        $additionaldomainfields[".nu"][] = array("Name" => "Vat number", "Type" => "text", "Size" => "20", "Default" => "", "Required" => false, 'Description' => 'VAT registration number (only for foreign legal entities within the EU who are registered to pay VAT)');
 
         Zero_App::ResponseJson200($additionaldomainfields);
         return true;
