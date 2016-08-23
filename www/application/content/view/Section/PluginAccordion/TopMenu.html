@@ -2,13 +2,13 @@
     {foreach ($NAVIGATION as $KEY => $VALUE )}
       {if (isset($VALUE['child']) AND count( $VALUE['child']) >0)}
         <li class="nav__item nav__item_drop_yes">
-            <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['NameMenu']}</a><!--пункты меню, кроме domains-->
+            <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['NameMenu']}</a>
 
                     <nav class="b-sub-menu">
                         <ul class="b-menu__item b-menu__item_nav_yes nav">
                             {foreach ($VALUE['child'] as $K => $V)}
                                 <li class="nav__item">
-                                    <a class="nav__link {if ($V['action'])} nav__link_active{/if}" href="{$V['Url']}">{$V['NameMenu']}</a><!--субменю-->
+                                    <a class="nav__link {if ($V['action'])} nav__link_active{/if}" href="{$V['Url']}">{$V['NameMenu']}</a>
                                 </li>
                             {/foreach}
                         </ul>
@@ -16,19 +16,28 @@
         </li>
       {else}
             <div class="nav__item">
-                <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['NameMenu']}</a><!--пункт меню domains-->
+                <a class="nav__link{if ($VALUE['action'])} nav__link_active{/if}" href="{$VALUE['Url']}">{$VALUE['NameMenu']}</a>
             </div>
+
+
+
     {/if}
     {/foreach}
+    <div class="nav__item">
+        <a class="nav__link" href="https://bill.hostkey.com">CLIENT AREA</a>
+    </div>
 </ul>
 
-<div class="header_phone">+31 20 820 3777</div>
 
-<div class="header_client_area">
+<!--<a class="nav__link" href="https://bill.hostkey.com">CLIENT AREA</a>-->
+
+
+<!--<div class="header_client_area">
     <a class="header_client_area" href="https://bill.hostkey.com">CLIENT AREA</a>
-</div>
+</div>-->
 
-<form class="header_form_search">
-    <input type="text" placeholder="Search...">
-    <input type="submit" value="Поиск">
-</form>
+<!--<form class="header_form_search">
+    <input type="text" class="header_input_text" placeholder="Search...">
+    <input type="submit" class="header_input_submit" value="Поиск">
+</form>-->
+
