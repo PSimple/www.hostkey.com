@@ -1,25 +1,58 @@
-# Composer files
-composer.phar
-vendor/
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+*.conf
+*.log
 
-# Local configs
-config/autoload/*.local.php
+# Project
+nginx.conf_good
+nginx.conf_ssl
+nginx.conf_ssl_good
+nginx.conf_super_good
+test.php
+config.php
+test
+cache
+config
+deploy
+upload
+exchange
+library
+www/zero
+www/engine
+www/doc
+www/application/document
+www/sitemap.xml
 
-# Binary gettext files
-*.mo
+# External dependences
 
-# Data
-data/logs/
-data/cache/
-data/sessions/
-data/tmp/
-temp/
+# IDE
+.git
+.project
+.settings
+.idea
+nbproject*
 
-#Doctrine 2
-data/DoctrineORMModule/Proxy/
-data/DoctrineORMModule/cache/
+# Folders
+_obj
+_test
+bin
+pkg
+run
+log
 
+# Architecture specific extensions/prefixes
+*.[568vq]
+[568vq].out
 
-# Legacy ZF1
-demos/
-extras/documentation
+*.cgo1.go
+*.cgo2.c
+_cgo_defun.c
+_cgo_gotypes.go
+_cgo_export.*
+
+_testmain.go
+
+*.exe
+*.test
