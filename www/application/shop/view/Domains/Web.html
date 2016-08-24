@@ -17,8 +17,8 @@
 
             <div class="b-container" id="searchBarContainer" style="display: block;">
                 <div class="search-bar">
-                    <input type="text" class="b-input search-bar__input" name="" placeholder="Find your new domain name today"/><!--
-                        --><textarea class="b-input search-bar__input search-bar__input-hidden" name="" cols="30"
+                    <input type="text" class="b-input search-bar__input" name="" placeholder="Find your new domain name today" autofocus="autofocus"/><!--
+                        --><textarea class="b-input search-bar__input search-bar__input-hidden" id="searchBar-textarea" name="" cols="30"
                                      rows="10"></textarea><!--
                         -->
                     <button class="search-bar__button-bulk">Bulk Options</button><!--
@@ -190,8 +190,12 @@
                             <tr>
                                 <th width="250" class="tab-list__content-table-cell">Domain</th>
                                 <th width="260" class="tab-list__content-table-cell">Registration period</th>
-                                <th width="260" class="tab-list__content-table-cell"><a href="#" class="tab-list__content-reg-idprotAll">WHOIS privacy<span class="tab-list__content-reg-help js-tooltip" title="Add WHOIS privacy protection for all domains in your order by clicking on this title or choose one or several domains manually below. Note:&nbsp;It&nbsp;will&nbsp;be&nbsp;provided&nbsp;for&nbsp;the entire registration period for the selected domains. This service cannot be provided for some domain extensions."></span></a></th>
-                                <th width="300" class="tab-list__content-table-cell"><a href="#" class="tab-list__content-reg-dnsAll">DNS hosting<span class="tab-list__content-reg-help js-tooltip" title="Add DNS hosting service for all domains in your by clicking on the title, or select one or several domains manually below. Note:&nbsp;DNS&nbsp;hosting&nbsp;will&nbsp;be&nbsp;provided&nbsp;for the entire registration period for the selected domains."></span></a></th>
+                                <th width="260" class="tab-list__content-table-cell"><a href="#" class="tab-list__content-reg-idprotAll">WHOIS privacy<span class="tab-list__content-reg-help js-tooltip"
+                                                                                                                                                            title="Add WHOIS privacy protection for all domains in your order by clicking on this title or choose one or several domains manually below. Note:&nbsp;It&nbsp;will&nbsp;be&nbsp;provided&nbsp;for&nbsp;the entire registration period for the selected domains. This service cannot be provided for some domain extensions."></span></a>
+                                </th>
+                                <th width="300" class="tab-list__content-table-cell"><a href="#" class="tab-list__content-reg-dnsAll">DNS hosting<span class="tab-list__content-reg-help js-tooltip"
+                                                                                                                                                       title="Add DNS hosting service for all domains in your by clicking on the title, or select one or several domains manually below. Note:&nbsp;DNS&nbsp;hosting&nbsp;will&nbsp;be&nbsp;provided&nbsp;for the entire registration period for the selected domains."></span></a>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>

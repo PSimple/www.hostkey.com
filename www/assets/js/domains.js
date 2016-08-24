@@ -35,7 +35,6 @@ var i,
             'ns2': '',
             'ns3': '',
             'ns4': ''
-
         },
         'domains': {}
     },
@@ -65,6 +64,7 @@ var i,
         'ThematicTable': 0
     };
 
+// Выдача хэша на первый шаг
 window.location.hash = '#domains_1';
 
 // Проверка наличия атрибута
@@ -275,10 +275,15 @@ function genDomainsTable(target, data) {
 
     fullAvDomList[target.slice(1)] += domainsList.join(', ');
     fullAvDomPrices[target.slice(1)] += domainsPrice;
+
+    if (fullAvDomList[target.slice(1)].slice(-1) != ',')
+        fullAvDomList[target.slice(1)] += ', ';
+
     var tableDomList = fullAvDomList[target.slice(1)],
         tableDomPrices = fullAvDomPrices[target.slice(1)],
         qDom = ((!tableDomList.length) ? 0 : (tableDomList.indexOf(',') >= 0) ? (tableDomList.split(',')).length : 1),
-        numVariation = ' domains';
+        numVariation = ' domains',
+        tdlCut = tableDomList.slice(0, -2);
     if (qDom > 0) {
         switch (qDom) {
             case 1:
@@ -289,9 +294,8 @@ function genDomainsTable(target, data) {
                 break;
 
         }
-        $(target).next('.nextPg').after('<div class="regAllContainer for' + target.slice(1) + '"><div class="regAllContent">' +
-            '<div class="regAllTitle">Register ' + qDom + numVariation + '  for one year for €' + tableDomPrices.toFixed(2) + ':</div>' +
-            tableDomList + '</div>' +
+        $(target).next('.nextPg').after('<div class="regAllContainer for' + target.slice(1) + '">' +
+            '<div class="regAllContent"><div class="regAllTitle">Register ' + qDom + numVariation + '  for one year for €' + tableDomPrices.toFixed(2) + ':</div>' + tdlCut + '</div>' +
             '<a href="#" data-tname="' + target + '" class="regAllButton"><i class="b-icon"></i>Register all</a>' +
             '</div>');
     }
@@ -347,12 +351,12 @@ $.getJSON('/api/v1/shop/domains/dns/price', function (data) {
     if (!data['ErrorStatus'])
         dnsRate = data['Content'];
 });
+
 // Подгрузка цены на id protection
 $.getJSON('/api/v1/shop/domains/idprotection/price', function (data) {
     if (!data['ErrorStatus'])
         idProtectionRate = data['Content'];
 });
-
 
 // Подгрузка инфы для доп полей
 $.getJSON('/api/v1/domains/advanced/field', function (data) {
@@ -494,12 +498,26 @@ $('#domains-check__more').on('click', '', function () {
 
 // Чистка области поиска от лишних символов на лету
 $('.search-bar__input').on('keyup', function (e) {
-    var svalue = $(this).val().replace(/[^a-zA-Z0-9-^.\n]/g, '');
+    var svalue = $(this).val().replace(/[^a-zA-Z0-9-^.\n]/g, ''),
+        nvalue = svalue.replace(/[а-яА-Я,;!@#$%^&*()_=+<>/\\'’"\[\]\{\}№:?]/g, '\n'),
+        lines = nvalue.split("\n"),
+        linesCount = lines.length,
+        linesMax = 10;
     // var svalue = $(this).val().replace(/[^a-zA-Zа-яА-Я0-9-^.\n]/g, ''); // буквы всех алфавитов
-    var nvalue = $(this).val().replace(/[а-яА-Я,;!@#$%^&*()_=+<>/\\'"\[\]\{\}№:? ]/g, '\n');
-    $(this).val(svalue);
-    $(this).val(nvalue);
 
+    // for (var key in lines) {
+    //     if (lines[key] == '') {
+    //         delete lines[key];
+    //     }
+    // }
+
+    if (linesCount >= linesMax) {
+        var linesCut = lines.slice(0, linesMax),
+            linesCutStr = linesCut.join('\n');
+        $(this).val(linesCutStr);
+    } else {
+        $(this).val(nvalue);
+    }
     if ($('.search-bar__input:visible').val() == '') {
         $('.search-bar .b-submit').addClass('search-bar__submit__disabled');
     } else {
@@ -509,7 +527,6 @@ $('.search-bar__input').on('keyup', function (e) {
     if (e.keyCode == 13 && $('input.search-bar__input').is(':visible') && !$('.search-bar .b-submit').hasClass('search-bar__submit__disabled')) {
         $('.search-bar .b-submit').click();
     }
-
 });
 
 // Переключение поисковой области в многострочный режим
@@ -665,7 +682,7 @@ $(document).on('click', 'a.tab-list__content-reg-this', function () {
                 '<td class="domains-step__summary-table-cell domain-title-show' + (!isCut ? '' : ' js-tooltip" title="' + $domain) + '">' +
                 (!isCut ? $domain : cutName) + '</td>' +
                 '<td class="domains-step__summary-table-cell remove-row" data-rowN="' + $rowN + '" data-domain="' + $domain + '">€' + $price + '</td>' +
-                '</tr><tr><td class="domains-step__summary-table-border" colspan="2"><div> </div></td></tr>');
+                '</tr><tr data-separator="' + $domain + '"><td class="domains-step__summary-table-border" colspan="2"><div> </div></td></tr>');
             summaryPriceCalc($price, '+');
         } else {
             pricesSumArr[$domain]['period'] = $period;
@@ -695,6 +712,7 @@ $(document).on('click', '.domains-step__summary-table .remove-row', function () 
 
         $('#additServTable').find('.tab-list__content-table-row[data-domain="' + $domain + '"]').remove();
         $('#domains-infoExtItem').find('.domains-infoExtItem[data-domain="' + $domain + '"]').remove();
+        $('tr[data-separator="' + $domain + '"]').remove();
         $('.tab-list__content-reg-this[data-domain="' + $domain + '"]').parents('.selected_row').removeClass('selected_row');
 
     } else {
@@ -730,7 +748,7 @@ $(document).on('click', '.tab-list__content-reg-all, .regAllButton', function ()
     return false;
 });
 
-// Обработка кнопки "WHOIS PRIVACY"
+// Обработка кнопки "WHOIS PRIVACY" на третьем шаге
 $(document).on('click', '.tab-list__content-reg-idprotAll', function () {
     var $item = $('#additServTable').find('.idprot-cell');
     $.each($item, function () {
@@ -740,7 +758,7 @@ $(document).on('click', '.tab-list__content-reg-idprotAll', function () {
     return false;
 });
 
-// Обработка кнопки "WHOIS PRIVACY"
+// Обработка кнопки "DNS HOSTING" на третьем шаге
 $(document).on('click', '.tab-list__content-reg-dnsAll', function () {
     var $item = $('#additServTable').find('.dns-cell');
     $.each($item, function () {
@@ -881,16 +899,15 @@ $('#buy').on('click', '', function () {
                 $('.domains-infoBlockSubtitle').after('<div class="errorFieldsList">Please fill in all of the required fields.</div>');
                 // document.location.href="#errorValidate";
                 var destination = $("#errorValidate").offset().top;
-                $("html,body").animate( { scrollTop: destination }, 1000);
+                $("html,body").animate({scrollTop: destination}, 1000);
             }
         }
     }
 });
 
-
 function advancedField(elem) {
-    advanced = {};
-    tags = elem.getElementsByTagName("input");
+    var advanced = {},
+        tags = elem.getElementsByTagName("input");
     for (var k in tags) {
         if ('text' == tags[k].type)
             advanced[tags[k].name] = tags[k].value;
@@ -920,7 +937,7 @@ $(document).on('change', '.js-switch', function () {
     var linkDom = $(this).attr('data-linkDom').split('_'),
         type = linkDom[0],
         domain = linkDom[1],
-        // price = parseInt($(this).attr('data-price')),
+    // price = parseInt($(this).attr('data-price')),
         price = parseFloat($(this).attr('data-price')),
         cartRow = '<tr class="domains-step__summary-table-row" data-linkDom="' + type + '_' + domain + '">' +
             '<td class="domains-step__summary-table-cell domain-title-show domain-title-padding">' + ((type == "dns") ? 'DNS hosting' : 'WHOIS privacy') + '</td>' +
